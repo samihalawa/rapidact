@@ -13,3 +13,7 @@ AI transparency tooling for EU AI Act Article 50 — detect AI chatbots, disclos
 
 ## Env
 `DATABASE_URL`, `APP_ID`, `APP_SECRET` (set in Coolify, never committed)
+
+## Deploy status
+
+Production: https://rapidact.megawebs.com (Coolify auto-deploys every push to `main`)
