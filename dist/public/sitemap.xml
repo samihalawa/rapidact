@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://rapidact.eu</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://rapidact.eu/scanner</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/article-50</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/privacy</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/terms</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/requirements/chatbot-ai-disclosure</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/requirements/ai-content-labeling</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/requirements/deepfake-labeling</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/requirements/ai-disclosure-evidence</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/platforms/wordpress</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/platforms/wix</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/platforms/shopify</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/platforms/tidio</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/platforms/botpress</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://rapidact.eu/platforms/custom-website</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>

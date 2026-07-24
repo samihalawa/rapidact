@@ -1,23 +1,23 @@
-import { ScanSearch, MessageSquareWarning, FolderCheck } from "lucide-react";
+import { ScanSearch, ClipboardList, PackageCheck } from "lucide-react";
 
 const steps = [
   {
     n: "01",
     icon: ScanSearch,
-    title: "Scan",
-    text: "Run the free scan. In under a minute you see every AI touchpoint we can detect on your site, with evidence and a readiness score.",
+    title: "Scan — free",
+    text: "Paste your URL. In under a minute we detect the AI systems visible on your site and score your exposure. No signup, no email required.",
   },
   {
     n: "02",
-    icon: MessageSquareWarning,
-    title: "Disclose",
-    text: "Install the plugin or snippet. The AI disclosure appears above your chat widget — clearly, at first contact, like Article 50(1) demands.",
+    icon: ClipboardList,
+    title: "Plan — free",
+    text: "You get a plain-English implementation plan: exactly what your site needs, which free tool to use, and the steps for your platform.",
   },
   {
     n: "03",
-    icon: FolderCheck,
-    title: "Evidence",
-    text: "Every disclosure view is logged with a timestamp. When someone asks 'prove it', you export the file instead of panicking.",
+    icon: PackageCheck,
+    title: "Install — your choice",
+    text: "Do it yourself for €0 with our free plugin and guides. Get the €59 pack with everything ready for your site. Or pay €99 and we install it all.",
   },
 ];
 
@@ -28,7 +28,7 @@ export default function HowItWorks() {
         <div className="max-w-2xl">
           <p className="text-sm font-bold tracking-wide text-[#6d5df6] uppercase">How it works</p>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
-            Three steps. Zero legal jargon.
+            Free to know. Cheap to fix.
           </h2>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">

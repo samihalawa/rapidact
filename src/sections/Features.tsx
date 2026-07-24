@@ -1,36 +1,36 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScanSearch, Puzzle, Chrome, FileClock, DatabaseZap, Languages } from "lucide-react";
+import { MessageSquareWarning, FileClock, Tags, Layers, BookOpenCheck, RefreshCcw } from "lucide-react";
 
 const features = [
   {
-    icon: ScanSearch,
-    title: "Outside-in scanner",
-    text: "Paste any URL. We check 52 known AI chatbot and assistant signatures — scripts, iframes, DOM nodes, globals — and score your disclosure gaps in seconds.",
+    icon: MessageSquareWarning,
+    title: "Visitor AI disclosure",
+    text: "The clear notice Article 50(1) demands, shown before anyone chats with your AI — in English and Spanish, styled for your site.",
   },
   {
-    icon: Puzzle,
-    title: "WordPress plugin",
-    text: "Install, one checkbox, done. The visitor disclosure sits above your chat widget in English and Spanish. Detection stays free forever.",
-  },
-  {
-    icon: Chrome,
-    title: "Chrome extension",
-    text: "Scan any website from your browser — your competitors, your prospects, your own properties. One click, instant evidence.",
+    icon: Tags,
+    title: "AI content labels",
+    text: "Ready-made labels for AI-generated images, videos and text, with the EU-standard icon set — so synthetic content is marked, not debated.",
   },
   {
     icon: FileClock,
-    title: "Evidence log",
-    text: "Every disclosure view is timestamped into your own database. Export the CSV a regulator, auditor or board member asks for.",
+    title: "Timestamped evidence log",
+    text: "Every disclosure view is logged with a time and page. When a regulator, client or board asks 'prove it', you export a CSV instead of panicking.",
   },
   {
-    icon: DatabaseZap,
-    title: "Signature database",
-    text: "52 AI platforms tracked — Tidio, Zendesk, Intercom, Landbot, Chatbase, oct8ne and more — updated as vendors and rules evolve.",
+    icon: Layers,
+    title: "Works on your stack",
+    text: "WordPress plugin, Wix app, Shopify block, or one script tag for anything else. Your chatbot — Tidio, Botpress, Zendesk, Intercom — stays exactly as it is.",
   },
   {
-    icon: Languages,
-    title: "EN/ES by default",
-    text: "The only Article 50 toolkit shipping English and Spanish disclosures out of the box. More EU languages on the roadmap.",
+    icon: BookOpenCheck,
+    title: "Plain-English guides",
+    text: "No legal jargon, no technical jargon. Each guide tells you what the rule means for your site and the exact clicks to fix it.",
+  },
+  {
+    icon: RefreshCcw,
+    title: "Rule updates for 12 months",
+    text: "The regulation and its guidelines keep moving. Your pack stays current with every update for a year — included.",
   },
 ];
 
@@ -39,13 +39,13 @@ export default function Features() {
     <section id="features" className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-2xl">
-          <p className="text-sm font-bold tracking-wide text-[#6d5df6] uppercase">Product</p>
+          <p className="text-sm font-bold tracking-wide text-[#6d5df6] uppercase">What gets installed</p>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
-            Everything Article 50 asks for, in one install
+            Everything Article 50 asks for, on your website
           </h2>
           <p className="mt-3 text-lg text-[#5a6378]">
-            No consultants, no custom code, no 40-page report. Tooling that detects, discloses and
-            documents.
+            Not a report, not a subscription. Actual things installed on your actual site — free if
+            you do it yourself, €59 for the pack, €99 done for you.
           </p>
         </div>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

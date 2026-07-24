@@ -128,8 +128,9 @@ export default function Hero() {
             in minutes
           </h1>
           <p className="mt-5 max-w-md text-lg leading-relaxed text-[#5a6378]">
-            Detect every AI chatbot on your site, show visitors the disclosure the EU AI Act
-            requires, and keep the timestamped evidence. One plugin — no lawyers, no code.
+            The EU AI Act says every site using AI must disclose it. Scan free, get your free
+            implementation plan, then install it yourself for €0 — or the full pack for €59, or
+            done for you for €99.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Button
@@ -145,7 +146,7 @@ export default function Hero() {
               className="rounded-full border-[#d8dce8] bg-white/80 px-7 font-semibold text-[#141b2e]"
               onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
             >
-              See pricing
+              We install it — €99
             </Button>
           </div>
           <div className="mt-9 flex flex-wrap gap-3">

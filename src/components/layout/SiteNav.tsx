@@ -15,11 +15,11 @@ export default function SiteNav() {
 
         <nav className="hidden items-center gap-7 text-sm font-medium text-[#5a6378] md:flex">
           <a href="/#features" className="transition hover:text-[#141b2e]">
-            Product
+            What we install
           </a>
-          <a href="/#how" className="transition hover:text-[#141b2e]">
-            How it works
-          </a>
+          <Link to="/article-50" className="transition hover:text-[#141b2e]">
+            Article 50 guide
+          </Link>
           <a href="/#pricing" className="transition hover:text-[#141b2e]">
             Pricing
           </a>

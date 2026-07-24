@@ -5,49 +5,52 @@ import { useNavigate } from "react-router";
 
 const tiers = [
   {
-    name: "Scanner",
-    price: "Free",
+    name: "Free — do it yourself",
+    price: "€0",
     period: "forever",
-    tagline: "Know where you stand",
+    tagline: "Everything you need, you install it",
     features: [
-      "Unlimited URL scans",
-      "52-signature AI detection",
-      "Readiness score + evidence",
-      "Copyable scan report",
-      "Chrome extension",
+      "Unlimited site scans",
+      "Free implementation plan for your site",
+      "Free plugin for WordPress, Wix & any stack",
+      "Step-by-step guides per platform",
+      "EN/ES disclosure texts, ready to paste",
+      "EU-standard AI icons",
     ],
-    cta: "Scan your site",
+    cta: "Start free",
     featured: false,
   },
   {
-    name: "Pro",
-    price: "€19",
-    period: "/month per site",
-    tagline: "Disclose + prove it",
+    name: "Compliance Pack",
+    price: "€59",
+    period: "one-time · per site",
+    tagline: "Everything needed, ready for your site",
     features: [
-      "Everything in Scanner",
-      "WordPress plugin + JS snippet",
-      "EN/ES visitor disclosure badge",
-      "Timestamped evidence log",
-      "Evidence CSV export",
-      "White-label badge",
+      "Everything in Free",
+      "Disclosure layer configured for your stack",
+      "Timestamped evidence log + CSV export",
+      "Per-page AI label templates",
+      "Chatbot notice presets (Tidio, Botpress, Zendesk…)",
+      "12 months of rule updates",
+      "Email support",
     ],
-    cta: "Start with Pro",
+    cta: "Get the pack — €59",
     featured: true,
   },
   {
-    name: "Agency",
+    name: "Done For You",
     price: "€99",
-    period: "/month · 25 sites",
-    tagline: "Cover your whole client roster",
+    period: "one-time · per site",
+    tagline: "We install everything on your website",
     features: [
-      "Everything in Pro",
-      "25 sites from one dashboard",
-      "Per-site client reports",
-      "Priority signature updates",
-      "Reseller-friendly licensing",
+      "Everything in the Pack",
+      "We install it on your site — WordPress, Wix, Shopify, custom",
+      "Disclosure verified live on your pages",
+      "Evidence log running + tested",
+      "Handover call + documentation",
+      "You do literally nothing",
     ],
-    cta: "Talk to us",
+    cta: "We do it — €99",
     featured: false,
   },
 ];
@@ -60,10 +63,11 @@ export default function Pricing() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-bold tracking-wide text-[#6d5df6] uppercase">Pricing</p>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
-            Less than one hour of legal advice
+            Start free. Pay only if you want it done.
           </h2>
           <p className="mt-3 text-lg text-[#5a6378]">
-            The scan is free forever. Pay only when you want the fix and the proof.
+            Scan and plan are always free. Install it yourself for €0, get the full pack for €59, or
+            have us install everything for €99. One-time — no subscriptions.
           </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -119,8 +123,8 @@ export default function Pricing() {
           ))}
         </div>
         <p className="mt-8 text-center text-xs text-[#8a92a6]">
-          Prices exclude VAT. Cancel anytime. RapidAct is technical transparency tooling — not legal
-          advice.
+          Prices exclude VAT. One-time payments, no subscriptions. RapidAct is technical
+          transparency tooling — not legal advice.
         </p>
       </div>
     </section>

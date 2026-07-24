@@ -1,13 +1,25 @@
 import { useState } from "react";
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
+import Seo from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/providers/trpc";
-import type { ScanResult } from "@contracts/types";
-import { ScanSearch, Loader2, CheckCircle2, XCircle, Copy, Download, ShieldAlert } from "lucide-react";
+import type { ScanResult, ScanFinding } from "@contracts/types";
+import {
+  ScanSearch,
+  Loader2,
+  CheckCircle2,
+  XCircle,
+  Copy,
+  Download,
+  ShieldAlert,
+  ClipboardList,
+  PackageCheck,
+  Wrench,
+} from "lucide-react";
 
 function scoreColor(score: number) {
   if (score >= 80) return "text-[#0e9f6e]";
@@ -19,6 +31,20 @@ function scoreLabel(score: number) {
   if (score >= 80) return "Low visible exposure";
   if (score >= 50) return "Disclosure gaps found";
   return "High exposure — undisclosed AI";
+}
+
+/** Turn each finding into a plain-English plan item. */
+function planItemFor(d: ScanFinding): { what: string; fix: string } {
+  if (d.category === "chat") {
+    return {
+      what: `Your site runs ${d.name}. From 2 August 2026, visitors must be told — clearly, before the conversation starts — that they are talking to an AI, not a person. ${d.existingDisclosureFound ? "We found disclosure wording on the page: verify it appears before the first message." : "We found no disclosure near it."}`,
+      fix: `Free: install the RapidAct plugin (WordPress / Wix / any stack) — it adds the notice above ${d.name} automatically. Pack (€59): configured for your site with evidence log. Done For You (€99): we install and verify it live.`,
+    };
+  }
+  return {
+    what: `Your site uses ${d.name}, an AI-powered feature. Check whether visitors can tell AI is involved.`,
+    fix: "Free: review the AI content labeling guide. Pack/DFY: labels + templates installed for you.",
+  };
 }
 
 export default function Scanner() {
@@ -53,17 +79,21 @@ export default function Scanner() {
 
   return (
     <div className="mesh-bg min-h-screen">
+      <Seo
+        title="Free AI transparency scan + implementation plan | RapidAct"
+        description="Scan your website free: detect AI chatbots missing the EU AI Act Article 50 disclosure, get a readiness score and a free plain-English implementation plan."
+      />
       <SiteNav />
       <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-[#141b2e] sm:text-5xl">
-            Is your site telling visitors
+            Scan your site.
             <br />
-            <span className="brand-gradient-text">they're talking to AI?</span>
+            <span className="brand-gradient-text">Get your free fix-it plan.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-lg text-[#5a6378]">
-            Free outside-in scan against 52 known AI chatbot signatures. Same check a regulator —
-            or your competitor — can run in 30 seconds.
+            The same outside-in check a regulator — or your competitor — can run in 30 seconds.
+            Free forever, no signup. You keep the plan either way.
           </p>
         </div>
 
@@ -81,7 +111,7 @@ export default function Scanner() {
             className="h-12 rounded-full bg-[#141b2e] px-6 font-semibold text-white hover:bg-[#232c4a]"
           >
             {scan.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <ScanSearch className="h-4 w-4" />}
-            <span className="ml-2">{scan.isPending ? "Scanning…" : "Scan"}</span>
+            <span className="ml-2">{scan.isPending ? "Scanning…" : "Scan free"}</span>
           </Button>
         </div>
 
@@ -102,7 +132,7 @@ export default function Scanner() {
                     ? "Too many scans from your network — try again in a few minutes."
                     : result.error === "invalid-url"
                       ? "That doesn't look like a valid public URL."
-                      : `The site didn't respond (${result.error ?? "unreachable"}). It may block scanners — try the Chrome extension instead, which scans from your own browser.`}
+                      : `The site didn't respond (${result.error ?? "unreachable"}). It may block automated checks — the Done-For-You install (€99) includes a manual review instead.`}
                 </p>
               </div>
             </CardContent>
@@ -185,25 +215,112 @@ export default function Scanner() {
                     No known AI chat signatures found on this page.
                   </p>
                   <p className="mt-1 text-sm text-[#5a6378]">
-                    This covers 52 known vendor signatures — custom-built AI may still be present.
+                    This covers 52 known vendor signatures — custom-built AI may still be present. If
+                    you use AI for images, videos or text, the labeling rules may still apply to you.
                   </p>
                 </CardContent>
               </Card>
             )}
 
-            {/* actions + lead capture */}
+            {/* FREE IMPLEMENTATION PLAN */}
+            <Card className="border-[#6d5df6] bg-white shadow-lg">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0eeff]">
+                    <ClipboardList className="h-5 w-5 text-[#6d5df6]" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl font-extrabold text-[#141b2e]">
+                      Your free implementation plan
+                    </CardTitle>
+                    <p className="text-sm text-[#8a92a6]">Yours to keep — no email required.</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                {result.detected.map((d, i) => {
+                  const plan = planItemFor(d);
+                  return (
+                    <div key={d.id} className="rounded-xl border border-[#eef0f6] p-4">
+                      <p className="text-xs font-extrabold tracking-wide text-[#6d5df6] uppercase">
+                        Step {i + 1} — {d.name}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-[#3d445c]">{plan.what}</p>
+                      <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#141b2e]">
+                        <Wrench className="mt-0.5 h-4 w-4 shrink-0 text-[#6d5df6]" />
+                        {plan.fix}
+                      </p>
+                    </div>
+                  );
+                })}
+                <div className="rounded-xl border border-[#eef0f6] p-4">
+                  <p className="text-xs font-extrabold tracking-wide text-[#6d5df6] uppercase">
+                    Always-on step — your evidence
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-[#3d445c]">
+                    Whatever you install, keep proof: which pages show the disclosure, and when.
+                    Article 50 questions arrive months later, in writing. The RapidAct evidence log
+                    records every disclosure view automatically.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* CTAs + lead capture */}
             <Card className="border-[#141b2e] bg-[#141b2e] text-white shadow-lg">
               <CardContent className="flex flex-col gap-5 pt-7 pb-7">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <p className="text-lg font-bold">Fix it before 2 August</p>
-                    <p className="text-sm text-white/60">
-                      Plugin + disclosure badge + evidence log. €19/mo per site.
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="rounded-xl border border-white/15 p-4">
+                    <PackageCheck className="h-5 w-5 text-[#4ade80]" />
+                    <p className="mt-2 font-bold">Do it yourself — €0</p>
+                    <p className="mt-1 text-xs leading-relaxed text-white/60">
+                      Free plugin for WordPress, Wix or any stack + step-by-step guide.
                     </p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-4">
+                    <PackageCheck className="h-5 w-5 text-[#ffd617]" />
+                    <p className="mt-2 font-bold">The Pack — €59</p>
+                    <p className="mt-1 text-xs leading-relaxed text-white/60">
+                      Everything configured for your site + evidence log + 12 months of updates.
+                    </p>
+                  </div>
+                  <div className="rounded-xl border border-white/15 p-4">
+                    <PackageCheck className="h-5 w-5 text-white" />
+                    <p className="mt-2 font-bold">Done For You — €99</p>
+                    <p className="mt-1 text-xs leading-relaxed text-white/60">
+                      We install everything on your website and verify it live. You do nothing.
+                    </p>
+                  </div>
+                </div>
+                <div className="border-t border-white/10 pt-5">
+                  {leadDone ? (
+                    <p className="flex items-center gap-2 text-sm font-semibold text-[#4ade80]">
+                      <CheckCircle2 className="h-4 w-4" /> Done — we'll send the plan and the install
+                      link.
+                    </p>
+                  ) : (
+                    <div className="flex flex-col gap-2 sm:flex-row">
+                      <Input
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Work email — get this plan + install link"
+                        className="h-11 flex-1 rounded-full border-white/20 bg-white/10 px-5 text-white placeholder:text-white/40"
+                      />
+                      <Button
+                        disabled={lead.isPending || !email.includes("@")}
+                        onClick={() =>
+                          lead.mutate({ email: email.trim(), url: result.summary.url, source: "scanner-plan" })
+                        }
+                        className="h-11 rounded-full bg-[#ffd617] px-6 font-bold text-[#141b2e] hover:bg-[#ffe44d]"
+                      >
+                        {lead.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send my plan"}
+                      </Button>
+                    </div>
+                  )}
+                  <div className="mt-4 flex gap-2">
                     <Button
                       variant="outline"
+                      size="sm"
                       className="rounded-full border-white/25 bg-transparent text-white hover:bg-white/10"
                       onClick={() => {
                         navigator.clipboard.writeText(result.report).then(() => {
@@ -212,42 +329,17 @@ export default function Scanner() {
                         });
                       }}
                     >
-                      <Copy className="mr-2 h-4 w-4" /> {copied ? "Copied!" : "Copy report"}
+                      <Copy className="mr-2 h-3.5 w-3.5" /> {copied ? "Copied!" : "Copy report"}
                     </Button>
                     <Button
                       variant="outline"
+                      size="sm"
                       className="rounded-full border-white/25 bg-transparent text-white hover:bg-white/10"
                       onClick={downloadReport}
                     >
-                      <Download className="mr-2 h-4 w-4" /> .txt
+                      <Download className="mr-2 h-3.5 w-3.5" /> Download .txt
                     </Button>
                   </div>
-                </div>
-                <div className="border-t border-white/10 pt-5">
-                  {leadDone ? (
-                    <p className="flex items-center gap-2 text-sm font-semibold text-[#4ade80]">
-                      <CheckCircle2 className="h-4 w-4" /> Done — we'll send the fix-it guide and launch
-                      pricing.
-                    </p>
-                  ) : (
-                    <div className="flex flex-col gap-2 sm:flex-row">
-                      <Input
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Work email — get the fix-it guide + launch pricing"
-                        className="h-11 flex-1 rounded-full border-white/20 bg-white/10 px-5 text-white placeholder:text-white/40"
-                      />
-                      <Button
-                        disabled={lead.isPending || !email.includes("@")}
-                        onClick={() =>
-                          lead.mutate({ email: email.trim(), url: result.summary.url, source: "scanner" })
-                        }
-                        className="h-11 rounded-full bg-[#ffd617] px-6 font-bold text-[#141b2e] hover:bg-[#ffe44d]"
-                      >
-                        {lead.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send it"}
-                      </Button>
-                    </div>
-                  )}
                 </div>
               </CardContent>
             </Card>

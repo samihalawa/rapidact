@@ -30,6 +30,10 @@ const faqs = [
     q: "What counts as an AI chatbot under Article 50?",
     a: "Any system your visitors interact with that generates automated responses presented as conversation: support chatbots, virtual agents, AI assistants, voice bots. Our signature database covers 52 known platforms, and the scanner flags each one with the exact evidence found on your page.",
   },
+  {
+    q: "What's the real difference between free, the €59 pack and the €99 install?",
+    a: "Same destination, different amounts of your time. Free: you get the scan, the plan, the plugin and the guides — you do the clicking, €0. The €59 pack: everything arrives preconfigured for your site — disclosure, labels, evidence log, 12 months of updates — you just switch it on. €99: we log into your stack and install everything ourselves, then verify it live on your pages. All one-time payments, no subscriptions.",
+  },
 ];
 
 export default function Faq() {
