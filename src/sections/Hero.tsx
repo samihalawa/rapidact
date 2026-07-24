@@ -118,7 +118,7 @@ export default function Hero() {
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-[#e7e9f2] bg-white/80 px-3 py-1 text-xs font-semibold text-[#5a6378] shadow-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[#dc2626]" />
-            EU AI Act Article 50 · applies 2 Aug 2026
+            EU AI Act Article 50 · live from 2 Aug 2026 · fines up to €15M
           </span>
           <h1 className="mt-5 text-[44px] leading-[1.05] font-extrabold tracking-tight text-[#141b2e] sm:text-[56px]">
             Install AI
