@@ -9,6 +9,21 @@ import { env } from "./lib/env";
 const app = new Hono<{ Bindings: HttpBindings }>();
 
 app.use(bodyLimit({ maxSize: 50 * 1024 * 1024 }));
+
+// Health probe for Coolify / uptime checks.
+app.get("/api/health", async (c) => {
+  let db = "unknown";
+  try {
+    const { getDb } = await import("./queries/connection");
+    const { sql } = await import("drizzle-orm");
+    await getDb().execute(sql`select 1`);
+    db = "up";
+  } catch {
+    db = "down";
+  }
+  return c.json({ ok: true, service: "rapidact", db, ts: Date.now() });
+});
+
 app.use("/api/trpc/*", async (c) => {
   return fetchRequestHandler({
     endpoint: "/api/trpc",
