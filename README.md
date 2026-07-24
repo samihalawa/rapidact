@@ -17,3 +17,5 @@ AI transparency tooling for EU AI Act Article 50 — detect AI chatbots, disclos
 ## Deploy status
 
 Production: https://rapidact.megawebs.com (Coolify auto-deploys every push to `main`)
+
+_Auto-deploy verified: push → Coolify webhook → rolling update._
