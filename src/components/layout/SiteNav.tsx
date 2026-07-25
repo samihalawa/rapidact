@@ -20,6 +20,9 @@ export default function SiteNav() {
           <Link to="/article-50" className="transition hover:text-[#141b2e]">
             Article 50 guide
           </Link>
+          <Link to="/learn" className="transition hover:text-[#141b2e]">
+            Learn
+          </Link>
           <a href="/#pricing" className="transition hover:text-[#141b2e]">
             Pricing
           </a>

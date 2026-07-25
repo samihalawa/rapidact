@@ -28,6 +28,7 @@ export default function SiteFooter() {
                 { label: "What we install", href: "/#features" },
                 { label: "Pricing — €0/€59/€99", href: "/#pricing" },
                 { label: "Article 50 guide", href: "/article-50" },
+                { label: "Learn — 98 guides", href: "/learn" },
               ].map((l) => (
                 <li key={l.label}>
                   <Link to={l.href} className="text-sm text-[#5a6378] transition hover:text-[#141b2e]">
