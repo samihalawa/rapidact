@@ -9,9 +9,11 @@ import PlatformPage from "./pages/PlatformPage";
 import ContentHub from "./pages/ContentHub";
 import ContentPage from "./pages/ContentPage";
 import Start from "./pages/Start";
+import TransparencyWidget from "./components/TransparencyWidget";
 
 export default function App() {
   return (
+    <>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/scanner" element={<Scanner />} />
@@ -27,5 +29,7 @@ export default function App() {
       <Route path="/terms" element={<Terms />} />
       <Route path="*" element={<Home />} />
     </Routes>
+    <TransparencyWidget />
+    </>
   );
 }

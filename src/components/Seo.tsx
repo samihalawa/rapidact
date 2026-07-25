@@ -4,10 +4,12 @@ interface SeoProps {
   title: string;
   description: string;
   canonical?: string;
+  /** hreflang alternates: [{lang, path}] — path starting with "/" */
+  alternates?: { lang: string; path: string }[];
 }
 
-/** Sets per-page title + meta description (+ canonical) for SEO on a SPA. */
-export default function Seo({ title, description, canonical }: SeoProps) {
+/** Sets per-page title + meta description (+ canonical + hreflang) for SEO on a SPA. */
+export default function Seo({ title, description, canonical, alternates }: SeoProps) {
   useEffect(() => {
     document.title = title;
 
@@ -30,6 +32,23 @@ export default function Seo({ title, description, canonical }: SeoProps) {
       canonical ?? `https://rapidact.eu${window.location.pathname}`,
     );
 
+    // hreflang alternates (multilingual SEO)
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
+    if (alternates?.length) {
+      for (const alt of alternates) {
+        const l = document.createElement("link");
+        l.setAttribute("rel", "alternate");
+        l.setAttribute("hreflang", alt.lang);
+        l.setAttribute("href", `https://rapidact.eu${alt.path}`);
+        document.head.appendChild(l);
+      }
+      const xd = document.createElement("link");
+      xd.setAttribute("rel", "alternate");
+      xd.setAttribute("hreflang", "x-default");
+      xd.setAttribute("href", `https://rapidact.eu${alternates[0].path}`);
+      document.head.appendChild(xd);
+    }
+
     // Open Graph basics
     const og: Record<string, string> = {
       "og:title": title,
@@ -46,7 +65,7 @@ export default function Seo({ title, description, canonical }: SeoProps) {
       }
       tag.setAttribute("content", content);
     });
-  }, [title, description, canonical]);
+  }, [title, description, canonical, alternates]);
 
   return null;
 }

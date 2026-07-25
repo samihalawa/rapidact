@@ -7,9 +7,7 @@ export default function SiteNav() {
     <header className="sticky top-0 z-50 w-full border-b border-white/40 bg-white/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ffd617] text-[11px] font-extrabold tracking-tight text-[#141b2e]">
-            AI
-          </span>
+          <img src="/icons/logo-32.png" alt="RapidAct logo" className="h-7 w-7 rounded-lg" />
           <span className="text-[17px] font-bold tracking-tight text-[#141b2e]">RapidAct</span>
         </Link>
 

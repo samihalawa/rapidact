@@ -9,9 +9,7 @@ export default function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ffd617] text-[11px] font-extrabold text-[#141b2e]">
-                AI
-              </span>
+              <img src="/icons/logo-32.png" alt="RapidAct logo" className="h-7 w-7 rounded-lg" />
               <span className="text-[17px] font-bold text-[#141b2e]">RapidAct</span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#5a6378]">

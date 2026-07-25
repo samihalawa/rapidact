@@ -46,9 +46,15 @@ export default function ContentPage() {
 
   const siblings = relatedContent(item);
 
+  // hreflang alternates for every language twin that exists in the registry
+  const alternates = LANGS.filter((l) => getContent(item.type, item.slug, l)).map((l) => ({
+    lang: l === "en" ? "en" : l,
+    path: contentPath({ type: item.type, slug: item.slug, lang: l }),
+  }));
+
   return (
     <div className="min-h-screen bg-white">
-      <Seo title={item.title} description={item.description} />
+      <Seo title={item.title} description={item.description} alternates={alternates} />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <nav className="text-xs text-[#8a92a6]">
