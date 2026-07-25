@@ -5,11 +5,11 @@ lang: en
 ---
 # Best EU AI Act compliance tools 2026 (honest comparison)
 
-**Seven tools launched for Article 50 in 2026. The honest summary: Disclo (hosted badge, €19/mo), EU AI Act Ready (free WP suite), Clarivo (free media labels), AIM Transparency (image metadata, paid tiers), Disclosio (free image labels), AIActify (free labels) — and RapidAct (free scanner + any-stack disclosure + evidence, €0/€59/€99).**
+**Seven tools launched for Article 50 in 2026. The honest summary: Disclo (hosted badge, €19/mo), EU AI Act Ready (free WP suite), Clarivo (free media labels), AIM Transparency (image metadata, paid tiers), Disclosio (free image labels), AIActify (free labels) — and RapidAct (free scanner + any-stack disclosure + evidence, plus a €99 written compliance assessment).**
 
 | Tool | Price | Strength | Gap |
 |---|---|---|---|
-| RapidAct | Free / €59 / €99 one-time | 52-signature scanner, any stack, evidence log, EN/ES, €99 install | Newest entrant |
+| RapidAct | Free tools + €99 report | 52-signature scanner, any stack, evidence log, EN/ES, full written compliance assessment | Newest entrant |
 | Disclo | €19/mo | Polished hosted badge | Subscription, hosted account |
 | EU AI Act Ready | Free | Broad WP suite | WP only, ~15 vendors |
 | Clarivo | Free | Media metadata | WP only |
@@ -23,4 +23,4 @@ We're biased — we're RapidAct — but this table is accurate. Pick by stack (W
 
 ---
 
-*Try the free version: [scan your site](/scanner) · [pricing €0/€59/€99](/#pricing)*
+*Try the free version: [scan your site](/scanner) · [full assessment — €99](/report)*

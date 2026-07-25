@@ -22,4 +22,4 @@ Article 50(4): deepfakes must be disclosed **visibly and clearly** when publishe
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

@@ -27,4 +27,4 @@ SaaS products face Article 50 from two sides — as deployers on their sites and
 
 Two sides of the same coin: your website is the easy, free fix — and your product's AI UX needs a disclosure pattern your customers will copy from you.
 
-*Prefer it handled? The [€59 pack](/#pricing) arrives preconfigured, or we install everything for €99 — verified live on your pages.*
+*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*

@@ -35,4 +35,4 @@ Enforcement will need visible early examples, and regulators (plus competitors, 
 
 ---
 
-*Start here: [free scan](/scanner) · [learn hub](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Start here: [free scan](/scanner) · [learn hub](/learn) · [full assessment — €99](/report)*

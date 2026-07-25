@@ -9,7 +9,7 @@ lang: en
 
 | | RapidAct | EU AI Act Ready |
 |---|---|---|
-| Price | Free + €59/€99 one-time | Free |
+| Price | Free tools + €99 report | Free |
 | Chatbot platforms detected | 52 | ~15 |
 | Stacks covered | WP, Wix, Shopify, any | WordPress only |
 | Evidence log + CSV | Yes | Checklist-style |
@@ -22,4 +22,4 @@ EU AI Act Ready is a solid free WP plugin. RapidAct is for when you want it beyo
 
 ---
 
-*Try the free version: [scan your site](/scanner) · [pricing €0/€59/€99](/#pricing)*
+*Try the free version: [scan your site](/scanner) · [full assessment — €99](/report)*

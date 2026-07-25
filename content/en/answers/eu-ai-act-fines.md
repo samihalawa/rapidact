@@ -28,4 +28,4 @@ A disclosure layer and an evidence log cost between €0 and €99. [Compare opt
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

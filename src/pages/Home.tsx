@@ -3,25 +3,27 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
 import JsonLd, { ORG_LD, PRODUCT_LD, faqLd } from "@/components/JsonLd";
 import Hero from "@/sections/Hero";
-import Features from "@/sections/Features";
+import ReportOffer from "@/sections/ReportOffer";
 import HowItWorks from "@/sections/HowItWorks";
 import Pricing from "@/sections/Pricing";
+import Features from "@/sections/Features";
 import Faq, { FAQS } from "@/sections/Faq";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <Seo
-        title="RapidAct — AI transparency installed on your website | EU AI Act Article 50"
-        description="EU AI Act Article 50 requires AI disclosure on your website from 2 Aug 2026. Free scan + plan, free DIY plugin, €59 full pack, or €99 installed for you. No subscriptions."
+        title="AI Act Complete Pre-Consultory Report — know exactly where your company stands | RapidAct"
+        description="Tell us about your company and the AI you use. A specialist assesses your real EU AI Act exposure and sends the complete report plus a professional contact assessment to your inbox within 24–48h. €99 one-time, any company size. Free site scanner and self-install disclosure layer included."
       />
       <JsonLd data={[ORG_LD, PRODUCT_LD, faqLd(FAQS)]} />
       <SiteNav />
       <main>
         <Hero />
-        <Features />
+        <ReportOffer />
         <HowItWorks />
         <Pricing />
+        <Features />
         <Faq />
       </main>
       <SiteFooter />

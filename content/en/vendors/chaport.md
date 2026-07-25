@@ -30,4 +30,4 @@ Its chatbot scenarios answer visitors automatically. That is precisely the situa
 - Relying on the vendor's own compliance — Article 50 duties sit with the deployer.
 - Waiting for the "2027 delay" — that was the high-risk rulebook, not Article 50. [What actually got delayed →](/answers/digital-omnibus-ai-act-delay)
 
-*Prefer it done? The [€59 pack](/#pricing) comes preconfigured, or we install everything for €99.*
+*Not sure which duties actually apply to your company? The [€99 pre-consultory report](/report) tells you exactly — in your inbox within 24–48h.*

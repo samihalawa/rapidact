@@ -31,8 +31,8 @@ export default function TransparencyWidget() {
           <p className="text-sm font-extrabold text-[#141b2e]">This is the product, live.</p>
           <p className="mt-1.5 text-xs leading-relaxed text-[#5a6378]">
             The badge you're looking at is the Article 50 disclosure layer running on our own site
-            — the same one your visitors would see on yours. Detection is free; the pack is €59; we
-            install it for €99.
+            — the same one your visitors would see on yours. Scanning and installing it are free.
+            Knowing which duties actually apply to your company is what the €99 report answers.
           </p>
           <button
             onClick={() => navigate("/scanner")}

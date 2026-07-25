@@ -13,8 +13,9 @@ export default function SiteFooter() {
               <span className="text-[17px] font-bold text-[#141b2e]">RapidAct</span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#5a6378]">
-              AI transparency for the EU AI Act, installed on your website. Free to start — €59 for
-              the pack, €99 done for you. Technical tooling, not legal advice.
+              Know exactly where your company stands on the EU AI Act. Complete pre-consultory
+              report in your inbox within 24–48h for €99 — free scanner and self-install disclosure
+              layer either way. Technical assessment, not legal advice.
             </p>
           </div>
 
@@ -22,9 +23,9 @@ export default function SiteFooter() {
             <h4 className="text-sm font-semibold text-[#141b2e]">Product</h4>
             <ul className="mt-4 space-y-2.5">
               {[
+                { label: "Pre-Consultory Report — €99", href: "/report" },
                 { label: "Free scan + plan", href: "/scanner" },
-                { label: "What we install", href: "/#features" },
-                { label: "Pricing — €0/€59/€99", href: "/#pricing" },
+                { label: "Free tools", href: "/#features" },
                 { label: "Article 50 guide", href: "/article-50" },
                 { label: "Learn — 98 guides", href: "/learn" },
               ].map((l) => (

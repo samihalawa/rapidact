@@ -27,4 +27,4 @@ Your clients' chatbots and AI creatives put disclosure duties on their sites —
 
 Agencies that bake disclosure into delivery stop firefighting and start selling it as a retainer line — compliance as a service, per client, per month.
 
-*Prefer it handled? The [€59 pack](/#pricing) arrives preconfigured, or we install everything for €99 — verified live on your pages.*
+*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*

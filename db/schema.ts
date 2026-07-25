@@ -32,5 +32,31 @@ export const scans = mysqlTable("scans", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+/**
+ * Paid "AI Act Complete Pre-Consultory Report" requests.
+ *
+ * A row is written the moment a company submits its intake — before payment — so a
+ * lead is never lost if they drop off at the bunq screen. `ref` is the short code the
+ * buyer sees and that travels in the bunq payment description, which is how an
+ * incoming payment gets matched back to this row.
+ */
+export const reportRequests = mysqlTable("report_requests", {
+  id: serial("id").primaryKey(),
+  ref: varchar("ref", { length: 16 }).notNull(),
+  company: varchar("company", { length: 255 }).notNull(),
+  website: varchar("website", { length: 512 }),
+  email: varchar("email", { length: 255 }).notNull(),
+  country: varchar("country", { length: 64 }),
+  companySize: varchar("company_size", { length: 32 }),
+  sector: varchar("sector", { length: 64 }),
+  /** Comma-separated AI systems the company reports using. */
+  aiSystems: text("ai_systems"),
+  notes: text("notes"),
+  /** requested → paid → delivered */
+  status: varchar("status", { length: 24 }).notNull().default("requested"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export type Lead = typeof leads.$inferSelect;
 export type Scan = typeof scans.$inferSelect;
+export type ReportRequest = typeof reportRequests.$inferSelect;

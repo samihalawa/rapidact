@@ -22,4 +22,4 @@ Your evidence log: if you log disclosure events, store only what's needed (event
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

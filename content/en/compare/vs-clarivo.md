@@ -21,4 +21,4 @@ Clarivo is a good free media-labeling tool. RapidAct is the operational kit — 
 
 ---
 
-*Try the free version: [scan your site](/scanner) · [pricing €0/€59/€99](/#pricing)*
+*Try the free version: [scan your site](/scanner) · [full assessment — €99](/report)*

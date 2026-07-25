@@ -27,4 +27,4 @@ publishers sit at the center of Article 50(4). What the editorial-review exempti
 
 The 'a human checked it' exemption is the most abused sentence in the Act. Without a documented review trail — who reviewed, what changed, when — the exemption doesn't exist.
 
-*Prefer it handled? The [€59 pack](/#pricing) arrives preconfigured, or we install everything for €99 — verified live on your pages.*
+*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*

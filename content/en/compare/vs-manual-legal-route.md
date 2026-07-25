@@ -20,4 +20,4 @@ Most Article 50 work for normal websites is mechanical: notices, labels, logs. D
 
 ---
 
-*Try the free version: [scan your site](/scanner) · [pricing €0/€59/€99](/#pricing)*
+*Try the free version: [scan your site](/scanner) · [full assessment — €99](/report)*

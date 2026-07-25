@@ -39,3 +39,23 @@ export interface LeadInput {
 export interface LeadResult {
   ok: boolean;
 }
+
+/** Intake for the paid AI Act Complete Pre-Consultory Report. */
+export interface ReportRequestInput {
+  company: string;
+  website?: string;
+  email: string;
+  country?: string;
+  companySize?: string;
+  sector?: string;
+  aiSystems?: string[];
+  notes?: string;
+}
+
+export interface ReportRequestResult {
+  ok: boolean;
+  /** Short reference code shown to the buyer and carried in the payment description. */
+  ref: string;
+  /** False when the intake could not be persisted — the buyer is never blocked by this. */
+  stored: boolean;
+}

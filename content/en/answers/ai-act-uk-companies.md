@@ -21,4 +21,4 @@ Same fix as everyone: disclosure on AI interactions, labels on synthetic content
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

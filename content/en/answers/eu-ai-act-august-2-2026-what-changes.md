@@ -26,4 +26,4 @@ For most sites it's genuinely an afternoon of work. [The 8-step checklist →](/
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

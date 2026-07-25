@@ -23,4 +23,4 @@ Vendor bots at least have docs. A custom GPT embed has *nothing* — no default 
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

@@ -26,34 +26,24 @@ export const ORG_LD = {
 
 export const PRODUCT_LD = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  name: "RapidAct AI Disclosure",
+  "@type": "Service",
+  name: "AI Act Complete Pre-Consultory Report",
+  serviceType: "EU AI Act compliance assessment",
   description:
-    "Article 50 compliance installed on your website: AI-touchpoint detection, EN/ES visitor disclosure, timestamped evidence log. Free tier, €59 pack, €99 done-for-you install.",
-  brand: { "@type": "Brand", name: "RapidAct" },
-  offers: [
-    {
-      "@type": "Offer",
-      name: "Free",
-      price: "0",
-      priceCurrency: "EUR",
-      description: "Scanner, implementation plan, DIY plugin and guides.",
-    },
-    {
-      "@type": "Offer",
-      name: "Compliance Pack",
-      price: "59",
-      priceCurrency: "EUR",
-      description: "Everything configured for your site, evidence log + export, 12 months of updates.",
-    },
-    {
-      "@type": "Offer",
-      name: "Done For You",
-      price: "99",
-      priceCurrency: "EUR",
-      description: "Full installation on your website, verified live, within 48 hours.",
-    },
-  ],
+    "A specialist assesses your company's AI systems against the EU AI Act and delivers a complete written pre-consultory report plus a professional contact assessment to your inbox within 24–48 hours. Flat €99, one-time, any company size.",
+  provider: { "@type": "Organization", name: "RapidAct", url: "https://rapidact.eu" },
+  areaServed: "EU",
+  url: "https://rapidact.eu/report",
+  offers: {
+    "@type": "Offer",
+    name: "AI Act Complete Pre-Consultory Report",
+    price: "99",
+    priceCurrency: "EUR",
+    availability: "https://schema.org/InStock",
+    url: "https://rapidact.eu/report",
+    description:
+      "Complete written EU AI Act assessment of every AI system your company operates, risk classification per system, exact Article 50 disclosure duties, required evidence, prioritised action plan, and a named specialist's contact assessment. Delivered in 24–48 hours or fully refunded.",
+  },
 };
 
 export function faqLd(faqs: { q: string; a: string }[]) {

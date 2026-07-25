@@ -27,4 +27,4 @@ real estate's AI toolkit is exactly what Article 50 covers. What agencies and po
 
 Virtual staging is the sector's blind spot: it looks like photography, reads as reality, and under Article 50 it needs a label just like any deepfake-adjacent content.
 
-*Prefer it handled? The [€59 pack](/#pricing) arrives preconfigured, or we install everything for €99 — verified live on your pages.*
+*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*

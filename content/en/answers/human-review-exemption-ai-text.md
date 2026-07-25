@@ -27,4 +27,4 @@ The 30-second habit that makes it real: a review log — reviewer name, date, ch
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

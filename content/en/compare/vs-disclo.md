@@ -5,7 +5,7 @@ lang: en
 ---
 # RapidAct vs Disclo
 
-**Disclo sells a hosted chatbot badge at €19/mo with an external account and hosted evidence. RapidAct gives the same outcome free (local, no account), with a €59 one-time pack and €99 done-for-you install — no subscription, evidence stored on your own server.**
+**Disclo sells a hosted chatbot badge at €19/mo with an external account and hosted evidence. RapidAct gives the same outcome free (local, no account), plus a €99 one-time written assessment of every AI system you run — no subscription, evidence stored on your own server.**
 
 | | RapidAct | Disclo |
 |---|---|---|
@@ -23,4 +23,4 @@ If you want a hosted service and like subscriptions, Disclo works. If you want t
 
 ---
 
-*Try the free version: [scan your site](/scanner) · [pricing €0/€59/€99](/#pricing)*
+*Try the free version: [scan your site](/scanner) · [full assessment — €99](/report)*

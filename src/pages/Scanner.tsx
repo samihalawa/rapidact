@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/providers/trpc";
 import type { ScanResult, ScanFinding } from "@contracts/types";
-import { openConversion } from "@/config";
+import { CONVERT, REPORT } from "@/config";
 import { useNavigate } from "react-router";
 import {
   ScanSearch,
@@ -40,7 +40,7 @@ function planItemFor(d: ScanFinding): { what: string; fix: string } {
   if (d.category === "chat") {
     return {
       what: `Your site runs ${d.name}. From 2 August 2026, visitors must be told — clearly, before the conversation starts — that they are talking to an AI, not a person. ${d.existingDisclosureFound ? "We found disclosure wording on the page: verify it appears before the first message." : "We found no disclosure near it."}`,
-      fix: `Free: install the RapidAct plugin (WordPress / Wix / any stack) — it adds the notice above ${d.name} automatically. Pack (€59): configured for your site with evidence log. Done For You (€99): we install and verify it live.`,
+      fix: `Free: install the RapidAct disclosure layer (WordPress / Wix / any stack) — it adds the notice above ${d.name} automatically, and the evidence log records every view. Not sure this is your only obligation? The €99 pre-consultory report classifies every AI system your company runs and states exactly what each one requires.`,
     };
   }
   return {
@@ -135,7 +135,7 @@ export default function Scanner() {
                     ? "Too many scans from your network — try again in a few minutes."
                     : result.error === "invalid-url"
                       ? "That doesn't look like a valid public URL."
-                      : `The site didn't respond (${result.error ?? "unreachable"}). It may block automated checks — the Done-For-You install (€99) includes a manual review instead.`}
+                      : `The site didn't respond (${result.error ?? "unreachable"}). It may block automated checks — the €99 pre-consultory report covers your systems by manual review instead.`}
                 </p>
               </div>
             </CardContent>
@@ -272,35 +272,31 @@ export default function Scanner() {
             {/* CTAs + lead capture */}
             <Card className="border-[#141b2e] bg-[#141b2e] text-white shadow-lg">
               <CardContent className="flex flex-col gap-5 pt-7 pb-7">
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-[1.3fr_1fr]">
+                  <button
+                    onClick={() => navigate(CONVERT.report)}
+                    className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-4 text-left transition hover:bg-[#ffd617]/20"
+                  >
+                    <PackageCheck className="h-5 w-5 text-[#ffd617]" />
+                    <p className="mt-2 font-bold">
+                      This scan sees your website. The report sees your company — €99
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-white/60">
+                      A specialist classifies every AI system you run, states your exact Article 50
+                      duties and the evidence you must hold, and sends it with a professional
+                      contact assessment within {REPORT.delivery}. Full refund if it does not
+                      arrive →
+                    </p>
+                  </button>
                   <button
                     onClick={() => navigate("/learn")}
                     className="rounded-xl border border-white/15 p-4 text-left transition hover:bg-white/5"
                   >
                     <PackageCheck className="h-5 w-5 text-[#4ade80]" />
-                    <p className="mt-2 font-bold">Do it yourself — €0</p>
+                    <p className="mt-2 font-bold">Install it yourself — €0</p>
                     <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      Free plugin for WordPress, Wix or any stack + step-by-step guide →
-                    </p>
-                  </button>
-                  <button
-                    onClick={() => openConversion("pack", navigate)}
-                    className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-4 text-left transition hover:bg-[#ffd617]/20"
-                  >
-                    <PackageCheck className="h-5 w-5 text-[#ffd617]" />
-                    <p className="mt-2 font-bold">The Pack — €59</p>
-                    <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      Everything configured for your site + evidence log + 12 months of updates. Buy directly →
-                    </p>
-                  </button>
-                  <button
-                    onClick={() => openConversion("dfy", navigate)}
-                    className="rounded-xl border border-white/15 p-4 text-left transition hover:bg-white/5"
-                  >
-                    <PackageCheck className="h-5 w-5 text-white" />
-                    <p className="mt-2 font-bold">Done For You — €99</p>
-                    <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      We install everything on your website and verify it live. Book your slot →
+                      Free disclosure layer and evidence log for WordPress, Wix or any stack, with
+                      step-by-step guides. Free forever →
                     </p>
                   </button>
                 </div>

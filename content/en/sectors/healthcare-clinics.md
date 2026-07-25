@@ -27,4 +27,4 @@ Dental, aesthetic and medical clinics use booking chatbots and AI triage heavily
 
 Transparency (Article 50) is the floor. If a bot starts advising on treatment, you drift toward high-risk territory — that's a different, bigger rulebook worth a lawyer.
 
-*Prefer it handled? The [€59 pack](/#pricing) arrives preconfigured, or we install everything for €99 — verified live on your pages.*
+*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*

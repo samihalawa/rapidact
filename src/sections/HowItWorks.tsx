@@ -1,23 +1,24 @@
-import { ScanSearch, ClipboardList, PackageCheck } from "lucide-react";
+import { ClipboardList, SearchCheck, MailCheck } from "lucide-react";
+import { REPORT } from "@/config";
 
 const steps = [
   {
     n: "01",
-    icon: ScanSearch,
-    title: "Scan — free",
-    text: "Paste your URL. In under a minute we detect the AI systems visible on your site and score your exposure. No signup, no email required.",
+    icon: ClipboardList,
+    title: "You tell us about your company",
+    text: "Two minutes: your business, your sector, your size, and which AI you actually use. If you are not sure what counts, say so — working that out is part of the job.",
   },
   {
     n: "02",
-    icon: ClipboardList,
-    title: "Plan — free",
-    text: "You get a plain-English implementation plan: exactly what your site needs, which free tool to use, and the steps for your platform.",
+    icon: SearchCheck,
+    title: "A specialist assesses your case",
+    text: "We review your systems, your site and your sector against the current AI Act text and guidance. Real analysis of your situation, not a template with your name inserted.",
   },
   {
     n: "03",
-    icon: PackageCheck,
-    title: "Install — your choice",
-    text: "Do it yourself for €0 with our free plugin and guides. Get the €59 pack with everything ready for your site. Or pay €99 and we install it all.",
+    icon: MailCheck,
+    title: `Your report lands within ${REPORT.delivery}`,
+    text: "The complete written assessment plus a professional contact assessment arrive in your inbox. Written by a named person you can reply to. Not there in time? Full refund.",
   },
 ];
 
@@ -28,7 +29,7 @@ export default function HowItWorks() {
         <div className="max-w-2xl">
           <p className="text-sm font-bold tracking-wide text-[#6d5df6] uppercase">How it works</p>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
-            Free to know. Cheap to fix.
+            Two minutes of your time. Then you know.
           </h2>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -55,7 +56,7 @@ export default function HowItWorks() {
             deadlines to 2027–2028 — but Article 50 transparency duties were{" "}
             <strong>not</strong> postponed. They apply from <strong>2 August 2026</strong>, to any
             company whose AI touches EU users, at any size. Fines go up to €15M or 3% of worldwide
-            turnover.
+            turnover. Knowing which clock applies to you is the first thing your report answers.
           </p>
         </div>
       </div>

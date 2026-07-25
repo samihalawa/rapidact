@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
+import { CONVERT } from "@/config";
 
 export default function SiteNav() {
   const navigate = useNavigate();
@@ -12,8 +13,11 @@ export default function SiteNav() {
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm font-medium text-[#5a6378] md:flex">
+          <a href="/#report" className="transition hover:text-[#141b2e]">
+            The report
+          </a>
           <a href="/#features" className="transition hover:text-[#141b2e]">
-            What we install
+            Free tools
           </a>
           <Link to="/article-50" className="transition hover:text-[#141b2e]">
             Article 50 guide
@@ -21,9 +25,6 @@ export default function SiteNav() {
           <Link to="/learn" className="transition hover:text-[#141b2e]">
             Learn
           </Link>
-          <a href="/#pricing" className="transition hover:text-[#141b2e]">
-            Pricing
-          </a>
           <a href="/#faq" className="transition hover:text-[#141b2e]">
             FAQ
           </a>
@@ -33,15 +34,15 @@ export default function SiteNav() {
           <Button
             variant="ghost"
             className="hidden text-sm font-medium text-[#5a6378] sm:inline-flex"
-            onClick={() => navigate("/scanner")}
+            onClick={() => navigate(CONVERT.scanner)}
           >
             Free scan
           </Button>
           <Button
             className="rounded-full bg-[#141b2e] px-5 text-sm font-semibold text-white hover:bg-[#232c4a]"
-            onClick={() => navigate("/scanner")}
+            onClick={() => navigate(CONVERT.report)}
           >
-            Get started
+            Get my report
           </Button>
         </div>
       </div>

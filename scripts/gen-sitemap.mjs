@@ -12,10 +12,10 @@ const LANGS = ["en", "es", "de", "fr", "it"];
 
 const staticRoutes = [
   ["", "1.0"],
+  ["/report", "1.0"],
   ["/scanner", "0.9"],
   ["/article-50", "0.9"],
   ["/learn", "0.9"],
-  ["/#pricing", "0.6"],
   ["/privacy", "0.3"],
   ["/terms", "0.3"],
   ["/requirements/chatbot-ai-disclosure", "0.8"],

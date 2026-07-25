@@ -20,8 +20,8 @@ lang: en
 
 ## The fast path
 
-Steps 1, 2, 3 and 7 come free with RapidAct — an afternoon, not a project. [Pricing — €0/€59/€99 →](/#pricing)
+Steps 1, 2, 3 and 7 come free with RapidAct — an afternoon, not a project. Not sure which steps are yours? [Get the €99 report →](/report)
 
 ---
 
-*Free tools: [scan your site](/scanner) · [all guides](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Free tools: [scan your site](/scanner) · [all guides](/learn) · [full assessment — €99](/report)*

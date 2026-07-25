@@ -28,4 +28,4 @@ The goal was never "avoid a fine on day one" — it's "never be the easy example
 
 ---
 
-*Start here: [free scan](/scanner) · [learn hub](/learn) · [pricing €0/€59/€99](/#pricing)*
+*Start here: [free scan](/scanner) · [learn hub](/learn) · [full assessment — €99](/report)*

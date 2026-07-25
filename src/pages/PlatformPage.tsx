@@ -76,8 +76,9 @@ export default function PlatformPage() {
           </ol>
           <p className="mt-4 flex items-start gap-2 text-sm text-[#5a6378]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />
-            Rather not touch anything? The €59 pack comes preconfigured for {guide.name} — and for
-            €99 we do the whole install for you.
+            Not sure this is even the right fix for your case? The €99 pre-consultory report tells
+            you which of your AI systems the Act actually covers, on {guide.name} and everywhere
+            else you operate.
           </p>
         </section>
 

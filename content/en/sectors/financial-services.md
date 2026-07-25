@@ -27,4 +27,4 @@ insurers and fintechs are early AI adopters — and highly visible Article 50 ta
 
 This sector already lives under conduct rules and record-keeping duties — an evidence log of disclosures fits its culture. It will likely be among the first audited.
 
-*Prefer it handled? The [€59 pack](/#pricing) arrives preconfigured, or we install everything for €99 — verified live on your pages.*
+*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*

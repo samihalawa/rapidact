@@ -20,4 +20,4 @@ If you learned the cookie-banner playbook in 2018, you already understand this m
 
 ---
 
-*Try the free version: [scan your site](/scanner) · [pricing €0/€59/€99](/#pricing)*
+*Try the free version: [scan your site](/scanner) · [full assessment — €99](/report)*

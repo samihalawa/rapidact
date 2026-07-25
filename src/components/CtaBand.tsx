@@ -1,52 +1,65 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
-import { openConversion } from "@/config";
+import { Check, ArrowRight } from "lucide-react";
+import { CONVERT, REPORT } from "@/config";
 
-/** Shared conversion band used on SEO pages. */
+/** Shared conversion band used on every SEO page. Report-first. */
 export default function CtaBand() {
   const navigate = useNavigate();
   return (
-    <div className="mt-12 rounded-2xl bg-[#141b2e] p-8 text-white">
-      <div className="grid gap-6 sm:grid-cols-3">
+    <div className="mt-12 overflow-hidden rounded-2xl bg-[#141b2e] text-white">
+      <div className="grid gap-8 p-8 lg:grid-cols-[1.1fr_1fr]">
         <div>
-          <p className="text-lg font-extrabold">Free — €0</p>
-          <p className="mt-1 text-sm text-white/60">
-            Scan + plan + plugin + guides. Do it yourself, keep everything.
+          <span className="rounded-full bg-[#ffd617] px-3 py-1 text-[11px] font-extrabold tracking-wide text-[#141b2e] uppercase">
+            Know where you stand
+          </span>
+          <p className="mt-4 text-2xl leading-tight font-extrabold">{REPORT.name}</p>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-4xl font-extrabold">€99</span>
+            <span className="text-sm text-white/60">one-time · per company</span>
+          </div>
+          <p className="mt-3 text-sm leading-relaxed text-white/70">
+            Tell us about your company and the AI you use. A specialist assesses your real exposure
+            and sends the complete report plus a professional contact assessment to your inbox
+            within {REPORT.delivery} — or you get a full refund.
+          </p>
+          <Button
+            className="mt-5 rounded-full bg-white font-bold text-[#141b2e] hover:bg-[#f1f2f8]"
+            onClick={() => navigate(CONVERT.report)}
+          >
+            Get my report — €99
+            <ArrowRight className="ml-1.5 h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="lg:border-l lg:border-white/10 lg:pl-8">
+          <p className="text-xs font-bold tracking-wide text-[#ffd617] uppercase">In the report</p>
+          <ul className="mt-3 space-y-2">
+            {[
+              "Every AI system you run, classified by real risk category",
+              "Your exact Article 50 duties, per touchpoint",
+              "The disclosure wording and where it must appear",
+              "The evidence you must be able to produce",
+              "A prioritised action list with deadlines",
+              "A named specialist's assessment you can reply to",
+            ].map((f) => (
+              <li key={f} className="flex items-start gap-2 text-sm">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#ffd617]" />
+                <span className="leading-relaxed text-white/80">{f}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-xs leading-relaxed text-white/50">
+            Prefer to start free? The{" "}
+            <button
+              onClick={() => navigate(CONVERT.scanner)}
+              className="font-semibold text-white/80 underline"
+            >
+              site scanner
+            </button>{" "}
+            and the self-install disclosure layer are free forever, with or without a report.
           </p>
         </div>
-        <button
-          onClick={() => openConversion("pack", navigate)}
-          className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-3 text-left transition hover:bg-[#ffd617]/20"
-        >
-          <p className="text-lg font-extrabold text-[#ffd617]">The Pack — €59</p>
-          <p className="mt-1 text-sm text-white/60">
-            Everything configured for your site, evidence log, 12 months of updates. Buy directly →
-          </p>
-        </button>
-        <button
-          onClick={() => openConversion("dfy", navigate)}
-          className="rounded-xl border border-white/15 p-3 text-left transition hover:bg-white/5"
-        >
-          <p className="text-lg font-extrabold">Done For You — €99</p>
-          <p className="mt-1 text-sm text-white/60">
-            We install it all on your website and verify it live. Book your slot →
-          </p>
-        </button>
-      </div>
-      <div className="mt-6 flex flex-wrap gap-3">
-        <Button
-          className="rounded-full bg-[#ffd617] font-bold text-[#141b2e] hover:bg-[#ffe44d]"
-          onClick={() => navigate("/scanner")}
-        >
-          Scan your site free
-        </Button>
-        <Button
-          variant="outline"
-          className="rounded-full border-white/25 bg-transparent text-white hover:bg-white/10"
-          onClick={() => navigate("/#pricing")}
-        >
-          Compare options
-        </Button>
       </div>
     </div>
   );
