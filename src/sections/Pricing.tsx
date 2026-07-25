@@ -1,11 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, ShieldCheck, CalendarClock } from "lucide-react";
 import { useNavigate } from "react-router";
+import { openConversion, type Tier } from "@/config";
+import Countdown from "@/components/Countdown";
 
-const tiers = [
+interface TierDef {
+  name: string;
+  tier: Tier;
+  price: string;
+  period: string;
+  tagline: string;
+  features: string[];
+  cta: string;
+  featured: boolean;
+}
+
+const tiers: TierDef[] = [
   {
     name: "Free — do it yourself",
+    tier: "free",
     price: "€0",
     period: "forever",
     tagline: "Everything you need, you install it",
@@ -22,6 +36,7 @@ const tiers = [
   },
   {
     name: "Compliance Pack",
+    tier: "pack",
     price: "€59",
     period: "one-time · per site",
     tagline: "Everything needed, ready for your site",
@@ -34,11 +49,12 @@ const tiers = [
       "12 months of rule updates",
       "Email support",
     ],
-    cta: "Get the pack — €59",
+    cta: "Buy the pack — €59",
     featured: true,
   },
   {
     name: "Done For You",
+    tier: "dfy",
     price: "€99",
     period: "one-time · per site",
     tagline: "We install everything on your website",
@@ -50,7 +66,7 @@ const tiers = [
       "Handover call + documentation",
       "You do literally nothing",
     ],
-    cta: "We do it — €99",
+    cta: "Book your install — €99",
     featured: false,
   },
 ];
@@ -69,6 +85,7 @@ export default function Pricing() {
             Scan and plan are always free. Install it yourself for €0, get the full pack for €59, or
             have us install everything for €99. One-time — no subscriptions.
           </p>
+          <Countdown className="mt-4" />
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {tiers.map((t) => (
@@ -107,24 +124,44 @@ export default function Pricing() {
                   ))}
                 </ul>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex-col gap-2">
                 <Button
                   className={
                     t.featured
                       ? "w-full rounded-full bg-white font-semibold text-[#141b2e] hover:bg-[#f1f2f8]"
                       : "w-full rounded-full bg-[#141b2e] font-semibold text-white hover:bg-[#232c4a]"
                   }
-                  onClick={() => navigate("/scanner")}
+                  onClick={() => openConversion(t.tier, navigate)}
                 >
                   {t.cta}
                 </Button>
+                {t.tier === "dfy" && (
+                  <p className={`flex items-center gap-1.5 text-[11px] ${t.featured ? "text-white/50" : "text-[#8a92a6]"}`}>
+                    <CalendarClock className="h-3 w-3" /> Book directly on Cal.com — pick your slot
+                  </p>
+                )}
               </CardFooter>
             </Card>
           ))}
         </div>
-        <p className="mt-8 text-center text-xs text-[#8a92a6]">
-          Prices exclude VAT. One-time payments, no subscriptions. RapidAct is technical
-          transparency tooling — not legal advice.
+
+        {/* guarantee strip */}
+        <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 rounded-2xl border border-[#e7e9f2] bg-[#f8f9fc] px-6 py-4">
+          {[
+            "48-hour install or full refund",
+            "One-time payment — never a subscription",
+            "VAT invoice included",
+            "You keep everything, even free tier",
+          ].map((g) => (
+            <span key={g} className="flex items-center gap-2 text-xs font-semibold text-[#3d445c]">
+              <ShieldCheck className="h-4 w-4 text-[#0e9f6e]" />
+              {g}
+            </span>
+          ))}
+        </div>
+
+        <p className="mt-6 text-center text-xs text-[#8a92a6]">
+          Prices exclude VAT. RapidAct is technical transparency tooling — not legal advice.
         </p>
       </div>
     </section>

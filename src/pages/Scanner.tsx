@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/providers/trpc";
 import type { ScanResult, ScanFinding } from "@contracts/types";
+import { openConversion } from "@/config";
+import { useNavigate } from "react-router";
 import {
   ScanSearch,
   Loader2,
@@ -48,6 +50,7 @@ function planItemFor(d: ScanFinding): { what: string; fix: string } {
 }
 
 export default function Scanner() {
+  const navigate = useNavigate();
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -270,27 +273,36 @@ export default function Scanner() {
             <Card className="border-[#141b2e] bg-[#141b2e] text-white shadow-lg">
               <CardContent className="flex flex-col gap-5 pt-7 pb-7">
                 <div className="grid gap-3 sm:grid-cols-3">
-                  <div className="rounded-xl border border-white/15 p-4">
+                  <button
+                    onClick={() => navigate("/learn")}
+                    className="rounded-xl border border-white/15 p-4 text-left transition hover:bg-white/5"
+                  >
                     <PackageCheck className="h-5 w-5 text-[#4ade80]" />
                     <p className="mt-2 font-bold">Do it yourself — €0</p>
                     <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      Free plugin for WordPress, Wix or any stack + step-by-step guide.
+                      Free plugin for WordPress, Wix or any stack + step-by-step guide →
                     </p>
-                  </div>
-                  <div className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-4">
+                  </button>
+                  <button
+                    onClick={() => openConversion("pack", navigate)}
+                    className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-4 text-left transition hover:bg-[#ffd617]/20"
+                  >
                     <PackageCheck className="h-5 w-5 text-[#ffd617]" />
                     <p className="mt-2 font-bold">The Pack — €59</p>
                     <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      Everything configured for your site + evidence log + 12 months of updates.
+                      Everything configured for your site + evidence log + 12 months of updates. Buy directly →
                     </p>
-                  </div>
-                  <div className="rounded-xl border border-white/15 p-4">
+                  </button>
+                  <button
+                    onClick={() => openConversion("dfy", navigate)}
+                    className="rounded-xl border border-white/15 p-4 text-left transition hover:bg-white/5"
+                  >
                     <PackageCheck className="h-5 w-5 text-white" />
                     <p className="mt-2 font-bold">Done For You — €99</p>
                     <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      We install everything on your website and verify it live. You do nothing.
+                      We install everything on your website and verify it live. Book your slot →
                     </p>
-                  </div>
+                  </button>
                 </div>
                 <div className="border-t border-white/10 pt-5">
                   {leadDone ? (

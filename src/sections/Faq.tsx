@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqs = [
+export const FAQS = [
   {
     q: "Does this make my site compliant with the EU AI Act?",
     a: "No tool can promise that, and anyone who does is selling you risk. RapidAct implements and documents the Article 50(1) visitor-disclosure duty for AI interaction — the part that is genuinely automatable. Scoping your full obligations stays with you; for edge cases, talk to a qualified EU technology lawyer.",
@@ -47,7 +47,7 @@ export default function Faq() {
           </h2>
         </div>
         <Accordion type="single" collapsible className="mt-10">
-          {faqs.map((f, i) => (
+          {FAQS.map((f, i) => (
             <AccordionItem
               key={f.q}
               value={`item-${i}`}

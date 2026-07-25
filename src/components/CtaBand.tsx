@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
+import { openConversion } from "@/config";
 
 /** Shared conversion band used on SEO pages. */
 export default function CtaBand() {
@@ -13,18 +14,24 @@ export default function CtaBand() {
             Scan + plan + plugin + guides. Do it yourself, keep everything.
           </p>
         </div>
-        <div>
+        <button
+          onClick={() => openConversion("pack", navigate)}
+          className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-3 text-left transition hover:bg-[#ffd617]/20"
+        >
           <p className="text-lg font-extrabold text-[#ffd617]">The Pack — €59</p>
           <p className="mt-1 text-sm text-white/60">
-            Everything configured for your site, evidence log, 12 months of updates.
+            Everything configured for your site, evidence log, 12 months of updates. Buy directly →
           </p>
-        </div>
-        <div>
+        </button>
+        <button
+          onClick={() => openConversion("dfy", navigate)}
+          className="rounded-xl border border-white/15 p-3 text-left transition hover:bg-white/5"
+        >
           <p className="text-lg font-extrabold">Done For You — €99</p>
           <p className="mt-1 text-sm text-white/60">
-            We install it all on your website and verify it live.
+            We install it all on your website and verify it live. Book your slot →
           </p>
-        </div>
+        </button>
       </div>
       <div className="mt-6 flex flex-wrap gap-3">
         <Button

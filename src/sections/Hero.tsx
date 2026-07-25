@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Zap, ShieldCheck, MessagesSquare, Lock, Send, Sparkles, ChartColumn, BadgeCheck } from "lucide-react";
+import { openConversion } from "@/config";
+import { daysLeft } from "@/components/Countdown";
 
 const pills = [
   { icon: Zap, label: "Fast setup" },
@@ -118,7 +120,7 @@ export default function Hero() {
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-[#e7e9f2] bg-white/80 px-3 py-1 text-xs font-semibold text-[#5a6378] shadow-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[#dc2626]" />
-            EU AI Act Article 50 · live from 2 Aug 2026 · fines up to €15M
+            EU AI Act Article 50 · {daysLeft() === 0 ? "in force now" : `live in ${daysLeft()} days`} · fines up to €15M
           </span>
           <h1 className="mt-5 text-[44px] leading-[1.05] font-extrabold tracking-tight text-[#141b2e] sm:text-[56px]">
             Install AI
@@ -144,7 +146,7 @@ export default function Hero() {
               size="lg"
               variant="outline"
               className="rounded-full border-[#d8dce8] bg-white/80 px-7 font-semibold text-[#141b2e]"
-              onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => openConversion("dfy", navigate)}
             >
               We install it — €99
             </Button>

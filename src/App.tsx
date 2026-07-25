@@ -8,6 +8,7 @@ import RequirementPage from "./pages/RequirementPage";
 import PlatformPage from "./pages/PlatformPage";
 import ContentHub from "./pages/ContentHub";
 import ContentPage from "./pages/ContentPage";
+import Start from "./pages/Start";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
       <Route path="/platforms/:slug" element={<PlatformPage />} />
       <Route path="/learn" element={<ContentHub />} />
       <Route path="/:lang?/learn" element={<ContentHub />} />
+      <Route path="/start" element={<Start />} />
       {/* Markdown content system: /answers/x, /es/vendors/y, … */}
       <Route path="/:lang?/:type/:slug" element={<ContentPage />} />
       <Route path="/privacy" element={<Privacy />} />
