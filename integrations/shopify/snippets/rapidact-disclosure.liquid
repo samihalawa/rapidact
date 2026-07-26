@@ -1,0 +1,26 @@
+{% comment %}
+  RapidAct AI Disclosure
+  Canonical runtime: https://rapidact.eu/rapidact-badge.js
+
+  Example:
+  {% render 'rapidact-disclosure',
+    system: 'Shopping assistant',
+    provider: 'Example Store',
+    details_url: '/pages/ai-transparency',
+    position: 'right',
+    color: '#1f3a5f'
+  %}
+{% endcomment %}
+
+<script
+  defer
+  src="https://rapidact.eu/rapidact-badge.js"
+  data-language="{{ request.locale.iso_code | downcase | slice: 0, 2 | escape }}"
+  {% if title != blank %}data-title="{{ title | escape }}"{% endif %}
+  {% if message != blank %}data-message="{{ message | escape }}"{% endif %}
+  {% if system != blank %}data-system="{{ system | escape }}"{% endif %}
+  {% if provider != blank %}data-provider="{{ provider | escape }}"{% endif %}
+  {% if details_url != blank %}data-details-url="{{ details_url | escape }}"{% endif %}
+  data-position="{{ position | default: 'right' | escape }}"
+  data-color="{{ color | default: '#1f3a5f' | escape }}"
+></script>

@@ -11,6 +11,7 @@ import {
   Check,
   Code2,
   Copy,
+  Download,
   FileClock,
   MessagesSquare,
   Tags,
@@ -21,6 +22,23 @@ import { useI18n } from "@/lib/i18n";
 import { GUIDE_COPY } from "@/data/localizedGuide";
 
 const reqIcons = [MessagesSquare, Tags, Video, FileClock];
+const platformInstallers = [
+  {
+    slug: "wordpress" as const,
+    name: "WordPress",
+    href: "/downloads/rapidact-wordpress.zip",
+  },
+  {
+    slug: "shopify" as const,
+    name: "Shopify",
+    href: "/downloads/rapidact-shopify.zip",
+  },
+  {
+    slug: "wix" as const,
+    name: "Wix",
+    href: "/downloads/rapidact-wix.zip",
+  },
+];
 
 export default function Guide() {
   const [copied, setCopied] = useState(false);
@@ -86,6 +104,58 @@ export default function Guide() {
             <span className="eyebrow shrink-0">{copy.preview}</span>
           </div>
 
+          <div className="mt-8">
+            <h3 className="text-lg font-bold tracking-tight text-[#16181d]">
+              {copy.installerTitle}
+            </h3>
+            <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-[#5c6370]">
+              {copy.installerBody}
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {platformInstallers.map(installer => {
+                const installerCopy = copy.installers[installer.slug];
+                return (
+                  <article
+                    key={installer.slug}
+                    className="flex min-h-full flex-col border border-[#d8d8d2] bg-white p-4"
+                  >
+                    <p className="mono text-[10px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
+                      {installerCopy.type}
+                    </p>
+                    <h4 className="mt-2 text-base font-bold text-[#16181d]">
+                      {installer.name}
+                    </h4>
+                    <p className="mt-2 flex-1 text-[13px] leading-relaxed text-[#5c6370]">
+                      {installerCopy.body}
+                    </p>
+                    <a
+                      href={installer.href}
+                      download
+                      onClick={() =>
+                        track("platform_installer_download", {
+                          platform: installer.slug,
+                        })
+                      }
+                      className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded bg-[#16181d] px-3 text-center text-[12px] font-bold text-white transition hover:bg-[#2b2f38] focus-visible:ring-2 focus-visible:ring-[#1f3a5f] focus-visible:ring-offset-2 focus-visible:outline-none"
+                    >
+                      <Download className="h-4 w-4" aria-hidden="true" />
+                      {installerCopy.action}
+                    </a>
+                    <Link
+                      to={path(`/platforms/${installer.slug}`)}
+                      className="mt-3 text-center text-[12px] font-semibold text-[#1f3a5f] underline underline-offset-2"
+                    >
+                      {copy.openGuide}
+                    </Link>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+
+          <h3 className="mt-8 text-lg font-bold tracking-tight text-[#16181d]">
+            {copy.anySiteTitle}
+          </h3>
           <div className="mt-6 overflow-hidden border border-[#d8d8d2] bg-[#16181d]">
             <div className="flex items-center justify-between border-b border-white/15 px-4 py-2.5">
               <span className="mono text-[11px] font-bold tracking-[0.1em] text-white/60 uppercase">

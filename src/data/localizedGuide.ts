@@ -13,6 +13,18 @@ export type GuideCopy = {
   installCode: string;
   copy: string;
   copied: string;
+  installerTitle: string;
+  installerBody: string;
+  anySiteTitle: string;
+  openGuide: string;
+  installers: Record<
+    "wordpress" | "shopify" | "wix",
+    {
+      type: string;
+      body: string;
+      action: string;
+    }
+  >;
   steps: [string, string, string][];
   scope: string;
   scopeLink: string;
@@ -45,6 +57,28 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installCode: "Install code",
     copy: "Copy code",
     copied: "Copied",
+    installerTitle: "Choose the fastest installation",
+    installerBody:
+      "Each option is a thin installer for the same RapidAct runtime. Improvements load from rapidact.eu automatically; there is no copied engine to maintain.",
+    anySiteTitle: "Any website: copy the hosted script",
+    openGuide: "Installation guide",
+    installers: {
+      wordpress: {
+        type: "Direct plugin · ZIP",
+        body: "Upload, activate and tailor the notice from WordPress Settings.",
+        action: "Download WordPress plugin",
+      },
+      shopify: {
+        type: "Theme kit · ZIP",
+        body: "Add one Liquid snippet and one render line to your storefront.",
+        action: "Download Shopify kit",
+      },
+      wix: {
+        type: "Custom Code · ZIP",
+        body: "Paste once in Wix Custom Code and apply it to every page.",
+        action: "Download Wix kit",
+      },
+    },
     steps: [
       ["01", "Copy", "Copy the script. No account required."],
       ["02", "Tailor", "State how visitors encounter AI on your site."],
@@ -84,6 +118,28 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installCode: "Código de instalación",
     copy: "Copiar código",
     copied: "Copiado",
+    installerTitle: "Elige la instalación más rápida",
+    installerBody:
+      "Cada opción es un instalador ligero para el mismo sistema RapidAct. Las mejoras se cargan automáticamente desde rapidact.eu, sin mantener copias.",
+    anySiteTitle: "Cualquier web: copia el script alojado",
+    openGuide: "Guía de instalación",
+    installers: {
+      wordpress: {
+        type: "Plugin directo · ZIP",
+        body: "Súbelo, actívalo y adapta el aviso desde Ajustes de WordPress.",
+        action: "Descargar plugin WordPress",
+      },
+      shopify: {
+        type: "Kit de tema · ZIP",
+        body: "Añade un snippet Liquid y una línea de renderizado a tu tienda.",
+        action: "Descargar kit Shopify",
+      },
+      wix: {
+        type: "Código personalizado · ZIP",
+        body: "Pégalo una vez en Código personalizado y aplícalo a todas las páginas.",
+        action: "Descargar kit Wix",
+      },
+    },
     steps: [
       ["01", "Copia", "Copia el script. No necesitas una cuenta."],
       ["02", "Adapta", "Explica cómo encuentran la IA los visitantes."],
@@ -123,6 +179,28 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installCode: "Installationscode",
     copy: "Code kopieren",
     copied: "Kopiert",
+    installerTitle: "Wählen Sie die schnellste Installation",
+    installerBody:
+      "Jede Option ist ein schlanker Installer für dieselbe RapidAct-Laufzeit. Verbesserungen werden automatisch von rapidact.eu geladen.",
+    anySiteTitle: "Jede Website: gehostetes Skript kopieren",
+    openGuide: "Installationsanleitung",
+    installers: {
+      wordpress: {
+        type: "Direktes Plugin · ZIP",
+        body: "Hochladen, aktivieren und den Hinweis in WordPress anpassen.",
+        action: "WordPress-Plugin laden",
+      },
+      shopify: {
+        type: "Theme-Kit · ZIP",
+        body: "Ein Liquid-Snippet und eine Render-Zeile zum Shop hinzufügen.",
+        action: "Shopify-Kit laden",
+      },
+      wix: {
+        type: "Benutzerdefinierter Code · ZIP",
+        body: "Einmal in Wix einfügen und auf alle Seiten anwenden.",
+        action: "Wix-Kit laden",
+      },
+    },
     steps: [
       ["01", "Kopieren", "Kopieren Sie das Skript. Kein Konto nötig."],
       ["02", "Anpassen", "Beschreiben Sie, wie Besucher mit KI interagieren."],
@@ -166,6 +244,28 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installCode: "Code d’installation",
     copy: "Copier le code",
     copied: "Copié",
+    installerTitle: "Choisissez l’installation la plus rapide",
+    installerBody:
+      "Chaque option est un installateur léger pour le même moteur RapidAct. Les améliorations se chargent automatiquement depuis rapidact.eu.",
+    anySiteTitle: "Tout site : copiez le script hébergé",
+    openGuide: "Guide d’installation",
+    installers: {
+      wordpress: {
+        type: "Extension directe · ZIP",
+        body: "Importez, activez et adaptez l’avis dans les réglages WordPress.",
+        action: "Télécharger pour WordPress",
+      },
+      shopify: {
+        type: "Kit de thème · ZIP",
+        body: "Ajoutez un snippet Liquid et une ligne de rendu à la boutique.",
+        action: "Télécharger pour Shopify",
+      },
+      wix: {
+        type: "Code personnalisé · ZIP",
+        body: "Collez-le une fois dans Wix et appliquez-le à toutes les pages.",
+        action: "Télécharger pour Wix",
+      },
+    },
     steps: [
       ["01", "Copier", "Copiez le script. Aucun compte requis."],
       ["02", "Adapter", "Indiquez comment les visiteurs rencontrent l’IA."],
@@ -204,6 +304,28 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installCode: "Codice di installazione",
     copy: "Copia codice",
     copied: "Copiato",
+    installerTitle: "Scegli l’installazione più rapida",
+    installerBody:
+      "Ogni opzione è un installer leggero per lo stesso runtime RapidAct. I miglioramenti vengono caricati automaticamente da rapidact.eu.",
+    anySiteTitle: "Qualsiasi sito: copia lo script ospitato",
+    openGuide: "Guida all’installazione",
+    installers: {
+      wordpress: {
+        type: "Plugin diretto · ZIP",
+        body: "Carica, attiva e personalizza l’avviso dalle impostazioni WordPress.",
+        action: "Scarica plugin WordPress",
+      },
+      shopify: {
+        type: "Kit tema · ZIP",
+        body: "Aggiungi uno snippet Liquid e una riga di rendering al negozio.",
+        action: "Scarica kit Shopify",
+      },
+      wix: {
+        type: "Codice personalizzato · ZIP",
+        body: "Incolla una volta in Wix e applica il codice a tutte le pagine.",
+        action: "Scarica kit Wix",
+      },
+    },
     steps: [
       ["01", "Copia", "Copia lo script. Nessun account richiesto."],
       ["02", "Adatta", "Indica come i visitatori incontrano l’IA."],

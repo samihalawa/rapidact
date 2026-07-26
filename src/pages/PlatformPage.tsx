@@ -4,10 +4,19 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
 import CtaBand from "@/components/CtaBand";
 import { getPlatform, PLATFORMS } from "@/data/platforms";
-import { CheckCircle2, ScanSearch, ListChecks, Blocks } from "lucide-react";
+import {
+  CheckCircle2,
+  ScanSearch,
+  ListChecks,
+  Blocks,
+  Download,
+} from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { track } from "@/lib/analytics";
 
 export default function PlatformPage() {
   const { slug } = useParams<{ slug: string }>();
+  const { path } = useI18n();
   const guide = slug ? getPlatform(slug) : undefined;
 
   if (!guide) {
@@ -87,12 +96,34 @@ export default function PlatformPage() {
               </li>
             ))}
           </ol>
-          <Link
-            to="/article-50#install"
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
-          >
-            Add the AI-use notice
-          </Link>
+          {guide.installer ? (
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href={guide.installer.href}
+                download
+                onClick={() =>
+                  track("platform_installer_download", {
+                    platform: guide.slug,
+                    source: "platform_guide",
+                  })
+                }
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+                {guide.installer.label}
+              </a>
+              <span className="mono text-[11px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
+                {guide.installer.format}
+              </span>
+            </div>
+          ) : (
+            <Link
+              to={path("/article-50#install")}
+              className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
+            >
+              Add the AI-use notice
+            </Link>
+          )}
           <p className="mt-4 flex items-start gap-2 text-sm text-[#5c6370]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />
             Need to confirm which systems and duties apply? The €99 company
@@ -111,7 +142,7 @@ export default function PlatformPage() {
             {PLATFORMS.filter(p => p.slug !== guide.slug).map(p => (
               <Link
                 key={p.slug}
-                to={`/platforms/${p.slug}`}
+                to={path(`/platforms/${p.slug}`)}
                 className="rounded border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
               >
                 {p.name}

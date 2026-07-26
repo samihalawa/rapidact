@@ -8,6 +8,11 @@ export interface PlatformGuide {
   detectionNote: string;
   freeInstall: string[];
   commonWidgets: string[];
+  installer?: {
+    href: string;
+    label: string;
+    format: string;
+  };
 }
 
 export const PLATFORMS: PlatformGuide[] = [
@@ -18,15 +23,15 @@ export const PLATFORMS: PlatformGuide[] = [
       "AI disclosure on WordPress — one-script Article 50 notice | RapidAct",
     metaDescription:
       "Add a clear AI-interaction notice to WordPress in minutes with one RapidAct script. No account, cookies or tracking.",
-    h1: "AI disclosure on WordPress — paste one script",
+    h1: "AI disclosure on WordPress — upload one small plugin",
     intro:
       "If you provide an AI assistant under your own service or brand, Article 50(1) may require a clear notice before the first interaction. The free RapidAct notice gives you that visible technical layer without replacing the role and scope assessment.",
     detectionNote:
       "Run the free website scan first. It checks the public page against 52 known AI-chat signatures and reports whether disclosure wording is visible. It cannot inspect private plugins, custom back-office AI or your contractual role.",
     freeInstall: [
-      "Open the AI notice installer and copy the production script.",
-      "In WordPress, add it through your theme's header/footer custom-code field or a trusted custom-code plugin.",
-      "Paste it before the closing body tag, edit the title and message for your actual AI system, then publish.",
+      "Download the RapidAct WordPress ZIP and open Plugins → Add New Plugin → Upload Plugin.",
+      "Upload the ZIP, activate it, then open Settings → RapidAct AI Disclosure.",
+      "Choose the language, message, system, details URL, position and colour, then save.",
       "Open the live page in a private window and verify the notice is visible before a visitor starts the AI interaction.",
     ],
     commonWidgets: [
@@ -38,6 +43,11 @@ export const PLATFORMS: PlatformGuide[] = [
       "Chatbase",
       "JivoChat",
     ],
+    installer: {
+      href: "/downloads/rapidact-wordpress.zip",
+      label: "Download the WordPress plugin",
+      format: "Direct plugin · ZIP",
+    },
   },
   {
     slug: "wix",
@@ -52,12 +62,17 @@ export const PLATFORMS: PlatformGuide[] = [
     detectionNote:
       "Run the free scan first: it checks your published Wix site for known chat widgets and shows whether any disclosure is already visible. Wix renders widgets client-side, so the scan reads what your visitors actually receive.",
     freeInstall: [
-      "Open the AI notice installer and copy the production script.",
-      "In your Wix dashboard, go to Settings → Custom Code and add it to the pages that contain the AI experience.",
-      "Place it at the end of the body, edit the title and message for the system your visitors meet, then publish.",
+      "Download the Wix kit and open rapidact-custom-code.html.",
+      "In your Wix dashboard, go to Settings → Custom Code and paste the snippet.",
+      "Apply it to all pages, choose Load code on each new page and place it at Body – end.",
       "Open the published page in a private window and verify the notice appears before the first AI interaction.",
     ],
     commonWidgets: ["Wix Chat (AI)", "Tidio", "Chatbase", "Custom GPT apps"],
+    installer: {
+      href: "/downloads/rapidact-wix.zip",
+      label: "Download the Wix kit",
+      format: "Custom Code · ZIP",
+    },
   },
   {
     slug: "shopify",
@@ -66,15 +81,15 @@ export const PLATFORMS: PlatformGuide[] = [
       "AI disclosure on Shopify — EU AI Act Article 50 for online stores | RapidAct",
     metaDescription:
       "Add a clear AI-interaction notice to Shopify with one RapidAct script, including theme.liquid and live-store verification steps.",
-    h1: "AI disclosure on Shopify — one script in your theme",
+    h1: "AI disclosure on Shopify — one small theme kit",
     intro:
       "If your store provides an AI shopping or support assistant, you may need a clear direct-interaction notice. AI-generated content has separate rules, so first classify the system and your role; use the notice where it fits.",
     detectionNote:
       "The free scan checks the public storefront for common Shopify AI-chat signatures and visible disclosure wording. It cannot determine whether a product image was generated or materially altered by AI.",
     freeInstall: [
-      "Open the AI notice installer and copy the production script.",
-      "In Shopify, go to Online Store → Themes → Edit code and open theme.liquid.",
-      "Paste the script immediately before the closing body tag, edit its message, save and publish.",
+      "Download the Shopify kit and copy rapidact-disclosure.liquid into a new theme snippet with the same name.",
+      "Open layout/theme.liquid and add the provided render line immediately before the closing body tag.",
+      "Set the system, responsible organisation, details URL, position and colour, then save.",
       "Open the storefront in a private window and verify the disclosure is visible before the first AI interaction.",
     ],
     commonWidgets: [
@@ -84,6 +99,11 @@ export const PLATFORMS: PlatformGuide[] = [
       "Chatty",
       "Rep AI",
     ],
+    installer: {
+      href: "/downloads/rapidact-shopify.zip",
+      label: "Download the Shopify kit",
+      format: "Theme kit · ZIP",
+    },
   },
   {
     slug: "tidio",
