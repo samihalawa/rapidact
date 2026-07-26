@@ -1,43 +1,28 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { CONVERT, REPORT } from "@/config";
-import { REPORT_DELIVERABLES } from "@/data/report";
-import { ENTITY_DISPLAY_NAME, HAS_VAT } from "@/data/company";
-
-/** The free tools, kept genuinely free and stated as secondary. */
-const freeTools = [
-  {
-    name: "Website scanner",
-    text: "Submit a URL and see which AI systems are detectable on your pages, checked against 52 known chatbot platforms, with the evidence found for each. Unlimited, no account.",
-    cta: "Scan a website",
-    to: CONVERT.scanner,
-  },
-  {
-    name: "One-script AI disclosure badge",
-    text: "A lightweight, privacy-preserving notice you can paste into WordPress, Wix, Shopify, Webflow or any custom site. No account, plugin or build step.",
-    cta: "Copy the install code",
-    to: CONVERT.badge,
-  },
-];
+import { useI18n } from "@/lib/i18n";
+import { HOME_COPY } from "@/data/localizedHome";
 
 export default function Pricing() {
   const navigate = useNavigate();
+  const { lang, path, t } = useI18n();
+  const copy = HOME_COPY[lang];
   return (
     <section id="pricing" className="paper-alt hairline border-b py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="eyebrow">Fees</p>
+        <p className="eyebrow">{copy.pricingLabel}</p>
         <h2 className="ink mt-3 max-w-2xl text-[28px] leading-tight font-bold tracking-[-0.015em] sm:text-[32px]">
-          One fee, charged once
+          {copy.pricingTitle}
         </h2>
         <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
-          The tools on this site are free and remain free. The fee is for a
-          specialist reading your case and putting the answer in writing.
+          {copy.pricingIntro}
         </p>
 
         <div className="hairline mt-10 border bg-white">
           <div className="hairline grid border-b lg:grid-cols-[22rem_1fr]">
             <div className="hairline border-b p-7 lg:border-r lg:border-b-0">
-              <p className="eyebrow">Assessment</p>
+              <p className="eyebrow">{copy.assessmentLabel}</p>
               <h3 className="ink mt-2 text-[19px] leading-snug font-semibold">
                 {REPORT.name}
               </h3>
@@ -45,30 +30,29 @@ export default function Pricing() {
                 €99
               </p>
               <p className="ink-soft mt-1.5 text-[13px]">
-                Charged once, per company. Not a subscription.
+                {copy.chargedOnce}
               </p>
               <Button
                 className="mt-6 h-11 w-full rounded bg-[#16181d] text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
-                onClick={() => navigate(CONVERT.report)}
+                onClick={() => navigate(path(CONVERT.report))}
               >
-                Request the assessment
+                {t("hero.request")}
               </Button>
               <p className="ink-soft mt-3 text-[12px] leading-relaxed">
-                You enter your details first and review them before any payment
-                is taken. Nothing is charged on this website.
+                {copy.paymentLead}
               </p>
               <button
-                onClick={() => navigate(CONVERT.example)}
+                onClick={() => navigate(path(CONVERT.example))}
                 className="accent mt-3 text-[13px] font-semibold underline underline-offset-2"
               >
-                Read a full specimen assessment first
+                {copy.specimenFirst}
               </button>
             </div>
 
             <div className="p-7">
-              <p className="eyebrow">What the fee covers</p>
+              <p className="eyebrow">{copy.feeCovers}</p>
               <ul className="mt-4 space-y-3">
-                {REPORT_DELIVERABLES.map(d => (
+                {copy.deliverables.map(d => (
                   <li key={d} className="flex gap-3 text-[15px]">
                     <span className="ink-soft mono shrink-0 pt-0.5 text-[11px]">
                       &bull;
@@ -81,15 +65,11 @@ export default function Pricing() {
           </div>
 
           <dl className="grid divide-y divide-[#e2e2dd] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {[
-              ["Delivery", `Within ${REPORT.delivery} of payment`],
-              ["If we miss it", "Refunded in full, on request"],
-              ["Payment handled by", "bunq. Card details never reach us"],
-            ].map(([t, v]) => (
-              <div key={t} className="px-6 py-4">
-                <dt className="eyebrow">{t}</dt>
+            {copy.facts.map(([label, value]) => (
+              <div key={label} className="px-6 py-4">
+                <dt className="eyebrow">{label}</dt>
                 <dd className="ink-soft mt-1 text-[13px] leading-relaxed">
-                  {v}
+                  {value}
                 </dd>
               </div>
             ))}
@@ -98,22 +78,22 @@ export default function Pricing() {
 
         {/* Free tools, deliberately secondary */}
         <div className="mt-12">
-          <p className="eyebrow">Free, with or without an assessment</p>
+          <p className="eyebrow">{copy.freeLabel}</p>
           <div className="hairline mt-4 grid border-t sm:grid-cols-2">
-            {freeTools.map(t => (
+            {copy.freeTools.map((tool, index) => (
               <div
-                key={t.name}
+                key={tool.title}
                 className="hairline border-b py-6 sm:pr-8 sm:last:pl-8 sm:last:pr-0"
               >
-                <h3 className="ink text-[15px] font-semibold">{t.name}</h3>
+                <h3 className="ink text-[15px] font-semibold">{tool.title}</h3>
                 <p className="ink-soft mt-2 text-[15px] leading-relaxed">
-                  {t.text}
+                  {tool.text}
                 </p>
                 <button
-                  onClick={() => navigate(t.to)}
+                  onClick={() => navigate(path(index === 0 ? CONVERT.scanner : CONVERT.badge))}
                   className="accent mt-3 text-[14px] font-semibold underline underline-offset-2"
                 >
-                  {t.cta}
+                  {tool.cta}
                 </button>
               </div>
             ))}
@@ -121,11 +101,7 @@ export default function Pricing() {
         </div>
 
         <p className="ink-soft mt-8 max-w-3xl text-[13px] leading-relaxed">
-          {HAS_VAT
-            ? "Prices exclude VAT. A VAT invoice is issued for every payment."
-            : `An invoice is issued for every payment by ${ENTITY_DISPLAY_NAME}`}{" "}
-          RapidAct produces technical and organisational compliance assessments.
-          It is not a law firm and the report is not legal advice.
+          {copy.invoice}
         </p>
       </div>
     </section>

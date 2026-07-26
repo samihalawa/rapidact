@@ -1,169 +1,137 @@
 import { useNavigate } from "react-router";
+import { Download, ExternalLink, FileText } from "lucide-react";
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { Button } from "@/components/ui/button";
-import { CONVERT, REPORT } from "@/config";
-import { ENTITY_DISPLAY_NAME, SAMPLE_REPORT_URL } from "@/data/company";
-import { getContent } from "@/lib/content";
-import { Download } from "lucide-react";
-
-/**
- * The published specimen assessment.
- *
- * The document body is NOT written in this file. It comes from
- * content/en/reports/example-eu-ai-act-assessment.md, so the report can be
- * edited, replaced or added to by dropping a markdown file in that folder with
- * no code change. This page only supplies the surrounding chrome: the specimen
- * warning, the document header and the closing call to action.
- */
-const SLUG = "example-eu-ai-act-assessment";
-
-/** The banner that must never be missing from this page. */
-function SpecimenNotice({ subject, compact = false }: { subject: string; compact?: boolean }) {
-  return (
-    <div className="border-l-2 border-l-[#9b1c1c] bg-[#fdf7f7] px-5 py-4">
-      <p className="text-[13px] font-bold tracking-wide text-[#9b1c1c] uppercase">
-        Specimen document
-      </p>
-      <p className="ink-soft mt-1.5 text-[14px] leading-relaxed">
-        This is an illustrative assessment written for an invented company, published so you can
-        read the format and depth before buying. {subject} does not exist, and this is not a real
-        client's report, which would be confidential.
-        {!compact && (
-          <>
-            {" "}
-            Your assessment covers your own systems and reaches your inbox within {REPORT.delivery}.
-          </>
-        )}
-      </p>
-    </div>
-  );
-}
+import { CONVERT } from "@/config";
+import { SAMPLE_REPORT_URL } from "@/data/company";
+import { useI18n } from "@/lib/i18n";
 
 export default function ExampleReport() {
   const navigate = useNavigate();
-  const doc = getContent("reports", SLUG, "en");
-
-  if (!doc) {
-    return (
-      <div className="paper min-h-screen">
-        <SiteNav />
-        <main className="mx-auto max-w-3xl px-4 py-24 text-center">
-          <h1 className="ink text-2xl font-bold">Specimen not available</h1>
-          <p className="ink-soft mt-3 text-[15px]">
-            The specimen assessment could not be loaded. Request the full assessment instead.
-          </p>
-          <Button
-            className="mt-6 rounded bg-[#16181d] px-6 font-semibold text-white hover:bg-[#2b2f38]"
-            onClick={() => navigate(CONVERT.report)}
-          >
-            Request the assessment
-          </Button>
-        </main>
-        <SiteFooter />
-      </div>
-    );
-  }
-
-  const subject = doc.meta.subject || "The company in this document";
-  const isSpecimen = doc.meta.specimen === "true";
+  const { path, t } = useI18n();
 
   return (
-    <div className="paper min-h-screen">
+    <div className="min-h-screen bg-[#ecece8]">
       <Seo
-        title="Specimen EU AI Act assessment: what the €99 report looks like | RapidAct"
-        description="Read a full specimen of the AI Act Complete Pre-Consultory Report before you buy: AI system inventory, risk classification per system, exact Article 50 disclosure wording, evidence position and a prioritised action plan."
+        title="Multi-page specimen EU AI Act assessment PDF | RapidAct"
+        description="Preview and download the full eight-page RapidAct assessment specimen before buying."
       />
       <SiteNav />
 
-      <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
-        <p className="eyebrow">Example of the deliverable</p>
-        <h1 className="ink mt-3 text-[32px] leading-[1.12] font-bold tracking-[-0.02em] sm:text-[38px]">
-          What the €99 assessment actually looks like
-        </h1>
-        <p className="ink-soft mt-4 max-w-2xl text-[16px] leading-relaxed">
-          Rather than ask you to take our word for it, here is a complete specimen of the document,
-          reproduced in full.
-        </p>
-
-        {isSpecimen && (
-          <div className="mt-8">
-            <SpecimenNotice subject={subject} />
-          </div>
-        )}
-
-        <div className="hairline mt-10 border">
-          <div className="hairline flex flex-wrap items-baseline justify-between gap-2 border-b bg-[#16181d] px-6 py-5">
-            <div>
-              <p className="text-[10px] font-bold tracking-[0.14em] text-white/55 uppercase">
-                {REPORT.name}
-              </p>
-              <p className="mt-1 text-[16px] font-semibold text-white">{subject}</p>
-              {doc.meta.subjectNote && (
-                <p className="mt-0.5 text-[12px] text-white/50">{doc.meta.subjectNote}</p>
-              )}
+      <main>
+        <section className="border-b border-[#deded8] bg-white">
+          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <p className="eyebrow">{t("specimen.kicker")}</p>
+                <h1 className="ink mt-3 max-w-3xl text-[34px] leading-[1.08] font-bold tracking-[-0.025em] sm:text-[46px]">
+                  {t("specimen.title")}
+                </h1>
+                <p className="ink-soft mt-5 max-w-2xl text-[17px] leading-relaxed">
+                  {t("specimen.body")}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={SAMPLE_REPORT_URL}
+                  data-analytics-event="view_specimen_pdf"
+                  target="_blank"
+                  rel="noopener"
+                  className="hairline ink inline-flex min-h-11 items-center gap-2 rounded border bg-white px-4 text-[14px] font-semibold hover:bg-[#f7f7f5]"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  {t("specimen.open")}
+                </a>
+                <a
+                  href={SAMPLE_REPORT_URL}
+                  download
+                  data-analytics-event="download_specimen"
+                  className="inline-flex min-h-11 items-center gap-2 rounded bg-[#16181d] px-4 text-[14px] font-semibold text-white hover:bg-[#2b2f38]"
+                >
+                  <Download className="h-4 w-4" />
+                  {t("specimen.download")}
+                </a>
+              </div>
             </div>
-            {doc.meta.ref && (
-              <span className="mono text-[11px] text-white/45">Ref {doc.meta.ref}</span>
-            )}
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-6xl px-3 py-6 sm:px-6 sm:py-10">
+          <div className="overflow-hidden rounded-md border border-[#cfcfca] bg-[#24272d] shadow-[0_24px_70px_rgba(22,24,29,0.18)]">
+            <div className="flex min-h-14 flex-wrap items-center justify-between gap-3 border-b border-white/10 px-4 py-2.5 sm:px-5">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded bg-white/10 text-white">
+                  <FileText className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-[13px] font-semibold text-white">rapidact-specimen-assessment.pdf</p>
+                  <p className="text-[11px] text-white/45">{t("specimen.pages")}</p>
+                </div>
+              </div>
+              <span className="rounded-sm border border-[#f0b4b4]/25 bg-[#9b1c1c]/20 px-2.5 py-1 text-[10px] font-bold tracking-[0.08em] text-[#ffd7d7] uppercase">
+                {t("specimen.notice")}
+              </span>
+            </div>
+
+            <div className="bg-[#777a80] p-3 sm:p-6">
+              <div className="mx-auto aspect-[1/1.20] min-h-[590px] max-w-[940px] overflow-hidden bg-white shadow-[0_12px_30px_rgba(0,0,0,0.22)] sm:aspect-[1/1.15] sm:min-h-[760px] lg:min-h-[900px]">
+                <object
+                  data={`${SAMPLE_REPORT_URL}#view=FitH&toolbar=1&navpanes=0`}
+                  type="application/pdf"
+                  aria-label="RapidAct eight-page specimen assessment PDF"
+                  className="h-full w-full"
+                >
+                  <div className="flex h-full flex-col items-center justify-center p-8 text-center">
+                    <FileText className="h-10 w-10 text-[#1f3a5f]" />
+                    <p className="ink mt-4 text-lg font-semibold">{t("specimen.title")}</p>
+                    <a href={SAMPLE_REPORT_URL} className="accent mt-3 underline">
+                      {t("specimen.open")}
+                    </a>
+                  </div>
+                </object>
+              </div>
+            </div>
           </div>
 
-          <div className="px-6 py-7">
-            <MarkdownRenderer body={doc.body} />
-            <p className="ink-soft hairline mt-8 border-t pt-4 text-[13px] leading-relaxed">
-              Prepared by {ENTITY_DISPLAY_NAME}. This document is a technical and organisational
-              compliance assessment. It is not legal advice, and where a question turns on a point
-              of law the assessment says so and sets out what to put in front of counsel.
+          <div className="mt-5 border-l-2 border-l-[#9b1c1c] bg-white px-5 py-4">
+            <p className="text-[12px] font-bold tracking-[0.08em] text-[#9b1c1c] uppercase">
+              {t("specimen.notice")}
+            </p>
+            <p className="ink-soft mt-1 text-[14px] leading-relaxed">
+              {t("specimen.noticeBody")}
             </p>
           </div>
-        </div>
 
-        {/* Optional downloadable version, appears only once a file is published. */}
-        {SAMPLE_REPORT_URL && (
-          <a
-            href={SAMPLE_REPORT_URL}
-            target="_blank"
-            rel="noopener"
-            className="hairline ink mt-6 inline-flex items-center gap-2 rounded border bg-white px-4 py-2.5 text-[14px] font-semibold hover:bg-[#f7f7f5]"
-          >
-            <Download className="h-4 w-4" />
-            Download this specimen as a document
-          </a>
-        )}
-
-        {isSpecimen && (
-          <div className="mt-8">
-            <SpecimenNotice subject={subject} compact />
+          <div className="hairline mt-8 border bg-white p-7 sm:p-9">
+            <h2 className="ink text-[24px] leading-snug font-bold tracking-[-0.015em]">
+              {t("specimen.ctaTitle")}
+            </h2>
+            <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
+              {t("specimen.ctaBody")}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button
+                data-analytics-event="report_started"
+                data-analytics-label="Specimen conversion CTA"
+                className="min-h-11 rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
+                onClick={() => navigate(path(CONVERT.report))}
+              >
+                {t("hero.request")}, €99
+              </Button>
+              <Button
+                data-analytics-event="scan_started"
+                data-analytics-label="Specimen free scan CTA"
+                variant="outline"
+                className="hairline ink min-h-11 rounded border bg-white px-6 text-[15px] font-semibold hover:bg-[#f7f7f5]"
+                onClick={() => navigate(path(CONVERT.scanner))}
+              >
+                {t("nav.scan")}
+              </Button>
+            </div>
           </div>
-        )}
-
-        <div className="hairline mt-10 border bg-white p-7">
-          <h2 className="ink text-[22px] leading-snug font-bold tracking-[-0.015em]">
-            The same document, written for your systems
-          </h2>
-          <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
-            Tell us what your company runs and this is what arrives in your inbox within{" "}
-            {REPORT.delivery}, covering your own systems, your markets and your obligations. €99,
-            charged once. If it does not arrive in that window, you are refunded in full.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button
-              className="rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
-              onClick={() => navigate(CONVERT.report)}
-            >
-              Request the assessment, €99
-            </Button>
-            <Button
-              variant="outline"
-              className="hairline ink rounded border bg-white px-6 text-[15px] font-semibold hover:bg-[#f7f7f5]"
-              onClick={() => navigate(CONVERT.scanner)}
-            >
-              Scan your website first, free
-            </Button>
-          </div>
-        </div>
+        </section>
       </main>
       <SiteFooter />
     </div>

@@ -1,5 +1,7 @@
 import { SPECIALIST, HAS_NAMED_SPECIALIST } from "@/data/company";
-import { REPORT } from "@/config";
+import { Linkedin } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { HOME_COPY } from "@/data/localizedHome";
 
 /**
  * Who performs the assessment.
@@ -9,58 +11,60 @@ import { REPORT } from "@/config";
  * precisely the unfalsifiable claim that makes a page read as machine-made.
  */
 export default function Specialist() {
+  const { lang, t } = useI18n();
+  const copy = HOME_COPY[lang];
   if (!HAS_NAMED_SPECIALIST) return null;
 
   return (
     <section id="who" className="paper hairline border-b py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="eyebrow">Who performs the assessment</p>
+        <p className="eyebrow">{t("specialist.label")}</p>
+        <h2 className="ink mt-3 text-[28px] leading-tight font-bold tracking-[-0.015em] sm:text-[32px]">
+          {t("specialist.title")}
+        </h2>
 
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
-          <div className="flex items-start gap-4">
+        <div className="hairline mt-8 grid overflow-hidden border bg-white lg:grid-cols-[0.9fr_1.5fr]">
+          <div className="flex items-center gap-5 bg-[#16181d] p-6 sm:p-8">
             {SPECIALIST.photo && (
               <img
                 src={SPECIALIST.photo}
                 alt={SPECIALIST.name}
-                className="hairline h-20 w-20 shrink-0 border object-cover grayscale"
+                className="h-20 w-20 shrink-0 rounded-full border-2 border-white/20 object-cover"
               />
             )}
             <div>
-              <p className="ink text-lg font-semibold">{SPECIALIST.name}</p>
-              {SPECIALIST.role && <p className="ink-soft text-sm">{SPECIALIST.role}</p>}
+              <p className="text-lg font-semibold text-white">{SPECIALIST.name}</p>
+              {SPECIALIST.role && <p className="text-sm text-white/60">{t("specialist.role")}</p>}
               {SPECIALIST.linkedin && (
                 <a
                   href={SPECIALIST.linkedin}
+                  data-analytics-event="specialist_profile_click"
                   target="_blank"
                   rel="noopener"
-                  className="accent mt-1.5 inline-block text-sm underline underline-offset-2"
+                  className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#b8d4fb] underline underline-offset-4"
                 >
-                  Verify this profile
+                  <Linkedin className="h-4 w-4" />
+                  {t("specialist.verify")}
                 </a>
               )}
             </div>
           </div>
 
-          <div>
-            {SPECIALIST.bio && (
-              <p className="ink-soft text-[15px] leading-relaxed">{SPECIALIST.bio}</p>
-            )}
+          <div className="p-6 sm:p-8">
+            <p className="ink-soft text-[15px] leading-relaxed">{copy.specialistBio}</p>
             <p className="ink-soft mt-4 text-[15px] leading-relaxed">
-              Your assessment is read and written by a person, not generated and sent unread. The
-              report arrives from an address that a human monitors, and you can reply to it with
-              follow-up questions about your own case at no extra cost.
+              {t("specialist.human")}
             </p>
             {SPECIALIST.email && (
               <p className="ink-soft mt-4 text-[15px] leading-relaxed">
-                Questions before you buy:{" "}
+                {copy.specialistQuestions}{" "}
                 <a
                   href={`mailto:${SPECIALIST.email}`}
                   className="accent font-medium underline underline-offset-2"
                 >
                   {SPECIALIST.email}
                 </a>
-                . Replies normally come the same working day, and always inside the{" "}
-                {REPORT.delivery} window we hold ourselves to for reports.
+                . {copy.specialistReply}
               </p>
             )}
           </div>

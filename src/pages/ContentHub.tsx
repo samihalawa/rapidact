@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
@@ -7,7 +7,10 @@ import {
   listContent,
   contentPath,
   type ContentType,
+  LANGS,
+  type Lang,
 } from "@/lib/content";
+import { useI18n } from "@/lib/i18n";
 
 const SECTIONS: { type: ContentType; title: string; blurb: string }[] = [
   { type: "answers", title: "Answers", blurb: "The exact questions everyone searches about the EU AI Act — answered directly." },
@@ -19,6 +22,9 @@ const SECTIONS: { type: ContentType; title: string; blurb: string }[] = [
 ];
 
 export default function ContentHub() {
+  const { lang: paramLang } = useParams<{ lang?: string }>();
+  const { lang: contextLang } = useI18n();
+  const lang: Lang = LANGS.includes(paramLang as Lang) ? (paramLang as Lang) : contextLang;
   return (
     <div className="min-h-screen bg-white">
       <Seo
@@ -36,7 +42,7 @@ export default function ContentHub() {
         </p>
 
         {SECTIONS.map((sec) => {
-          const items = listContent(sec.type, "en");
+          const items = listContent(sec.type, lang);
           if (!items.length) return null;
           return (
             <section key={sec.type} className="mt-12">

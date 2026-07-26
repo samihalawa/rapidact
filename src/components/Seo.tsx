@@ -55,12 +55,30 @@ export default function Seo({ title, description, canonical, alternates }: SeoPr
       "og:description": description,
       "og:type": "website",
       "og:url": `https://rapidact.eu${window.location.pathname}`,
+      "og:image": "https://rapidact.eu/social/open-graph-1200x630.png",
+      "og:image:alt": "RapidAct — EU AI Act assessments",
     };
     Object.entries(og).forEach(([property, content]) => {
       let tag = document.querySelector(`meta[property="${property}"]`);
       if (!tag) {
         tag = document.createElement("meta");
         tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", content);
+    });
+
+    const twitter: Record<string, string> = {
+      "twitter:card": "summary_large_image",
+      "twitter:title": title,
+      "twitter:description": description,
+      "twitter:image": "https://rapidact.eu/social/open-graph-1200x630.png",
+    };
+    Object.entries(twitter).forEach(([name, content]) => {
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("name", name);
         document.head.appendChild(tag);
       }
       tag.setAttribute("content", content);

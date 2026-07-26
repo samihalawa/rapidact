@@ -22,6 +22,7 @@ import {
   PackageCheck,
   Wrench,
 } from "lucide-react";
+import { track } from "@/lib/analytics";
 
 function scoreColor(score: number) {
   if (score >= 80) return "text-[#0e9f6e]";
@@ -58,7 +59,16 @@ export default function Scanner() {
   const [copied, setCopied] = useState(false);
 
   const scan = trpc.scan.run.useMutation({
-    onSuccess: data => setResult(data as ScanResult),
+    onSuccess: data => {
+      const next = data as ScanResult;
+      setResult(next);
+      track("scan_completed", {
+        detected_count: next.summary.total,
+        high_exposure_count: next.summary.high,
+        undisclosed_count: next.summary.undisclosed,
+      });
+    },
+    onError: error => track("scan_failed", { error_type: error.data?.code || "unknown" }),
   });
   const lead = trpc.leads.capture.useMutation({
     onSuccess: () => setLeadDone(true),
@@ -67,6 +77,7 @@ export default function Scanner() {
   const runScan = () => {
     if (!url.trim()) return;
     setResult(null);
+    track("scan_started", { has_protocol: /^https?:\/\//i.test(url.trim()) });
     scan.mutate({ url: url.trim() });
   };
 
@@ -128,6 +139,7 @@ export default function Scanner() {
             className="hairline h-11 rounded border bg-white px-4 text-[15px]"
           />
           <Button
+            data-analytics-event="scan_button_click"
             onClick={runScan}
             disabled={scan.isPending || !url.trim()}
             className="h-11 rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"

@@ -1,8 +1,10 @@
 import { useNavigate, Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { CONVERT, REPORT } from "@/config";
-import { REPORT_CHAPTERS } from "@/data/report";
 import { daysLeft } from "@/components/Countdown";
+import { FileText } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import { HOME_COPY } from "@/data/localizedHome";
 
 /**
  * Contents panel. This shows the actual structure of the deliverable, taken from
@@ -11,22 +13,28 @@ import { daysLeft } from "@/components/Countdown";
  * against what they receive.
  */
 function ReportContents() {
+  const { lang, path, t } = useI18n();
+  const copy = HOME_COPY[lang];
   return (
-    <div className="hairline border bg-white">
+    <div className="relative pt-4 pr-4">
+      <div className="absolute top-0 right-0 bottom-4 left-4 border border-[#d8d8d2] bg-[#eeeee9]" aria-hidden="true" />
+      <div className="hairline relative border bg-white shadow-[0_16px_35px_rgba(22,24,29,0.10)]">
       <div className="hairline flex items-baseline justify-between border-b bg-[#16181d] px-6 py-4">
         <div>
           <p className="text-[10px] font-bold tracking-[0.14em] text-white/55 uppercase">
-            Deliverable
+            {t("nav.specimen")} PDF
           </p>
           <p className="mt-1 text-[15px] font-semibold text-white">
             {REPORT.name}
           </p>
         </div>
-        <span className="mono text-[11px] text-white/45">€99</span>
+          <span className="inline-flex items-center gap-1.5 text-[11px] text-white/55">
+            <FileText className="h-3.5 w-3.5" /> {t("specimen.pages")}
+          </span>
       </div>
 
       <ol className="divide-y divide-[#e2e2dd]">
-        {REPORT_CHAPTERS.map(c => (
+        {copy.chapters.map(c => (
           <li key={c.n} className="flex gap-4 px-6 py-3.5">
             <span className="mono ink-soft w-6 shrink-0 pt-0.5 text-[11px]">
               {c.n}
@@ -45,16 +53,17 @@ function ReportContents() {
 
       <div className="hairline border-t bg-[#f7f7f5] px-6 py-3.5">
         <p className="ink-soft text-[12px] leading-relaxed">
-          Prepared for your company specifically. Delivered as a written
-          document to the address you give us, within {REPORT.delivery} of
-          payment.
+          {copy.prepared}
         </p>
         <Link
-          to={CONVERT.example}
+          to={path(CONVERT.example)}
+          data-analytics-event="view_specimen"
+          data-analytics-label="Hero report preview"
           className="accent mt-2 inline-block text-[12px] font-semibold underline underline-offset-2"
         >
-          Read a full specimen before you buy
+          {t("hero.specimen")}
         </Link>
+      </div>
       </div>
     </div>
   );
@@ -63,6 +72,8 @@ function ReportContents() {
 export default function Hero() {
   const navigate = useNavigate();
   const d = daysLeft();
+  const { lang, path, t } = useI18n();
+  const copy = HOME_COPY[lang];
 
   return (
     <section className="paper hairline border-b">
@@ -71,66 +82,61 @@ export default function Hero() {
           {/* Regulatory status, stated as fact rather than as an urgency device. */}
           <div className="hairline flex flex-wrap items-center gap-x-3 gap-y-1 border-l-2 border-l-[#16181d] pl-3">
             <span className="ink text-[13px] font-semibold">
-              EU AI Act, Article 50
+              {t("hero.kicker")}
             </span>
             <span className="ink-soft text-[13px]">
-              {d === 0
-                ? "In force since 2 August 2026"
-                : `Applies from 2 August 2026, in ${d} day${d === 1 ? "" : "s"}`}
+              {d === 0 ? copy.statusLive : copy.statusFuture(d)}
             </span>
           </div>
 
-          <h1 className="ink mt-6 text-[38px] leading-[1.1] font-bold tracking-[-0.02em] sm:text-[46px]">
-            Find out which of your AI systems the EU AI Act actually covers
+          <h1 className="ink mt-6 text-[34px] leading-[1.08] font-bold tracking-[-0.02em] sm:text-[46px] sm:leading-[1.1]">
+            {t("hero.title")}
           </h1>
 
           <p className="ink-soft mt-5 max-w-xl text-[17px] leading-relaxed">
-            Most companies do not have a written list of the AI they run, let
-            alone which obligations attach to each system. We produce that list
-            for you, classify every system against the regulation, and set out
-            what you are required to publish and document.
+            {t("hero.body")}
           </p>
 
           <p className="ink-soft mt-4 max-w-xl text-[17px] leading-relaxed">
-            The assessment costs <span className="ink font-semibold">€99</span>,
-            paid once. It reaches your inbox within {REPORT.delivery}. If it
-            does not arrive in that window, you are refunded in full.
+            {t("hero.price")}
           </p>
 
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Button
+              data-analytics-event="report_started"
+              data-analytics-label="Hero assessment CTA"
               size="lg"
               className="h-12 rounded bg-[#16181d] px-7 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
-              onClick={() => navigate(CONVERT.report)}
+              onClick={() => navigate(path(CONVERT.report))}
             >
-              Request the assessment
+              {t("hero.request")}
             </Button>
             <Button
+              data-analytics-event="view_specimen"
+              data-analytics-label="Hero specimen CTA"
               size="lg"
               variant="outline"
               className="hairline h-12 rounded border bg-white px-7 text-[15px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
-              onClick={() => navigate(CONVERT.example)}
+              onClick={() => navigate(path(CONVERT.example))}
             >
-              Read a specimen report
+              {t("hero.specimen")}
             </Button>
           </div>
 
           <p className="ink-soft mt-4 text-[13px]">
-            Need the technical notice only?{" "}
+            {t("hero.badgeLead")}{" "}
             <Link
+              data-analytics-event="badge_installer_view"
               className="accent font-semibold underline underline-offset-2"
-              to={CONVERT.badge}
+              to={path(CONVERT.badge)}
             >
-              Install the free badge in one minute
+              {t("hero.badgeLink")}
             </Link>
             .
           </p>
 
           <p className="ink-soft mt-5 max-w-xl text-[13px] leading-relaxed">
-            RapidAct produces technical and organisational compliance
-            assessments. It is not a law firm, and the report is not legal
-            advice. Where a question genuinely requires a legal opinion, the
-            report says so and tells you what to put in front of counsel.
+            {copy.heroDisclaimer}
           </p>
         </div>
 

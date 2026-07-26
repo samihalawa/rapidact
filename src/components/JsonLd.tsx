@@ -21,7 +21,7 @@ export const ORG_LD = {
   name: "RapidAct",
   legalName: ENTITY.legalName || undefined,
   url: "https://rapidact.eu",
-  logo: "https://rapidact.eu/favicon.svg",
+  logo: "https://rapidact.eu/icons/icon-512x512.png",
   description:
     "EU AI Act compliance assessments for companies: which of your AI systems are covered, what you must disclose, and what documentation you must hold. Free website scanner and self-install disclosure layer.",
   // Real, verifiable identity. Search engines surface this, and it is the same

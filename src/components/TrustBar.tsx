@@ -1,5 +1,6 @@
 import { ENTITY, COMPANIES_HOUSE_URL, HAS_ENTITY_DETAILS } from "@/data/company";
-import { REPORT } from "@/config";
+import { useI18n } from "@/lib/i18n";
+import { HOME_COPY } from "@/data/localizedHome";
 
 /**
  * Who you are paying, stated plainly and made checkable.
@@ -10,13 +11,15 @@ import { REPORT } from "@/config";
  * far more convincingly than a badge or a testimonial.
  */
 export default function TrustBar() {
+  const { lang, t } = useI18n();
+  const copy = HOME_COPY[lang];
   if (!HAS_ENTITY_DETAILS) return null;
 
   return (
     <section className="paper-alt hairline border-b">
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6 sm:px-6 md:grid-cols-4">
         <div>
-          <p className="eyebrow">Registered company</p>
+          <p className="eyebrow">{t("footer.company")}</p>
           <p className="ink mt-1.5 text-[14px] font-semibold">{ENTITY.legalName}</p>
           <a
             href={COMPANIES_HOUSE_URL}
@@ -29,7 +32,7 @@ export default function TrustBar() {
         </div>
 
         <div>
-          <p className="eyebrow">Registered office</p>
+          <p className="eyebrow">{t("footer.office")}</p>
           <p className="ink-soft mt-1.5 text-[13px] leading-relaxed">
             {ENTITY.address}
             <br />
@@ -38,7 +41,7 @@ export default function TrustBar() {
         </div>
 
         <div>
-          <p className="eyebrow">Contact</p>
+          <p className="eyebrow">{t("footer.contact")}</p>
           <a
             href={`tel:${ENTITY.phone.replace(/\s/g, "")}`}
             className="ink mono mt-1.5 block text-[13px] hover:underline"
@@ -56,9 +59,9 @@ export default function TrustBar() {
         </div>
 
         <div>
-          <p className="eyebrow">Our commitment</p>
+          <p className="eyebrow">{t("trust.commitment")}</p>
           <p className="ink-soft mt-1.5 text-[13px] leading-relaxed">
-            Delivered within {REPORT.delivery} of payment, or refunded in full.
+            {copy.trustCommitment}
           </p>
         </div>
       </div>

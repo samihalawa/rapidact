@@ -16,6 +16,7 @@ import {
   Tags,
   Video,
 } from "lucide-react";
+import { track } from "@/lib/analytics";
 
 const reqIcons = [MessagesSquare, Tags, Video, FileClock];
 const INSTALL_SNIPPET =
@@ -26,6 +27,7 @@ export default function Guide() {
 
   const copySnippet = async () => {
     await navigator.clipboard.writeText(INSTALL_SNIPPET);
+    track("badge_installer_copy", { installer: "script" });
     setCopied(true);
     window.setTimeout(() => setCopied(false), 2000);
   };

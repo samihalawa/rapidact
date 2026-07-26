@@ -9,7 +9,6 @@ import {
   relatedContent,
   contentPath,
   LANGS,
-  LANG_LABELS,
   type ContentType,
   type Lang,
 } from "@/lib/content";
@@ -69,28 +68,6 @@ export default function ContentPage() {
         </nav>
 
         <MarkdownRenderer body={item.body} />
-
-        {/* language switcher (renders only when translations exist in registry) */}
-        <div className="mt-8 flex flex-wrap items-center gap-2 text-xs text-[#6b7280]">
-          {LANGS.map((l) => {
-            const twin = getContent(item.type, item.slug, l);
-            if (!twin) return null;
-            const active = l === item.lang;
-            return (
-              <Link
-                key={l}
-                to={contentPath({ type: item.type, slug: item.slug, lang: l })}
-                className={
-                  active
-                    ? "rounded bg-[#16181d] px-3 py-1 font-semibold text-white"
-                    : "rounded border border-[#e2e2dd] px-3 py-1 hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
-                }
-              >
-                {LANG_LABELS[l]}
-              </Link>
-            );
-          })}
-        </div>
 
         <CtaBand />
 

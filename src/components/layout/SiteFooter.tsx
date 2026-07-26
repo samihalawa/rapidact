@@ -7,44 +7,38 @@ import {
   HAS_ENTITY_DETAILS,
   ENTITY_DISPLAY_NAME,
 } from "@/data/company";
+import { useI18n } from "@/lib/i18n";
 
 export default function SiteFooter() {
+  const { path, t } = useI18n();
   return (
     <footer className="border-t border-[#e2e2dd] bg-white">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 md:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div>
-            <div className="flex items-center gap-2">
-              <img
-                src="/icons/logo-32.png"
-                alt="RapidAct logo"
-                className="h-7 w-7 rounded-lg"
-              />
-              <span className="text-[17px] font-bold text-[#16181d]">
-                RapidAct
-              </span>
-            </div>
+            <img
+              src="/brand/rapidact-horizontal.svg"
+              alt="RapidAct"
+              className="h-10 w-auto"
+            />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#5c6370]">
-              Find out which of your AI systems the EU AI Act covers. A written
-              assessment reaches your inbox within 24–48h for €99. The website
-              scanner and one-script disclosure badge are free either way.
-              Technical assessment, not legal advice.
+              {t("footer.description")}
             </p>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-[#16181d]">Product</h4>
+            <h4 className="text-sm font-semibold text-[#16181d]">{t("footer.product")}</h4>
             <ul className="mt-4 space-y-2.5">
               {[
-                { label: "The assessment, €99", href: "/report" },
-                { label: "Free website scan", href: "/scanner" },
-                { label: "Free badge installer", href: "/article-50#install" },
-                { label: "Article 50 guide", href: "/article-50" },
-                { label: "Guides", href: "/learn" },
+                { label: t("footer.assessment"), href: "/report" },
+                { label: t("footer.scan"), href: "/scanner" },
+                { label: t("footer.badge"), href: "/article-50#install" },
+                { label: t("footer.article"), href: "/article-50" },
+                { label: t("footer.guides"), href: "/learn" },
               ].map(l => (
                 <li key={l.label}>
                   <Link
-                    to={l.href}
+                    to={path(l.href)}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
                     {l.label}
@@ -56,16 +50,16 @@ export default function SiteFooter() {
 
           <div>
             <h4 className="text-sm font-semibold text-[#16181d]">
-              Requirements
+              {t("footer.requirements")}
             </h4>
             <ul className="mt-4 space-y-2.5">
               {REQUIREMENTS.map(r => (
                 <li key={r.slug}>
                   <Link
-                    to={`/requirements/${r.slug}`}
+                    to={path(`/requirements/${r.slug}`)}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
-                    {r.title}
+                    {t(`footer.${r.slug === "chatbot-ai-disclosure" ? "chatbot" : r.slug === "ai-content-labeling" ? "content" : r.slug === "deepfake-labeling" ? "deepfake" : "evidence"}`)}
                   </Link>
                 </li>
               ))}
@@ -73,15 +67,15 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-[#16181d]">Platforms</h4>
+            <h4 className="text-sm font-semibold text-[#16181d]">{t("footer.platforms")}</h4>
             <ul className="mt-4 space-y-2.5">
               {PLATFORMS.map(p => (
                 <li key={p.slug}>
                   <Link
-                    to={`/platforms/${p.slug}`}
+                    to={path(`/platforms/${p.slug}`)}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
-                    {p.name}
+                    {p.slug === "custom-website" ? t("footer.any") : p.name}
                   </Link>
                 </li>
               ))}
@@ -89,16 +83,16 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-[#16181d]">Legal</h4>
+            <h4 className="text-sm font-semibold text-[#16181d]">{t("footer.legal")}</h4>
             <ul className="mt-4 space-y-2.5">
               {[
-                { label: "Privacy policy", href: "/privacy" },
-                { label: "Terms of service", href: "/terms" },
-                { label: "Not legal advice", href: "/terms" },
+                { label: t("footer.privacy"), href: "/privacy" },
+                { label: t("footer.terms"), href: "/terms" },
+                { label: t("footer.advice"), href: "/terms" },
               ].map(l => (
                 <li key={l.label}>
                   <Link
-                    to={l.href}
+                    to={path(l.href)}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
                     {l.label}
@@ -114,7 +108,7 @@ export default function SiteFooter() {
         {HAS_ENTITY_DETAILS && (
           <div className="hairline mt-12 grid gap-6 border-t pt-8 sm:grid-cols-3">
             <div>
-              <p className="eyebrow">Registered company</p>
+              <p className="eyebrow">{t("footer.company")}</p>
               <p className="ink mt-1.5 text-[13px] font-semibold">
                 {ENTITY.legalName}
               </p>
@@ -124,7 +118,7 @@ export default function SiteFooter() {
                 rel="noopener"
                 className="accent mono mt-0.5 inline-block text-[12px] underline underline-offset-2"
               >
-                Companies House No. {ENTITY.registrationNumber}
+                {t("footer.house")} {ENTITY.registrationNumber}
               </a>
               {ENTITY.vatNumber && (
                 <p className="ink-soft mono mt-0.5 text-[12px]">
@@ -133,7 +127,7 @@ export default function SiteFooter() {
               )}
             </div>
             <div>
-              <p className="eyebrow">Registered office</p>
+              <p className="eyebrow">{t("footer.office")}</p>
               <p className="ink-soft mt-1.5 text-[12px] leading-relaxed">
                 {ENTITY.address}
                 <br />
@@ -141,7 +135,7 @@ export default function SiteFooter() {
               </p>
             </div>
             <div>
-              <p className="eyebrow">Contact</p>
+              <p className="eyebrow">{t("footer.contact")}</p>
               <a
                 href={`tel:${ENTITY.phone.replace(/\s/g, "")}`}
                 className="ink mono mt-1.5 block text-[12px] hover:underline"
@@ -162,11 +156,10 @@ export default function SiteFooter() {
 
         <div className="hairline ink-soft mt-8 flex flex-col items-start justify-between gap-3 border-t pt-6 text-[12px] sm:flex-row sm:items-center">
           <span>
-            © {new Date().getFullYear()} {ENTITY_DISPLAY_NAME} RapidAct is a
-            trading name.
+            © {new Date().getFullYear()} {ENTITY_DISPLAY_NAME} {t("footer.copyright")}
           </span>
           <span>
-            Regulation (EU) 2024/1689, Article 50, applies from 2 August 2026
+            {t("footer.regulation")}
           </span>
         </div>
       </div>

@@ -39,12 +39,27 @@ export default function Privacy() {
           </section>
           <section>
             <h2 className="text-lg font-bold text-[#16181d]">
+              Website analytics
+            </h2>
+            <p className="mt-2">
+              If you choose “Allow analytics”, Google Analytics and PostHog
+              measure page views, conversion steps, errors, performance and
+              session interactions. IP addresses are anonymised in PostHog.
+              Intake answers, email addresses, payment details and report
+              contents are not included in analytics events. “Essential only”
+              keeps analytics and advertising storage denied through Google
+              Consent Mode and disables PostHog capture and session replay.
+              You can reset this choice by clearing this site's browser data.
+            </p>
+          </section>
+          <section>
+            <h2 className="text-lg font-bold text-[#16181d]">
               What we never do
             </h2>
             <p className="mt-2">
-              We don't sell data, we don't run third-party trackers on this
-              site, and we don't build advertising profiles. Scan results are
-              never published with identifying site ownership.
+              We don't sell personal data. Scan results are never published
+              with identifying site ownership, and a completed intake is not
+              sent to analytics or advertising systems.
             </p>
           </section>
           <section>

@@ -1,7 +1,31 @@
 # INDEX
 
+RapidAct mobile header | language selector displaced the conversion action | keep compact logo, two-letter language selector, and assessment CTA visible | do not replace the CTA with a hamburger or full language name | verify the real phone header and 44px targets
+RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | invented installers and evidence logging | promise only shipped badge/scanner/report | do not advertise plugins, apps, extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer proof
+
+## 2026-07-26 — Mobile navigation preserves the conversion path
+
+- Status: CURRENT
+- Project/root: `rapidact`; responsive header and localized buyer journey.
+- Mistake: allowing a large language control or generic mobile menu to replace the primary assessment action.
+- Do: keep the compact horizontal brand, two-letter language selector, and short localized assessment CTA visible on phones.
+- Don't: hide the conversion action behind a hamburger or show a full-width language picker.
+- Evidence: user correction in this task; `SiteNav.tsx` and `i18n.tsx` implement the compact header and 44px controls.
+- Trigger terms: phone, responsive, header, language selector, hamburger, conversion CTA.
+- Verify before reuse: inspect the rendered header at a real phone viewport, then desktop; confirm no wrap, clipping, overlap, or sub-44px control.
+
+## 2026-07-26 — Analytics resources are product-specific and single-loader
+
+- Status: CURRENT
+- Project/root: `rapidact`; acquisition, conversion, consent, and replay measurement.
+- Mistake: reusing another product's property or loading GTM and gtag independently, creating contaminated or duplicate events.
+- Do: keep RapidAct's dedicated GA4 property, PostHog project, GTM container, Ads link, Consent Mode v2, and Cloudflare `/metrics` gateway.
+- Don't: emit a purchase before payment proof, capture form contents, or add a second Google loader.
+- Evidence: `src/lib/analytics.ts`, GA4 property `547132092`, GTM `GTM-TZFZ5ZHK`, and Cloudflare zone config read-back on 2026-07-26.
+- Trigger terms: GA4, GTM, Google Ads, PostHog, consent, replay, Cloudflare gateway, conversion.
+- Verify before reuse: one loader in the DOM, live pageviews and explicit events, a PostHog replay, Ads property link, and gateway `enabled=true`, `setUpTag=false`.
 
 ## 2026-07-26 — Production serves the committed distribution bundle
 

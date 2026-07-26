@@ -3,14 +3,17 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 import './index.css'
 import { TRPCProvider } from "@/providers/trpc"
+import { I18nProvider } from "@/lib/i18n"
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <TRPCProvider>
-        <App />
-      </TRPCProvider>
+      <I18nProvider>
+        <TRPCProvider>
+          <App />
+        </TRPCProvider>
+      </I18nProvider>
     </BrowserRouter>
   </StrictMode>,
 )
