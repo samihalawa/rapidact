@@ -91,7 +91,7 @@ export default function PlatformPage() {
             to="/article-50#install"
             className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
           >
-            Copy the free badge code
+            Add the AI-use notice
           </Link>
           <p className="mt-4 flex items-start gap-2 text-sm text-[#5c6370]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />

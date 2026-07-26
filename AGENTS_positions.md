@@ -1,9 +1,21 @@
 # INDEX
 
+RapidAct responsive report rows | three children collapsed when the grid changed from two to three columns | place the description explicitly at each breakpoint | do not rely on implicit grid flow across column-count changes | verify 640–1023px and desktop rendered rows
 RapidAct mobile header | language selector displaced the conversion action | keep compact logo, two-letter language selector, and assessment CTA visible | do not replace the CTA with a hamburger or full language name | verify the real phone header and 44px targets
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | invented installers and evidence logging | promise only shipped badge/scanner/report | do not advertise plugins, apps, extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer proof
+
+## 2026-07-26 — Responsive report rows require explicit placement
+
+- Status: CURRENT
+- Project/root: `rapidact`; report-offer rows between tablet and desktop breakpoints.
+- Mistake: a three-child row used two columns at `sm` and three at `lg`, so implicit flow placed the description in a narrow first-column strip.
+- Do: place the description in column two at `sm` and column three at `lg` when the grid changes shape.
+- Don't: rely on auto-placement when one semantic row has more children than the intermediate breakpoint has columns.
+- Evidence: user-selected production defect in this task; corrected `ReportOffer.tsx` rendered with full-width descriptions at the same mid-width.
+- Trigger terms: report rows, numbered section, giant blank area, collapsed text, tablet, responsive grid.
+- Verify before reuse: render 640–1023px and desktop widths; confirm every number, title, and description stays on its intended row without horizontal overflow.
 
 ## 2026-07-26 — Mobile navigation preserves the conversion path
 

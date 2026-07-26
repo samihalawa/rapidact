@@ -17,7 +17,7 @@ export default function Terms() {
             </h2>
             <p className="mt-2">
               RapidAct provides a public website scanner, a configurable
-              one-script AI disclosure badge, educational guides and a paid
+              one-script AI-use notice, educational guides and a paid
               written pre-consultory assessment. The scanner detects public
               technical signals; it does not classify every AI system or
               determine legal responsibility.
@@ -54,7 +54,7 @@ export default function Terms() {
               The current €99 assessment is a one-time purchase, not a recurring
               subscription. Any applicable VAT is shown before payment. The
               delivery promise and refund condition displayed on the order page
-              form part of the offer. The website scanner and badge are
+              form part of the offer. The website scanner and notice are
               currently free.
             </p>
           </section>

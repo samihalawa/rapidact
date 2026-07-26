@@ -76,7 +76,7 @@ export default function CtaBand() {
               onClick={() => navigate(CONVERT.badge)}
               className="accent underline underline-offset-2"
             >
-              one-script disclosure badge
+              clear AI-use notice
             </button>{" "}
             are free, with or without an assessment.
           </p>

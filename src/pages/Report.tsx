@@ -12,7 +12,7 @@ import {
   COMPANIES_HOUSE_URL,
   HAS_ENTITY_DETAILS,
 } from "@/data/company";
-import { Loader2, ArrowLeft, Copy, Check } from "lucide-react";
+import { Loader2, ArrowLeft, Copy, Check, ChevronDown } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 import { REPORT_COPY } from "@/data/localizedReport";
@@ -69,7 +69,10 @@ export default function Report() {
         ai_system_count: systems.length,
       });
     },
-    onError: error => track("report_submission_failed", { error_type: error.data?.code || "unknown" }),
+    onError: error =>
+      track("report_submission_failed", {
+        error_type: error.data?.code || "unknown",
+      }),
   });
 
   // The payment step is much shorter than the intake form, so keeping the old scroll
@@ -116,10 +119,7 @@ export default function Report() {
 
   return (
     <div className="paper min-h-screen">
-      <Seo
-        title={copy.seoTitle}
-        description={copy.seoDescription}
-      />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} />
       <SiteNav />
 
       <main className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
@@ -262,7 +262,7 @@ export default function Report() {
                 {copy.intakeBody}
               </p>
 
-              <div className="hairline mt-8 space-y-6 border bg-white p-6 sm:p-7">
+              <div className="hairline mt-8 space-y-5 border bg-white p-5 sm:p-7">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label className="ink block text-[13px] font-semibold">
@@ -291,7 +291,7 @@ export default function Report() {
                       required
                     />
                   </div>
-                  <div>
+                  <div className="sm:col-span-2">
                     <label className="ink block text-[13px] font-semibold">
                       {copy.website}
                     </label>
@@ -302,55 +302,6 @@ export default function Report() {
                       className="hairline mt-1.5 h-11 rounded border"
                       autoComplete="url"
                     />
-                  </div>
-                  <div>
-                    <label className="ink block text-[13px] font-semibold">
-                      {copy.countries}
-                    </label>
-                    <Input
-                      value={country}
-                      onChange={e => setCountry(e.target.value)}
-                      placeholder={copy.countriesPlaceholder}
-                      className="hairline mt-1.5 h-11 rounded border"
-                      autoComplete="country-name"
-                    />
-                  </div>
-                </div>
-
-                <div className="hairline border-t pt-5">
-                  <label className="ink block text-[13px] font-semibold">
-                    {copy.size}
-                  </label>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {SIZES.map(s => (
-                      <Chip
-                        key={s}
-                        active={size === s}
-                        onClick={() => setSize(s === size ? "" : s)}
-                      >
-                        {s}
-                      </Chip>
-                    ))}
-                  </div>
-                  <p className="ink-soft mt-2 text-[12px] leading-relaxed">
-                    {copy.sizeNote}
-                  </p>
-                </div>
-
-                <div className="hairline border-t pt-5">
-                  <label className="ink block text-[13px] font-semibold">
-                    {copy.sector}
-                  </label>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {copy.sectors.map(option => (
-                      <Chip
-                        key={option.value}
-                        active={sector === option.value}
-                        onClick={() => setSector(option.value === sector ? "" : option.value)}
-                      >
-                        {option.label}
-                      </Chip>
-                    ))}
                   </div>
                 </div>
 
@@ -371,17 +322,85 @@ export default function Report() {
                   </div>
                 </div>
 
-                <div className="hairline border-t pt-5">
-                  <label className="ink block text-[13px] font-semibold">
-                    {copy.notes}
-                  </label>
-                  <Textarea
-                    value={notes}
-                    onChange={e => setNotes(e.target.value)}
-                    placeholder={copy.notesPlaceholder}
-                    className="hairline mt-1.5 min-h-24 rounded border text-[14px]"
-                  />
-                </div>
+                <details className="group hairline border-t pt-1">
+                  <summary className="ink flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-3 text-[14px] font-semibold focus-visible:ring-2 focus-visible:ring-[#1f3a5f]/25 focus-visible:outline-none">
+                    <span>
+                      {copy.optionalContext}
+                      <span className="ink-soft mt-0.5 block text-[12px] font-normal">
+                        {copy.optionalContextHint}
+                      </span>
+                    </span>
+                    <ChevronDown
+                      aria-hidden="true"
+                      className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
+
+                  <div className="hairline grid gap-5 border-t bg-[#f7f7f5] p-4 sm:grid-cols-2 sm:p-5">
+                    <div>
+                      <label className="ink block text-[13px] font-semibold">
+                        {copy.countries}
+                      </label>
+                      <Input
+                        value={country}
+                        onChange={e => setCountry(e.target.value)}
+                        placeholder={copy.countriesPlaceholder}
+                        className="hairline mt-1.5 h-11 rounded border bg-white"
+                        autoComplete="country-name"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="ink block text-[13px] font-semibold">
+                        {copy.size}
+                      </label>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {SIZES.map(s => (
+                          <Chip
+                            key={s}
+                            active={size === s}
+                            onClick={() => setSize(s === size ? "" : s)}
+                          >
+                            {s}
+                          </Chip>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="ink block text-[13px] font-semibold">
+                        {copy.sector}
+                      </label>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {copy.sectors.map(option => (
+                          <Chip
+                            key={option.value}
+                            active={sector === option.value}
+                            onClick={() =>
+                              setSector(
+                                option.value === sector ? "" : option.value
+                              )
+                            }
+                          >
+                            {option.label}
+                          </Chip>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="ink block text-[13px] font-semibold">
+                        {copy.notes}
+                      </label>
+                      <Textarea
+                        value={notes}
+                        onChange={e => setNotes(e.target.value)}
+                        placeholder={copy.notesPlaceholder}
+                        className="hairline mt-1.5 min-h-24 rounded border bg-white text-[14px]"
+                      />
+                    </div>
+                  </div>
+                </details>
 
                 {request.isError && (
                   <p className="border-l-2 border-l-[#b91c1c] bg-[#fef4f4] px-4 py-3 text-[14px] text-[#991b1b]">
@@ -431,14 +450,16 @@ export default function Report() {
                       {copy.specimen}
                     </a>
                   </div>
-                  <ul className="divide-y divide-[#e2e2dd]">
+                  <ul className="grid grid-cols-2 gap-x-5 gap-y-3 px-6 py-5">
                     {homeCopy.chapters.map(d => (
                       <li
                         key={d.n}
-                        className="ink-soft px-6 py-3 text-[13px] leading-relaxed"
+                        className="ink flex gap-2 text-[13px] leading-snug"
                       >
-                        <span className="ink font-semibold">{d.title}</span>
-                        <span className="mt-0.5 block">{d.text}</span>
+                        <span className="mono ink-soft shrink-0 text-[10px]">
+                          {d.n}
+                        </span>
+                        <span className="font-semibold">{d.title}</span>
                       </li>
                     ))}
                   </ul>

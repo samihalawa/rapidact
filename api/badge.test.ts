@@ -22,6 +22,13 @@ describe("RapidAct disclosure badge", () => {
     expect(badge).not.toContain("document.cookie");
   });
 
+  it("matches every language offered by the website", () => {
+    for (const language of ["en", "es", "de", "fr", "it"]) {
+      expect(badge).toContain(`${language}: {`);
+    }
+    expect(badge).toContain("supportedLanguages.indexOf(pathLanguage)");
+  });
+
   it("uses the requested direct WhatsApp destination", () => {
     expect(config).toContain('whatsapp: "https://wa.me/34679794037"');
   });

@@ -20,7 +20,7 @@ import { track } from "@/lib/analytics";
 
 const reqIcons = [MessagesSquare, Tags, Video, FileClock];
 const INSTALL_SNIPPET =
-  '<script defer src="https://rapidact.eu/rapidact-badge.js" data-title="AI transparency" data-message="This site uses an AI assistant. You are interacting with an AI system, not a person." data-position="right"></script>';
+  '<script defer src="https://rapidact.eu/rapidact-badge.js" data-message="This site uses an AI assistant. You are interacting with an AI system, not a person." data-position="right"></script>';
 
 export default function Guide() {
   const [copied, setCopied] = useState(false);
@@ -60,20 +60,39 @@ export default function Guide() {
               <Code2 className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
-              <p className="eyebrow">Free installer</p>
+              <p className="eyebrow">Visitor-facing AI notice</p>
               <h2 className="mt-1 text-2xl font-bold tracking-tight text-[#16181d]">
-                Add the badge with one script tag
+                Publish a clear AI-use notice in one paste
               </h2>
               <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-[#5c6370]">
-                No account, plugin or build step. Copy this line into your
-                site-wide custom code, just before the closing body tag. Change
-                the message inside{" "}
+                No account, plugin or build step. Paste the line into your
+                site-wide custom code, then change{" "}
                 <code className="mono text-[13px] text-[#16181d]">
                   data-message
                 </code>{" "}
-                to describe the AI your visitors actually meet.
+                so it says exactly how visitors encounter AI.
               </p>
             </div>
+          </div>
+
+          <div className="mt-6 flex items-center justify-between gap-5 rounded-lg border border-[#cfd6e2] bg-white p-4 shadow-[0_7px_22px_rgba(5,25,70,0.08)]">
+            <div className="flex items-center gap-3">
+              <span
+                aria-hidden="true"
+                className="grid h-9 w-9 place-items-center bg-[#1f3a5f] text-[11px] font-extrabold text-white [clip-path:polygon(50%_0,92%_17%,92%_55%,82%_75%,65%_90%,50%_100%,35%_90%,18%_75%,8%_55%,8%_17%)]"
+              >
+                AI
+              </span>
+              <span>
+                <strong className="block text-[13px] text-[#16181d]">
+                  AI use disclosed
+                </strong>
+                <span className="mt-0.5 block text-[11px] text-[#6b7280]">
+                  How AI is used
+                </span>
+              </span>
+            </div>
+            <span className="eyebrow shrink-0">Live preview</span>
           </div>
 
           <div className="mt-6 overflow-hidden border border-[#d8d8d2] bg-[#16181d]">
@@ -102,16 +121,16 @@ export default function Guide() {
 
           <ol className="mt-5 grid gap-3 sm:grid-cols-3">
             {[
-              ["01", "Copy", "Use the button above."],
+              ["01", "Copy", "One line; no account needed."],
               [
                 "02",
                 "Paste",
-                "Add it to site-wide custom code or your footer template.",
+                "Add it to site-wide code or the footer template.",
               ],
               [
                 "03",
                 "Publish",
-                "Open the live site and click the badge to verify the notice.",
+                "Open the live site and read the notice as a visitor.",
               ],
             ].map(([number, title, text]) => (
               <li key={number} className="border-t border-[#d8d8d2] pt-3">
@@ -129,11 +148,9 @@ export default function Guide() {
           </ol>
 
           <p className="mt-5 border-l-2 border-[#1f3a5f] pl-4 text-[13px] leading-relaxed text-[#5c6370]">
-            The badge is a technical disclosure aid, not a universal compliance
-            certificate. Under Article 50(1), the design duty sits with the
-            provider of the interactive AI system; deployers have separate
-            duties for emotion recognition, biometric categorisation, deepfakes
-            and certain public-interest text.{" "}
+            This notice solves one visible disclosure step; it is not a
+            certificate for the rest of the AI Act. The exact duty still depends
+            on the system and whether you are its provider or deployer.{" "}
             <a
               href="https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act"
               target="_blank"

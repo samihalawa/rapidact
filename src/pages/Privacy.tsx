@@ -26,14 +26,14 @@ export default function Privacy() {
           </section>
           <section>
             <h2 className="text-lg font-bold text-[#16181d]">
-              What the disclosure badge collects
+              What the AI-use notice collects
             </h2>
             <p className="mt-2">
-              The one-script RapidAct badge downloads a JavaScript file from
+              The one-script RapidAct notice downloads a JavaScript file from
               rapidact.eu and renders the disclosure configured by the site
               operator. It does not set cookies, use browser storage, identify
               visitors, send interaction events or create an evidence log. The
-              site loading the badge may still have its own analytics and
+              site loading the notice may still have its own analytics and
               privacy practices.
             </p>
           </section>

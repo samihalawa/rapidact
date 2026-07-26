@@ -41,7 +41,7 @@ function planItemFor(d: ScanFinding): { what: string; fix: string } {
   if (d.category === "chat") {
     return {
       what: `Your site runs ${d.name}. If you are the provider responsible for Article 50(1), the visitor must receive a clear AI-interaction notice at the latest at first interaction. ${d.existingDisclosureFound ? "We found disclosure wording on the page: verify its timing and prominence." : "We found no disclosure wording on the scanned page."}`,
-      fix: `Free: install and tailor the one-script RapidAct badge, then verify it on the live page. The scan cannot determine your provider/deployer role or private AI systems; the €99 pre-consultory report classifies those company-wide questions.`,
+      fix: `Free: install and tailor the one-script RapidAct notice, then verify it on the live page. The scan cannot determine your provider/deployer role or private AI systems; the €99 pre-consultory report classifies those company-wide questions.`,
     };
   }
   return {
@@ -68,7 +68,8 @@ export default function Scanner() {
         undisclosed_count: next.summary.undisclosed,
       });
     },
-    onError: error => track("scan_failed", { error_type: error.data?.code || "unknown" }),
+    onError: error =>
+      track("scan_failed", { error_type: error.data?.code || "unknown" }),
   });
   const lead = trpc.leads.capture.useMutation({
     onSuccess: () => setLeadDone(true),
@@ -321,7 +322,7 @@ export default function Scanner() {
                     Whatever you install, keep proportionate proof: the live
                     URL, approved wording, provider/deployer roles, owner,
                     publication date and a rendered desktop/mobile check. The
-                    badge itself does not track visitors or create an evidence
+                    notice itself does not track visitors or create an evidence
                     log.
                   </p>
                 </div>
@@ -355,12 +356,11 @@ export default function Scanner() {
                   >
                     <PackageCheck className="h-5 w-5 text-[#4ade80]" />
                     <p className="mt-2 font-bold">
-                      Copy the one-script badge — €0
+                      Add the AI-use notice — free
                     </p>
                     <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      No account, cookies or visitor tracking. Set the wording
-                      and position with data attributes, publish, then verify
-                      the live page →
+                      One script, no account, cookies or visitor tracking.
+                      Tailor the wording, publish, then read it as a visitor →
                     </p>
                   </button>
                 </div>

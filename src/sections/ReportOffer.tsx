@@ -21,14 +21,16 @@ export default function ReportOffer() {
         </p>
 
         <div className="hairline mt-10 border-t">
-          {copy.chapters.map((c) => (
+          {copy.chapters.map(c => (
             <div
               key={c.n}
               className="hairline grid gap-2 border-b py-6 sm:grid-cols-[3rem_1fr] sm:gap-6 lg:grid-cols-[3rem_16rem_1fr]"
             >
               <span className="mono ink-soft pt-0.5 text-[12px]">{c.n}</span>
               <h3 className="ink text-[15px] font-semibold">{c.title}</h3>
-              <p className="ink-soft max-w-2xl text-[15px] leading-relaxed">{c.text}</p>
+              <p className="ink-soft max-w-2xl text-[15px] leading-relaxed sm:col-start-2 lg:col-start-3">
+                {c.text}
+              </p>
             </div>
           ))}
         </div>

@@ -35,7 +35,7 @@ export const CONVERT = {
   scanner: "/scanner",
   /** Direct human help for visitors who are not ready to buy. */
   whatsapp: "https://wa.me/34679794037",
-  /** One-script badge installer on the Article 50 guide. */
+  /** One-script AI-use notice installer on the Article 50 guide. */
   badge: "/article-50#install",
 } as const;
 
