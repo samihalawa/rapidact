@@ -38,17 +38,17 @@ export default function RequirementPage() {
           <span className="text-[#5c6370]">{guide.title}</span>
         </nav>
 
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-[#16181d] sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#16181d] sm:text-4xl">
           {guide.h1}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">{guide.intro}</p>
 
-        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#fecaca] bg-[#fef2f2] px-4 py-1.5 text-sm font-semibold text-[#991b1b]">
+        <div className="mt-6 inline-flex items-center gap-2 rounded border border-[#fecaca] bg-[#fef2f2] px-4 py-1.5 text-sm font-semibold text-[#991b1b]">
           <AlertTriangle className="h-4 w-4" /> Deadline: {guide.deadline}
         </div>
 
         <section className="mt-10">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#16181d]">
+          <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
             <Users className="h-5 w-5 text-[#1f3a5f]" /> Who this applies to
           </h2>
           <ul className="mt-4 space-y-2.5">
@@ -61,21 +61,21 @@ export default function RequirementPage() {
           </ul>
         </section>
 
-        <section className="mt-10 rounded-2xl border border-[#e2e2dd] bg-[#f7f7f5] p-6">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#16181d]">
+        <section className="mt-10 rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
+          <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
             <Scale className="h-5 w-5 text-[#1f3a5f]" /> What the law actually says
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">{guide.whatLawSays}</p>
         </section>
 
         <section className="mt-10">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#16181d]">
+          <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
             <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Fix it free, step by step
           </h2>
           <ol className="mt-4 space-y-3">
             {guide.freeSteps.map((s, i) => (
               <li key={s} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#5c6370]">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#16181d] text-xs font-bold text-white">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#16181d] text-xs font-bold text-white">
                   {i + 1}
                 </span>
                 {s}
@@ -84,8 +84,8 @@ export default function RequirementPage() {
           </ol>
         </section>
 
-        <section className="mt-10 rounded-2xl border border-[#fde68a] bg-[#fffbeb] p-6">
-          <h2 className="text-lg font-extrabold text-[#92400e]">The mistakes everyone makes</h2>
+        <section className="mt-10 rounded border border-[#fde68a] bg-[#fffbeb] p-6">
+          <h2 className="text-lg font-bold text-[#92400e]">The mistakes everyone makes</h2>
           <ul className="mt-3 space-y-2">
             {guide.mistakes.map((m) => (
               <li key={m} className="flex items-start gap-2 text-sm leading-relaxed text-[#92400e]">
@@ -105,7 +105,7 @@ export default function RequirementPage() {
               <Link
                 key={r.slug}
                 to={`/requirements/${r.slug}`}
-                className="rounded-full border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
+                className="rounded border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
               >
                 {r.title}
               </Link>

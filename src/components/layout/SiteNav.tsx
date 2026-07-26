@@ -35,6 +35,9 @@ export default function SiteNav() {
             <a href="/#report" className="hover:text-[#16181d]">
               The assessment
             </a>
+            <Link to={CONVERT.example} className="hover:text-[#16181d]">
+              Specimen
+            </Link>
             <a href="/#pricing" className="hover:text-[#16181d]">
               Fees
             </a>

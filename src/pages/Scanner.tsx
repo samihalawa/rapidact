@@ -88,33 +88,45 @@ export default function Scanner() {
       />
       <SiteNav />
       <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#16181d] sm:text-5xl">
-            Scan your site.
-            <br />
-            <span className="ink">Get your free fix-it plan.</span>
+        <div>
+          <p className="eyebrow">Free tool</p>
+          <h1 className="ink mt-3 text-[32px] leading-tight font-bold tracking-[-0.02em] sm:text-[38px]">
+            Check which AI systems are visible on your website
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-[#5c6370]">
-            The same outside-in check a regulator — or your competitor — can run in 30 seconds.
-            Free forever, no signup. You keep the plan either way.
+          <p className="ink-soft mt-4 max-w-2xl text-[16px] leading-relaxed">
+            The same outside-in check a regulator, an enterprise client or a competitor can run on
+            you in under a minute. It reads only the public HTML of the address you submit, matches
+            it against 52 known platforms, and returns an implementation plan you keep. Free, with
+            no account.
+          </p>
+          <p className="ink-soft mt-3 max-w-2xl text-[15px] leading-relaxed">
+            The scan sees your website. It cannot see the AI systems that never touch a public page,
+            which is where most of the exposure sits. That is what the{" "}
+            <button
+              onClick={() => navigate(CONVERT.report)}
+              className="accent font-semibold underline underline-offset-2"
+            >
+              €99 assessment
+            </button>{" "}
+            covers.
           </p>
         </div>
 
-        <div className="mx-auto mt-8 flex max-w-xl gap-2">
+        <div className="mt-8 flex max-w-2xl gap-2">
           <Input
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && runScan()}
             placeholder="your-site.com"
-            className="h-12 rounded-full border-[#e2e2dd] bg-white px-5 text-base"
+            className="hairline h-11 rounded border bg-white px-4 text-[15px]"
           />
           <Button
             onClick={runScan}
             disabled={scan.isPending || !url.trim()}
-            className="h-12 rounded-full bg-[#16181d] px-6 font-semibold text-white hover:bg-[#2b2f38]"
+            className="h-11 rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
           >
             {scan.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <ScanSearch className="h-4 w-4" />}
-            <span className="ml-2">{scan.isPending ? "Scanning…" : "Scan free"}</span>
+            <span className="ml-2">{scan.isPending ? "Scanning" : "Scan"}</span>
           </Button>
         </div>
 
@@ -148,7 +160,7 @@ export default function Scanner() {
             <Card className="border-[#e2e2dd] bg-white shadow-sm">
               <CardContent className="flex flex-col items-center gap-6 pt-8 pb-8 sm:flex-row sm:justify-center sm:gap-12">
                 <div className="text-center">
-                  <div className={`text-6xl font-extrabold ${scoreColor(result.score)}`}>
+                  <div className={`text-6xl font-bold ${scoreColor(result.score)}`}>
                     {result.score}
                   </div>
                   <div className="mt-1 text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
@@ -229,11 +241,11 @@ export default function Scanner() {
             <Card className="border-[#1f3a5f] bg-white shadow-lg">
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f7f5]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-[#f7f7f5]">
                     <ClipboardList className="h-5 w-5 text-[#1f3a5f]" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl font-extrabold text-[#16181d]">
+                    <CardTitle className="text-xl font-bold text-[#16181d]">
                       Your free implementation plan
                     </CardTitle>
                     <p className="text-sm text-[#6b7280]">Yours to keep — no email required.</p>
@@ -244,8 +256,8 @@ export default function Scanner() {
                 {result.detected.map((d, i) => {
                   const plan = planItemFor(d);
                   return (
-                    <div key={d.id} className="rounded-xl border border-[#e2e2dd] p-4">
-                      <p className="text-xs font-extrabold tracking-wide text-[#1f3a5f] uppercase">
+                    <div key={d.id} className="rounded border border-[#e2e2dd] p-4">
+                      <p className="text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
                         Step {i + 1} — {d.name}
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">{plan.what}</p>
@@ -256,8 +268,8 @@ export default function Scanner() {
                     </div>
                   );
                 })}
-                <div className="rounded-xl border border-[#e2e2dd] p-4">
-                  <p className="text-xs font-extrabold tracking-wide text-[#1f3a5f] uppercase">
+                <div className="rounded border border-[#e2e2dd] p-4">
+                  <p className="text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
                     Always-on step — your evidence
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
@@ -275,9 +287,9 @@ export default function Scanner() {
                 <div className="grid gap-3 sm:grid-cols-[1.3fr_1fr]">
                   <button
                     onClick={() => navigate(CONVERT.report)}
-                    className="rounded-xl border border-[#ffd617]/40 bg-[#ffd617]/10 p-4 text-left transition hover:bg-[#ffd617]/20"
+                    className="rounded border border-white/25 bg-white/10 p-4 text-left transition hover:bg-white/20"
                   >
-                    <PackageCheck className="h-5 w-5 text-[#ffd617]" />
+                    <PackageCheck className="h-5 w-5 text-white" />
                     <p className="mt-2 font-bold">
                       This scan sees your website. The report sees your company — €99
                     </p>
@@ -290,7 +302,7 @@ export default function Scanner() {
                   </button>
                   <button
                     onClick={() => navigate("/learn")}
-                    className="rounded-xl border border-white/15 p-4 text-left transition hover:bg-white/5"
+                    className="rounded border border-white/15 p-4 text-left transition hover:bg-white/5"
                   >
                     <PackageCheck className="h-5 w-5 text-[#4ade80]" />
                     <p className="mt-2 font-bold">Install it yourself — €0</p>
@@ -312,14 +324,14 @@ export default function Scanner() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Work email — get this plan + install link"
-                        className="h-11 flex-1 rounded-full border-white/20 bg-white/10 px-5 text-white placeholder:text-white/40"
+                        className="h-11 flex-1 rounded border-white/20 bg-white/10 px-5 text-white placeholder:text-white/40"
                       />
                       <Button
                         disabled={lead.isPending || !email.includes("@")}
                         onClick={() =>
                           lead.mutate({ email: email.trim(), url: result.summary.url, source: "scanner-plan" })
                         }
-                        className="h-11 rounded-full bg-[#ffd617] px-6 font-bold text-[#16181d] hover:bg-[#ffe44d]"
+                        className="h-11 rounded bg-white px-6 font-bold text-[#16181d] hover:bg-[#f7f7f5]"
                       >
                         {lead.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send my plan"}
                       </Button>
@@ -329,7 +341,7 @@ export default function Scanner() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="rounded-full border-white/25 bg-transparent text-white hover:bg-white/10"
+                      className="rounded border-white/25 bg-transparent text-white hover:bg-white/10"
                       onClick={() => {
                         navigator.clipboard.writeText(result.report).then(() => {
                           setCopied(true);
@@ -342,7 +354,7 @@ export default function Scanner() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="rounded-full border-white/25 bg-transparent text-white hover:bg-white/10"
+                      className="rounded border-white/25 bg-transparent text-white hover:bg-white/10"
                       onClick={downloadReport}
                     >
                       <Download className="mr-2 h-3.5 w-3.5" /> Download .txt

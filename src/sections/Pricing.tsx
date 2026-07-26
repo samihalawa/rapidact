@@ -53,6 +53,12 @@ export default function Pricing() {
                 You enter your details first and review them before any payment is taken. Nothing
                 is charged on this website.
               </p>
+              <button
+                onClick={() => navigate(CONVERT.example)}
+                className="accent mt-3 text-[13px] font-semibold underline underline-offset-2"
+              >
+                Read a full specimen assessment first
+              </button>
             </div>
 
             <div className="p-7">

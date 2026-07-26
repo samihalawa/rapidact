@@ -19,12 +19,20 @@ export default function CtaBand() {
             regulation and sets out what you must publish and document. Delivered within{" "}
             {REPORT.delivery}, or refunded in full.
           </p>
-          <Button
-            className="mt-5 rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
-            onClick={() => navigate(CONVERT.report)}
-          >
-            Request the assessment
-          </Button>
+          <div className="mt-5 flex flex-wrap items-center gap-4">
+            <Button
+              className="rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
+              onClick={() => navigate(CONVERT.report)}
+            >
+              Request the assessment
+            </Button>
+            <button
+              onClick={() => navigate(CONVERT.example)}
+              className="text-[14px] font-semibold text-white/80 underline underline-offset-2 hover:text-white"
+            >
+              Read a specimen first
+            </button>
+          </div>
         </div>
 
         <div className="p-7">

@@ -13,6 +13,7 @@ const LANGS = ["en", "es", "de", "fr", "it"];
 const staticRoutes = [
   ["", "1.0"],
   ["/report", "1.0"],
+  ["/example-report", "0.9"],
   ["/scanner", "0.9"],
   ["/article-50", "0.9"],
   ["/learn", "0.9"],

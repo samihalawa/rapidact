@@ -58,9 +58,9 @@ export const SPECIALIST = {
 } as const;
 
 /**
- * A genuine redacted example of the deliverable. Publishing one is the single
- * biggest remaining conversion lever: it converts "trust us" into "read it
- * yourself". Put a PDF in /public and point here.
+ * Optional downloadable version of the deliverable, e.g. a redacted PDF placed
+ * in /public. The published specimen at /example-report already covers the
+ * "read it before you buy" job, so this is a nice-to-have rather than a gap.
  */
 export const SAMPLE_REPORT_URL = "";
 

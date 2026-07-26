@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import { CONVERT, REPORT } from "@/config";
 import { REPORT_CHAPTERS } from "@/data/report";
-import { SAMPLE_REPORT_URL } from "@/data/company";
 import { daysLeft } from "@/components/Countdown";
 
 /**
@@ -43,16 +42,12 @@ function ReportContents() {
           Prepared for your company specifically. Delivered as a written document to the address
           you give us, within {REPORT.delivery} of payment.
         </p>
-        {SAMPLE_REPORT_URL && (
-          <a
-            href={SAMPLE_REPORT_URL}
-            target="_blank"
-            rel="noopener"
-            className="accent mt-2 inline-block text-[12px] font-semibold underline underline-offset-2"
-          >
-            Read an example report before you buy
-          </a>
-        )}
+        <Link
+          to={CONVERT.example}
+          className="accent mt-2 inline-block text-[12px] font-semibold underline underline-offset-2"
+        >
+          Read a full specimen before you buy
+        </Link>
       </div>
     </div>
   );
@@ -104,9 +99,9 @@ export default function Hero() {
               size="lg"
               variant="outline"
               className="hairline rounded border bg-white px-7 text-[15px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
-              onClick={() => navigate(CONVERT.scanner)}
+              onClick={() => navigate(CONVERT.example)}
             >
-              Scan your website first, free
+              Read a specimen report
             </Button>
           </div>
 

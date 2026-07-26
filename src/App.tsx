@@ -9,6 +9,7 @@ import PlatformPage from "./pages/PlatformPage";
 import ContentHub from "./pages/ContentHub";
 import ContentPage from "./pages/ContentPage";
 import Report from "./pages/Report";
+import ExampleReport from "./pages/ExampleReport";
 import TransparencyWidget from "./components/TransparencyWidget";
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
       <Route path="/learn" element={<ContentHub />} />
       <Route path="/:lang?/learn" element={<ContentHub />} />
       <Route path="/report" element={<Report />} />
+      <Route path="/example-report" element={<ExampleReport />} />
       {/* Legacy intake path — kept so old links and payment redirects still land. */}
       <Route path="/start" element={<Report />} />
       {/* Markdown content system: /answers/x, /es/vendors/y, … */}

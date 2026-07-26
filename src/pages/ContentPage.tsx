@@ -21,6 +21,7 @@ const TYPE_LABELS: Record<ContentType, string> = {
   compare: "Comparisons",
   glossary: "Glossary",
   blog: "Blog",
+  reports: "Assessments",
 };
 
 export default function ContentPage() {
@@ -81,8 +82,8 @@ export default function ContentPage() {
                 to={contentPath({ type: item.type, slug: item.slug, lang: l })}
                 className={
                   active
-                    ? "rounded-full bg-[#16181d] px-3 py-1 font-semibold text-white"
-                    : "rounded-full border border-[#e2e2dd] px-3 py-1 hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
+                    ? "rounded bg-[#16181d] px-3 py-1 font-semibold text-white"
+                    : "rounded border border-[#e2e2dd] px-3 py-1 hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
                 }
               >
                 {LANG_LABELS[l]}
@@ -103,7 +104,7 @@ export default function ContentPage() {
                 <Link
                   key={s.slug}
                   to={contentPath(s)}
-                  className="rounded-full border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
+                  className="rounded border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
                 >
                   {s.title.replace(/ \| RapidAct$/, "").slice(0, 48)}
                 </Link>

@@ -38,13 +38,13 @@ export default function PlatformPage() {
           <span className="text-[#5c6370]">{guide.name}</span>
         </nav>
 
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-[#16181d] sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#16181d] sm:text-4xl">
           {guide.h1}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">{guide.intro}</p>
 
-        <section className="mt-10 rounded-2xl border border-[#e2e2dd] bg-[#f7f7f5] p-6">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#16181d]">
+        <section className="mt-10 rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
+          <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
             <ScanSearch className="h-5 w-5 text-[#1f3a5f]" /> First: know what you're running
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">{guide.detectionNote}</p>
@@ -52,7 +52,7 @@ export default function PlatformPage() {
             {guide.commonWidgets.map((w) => (
               <span
                 key={w}
-                className="rounded-full border border-[#e2e2dd] bg-white px-3 py-1 text-xs font-medium text-[#5c6370]"
+                className="rounded border border-[#e2e2dd] bg-white px-3 py-1 text-xs font-medium text-[#5c6370]"
               >
                 {w}
               </span>
@@ -61,13 +61,13 @@ export default function PlatformPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#16181d]">
+          <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
             <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Install it free on {guide.name}
           </h2>
           <ol className="mt-4 space-y-3">
             {guide.freeInstall.map((s, i) => (
               <li key={s} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#5c6370]">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#16181d] text-xs font-bold text-white">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#16181d] text-xs font-bold text-white">
                   {i + 1}
                 </span>
                 {s}
@@ -93,7 +93,7 @@ export default function PlatformPage() {
               <Link
                 key={p.slug}
                 to={`/platforms/${p.slug}`}
-                className="rounded-full border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
+                className="rounded border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
               >
                 {p.name}
               </Link>

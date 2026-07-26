@@ -419,6 +419,12 @@ export default function Report() {
                     <p className="ink mt-2 text-[17px] leading-snug font-semibold">{REPORT.name}</p>
                     <p className="ink mt-3 text-[32px] leading-none font-bold">€99</p>
                     <p className="ink-soft mt-1 text-[12px]">Charged once, per company.</p>
+                    <a
+                      href={CONVERT.example}
+                      className="accent mt-2 inline-block text-[12px] font-semibold underline underline-offset-2"
+                    >
+                      See a full specimen of this document
+                    </a>
                   </div>
                   <ul className="divide-y divide-[#e2e2dd]">
                     {REPORT_DELIVERABLES.map((d) => (

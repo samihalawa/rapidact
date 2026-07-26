@@ -7,7 +7,15 @@
  * Fallback: any missing lang page renders the EN version.
  */
 
-export type ContentType = "answers" | "vendors" | "sectors" | "compare" | "glossary" | "blog";
+export type ContentType =
+  | "answers"
+  | "vendors"
+  | "sectors"
+  | "compare"
+  | "glossary"
+  | "blog"
+  /** Published assessments and specimens. Drop a .md file in content/<lang>/reports/. */
+  | "reports";
 export type Lang = "en" | "es" | "de" | "fr" | "it";
 
 export const LANGS: Lang[] = ["en", "es", "de", "fr", "it"];
@@ -29,6 +37,8 @@ export interface ContentItem {
   updated?: string;
   draft: boolean;
   body: string;
+  /** Free-form extra frontmatter, used by report documents (subject, ref, specimen). */
+  meta: Record<string, string>;
 }
 
 /* ---------- tiny frontmatter parser (browser-safe, no deps) ---------- */
@@ -81,6 +91,7 @@ for (const [path, raw] of Object.entries(modules)) {
     updated: data.updated,
     draft: data.draft === "true",
     body,
+    meta: data,
   });
 }
 

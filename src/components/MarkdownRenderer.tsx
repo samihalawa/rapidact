@@ -10,12 +10,12 @@ export default function MarkdownRenderer({ body }: { body: string }) {
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
-            <h1 className="mt-2 mb-5 text-3xl font-extrabold tracking-tight text-[#16181d] sm:text-4xl">
+            <h1 className="mt-2 mb-5 text-3xl font-bold tracking-tight text-[#16181d] sm:text-4xl">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="mt-10 mb-3 text-xl font-extrabold text-[#16181d]">{children}</h2>
+            <h2 className="mt-10 mb-3 text-xl font-bold text-[#16181d]">{children}</h2>
           ),
           h3: ({ children }) => (
             <h3 className="mt-7 mb-2 text-lg font-bold text-[#16181d]">{children}</h3>
@@ -34,7 +34,7 @@ export default function MarkdownRenderer({ body }: { body: string }) {
           a: ({ href, children }) => {
             const internal = href?.startsWith("/");
             return internal ? (
-              <Link to={href!} className="font-medium text-[#1f3a5f] underline decoration-[#c9c2f5] hover:decoration-[#1f3a5f]">
+              <Link to={href!} className="font-medium text-[#1f3a5f] underline decoration-[#b9c2ce] hover:decoration-[#1f3a5f]">
                 {children}
               </Link>
             ) : (
@@ -42,7 +42,7 @@ export default function MarkdownRenderer({ body }: { body: string }) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-[#1f3a5f] underline decoration-[#c9c2f5] hover:decoration-[#1f3a5f]"
+                className="font-medium text-[#1f3a5f] underline decoration-[#b9c2ce] hover:decoration-[#1f3a5f]"
               >
                 {children}
               </a>
@@ -50,12 +50,12 @@ export default function MarkdownRenderer({ body }: { body: string }) {
           },
           strong: ({ children }) => <strong className="font-bold text-[#16181d]">{children}</strong>,
           blockquote: ({ children }) => (
-            <blockquote className="my-4 rounded-r-xl border-l-4 border-[#ffd617] bg-[#fffbeb] px-5 py-3 text-[#92400e]">
+            <blockquote className="my-4 border-l-2 border-[#8a6d1f] bg-[#fdfaf1] px-5 py-4 text-[#5c6370]">
               {children}
             </blockquote>
           ),
           table: ({ children }) => (
-            <div className="my-5 overflow-x-auto rounded-xl border border-[#e2e2dd]">
+            <div className="my-5 overflow-x-auto border border-[#e2e2dd]">
               <table className="w-full text-sm">{children}</table>
             </div>
           ),
@@ -68,7 +68,7 @@ export default function MarkdownRenderer({ body }: { body: string }) {
             <td className="border-b border-[#e2e2dd] px-4 py-2.5 align-top text-[#5c6370]">{children}</td>
           ),
           code: ({ children }) => (
-            <code className="rounded bg-[#f1f2f8] px-1.5 py-0.5 text-[13px] text-[#16181d]">{children}</code>
+            <code className="rounded bg-[#f7f7f5] px-1.5 py-0.5 text-[13px] text-[#16181d]">{children}</code>
           ),
         }}
       >

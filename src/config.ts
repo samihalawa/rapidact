@@ -29,7 +29,9 @@ export const CONVERT = {
   calBooking: "https://cal.com/oulang/aiact",
   /** Where every "get the report" CTA goes. */
   report: "/report",
-  /** Free scanner — top of funnel, still free forever. */
+  /** Published specimen of the deliverable, so buyers can read before paying. */
+  example: "/example-report",
+  /** Free scanner, top of funnel, still free forever. */
   scanner: "/scanner",
 } as const;
 

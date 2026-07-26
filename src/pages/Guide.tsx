@@ -18,7 +18,7 @@ export default function Guide() {
       />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
-        <h1 className="text-3xl font-extrabold tracking-tight text-[#16181d] sm:text-5xl">
+        <h1 className="text-3xl font-bold tracking-tight text-[#16181d] sm:text-5xl">
           Article 50 of the EU AI Act, in plain English
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">
@@ -28,8 +28,8 @@ export default function Guide() {
         </p>
 
         <section className="mt-10 space-y-6 text-[15px] leading-relaxed text-[#5c6370]">
-          <div className="rounded-2xl border border-[#e2e2dd] bg-[#f7f7f5] p-6">
-            <h2 className="text-xl font-extrabold text-[#16181d]">Does it apply to me?</h2>
+          <div className="rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
+            <h2 className="text-xl font-bold text-[#16181d]">Does it apply to me?</h2>
             <p className="mt-3">
               It applies if any of these are true: your site has a chatbot or AI assistant; you
               publish AI-generated images, videos or voices that look real; you publish AI-written
@@ -39,8 +39,8 @@ export default function Guide() {
               you're in scope.
             </p>
           </div>
-          <div className="rounded-2xl border border-[#e2e2dd] bg-[#f7f7f5] p-6">
-            <h2 className="text-xl font-extrabold text-[#16181d]">The deadline everyone gets wrong</h2>
+          <div className="rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
+            <h2 className="text-xl font-bold text-[#16181d]">The deadline everyone gets wrong</h2>
             <p className="mt-3">
               In 2026 the EU delayed parts of the AI Act — the <em>high-risk</em> rules moved to
               December 2027 and August 2028. Many businesses read "AI Act delayed" and relaxed.
@@ -49,8 +49,8 @@ export default function Guide() {
               systems already on the market, until 2 December 2026).
             </p>
           </div>
-          <div className="rounded-2xl border border-[#e2e2dd] bg-[#f7f7f5] p-6">
-            <h2 className="text-xl font-extrabold text-[#16181d]">What happens if I ignore it?</h2>
+          <div className="rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
+            <h2 className="text-xl font-bold text-[#16181d]">What happens if I ignore it?</h2>
             <p className="mt-3">
               Article 50 violations sit in the mid-tier of AI Act fines:{" "}
               <strong>up to €15 million or 3% of worldwide annual turnover</strong>, whichever is
@@ -61,7 +61,7 @@ export default function Guide() {
         </section>
 
         <section className="mt-12">
-          <h2 className="text-2xl font-extrabold text-[#16181d]">The four duties, one guide each</h2>
+          <h2 className="text-2xl font-bold text-[#16181d]">The four duties, one guide each</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {REQUIREMENTS.map((r, i) => {
               const Icon = reqIcons[i % reqIcons.length];
@@ -69,7 +69,7 @@ export default function Guide() {
                 <Link
                   key={r.slug}
                   to={`/requirements/${r.slug}`}
-                  className="group rounded-2xl border border-[#e2e2dd] bg-white p-5 transition hover:-translate-y-0.5 hover:border-[#1f3a5f] hover:shadow-lg"
+                  className="group rounded border border-[#e2e2dd] bg-white p-5 transition hover:-translate-y-0.5 hover:border-[#1f3a5f] hover:shadow-lg"
                 >
                   <Icon className="h-5 w-5 text-[#1f3a5f]" />
                   <p className="mt-3 font-bold text-[#16181d]">{r.title}</p>
@@ -84,13 +84,13 @@ export default function Guide() {
         </section>
 
         <section className="mt-12">
-          <h2 className="text-2xl font-extrabold text-[#16181d]">Guides for your platform</h2>
+          <h2 className="text-2xl font-bold text-[#16181d]">Guides for your platform</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {PLATFORMS.map((p) => (
               <Link
                 key={p.slug}
                 to={`/platforms/${p.slug}`}
-                className="rounded-full border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
+                className="rounded border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
               >
                 {p.name}
               </Link>
