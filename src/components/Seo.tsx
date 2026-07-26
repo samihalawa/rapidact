@@ -55,7 +55,7 @@ export default function Seo({ title, description, canonical, alternates }: SeoPr
       "og:description": description,
       "og:type": "website",
       "og:url": `https://rapidact.eu${window.location.pathname}`,
-      "og:image": "https://rapidact.eu/social/open-graph-1200x630.png",
+      "og:image": "https://rapidact.eu/social/rapidact-app-icon-navy-1200x1200.png",
       "og:image:alt": "RapidAct — EU AI Act assessments",
     };
     Object.entries(og).forEach(([property, content]) => {
@@ -69,10 +69,10 @@ export default function Seo({ title, description, canonical, alternates }: SeoPr
     });
 
     const twitter: Record<string, string> = {
-      "twitter:card": "summary_large_image",
+      "twitter:card": "summary",
       "twitter:title": title,
       "twitter:description": description,
-      "twitter:image": "https://rapidact.eu/social/open-graph-1200x630.png",
+      "twitter:image": "https://rapidact.eu/social/rapidact-app-icon-navy-1200x1200.png",
     };
     Object.entries(twitter).forEach(([name, content]) => {
       let tag = document.querySelector(`meta[name="${name}"]`);

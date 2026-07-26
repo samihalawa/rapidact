@@ -33,11 +33,17 @@ export default function SiteNav() {
             className="shrink-0"
             aria-label="RapidAct home"
           >
-            <img
-              src="/brand/rapidact-horizontal.svg"
-              alt="RapidAct"
-              className="h-8 w-auto sm:h-9"
-            />
+            <span className="flex items-center gap-2">
+              <img
+                src="/brand/rapidact-exact-symbol.png"
+                alt=""
+                aria-hidden="true"
+                className="h-9 w-auto sm:h-10"
+              />
+              <span className="brand-wordmark text-[17px] font-bold tracking-[-0.04em] text-[#03123d] sm:text-[19px]">
+                Rapid<span className="text-[#087ee8]">Act</span>
+              </span>
+            </span>
           </Link>
 
           <nav className="ink-soft hidden items-center gap-5 text-[13px] md:flex">

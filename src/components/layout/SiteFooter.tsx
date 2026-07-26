@@ -16,11 +16,17 @@ export default function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 md:grid-cols-[1.3fr_repeat(4,1fr)]">
           <div>
-            <img
-              src="/brand/rapidact-horizontal.svg"
-              alt="RapidAct"
-              className="h-10 w-auto"
-            />
+            <div className="flex items-center gap-2.5" aria-label="RapidAct">
+              <img
+                src="/brand/rapidact-exact-symbol.png"
+                alt=""
+                aria-hidden="true"
+                className="h-11 w-auto"
+              />
+              <span className="brand-wordmark text-xl font-bold tracking-[-0.04em] text-[#03123d]">
+                Rapid<span className="text-[#087ee8]">Act</span>
+              </span>
+            </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#5c6370]">
               {t("footer.description")}
             </p>

@@ -76,15 +76,21 @@ export default function Guide() {
           </div>
 
           <div className="mt-6 flex items-center justify-between gap-5 rounded-xl border border-[#b9d8ff] bg-white p-4 shadow-[0_12px_32px_rgba(5,25,70,0.12)]">
-            <div className="relative pb-2">
+            <div className="flex min-w-0 items-center gap-3">
               <img
-                src="/brand/rapidact-ai-notice-brand.png"
-                alt="RapidAct"
-                className="block h-auto w-[190px] drop-shadow-[0_10px_18px_rgba(1,17,58,0.24)]"
+                src="/brand/rapidact-exact-symbol.png"
+                alt=""
+                aria-hidden="true"
+                className="h-14 w-auto shrink-0"
               />
-              <span className="absolute right-2 bottom-0 rounded-full border border-[#b9d8ff] bg-white px-2 py-1 text-[9px] leading-none font-extrabold tracking-[0.07em] text-[#12366c] uppercase shadow-sm">
-                AI use disclosed
-              </span>
+              <div className="min-w-0">
+                <p className="brand-wordmark text-lg font-bold tracking-[-0.04em] text-[#03123d]">
+                  Rapid<span className="text-[#087ee8]">Act</span>
+                </p>
+                <p className="mt-0.5 text-[10px] leading-none font-extrabold tracking-[0.08em] text-[#12366c] uppercase">
+                  AI use disclosed
+                </p>
+              </div>
             </div>
             <span className="eyebrow shrink-0">Live preview</span>
           </div>

@@ -107,6 +107,9 @@
 }
 
 @layer utilities {
+  .brand-wordmark {
+    font-family: "Sora", "Avenir Next", ui-sans-serif, system-ui, sans-serif;
+  }
   /* Paper: the page surface. Warm off-white, no gradient. */
   .paper {
     background-color: #ffffff;

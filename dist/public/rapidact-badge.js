@@ -106,11 +106,11 @@
   };
   var safeTitle = escapeHtml(title);
   var defaultBrandUrl =
-    "https://rapidact.eu/brand/rapidact-ai-notice-brand.png";
+    "https://rapidact.eu/brand/rapidact-exact-symbol.png";
   try {
     if (script && script.src) {
       defaultBrandUrl = new URL(
-        "brand/rapidact-ai-notice-brand.png",
+        "brand/rapidact-exact-symbol.png",
         script.src
       ).href;
     }
@@ -139,8 +139,11 @@
     ";gap:13px}" +
     ".ra-panel{position:relative;display:none;width:min(390px,calc(100vw - 32px));overflow:hidden;border:1px solid #174a9b;border-radius:18px;background:#fff;color:#08152f;box-shadow:0 24px 70px rgba(1,17,58,.25),0 0 0 3px rgba(34,197,255,.08)}" +
     ".ra-panel[data-open=true]{display:block}" +
-    ".ra-panel-brand{display:flex;min-height:68px;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(67,206,255,.35);background:#061b50;padding:12px 15px}" +
-    ".ra-brand-image{display:block;width:174px;max-width:57%;height:auto;filter:drop-shadow(0 5px 12px rgba(0,0,0,.25))}" +
+    ".ra-panel-brand{display:flex;min-height:78px;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(67,206,255,.35);background:#03123d;padding:11px 15px}" +
+    ".ra-brand-lockup{display:flex;min-width:0;align-items:center;gap:10px}" +
+    ".ra-brand-image{display:block;width:auto;height:54px;flex:none}" +
+    ".ra-brand-name{font-family:'Sora','Avenir Next',ui-sans-serif,system-ui,sans-serif;font-size:18px;line-height:1;font-weight:700;letter-spacing:-.045em;color:#fff;white-space:nowrap}" +
+    ".ra-brand-name-accent{color:#53ddff}" +
     ".ra-brand-status{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(109,221,255,.5);border-radius:999px;background:rgba(11,76,169,.48);color:#e9f9ff;padding:6px 9px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}" +
     ".ra-brand-status::before{width:6px;height:6px;border-radius:50%;background:#53ddff;box-shadow:0 0 9px #53ddff;content:''}" +
     ".ra-panel-body{padding:19px 20px 20px}" +
@@ -153,15 +156,19 @@
     ".ra-link{color:" +
     accent +
     ";font-size:12px;line-height:1.4;font-weight:700;text-underline-offset:3px}" +
-    ".ra-button{position:relative;display:block;min-width:184px;min-height:52px;border:0;background:transparent;padding:0 0 6px;cursor:pointer;font:inherit;filter:drop-shadow(0 10px 18px rgba(1,17,58,.26));transition:filter .18s ease,transform .18s ease}" +
+    ".ra-button{position:relative;display:block;min-width:194px;min-height:60px;border:1px solid #174a9b;border-radius:15px;background:#03123d;padding:7px 13px;cursor:pointer;font:inherit;box-shadow:0 12px 28px rgba(1,17,58,.26);transition:box-shadow .18s ease,transform .18s ease}" +
     ".ra-button:hover{filter:drop-shadow(0 13px 22px rgba(1,17,58,.34));transform:translateY(-2px)}" +
     ".ra-button:focus-visible{outline:3px solid " +
     accent +
     "66;outline-offset:5px;border-radius:999px}" +
-    ".ra-button-image{display:block;width:190px;max-width:calc(100vw - 32px);height:auto}" +
-    ".ra-button-status{position:absolute;right:9px;bottom:0;max-width:172px;overflow:hidden;border:1px solid #b9d8ff;border-radius:999px;background:#fff;color:#12366c;padding:4px 8px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.07em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap;box-shadow:0 5px 12px rgba(1,17,58,.18)}" +
+    ".ra-button-lockup{display:flex;align-items:center;gap:9px;text-align:left}" +
+    ".ra-button-image{display:block;width:auto;height:44px;flex:none}" +
+    ".ra-button-copy{display:block;min-width:0}" +
+    ".ra-button-name{display:block;font-family:'Sora','Avenir Next',ui-sans-serif,system-ui,sans-serif;font-size:16px;line-height:1.05;font-weight:700;letter-spacing:-.045em;color:#fff;white-space:nowrap}" +
+    ".ra-button-name-accent{color:#53ddff}" +
+    ".ra-button-status{display:block;margin-top:5px;max-width:135px;overflow:hidden;color:#cceeff;font-size:8px;line-height:1;font-weight:800;letter-spacing:.075em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}" +
     ".ra-sr-only{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}" +
-    "@media (max-width:520px){.ra-panel-brand{align-items:flex-start;flex-direction:column;gap:8px}.ra-brand-image{max-width:70%}.ra-links{align-items:flex-start;flex-direction:column;gap:9px}}" +
+    "@media (max-width:520px){.ra-panel-brand{align-items:flex-start;flex-direction:column;gap:9px}.ra-links{align-items:flex-start;flex-direction:column;gap:9px}}" +
     "@media (prefers-reduced-motion:no-preference){.ra-panel{animation:ra-in .16s ease-out}@keyframes ra-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}}" +
     "</style>" +
     '<div class="ra-wrap">' +
@@ -169,9 +176,12 @@
     safeTitle +
     '" data-open="false">' +
     '<div class="ra-panel-brand">' +
+    '<div class="ra-brand-lockup">' +
     '<img class="ra-brand-image" src="' +
     safeBrandUrl +
     '" alt="" aria-hidden="true">' +
+    '<span class="ra-brand-name">Rapid<span class="ra-brand-name-accent">Act</span></span>' +
+    "</div>" +
     '<span class="ra-brand-status">' +
     safeTitle +
     "</span>" +
@@ -194,11 +204,16 @@
     "</div>" +
     "</section>" +
     '<button class="ra-button" type="button" aria-expanded="false">' +
+    '<span class="ra-button-lockup" aria-hidden="true">' +
     '<img class="ra-button-image" src="' +
     safeBrandUrl +
     '" alt="" aria-hidden="true">' +
-    '<span class="ra-button-status" aria-hidden="true">' +
+    '<span class="ra-button-copy">' +
+    '<span class="ra-button-name">Rapid<span class="ra-button-name-accent">Act</span></span>' +
+    '<span class="ra-button-status">' +
     safeTitle +
+    "</span>" +
+    "</span>" +
     "</span>" +
     '<span class="ra-sr-only ra-button-title">' +
     safeTitle +
