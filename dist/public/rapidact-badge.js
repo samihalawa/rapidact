@@ -105,6 +105,20 @@
       .replace(/'/g, "&#039;");
   };
   var safeTitle = escapeHtml(title);
+  var defaultBrandUrl =
+    "https://rapidact.eu/brand/rapidact-ai-notice-brand.png";
+  try {
+    if (script && script.src) {
+      defaultBrandUrl = new URL(
+        "brand/rapidact-ai-notice-brand.png",
+        script.src
+      ).href;
+    }
+  } catch (_error) {
+    // The absolute production URL above remains the reliable fallback.
+  }
+  var brandUrl = (script && script.dataset.brandSrc) || defaultBrandUrl;
+  var safeBrandUrl = escapeHtml(brandUrl);
 
   var host = document.createElement("div");
   host.id = "rapidact-ai-disclosure";
@@ -113,7 +127,7 @@
   host.style.bottom = "max(16px, env(safe-area-inset-bottom))";
   host.style.zIndex = "2147483000";
   host.style.fontFamily =
-    '"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+    '"Manrope", "Avenir Next", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
   var root = host.attachShadow ? host.attachShadow({ mode: "open" }) : host;
   root.innerHTML =
@@ -122,40 +136,47 @@
     "*,*::before,*::after{box-sizing:border-box}" +
     ".ra-wrap{display:flex;flex-direction:column;align-items:" +
     (position === "left" ? "flex-start" : "flex-end") +
-    ";gap:10px}" +
-    ".ra-panel{position:relative;display:none;width:min(380px,calc(100vw - 32px));overflow:hidden;border:1px solid #cfd6e2;border-radius:12px;background:#fff;color:#111827;padding:20px;box-shadow:0 22px 55px rgba(5,25,70,.18)}" +
-    ".ra-panel::before{position:absolute;inset:0 0 auto;height:4px;background:" +
-    accent +
-    ";content:''}" +
+    ";gap:13px}" +
+    ".ra-panel{position:relative;display:none;width:min(390px,calc(100vw - 32px));overflow:hidden;border:1px solid #174a9b;border-radius:18px;background:#fff;color:#08152f;box-shadow:0 24px 70px rgba(1,17,58,.25),0 0 0 3px rgba(34,197,255,.08)}" +
     ".ra-panel[data-open=true]{display:block}" +
-    ".ra-eyebrow{margin:2px 0 7px;font-size:10px;line-height:1.2;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#64748b}" +
-    ".ra-title{margin:0;font-size:17px;line-height:1.3;font-weight:700;letter-spacing:-.015em}" +
-    ".ra-copy{margin:9px 0 0;font-size:14px;line-height:1.6;color:#475569}" +
-    ".ra-meta{margin:14px 0 0;padding-top:12px;border-top:1px solid #e2e8f0;font-size:12px;line-height:1.5;color:#64748b}" +
+    ".ra-panel-brand{display:flex;min-height:68px;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(67,206,255,.35);background:#061b50;padding:12px 15px}" +
+    ".ra-brand-image{display:block;width:174px;max-width:57%;height:auto;filter:drop-shadow(0 5px 12px rgba(0,0,0,.25))}" +
+    ".ra-brand-status{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(109,221,255,.5);border-radius:999px;background:rgba(11,76,169,.48);color:#e9f9ff;padding:6px 9px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}" +
+    ".ra-brand-status::before{width:6px;height:6px;border-radius:50%;background:#53ddff;box-shadow:0 0 9px #53ddff;content:''}" +
+    ".ra-panel-body{padding:19px 20px 20px}" +
+    ".ra-eyebrow{margin:0 0 7px;font-size:10px;line-height:1.2;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#4c6286}" +
+    ".ra-title{margin:0;font-family:'Sora','Avenir Next',ui-sans-serif,system-ui,sans-serif;font-size:18px;line-height:1.3;font-weight:700;letter-spacing:-.025em}" +
+    ".ra-copy{margin:9px 0 0;font-size:14px;line-height:1.62;color:#43516a}" +
+    ".ra-meta{margin:14px 0 0;padding-top:12px;border-top:1px solid #dbe5f2;font-size:12px;line-height:1.5;color:#5d6c84}" +
     ".ra-meta:empty{display:none}" +
     ".ra-links{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px}" +
     ".ra-link{color:" +
     accent +
     ";font-size:12px;line-height:1.4;font-weight:700;text-underline-offset:3px}" +
-    ".ra-button{display:inline-flex;min-height:50px;align-items:center;gap:10px;border:1px solid #cfd6e2;border-radius:10px;background:#fff;color:#111827;padding:8px 14px 8px 9px;box-shadow:0 7px 22px rgba(5,25,70,.14);cursor:pointer;font:inherit}" +
-    ".ra-button:hover{border-color:" +
-    accent +
-    ";background:#f8fafc;transform:translateY(-1px)}" +
+    ".ra-button{position:relative;display:block;min-width:184px;min-height:52px;border:0;background:transparent;padding:0 0 6px;cursor:pointer;font:inherit;filter:drop-shadow(0 10px 18px rgba(1,17,58,.26));transition:filter .18s ease,transform .18s ease}" +
+    ".ra-button:hover{filter:drop-shadow(0 13px 22px rgba(1,17,58,.34));transform:translateY(-2px)}" +
     ".ra-button:focus-visible{outline:3px solid " +
     accent +
-    "55;outline-offset:3px}" +
-    ".ra-icon{display:grid;width:31px;height:33px;place-items:center;clip-path:polygon(50% 0,92% 17%,92% 55%,82% 75%,65% 90%,50% 100%,35% 90%,18% 75%,8% 55%,8% 17%);background:" +
-    accent +
-    ";color:#fff;font-size:11px;font-weight:800}" +
-    ".ra-button-title{display:block;font-size:13px;line-height:1.15;font-weight:700;text-align:left;letter-spacing:-.01em}" +
-    ".ra-button-sub{display:block;margin-top:3px;font-size:10.5px;line-height:1.15;color:#64748b;text-align:left}" +
-    "@media (max-width:520px){.ra-button{max-width:calc(100vw - 32px)}.ra-links{align-items:flex-start;flex-direction:column;gap:9px}}" +
+    "66;outline-offset:5px;border-radius:999px}" +
+    ".ra-button-image{display:block;width:190px;max-width:calc(100vw - 32px);height:auto}" +
+    ".ra-button-status{position:absolute;right:9px;bottom:0;max-width:172px;overflow:hidden;border:1px solid #b9d8ff;border-radius:999px;background:#fff;color:#12366c;padding:4px 8px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.07em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap;box-shadow:0 5px 12px rgba(1,17,58,.18)}" +
+    ".ra-sr-only{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}" +
+    "@media (max-width:520px){.ra-panel-brand{align-items:flex-start;flex-direction:column;gap:8px}.ra-brand-image{max-width:70%}.ra-links{align-items:flex-start;flex-direction:column;gap:9px}}" +
     "@media (prefers-reduced-motion:no-preference){.ra-panel{animation:ra-in .16s ease-out}@keyframes ra-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}}" +
     "</style>" +
     '<div class="ra-wrap">' +
     '<section class="ra-panel" role="dialog" aria-label="' +
     safeTitle +
     '" data-open="false">' +
+    '<div class="ra-panel-brand">' +
+    '<img class="ra-brand-image" src="' +
+    safeBrandUrl +
+    '" alt="" aria-hidden="true">' +
+    '<span class="ra-brand-status">' +
+    safeTitle +
+    "</span>" +
+    "</div>" +
+    '<div class="ra-panel-body">' +
     '<p class="ra-eyebrow">' +
     copybook.eyebrow +
     "</p>" +
@@ -170,16 +191,20 @@
     copybook.install +
     "</a>" +
     "</div>" +
+    "</div>" +
     "</section>" +
     '<button class="ra-button" type="button" aria-expanded="false">' +
-    '<span class="ra-icon" aria-hidden="true">AI</span>' +
-    "<span>" +
-    '<span class="ra-button-title">' +
+    '<img class="ra-button-image" src="' +
+    safeBrandUrl +
+    '" alt="" aria-hidden="true">' +
+    '<span class="ra-button-status" aria-hidden="true">' +
     safeTitle +
     "</span>" +
-    '<span class="ra-button-sub">' +
-    copybook.open +
+    '<span class="ra-sr-only ra-button-title">' +
+    safeTitle +
     "</span>" +
+    '<span class="ra-sr-only ra-button-sub">' +
+    copybook.open +
     "</span>" +
     "</button>" +
     "</div>";

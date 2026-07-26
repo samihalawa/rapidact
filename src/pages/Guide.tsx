@@ -75,21 +75,15 @@ export default function Guide() {
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-between gap-5 rounded-lg border border-[#cfd6e2] bg-white p-4 shadow-[0_7px_22px_rgba(5,25,70,0.08)]">
-            <div className="flex items-center gap-3">
-              <span
-                aria-hidden="true"
-                className="grid h-9 w-9 place-items-center bg-[#1f3a5f] text-[11px] font-extrabold text-white [clip-path:polygon(50%_0,92%_17%,92%_55%,82%_75%,65%_90%,50%_100%,35%_90%,18%_75%,8%_55%,8%_17%)]"
-              >
-                AI
-              </span>
-              <span>
-                <strong className="block text-[13px] text-[#16181d]">
-                  AI use disclosed
-                </strong>
-                <span className="mt-0.5 block text-[11px] text-[#6b7280]">
-                  How AI is used
-                </span>
+          <div className="mt-6 flex items-center justify-between gap-5 rounded-xl border border-[#b9d8ff] bg-white p-4 shadow-[0_12px_32px_rgba(5,25,70,0.12)]">
+            <div className="relative pb-2">
+              <img
+                src="/brand/rapidact-ai-notice-brand.png"
+                alt="RapidAct"
+                className="block h-auto w-[190px] drop-shadow-[0_10px_18px_rgba(1,17,58,0.24)]"
+              />
+              <span className="absolute right-2 bottom-0 rounded-full border border-[#b9d8ff] bg-white px-2 py-1 text-[9px] leading-none font-extrabold tracking-[0.07em] text-[#12366c] uppercase shadow-sm">
+                AI use disclosed
               </span>
             </div>
             <span className="eyebrow shrink-0">Live preview</span>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
@@ -36,6 +36,35 @@ function scoreLabel(score: number) {
   return "High visible exposure — review needed";
 }
 
+const SCAN_STAGES = [
+  {
+    label: "Preparing a secure fetch",
+    detail:
+      "Normalising the address and checking that the public page can be reached.",
+  },
+  {
+    label: "Reading the public page",
+    detail:
+      "Fetching the published HTML, scripts and embedded tools a visitor receives.",
+  },
+  {
+    label: "Checking 52 AI signatures",
+    detail:
+      "Comparing visible technologies and disclosure wording against the scanner library.",
+  },
+  {
+    label: "Building your preview",
+    detail:
+      "Turning the technical matches into a score and practical next steps.",
+  },
+] as const;
+
+const MIN_SCAN_DISPLAY_MS = 2_800;
+
+function wait(ms: number) {
+  return new Promise(resolve => window.setTimeout(resolve, ms));
+}
+
 /** Turn each finding into a plain-English plan item. */
 function planItemFor(d: ScanFinding): { what: string; fix: string } {
   if (d.category === "chat") {
@@ -57,29 +86,68 @@ export default function Scanner() {
   const [result, setResult] = useState<ScanResult | null>(null);
   const [leadDone, setLeadDone] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [scanActive, setScanActive] = useState(false);
+  const [scanProgress, setScanProgress] = useState(0);
+  const [scanStage, setScanStage] = useState(0);
 
-  const scan = trpc.scan.run.useMutation({
-    onSuccess: data => {
-      const next = data as ScanResult;
-      setResult(next);
-      track("scan_completed", {
-        detected_count: next.summary.total,
-        high_exposure_count: next.summary.high,
-        undisclosed_count: next.summary.undisclosed,
-      });
-    },
-    onError: error =>
-      track("scan_failed", { error_type: error.data?.code || "unknown" }),
-  });
+  const scan = trpc.scan.run.useMutation();
   const lead = trpc.leads.capture.useMutation({
     onSuccess: () => setLeadDone(true),
   });
 
-  const runScan = () => {
-    if (!url.trim()) return;
+  useEffect(() => {
+    if (!scanActive) return;
+    const startedAt = Date.now();
+    const timer = window.setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      if (elapsed < 650) {
+        setScanStage(0);
+        setScanProgress(Math.min(22, 8 + Math.round(elapsed / 48)));
+      } else if (elapsed < 1_350) {
+        setScanStage(1);
+        setScanProgress(Math.min(48, 24 + Math.round((elapsed - 650) / 30)));
+      } else if (elapsed < 2_100) {
+        setScanStage(2);
+        setScanProgress(Math.min(74, 50 + Math.round((elapsed - 1_350) / 31)));
+      } else {
+        setScanStage(3);
+        setScanProgress(Math.min(94, 76 + Math.round((elapsed - 2_100) / 250)));
+      }
+    }, 120);
+    return () => window.clearInterval(timer);
+  }, [scanActive]);
+
+  const runScan = async () => {
+    const submittedUrl = url.trim();
+    if (!submittedUrl || scanActive) return;
     setResult(null);
-    track("scan_started", { has_protocol: /^https?:\/\//i.test(url.trim()) });
-    scan.mutate({ url: url.trim() });
+    setScanProgress(8);
+    setScanStage(0);
+    setScanActive(true);
+    const startedAt = Date.now();
+    track("scan_started", { has_protocol: /^https?:\/\//i.test(submittedUrl) });
+
+    try {
+      const next = (await scan.mutateAsync({
+        url: submittedUrl,
+      })) as ScanResult;
+      await wait(Math.max(0, MIN_SCAN_DISPLAY_MS - (Date.now() - startedAt)));
+      setScanStage(3);
+      setScanProgress(100);
+      await wait(180);
+      setResult(next);
+      track("scan_completed", {
+        reachable: next.reachable,
+        detected_count: next.summary?.total ?? 0,
+        high_exposure_count: next.summary?.high ?? 0,
+        undisclosed_count: next.summary?.undisclosed ?? 0,
+      });
+    } catch (error) {
+      const typedError = error as { data?: { code?: string } };
+      track("scan_failed", { error_type: typedError.data?.code || "unknown" });
+    } finally {
+      setScanActive(false);
+    }
   };
 
   const downloadReport = () => {
@@ -142,40 +210,106 @@ export default function Scanner() {
           <Button
             data-analytics-event="scan_button_click"
             onClick={runScan}
-            disabled={scan.isPending || !url.trim()}
+            disabled={scanActive || !url.trim()}
             className="h-11 rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
           >
-            {scan.isPending ? (
+            {scanActive ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
               <ScanSearch className="h-4 w-4" />
             )}
-            <span className="ml-2">{scan.isPending ? "Scanning" : "Scan"}</span>
+            <span className="ml-2">{scanActive ? "Scanning" : "Scan"}</span>
           </Button>
         </div>
 
-        {scan.isPending && (
-          <p className="mt-6 text-center text-sm text-[#6b7280]">
-            Fetching the page and checking 52 signatures… usually under 15
-            seconds.
-          </p>
+        {scanActive && (
+          <section
+            aria-live="polite"
+            className="mt-6 max-w-2xl rounded-xl border border-[#cbd8ec] bg-white p-5 shadow-[0_12px_34px_rgba(5,25,70,0.09)]"
+          >
+            <div className="flex items-start justify-between gap-5">
+              <div>
+                <p className="eyebrow">Public-page scan in progress</p>
+                <p className="ink mt-2 text-[16px] font-bold">
+                  {SCAN_STAGES[scanStage].label}
+                </p>
+                <p className="ink-soft mt-1 text-[13px] leading-relaxed">
+                  {SCAN_STAGES[scanStage].detail}
+                </p>
+              </div>
+              <span className="shrink-0 font-mono text-[13px] font-semibold text-[#1f3a5f]">
+                {scanProgress}%
+              </span>
+            </div>
+            <div
+              role="progressbar"
+              aria-label={SCAN_STAGES[scanStage].label}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={scanProgress}
+              className="mt-4 h-2 overflow-hidden rounded-full bg-[#e5ebf4]"
+            >
+              <div
+                className="h-full rounded-full bg-[#1f5fd2] transition-[width] duration-300 ease-out"
+                style={{ width: `${scanProgress}%` }}
+              />
+            </div>
+            <div className="mt-4 grid grid-cols-4 gap-2" aria-hidden="true">
+              {SCAN_STAGES.map((stage, index) => (
+                <span
+                  key={stage.label}
+                  className={`h-1 rounded-full ${
+                    index <= scanStage ? "bg-[#1f5fd2]" : "bg-[#e5ebf4]"
+                  }`}
+                />
+              ))}
+            </div>
+          </section>
         )}
 
-        {result && !result.reachable && (
+        <aside className="mt-6 flex max-w-2xl flex-col gap-4 rounded-xl border border-[#9fc5ff] bg-[#f3f8ff] p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-xl">
+            <p className="eyebrow text-[#174a9b]">Full assessment</p>
+            <p className="ink mt-2 text-[15px] leading-relaxed font-semibold">
+              This free scan is a public-page preview. The €99 assessment
+              reviews the AI your company actually runs—including private
+              systems, your provider/deployer role, the notices required and a
+              written action plan.
+            </p>
+          </div>
+          <Button
+            data-analytics-event="scanner_full_assessment_click"
+            data-analytics-label="Scanner full assessment fallback"
+            onClick={() => navigate(CONVERT.report)}
+            className="min-h-11 shrink-0 rounded bg-[#174a9b] px-5 text-white hover:bg-[#123b7d]"
+          >
+            Get the full assessment · €99
+          </Button>
+        </aside>
+
+        {(scan.isError || (result && !result.reachable)) && (
           <Card className="mx-auto mt-10 max-w-xl border-[#fecaca] bg-[#fef2f2]">
-            <CardContent className="flex items-start gap-3 pt-6">
+            <CardContent className="flex items-start gap-3 pt-6 pb-6">
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[#dc2626]" />
               <div>
                 <p className="font-semibold text-[#991b1b]">
                   We couldn't scan that URL
                 </p>
                 <p className="mt-1 text-sm text-[#b91c1c]">
-                  {result.error === "rate-limited"
+                  {result?.error === "rate-limited"
                     ? "Too many scans from your network — try again in a few minutes."
-                    : result.error === "invalid-url"
+                    : result?.error === "invalid-url"
                       ? "That doesn't look like a valid public URL."
-                      : `The site didn't respond (${result.error ?? "unreachable"}). It may block automated checks — the €99 pre-consultory report covers your systems by manual review instead.`}
+                      : `The site didn't respond (${result?.error ?? scan.error?.data?.code ?? "unreachable"}). It may block automated checks — the €99 pre-consultory report covers your systems by manual review instead.`}
                 </p>
+                <button
+                  type="button"
+                  data-analytics-event="scanner_failure_assessment_click"
+                  onClick={() => navigate(CONVERT.report)}
+                  className="mt-3 min-h-11 rounded bg-[#991b1b] px-4 text-sm font-bold text-white"
+                >
+                  Continue with the full assessment · €99
+                </button>
               </div>
             </CardContent>
           </Card>

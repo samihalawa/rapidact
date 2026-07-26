@@ -1,10 +1,34 @@
 # INDEX
 
+RapidAct scanner conversion | a spinner made the public-page preview feel unfinished and gave failures no next step | show readable scan phases and a permanent full-assessment fallback | do not imply the technical preview makes a company compliant | verify progress, success, unreachable, and CTA events live
+RapidAct AI notice badge | generic HTML/CSS badge diluted the real brand | use a generated branded image for the trigger and real HTML for localized disclosure | do not bake readiness or certification claims into artwork | verify trigger, panel, installer, and five languages live
 RapidAct responsive report rows | three children collapsed when the grid changed from two to three columns | place the description explicitly at each breakpoint | do not rely on implicit grid flow across column-count changes | verify 640–1023px and desktop rendered rows
 RapidAct mobile header | language selector displaced the conversion action | keep compact logo, two-letter language selector, and assessment CTA visible | do not replace the CTA with a hamburger or full language name | verify the real phone header and 44px targets
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | invented installers and evidence logging | promise only shipped badge/scanner/report | do not advertise plugins, apps, extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer proof
+
+## 2026-07-26 — Scanner progress must lead to the complete assessment
+
+- Status: CURRENT
+- Project/root: `rapidact`; free website scanner and paid-assessment conversion.
+- Mistake: a lone loading spinner made the real public-page scan feel like a placeholder, while blocked scans had no strong continuation path.
+- Do: show concise phases for the actual fetch, page read, signature check, and preview build; keep a compact €99 full-assessment CTA visible before and after results.
+- Don't: say the automated page preview performs a complete company scan or makes the site compliant.
+- Evidence: user correction in this task; `src/pages/Scanner.tsx` now separates the public-page preview from private systems, roles, disclosures, and the written action plan.
+- Trigger terms: scanner, spinner, progress, preview, fallback, full scan, compliance.
+- Verify before reuse: render progress through completion; test reachable, unreachable, and transport-error states; confirm scan and fallback analytics events fire once.
+
+## 2026-07-26 — AI notice branding is image-first but claims stay semantic
+
+- Status: CURRENT
+- Project/root: `rapidact`; floating disclosure trigger, panel, and installer preview.
+- Mistake: rebuilding the badge as a generic white HTML card and CSS shield after real branded artwork existed.
+- Do: use the supplied/generated RapidAct navy-and-cyan image for the trigger and panel brand; keep localized disclosure copy and controls in accessible HTML.
+- Don't: bake “AI Act Ready,” “Article 50 Ready,” certificate, or universal-compliance claims into the artwork.
+- Evidence: user correction in this task, `PROJECTS_MEDIA/RAPIDACT/multibadge`, and `public/brand/rapidact-ai-notice-brand.png`.
+- Trigger terms: badge, AI notice, brand asset, image generation, font, ready, certificate.
+- Verify before reuse: compare the live trigger, panel, and installer in EN/ES/DE/FR/IT on desktop and mobile; confirm the image loads and exact disclosure text stays readable.
 
 ## 2026-07-26 — Responsive report rows require explicit placement
 

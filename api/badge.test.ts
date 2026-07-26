@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -12,6 +12,10 @@ describe("RapidAct disclosure badge", () => {
     expect(html).toContain('src="/rapidact-badge.js"');
     expect(badge).toContain('host.id = "rapidact-ai-disclosure"');
     expect(badge).toContain('button.setAttribute("aria-expanded"');
+    expect(badge).toContain("rapidact-ai-notice-brand.png");
+    expect(
+      existsSync(resolve(root, "public/brand/rapidact-ai-notice-brand.png"))
+    ).toBe(true);
   });
 
   it("does not track or persist visitor interactions", () => {

@@ -76,7 +76,7 @@
 /* ---- RapidAct design layer ------------------------------------------------
    Register: professional services / regulatory. The reader is deciding whether
    to send €99 to strangers for a compliance assessment, so the page should read
-   like an auditor's letterhead with an editorial voice, not a software launch.
+   like a modern technical-assurance practice, not a generic software launch.
 
    Rules this layer enforces:
    - No gradients, no colour washes, no glow. Flat paper surfaces only.
@@ -89,7 +89,7 @@
 @layer base {
   html {
     font-family:
-      "IBM Plex Sans",
+      "Manrope",
       ui-sans-serif,
       system-ui,
       -apple-system,
@@ -101,10 +101,8 @@
   }
   h1,
   h2 {
-    font-family:
-      "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman", serif;
-    font-optical-sizing: auto;
-    letter-spacing: -0.025em;
+    font-family: "Sora", "Avenir Next", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.035em;
   }
 }
 
@@ -146,8 +144,6 @@
     font-variant-numeric: tabular-nums;
   }
   .editorial {
-    font-family:
-      "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman", serif;
-    font-optical-sizing: auto;
+    font-family: "Sora", "Avenir Next", ui-sans-serif, system-ui, sans-serif;
   }
 }
