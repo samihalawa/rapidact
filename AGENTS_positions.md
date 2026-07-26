@@ -1,6 +1,18 @@
 # INDEX
 
+RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | invented installers and evidence logging | promise only shipped badge/scanner/report | do not advertise plugins, apps, extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer proof
+
+## 2026-07-26 — Production serves the committed distribution bundle
+
+- Status: CURRENT
+- Project/root: `rapidact`; GitHub-to-Coolify production deployment.
+- Mistake: treating a passing local build and pushed source as sufficient while `dist/` remained ignored and unchanged.
+- Do: build locally, force-add the complete verified `dist/` output, and push the source and artifact together.
+- Don't: restore generated assets before closure or assume Coolify rebuilds the application from TypeScript.
+- Evidence: `Dockerfile` copies only `dist/`; `.gitignore` ignores that directory; Coolify deployment `i239tu493tdqrq7tkchyrhg7` built commit `ed039d2` from the old tracked bundle.
+- Trigger terms: deploy, Coolify, production, dist, build artifact, live UI.
+- Verify before reuse: Coolify logs name the artifact commit, local and remote refs match, and the live installer plus exact WhatsApp destination render at `rapidact.eu`.
 
 ## 2026-07-26 — Product claims must resolve to a shipped surface
 
