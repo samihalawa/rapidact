@@ -29,9 +29,7 @@ export default function Pricing() {
               <p className="ink mt-5 text-[42px] leading-none font-bold tracking-tight">
                 €99
               </p>
-              <p className="ink-soft mt-1.5 text-[13px]">
-                {copy.chargedOnce}
-              </p>
+              <p className="ink-soft mt-1.5 text-[13px]">{copy.chargedOnce}</p>
               <Button
                 className="mt-6 h-11 w-full rounded bg-[#16181d] text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
                 onClick={() => navigate(path(CONVERT.report))}
@@ -74,30 +72,6 @@ export default function Pricing() {
               </div>
             ))}
           </dl>
-        </div>
-
-        {/* Free tools, deliberately secondary */}
-        <div className="mt-12">
-          <p className="eyebrow">{copy.freeLabel}</p>
-          <div className="hairline mt-4 grid border-t sm:grid-cols-2">
-            {copy.freeTools.map((tool, index) => (
-              <div
-                key={tool.title}
-                className="hairline border-b py-6 sm:pr-8 sm:last:pl-8 sm:last:pr-0"
-              >
-                <h3 className="ink text-[15px] font-semibold">{tool.title}</h3>
-                <p className="ink-soft mt-2 text-[15px] leading-relaxed">
-                  {tool.text}
-                </p>
-                <button
-                  onClick={() => navigate(path(index === 0 ? CONVERT.scanner : CONVERT.badge))}
-                  className="accent mt-3 text-[14px] font-semibold underline underline-offset-2"
-                >
-                  {tool.cta}
-                </button>
-              </div>
-            ))}
-          </div>
         </div>
 
         <p className="ink-soft mt-8 max-w-3xl text-[13px] leading-relaxed">

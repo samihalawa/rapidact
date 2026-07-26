@@ -115,9 +115,9 @@ const en: HomeCopy = {
   invoice:
     "An invoice is issued for every payment by Agents AI Ltd. RapidAct is not a law firm and the report is not legal advice.",
   featuresLabel: "Free tools",
-  featuresTitle: "Publish and verify the visitor notice",
+  featuresTitle: "Scan your page. Publish the notice.",
   featuresIntro:
-    "Scan a public page and install the visitor disclosure whether or not you buy an assessment.",
+    "Check the AI signals visible on a public page, then add a clear visitor disclosure. Both tools are free.",
   features: [
     {
       title: "AI detection scanner",
@@ -259,9 +259,9 @@ const es: HomeCopy = {
   invoice:
     "Agents AI Ltd. emite factura por cada pago. RapidAct no es un despacho de abogados y el informe no es asesoramiento jurídico.",
   featuresLabel: "Herramientas gratuitas",
-  featuresTitle: "La implementación técnica no cuesta nada",
+  featuresTitle: "Escanea tu página. Publica el aviso.",
   featuresIntro:
-    "Escanea una página pública e instala el aviso para visitantes, compres o no la evaluación.",
+    "Comprueba las señales de IA visibles en una página pública y añade un aviso claro. Ambas herramientas son gratuitas.",
   features: [
     {
       title: "Escáner de detección de IA",
@@ -436,9 +436,9 @@ const de: HomeCopy = {
   invoice:
     "Agents AI Ltd. stellt eine Rechnung aus. RapidAct ist keine Kanzlei; der Bericht ist keine Rechtsberatung.",
   featuresLabel: "Kostenlose Tools",
-  featuresTitle: "Die technische Umsetzung kostet nichts",
+  featuresTitle: "Seite scannen. Hinweis veröffentlichen.",
   featuresIntro:
-    "Scannen Sie Ihre Seite und installieren Sie den Hinweis unabhängig vom Kauf.",
+    "Prüfen Sie sichtbare KI-Signale und fügen Sie einen klaren Besucherhinweis hinzu. Beide Tools sind kostenlos.",
   features: [
     {
       title: "KI-Scanner",
@@ -613,9 +613,9 @@ const fr: HomeCopy = {
   invoice:
     "Agents AI Ltd. émet une facture. RapidAct n’est pas un cabinet d’avocats et le rapport n’est pas un avis juridique.",
   featuresLabel: "Outils gratuits",
-  featuresTitle: "La mise en œuvre technique est gratuite",
+  featuresTitle: "Scannez la page. Publiez la notice.",
   featuresIntro:
-    "Scannez une page et installez la notice, que vous achetiez ou non l’évaluation.",
+    "Vérifiez les signaux IA visibles puis ajoutez une notice claire. Les deux outils sont gratuits.",
   features: [
     {
       title: "Scanner IA",
@@ -790,9 +790,9 @@ const it: HomeCopy = {
   invoice:
     "Agents AI Ltd. emette fattura. RapidAct non è uno studio legale e il report non è consulenza giuridica.",
   featuresLabel: "Strumenti gratuiti",
-  featuresTitle: "L’implementazione tecnica è gratuita",
+  featuresTitle: "Scansiona la pagina. Pubblica l’avviso.",
   featuresIntro:
-    "Scansiona una pagina e installa l’avviso, anche senza acquistare la valutazione.",
+    "Controlla i segnali IA visibili e aggiungi un avviso chiaro. Entrambi gli strumenti sono gratuiti.",
   features: [
     {
       title: "Scanner IA",

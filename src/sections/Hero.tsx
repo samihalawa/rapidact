@@ -6,64 +6,59 @@ import { FileText } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { HOME_COPY } from "@/data/localizedHome";
 
-/**
- * Contents panel. This shows the actual structure of the deliverable, taken from
- * the same REPORT_CHAPTERS the offer section renders, rather than a mocked-up
- * screenshot of a fictional customer's results. A prospect can check the claim
- * against what they receive.
- */
-function ReportContents() {
+/** Preview generated from pages in the downloadable specimen PDF. */
+function ReportPreview() {
   const { lang, path, t } = useI18n();
   const copy = HOME_COPY[lang];
   return (
     <div className="relative pt-4 pr-4">
-      <div className="absolute top-0 right-0 bottom-4 left-4 border border-[#d8d8d2] bg-[#eeeee9]" aria-hidden="true" />
-      <div className="hairline relative border bg-white shadow-[0_16px_35px_rgba(22,24,29,0.10)]">
-      <div className="hairline flex items-baseline justify-between border-b bg-[#16181d] px-6 py-4">
-        <div>
+      <div
+        className="absolute top-0 right-0 bottom-4 left-4 border border-[#d8d8d2] bg-[#eeeee9]"
+        aria-hidden="true"
+      />
+      <div className="hairline relative overflow-hidden border bg-[#f7f7f5] shadow-[0_16px_35px_rgba(22,24,29,0.10)]">
+        <div className="hairline flex items-center justify-between border-b bg-[#16181d] px-5 py-4 sm:px-6">
           <p className="text-[10px] font-bold tracking-[0.14em] text-white/55 uppercase">
             {t("nav.specimen")} PDF
           </p>
-          <p className="mt-1 text-[15px] font-semibold text-white">
-            {REPORT.name}
-          </p>
-        </div>
           <span className="inline-flex items-center gap-1.5 text-[11px] text-white/55">
             <FileText className="h-3.5 w-3.5" /> {t("specimen.pages")}
           </span>
-      </div>
+        </div>
 
-      <ol className="divide-y divide-[#e2e2dd]">
-        {copy.chapters.map(c => (
-          <li key={c.n} className="flex gap-4 px-6 py-3.5">
-            <span className="mono ink-soft w-6 shrink-0 pt-0.5 text-[11px]">
-              {c.n}
-            </span>
-            <div>
-              <p className="ink text-[13px] leading-snug font-semibold">
-                {c.title}
-              </p>
-              <p className="ink-soft mt-0.5 text-[12px] leading-relaxed">
-                {c.text.split(".")[0]}.
-              </p>
-            </div>
-          </li>
-        ))}
-      </ol>
+        <div className="relative mx-auto grid max-w-[31rem] grid-cols-[0.78fr_1fr] items-end px-5 pt-7 pb-6 sm:px-8 sm:pt-9">
+          <img
+            src="/reports/rapidact-specimen-cover.webp"
+            alt={`${REPORT.name} — ${t("nav.specimen")} cover`}
+            width="760"
+            height="1075"
+            loading="eager"
+            className="relative z-0 w-full -rotate-2 border border-[#d8d8d2] shadow-[0_12px_28px_rgba(22,24,29,0.16)]"
+          />
+          <img
+            src="/reports/rapidact-specimen-inventory.webp"
+            alt={copy.chapters[0].title}
+            width="760"
+            height="1075"
+            loading="eager"
+            className="relative z-10 -ml-6 w-[calc(100%+1.5rem)] rotate-1 border border-[#d8d8d2] bg-white shadow-[0_14px_30px_rgba(22,24,29,0.18)] sm:-ml-9 sm:w-[calc(100%+2.25rem)]"
+          />
+        </div>
 
-      <div className="hairline border-t bg-[#f7f7f5] px-6 py-3.5">
-        <p className="ink-soft text-[12px] leading-relaxed">
-          {copy.prepared}
-        </p>
-        <Link
-          to={path(CONVERT.example)}
-          data-analytics-event="view_specimen"
-          data-analytics-label="Hero report preview"
-          className="accent mt-2 inline-block text-[12px] font-semibold underline underline-offset-2"
-        >
-          {t("hero.specimen")}
-        </Link>
-      </div>
+        <div className="hairline border-t bg-white px-5 py-4 sm:px-6">
+          <p className="ink text-[13px] font-semibold">{REPORT.name}</p>
+          <p className="ink-soft mt-1 text-[12px] leading-relaxed">
+            {copy.prepared}
+          </p>
+          <Link
+            to={path(CONVERT.example)}
+            data-analytics-event="view_specimen"
+            data-analytics-label="Hero report preview"
+            className="accent mt-2 inline-block text-[12px] font-semibold underline underline-offset-2"
+          >
+            {t("hero.specimen")}
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -141,7 +136,7 @@ export default function Hero() {
         </div>
 
         <div className="lg:pt-2">
-          <ReportContents />
+          <ReportPreview />
         </div>
       </div>
     </section>

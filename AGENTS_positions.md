@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct conversion page | the hero preview and later sections repeated the same offer details | show actual specimen pages in the hero and reserve detailed lists for their dedicated section | do not repeat long deliverable or free-tool explanations | verify the full page for repeated claims and a clear primary CTA
 RapidAct scanner conversion | a spinner made the public-page preview feel unfinished and gave failures no next step | show readable scan phases and a permanent full-assessment fallback | do not imply the technical preview makes a company compliant | verify progress, success, unreachable, and CTA events live
 RapidAct brand assets | redrawn SVG and generated marks drifted from the approved logo | use the exact tight-crop raster pack by purpose, plus semantic text for the wordmark and disclosure | do not redraw, stretch, or retain superseded marks | verify header, footer, badge, favicon, PWA, social, and five languages live
 RapidAct responsive report rows | three children collapsed when the grid changed from two to three columns | place the description explicitly at each breakpoint | do not rely on implicit grid flow across column-count changes | verify 640–1023px and desktop rendered rows
@@ -7,6 +8,17 @@ RapidAct mobile header | language selector displaced the conversion action | kee
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | invented installers and evidence logging | promise only shipped badge/scanner/report | do not advertise plugins, apps, extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer proof
+
+## 2026-07-26 — The conversion page previews depth without repeating it
+
+- Status: CURRENT
+- Project/root: `rapidact`; homepage specimen, assessment outline, pricing, and free-tool sections.
+- Mistake: the hero reproduced all six assessment rows, then the next section repeated them; pricing also repeated the scanner and notice explanation shown later.
+- Do: use rendered pages from the real specimen in the hero, keep the full assessment outline in one section, and explain the free tools once.
+- Don't: use another long HTML deliverables panel as a document preview or repeat secondary offers around the main €99 decision.
+- Evidence: user-supplied full-page screenshot and correction in this task; `src/sections/Hero.tsx`, `Pricing.tsx`, and the generated specimen page images.
+- Trigger terms: redundant copy, long page, specimen mockup, conversion, free tools, CTA hierarchy.
+- Verify before reuse: inspect the entire desktop page and phone flow; confirm the PDF preview is legible as a document, the primary CTA remains visually dominant, and every removed duplicate still has one reachable canonical section.
 
 ## 2026-07-26 — Scanner progress must lead to the complete assessment
 
