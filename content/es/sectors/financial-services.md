@@ -27,4 +27,4 @@ Esta es la guía en español claro — qué activa la ley en seguros y finanzas,
 
 Este sector ya vive bajo normas de conducta y deberes de registro — un registro de evidencia de disclosures encaja en su cultura. Probablemente estará entre los primeros auditados.
 
-*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*
+*El [evaluación de empresa de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

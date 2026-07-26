@@ -33,7 +33,7 @@ export const scans = mysqlTable("scans", {
 });
 
 /**
- * Paid "AI Act Complete Pre-Consultory Report" requests.
+ * Paid "EU AI Act Company Assessment" requests.
  *
  * A row is written the moment a company submits its intake — before payment — so a
  * lead is never lost if they drop off at the bunq screen. `ref` is the short code the

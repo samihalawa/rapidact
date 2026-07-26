@@ -27,4 +27,4 @@ what hotels, airlines and travel agencies must disclose under Article 50. This i
 
 Voice is the channel everyone forgets: if an AI answers your phone line naturally, Article 50(1) applies exactly as it does to web chat.
 
-*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*
+*Prefer it assessed properly? The [€99 company assessment](/report) classifies every AI system you run and states exactly what each one requires.*

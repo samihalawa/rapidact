@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in cliniche e salute, cosa 
 
 La trasparenza (Articolo 50) è il pavimento. Se un bot inizia a consigliare sul trattamento, vai verso il territorio ad alto rischio — quello è un regime diverso e più grande che merita un avvocato.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

@@ -9,7 +9,7 @@ Una firma pública muestra que este proveedor de IA está presente en la página
 
 ## Por qué esta señal técnica merece revisión
 
-Sus AI agents y Answer Bot resuelven tickets y chatean con visitantes antes de que nadie humano intervenga. Es una señal técnica que conviene revisar bajo el Artículo 50(1) si eres el proveedor responsable del aviso de interacción directa. Nuestra base de datos de detección identifica Zendesk Messaging / AI Agents en una página en segundos — nivel de exposición: **alta** — y un regulador (o un competidor) puede hacer la misma comprobación.
+Sus AI agents y Answer Bot resuelven tickets y chatean con visitantes antes de que nadie humano intervenga. Es una señal técnica que conviene revisar bajo el Artículo 50(1) si eres el proveedor responsable del aviso de interacción directa. Nuestra base de datos de detección identifica Zendesk Messaging / AI Agents en una página en segundos — nivel de exposición: **alta**.
 
 ## Qué debes verificar en tu web
 
@@ -30,4 +30,4 @@ Sus AI agents y Answer Bot resuelven tickets y chatean con visitantes antes de q
 - Suponer que el proveedor tecnológico o el titular de la web siempre tiene la obligación — hay que establecer los roles de proveedor y deployer.
 - Esperar al «retraso de 2027» — eso era el reglamento de alto riesgo, no el Artículo 50. [Qué se retrasó de verdad →](/answers/digital-omnibus-ai-act-delay)
 
-*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*
+*El [evaluación de empresa de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

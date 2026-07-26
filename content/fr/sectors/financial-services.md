@@ -27,4 +27,4 @@ Le guide en français clair — ce qui déclenche la loi dans les assurances et 
 
 Ce secteur vit déjà sous des règles de conduite et des devoirs d'enregistrement — un journal de preuves des divulgations s'insère dans sa culture. Il sera probablement parmi les premiers audités.
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

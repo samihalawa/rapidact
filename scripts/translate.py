@@ -27,7 +27,7 @@ Rules:
 - Keep ALL markdown structure exactly (headers, tables, links, bold, blockquotes, frontmatter ---).
 - Keep URLs/link paths unchanged (e.g. /scanner, /answers/foo) — translate only the visible anchor text.
 - Keep brand/product names unchanged: RapidAct, Article 50, EU AI Act, WordPress, Tidio, Zendesk, etc.
-- Keep prices as-is (€0 for the free tools, €99 for the pre-consultory report).
+- Keep prices as-is (€0 for the free tools, €99 for the company assessment).
 - Tone: clear, plain, direct — match the source's no-jargon style.
 - Output ONLY the translated document, nothing else.
 

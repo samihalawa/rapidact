@@ -229,7 +229,7 @@ def build() -> None:
             Paragraph("RAPIDACT / SPECIMEN", ParagraphStyle("CoverLabel", parent=LABEL, textColor=colors.HexColor("#AFC4E0"))),
             Spacer(1, 8 * mm),
             Paragraph(
-                "AI Act Complete<br/>Pre-Consultory Report",
+                "EU AI Act<br/>Company Assessment",
                 ParagraphStyle(
                     "CoverTitle",
                     parent=SECTION,

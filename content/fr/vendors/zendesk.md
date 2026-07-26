@@ -9,7 +9,7 @@ Une signature publique montre que ce fournisseur IA est présent sur la page. Il
 
 ## Pourquoi ce signal technique mérite examen
 
-Ses AI agents et Answer Bot résolvent les tickets et discutent avec les visiteurs avant tout humain. Il s agit d un signal technique à examiner au regard de l Article 50(1) si vous êtes le fournisseur responsable de la divulgation lors de la première interaction. Notre base de détection identifie Zendesk Messaging / AI Agents sur une page en quelques secondes — niveau d'exposition : **élevé** — et un régulateur (ou un concurrent) peut faire la même vérification.
+Ses AI agents et Answer Bot résolvent les tickets et discutent avec les visiteurs avant tout humain. Il s agit d un signal technique à examiner au regard de l Article 50(1) si vous êtes le fournisseur responsable de la divulgation lors de la première interaction. Notre base de détection identifie Zendesk Messaging / AI Agents sur une page en quelques secondes — niveau d'exposition : **élevé**.
 
 ## Ce que vous devez vérifier sur votre site
 
@@ -30,4 +30,4 @@ Ses AI agents et Answer Bot résolvent les tickets et discutent avec les visiteu
 - Ne supposez pas que le fournisseur technique ou le propriétaire du site porte toujours cette obligation ; établissez les rôles de fournisseur et de déployeur.
 - Attendre le « report de 2027 » — il concernait les règles haut risque, pas l'Article 50. [Ce qui a vraiment été reporté →](/answers/digital-omnibus-ai-act-delay)
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

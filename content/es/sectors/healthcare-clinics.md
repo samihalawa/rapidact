@@ -27,4 +27,4 @@ Esta es la guía en español claro — qué activa la ley en clínicas y salud, 
 
 La transparencia (Artículo 50) es el suelo. Si un bot empieza a aconsejar sobre tratamiento, te acercas al territorio de alto riesgo — ese es un reglamento distinto y más grande que merece un abogado.
 
-*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*
+*El [evaluación de empresa de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

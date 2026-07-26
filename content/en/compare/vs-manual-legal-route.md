@@ -5,7 +5,7 @@ lang: en
 ---
 # RapidAct vs hiring a lawyer or consultant
 
-**RapidAct and legal counsel do different jobs. RapidAct provides a free public-page scan, a free disclosure badge and a €99 technical pre-consultory assessment. A lawyer provides legal opinions, privilege and representation.**
+**RapidAct and legal counsel do different jobs. RapidAct provides a free public-page scan, a free disclosure badge and a €99 technical company assessment. A lawyer provides legal opinions, privilege and representation.**
 
 | | RapidAct | Lawyer / consultant |
 |---|---|---|

@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/providers/trpc";
 import type { ScanResult, ScanFinding } from "@contracts/types";
-import { CONVERT, REPORT } from "@/config";
+import { CONVERT } from "@/config";
 import { useNavigate } from "react-router";
 import {
   ScanSearch,
@@ -23,6 +23,8 @@ import {
   Wrench,
 } from "lucide-react";
 import { track } from "@/lib/analytics";
+import { useI18n } from "@/lib/i18n";
+import { SCANNER_COPY } from "@/data/localizedScanner";
 
 function scoreColor(score: number) {
   if (score >= 80) return "text-[#0e9f6e]";
@@ -30,34 +32,11 @@ function scoreColor(score: number) {
   return "text-[#dc2626]";
 }
 
-function scoreLabel(score: number) {
-  if (score >= 80) return "Low visible exposure";
-  if (score >= 50) return "Disclosure gaps found";
-  return "High visible exposure — review needed";
+function scoreLabel(score: number, labels: [string, string, string]) {
+  if (score >= 80) return labels[2];
+  if (score >= 50) return labels[1];
+  return labels[0];
 }
-
-const SCAN_STAGES = [
-  {
-    label: "Preparing a secure fetch",
-    detail:
-      "Normalising the address and checking that the public page can be reached.",
-  },
-  {
-    label: "Reading the public page",
-    detail:
-      "Fetching the published HTML, scripts and embedded tools a visitor receives.",
-  },
-  {
-    label: "Checking 52 AI signatures",
-    detail:
-      "Comparing visible technologies and disclosure wording against the scanner library.",
-  },
-  {
-    label: "Building your preview",
-    detail:
-      "Turning the technical matches into a score and practical next steps.",
-  },
-] as const;
 
 const MIN_SCAN_DISPLAY_MS = 2_800;
 
@@ -66,21 +45,26 @@ function wait(ms: number) {
 }
 
 /** Turn each finding into a plain-English plan item. */
-function planItemFor(d: ScanFinding): { what: string; fix: string } {
+function planItemFor(
+  d: ScanFinding,
+  copy: (typeof SCANNER_COPY)[keyof typeof SCANNER_COPY]
+): { what: string; fix: string } {
   if (d.category === "chat") {
     return {
-      what: `Your site runs ${d.name}. If you are the provider responsible for Article 50(1), the visitor must receive a clear AI-interaction notice at the latest at first interaction. ${d.existingDisclosureFound ? "We found disclosure wording on the page: verify its timing and prominence." : "We found no disclosure wording on the scanned page."}`,
-      fix: `Free: install and tailor the one-script RapidAct notice, then verify it on the live page. The scan cannot determine your provider/deployer role or private AI systems; the €99 pre-consultory report classifies those company-wide questions.`,
+      what: copy.chatWhat(d.name, d.existingDisclosureFound),
+      fix: copy.chatFix,
     };
   }
   return {
-    what: `Your site uses ${d.name}, an AI-powered feature. Check whether visitors can tell AI is involved.`,
-    fix: "Free: review the AI content labeling guide. Pack/DFY: labels + templates installed for you.",
+    what: copy.otherWhat(d.name),
+    fix: copy.otherFix,
   };
 }
 
 export default function Scanner() {
   const navigate = useNavigate();
+  const { lang, path } = useI18n();
+  const copy = SCANNER_COPY[lang];
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -162,40 +146,28 @@ export default function Scanner() {
 
   return (
     <div className="paper min-h-screen">
-      <Seo
-        title="Free AI transparency scan + implementation plan | RapidAct"
-        description="Scan your website free: detect AI chatbots missing the EU AI Act Article 50 disclosure, get a readiness score and a free plain-English implementation plan."
-      />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} />
       <SiteNav />
       <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <div>
-          <p className="eyebrow">Free tool</p>
+          <p className="eyebrow">{copy.eyebrow}</p>
           <h1 className="ink mt-3 text-[32px] leading-tight font-bold tracking-[-0.02em] sm:text-[38px]">
-            Check which AI systems are visible on your website
+            {copy.title}
           </h1>
           <p className="ink-soft mt-4 max-w-2xl text-[16px] leading-relaxed">
-            The same outside-in check a regulator, an enterprise client or a
-            competitor can run on you in under a minute. It reads only the
-            public HTML of the address you submit, matches it against 52 known
-            platforms, and returns an implementation plan you keep. Free, with
-            no account.
+            {copy.intro}
           </p>
           <p className="ink-soft mt-3 max-w-2xl text-[14px] leading-relaxed">
-            A signature match is a technical signal, not a legal classification.
-            Your role, the system's purpose and any applicable exception still
-            need to be established.
+            {copy.scope}
           </p>
           <p className="ink-soft mt-3 max-w-2xl text-[15px] leading-relaxed">
-            The scan sees your website. It cannot see the AI systems that never
-            touch a public page, which is where most of the exposure sits. That
-            is what the{" "}
+            {copy.companyLead}{" "}
             <button
-              onClick={() => navigate(CONVERT.report)}
+              onClick={() => navigate(path(CONVERT.report))}
               className="accent font-semibold underline underline-offset-2"
             >
-              €99 assessment
-            </button>{" "}
-            covers.
+              {copy.companyLink}
+            </button>
           </p>
         </div>
 
@@ -204,7 +176,7 @@ export default function Scanner() {
             value={url}
             onChange={e => setUrl(e.target.value)}
             onKeyDown={e => e.key === "Enter" && runScan()}
-            placeholder="your-site.com"
+            placeholder={copy.placeholder}
             className="hairline h-11 rounded border bg-white px-4 text-[15px]"
           />
           <Button
@@ -218,7 +190,9 @@ export default function Scanner() {
             ) : (
               <ScanSearch className="h-4 w-4" />
             )}
-            <span className="ml-2">{scanActive ? "Scanning" : "Scan"}</span>
+            <span className="ml-2">
+              {scanActive ? copy.scanning : copy.scan}
+            </span>
           </Button>
         </div>
 
@@ -229,12 +203,12 @@ export default function Scanner() {
           >
             <div className="flex items-start justify-between gap-5">
               <div>
-                <p className="eyebrow">Public-page scan in progress</p>
+                <p className="eyebrow">{copy.progress}</p>
                 <p className="ink mt-2 text-[16px] font-bold">
-                  {SCAN_STAGES[scanStage].label}
+                  {copy.stages[scanStage].label}
                 </p>
                 <p className="ink-soft mt-1 text-[13px] leading-relaxed">
-                  {SCAN_STAGES[scanStage].detail}
+                  {copy.stages[scanStage].detail}
                 </p>
               </div>
               <span className="shrink-0 font-mono text-[13px] font-semibold text-[#1f3a5f]">
@@ -243,7 +217,7 @@ export default function Scanner() {
             </div>
             <div
               role="progressbar"
-              aria-label={SCAN_STAGES[scanStage].label}
+              aria-label={copy.stages[scanStage].label}
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={scanProgress}
@@ -255,7 +229,7 @@ export default function Scanner() {
               />
             </div>
             <div className="mt-4 grid grid-cols-4 gap-2" aria-hidden="true">
-              {SCAN_STAGES.map((stage, index) => (
+              {copy.stages.map((stage, index) => (
                 <span
                   key={stage.label}
                   className={`h-1 rounded-full ${
@@ -269,21 +243,18 @@ export default function Scanner() {
 
         <aside className="mt-6 flex max-w-2xl flex-col gap-4 rounded-xl border border-[#9fc5ff] bg-[#f3f8ff] p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="max-w-xl">
-            <p className="eyebrow text-[#174a9b]">Full assessment</p>
+            <p className="eyebrow text-[#174a9b]">{copy.fullLabel}</p>
             <p className="ink mt-2 text-[15px] leading-relaxed font-semibold">
-              This free scan is a public-page preview. The €99 assessment
-              reviews the AI your company actually runs—including private
-              systems, your provider/deployer role, the notices required and a
-              written action plan.
+              {copy.fullBody}
             </p>
           </div>
           <Button
             data-analytics-event="scanner_full_assessment_click"
             data-analytics-label="Scanner full assessment fallback"
-            onClick={() => navigate(CONVERT.report)}
+            onClick={() => navigate(path(CONVERT.report))}
             className="min-h-11 shrink-0 rounded bg-[#174a9b] px-5 text-white hover:bg-[#123b7d]"
           >
-            Get the full assessment · €99
+            {copy.fullCta}
           </Button>
         </aside>
 
@@ -293,22 +264,26 @@ export default function Scanner() {
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[#dc2626]" />
               <div>
                 <p className="font-semibold text-[#991b1b]">
-                  We couldn't scan that URL
+                  {copy.failureTitle}
                 </p>
                 <p className="mt-1 text-sm text-[#b91c1c]">
                   {result?.error === "rate-limited"
-                    ? "Too many scans from your network — try again in a few minutes."
+                    ? copy.rateLimited
                     : result?.error === "invalid-url"
-                      ? "That doesn't look like a valid public URL."
-                      : `The site didn't respond (${result?.error ?? scan.error?.data?.code ?? "unreachable"}). It may block automated checks — the €99 pre-consultory report covers your systems by manual review instead.`}
+                      ? copy.invalidUrl
+                      : copy.unreachable(
+                          result?.error ??
+                            scan.error?.data?.code ??
+                            "unreachable"
+                        )}
                 </p>
                 <button
                   type="button"
                   data-analytics-event="scanner_failure_assessment_click"
-                  onClick={() => navigate(CONVERT.report)}
+                  onClick={() => navigate(path(CONVERT.report))}
                   className="mt-3 min-h-11 rounded bg-[#991b1b] px-4 text-sm font-bold text-white"
                 >
-                  Continue with the full assessment · €99
+                  {copy.failureCta}
                 </button>
               </div>
             </CardContent>
@@ -327,20 +302,19 @@ export default function Scanner() {
                     {result.score}
                   </div>
                   <div className="mt-1 text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
-                    readiness / 100
+                    {copy.readiness}
                   </div>
                 </div>
                 <div className="text-center sm:text-left">
                   <p className="text-lg font-bold text-[#16181d]">
-                    {scoreLabel(result.score)}
+                    {scoreLabel(result.score, copy.scoreLabels)}
                   </p>
                   <p className="mt-1 text-sm text-[#5c6370]">
-                    {result.summary.total} AI touchpoint
-                    {result.summary.total === 1 ? "" : "s"} detected ·{" "}
-                    {result.summary.high} high-exposure ·{" "}
-                    <span className="font-semibold text-[#dc2626]">
-                      {result.summary.undisclosed} without visible AI disclosure
-                    </span>
+                    {copy.summary(
+                      result.summary.total,
+                      result.summary.high,
+                      result.summary.undisclosed
+                    )}
                   </p>
                   <p className="mt-1 text-xs break-all text-[#6b7280]">
                     {result.summary.url}
@@ -357,7 +331,7 @@ export default function Scanner() {
                     <CardTitle className="text-base font-bold text-[#16181d]">
                       {d.name}
                       <span className="ml-2 text-sm font-medium text-[#6b7280]">
-                        Art. {d.article}
+                        {copy.article} {d.article}
                       </span>
                     </CardTitle>
                     <Badge
@@ -376,19 +350,17 @@ export default function Scanner() {
                 <CardContent className="space-y-2">
                   {d.evidence.map(e => (
                     <p key={e} className="text-xs break-all text-[#6b7280]">
-                      evidence: {e}
+                      {copy.evidence}: {e}
                     </p>
                   ))}
                   {d.existingDisclosureFound ? (
                     <p className="flex items-center gap-2 pt-1 text-sm font-semibold text-[#0e9f6e]">
-                      <CheckCircle2 className="h-4 w-4" /> AI disclosure wording
-                      detected on the page
+                      <CheckCircle2 className="h-4 w-4" />{" "}
+                      {copy.disclosureFound}
                     </p>
                   ) : (
                     <p className="flex items-center gap-2 pt-1 text-sm font-semibold text-[#dc2626]">
-                      <XCircle className="h-4 w-4" /> No AI disclosure wording
-                      detected — review Article 50(1), your role and the
-                      first-interaction experience
+                      <XCircle className="h-4 w-4" /> {copy.disclosureMissing}
                     </p>
                   )}
                 </CardContent>
@@ -399,12 +371,10 @@ export default function Scanner() {
               <Card className="border-[#e2e2dd] bg-white shadow-sm">
                 <CardContent className="pt-6 text-center">
                   <p className="font-semibold text-[#16181d]">
-                    No known AI chat signatures found on this page.
+                    {copy.noSignaturesTitle}
                   </p>
                   <p className="mt-1 text-sm text-[#5c6370]">
-                    This covers 52 known vendor signatures — custom-built AI may
-                    still be present. If you use AI for images, videos or text,
-                    the labeling rules may still apply to you.
+                    {copy.noSignaturesBody}
                   </p>
                 </CardContent>
               </Card>
@@ -419,24 +389,24 @@ export default function Scanner() {
                   </div>
                   <div>
                     <CardTitle className="text-xl font-bold text-[#16181d]">
-                      Your free implementation plan
+                      {copy.planTitle}
                     </CardTitle>
                     <p className="text-sm text-[#6b7280]">
-                      Yours to keep — no email required.
+                      {copy.planSubtitle}
                     </p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-5">
                 {result.detected.map((d, i) => {
-                  const plan = planItemFor(d);
+                  const plan = planItemFor(d, copy);
                   return (
                     <div
                       key={d.id}
                       className="rounded border border-[#e2e2dd] p-4"
                     >
                       <p className="text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
-                        Step {i + 1} — {d.name}
+                        {copy.step} {i + 1} — {d.name}
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
                         {plan.what}
@@ -450,14 +420,10 @@ export default function Scanner() {
                 })}
                 <div className="rounded border border-[#e2e2dd] p-4">
                   <p className="text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
-                    Always-on step — your evidence
+                    {copy.alwaysStep}
                   </p>
                   <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
-                    Whatever you install, keep proportionate proof: the live
-                    URL, approved wording, provider/deployer roles, owner,
-                    publication date and a rendered desktop/mobile check. The
-                    notice itself does not track visitors or create an evidence
-                    log.
+                    {copy.evidenceBody}
                   </p>
                 </div>
               </CardContent>
@@ -468,48 +434,37 @@ export default function Scanner() {
               <CardContent className="flex flex-col gap-5 pt-7 pb-7">
                 <div className="grid gap-3 sm:grid-cols-[1.3fr_1fr]">
                   <button
-                    onClick={() => navigate(CONVERT.report)}
+                    onClick={() => navigate(path(CONVERT.report))}
                     className="rounded border border-white/25 bg-white/10 p-4 text-left transition hover:bg-white/20"
                   >
                     <PackageCheck className="h-5 w-5 text-white" />
-                    <p className="mt-2 font-bold">
-                      This scan sees your website. The report sees your company
-                      — €99
-                    </p>
+                    <p className="mt-2 font-bold">{copy.assessmentTitle}</p>
                     <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      A specialist classifies every AI system you run, states
-                      your exact Article 50 duties and the evidence you must
-                      hold, and sends it with a professional contact assessment
-                      within {REPORT.delivery}. Full refund if it does not
-                      arrive →
+                      {copy.assessmentBody} →
                     </p>
                   </button>
                   <button
-                    onClick={() => navigate(CONVERT.badge)}
+                    onClick={() => navigate(path(CONVERT.badge))}
                     className="rounded border border-white/15 p-4 text-left transition hover:bg-white/5"
                   >
                     <PackageCheck className="h-5 w-5 text-[#4ade80]" />
-                    <p className="mt-2 font-bold">
-                      Add the AI-use notice — free
-                    </p>
+                    <p className="mt-2 font-bold">{copy.noticeTitle}</p>
                     <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      One script, no account, cookies or visitor tracking.
-                      Tailor the wording, publish, then read it as a visitor →
+                      {copy.noticeBody} →
                     </p>
                   </button>
                 </div>
                 <div className="border-t border-white/10 pt-5">
                   {leadDone ? (
                     <p className="flex items-center gap-2 text-sm font-semibold text-[#4ade80]">
-                      <CheckCircle2 className="h-4 w-4" /> Done — we'll send the
-                      plan and the install link.
+                      <CheckCircle2 className="h-4 w-4" /> {copy.leadDone}
                     </p>
                   ) : (
                     <div className="flex flex-col gap-2 sm:flex-row">
                       <Input
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        placeholder="Work email — get this plan + install link"
+                        placeholder={copy.emailPlaceholder}
                         autoComplete="email"
                         className="h-11 flex-1 rounded border-white/20 bg-white/10 px-5 text-white placeholder:text-white/40"
                       />
@@ -527,7 +482,7 @@ export default function Scanner() {
                         {lead.isPending ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
                         ) : (
-                          "Send my plan"
+                          copy.sendPlan
                         )}
                       </Button>
                     </div>
@@ -547,7 +502,7 @@ export default function Scanner() {
                       }}
                     >
                       <Copy className="mr-2 h-3.5 w-3.5" />{" "}
-                      {copied ? "Copied!" : "Copy report"}
+                      {copied ? copy.copied : copy.copyReport}
                     </Button>
                     <Button
                       variant="outline"
@@ -555,7 +510,7 @@ export default function Scanner() {
                       className="min-h-11 rounded border-white/25 bg-transparent text-white hover:bg-white/10"
                       onClick={downloadReport}
                     >
-                      <Download className="mr-2 h-3.5 w-3.5" /> Download .txt
+                      <Download className="mr-2 h-3.5 w-3.5" /> {copy.download}
                     </Button>
                   </div>
                 </div>
@@ -563,8 +518,7 @@ export default function Scanner() {
             </Card>
 
             <p className="text-center text-xs text-[#6b7280]">
-              Technical scan, not legal advice. Regulation (EU) 2024/1689, Art.
-              50 · fines up to €15M or 3% of global turnover (Art. 99).
+              {copy.disclaimer}
             </p>
           </div>
         )}

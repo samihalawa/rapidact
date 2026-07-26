@@ -40,7 +40,7 @@ export interface LeadResult {
   ok: boolean;
 }
 
-/** Intake for the paid AI Act Complete Pre-Consultory Report. */
+/** Intake for the paid EU AI Act Company Assessment. */
 export interface ReportRequestInput {
   company: string;
   website?: string;

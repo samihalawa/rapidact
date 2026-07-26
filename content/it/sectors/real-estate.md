@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in l'immobiliare, cosa sist
 
 L'home staging virtuale è il punto cieco del settore: sembra fotografia, si legge come realtà, e secondo l'Articolo 50 ha bisogno di un'etichetta come qualsiasi contenuto vicino al deepfake.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

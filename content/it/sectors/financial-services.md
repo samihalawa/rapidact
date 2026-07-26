@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in assicurazioni e finanza,
 
 Questo settore vive già sotto regole di condotta e doveri di registrazione — un registro delle prove delle disclosure si inserisce nella sua cultura. Sarà probabilmente tra i primi auditati.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

@@ -27,4 +27,4 @@ online stores are the biggest Article 50 target. What your shop must disclose by
 
 Shoppers don't read terms of service. The disclosure has to live where the shopping happens: above the chat, on the image, near the text.
 
-*Prefer it assessed properly? The [€99 pre-consultory report](/report) classifies every AI system you run and states exactly what each one requires.*
+*Prefer it assessed properly? The [€99 company assessment](/report) classifies every AI system you run and states exactly what each one requires.*

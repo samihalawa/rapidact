@@ -9,7 +9,7 @@ Eine öffentliche Signatur zeigt, dass dieser KI-Anbieter auf der Seite vorhande
 
 ## Warum dieses technische Signal geprüft werden sollte
 
-Fin, der KI-Agent, beantwortet Kundenfragen automatisch in einem Messenger, den Besucher wie einen Menschen behandeln. Dies ist ein technisches Signal, das nach Artikel 50(1) geprüft werden sollte, wenn Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind. Unsere Erkennungsdatenbank identifiziert Intercom / Fin AI Agent in Sekunden — Expositionslevel: **hoch** — und eine Behörde (oder ein Wettbewerber) kann dieselbe Prüfung durchführen.
+Fin, der KI-Agent, beantwortet Kundenfragen automatisch in einem Messenger, den Besucher wie einen Menschen behandeln. Dies ist ein technisches Signal, das nach Artikel 50(1) geprüft werden sollte, wenn Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind. Unsere Erkennungsdatenbank identifiziert Intercom / Fin AI Agent in Sekunden — Expositionslevel: **hoch**.
 
 ## Was Sie auf Ihrer Website prüfen müssen
 

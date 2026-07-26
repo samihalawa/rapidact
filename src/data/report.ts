@@ -1,5 +1,5 @@
 /**
- * Contents of the AI Act Complete Pre-Consultory Report, the paid deliverable.
+ * Contents of the EU AI Act Company Assessment, the paid deliverable.
  * Shared by the homepage offer section and the /report intake page so the promise
  * made on the landing page and the promise made at checkout can never drift apart.
  */
@@ -12,13 +12,13 @@ export interface ReportChapter {
 
 /** Short bullets, used in the checkout sidebar and CTA bands. */
 export const REPORT_DELIVERABLES = [
-  "Full written assessment of every AI system you operate, mapped to the exact EU AI Act articles that apply to it",
+  "A written inventory of the AI systems your company operates",
   "Risk classification per system: prohibited, high-risk, transparency-only, or out of scope",
-  "Your Article 50 transparency duties stated per touchpoint, not as generic advice",
-  "The exact disclosure wording for your case, and where each notice must appear",
-  "The documentation and evidence you are expected to produce on request",
-  "A prioritised action list with deadlines, separating what is urgent from what is not",
-  "A written assessment from the specialist who prepared it: their read on your situation and what to do next",
+  "Applicable Article 50 duties for each customer or employee touchpoint",
+  "Recommended disclosure wording and placement",
+  "The records and evidence your company should retain",
+  "A prioritised action plan with owners and deadlines",
+  "Follow-up questions with the specialist who prepared the assessment",
 ];
 
 /** Long-form chapters, used on the homepage offer section. */
@@ -26,32 +26,32 @@ export const REPORT_CHAPTERS: ReportChapter[] = [
   {
     n: "01",
     title: "Your AI inventory",
-    text: "Every AI system you actually run, written down in one place: the chatbot, the generated copy, the voice agent, the scoring model, and the tools your team adopted without telling anyone. Most companies have never seen this list.",
+    text: "A single inventory of the AI systems your company operates, including customer-facing tools, internal systems and third-party services.",
   },
   {
     n: "02",
     title: "Risk classification per system",
-    text: "Each system placed in its real category: prohibited, high-risk under Annex III, transparency-only under Article 50, or out of scope. This is the answer that determines everything else, and the one most companies get wrong.",
+    text: "Each system mapped to its relevant category: prohibited, high-risk under Annex III, transparency-only under Article 50, or out of scope.",
   },
   {
     n: "03",
     title: "What you must disclose, exactly",
-    text: "Per touchpoint: what has to be said, where it has to appear, at what moment, and in which languages. Including the disclosure wording, written for your systems rather than copied from a template.",
+    text: "For each relevant touchpoint: what to disclose, where to place the notice, when people must see it and which languages to use.",
   },
   {
     n: "04",
     title: "Your evidence position",
-    text: "What a regulator, an enterprise client or an insurer can ask you to produce, what you can produce today, and the specific gap between those two. Documentation duties are where most exposure hides.",
+    text: "The records a regulator, enterprise client or insurer may request, the evidence available today and the gaps to close.",
   },
   {
     n: "05",
     title: "Prioritised action plan",
-    text: "Everything you need to do, ordered by deadline and severity, with the items that are genuinely urgent separated from the items being sold to you as urgent.",
+    text: "Required actions ordered by urgency and impact, with clear owners, dependencies and target dates.",
   },
   {
     n: "06",
-    title: "Professional contact assessment",
-    text: "A named specialist's direct read on your situation: where you stand, what we would do first, what needs a lawyer and what does not. You can reply to it and reach a human.",
+    title: "Specialist review",
+    text: "A named specialist's conclusion on your current position, the first action to take and any point that should be referred to legal counsel.",
   },
 ];
 
@@ -59,31 +59,31 @@ export const REPORT_CHAPTERS: ReportChapter[] = [
 export const REPORT_FAQS = [
   {
     q: "What exactly am I paying €99 for?",
-    a: "A complete written assessment of your company's position under the EU AI Act, prepared for your specific systems, together with a direct assessment from the specialist who wrote it. It works like a law firm's pre-consultation fee: you pay to have your case properly looked at, and you get a document you can act on, forward to your board, or hand to a lawyer. It is not a template and not an automatically generated PDF.",
+    a: "A company-specific written assessment: AI inventory, risk classification, Article 50 duties, disclosure wording, evidence gaps and a prioritised action plan. A specialist reviews it before delivery. It is not a generic template.",
   },
   {
     q: "How do I know it will actually arrive?",
-    a: "Because you get it within 24–48 hours or your money back in full, no questions asked. You are paying a UK-registered company whose number you can check on the public Companies House register from a link in the footer, at an address and phone number published on this site. You receive a receipt and a reference code the moment you pay, and the report comes from a person whose email you can reply to. If the deadline passes with nothing in your inbox, one reply gets you refunded.",
+    a: "You receive a payment reference and receipt. The assessment is delivered to your work email within 24–48 hours. If it does not arrive in that window, reply to the receipt for a full refund. The seller's registered company details are published and linked to Companies House.",
   },
   {
-    q: "We're a large company with a legal team. Is this useful to us?",
-    a: "Usually more so, because the gap is wider. Legal teams know the regulation; what they typically lack is a written inventory of which AI systems the business actually runs and how each one classifies. That mapping is what the report delivers, in a form your counsel can work from directly.",
+    q: "Can our legal team use it?",
+    a: "Yes. The assessment gives counsel a structured inventory, system classifications, evidence gaps and implementation questions they can review directly.",
   },
   {
-    q: "We're tiny. Do we even need this?",
-    a: "Article 50 triggers on what your AI does, not on how big you are. A five-person shop with an AI chatbot on its checkout page carries the same disclosure duty as an enterprise. Penalty calculations consider scale; the obligations themselves do not. If it turns out you have little exposure, the report says so plainly, and that answer in writing is worth having.",
+    q: "Does company size matter?",
+    a: "The applicable duty depends primarily on what each system does and your role. Company size is relevant to proportionality and penalties. If your exposure is limited, the assessment states that clearly.",
   },
   {
     q: "Is this legal advice?",
-    a: "No, and we will not pretend otherwise. RapidAct produces technical and organisational compliance assessments. Where your situation genuinely needs a legal opinion, the report says so and tells you precisely what to bring to counsel, which makes that conversation shorter and cheaper.",
+    a: "No. RapidAct provides a technical and organisational assessment. Where a legal opinion is needed, the document identifies the question and the evidence to take to counsel.",
   },
   {
     q: "Didn't the EU delay the AI Act to 2027?",
-    a: "That was the high-risk rulebook. Annex III moved to December 2027 and Annex I to August 2028. The Article 50 transparency obligations were deliberately left on schedule and apply from 2 August 2026. This 'two-clock' misreading is the most common and most expensive mistake we see right now.",
+    a: "The revised timeline moved parts of the high-risk framework. Article 50 transparency duties still apply from 2 August 2026. A limited transition applies to some provider-side machine-readable marking duties for systems already on the market; it is not a general Article 50 delay.",
   },
   {
     q: "What happens after I get the report?",
-    a: "Whatever you want. Many companies act on the list themselves, since the free scanner and the self-install disclosure layer on this site cover the technical part at no cost. Others reply to the assessment and have us handle the implementation. There is no subscription and no obligation either way.",
+    a: "Use the action plan internally, send it to counsel, or ask RapidAct to support implementation. There is no subscription or follow-on obligation.",
   },
   {
     q: "What data do you need, and what do you do with it?",

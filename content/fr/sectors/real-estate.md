@@ -27,4 +27,4 @@ Le guide en français clair — ce qui déclenche la loi dans l'immobilier, quoi
 
 Le home staging virtuel est l'angle mort du secteur : ça ressemble à de la photographie, ça se lit comme la réalité, et selon l'Article 50 ça nécessite une étiquette comme tout contenu proche du deepfake.
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

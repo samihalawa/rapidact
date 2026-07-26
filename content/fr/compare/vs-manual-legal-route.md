@@ -5,7 +5,7 @@ lang: fr
 ---
 # RapidAct vs embaucher un avocat ou un consultant
 
-**RapidAct et le conseil juridique remplissent des fonctions différentes. RapidAct propose un scan public et un badge gratuits, ainsi que une évaluation technique préconsultative à 99 €. Un avocat fournit des avis juridiques, la confidentialité et la représentation.**
+**RapidAct et le conseil juridique remplissent des fonctions différentes. RapidAct propose un scan public et un badge gratuits, ainsi que une évaluation technique de l’entreprise à 99 €. Un avocat fournit des avis juridiques, la confidentialité et la représentation.**
 
 | | RapidAct | Avocat ou conseil juridique |
 |---|---|---|

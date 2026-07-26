@@ -27,4 +27,4 @@ Le guide en français clair — ce qui déclenche la loi dans les cliniques et l
 
 La transparence (Article 50) est le plancher. Si un bot commence à conseiller sur le traitement, vous dérivez vers le territoire haut risque — c'est un régime différent et plus grand qui mérite un avocat.
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

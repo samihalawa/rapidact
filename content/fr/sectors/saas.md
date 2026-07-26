@@ -27,4 +27,4 @@ Le guide en français clair — ce qui déclenche la loi dans le saas et la tech
 
 Deux faces de la même pièce : votre site est la solution facile et gratuite — et l'UX IA de votre produit a besoin d'un modèle de divulgation que vos clients copieront de vous.
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

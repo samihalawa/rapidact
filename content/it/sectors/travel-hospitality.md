@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in viaggi e ospitalità, co
 
 La voce è il canale che tutti dimenticano: se un'IA risponde alla tua linea telefonica naturalmente, l'Articolo 50(1) si applica esattamente come alla chat web.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

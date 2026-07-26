@@ -1,6 +1,6 @@
 ---
 title: "Specimen assessment: Meridian Retail Group"
-description: "A complete specimen of the AI Act Complete Pre-Consultory Report, published so you can read the format and depth before buying."
+description: "A complete specimen of the EU AI Act Company Assessment, published so you can read the format and depth before buying."
 subject: "Meridian Retail Group"
 subjectNote: "Illustrative mid-size EU e-commerce retailer, 180 staff, sells in 6 EU markets"
 ref: "SPECIMEN"
@@ -10,7 +10,7 @@ updated: "2026-07-26"
 
 ## 01. Your AI inventory
 
-Every AI system the company operates, written down in one place. Most companies have never seen this list, and it is common for the item carrying the most exposure to be one nobody thought of as AI.
+A single inventory of the AI systems the company operates, including customer-facing tools, internal systems and third-party services.
 
 | System | Where it runs | Vendor | Classification |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@ CV screening is the system carrying the most exposure. Recruitment and applicant
 
 The internal code assistant is out of scope. It does not touch external users and does not produce content published to the public. It is listed for completeness, because an inventory that omits systems is not an inventory.
 
-> **The two clocks.** Article 50 transparency duties apply from 2 August 2026. The Annex III high-risk obligations that catch your CV screening were postponed to December 2027. Both apply to this company; they simply do not start together. Treating the postponement as covering everything is the most expensive misreading we encounter.
+> **Two implementation dates.** Article 50 transparency duties apply from 2 August 2026. The Annex III high-risk obligations relevant to CV screening begin later. Both apply to this company, but they require separate implementation plans.
 
 ## 03. What you must disclose, where, and in what words
 
@@ -47,17 +47,17 @@ Because Meridian sells into six EU markets, each disclosure must be present in t
 
 ## 04. Your evidence position
 
-The duty is not only to disclose but to be able to demonstrate that you disclosed. A regulator, an enterprise customer running vendor due diligence, or an insurer assessing a claim can each ask you to show what was displayed, on which pages, and from what date.
+Article 50 requires the relevant disclosure outcome. A dated implementation record also helps the company show what was displayed, on which pages and from what date during regulatory, client or insurer reviews.
 
-As described, Meridian can currently produce screenshots taken on the day of the request. That evidences the present, not the period under question, and is the single most common gap we find. What is needed is a dated record of disclosure events that predates the question being asked.
+Meridian can currently produce screenshots taken on the day of a request. That proves the current rendered state, not earlier availability. A proportionate record should therefore begin when the disclosure is published and be updated after material changes.
 
 For the high-risk CV screening system the standard is considerably higher, extending to logs of system operation, documentation of the human oversight actually exercised, and records of the data used. If the ATS vendor holds these, you need a contractual route to obtain them, because the obligation sits with you as the deployer and cannot be delegated by silence.
 
-> **Practical consequence.** Evidence is cheap to start and impossible to backfill. A log begun today covers the period from today. A log begun when the question arrives covers nothing that matters.
+> **Practical consequence.** Start the implementation record when the disclosure is published. Later screenshots cannot demonstrate an earlier rendered state.
 
 ## 05. Prioritised actions
 
-Ordered by deadline and severity, separating what is genuinely urgent from what is merely being sold as urgent.
+Ordered by deadline, impact and implementation lead time.
 
 | # | Action | Owner | Deadline |
 | --- | --- | --- | --- |

@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in il saas e la tech, cosa 
 
 Due facce della stessa medaglia: il tuo sito è la soluzione facile e gratuita — e l'UX IA del tuo prodotto ha bisogno di un modello di disclosure che i tuoi clienti copieranno da te.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

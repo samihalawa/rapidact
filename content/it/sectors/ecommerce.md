@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in l'e-commerce, cosa siste
 
 Gli acquirenti non leggono i termini di servizio. La disclosure deve vivere dove avviene l'acquisto: sopra la chat, sull'immagine, vicino al testo.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

@@ -53,18 +53,18 @@ const en: HomeCopy = {
     `Applies from 2 August 2026, in ${days} day${days === 1 ? "" : "s"}`,
   statusLive: "In force since 2 August 2026",
   heroDisclaimer:
-    "RapidAct produces technical and organisational compliance assessments. It is not a law firm, and the report is not legal advice. Where a question genuinely requires a legal opinion, the report says so and tells you what to put in front of counsel.",
+    "Technical and organisational assessment, not legal advice. Any point requiring a legal opinion is identified for counsel.",
   prepared:
     "Prepared for your company specifically. Delivered as a written document to the address you give us, within 24–48h of payment.",
   chapters: REPORT_CHAPTERS,
   trustCommitment: "Delivered within 24–48h of payment, or refunded in full.",
   procedureLabel: "Procedure",
-  procedureTitle: "What happens after you pay",
+  procedureTitle: "From intake to action plan",
   stepLabel: "Step",
   steps: [
     {
       title: "You describe your company",
-      text: "A short form covers your business, sector, size, operating countries and the AI you know you use. If you are unsure what counts as AI, say so; establishing that is part of the work.",
+      text: "Add your business, sector, operating countries and known AI systems. Uncertain or missing systems are part of the review.",
     },
     {
       title: "We assess your case",
@@ -72,14 +72,14 @@ const en: HomeCopy = {
     },
     {
       title: "You receive the written assessment within 24–48h",
-      text: "You receive a document you can act on, forward to your board or hand to counsel, plus the specialist's direct assessment. If it misses the window, you are refunded in full.",
+      text: "Receive the inventory, classifications and prioritised action plan. If delivery misses the window, the fee is refunded in full.",
     },
   ],
   delayTitle: "On the reports that the AI Act was delayed",
   delayText:
     "The postponement covered the high-risk rulebook: Annex III obligations moved to December 2027 and Annex I to August 2028. Article 50 transparency obligations remain on schedule from 2 August 2026. The assessment establishes which timetable and duty applies to each system.",
   specialistBio:
-    "I build and ship AI systems for a living, so this assessment is written by someone who can read your stack as well as the regulation. When a question turns on law rather than implementation, the report says so plainly and tells you what to take to counsel.",
+    "I design and deploy AI systems, so the assessment connects the regulation to the technology your company operates. Legal questions are isolated and prepared for counsel.",
   specialistQuestions: "Questions before you buy:",
   specialistReply:
     "Replies normally come the same working day, and always inside the 24–48h report window.",
@@ -96,7 +96,7 @@ const en: HomeCopy = {
   deliverables: REPORT_DELIVERABLES,
   facts: [
     ["Delivery", "Within 24–48h of payment"],
-    ["If we miss it", "Refunded in full, on request"],
+    ["If we miss it", "Refunded in full"],
     ["Payment handled by", "bunq. Card details never reach us"],
   ],
   freeLabel: "Free, with or without an assessment",
@@ -115,7 +115,7 @@ const en: HomeCopy = {
   invoice:
     "An invoice is issued for every payment by Agents AI Ltd. RapidAct is not a law firm and the report is not legal advice.",
   featuresLabel: "Free tools",
-  featuresTitle: "The implementation tools cost nothing",
+  featuresTitle: "Publish and verify the visitor notice",
   featuresIntro:
     "Scan a public page and install the visitor disclosure whether or not you buy an assessment.",
   features: [
@@ -141,7 +141,7 @@ const en: HomeCopy = {
     },
     {
       title: "Implementation guides",
-      text: "Specific steps for each platform, written without legal or technical jargon.",
+      text: "Specific installation and verification steps for each supported platform.",
     },
   ],
   featuresClose:
@@ -189,8 +189,8 @@ const es: HomeCopy = {
     },
     {
       n: "06",
-      title: "Valoración profesional directa",
-      text: "La lectura personal del especialista: dónde estás, qué haríamos primero y qué requiere abogado.",
+      title: "Revisión del especialista",
+      text: "Conclusión sobre tu posición, la primera acción y cualquier cuestión para asesoría jurídica.",
     },
   ],
   trustCommitment: "Entrega en 24–48 h desde el pago o reembolso íntegro.",
@@ -365,8 +365,8 @@ const de: HomeCopy = {
     },
     {
       n: "06",
-      title: "Persönliche Facheinschätzung",
-      text: "Direkte Einschätzung des Spezialisten und klare nächste Schritte.",
+      title: "Prüfung durch den Spezialisten",
+      text: "Fazit, erste Maßnahme und alle Fragen für die Rechtsberatung.",
     },
   ],
   trustCommitment:
@@ -543,8 +543,8 @@ const fr: HomeCopy = {
     },
     {
       n: "06",
-      title: "Avis professionnel direct",
-      text: "Lecture personnelle du spécialiste et prochaines étapes.",
+      title: "Vérification du spécialiste",
+      text: "Conclusion, première action et questions à soumettre au conseil juridique.",
     },
   ],
   trustCommitment: "Livré sous 24–48 h ou remboursé intégralement.",
@@ -606,7 +606,7 @@ const fr: HomeCopy = {
     },
     {
       title: "Avis clair sur l’usage de l’IA",
-      text: "Information sobre et visible pour toutes les plateformes. Un script, sans compte ni plugin.",
+      text: "Information claire et visible pour toutes les plateformes. Un script, sans compte ni plugin.",
       cta: "Ajouter l’avis",
     },
   ],
@@ -720,8 +720,8 @@ const it: HomeCopy = {
     },
     {
       n: "06",
-      title: "Valutazione professionale diretta",
-      text: "Lettura personale dello specialista e prossimi passi.",
+      title: "Verifica dello specialista",
+      text: "Conclusione, prima azione e domande da sottoporre al consulente legale.",
     },
   ],
   trustCommitment: "Consegna entro 24–48 ore o rimborso completo.",

@@ -27,4 +27,4 @@ Le guide en français clair — ce qui déclenche la loi dans les voyages et l'h
 
 La voix est le canal que tout le monde oublie : si une IA répond à votre ligne téléphonique naturellement, l'Article 50(1) s'applique exactement comme au chat web.
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

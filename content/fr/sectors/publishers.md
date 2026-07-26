@@ -27,4 +27,4 @@ Le guide en français clair — ce qui déclenche la loi dans les médias et éd
 
 L'exemption «un humain a relu» est la phrase la plus abusée de la loi. Sans trace documentée de révision — qui a relu, quoi a changé, quand — l'exemption n'existe pas.
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

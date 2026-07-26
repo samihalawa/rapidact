@@ -5,7 +5,7 @@ lang: es
 ---
 # RapidAct vs contratar un abogado o consultor
 
-**RapidAct y el asesoramiento jurídico hacen trabajos distintos. RapidAct ofrece un escaneo público y una insignia gratuitos, además de una evaluación técnica preconsultiva de 99 €. Un abogado ofrece opiniones jurídicas, privilegio y representación.**
+**RapidAct y el asesoramiento jurídico hacen trabajos distintos. RapidAct ofrece un escaneo público y una insignia gratuitos, además de una evaluación técnica de empresa de 99 €. Un abogado ofrece opiniones jurídicas, privilegio y representación.**
 
 | | RapidAct | Abogado o consultor jurídico |
 |---|---|---|

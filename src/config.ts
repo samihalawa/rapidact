@@ -1,10 +1,9 @@
 /**
  * Conversion destinations — the only file to edit when the offer or payment link changes.
  *
- * The product is the **AI Act Complete Pre-Consultory Report**: the company tells us
- * about their business and AI usage, pays a flat fee, and receives a full written
- * assessment plus a professional contact assessment in their inbox within 24–48h.
- * (Same model as a law firm's pre-consultation fee — you pay to have your case looked at.)
+ * The product is the **EU AI Act Company Assessment**: the company tells us
+ * about its business and AI usage, pays a flat fee, and receives a written
+ * assessment with system classifications and a prioritised action plan within 24–48h.
  *
  * Payment runs through a bunq.me request link. bunq.me accepts `amount` and
  * `description` query params, so each payment carries the buyer's reference code and
@@ -13,7 +12,7 @@
 
 export const REPORT = {
   /** Product name — also what the buyer sees in their bunq payment screen. */
-  name: "AI Act Complete Pre-Consultory Report",
+  name: "EU AI Act Company Assessment",
   price: 99,
   currency: "EUR",
   priceLabel: "€99",
@@ -43,7 +42,7 @@ export const CONVERT = {
  * Build the bunq.me payment URL for a report purchase.
  *
  * Produces e.g.
- *   https://bunq.me/oulang?description=AI+Act+Complete+Pre-Consultory+Report+REF+K3F9QP&amount=99
+ *   https://bunq.me/oulang?description=EU+AI+Act+Company+Assessment+REF+K3F9QP&amount=99
  *
  * The description stays ASCII-only — payment descriptions get passed through bank
  * rails that are not reliably UTF-8 clean, and the ref must survive that trip intact.

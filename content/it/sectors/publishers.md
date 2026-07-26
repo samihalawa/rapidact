@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in editori e media, cosa si
 
 L'esenzione «un umano l'ha revisionato» è la frase più abusata della legge. Senza una traccia documentata di revisione — chi ha revisionato, cosa è cambiato, quando — l'esenzione non esiste.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

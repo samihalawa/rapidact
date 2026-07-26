@@ -9,7 +9,7 @@ Eine öffentliche Signatur zeigt, dass dieser KI-Anbieter auf der Seite vorhande
 
 ## Warum dieses technische Signal geprüft werden sollte
 
-Dessen KI-Funktionen automatisch mit Ihren Website-Besuchern interagieren. Dies ist ein technisches Signal, das nach Artikel 50(1) geprüft werden sollte, wenn Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind. Unsere Erkennungsdatenbank identifiziert Tars Chatbots in Sekunden — Expositionslevel: **mittel** — und eine Behörde (oder ein Wettbewerber) kann dieselbe Prüfung durchführen.
+Dessen KI-Funktionen automatisch mit Ihren Website-Besuchern interagieren. Dies ist ein technisches Signal, das nach Artikel 50(1) geprüft werden sollte, wenn Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind. Unsere Erkennungsdatenbank identifiziert Tars Chatbots in Sekunden — Expositionslevel: **mittel**.
 
 ## Was Sie auf Ihrer Website prüfen müssen
 

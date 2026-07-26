@@ -6,79 +6,77 @@ import {
   COMPANIES_HOUSE_URL,
   HAS_ENTITY_DETAILS,
 } from "@/data/company";
+import { useI18n } from "@/lib/i18n";
 
 /** Shared conversion band used on every SEO page. */
 export default function CtaBand() {
   const navigate = useNavigate();
+  const { path, t } = useI18n();
+  const contents = [
+    "cta.item1",
+    "cta.item2",
+    "cta.item3",
+    "cta.item4",
+    "cta.item5",
+    "cta.item6",
+  ];
   return (
     <div className="hairline mt-12 border bg-white">
       <div className="hairline grid border-b lg:grid-cols-[1.1fr_1fr]">
         <div className="hairline border-b p-7 lg:border-r lg:border-b-0">
-          <p className="eyebrow">Assessment</p>
+          <p className="eyebrow">{t("cta.label")}</p>
           <p className="ink mt-2 text-[19px] leading-snug font-semibold">
             {REPORT.name}
           </p>
           <p className="ink mt-4 text-[34px] leading-none font-bold">€99</p>
-          <p className="ink-soft mt-1.5 text-[13px]">
-            Charged once, per company.
-          </p>
+          <p className="ink-soft mt-1.5 text-[13px]">{t("cta.once")}</p>
           <p className="ink-soft mt-4 text-[15px] leading-relaxed">
-            Tell us what your company runs. A specialist classifies every AI
-            system against the regulation and sets out what you must publish and
-            document. Delivered within {REPORT.delivery}, or refunded in full.
+            {t("cta.body")}
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-4">
             <Button
               className="rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
-              onClick={() => navigate(CONVERT.report)}
+              onClick={() => navigate(path(CONVERT.report))}
             >
-              Request the assessment
+              {t("cta.primary")}
             </Button>
             <button
-              onClick={() => navigate(CONVERT.example)}
+              onClick={() => navigate(path(CONVERT.example))}
               className="accent min-h-11 text-[14px] font-semibold underline underline-offset-2"
             >
-              Read a specimen first
+              {t("cta.secondary")}
             </button>
           </div>
         </div>
 
         <div className="p-7">
-          <p className="eyebrow">Contents</p>
+          <p className="eyebrow">{t("cta.contents")}</p>
           <ul className="mt-3 space-y-2">
-            {[
-              "Every AI system you operate, listed and classified",
-              "Your Article 50 duties, stated per touchpoint",
-              "The disclosure wording, and where it must appear",
-              "The documentation you must be able to produce",
-              "A prioritised action list with deadlines",
-              "A direct assessment from the person who prepared it",
-            ].map(f => (
+            {contents.map(key => (
               <li
-                key={f}
+                key={key}
                 className="ink-soft flex gap-3 text-[14px] leading-relaxed"
               >
                 <span className="mono shrink-0 pt-0.5 text-[11px]">&bull;</span>
-                {f}
+                {t(key)}
               </li>
             ))}
           </ul>
           <p className="ink-soft mt-4 text-[13px] leading-relaxed">
-            The{" "}
+            {t("cta.freeLead")}{" "}
             <button
-              onClick={() => navigate(CONVERT.scanner)}
+              onClick={() => navigate(path(CONVERT.scanner))}
               className="accent underline underline-offset-2"
             >
-              website scanner
+              {t("cta.scan")}
             </button>{" "}
-            and the{" "}
+            · {t("cta.badgeLead")}{" "}
             <button
-              onClick={() => navigate(CONVERT.badge)}
+              onClick={() => navigate(path(CONVERT.badge))}
               className="accent underline underline-offset-2"
             >
-              clear AI-use notice
+              {t("cta.badge")}
             </button>{" "}
-            are free, with or without an assessment.
           </p>
         </div>
       </div>

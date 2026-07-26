@@ -51,8 +51,8 @@ export default function PlatformPage() {
 
         <section className="mt-10 rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
           <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
-            <ScanSearch className="h-5 w-5 text-[#1f3a5f]" /> First: know what
-            you're running
+            <ScanSearch className="h-5 w-5 text-[#1f3a5f]" /> Confirm the tool
+            and its role
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">
             {guide.detectionNote}
@@ -71,8 +71,8 @@ export default function PlatformPage() {
 
         <section className="mt-10">
           <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
-            <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Install it free on{" "}
-            {guide.name}
+            <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Install the notice
+            on {guide.name}
           </h2>
           <ol className="mt-4 space-y-3">
             {guide.freeInstall.map((s, i) => (
@@ -95,9 +95,9 @@ export default function PlatformPage() {
           </Link>
           <p className="mt-4 flex items-start gap-2 text-sm text-[#5c6370]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />
-            Not sure this is even the right fix for your case? The €99
-            pre-consultory report tells you which of your AI systems the Act
-            actually covers, on {guide.name} and everywhere else you operate.
+            Need to confirm which systems and duties apply? The €99 company
+            assessment covers {guide.name} and the other AI systems your
+            organisation operates.
           </p>
         </section>
 

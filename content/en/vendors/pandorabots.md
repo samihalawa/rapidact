@@ -9,7 +9,7 @@ A public signature shows that this AI vendor is present on the page. That is a t
 
 ## Why this technical signal deserves review
 
-Its AIML-based chatbots power custom conversational agents. This is a technical signal worth reviewing under Article 50(1) if you are the provider responsible for the direct-interaction notice. Our detection database fingerprints Pandorabots on a page in seconds — exposure level: **medium** — and a regulator (or a competitor) can run the same check.
+Its AIML-based chatbots power custom conversational agents. This is a technical signal worth reviewing under Article 50(1) if you are the provider responsible for the direct-interaction notice. Our detection database fingerprints Pandorabots on a page in seconds — exposure level: **medium**.
 
 ## What to verify on your site
 
@@ -30,4 +30,4 @@ Its AIML-based chatbots power custom conversational agents. This is a technical 
 - Assuming the vendor or site owner always holds the duty — establish the provider and deployer roles.
 - Waiting for the "2027 delay" — that was the high-risk rulebook, not Article 50. [What actually got delayed →](/answers/digital-omnibus-ai-act-delay)
 
-*Not sure which duties actually apply to your company? The [€99 pre-consultory report](/report) tells you exactly — in your inbox within 24–48h.*
+*Not sure which duties actually apply to your company? The [€99 company assessment](/report) tells you exactly — in your inbox within 24–48h.*

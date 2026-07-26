@@ -5,7 +5,7 @@ lang: it
 ---
 # RapidAct vs assumere un avvocato o consulente
 
-**RapidAct e la consulenza legale svolgono compiti diversi. RapidAct offre uno scan pubblico e un badge gratuiti, oltre a una valutazione tecnica preconsultiva da 99 €. Un avvocato fornisce pareri legali, riservatezza e rappresentanza.**
+**RapidAct e la consulenza legale svolgono compiti diversi. RapidAct offre uno scan pubblico e un badge gratuiti, oltre a una valutazione tecnica aziendale da 99 €. Un avvocato fornisce pareri legali, riservatezza e rappresentanza.**
 
 | | RapidAct | Avvocato o consulente legale |
 |---|---|---|

@@ -17,23 +17,22 @@ export default function Terms() {
             </h2>
             <p className="mt-2">
               RapidAct provides a public website scanner, a configurable
-              one-script AI-use notice, educational guides and a paid
-              written pre-consultory assessment. The scanner detects public
-              technical signals; it does not classify every AI system or
-              determine legal responsibility.
+              one-script AI-use notice, educational guides and a paid written
+              company assessment. The scanner detects public technical signals;
+              it does not classify every AI system or determine legal
+              responsibility.
             </p>
           </section>
           <section>
             <h2 className="text-lg font-bold text-[#16181d]">
-              2. Not legal advice — ever
+              2. Scope of the service
             </h2>
             <p className="mt-2">
-              RapidAct is not a law firm and provides no legal advice. Our tools
-              implement and document specific technical duties under Regulation
-              (EU) 2024/1689 Article 50. Compliance with your full legal
-              obligations remains your responsibility. No use of RapidAct
-              creates a lawyer-client relationship, and "compliant" claims made
-              by any tool — ours included — should be treated with scepticism.
+              RapidAct provides technical and organisational assessments, not
+              legal advice. Our tools support specific transparency steps under
+              Regulation (EU) 2024/1689 Article 50. Your organisation remains
+              responsible for its legal obligations, and using RapidAct does not
+              create a lawyer-client relationship.
             </p>
           </section>
           <section>

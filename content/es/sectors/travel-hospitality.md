@@ -27,4 +27,4 @@ Esta es la guía en español claro — qué activa la ley en viajes y hostelerí
 
 La voz es el canal que todos olvidan: si una IA contesta tu línea telefónica con naturalidad, el Artículo 50(1) aplica exactamente igual que al chat web.
 
-*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*
+*El [evaluación de empresa de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

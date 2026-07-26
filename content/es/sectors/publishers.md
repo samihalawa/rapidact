@@ -27,4 +27,4 @@ Esta es la guía en español claro — qué activa la ley en medios y editores, 
 
 La exención de «un humano lo revisó» es la frase más abusada de la Ley. Sin un rastro documentado de revisión — quién revisó, qué cambió, cuándo — la exención no existe.
 
-*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*
+*El [evaluación de empresa de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

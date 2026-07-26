@@ -27,4 +27,4 @@ La guida in italiano chiaro — cosa attiva la legge in le agenzie digitali, cos
 
 Le agenzie che integrano la disclosure nella consegna smettono di spegnere incendi e iniziano a venderla come linea di retainer — compliance come servizio, per cliente, al mese.
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

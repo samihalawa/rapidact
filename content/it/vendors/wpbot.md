@@ -9,7 +9,7 @@ Una firma pubblica mostra che questo fornitore IA è presente nella pagina. È u
 
 ## Perché questo segnale tecnico merita una verifica
 
-Le sue funzioni di IA interagiscono automaticamente con i visitatori del tuo sito. È un segnale tecnico da esaminare ai sensi dell Articolo 50(1) se sei il fornitore responsabile della comunicazione alla prima interazione. Il nostro database di rilevamento identifica WPBot / ChatBot for WordPress in una pagina in pochi secondi — livello di esposizione: **alto** — e un regolatore (o un concorrente) può fare lo stesso controllo.
+Le sue funzioni di IA interagiscono automaticamente con i visitatori del tuo sito. È un segnale tecnico da esaminare ai sensi dell Articolo 50(1) se sei il fornitore responsabile della comunicazione alla prima interazione. Il nostro database di rilevamento identifica WPBot / ChatBot for WordPress in una pagina in pochi secondi — livello di esposizione: **alto**.
 
 ## Cosa verificare sul tuo sito
 
@@ -30,4 +30,4 @@ Le sue funzioni di IA interagiscono automaticamente con i visitatori del tuo sit
 - Non presumere che il fornitore tecnico o il titolare del sito abbia sempre tale obbligo; vanno stabiliti i ruoli di fornitore e deployer.
 - Aspettare il «rinvio del 2027» — riguardava le regole ad alto rischio, non l'Articolo 50. [Cosa è stato davvero rinviato →](/answers/digital-omnibus-ai-act-delay)
 
-*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*
+*Il [valutazione aziendale da 99 €](/report) classifica i sistemi IA dell’azienda e arriva via e-mail entro 24–48 ore.*

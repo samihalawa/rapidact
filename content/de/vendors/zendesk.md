@@ -9,7 +9,7 @@ Eine öffentliche Signatur zeigt, dass dieser KI-Anbieter auf der Seite vorhande
 
 ## Warum dieses technische Signal geprüft werden sollte
 
-Die AI Agents und der Answer Bot lösen Tickets und chatten mit Besuchern, bevor ein Mensch übernimmt. Dies ist ein technisches Signal, das nach Artikel 50(1) geprüft werden sollte, wenn Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind. Unsere Erkennungsdatenbank identifiziert Zendesk Messaging / AI Agents in Sekunden — Expositionslevel: **hoch** — und eine Behörde (oder ein Wettbewerber) kann dieselbe Prüfung durchführen.
+Die AI Agents und der Answer Bot lösen Tickets und chatten mit Besuchern, bevor ein Mensch übernimmt. Dies ist ein technisches Signal, das nach Artikel 50(1) geprüft werden sollte, wenn Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind. Unsere Erkennungsdatenbank identifiziert Zendesk Messaging / AI Agents in Sekunden — Expositionslevel: **hoch**.
 
 ## Was Sie auf Ihrer Website prüfen müssen
 

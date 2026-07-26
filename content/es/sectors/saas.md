@@ -27,4 +27,4 @@ Esta es la guía en español claro — qué activa la ley en saas y tecnología,
 
 Dos caras de la misma moneda: tu web es la solución fácil y gratis — y la UX de IA de tu producto necesita un patrón de disclosure que tus clientes copiarán de ti.
 
-*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*
+*El [evaluación de empresa de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

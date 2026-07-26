@@ -17,16 +17,19 @@ import {
   Video,
 } from "lucide-react";
 import { track } from "@/lib/analytics";
+import { useI18n } from "@/lib/i18n";
+import { GUIDE_COPY } from "@/data/localizedGuide";
 
 const reqIcons = [MessagesSquare, Tags, Video, FileClock];
-const INSTALL_SNIPPET =
-  '<script defer src="https://rapidact.eu/rapidact-badge.js" data-message="This site uses an AI assistant. You are interacting with an AI system, not a person." data-position="right"></script>';
 
 export default function Guide() {
   const [copied, setCopied] = useState(false);
+  const { lang, path } = useI18n();
+  const copy = GUIDE_COPY[lang];
+  const installSnippet = `<script defer src="https://rapidact.eu/rapidact-badge.js" data-message="${copy.noticeMessage}" data-position="right"></script>`;
 
   const copySnippet = async () => {
-    await navigator.clipboard.writeText(INSTALL_SNIPPET);
+    await navigator.clipboard.writeText(installSnippet);
     track("badge_installer_copy", { installer: "script" });
     setCopied(true);
     window.setTimeout(() => setCopied(false), 2000);
@@ -34,21 +37,14 @@ export default function Guide() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Seo
-        title="EU AI Act Article 50 in plain English — what your website must do by 2 Aug 2026 | RapidAct"
-        description="Article 50 explained without legal jargon: chatbot AI disclosure, AI content labels, deepfake labeling and evidence — who it applies to, deadlines, fines, and how to comply free."
-      />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <h1 className="text-3xl font-bold tracking-tight text-[#16181d] sm:text-5xl">
-          Article 50 of the EU AI Act, in plain English
+          {copy.title}
         </h1>
         <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">
-          From <strong>2 August 2026</strong>, Article 50 introduces
-          transparency duties for providers and deployers of certain AI systems.
-          The exact duty depends on what the system does and on your role. The
-          practical starting point is simple: identify the system, decide who
-          holds the duty, and give people the right notice at the right moment.
+          {copy.intro}
         </p>
 
         <section
@@ -60,17 +56,12 @@ export default function Guide() {
               <Code2 className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
-              <p className="eyebrow">Visitor-facing AI notice</p>
+              <p className="eyebrow">{copy.installLabel}</p>
               <h2 className="mt-1 text-2xl font-bold tracking-tight text-[#16181d]">
-                Publish a clear AI-use notice in one paste
+                {copy.installTitle}
               </h2>
               <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-[#5c6370]">
-                No account, plugin or build step. Paste the line into your
-                site-wide custom code, then change{" "}
-                <code className="mono text-[13px] text-[#16181d]">
-                  data-message
-                </code>{" "}
-                so it says exactly how visitors encounter AI.
+                {copy.installBody}
               </p>
             </div>
           </div>
@@ -92,13 +83,13 @@ export default function Guide() {
                 </p>
               </div>
             </div>
-            <span className="eyebrow shrink-0">Live preview</span>
+            <span className="eyebrow shrink-0">{copy.preview}</span>
           </div>
 
           <div className="mt-6 overflow-hidden border border-[#d8d8d2] bg-[#16181d]">
             <div className="flex items-center justify-between border-b border-white/15 px-4 py-2.5">
               <span className="mono text-[11px] font-bold tracking-[0.1em] text-white/60 uppercase">
-                Install code
+                {copy.installCode}
               </span>
               <button
                 type="button"
@@ -111,28 +102,16 @@ export default function Guide() {
                 ) : (
                   <Copy className="h-4 w-4" aria-hidden="true" />
                 )}
-                {copied ? "Copied" : "Copy code"}
+                {copied ? copy.copied : copy.copy}
               </button>
             </div>
             <pre className="overflow-x-auto p-4 text-[12px] leading-relaxed text-white/85">
-              <code>{INSTALL_SNIPPET}</code>
+              <code>{installSnippet}</code>
             </pre>
           </div>
 
           <ol className="mt-5 grid gap-3 sm:grid-cols-3">
-            {[
-              ["01", "Copy", "One line; no account needed."],
-              [
-                "02",
-                "Paste",
-                "Add it to site-wide code or the footer template.",
-              ],
-              [
-                "03",
-                "Publish",
-                "Open the live site and read the notice as a visitor.",
-              ],
-            ].map(([number, title, text]) => (
+            {copy.steps.map(([number, title, text]) => (
               <li key={number} className="border-t border-[#d8d8d2] pt-3">
                 <span className="mono text-[11px] text-[#6b7280]">
                   {number}
@@ -148,16 +127,14 @@ export default function Guide() {
           </ol>
 
           <p className="mt-5 border-l-2 border-[#1f3a5f] pl-4 text-[13px] leading-relaxed text-[#5c6370]">
-            This notice solves one visible disclosure step; it is not a
-            certificate for the rest of the AI Act. The exact duty still depends
-            on the system and whether you are its provider or deployer.{" "}
+            {copy.scope}{" "}
             <a
-              href="https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act"
+              href="https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
               target="_blank"
               rel="noopener"
               className="font-semibold text-[#1f3a5f] underline underline-offset-2"
             >
-              Read the Commission's current scope guidance
+              {copy.scopeLink}
             </a>
             .
           </p>
@@ -166,54 +143,27 @@ export default function Guide() {
         <section className="mt-10 space-y-6 text-[15px] leading-relaxed text-[#5c6370]">
           <div className="rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
             <h2 className="text-xl font-bold text-[#16181d]">
-              Does it apply to me?
+              {copy.appliesTitle}
             </h2>
-            <p className="mt-3">
-              Start by separating role from use. Providers of AI systems that
-              directly interact with people must design the system to disclose
-              that interaction unless it is obvious. Professional deployers have
-              separate disclosure duties when they use emotion or biometric
-              categorisation systems, publish deepfakes, or publish AI-generated
-              text on matters of public interest without substantive human
-              review or editorial control. Company size affects proportionality,
-              not the four scope tests.
-            </p>
+            <p className="mt-3">{copy.appliesBody}</p>
           </div>
           <div className="rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
             <h2 className="text-xl font-bold text-[#16181d]">
-              The deadline everyone gets wrong
+              {copy.deadlineTitle}
             </h2>
-            <p className="mt-3">
-              In 2026 the EU delayed parts of the AI Act — the{" "}
-              <em>high-risk</em> rules moved to December 2027 and August 2028.
-              Many businesses read "AI Act delayed" and relaxed. Article 50
-              still applies from <strong>2 August 2026</strong>. The narrow
-              transition to 2 December 2026 concerns the provider-side
-              machine-readable marking obligation for eligible generative AI
-              systems already on the market; it is not a blanket grace period
-              for every Article 50 duty.
-            </p>
+            <p className="mt-3">{copy.deadlineBody}</p>
           </div>
           <div className="rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
             <h2 className="text-xl font-bold text-[#16181d]">
-              What happens if I ignore it?
+              {copy.riskTitle}
             </h2>
-            <p className="mt-3">
-              Article 50 violations can attract fines of{" "}
-              <strong>
-                up to €15 million or 3% of worldwide annual turnover
-              </strong>
-              . The Act also requires proportionality to be considered for
-              smaller companies. The more immediate commercial risk is being
-              unable to explain which system you use, who is responsible for its
-              notice, and what users actually saw.
-            </p>
+            <p className="mt-3">{copy.riskBody}</p>
           </div>
         </section>
 
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-[#16181d]">
-            The four duties, one guide each
+            {copy.dutiesTitle}
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {REQUIREMENTS.map((r, i) => {
@@ -221,7 +171,7 @@ export default function Guide() {
               return (
                 <Link
                   key={r.slug}
-                  to={`/requirements/${r.slug}`}
+                  to={path(`/requirements/${r.slug}`)}
                   className="group rounded border border-[#e2e2dd] bg-white p-5 transition hover:-translate-y-0.5 hover:border-[#1f3a5f] hover:shadow-lg"
                 >
                   <Icon className="h-5 w-5 text-[#1f3a5f]" />
@@ -230,7 +180,7 @@ export default function Guide() {
                     {r.metaDescription}
                   </p>
                   <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#1f3a5f]">
-                    Read the guide{" "}
+                    {copy.readGuide}{" "}
                     <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
                   </span>
                 </Link>
@@ -241,13 +191,13 @@ export default function Guide() {
 
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-[#16181d]">
-            Guides for your platform
+            {copy.platformsTitle}
           </h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {PLATFORMS.map(p => (
               <Link
                 key={p.slug}
-                to={`/platforms/${p.slug}`}
+                to={path(`/platforms/${p.slug}`)}
                 className="rounded border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
               >
                 {p.name}

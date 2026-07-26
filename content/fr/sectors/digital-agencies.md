@@ -27,4 +27,4 @@ Le guide en français clair — ce qui déclenche la loi dans les agences digita
 
 Les agences qui intègrent la divulgation dans la livraison arrêtent d'éteindre des feux et commencent à la vendre en ligne de retainer — conformité en service, par client, par mois.
 
-*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*
+*Le [évaluation d’entreprise à 99 €](/report) classe les systèmes d’IA de l’entreprise et arrive par e-mail sous 24 à 48 h.*

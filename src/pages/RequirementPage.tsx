@@ -4,7 +4,13 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
 import CtaBand from "@/components/CtaBand";
 import { getRequirement, REQUIREMENTS } from "@/data/requirements";
-import { CheckCircle2, AlertTriangle, Scale, Users, ListChecks } from "lucide-react";
+import {
+  CheckCircle2,
+  AlertTriangle,
+  Scale,
+  Users,
+  ListChecks,
+} from "lucide-react";
 
 export default function RequirementPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -31,9 +37,13 @@ export default function RequirementPage() {
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <nav className="text-xs text-[#6b7280]">
-          <Link to="/" className="hover:text-[#16181d]">RapidAct</Link>
+          <Link to="/" className="hover:text-[#16181d]">
+            RapidAct
+          </Link>
           <span className="mx-2">/</span>
-          <Link to="/article-50" className="hover:text-[#16181d]">Article 50 guides</Link>
+          <Link to="/article-50" className="hover:text-[#16181d]">
+            Article 50 guides
+          </Link>
           <span className="mx-2">/</span>
           <span className="text-[#5c6370]">{guide.title}</span>
         </nav>
@@ -41,7 +51,9 @@ export default function RequirementPage() {
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#16181d] sm:text-4xl">
           {guide.h1}
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">{guide.intro}</p>
+        <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">
+          {guide.intro}
+        </p>
 
         <div className="mt-6 inline-flex items-center gap-2 rounded border border-[#fecaca] bg-[#fef2f2] px-4 py-1.5 text-sm font-semibold text-[#991b1b]">
           <AlertTriangle className="h-4 w-4" /> Deadline: {guide.deadline}
@@ -52,8 +64,11 @@ export default function RequirementPage() {
             <Users className="h-5 w-5 text-[#1f3a5f]" /> Who this applies to
           </h2>
           <ul className="mt-4 space-y-2.5">
-            {guide.whoNeedsIt.map((w) => (
-              <li key={w} className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5c6370]">
+            {guide.whoNeedsIt.map(w => (
+              <li
+                key={w}
+                className="flex items-start gap-2 text-[15px] leading-relaxed text-[#5c6370]"
+              >
                 <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-[#0e9f6e]" />
                 {w}
               </li>
@@ -63,18 +78,25 @@ export default function RequirementPage() {
 
         <section className="mt-10 rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
           <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
-            <Scale className="h-5 w-5 text-[#1f3a5f]" /> What the law actually says
+            <Scale className="h-5 w-5 text-[#1f3a5f]" /> What the regulation
+            requires
           </h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">{guide.whatLawSays}</p>
+          <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">
+            {guide.whatLawSays}
+          </p>
         </section>
 
         <section className="mt-10">
           <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
-            <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Fix it free, step by step
+            <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Implementation
+            steps
           </h2>
           <ol className="mt-4 space-y-3">
             {guide.freeSteps.map((s, i) => (
-              <li key={s} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#5c6370]">
+              <li
+                key={s}
+                className="flex items-start gap-3 text-[15px] leading-relaxed text-[#5c6370]"
+              >
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#16181d] text-xs font-bold text-white">
                   {i + 1}
                 </span>
@@ -85,10 +107,15 @@ export default function RequirementPage() {
         </section>
 
         <section className="mt-10 rounded border border-[#fde68a] bg-[#fffbeb] p-6">
-          <h2 className="text-lg font-bold text-[#92400e]">The mistakes everyone makes</h2>
+          <h2 className="text-lg font-bold text-[#92400e]">
+            Common implementation gaps
+          </h2>
           <ul className="mt-3 space-y-2">
-            {guide.mistakes.map((m) => (
-              <li key={m} className="flex items-start gap-2 text-sm leading-relaxed text-[#92400e]">
+            {guide.mistakes.map(m => (
+              <li
+                key={m}
+                className="flex items-start gap-2 text-sm leading-relaxed text-[#92400e]"
+              >
                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d97706]" />
                 {m}
               </li>
@@ -99,9 +126,11 @@ export default function RequirementPage() {
         <CtaBand />
 
         <section className="mt-12 border-t border-[#e2e2dd] pt-8">
-          <h3 className="text-sm font-bold tracking-wide text-[#6b7280] uppercase">More guides</h3>
+          <h3 className="text-sm font-bold tracking-wide text-[#6b7280] uppercase">
+            More guides
+          </h3>
           <div className="mt-3 flex flex-wrap gap-2">
-            {REQUIREMENTS.filter((r) => r.slug !== guide.slug).map((r) => (
+            {REQUIREMENTS.filter(r => r.slug !== guide.slug).map(r => (
               <Link
                 key={r.slug}
                 to={`/requirements/${r.slug}`}

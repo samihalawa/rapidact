@@ -27,4 +27,4 @@ Esta es la guía en español claro — qué activa la ley en inmobiliaria, qué 
 
 El home staging virtual es el punto ciego del sector: parece fotografía, se lee como realidad, y bajo el Artículo 50 necesita una etiqueta como cualquier contenido cercano al deepfake.
 
-*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*
+*El [evaluación de empresa de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

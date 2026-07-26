@@ -88,9 +88,9 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     seoDescription:
       "Tell us about your company and the AI you use. Your complete assessment reaches your inbox within 24–48 hours.",
     step1: "Step 1 of 2",
-    intakeTitle: "Tell us what your company runs",
+    intakeTitle: "Start your company assessment",
     intakeBody:
-      "Start with your company and the AI you know about. Anything you are unsure of is part of what we assess.",
+      "Add your company and the AI systems you know about. We will examine any gaps or uncertainties.",
     company: "Company name",
     email: "Work email",
     website: "Website",
@@ -109,10 +109,9 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "For example: we run an AI voice agent for bookings and are unsure whether it is covered.",
     sendError:
       "Your details could not be sent. Try again, or contact us directly and we will take them by email.",
-    continue: "Review and continue",
+    continue: "Continue to payment",
     continuing: "Saving…",
-    noCharge:
-      "Nothing is charged on this screen. You see the fee and seller before paying.",
+    noCharge: "No charge yet. Confirm the €99 fee and seller on the next step.",
     buying: "You are buying",
     chargedOnce: "Charged once, per company.",
     specimen: "See the full eight-page specimen",
@@ -124,15 +123,15 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Technical and organisational assessment, not legal advice.",
     bookCall: "Book a call",
     step2: "Step 2 of 2",
-    recordedTitle: "Your details are recorded. The fee is €99.",
+    recordedTitle: "Assessment request saved — pay €99 to begin",
     recordedBody:
-      "Work begins when payment arrives. The assessment is sent to your work email within 24–48h.",
+      "Your specialist starts after payment. The assessment is delivered to your work email within 24–48h.",
     reference: "Your reference",
     copy: "Copy",
     copied: "Copied",
     referenceHelp:
       "This code is already included in the payment description so your payment matches your submission automatically.",
-    pay: "Pay €99 with bunq",
+    pay: "Pay €99 securely with bunq",
     paymentPrivacy:
       "Payment is processed by bunq. Card and bank details are never seen or stored by this website.",
     paidTo: "Paid to",
@@ -155,7 +154,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     refundTitle: "If the assessment does not arrive, you do not pay for it.",
     refundBody:
       "Nothing in your inbox within 24–48h? Reply to your receipt and the fee is refunded in full.",
-    change: "Change my details",
+    change: "Change details",
     sectors: options(sectorValues),
     systemsList: options(systemValues),
   },
@@ -164,9 +163,9 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     seoDescription:
       "Cuéntanos qué IA utiliza tu empresa. Recibirás la evaluación completa en 24–48 horas.",
     step1: "Paso 1 de 2",
-    intakeTitle: "Cuéntanos qué utiliza tu empresa",
+    intakeTitle: "Inicia la evaluación de tu empresa",
     intakeBody:
-      "Empieza por tu empresa y la IA que ya conoces. Lo que no tengas claro forma parte de lo que evaluamos.",
+      "Añade tu empresa y los sistemas de IA que conozcas. Revisaremos cualquier duda o carencia.",
     company: "Nombre de la empresa",
     email: "Correo de trabajo",
     website: "Sitio web",
@@ -185,10 +184,10 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Por ejemplo: utilizamos un agente de voz para reservas y no sabemos si está cubierto.",
     sendError:
       "No se han podido enviar los datos. Inténtalo de nuevo o contáctanos y los recogeremos por correo.",
-    continue: "Revisar y continuar",
+    continue: "Continuar al pago",
     continuing: "Guardando…",
     noCharge:
-      "No se cobra nada aquí. Verás el precio y el vendedor antes de pagar.",
+      "Todavía no se cobra nada. Confirma el precio de 99 € y el vendedor en el siguiente paso.",
     buying: "Estás comprando",
     chargedOnce: "Un solo pago por empresa.",
     specimen: "Ver la muestra completa de ocho páginas",
@@ -200,15 +199,15 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Evaluación técnica y organizativa, no asesoramiento jurídico.",
     bookCall: "Reservar llamada",
     step2: "Paso 2 de 2",
-    recordedTitle: "Hemos guardado tus datos. El precio es 99 €.",
+    recordedTitle: "Solicitud guardada — paga 99 € para empezar",
     recordedBody:
-      "El trabajo comienza al recibir el pago. La evaluación llegará a tu correo de trabajo en 24–48 h.",
+      "El especialista comienza tras el pago. La evaluación llegará a tu correo de trabajo en 24–48 h.",
     reference: "Tu referencia",
     copy: "Copiar",
     copied: "Copiado",
     referenceHelp:
       "El código ya está incluido en el concepto de pago para vincularlo automáticamente con tu solicitud.",
-    pay: "Pagar 99 € con bunq",
+    pay: "Pagar 99 € de forma segura con bunq",
     paymentPrivacy:
       "bunq procesa el pago. Esta web nunca ve ni almacena los datos bancarios o de la tarjeta.",
     paidTo: "Pago a",
@@ -231,7 +230,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     refundTitle: "Si la evaluación no llega, no la pagas.",
     refundBody:
       "¿No está en tu bandeja en 24–48 h? Responde al recibo y te reembolsaremos el importe completo.",
-    change: "Cambiar mis datos",
+    change: "Cambiar datos",
     sectors: options(sectorValues, [
       "Comercio electrónico / retail",
       "SaaS / software",
@@ -261,7 +260,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     seoDescription:
       "Beschreiben Sie Ihr Unternehmen und seine KI. Die vollständige Bewertung kommt in 24–48 Stunden.",
     step1: "Schritt 1 von 2",
-    intakeTitle: "Welche KI setzt Ihr Unternehmen ein?",
+    intakeTitle: "Starten Sie Ihre Unternehmensbewertung",
     intakeBody:
       "Beginnen Sie mit Ihrem Unternehmen und der KI, die Sie bereits kennen. Unklare Punkte sind Teil unserer Bewertung.",
     company: "Unternehmensname",
@@ -282,7 +281,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Zum Beispiel: Wir nutzen einen KI-Sprachagenten für Buchungen und kennen unsere Pflicht nicht.",
     sendError:
       "Die Angaben konnten nicht gesendet werden. Versuchen Sie es erneut oder kontaktieren Sie uns per E-Mail.",
-    continue: "Prüfen und weiter",
+    continue: "Weiter zur Zahlung",
     continuing: "Speichern…",
     noCharge:
       "Hier wird nichts berechnet. Preis und Verkäufer sehen Sie vor der Zahlung.",
@@ -297,7 +296,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Technische und organisatorische Bewertung, keine Rechtsberatung.",
     bookCall: "Gespräch buchen",
     step2: "Schritt 2 von 2",
-    recordedTitle: "Ihre Angaben sind gespeichert. Die Gebühr beträgt 99 €.",
+    recordedTitle: "Anfrage gespeichert — zahlen Sie 99 €, um zu starten",
     recordedBody:
       "Die Arbeit beginnt nach Zahlungseingang. Die Bewertung kommt in 24–48 Std. an Ihre geschäftliche E-Mail.",
     reference: "Ihre Referenz",
@@ -305,7 +304,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     copied: "Kopiert",
     referenceHelp:
       "Der Code steht bereits im Zahlungszweck und ordnet die Zahlung automatisch zu.",
-    pay: "99 € mit bunq bezahlen",
+    pay: "99 € sicher mit bunq bezahlen",
     paymentPrivacy:
       "bunq verarbeitet die Zahlung. Karten- und Bankdaten werden auf dieser Website weder gesehen noch gespeichert.",
     paidTo: "Zahlung an",
@@ -355,7 +354,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     seoDescription:
       "Décrivez votre entreprise et ses IA. L’évaluation complète arrive sous 24–48 heures.",
     step1: "Étape 1 sur 2",
-    intakeTitle: "Décrivez les IA utilisées par votre entreprise",
+    intakeTitle: "Commencez l’évaluation de votre entreprise",
     intakeBody:
       "Commencez par votre entreprise et les IA que vous connaissez déjà. Les points incertains font partie de notre évaluation.",
     company: "Nom de l’entreprise",
@@ -376,7 +375,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Par exemple : nous utilisons un agent vocal pour les réservations et ignorons s’il est couvert.",
     sendError:
       "Impossible d’envoyer vos informations. Réessayez ou contactez-nous par e-mail.",
-    continue: "Vérifier et continuer",
+    continue: "Continuer vers le paiement",
     continuing: "Enregistrement…",
     noCharge:
       "Aucun débit ici. Le prix et le vendeur sont affichés avant le paiement.",
@@ -391,7 +390,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Évaluation technique et organisationnelle, pas un avis juridique.",
     bookCall: "Réserver un appel",
     step2: "Étape 2 sur 2",
-    recordedTitle: "Vos informations sont enregistrées. Le prix est de 99 €.",
+    recordedTitle: "Demande enregistrée — payez 99 € pour commencer",
     recordedBody:
       "Le travail commence après le paiement. L’évaluation arrive à votre e-mail professionnel sous 24–48 h.",
     reference: "Votre référence",
@@ -399,7 +398,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     copied: "Copié",
     referenceHelp:
       "Ce code figure déjà dans le libellé du paiement et associe automatiquement votre demande.",
-    pay: "Payer 99 € avec bunq",
+    pay: "Payer 99 € en toute sécurité avec bunq",
     paymentPrivacy:
       "bunq traite le paiement. Ce site ne voit ni ne stocke vos données bancaires.",
     paidTo: "Payé à",
@@ -452,7 +451,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     seoDescription:
       "Descrivi l’azienda e le IA utilizzate. La valutazione completa arriva entro 24–48 ore.",
     step1: "Passaggio 1 di 2",
-    intakeTitle: "Descrivi le IA usate dalla tua azienda",
+    intakeTitle: "Inizia la valutazione della tua azienda",
     intakeBody:
       "Inizia dall’azienda e dalle IA che conosci già. I punti poco chiari fanno parte della nostra valutazione.",
     company: "Nome dell’azienda",
@@ -472,7 +471,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     notesPlaceholder:
       "Ad esempio: usiamo un agente vocale per le prenotazioni e non sappiamo se è coperto.",
     sendError: "Impossibile inviare i dati. Riprova o contattaci via e-mail.",
-    continue: "Controlla e continua",
+    continue: "Continua al pagamento",
     continuing: "Salvataggio…",
     noCharge:
       "Qui non viene addebitato nulla. Vedrai prezzo e venditore prima del pagamento.",
@@ -487,7 +486,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Valutazione tecnica e organizzativa, non consulenza legale.",
     bookCall: "Prenota una chiamata",
     step2: "Passaggio 2 di 2",
-    recordedTitle: "I dati sono salvati. Il prezzo è 99 €.",
+    recordedTitle: "Richiesta salvata — paga 99 € per iniziare",
     recordedBody:
       "Il lavoro inizia al ricevimento del pagamento. La valutazione arriva alla tua e-mail di lavoro entro 24–48 h.",
     reference: "Il tuo riferimento",
@@ -495,7 +494,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     copied: "Copiato",
     referenceHelp:
       "Il codice è già inserito nella causale e associa automaticamente il pagamento alla richiesta.",
-    pay: "Paga 99 € con bunq",
+    pay: "Paga 99 € in sicurezza con bunq",
     paymentPrivacy:
       "bunq elabora il pagamento. Questo sito non vede né conserva dati bancari o della carta.",
     paidTo: "Pagamento a",
