@@ -27,4 +27,4 @@ L'abitudine da 30 secondi che la rende reale: un registro di revisione — nome 
 
 ---
 
-*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [prezzi 0/59/99 €](/#pricing)*
+*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [badge e scanner gratuiti + valutazione da 99 €](/#pricing)*

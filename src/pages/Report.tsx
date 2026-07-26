@@ -62,8 +62,8 @@ function Chip({
       onClick={onClick}
       className={
         active
-          ? "rounded border border-[#16181d] bg-[#16181d] px-3 py-1.5 text-[13px] font-semibold text-white"
-          : "hairline ink-soft rounded border bg-white px-3 py-1.5 text-[13px] transition hover:border-[#16181d] hover:text-[#16181d]"
+          ? "min-h-11 rounded border border-[#16181d] bg-[#16181d] px-3 py-2 text-[13px] font-semibold text-white"
+          : "hairline ink-soft min-h-11 rounded border bg-white px-3 py-2 text-[13px] transition hover:border-[#16181d] hover:text-[#16181d]"
       }
     >
       {children}
@@ -84,7 +84,7 @@ export default function Report() {
   const [copied, setCopied] = useState(false);
 
   const request = trpc.report.request.useMutation({
-    onSuccess: (r) => setRef(r.ref),
+    onSuccess: r => setRef(r.ref),
   });
 
   // The payment step is much shorter than the intake form, so keeping the old scroll
@@ -95,10 +95,13 @@ export default function Report() {
     if (ref) window.scrollTo(0, 0);
   }, [ref]);
 
-  const valid = company.trim().length > 1 && email.includes("@") && email.includes(".");
+  const valid =
+    company.trim().length > 1 && email.includes("@") && email.includes(".");
 
   const toggle = (s: string) =>
-    setSystems((cur) => (cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]));
+    setSystems(cur =>
+      cur.includes(s) ? cur.filter(x => x !== s) : [...cur, s]
+    );
 
   const submit = () => {
     if (!valid || request.isPending) return;
@@ -140,9 +143,10 @@ export default function Report() {
             <p className="ink-soft mt-3 text-[16px] leading-relaxed">
               {/* Many legal names end in a period ("B.V.", "Ltd."), so trim one before
                   adding our own rather than printing a doubled full stop. */}
-              We hold the details for {company.trim().replace(/\.$/, "")}. Work begins when the
-              payment arrives, and the assessment is sent to{" "}
-              <span className="ink font-semibold">{email.trim()}</span> within {REPORT.delivery}.
+              We hold the details for {company.trim().replace(/\.$/, "")}. Work
+              begins when the payment arrives, and the assessment is sent to{" "}
+              <span className="ink font-semibold">{email.trim()}</span> within{" "}
+              {REPORT.delivery}.
             </p>
 
             <div className="hairline mt-8 border bg-white">
@@ -154,7 +158,7 @@ export default function Report() {
                   </span>
                   <button
                     onClick={copyRef}
-                    className="hairline ink-soft inline-flex items-center gap-1.5 rounded border bg-white px-2.5 py-1 text-[12px] font-semibold transition hover:border-[#16181d] hover:text-[#16181d]"
+                    className="hairline ink-soft inline-flex min-h-11 items-center gap-1.5 rounded border bg-white px-3 text-[12px] font-semibold transition hover:border-[#16181d] hover:text-[#16181d]"
                   >
                     {copied ? (
                       <Check className="h-3 w-3 text-[#15803d]" />
@@ -165,20 +169,26 @@ export default function Report() {
                   </button>
                 </div>
                 <p className="ink-soft mt-2 text-[13px] leading-relaxed">
-                  This code is already written into the payment description, so your payment is
-                  matched to your submission without you doing anything. Keep it for your records.
+                  This code is already written into the payment description, so
+                  your payment is matched to your submission without you doing
+                  anything. Keep it for your records.
                 </p>
               </div>
 
               <div className="px-6 py-6">
-                <a href={bunqPayUrl(ref)} target="_blank" rel="noopener" className="block">
+                <a
+                  href={bunqPayUrl(ref)}
+                  target="_blank"
+                  rel="noopener"
+                  className="block"
+                >
                   <Button className="h-12 w-full rounded bg-[#16181d] text-[15px] font-semibold text-white hover:bg-[#2b2f38]">
                     Pay €99 with bunq
                   </Button>
                 </a>
                 <p className="ink-soft mt-3 text-center text-[12px] leading-relaxed">
-                  Payment is processed by bunq. Card and bank details are never seen by, or stored
-                  on, this website.
+                  Payment is processed by bunq. Card and bank details are never
+                  seen by, or stored on, this website.
                 </p>
               </div>
 
@@ -187,7 +197,9 @@ export default function Report() {
                 <dl className="hairline grid gap-4 border-t bg-[#f7f7f5] px-6 py-5 sm:grid-cols-2">
                   <div>
                     <dt className="eyebrow">Paid to</dt>
-                    <dd className="ink mt-1 text-[13px] font-semibold">{ENTITY.legalName}</dd>
+                    <dd className="ink mt-1 text-[13px] font-semibold">
+                      {ENTITY.legalName}
+                    </dd>
                     <dd className="mt-0.5">
                       <a
                         href={COMPANIES_HOUSE_URL}
@@ -244,7 +256,9 @@ export default function Report() {
                     </span>
                     <div>
                       <p className="ink text-[14px] font-semibold">{t}</p>
-                      <p className="ink-soft mt-1 text-[14px] leading-relaxed">{s}</p>
+                      <p className="ink-soft mt-1 text-[14px] leading-relaxed">
+                        {s}
+                      </p>
                     </div>
                   </li>
                 ))}
@@ -256,8 +270,9 @@ export default function Report() {
                 If the assessment does not arrive, you do not pay for it.
               </p>
               <p className="ink-soft mt-1 text-[14px] leading-relaxed">
-                Nothing in your inbox within {REPORT.delivery}? Reply to your receipt and the fee is
-                refunded in full. You do not need to explain or ask twice.
+                Nothing in your inbox within {REPORT.delivery}? Reply to your
+                receipt and the fee is refunded in full. You do not need to
+                explain or ask twice.
               </p>
             </div>
 
@@ -278,9 +293,9 @@ export default function Report() {
                 Tell us what your company runs
               </h1>
               <p className="ink-soft mt-4 max-w-xl text-[16px] leading-relaxed">
-                This takes about two minutes. The more precisely you describe what you operate, the
-                more specific the assessment can be. You review everything before any payment is
-                taken.
+                This takes about two minutes. The more precisely you describe
+                what you operate, the more specific the assessment can be. You
+                review everything before any payment is taken.
               </p>
 
               <div className="hairline mt-8 space-y-6 border bg-white p-6 sm:p-7">
@@ -291,9 +306,11 @@ export default function Report() {
                     </label>
                     <Input
                       value={company}
-                      onChange={(e) => setCompany(e.target.value)}
+                      onChange={e => setCompany(e.target.value)}
                       placeholder="Acme B.V."
-                      className="hairline mt-1.5 h-10 rounded border"
+                      className="hairline mt-1.5 h-11 rounded border"
+                      autoComplete="organization"
+                      required
                     />
                   </div>
                   <div>
@@ -303,18 +320,23 @@ export default function Report() {
                     <Input
                       type="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={e => setEmail(e.target.value)}
                       placeholder="you@company.com"
-                      className="hairline mt-1.5 h-10 rounded border"
+                      className="hairline mt-1.5 h-11 rounded border"
+                      autoComplete="email"
+                      required
                     />
                   </div>
                   <div>
-                    <label className="ink block text-[13px] font-semibold">Website</label>
+                    <label className="ink block text-[13px] font-semibold">
+                      Website
+                    </label>
                     <Input
                       value={website}
-                      onChange={(e) => setWebsite(e.target.value)}
+                      onChange={e => setWebsite(e.target.value)}
                       placeholder="https://company.com"
-                      className="hairline mt-1.5 h-10 rounded border"
+                      className="hairline mt-1.5 h-11 rounded border"
+                      autoComplete="url"
                     />
                   </div>
                   <div>
@@ -323,32 +345,42 @@ export default function Report() {
                     </label>
                     <Input
                       value={country}
-                      onChange={(e) => setCountry(e.target.value)}
+                      onChange={e => setCountry(e.target.value)}
                       placeholder="Spain, Germany, UK"
-                      className="hairline mt-1.5 h-10 rounded border"
+                      className="hairline mt-1.5 h-11 rounded border"
+                      autoComplete="country-name"
                     />
                   </div>
                 </div>
 
                 <div className="hairline border-t pt-5">
-                  <label className="ink block text-[13px] font-semibold">Company size</label>
+                  <label className="ink block text-[13px] font-semibold">
+                    Company size
+                  </label>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {SIZES.map((s) => (
-                      <Chip key={s} active={size === s} onClick={() => setSize(s === size ? "" : s)}>
+                    {SIZES.map(s => (
+                      <Chip
+                        key={s}
+                        active={size === s}
+                        onClick={() => setSize(s === size ? "" : s)}
+                      >
                         {s}
                       </Chip>
                     ))}
                   </div>
                   <p className="ink-soft mt-2 text-[12px] leading-relaxed">
-                    Obligations trigger on what a system does, not on company size. Size affects the
-                    penalty calculation, not whether the duty applies.
+                    Obligations trigger on what a system does, not on company
+                    size. Size affects the penalty calculation, not whether the
+                    duty applies.
                   </p>
                 </div>
 
                 <div className="hairline border-t pt-5">
-                  <label className="ink block text-[13px] font-semibold">Sector</label>
+                  <label className="ink block text-[13px] font-semibold">
+                    Sector
+                  </label>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {SECTORS.map((s) => (
+                    {SECTORS.map(s => (
                       <Chip
                         key={s}
                         active={sector === s}
@@ -365,8 +397,12 @@ export default function Report() {
                     Which AI does your company use? Select all that apply.
                   </label>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {AI_SYSTEMS.map((s) => (
-                      <Chip key={s} active={systems.includes(s)} onClick={() => toggle(s)}>
+                    {AI_SYSTEMS.map(s => (
+                      <Chip
+                        key={s}
+                        active={systems.includes(s)}
+                        onClick={() => toggle(s)}
+                      >
                         {s}
                       </Chip>
                     ))}
@@ -379,7 +415,7 @@ export default function Report() {
                   </label>
                   <Textarea
                     value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
+                    onChange={e => setNotes(e.target.value)}
                     placeholder="For example: we run an AI voice agent for bookings and are unsure whether it is covered; our legal team has asked about the August 2026 date; an enterprise client is requesting documentation from us."
                     className="hairline mt-1.5 min-h-24 rounded border text-[14px]"
                   />
@@ -387,8 +423,9 @@ export default function Report() {
 
                 {request.isError && (
                   <p className="border-l-2 border-l-[#b91c1c] bg-[#fef4f4] px-4 py-3 text-[14px] text-[#991b1b]">
-                    Your details could not be sent. Please try again. If it keeps failing, contact
-                    us directly and we will take them by email.
+                    Your details could not be sent. Please try again. If it
+                    keeps failing, contact us directly and we will take them by
+                    email.
                   </p>
                 )}
 
@@ -404,8 +441,8 @@ export default function Report() {
                   )}
                 </Button>
                 <p className="ink-soft text-center text-[12px]">
-                  Nothing is charged on this screen. You see the fee and who you are paying on the
-                  next step.
+                  Nothing is charged on this screen. You see the fee and who you
+                  are paying on the next step.
                 </p>
               </div>
             </div>
@@ -416,9 +453,15 @@ export default function Report() {
                 <div className="hairline border bg-white">
                   <div className="hairline border-b px-6 py-5">
                     <p className="eyebrow">You are buying</p>
-                    <p className="ink mt-2 text-[17px] leading-snug font-semibold">{REPORT.name}</p>
-                    <p className="ink mt-3 text-[32px] leading-none font-bold">€99</p>
-                    <p className="ink-soft mt-1 text-[12px]">Charged once, per company.</p>
+                    <p className="ink mt-2 text-[17px] leading-snug font-semibold">
+                      {REPORT.name}
+                    </p>
+                    <p className="ink mt-3 text-[32px] leading-none font-bold">
+                      €99
+                    </p>
+                    <p className="ink-soft mt-1 text-[12px]">
+                      Charged once, per company.
+                    </p>
                     <a
                       href={CONVERT.example}
                       className="accent mt-2 inline-block text-[12px] font-semibold underline underline-offset-2"
@@ -427,8 +470,11 @@ export default function Report() {
                     </a>
                   </div>
                   <ul className="divide-y divide-[#e2e2dd]">
-                    {REPORT_DELIVERABLES.map((d) => (
-                      <li key={d} className="ink-soft px-6 py-3 text-[13px] leading-relaxed">
+                    {REPORT_DELIVERABLES.map(d => (
+                      <li
+                        key={d}
+                        className="ink-soft px-6 py-3 text-[13px] leading-relaxed"
+                      >
                         {d}
                       </li>
                     ))}
@@ -438,7 +484,9 @@ export default function Report() {
                 {HAS_ENTITY_DETAILS && (
                   <div className="hairline border bg-[#f7f7f5] px-6 py-5">
                     <p className="eyebrow">Sold by</p>
-                    <p className="ink mt-1.5 text-[13px] font-semibold">{ENTITY.legalName}</p>
+                    <p className="ink mt-1.5 text-[13px] font-semibold">
+                      {ENTITY.legalName}
+                    </p>
                     <p className="ink-soft mt-0.5 text-[12px] leading-relaxed">
                       {ENTITY.address}, {ENTITY.country}
                     </p>
@@ -451,9 +499,12 @@ export default function Report() {
                       Verify No. {ENTITY.registrationNumber} on Companies House
                     </a>
                     <p className="ink-soft mt-3 text-[12px] leading-relaxed">
-                      Delivered within {REPORT.delivery} or refunded in full. Questions before you
-                      buy:{" "}
-                      <a href={`tel:${ENTITY.phone.replace(/\s/g, "")}`} className="ink mono">
+                      Delivered within {REPORT.delivery} or refunded in full.
+                      Questions before you buy:{" "}
+                      <a
+                        href={`tel:${ENTITY.phone.replace(/\s/g, "")}`}
+                        className="ink mono"
+                      >
                         {ENTITY.phone}
                       </a>
                       .
@@ -462,10 +513,11 @@ export default function Report() {
                 )}
 
                 <p className="ink-soft text-[12px] leading-relaxed">
-                  RapidAct produces technical and organisational compliance assessments. It is not a
-                  law firm and the report is not legal advice. Where your situation requires a legal
-                  opinion, the report says so and sets out what to put in front of counsel. Prefer
-                  to speak first?{" "}
+                  RapidAct produces technical and organisational compliance
+                  assessments. It is not a law firm and the report is not legal
+                  advice. Where your situation requires a legal opinion, the
+                  report says so and sets out what to put in front of counsel.
+                  Prefer to speak first?{" "}
                   <a
                     href={CONVERT.calBooking}
                     target="_blank"

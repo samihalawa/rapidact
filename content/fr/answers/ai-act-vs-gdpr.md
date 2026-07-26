@@ -18,8 +18,8 @@ lang: fr
 
 ## Là où elles se croisent
 
-Votre journal de preuves : si vous enregistrez des événements de divulgation, ne stockez que le nécessaire (événement, page, heure) — pas d'IP ni de profils utilisateurs. Mal fait, prouver la conformité à la loi IA peut *créer* un problème RGPD. Le journal de RapidAct ne stocke aucune donnée personnelle exactement pour cette raison. [Comment ça marche →](/requirements/ai-disclosure-evidence)
+Votre preuve doit rester proportionnée : système, page, formulation, responsable et contrôle daté, sans identifier les visiteurs. Le badge RapidAct utilise ni cookies, ni stockage, ni suivi des interactions. [Comment ça marche →](/requirements/ai-disclosure-evidence)
 
 ---
 
-*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [prix 0/59/99 €](/#pricing)*
+*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

@@ -20,4 +20,4 @@ Si vous avez appris le manuel du bandeau cookies en 2018, vous comprenez déjà 
 
 ---
 
-*Essayez la version gratuite : [scannez votre site](/scanner) · [prix 0/59/99 €](/#pricing)*
+*Essayez la version gratuite : [scannez votre site](/scanner) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

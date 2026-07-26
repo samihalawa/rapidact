@@ -26,4 +26,4 @@ Les composants de divulgation RapidAct livrent le set d'icônes UE et des formul
 
 ---
 
-*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [prix 0/59/99 €](/#pricing)*
+*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

@@ -18,7 +18,7 @@ lang: en
 
 ## Where they meet
 
-Your evidence log: if you log disclosure events, store only what's needed (event, page, time) — not IPs or user profiles. Done carelessly, proving AI Act compliance can *create* a GDPR problem. RapidAct's evidence log stores no personal data for exactly this reason. [How it works →](/requirements/ai-disclosure-evidence)
+Your implementation record should be proportionate: retain the system, page, wording, owner and dated rendered proof without recording visitor identities. The RapidAct badge itself uses no cookies, storage or interaction tracking. [How it works →](/requirements/ai-disclosure-evidence)
 
 ---
 

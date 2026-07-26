@@ -18,13 +18,13 @@ Der Leitfaden in einfachem Deutsch — was das Gesetz in saas & tech auslöst, w
 ## Die Reihenfolge der Schritte
 
 1. **Alles Öffentliche scannen** — Ihre Website, den Buchungsflow und jedes Kundenportal. [Kostenloser Scan →](/scanner)
-2. **Zuerst den Chat beheben** — der sichtbarste Auslöser und der einfachste: die kostenlose RapidAct-Ebene fügt die Offenlegung über dem Widget hinzu. [Plattform-Leitfäden →](/learn)
-3. **Synthetische Medien kennzeichnen** — KI-Bilder bekommen sichtbare Labels aus dem kostenlosen Template-Kit.
-4. **Text klären** — KI-verfassten öffentlichen Content labeln oder echte redaktionelle Prüfung sauber dokumentieren.
-5. **Nachweise sichern** — Zeitstempel-Nachweis jeder Offenlegungsanzeige, als CSV exportierbar.
+2. **Rollen klären** — Anbieter, Betreiber und den konkreten Artikel-50-Auslöser für jedes System bestimmen.
+3. **Den richtigen Hinweis umsetzen** — das [kostenlose Ein-Skript-Badge](/article-50#install) nutzen, wenn ein Hinweis zur direkten Interaktion passt.
+4. **Inhalte getrennt behandeln** — maschinenlesbare Anbieterkennzeichnung von Betreiberpflichten für Deepfakes und Texte von öffentlichem Interesse unterscheiden.
+5. **Verhältnismäßige Nachweise führen** — URL, Wortlaut, Verantwortliche und datierte Desktop- und Mobilprüfungen ohne Besuchertracking dokumentieren.
 
 ## Branchenrealität
 
 Zwei Seiten derselben Medaille: Ihre Website ist der einfache, kostenlose Fix — und die KI-UX Ihres Produkts braucht ein Disclosure-Muster, das Ihre Kunden von Ihnen kopieren.
 
-*Lieber erledigt? Das [59-€-Paket](/#pricing) kommt vorkonfiguriert, oder wir installieren alles für 99 € — live auf Ihren Seiten verifiziert.*
+*Der [99-€-Vorprüfungsbericht](/report) klassifiziert die KI-Systeme des Unternehmens und kommt innerhalb von 24–48 Stunden per E-Mail.*

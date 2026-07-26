@@ -26,4 +26,4 @@ Los componentes de disclosure de RapidAct incluyen el set de iconos de la UE y r
 
 ---
 
-*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [precios 0/59/99 €](/#pricing)*
+*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

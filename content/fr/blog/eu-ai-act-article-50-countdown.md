@@ -35,4 +35,4 @@ L'application aura besoin d'exemples visibles précoces, et les régulateurs (pl
 
 ---
 
-*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [prix 0/59/99 €](/#pricing)*
+*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

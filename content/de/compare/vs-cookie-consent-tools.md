@@ -20,4 +20,4 @@ Wer 2018 das Cookie-Banner-Spielbuch gelernt hat, versteht diesen Markt bereits.
 
 ---
 
-*Testen Sie die kostenlose Version: [Website scannen](/scanner) · [Preise 0/59/99 €](/#pricing)*
+*Testen Sie die kostenlose Version: [Website scannen](/scanner) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

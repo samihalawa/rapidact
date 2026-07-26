@@ -21,4 +21,4 @@ La même solution que pour tout le monde : divulgation sur les interactions IA, 
 
 ---
 
-*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [prix 0/59/99 €](/#pricing)*
+*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

@@ -20,8 +20,8 @@ lang: fr
 
 ## La voie rapide
 
-Les étapes 1, 2, 3 et 7 sont gratuites avec RapidAct — un après-midi, pas un projet. [Prix — 0/59/99 € →](/#pricing)
+Les étapes 1, 2, 3 et 7 sont gratuites avec RapidAct — un après-midi, pas un projet. [Badge et scan gratuits + évaluation à 99 € →](/#pricing)
 
 ---
 
-*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [prix 0/59/99 €](/#pricing)*
+*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

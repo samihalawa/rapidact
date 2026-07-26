@@ -1,33 +1,33 @@
 ---
 title: "Disclosure de IA de Klevu AI Search — guía Artículo 50 | RapidAct"
-description: "¿Usas Klevu AI Search en tu web? El Artículo 50 pone la obligación del disclosure de IA en ti, no en Klevu. Qué añadir antes del 2 de agosto de 2026 y cómo hacerlo gratis."
+description: "Revisión técnica del Artículo 50 para este proveedor de IA: detección pública, roles de proveedor y deployer e insignia gratuita con un script."
 lang: es
 ---
-# Klevu AI Search y la Ley de IA de la UE: la obligación es tuya, no de Klevu
+# Klevu AI Search y la Ley de IA de la UE: comprueba el rol del Artículo 50
 
-Si tu web usa **Klevu AI Search**, los visitantes que hablan con él están interactuando con un sistema de IA — y desde el **2 de agosto de 2026**, el Artículo 50(1) de la Ley de IA de la UE exige informarles de ello con claridad, antes de que empiece la conversación. Klevu pone la herramienta; **tú**, como deployer, asumes la obligación legal.
+Una firma pública muestra que este proveedor de IA está presente en la página. Es una señal técnica, no una decisión sobre el rol legal: establece quién es el proveedor, quién es el deployer y si el Artículo 50(1) exige un aviso de interacción directa.
 
-## Por qué Klevu AI Search entra de lleno en el ámbito
+## Por qué esta señal técnica merece revisión
 
-Sus funciones de IA interactúan con los visitantes de tu web automáticamente. Eso es exactamente lo que el Artículo 50 fue escrito para cubrir: una persona interactuando con un software que responde como una persona. Nuestra base de datos de detección identifica Klevu AI Search en una página en segundos — nivel de exposición: **baja** — y un regulador (o un competidor) puede hacer la misma comprobación.
+Sus funciones de IA interactúan con los visitantes de tu web automáticamente. Es una señal técnica que conviene revisar bajo el Artículo 50(1) si eres el proveedor responsable del aviso de interacción directa. Nuestra base de datos de detección identifica Klevu AI Search en una página en segundos — nivel de exposición: **baja** — y un regulador (o un competidor) puede hacer la misma comprobación.
 
-## Lo que la ley exige en tu web
+## Qué debes verificar en tu web
 
-- Un aviso claro y visible de que el visitante está interactuando con un sistema de IA — en el primer contacto, no escondido en los términos.
-- Presente allí donde ocurra la interacción (widget de chat, messenger incrustado, interfaz de voz).
-- Redacción honesta: un nombre humano en el bot no elimina la obligación; aumenta el riesgo.
+- Cuando aplique el Artículo 50(1), un aviso claro de interacción con IA como máximo en el primer contacto.
+- El aviso en la superficie real de interacción, no solo en términos o privacidad.
+- Texto adaptado al sistema, rol, momento y excepción aplicable.
 
 ## Arréglalo gratis en minutos
 
-1. [Escanea tu web](/scanner) — confirmamos {name} y comprobamos si ya hay disclosure visible.
-2. Instala la capa gratuita de RapidAct para tu stack: [WordPress](/platforms/wordpress), [Wix](/platforms/wix), [Shopify](/platforms/shopify) o [una etiqueta script para cualquier otra](/platforms/custom-website).
-3. La misma instalación de una línea — la capa de RapidAct lo cubre.
-4. Activa el registro de evidencia con marca de tiempo — tu prueba de que el aviso estaba activo.
+1. [Escanea tu web](/scanner) — confirmamos la plataforma detectada y comprobamos si ya hay disclosure visible.
+2. Instala la [insignia RapidAct](/article-50#install) con un solo script y adapta el texto al sistema de IA real.
+3. Confirma si eres el proveedor responsable del aviso de interacción directa; una coincidencia técnica no decide por sí sola el rol legal.
+4. Publica y registra la URL, el texto, el responsable y la fecha de verificación en escritorio y móvil.
 
 ## Los errores a evitar
 
 - Asumir que la marca de Klevu o un avatar de robot cuenta como disclosure — no cuenta, salvo que informe claramente al usuario de que habla con IA.
-- Confiar en el cumplimiento del propio proveedor — las obligaciones del Artículo 50 recaen en el deployer.
+- Suponer que el proveedor tecnológico o el titular de la web siempre tiene la obligación — hay que establecer los roles de proveedor y deployer.
 - Esperar al «retraso de 2027» — eso era el reglamento de alto riesgo, no el Artículo 50. [Qué se retrasó de verdad →](/answers/digital-omnibus-ai-act-delay)
 
-*¿Prefieres que lo hagamos? El [pack de 59 €](/#pricing) viene preconfigurado, o lo instalamos todo por 99 €.*
+*El [informe preconsultivo de 99 €](/report) clasifica los sistemas de IA de la empresa y llega al correo en 24–48 h.*

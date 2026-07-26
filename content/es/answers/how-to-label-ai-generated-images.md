@@ -26,4 +26,4 @@ lang: es
 
 ---
 
-*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [precios 0/59/99 €](/#pricing)*
+*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

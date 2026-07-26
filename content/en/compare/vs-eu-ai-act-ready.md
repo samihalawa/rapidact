@@ -5,20 +5,20 @@ lang: en
 ---
 # RapidAct vs EU AI Act Ready
 
-**EU AI Act Ready is a comprehensive free WordPress plugin (readiness score, ~15 chatbot disclosures, wizard). RapidAct adds the commercial layer on top of free: 52-signature detection, evidence log with export, any-stack snippet, and €99 done-for-you installation.**
+**EU AI Act Ready is WordPress-focused. RapidAct provides 52-signature public-page detection, a free any-stack one-script badge and a €99 company-wide written assessment.**
 
 | | RapidAct | EU AI Act Ready |
 |---|---|---|
-| Price | Free tools + €99 report | Free |
+| Price | Free badge and scan + €99 report | Check current offer |
 | Chatbot platforms detected | 52 | ~15 |
 | Stacks covered | WP, Wix, Shopify, any | WordPress only |
-| Evidence log + CSV | Yes | Checklist-style |
+| Visitor tracking | None in the badge | Check current product |
 | Scanner for other sites | Yes | No |
-| Done-for-you install | €99 | No |
+| Company-wide written assessment | €99 | Not compared |
 
 ## The honest verdict
 
-EU AI Act Ready is a solid free WP plugin. RapidAct is for when you want it beyond WordPress, want proof exports, or want a human to just do it.
+Choose the WordPress-specific route when it matches your stack. Choose RapidAct when you need an any-stack badge, public-page scan or company-wide written classification. Neither badge alone proves full compliance.
 
 ---
 

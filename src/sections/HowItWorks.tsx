@@ -28,11 +28,16 @@ export default function HowItWorks() {
         </h2>
 
         <div className="hairline mt-10 grid divide-y divide-[#e2e2dd] border-y md:grid-cols-3 md:divide-x md:divide-y-0">
-          {steps.map((s) => (
-            <div key={s.n} className="px-0 py-6 md:px-6 md:py-7 md:first:pl-0 md:last:pr-0">
+          {steps.map(s => (
+            <div
+              key={s.n}
+              className="px-0 py-6 md:px-6 md:py-7 md:first:pl-0 md:last:pr-0"
+            >
               <span className="mono ink-soft text-[12px]">Step {s.n}</span>
               <h3 className="ink mt-2 text-[15px] font-semibold">{s.title}</h3>
-              <p className="ink-soft mt-2 text-[15px] leading-relaxed">{s.text}</p>
+              <p className="ink-soft mt-2 text-[15px] leading-relaxed">
+                {s.text}
+              </p>
             </div>
           ))}
         </div>
@@ -42,12 +47,15 @@ export default function HowItWorks() {
             On the reports that the AI Act was delayed
           </p>
           <p className="ink-soft mt-2 max-w-3xl text-[15px] leading-relaxed">
-            The postponement covered the high-risk rulebook: Annex III obligations moved to
-            December 2027 and Annex I to August 2028. The Article 50 transparency obligations were
-            deliberately left on their original schedule and apply from 2 August 2026, to any
-            company whose AI reaches users in the EU, regardless of company size. Penalties reach
-            €15M or 3% of worldwide turnover. Establishing which of the two timetables applies to
-            each of your systems is the first thing the assessment answers.
+            The postponement covered the high-risk rulebook: Annex III
+            obligations moved to December 2027 and Annex I to August 2028. The
+            Article 50 transparency obligations were left on their original
+            schedule and apply from 2 August 2026. Whether a particular duty is
+            yours depends on the system, your provider or deployer role, the EU
+            nexus and any applicable exception. Penalties can reach €15M or 3%
+            of worldwide turnover, subject to proportionality and the case.
+            Establishing which timetable and duty applies to each system is the
+            first thing the assessment answers.
           </p>
         </div>
       </div>

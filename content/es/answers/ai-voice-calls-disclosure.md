@@ -19,8 +19,8 @@ Insurtechs españolas ya ejecutan IA de voz (construida sobre plataformas como E
 
 - Una frase inicial en el flujo de llamada: «Está hablando con un asistente de IA automatizado.»
 - Documentado en tus guiones de IVR, con una ruta fácil a un humano.
-- Para la parte web (donde vive el chatbot), la capa gratuita RapidAct cubre el disclosure. [Obligaciones de voz y chat →](/requirements/chatbot-ai-disclosure)
+- Para el chatbot web, adapta la [insignia de un script](/article-50#install) si corresponde un aviso de interacción directa. [Obligaciones de voz y chat →](/requirements/chatbot-ai-disclosure)
 
 ---
 
-*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [precios 0/59/99 €](/#pricing)*
+*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

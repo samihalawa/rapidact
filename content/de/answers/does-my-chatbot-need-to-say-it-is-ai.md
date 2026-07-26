@@ -25,8 +25,8 @@ Artikel 50(1) der Verordnung (EU) 2024/1689 sagt, Anbieter und Deployer müssen 
 
 ## Die Lösung
 
-Kostenlos: Website scannen, RapidAct-Ebene installieren, fertig — der Hinweis erscheint über Ihrem Chat-Widget auf Englisch und Spanisch. [Chatbot-Offenlegungs-Leitfaden →](/requirements/chatbot-ai-disclosure)
+Kostenlos: öffentliche Website scannen, Anbieter- und Betreiberrolle klären und das [Ein-Skript-Badge](/article-50#install) dort anpassen, wo ein Hinweis zur direkten Interaktion passt.
 
 ---
 
-*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

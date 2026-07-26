@@ -10,30 +10,40 @@ import ContentHub from "./pages/ContentHub";
 import ContentPage from "./pages/ContentPage";
 import Report from "./pages/Report";
 import ExampleReport from "./pages/ExampleReport";
-import TransparencyWidget from "./components/TransparencyWidget";
+import { MessageCircle } from "lucide-react";
+import { CONVERT } from "./config";
 
 export default function App() {
   return (
     <>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/scanner" element={<Scanner />} />
-      <Route path="/article-50" element={<Guide />} />
-      <Route path="/requirements/:slug" element={<RequirementPage />} />
-      <Route path="/platforms/:slug" element={<PlatformPage />} />
-      <Route path="/learn" element={<ContentHub />} />
-      <Route path="/:lang?/learn" element={<ContentHub />} />
-      <Route path="/report" element={<Report />} />
-      <Route path="/example-report" element={<ExampleReport />} />
-      {/* Legacy intake path — kept so old links and payment redirects still land. */}
-      <Route path="/start" element={<Report />} />
-      {/* Markdown content system: /answers/x, /es/vendors/y, … */}
-      <Route path="/:lang?/:type/:slug" element={<ContentPage />} />
-      <Route path="/privacy" element={<Privacy />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="*" element={<Home />} />
-    </Routes>
-    <TransparencyWidget />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/scanner" element={<Scanner />} />
+        <Route path="/article-50" element={<Guide />} />
+        <Route path="/requirements/:slug" element={<RequirementPage />} />
+        <Route path="/platforms/:slug" element={<PlatformPage />} />
+        <Route path="/learn" element={<ContentHub />} />
+        <Route path="/:lang?/learn" element={<ContentHub />} />
+        <Route path="/report" element={<Report />} />
+        <Route path="/example-report" element={<ExampleReport />} />
+        {/* Legacy intake path — kept so old links and payment redirects still land. */}
+        <Route path="/start" element={<Report />} />
+        {/* Markdown content system: /answers/x, /es/vendors/y, … */}
+        <Route path="/:lang?/:type/:slug" element={<ContentPage />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+      <a
+        href={CONVERT.whatsapp}
+        target="_blank"
+        rel="noopener"
+        aria-label="Ask RapidAct on WhatsApp"
+        className="fixed right-4 bottom-4 z-50 inline-flex min-h-12 items-center gap-2 rounded-md bg-[#128c5e] px-3.5 text-[13px] font-bold text-white shadow-lg transition hover:bg-[#0f7a52] focus-visible:ring-4 focus-visible:ring-[#128c5e]/25 focus-visible:outline-none sm:right-6 sm:bottom-6"
+      >
+        <MessageCircle className="h-5 w-5" aria-hidden="true" />
+        <span className="hidden sm:inline">Ask on WhatsApp</span>
+      </a>
     </>
   );
 }

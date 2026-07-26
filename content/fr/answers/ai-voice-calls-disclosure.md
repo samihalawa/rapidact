@@ -19,8 +19,8 @@ Des insurtechs espagnoles font déjà tourner de la voix IA (construite sur des 
 
 - Une phrase d'ouverture dans le flux d'appel : «Vous parlez avec un assistant IA automatisé.»
 - Documentée dans vos scripts SVI, avec un chemin facile vers un humain.
-- Pour le côté web (où vit le chatbot), la couche gratuite RapidAct couvre la divulgation. [Obligations voix et chat →](/requirements/chatbot-ai-disclosure)
+- Pour le chatbot web, adaptez le [badge à un script](/article-50#install) si une divulgation lors de la première interaction convient. [Obligations voix et chat →](/requirements/chatbot-ai-disclosure)
 
 ---
 
-*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [prix 0/59/99 €](/#pricing)*
+*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

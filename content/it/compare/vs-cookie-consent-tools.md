@@ -20,4 +20,4 @@ Se hai imparato il playbook del banner cookie nel 2018, capisci già questo merc
 
 ---
 
-*Prova la versione gratuita: [scansiona il tuo sito](/scanner) · [prezzi 0/59/99 €](/#pricing)*
+*Prova la versione gratuita: [scansiona il tuo sito](/scanner) · [badge e scanner gratuiti + valutazione da 99 €](/#pricing)*

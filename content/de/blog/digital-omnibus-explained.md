@@ -32,4 +32,4 @@ Die Lösung ist ein Nachmittag: [scannen](/scanner), offenlegen, kennzeichnen, p
 
 ---
 
-*Hier starten: [kostenloser Scan](/scanner) · [Lernzentrum](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Hier starten: [kostenloser Scan](/scanner) · [Lernzentrum](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

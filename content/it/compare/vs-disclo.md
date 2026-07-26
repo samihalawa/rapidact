@@ -5,22 +5,21 @@ lang: it
 ---
 # RapidAct vs Disclo
 
-**Disclo vende un badge chatbot ospitato a 19 €/mese con account esterno ed evidenza ospitata. RapidAct offre lo stesso risultato gratis (locale, senza account), con un pacchetto unico da 59 € e installazione fatta per te da 99 € — senza abbonamento, evidenza sul tuo server.**
+RapidAct offre un badge di comunicazione IA gratuito, self-hosted e installabile con un solo script, oltre a uno scanner gratuito delle pagine pubbliche. Il badge non richiede account, cookie, tracciamento dei visitatori o registro delle prove.
 
-| | RapidAct | Disclo |
+| | RapidAct | Strumenti ospitati |
 |---|---|---|
-| Rilevamento + badge | **Gratis** | 19 €/mese |
-| Registro delle prove | Locale, sul tuo server | Ospitato (il loro account) |
-| Lingue | EN/ES nativo | Multi |
-| Firme dei fornitori | 52 | Focalizzato chatbot |
-| Scanner (qualsiasi sito) | Gratis, + estensione Chrome | — |
-| Installazione fatta per te | 99 € una tantum | — |
-| Lock-in | Nessuno (GPL) | Abbonamento |
+| Badge | **Installazione gratuita con uno script** | Dipende dal fornitore |
+| Account obbligatorio | No | Spesso |
+| Tracciamento visitatori | Nessuno nel badge | Verifica le condizioni |
+| Scanner di pagina pubblica | Gratuito, 52 firme tecniche | Variabile |
+| Valutazione aziendale | 99 € una tantum | Variabile |
+| Classificazione giuridica | Non inclusa nel badge o scanner | Verifica ambito |
 
 ## Il verdetto onesto
 
-Se vuoi un servizio ospitato e ti piacciono gli abbonamenti, Disclo funziona. Se vuoi lo stesso risultato di compliance senza quota mensile, senza account esterno e con le tue prove sulla tua infrastruttura — è per questo che esiste RapidAct.
+Scegli il badge RapidAct per una comunicazione leggera e configurabile sotto il tuo controllo. Stabilisci prima il sistema IA, il tuo ruolo di fornitore o deployer e obbligo pertinente dello Articolo 50; nessun badge da solo dimostra la conformità completa.
 
 ---
 
-*Prova la versione gratuita: [scansiona il tuo sito](/scanner) · [prezzi 0/59/99 €](/#pricing)*
+*[Copia il badge gratuito](/article-50#install) · [scansiona una pagina pubblica](/scanner) · [valutazione aziendale — 99 €](/report)*

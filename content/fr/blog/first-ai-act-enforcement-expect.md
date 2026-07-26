@@ -28,4 +28,4 @@ L'objectif n'a jamais été «éviter une amende le premier jour» — c'est «n
 
 ---
 
-*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [prix 0/59/99 €](/#pricing)*
+*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

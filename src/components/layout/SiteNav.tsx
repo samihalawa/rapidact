@@ -28,7 +28,9 @@ export default function SiteNav() {
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link to="/" className="flex items-center gap-2">
             <img src="/icons/logo-32.png" alt="" className="h-6 w-6 rounded" />
-            <span className="ink text-[16px] font-bold tracking-tight">RapidAct</span>
+            <span className="ink text-[16px] font-bold tracking-tight">
+              RapidAct
+            </span>
           </Link>
 
           <nav className="ink-soft hidden items-center gap-6 text-[14px] md:flex">
@@ -47,6 +49,9 @@ export default function SiteNav() {
             <Link to="/article-50" className="hover:text-[#16181d]">
               Article 50
             </Link>
+            <Link to={CONVERT.badge} className="hover:text-[#16181d]">
+              Free badge
+            </Link>
             <Link to="/learn" className="hover:text-[#16181d]">
               Guides
             </Link>
@@ -60,7 +65,7 @@ export default function SiteNav() {
               Free scan
             </button>
             <Button
-              className="h-9 rounded bg-[#16181d] px-4 text-[14px] font-semibold text-white hover:bg-[#2b2f38]"
+              className="h-11 rounded bg-[#16181d] px-4 text-[14px] font-semibold text-white hover:bg-[#2b2f38]"
               onClick={() => navigate(CONVERT.report)}
             >
               Request assessment

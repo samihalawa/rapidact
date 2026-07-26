@@ -20,8 +20,8 @@ lang: es
 
 ## El camino rápido
 
-Los pasos 1, 2, 3 y 7 vienen gratis con RapidAct — una tarde, no un proyecto. [Precios — 0/59/99 € →](/#pricing)
+Los pasos 1, 2, 3 y 7 vienen gratis con RapidAct — una tarde, no un proyecto. [Insignia y escáner gratis + evaluación de 99 € →](/#pricing)
 
 ---
 
-*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [precios 0/59/99 €](/#pricing)*
+*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

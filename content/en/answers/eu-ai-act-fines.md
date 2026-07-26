@@ -24,7 +24,7 @@ For a €50M-turnover company, 3% is €1.5M. For a €1B company, €30M — ab
 
 ## The cheapest insurance available
 
-A disclosure layer and an evidence log cost between €0 and €99. [Compare options →](/#pricing)
+The one-script disclosure badge and public scan are free; the company-wide written assessment is €99. [Compare options →](/#pricing)
 
 ---
 

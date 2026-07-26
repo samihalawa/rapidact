@@ -24,7 +24,7 @@ Regulators don't start with random audits. First waves of enforcement under any 
 
 ## Your position strategy
 
-The goal was never "avoid a fine on day one" — it's "never be the easy example". A visible disclosure, labeled synthetic content, and a timestamped evidence log put you in the vast, boring, un-fineable majority. [Get there this week →](/answers/ai-act-checklist-website)
+The practical goal is to identify the applicable duty, implement it clearly and retain proportionate proof of the live result. No badge or checklist makes a company automatically un-fineable. [Use the checklist →](/answers/ai-act-checklist-website)
 
 ---
 

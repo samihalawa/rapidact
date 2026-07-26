@@ -20,9 +20,9 @@ In June 2026 the European Commission published the final Code of Practice on Tra
 
 1. Use the **standard EU AI icons** rather than inventing your own label design — instant recognizability, zero design work.
 2. Follow its **wording patterns** for chat disclosure ("You are interacting with an AI system…").
-3. Keep **process evidence** — the Code emphasizes demonstrable measures, which is exactly what an evidence log provides.
+3. Keep **process evidence** — record owners, approved wording, affected channels and dated rendered checks.
 
-RapidAct's disclosure components ship the EU icon set and Code-aligned wording by default — it's the fastest way to inherit the standard without reading 60 pages of it. [See what's included →](/#features)
+RapidAct's free badge ships neutral default wording that you must tailor to the actual system. Review the Commission materials directly before relying on any specific icon or label pattern. [See the installer →](/article-50#install)
 
 ---
 

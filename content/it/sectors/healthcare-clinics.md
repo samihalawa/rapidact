@@ -18,13 +18,13 @@ La guida in italiano chiaro — cosa attiva la legge in cliniche e salute, cosa 
 ## L'ordine delle operazioni
 
 1. **Scansiona tutto ciò che è pubblico** — il tuo sito, il flusso di prenotazione e qualsiasi portale clienti. [Scansione gratuita →](/scanner)
-2. **Sistema prima la chat** — il trigger più visibile e più facile: il livello gratuito RapidAct aggiunge la disclosure sopra il widget. [Guide per piattaforma →](/learn)
-3. **Etichetta i media sintetici** — le immagini IA ricevono etichette visibili dal kit di modelli gratuito.
-4. **Sistema il tuo testo** — etichetta i contenuti pubblici scritti dall'IA, o documenta correttamente la genuina revisione editoriale.
-5. **Conserva le prove** — prova con timestamp di ogni visualizzazione della disclosure, esportabile in CSV.
+2. **Stabilisci i ruoli** — identifica fornitore, deployer e il preciso presupposto dello Articolo 50 per ogni sistema.
+3. **Implementa la comunicazione corretta** — usa il [badge gratuito con un solo script](/article-50#install) quando è appropriato un avviso alla prima interazione.
+4. **Tratta i contenuti separatamente** — distingui la marcatura leggibile dalla macchina del fornitore dagli obblighi del deployer per deepfake e testi di interesse pubblico.
+5. **Conserva prove proporzionate** — registra URL, testo, responsabile e controlli desktop/mobile datati senza tracciare i visitatori.
 
 ## La realtà del settore
 
 La trasparenza (Articolo 50) è il pavimento. Se un bot inizia a consigliare sul trattamento, vai verso il territorio ad alto rischio — quello è un regime diverso e più grande che merita un avvocato.
 
-*Preferisci che lo gestiamo noi? Il [pacchetto da 59 €](/#pricing) arriva preconfigurato, o installiamo tutto noi per 99 € — verificato dal vivo sulle tue pagine.*
+*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*

@@ -23,4 +23,4 @@ La soluzione non dipende nemmeno da dove sei: un livello di disclosure sul tuo s
 
 ---
 
-*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [prezzi 0/59/99 €](/#pricing)*
+*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [badge e scanner gratuiti + valutazione da 99 €](/#pricing)*

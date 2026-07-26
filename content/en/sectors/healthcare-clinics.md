@@ -18,10 +18,10 @@ Dental, aesthetic and medical clinics use booking chatbots and AI triage heavily
 ## The order of operations
 
 1. **Scan everything public** — your site, booking flow, and any client-facing portal. [Free scan →](/scanner)
-2. **Fix the chat first** — it's the most visible trigger and the easiest: the free RapidAct layer adds the disclosure above the widget. [Platform guides →](/learn)
-3. **Label synthetic media** — AI imagery gets visible labels from the free template kit.
-4. **Sort your text** — label AI-drafted public content, or document genuine editorial review properly.
-5. **Keep evidence** — timestamped proof of every disclosure view, exportable as CSV.
+2. **Establish the roles** — identify the provider, deployer and exact Article 50 trigger for each system.
+3. **Implement the right notice** — use the [free one-script badge](/article-50#install) for a direct-interaction disclosure where it fits.
+4. **Treat content separately** — distinguish provider machine-readable marking from deployer duties for deepfakes and public-interest text.
+5. **Keep proportionate proof** — record live URLs, wording, owners and dated desktop/mobile checks without tracking visitors.
 
 ## Sector reality check
 

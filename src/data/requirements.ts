@@ -16,126 +16,131 @@ export const REQUIREMENTS: RequirementGuide[] = [
   {
     slug: "chatbot-ai-disclosure",
     title: "Chatbot AI disclosure",
-    metaTitle: "Chatbot AI disclosure under EU AI Act Article 50 — plain-English guide | RapidAct",
+    metaTitle:
+      "Chatbot AI disclosure under EU AI Act Article 50 — plain-English guide | RapidAct",
     metaDescription:
-      "From 2 Aug 2026 your website chatbot must tell visitors they are talking to AI. Who it applies to, what the law says, and how to fix it free on WordPress, Wix or any stack.",
-    h1: "Your chatbot must say it's an AI — here's exactly what that means",
+      "Article 50(1) requires providers of direct-interaction AI systems to inform people they are interacting with AI. Check your role and add a clear notice.",
+    h1: "When your chatbot must say it is AI",
     intro:
-      "If your website has a chatbot, virtual assistant or AI support agent, EU law now requires it to introduce itself as an AI before the conversation starts. Not in the footer. Not in your terms. Right there, where the visitor sees it, at first contact.",
+      "Article 50(1) places the direct-interaction notice on providers of AI systems intended to interact directly with people. A site owner may also be the provider — for example when offering an own-brand assistant — but embedding a third-party tool does not automatically settle the role question.",
     whoNeedsIt: [
-      "Online shops with a support chat widget (Tidio, Zendesk, Intercom, LiveChat, Smartsupp…)",
-      "Businesses using AI assistants for bookings, quotes or appointments",
-      "Anyone whose website answers visitor questions automatically",
-      "Companies outside the EU whose site serves EU visitors — the law follows the audience, not your address",
+      "Providers offering an AI chatbot or assistant directly to people in the EU",
+      "Businesses offering an own-brand AI assistant for bookings, quotes or support",
+      "Teams that materially modify or relabel a third-party AI system under their own name",
+      "Non-EU providers whose system or output is placed or used in the EU",
     ],
     whatLawSays:
-      "Article 50(1) of the EU AI Act (Regulation 2024/1689) says that people must be informed, clearly and in a way they can't miss, when they are interacting with an AI system. It applies from 2 August 2026 to companies of every size — there is no small-business exemption. Breaking it sits in the mid-tier of fines: up to €15 million or 3% of worldwide turnover, whichever is higher.",
-    deadline: "2 August 2026 — already in force for new deployments.",
+      "Article 50(1) of Regulation (EU) 2024/1689 requires providers to design direct-interaction AI systems so people are informed they are interacting with AI, unless that is obvious to a reasonably well-informed, observant and circumspect person. The information must be clear, distinguishable and accessible at the latest at first interaction. Article 99 sets a maximum fine of €15 million or 3% of worldwide annual turnover, subject to proportionality and the specific case.",
+    deadline: "2 August 2026.",
     freeSteps: [
-      "Scan your site free — we detect which chatbot platform you run and whether a disclosure is already visible.",
-      "Install the free RapidAct plugin (WordPress, Wix, or one script tag for anything else).",
-      "The disclosure notice appears above your chat widget automatically, in English and Spanish.",
-      "Turn on the evidence log so every disclosure view is timestamped — your proof if anyone ever asks.",
+      "Scan the public page to identify known chatbot signatures and visible disclosure wording.",
+      "Confirm who is the provider, who is the deployer and whether an exception applies.",
+      "Install the free one-script RapidAct badge and tailor the wording to the actual system.",
+      "Verify the live desktop and mobile experience before the first interaction, then record the URL, wording, owner and verification date.",
     ],
     mistakes: [
-      "Thinking your chatbot vendor's label covers you — it doesn't. The duty sits with you, the site owner.",
+      "Assuming the website owner is always the provider — establish the contractual and product role.",
       "Hiding the notice in a settings page or terms document — it must be visible at first contact.",
-      "Assuming a 'human-sounding' bot name (like a person called Leia) is fine without disclosure — it's the exact thing the law targets.",
-      "Believing the 2027 delay applies — that was the high-risk rulebook, not Article 50.",
+      "Assuming a human-sounding bot name makes the AI interaction obvious.",
+      "Believing the 2027 high-risk-system delay also moves Article 50's transparency date.",
     ],
   },
   {
     slug: "ai-content-labeling",
     title: "AI content labeling",
-    metaTitle: "Labeling AI-generated text and images — EU AI Act guide for businesses | RapidAct",
+    metaTitle:
+      "Labeling AI-generated text and images — EU AI Act guide for businesses | RapidAct",
     metaDescription:
-      "AI-written articles and AI-generated images must be labeled under Article 50 from 2 Aug 2026. Plain-English guide: what's covered, the human-review exception, and free label templates.",
-    h1: "AI-made images and text need a label — here's the simple version",
+      "Article 50 has separate machine-readable marking and visible-disclosure duties for synthetic content. Learn who must do what and when.",
+    h1: "AI content marking has two different duties",
     intro:
-      "If your business publishes AI-generated images, videos or articles, the EU AI Act requires them to be marked as AI-made. This covers marketing images, product photos with AI models, AI-written blog posts and news-style content.",
+      "Article 50 does not impose one blanket visible label on every AI-assisted asset. Providers of generative AI have a machine-readable marking duty, while deployers have visible disclosure duties for deepfakes and certain public-interest text.",
     whoNeedsIt: [
-      "E-commerce stores using AI product photos or AI fashion models",
-      "Marketing teams publishing AI-generated ad creatives or social images",
-      "Publishers and blogs using AI to draft articles",
-      "Agencies producing synthetic content for client brands",
+      "Providers of AI systems that generate synthetic audio, image, video or text",
+      "Deployers publishing deepfake audio, images or video",
+      "Deployers publishing AI-generated or manipulated text to inform the public on matters of public interest",
+      "Teams publishing synthetic media that realistically depicts people, places, entities or events",
     ],
     whatLawSays:
-      "Article 50(2) and 50(4) require AI-generated content to be marked as artificially generated — visibly for deepfakes and public-interest text, and in machine-readable form for generative AI outputs. AI-written text on public-interest topics can skip the label only if a human editor genuinely reviewed it, changed it where needed, and takes editorial responsibility — a quick glance doesn't count.",
-    deadline: "2 August 2026 for most duties; machine-readable marking for older systems by 2 December 2026.",
+      "Article 50(2) requires providers of generative AI systems to mark outputs in a machine-readable format and make them detectable as artificially generated or manipulated, where technically feasible. Article 50(4) separately requires deployers to disclose deepfake content and AI-generated or manipulated public-interest text. The text duty has an exception where human review or editorial control exists and a person holds editorial responsibility.",
+    deadline:
+      "2 August 2026; Article 50(2) systems placed on the market before then have a transition until 2 December 2026.",
     freeSteps: [
-      "List where AI content appears on your site: product images, banners, blog posts, videos.",
-      "Download the free EU-standard AI label templates and icon set from RapidAct.",
-      "Add the labels to AI-made assets — our pack places them automatically on WordPress.",
-      "For AI-drafted text: either label it, or document the human editorial review properly.",
+      "Inventory synthetic audio, image, video and text by system, publishing channel and audience.",
+      "Separate the provider's machine-readable marking duty from the deployer's visible-disclosure duty.",
+      "Use the Commission's published code-of-practice materials and icons where they fit your case.",
+      "Record any human-review or editorial-responsibility basis you rely on for public-interest text.",
     ],
     mistakes: [
-      "Thinking 'a human checked it' qualifies for the exemption — the review must be substantive and documented.",
-      "Labeling only the obvious deepfakes — AI product photos count too.",
-      "Assuming the AI tool's own watermark covers your publishing duty — platform labels don't replace yours.",
+      "Treating the machine-readable provider duty and visible deployer duty as the same obligation.",
+      "Calling every AI-assisted marketing image a deepfake without checking the statutory definition.",
+      "Assuming a platform watermark always satisfies the information, accessibility and timing requirements.",
     ],
   },
   {
     slug: "deepfake-labeling",
     title: "Deepfake labeling",
-    metaTitle: "Deepfake and synthetic media labeling — EU AI Act Article 50(4) guide | RapidAct",
+    metaTitle:
+      "Deepfake and synthetic media labeling — EU AI Act Article 50(4) guide | RapidAct",
     metaDescription:
-      "Deepfakes and AI-altered photos, audio and video must be visibly labeled from 2 Aug 2026. What counts as a deepfake for a business, and how to label them correctly.",
-    h1: "If it looks real but AI made it, it needs a visible label",
+      "Deepfakes and AI-altered photos, audio and video must be visibly disclosed from 2 Aug 2026. Learn what counts and how to disclose it.",
+    h1: "If synthetic media looks real, check the deepfake duty",
     intro:
-      "Deepfakes aren't just celebrity scams. An AI-generated model wearing your clothes, an AI voiceover on your ad, a face swapped into your campaign video — all of these count as synthetic media under the EU AI Act, and all of them need a visible label.",
+      "Deepfakes are AI-generated or manipulated image, audio or video content that resembles existing people, objects, places, entities or events and would falsely appear authentic or truthful. The definition is narrower than anything made with AI.",
     whoNeedsIt: [
-      "Fashion and retail brands using AI-generated models or virtual influencers",
-      "Advertisers using AI voiceovers or AI-animated presenters",
-      "Anyone publishing AI-edited photos or videos that could pass as real",
-      "Social media teams running AI-generated campaign content",
+      "Fashion and retail brands using synthetic models that resemble real people",
+      "Advertisers using AI voices or presenters that could be mistaken for authentic recordings",
+      "Teams publishing face swaps or realistic AI-altered scenes",
+      "Deployers publishing third-party deepfake media through their own channels",
     ],
     whatLawSays:
-      "Article 50(4) requires deepfakes — AI-generated or AI-altered audio, image or video that resembles real people, places or events — to be disclosed visibly and clearly. For artistic or satirical work the label can be more discreet, but it can't be hidden. The duty applies to whoever publishes the content, including brands reposting AI-influencer content.",
+      "Article 50(4) requires deployers using an AI system to generate or manipulate deepfake audio, image or video to disclose that the content was artificially generated or manipulated. For evidently artistic, creative, satirical, fictional or analogous work, disclosure must still be appropriate and cannot hamper display or enjoyment of the work.",
     deadline: "2 August 2026.",
     freeSteps: [
-      "Identify AI-made people, voices and scenes in your published content.",
-      "Apply visible labels using the free EU-standard templates.",
-      "If you work with AI influencers or agencies, add labeling duties to the contract.",
-      "Keep a record of what was labeled and when — the evidence log does this for you.",
+      "Identify AI-generated or manipulated people, voices, objects, places and events.",
+      "Check whether each asset meets the Act's deepfake definition rather than applying a blanket rule.",
+      "Apply a clear, distinguishable and accessible disclosure at the latest on first exposure.",
+      "Record the asset, wording, channel, owner and publication date in your implementation file.",
     ],
     mistakes: [
-      "Believing 'everyone knows she's an AI influencer' counts as disclosure — profile-level mentions don't cover each piece of content.",
-      "Forgetting that republishing someone else's AI content still makes you the publisher.",
-      "Hiding the label in metadata only — deepfakes need a visible notice.",
+      "Believing profile-level wording automatically covers each separately published asset.",
+      "Ignoring republished synthetic media because another party generated it.",
+      "Relying only on hidden metadata where Article 50(4) calls for disclosure to people.",
     ],
   },
   {
     slug: "ai-disclosure-evidence",
     title: "Evidence & record-keeping",
-    metaTitle: "Prove your AI disclosures happened — evidence logs for EU AI Act | RapidAct",
+    metaTitle: "Build an AI disclosure evidence pack | RapidAct",
     metaDescription:
-      "When a regulator or client asks you to prove AI disclosures, a screenshot isn't enough. How timestamped evidence logs work and how to set one up free.",
-    h1: "The question won't be 'did you disclose?' — it'll be 'prove it'",
+      "Build a practical AI-transparency evidence pack with live URLs, screenshots, wording, ownership, change history and periodic verification.",
+    h1: "Keep practical proof of what you disclosed",
     intro:
-      "Regulatory questions arrive months later, in writing: show that your AI disclosure was actually live, on this page, at this time. If your answer is a screenshot from last week, you're guessing. An evidence log answers it in one email.",
+      "Article 50 sets transparency duties; it does not prescribe a RapidAct event log. A compact implementation record is still useful for governance, client assurance and demonstrating what was live, where and when.",
     whoNeedsIt: [
-      "Any business that installed an AI disclosure and wants proof it stays live",
-      "Agencies that must show clients the work was done and persists",
-      "Companies in regulated sectors where documentation is already a habit",
-      "Anyone whose compliance depends on a plugin nobody has checked since installing",
+      "Providers and deployers that have implemented an Article 50 disclosure",
+      "Agencies that need to hand over verifiable implementation details",
+      "Companies that operate the same disclosure across several sites or products",
+      "Teams that need owners and review dates when UI or AI vendors change",
     ],
     whatLawSays:
-      "Article 50 sets the disclosure duty; enforcement works through documentation. Market-surveillance authorities can ask deployers to demonstrate conformity, and fines consider whether you can show good-faith, documented effort. A timestamped, tamper-evident record of disclosure events is the practical way businesses show that.",
-    deadline: "Evidence matters from the day your disclosure goes live — ideally before 2 August 2026.",
+      "Article 50 defines the disclosure outcome, while the Act's enforcement framework and general governance practice make traceable implementation records useful. Your evidence should not claim more than it proves: a screenshot proves one rendered state, not continuous availability.",
+    deadline:
+      "Start the record when the disclosure is published and re-check it after material UI, vendor or wording changes.",
     freeSteps: [
-      "Install the free RapidAct plugin — the evidence log is built in.",
-      "Every time the disclosure appears for a visitor, the event is timestamped in your own database.",
-      "Nothing personal is stored: event, page URL, time. No IPs, no cookies.",
-      "Export the CSV whenever someone asks — that's the whole workflow.",
+      "Record the AI system, provider/deployer roles, affected pages and approved wording.",
+      "Capture the live desktop and mobile disclosure at first interaction with a date and URL.",
+      "Assign an owner and next review date, and preserve relevant code or configuration changes.",
+      "Re-test after releases and keep only the minimum evidence needed — no visitor tracking is required.",
     ],
     mistakes: [
-      "Keeping evidence on the vendor's side where you can't export it.",
-      "Logging personal data you don't need — it creates a GDPR problem to solve an AI Act one.",
-      "Installing the disclosure and never checking it again — logs also prove it stayed live.",
+      "Claiming continuous compliance from a single screenshot.",
+      "Collecting visitor identifiers when a configuration record and periodic rendered proof are enough.",
+      "Installing the disclosure and never checking it again after UI or vendor changes.",
     ],
   },
 ];
 
 export function getRequirement(slug: string): RequirementGuide | undefined {
-  return REQUIREMENTS.find((r) => r.slug === slug);
+  return REQUIREMENTS.find(r => r.slug === slug);
 }

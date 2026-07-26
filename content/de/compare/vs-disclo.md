@@ -5,22 +5,21 @@ lang: de
 ---
 # RapidAct vs Disclo
 
-**Disclo verkauft ein gehostetes Chatbot-Badge für 19 €/Monat mit externem Konto und gehosteter Evidenz. RapidAct liefert dasselbe Ergebnis kostenlos (lokal, ohne Konto), mit einem 59-€-Einmalpaket und 99-€-Done-for-you-Installation — ohne Abo, Evidenz auf Ihrem eigenen Server.**
+RapidAct bietet ein kostenloses, selbst gehostetes KI-Offenlegungsbadge mit einem Skript sowie einen kostenlosen Scanner für öffentliche Seiten. Das Badge benötigt kein Konto, keine Cookies, kein Besuchertracking und kein Evidence-Log.
 
-| | RapidAct | Disclo |
+| | RapidAct | Gehostete Offenlegungstools |
 |---|---|---|
-| Erkennung + Badge | **Kostenlos** | 19 €/Monat |
-| Evidence-Log | Lokal, auf Ihrem Server | Gehostet (deren Konto) |
-| Sprachen | EN/ES nativ | Multi |
-| Anbieter-Signaturen | 52 | Chatbot-fokussiert |
-| Scanner (jede Website) | Kostenlos, + Chrome-Erweiterung | — |
-| Done-for-you-Installation | 99 € einmalig | — |
-| Lock-in | Keiner (GPL) | Abo |
+| Badge | **Kostenlose Ein-Skript-Installation** | Anbieterabhängig |
+| Konto erforderlich | Nein | Häufig |
+| Besuchertracking | Keines im Badge | Bedingungen prüfen |
+| Scanner öffentlicher Seiten | Kostenlos, 52 technische Signaturen | Variabel |
+| Unternehmensweite Bewertung | 99 € einmalig | Variabel |
+| Rechtliche Klassifizierung | Nicht in Badge oder Scanner enthalten | Umfang prüfen |
 
 ## Das ehrliche Urteil
 
-Wenn Sie einen gehosteten Dienst wollen und Abos mögen, funktioniert Disclo. Wenn Sie dasselbe Compliance-Ergebnis ohne Monatsgebühr, ohne externes Konto und mit Ihrer Evidenz auf Ihrer eigenen Infrastruktur wollen — dafür existiert RapidAct.
+Wählen Sie das RapidAct-Badge für eine schlanke, konfigurierbare Offenlegungsebene unter Ihrer Kontrolle. Klären Sie zuerst KI-System, Anbieter- oder Betreiberrolle und die einschlägige Artikel-50-Pflicht; kein Badge allein beweist vollständige Compliance.
 
 ---
 
-*Testen Sie die kostenlose Version: [Website scannen](/scanner) · [Preise 0/59/99 €](/#pricing)*
+*[Kostenloses Badge kopieren](/article-50#install) · [öffentliche Seite scannen](/scanner) · [Unternehmensbewertung — 99 €](/report)*

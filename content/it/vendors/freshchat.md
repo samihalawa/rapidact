@@ -1,33 +1,33 @@
 ---
 title: "Disclosure IA di Freshchat / Freddy AI — guida Articolo 50 | RapidAct"
-description: "Usi Freshchat / Freddy AI sul tuo sito? L'Articolo 50 mette l'obbligo della disclosure IA su di te, non su Freshworks. Cosa aggiungere entro il 2 agosto 2026 — e come farlo gratis."
+description: "Revisione tecnica dello Articolo 50 per questo fornitore IA: rilevamento pubblico, ruoli di fornitore e deployer e badge gratuito con uno script."
 lang: it
 ---
-# Freshchat / Freddy AI e l'AI Act europeo: l'obbligo è tuo, non di Freshworks
+# Freshchat / Freddy AI e AI Act europeo: verifica il ruolo dello Articolo 50
 
-Se il tuo sito usa **Freshchat / Freddy AI**, i visitatori che ci parlano stanno interagendo con un sistema di IA — e dal **2 agosto 2026**, l'Articolo 50(1) dell'AI Act europeo impone di informarli chiaramente prima che la conversazione inizi. Freshworks fornisce lo strumento; **tu**, il deployer, hai l'obbligo legale.
+Una firma pubblica mostra che questo fornitore IA è presente nella pagina. È un segnale tecnico, non una decisione sul ruolo giuridico: stabilisci fornitore, deployer e se lo Articolo 50(1) richiede un avviso alla prima interazione.
 
-## Perché Freshchat / Freddy AI rientra pienamente nell'ambito
+## Perché questo segnale tecnico merita una verifica
 
-Le sue funzioni di IA interagiscono automaticamente con i visitatori del tuo sito. È esattamente la situazione per cui è stato scritto l'Articolo 50: una persona che interagisce con un software che risponde come una persona. Il nostro database di rilevamento identifica Freshchat / Freddy AI in una pagina in pochi secondi — livello di esposizione: **alto** — e un regolatore (o un concorrente) può fare lo stesso controllo.
+Le sue funzioni di IA interagiscono automaticamente con i visitatori del tuo sito. È un segnale tecnico da esaminare ai sensi dell Articolo 50(1) se sei il fornitore responsabile della comunicazione alla prima interazione. Il nostro database di rilevamento identifica Freshchat / Freddy AI in una pagina in pochi secondi — livello di esposizione: **alto** — e un regolatore (o un concorrente) può fare lo stesso controllo.
 
-## Cosa la legge richiede sul tuo sito
+## Cosa verificare sul tuo sito
 
-- Un avviso chiaro e visibile che il visitatore sta interagendo con un sistema di IA — al primo contatto, non nascosto nei termini.
-- Presente ovunque avvenga l'interazione (widget di chat, messenger incorporato, interfaccia vocale).
-- Formulazione onesta: un nome umano per il bot non elimina l'obbligo; aumenta il rischio.
+- Quando si applica lo Articolo 50(1), un avviso chiaro di interazione IA entro il primo contatto.
+- Avviso nella superficie reale di interazione, non solo nei termini o nella pagina privacy.
+- Testo adatto al sistema, al ruolo, al momento e alla eccezione applicabile.
 
 ## Risolvi gratis in pochi minuti
 
-1. [Scansiona il tuo sito](/scanner) — confermiamo {name} e verifichiamo se esiste già una disclosure.
-2. Installa il livello gratuito RapidAct per il tuo stack: [WordPress](/platforms/wordpress), [Wix](/platforms/wix), [Shopify](/platforms/shopify) o [un tag script per qualsiasi altra piattaforma](/platforms/custom-website).
-3. Stessa installazione in una riga — il livello RapidAct lo copre.
-4. Attiva il registro delle prove con timestamp — la tua prova che la disclosure era attiva.
+1. [Scansiona il tuo sito](/scanner) — confermiamo la piattaforma rilevata e verifichiamo se esiste già una disclosure.
+2. Installa il [badge RapidAct](/article-50#install) con un solo script e adatta il testo al sistema IA effettivo.
+3. Verifica se sei il fornitore responsabile della comunicazione alla prima interazione; una corrispondenza tecnica non determina il ruolo giuridico.
+4. Pubblica e registra URL, testo, responsabile e data della verifica desktop e mobile.
 
 ## Gli errori da evitare
 
 - Pensare che il brand di Freshworks o un avatar robot valga come disclosure — non vale, a meno che non informi chiaramente l'utente che parla con un'IA.
-- Affidarsi alla conformità del fornitore — gli obblighi dell'Articolo 50 sono del deployer.
+- Non presumere che il fornitore tecnico o il titolare del sito abbia sempre tale obbligo; vanno stabiliti i ruoli di fornitore e deployer.
 - Aspettare il «rinvio del 2027» — riguardava le regole ad alto rischio, non l'Articolo 50. [Cosa è stato davvero rinviato →](/answers/digital-omnibus-ai-act-delay)
 
-*Preferisci che lo facciamo noi? Il [pacchetto da 59 €](/#pricing) arriva preconfigurato, oppure installiamo tutto noi per 99 €.*
+*Il [rapporto preconsultivo da 99 €](/report) classifica i sistemi IA della azienda e arriva via e-mail entro 24–48 ore.*

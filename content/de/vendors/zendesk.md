@@ -1,33 +1,33 @@
 ---
 title: "Zendesk Messaging / AI Agents KI-Offenlegung — Artikel-50-Leitfaden | RapidAct"
-description: "Nutzen Sie Zendesk Messaging / AI Agents auf Ihrer Website? Artikel 50 legt die KI-Offenlegungspflicht auf Sie, nicht auf Zendesk. Was Sie vor dem 2. August 2026 brauchen — kostenlos umsetzbar."
+description: "Technische Artikel-50-Prüfung für diesen KI-Anbieter: öffentliche Erkennung, Anbieter- und Betreiberrollen sowie kostenloses Ein-Skript-Badge."
 lang: de
 ---
-# Zendesk Messaging / AI Agents und der EU AI Act: Ihre Pflicht, nicht die von Zendesk
+# Zendesk Messaging / AI Agents und der EU AI Act: Artikel-50-Rolle prüfen
 
-Wenn Ihre Website **Zendesk Messaging / AI Agents** nutzt, interagieren Besucher mit einem KI-System — und seit dem **2. August 2026** verlangt Artikel 50(1) des EU AI Act, sie klar darüber zu informieren, bevor das Gespräch beginnt. Zendesk stellt das Werkzeug; **Sie** als Deployer tragen die rechtliche Pflicht.
+Eine öffentliche Signatur zeigt, dass dieser KI-Anbieter auf der Seite vorhanden ist. Das ist ein technisches Signal, keine Entscheidung über die Rechtsrolle: Klären Sie Anbieter, Betreiber und ob Artikel 50(1) einen Hinweis zur direkten Interaktion verlangt.
 
-## Warum Zendesk Messaging / AI Agents voll in den Anwendungsbereich fällt
+## Warum dieses technische Signal geprüft werden sollte
 
-Die AI Agents und der Answer Bot lösen Tickets und chatten mit Besuchern, bevor ein Mensch übernimmt. Genau dafür wurde Artikel 50 geschrieben: ein Mensch, der mit Software interagiert, die wie ein Mensch antwortet. Unsere Erkennungsdatenbank identifiziert Zendesk Messaging / AI Agents in Sekunden — Expositionslevel: **hoch** — und eine Behörde (oder ein Wettbewerber) kann dieselbe Prüfung durchführen.
+Die AI Agents und der Answer Bot lösen Tickets und chatten mit Besuchern, bevor ein Mensch übernimmt. Dies ist ein technisches Signal, das nach Artikel 50(1) geprüft werden sollte, wenn Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind. Unsere Erkennungsdatenbank identifiziert Zendesk Messaging / AI Agents in Sekunden — Expositionslevel: **hoch** — und eine Behörde (oder ein Wettbewerber) kann dieselbe Prüfung durchführen.
 
-## Was das Gesetz auf Ihrer Website verlangt
+## Was Sie auf Ihrer Website prüfen müssen
 
-- Ein klarer, sichtbarer Hinweis, dass der Besucher mit einem KI-System interagiert — beim ersten Kontakt, nicht versteckt in den AGB.
-- Überall dort, wo die Interaktion stattfindet (Chat-Widget, eingebetteter Messenger, Sprachoberfläche).
-- Ehrliche Formulierung: ein menschlicher Bot-Name beseitigt die Pflicht nicht — er erhöht das Risiko.
+- Wenn Artikel 50(1) gilt, ein klarer KI-Interaktionshinweis spätestens beim ersten Kontakt.
+- Der Hinweis in der tatsächlichen Interaktionsfläche, nicht nur in AGB oder Datenschutzseite.
+- Wortlaut passend zu System, Rolle, Zeitpunkt und anwendbarer Ausnahme.
 
 ## Kostenlos in Minuten beheben
 
-1. [Website scannen](/scanner) — wir bestätigen {name} und prüfen auf vorhandene Offenlegung.
-2. Installieren Sie die kostenlose RapidAct-Ebene für Ihren Stack: [WordPress](/platforms/wordpress), [Wix](/platforms/wix), [Shopify](/platforms/shopify) oder [ein Script-Tag für alles andere](/platforms/custom-website).
-3. Der Hinweis sitzt über dem Web-Widget-Launcher; keine Zendesk-Konfiguration nötig.
-4. Aktivieren Sie das Evidence-Log mit Zeitstempel — Ihr Nachweis, dass der Hinweis live war.
+1. [Website scannen](/scanner) — wir bestätigen die erkannte Plattform und prüfen auf vorhandene Offenlegung.
+2. Installieren Sie das [RapidAct-Badge](/article-50#install) mit einem Skript und passen Sie den Text an das tatsächliche KI-System an.
+3. Klären Sie, ob Sie der für den Hinweis zur direkten Interaktion verantwortliche Anbieter sind; ein technischer Treffer entscheidet die rechtliche Rolle nicht.
+4. Veröffentlichen und dokumentieren Sie URL, Wortlaut, Verantwortliche und das Datum der Desktop- und Mobilprüfung.
 
 ## Die Fehler, die Sie vermeiden sollten
 
 - Anzunehmen, Zendesks Branding oder ein Roboter-Avatar zähle als Offenlegung — zählt es nicht, es sei denn, es informiert klar über die KI-Interaktion.
-- Sich auf die Compliance des Anbieters zu verlassen — Artikel-50-Pflichten liegen beim Deployer.
+- Nicht davon ausgehen, dass Anbieter oder Websitebetreiber immer die Pflicht trägt — Anbieter- und Betreiberrolle müssen geklärt werden.
 - Auf die „Verschiebung 2027“ zu warten — das betraf die Hochrisiko-Regeln, nicht Artikel 50. [Was wirklich verschoben wurde →](/answers/digital-omnibus-ai-act-delay)
 
-*Lieber erledigt? Das [59-€-Paket](/#pricing) kommt vorkonfiguriert, oder wir installieren alles für 99 €.*
+*Der [99-€-Vorprüfungsbericht](/report) klassifiziert die KI-Systeme des Unternehmens und kommt innerhalb von 24–48 Stunden per E-Mail.*

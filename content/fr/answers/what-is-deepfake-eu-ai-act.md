@@ -22,4 +22,4 @@ Article 50(4) : les deepfakes doivent être divulgués de manière **visible et 
 
 ---
 
-*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [prix 0/59/99 €](/#pricing)*
+*Outils gratuits : [scannez votre site](/scanner) · [tous les guides](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

@@ -32,4 +32,4 @@ La solución es una tarde: [escanear](/scanner), declarar, etiquetar, registrar.
 
 ---
 
-*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [precios 0/59/99 €](/#pricing)*
+*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

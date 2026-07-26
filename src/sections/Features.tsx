@@ -8,19 +8,19 @@ const tools = [
   },
   {
     name: "Visitor AI disclosure",
-    text: "The notice Article 50(1) requires, shown before a visitor interacts with your AI, in English and Spanish, styled to match your site.",
+    text: "A clear notice for interactive AI, configurable in English or Spanish and visible on every page where the interaction happens.",
   },
   {
-    name: "AI content labels",
-    text: "Labels for AI-generated images, video and text using the EU standard icon set, so synthetic content is marked rather than argued about later.",
+    name: "Configurable by data attributes",
+    text: "Set the system name, responsible provider, disclosure wording, details URL, screen position and accent colour without rebuilding the script.",
   },
   {
-    name: "Evidence log",
-    text: "Each disclosure view recorded with a page and a timestamp, exportable as CSV. Questions about what you displayed tend to arrive months afterwards, in writing.",
+    name: "Privacy-preserving",
+    text: "The badge stores no cookies, profiles or visitor data and makes no tracking request. Its only network request is the public script itself.",
   },
   {
     name: "Platform coverage",
-    text: "A WordPress plugin, a Wix app, a Shopify block, or one script tag for anything else. Your existing chatbot, whether Tidio, Botpress, Zendesk or Intercom, is left untouched.",
+    text: "One script tag works in WordPress custom HTML, Wix Custom Code, Shopify Custom Liquid, Webflow or a custom app. Your existing chatbot is left untouched.",
   },
   {
     name: "Implementation guides",
@@ -43,26 +43,35 @@ export default function Features() {
           The implementation tools cost nothing
         </h2>
         <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
-          Once you know what your company is required to do, the technical work is not the
-          difficult part, so we do not charge for it. Scan your site, install the disclosure layer,
-          keep the evidence log, whether or not you ever buy an assessment.
+          Once you know what your company is required to do, the visitor-facing
+          notice is usually the straightforward part. Scan the public page and
+          install the disclosure badge whether or not you ever buy an
+          assessment.
         </p>
 
         <div className="hairline mt-10 grid border-t sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map((t) => (
+          {tools.map(t => (
             <div key={t.name} className="hairline border-b py-6 sm:pr-8">
               <h3 className="ink text-[15px] font-semibold">{t.name}</h3>
-              <p className="ink-soft mt-2 text-[15px] leading-relaxed">{t.text}</p>
+              <p className="ink-soft mt-2 text-[15px] leading-relaxed">
+                {t.text}
+              </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-2">
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
           <p className="ink-soft max-w-2xl text-[15px] leading-relaxed">
-            Installing the notice is the straightforward half. Establishing which of your systems
-            the regulation covers, and what you must be able to produce on request, is the half
-            that costs companies money.
+            Installing the notice is the straightforward half. Establishing
+            which of your systems the regulation covers, and what you must be
+            able to produce on request, is the half that costs companies money.
           </p>
+          <button
+            onClick={() => navigate(CONVERT.badge)}
+            className="inline-flex min-h-11 items-center rounded bg-[#16181d] px-5 text-[14px] font-semibold text-white hover:bg-[#2b2f38]"
+          >
+            Copy the free install code
+          </button>
           <button
             onClick={() => navigate(CONVERT.report)}
             className="accent shrink-0 text-[14px] font-semibold underline underline-offset-2"

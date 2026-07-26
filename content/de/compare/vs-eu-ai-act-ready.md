@@ -5,21 +5,21 @@ lang: de
 ---
 # RapidAct vs EU AI Act Ready
 
-**EU AI Act Ready ist ein umfassendes kostenloses WordPress-Plugin (Readiness Score, ~15 Chatbot-Offenlegungen, Assistent). RapidAct ergänzt die kommerzielle Ebene über dem Kostenlosen: 52-Signaturen-Erkennung, Evidence-Log mit Export, Snippet für jeden Stack und 99-€-Done-for-you-Installation.**
+**EU AI Act Ready konzentriert sich auf WordPress. RapidAct bietet einen öffentlichen 52-Signaturen-Scan, ein kostenloses Ein-Skript-Badge für jeden Stack und eine schriftliche Unternehmensbewertung für 99 €.**
 
 | | RapidAct | EU AI Act Ready |
 |---|---|---|
-| Preis | Kostenlos + 59/99 € einmalig | Kostenlos |
+| Preis | Kostenloses Badge und Scan + 99-€-Bericht | Kostenlos |
 | Erkannte Chat-Plattformen | 52 | ~15 |
 | Abgedeckte Stacks | WP, Wix, Shopify, alle | Nur WordPress |
-| Evidence-Log + CSV | Ja | Checklisten-Stil |
+| Besuchertracking | Keines im Badge | Aktuelles Produkt prüfen |
 | Scanner für andere Websites | Ja | Nein |
 | Done-for-you-Installation | 99 € | Nein |
 
 ## Das ehrliche Urteil
 
-EU AI Act Ready ist ein solides kostenloses WP-Plugin. RapidAct ist für den Fall, dass Sie es jenseits von WordPress wollen, Nachweisexporte brauchen oder ein Mensch es einfach tun soll.
+Wählen Sie nach Stack: RapidAct passt für ein Badge auf jeder Website, einen öffentlichen Scan oder eine schriftliche Unternehmensklassifizierung. Kein Badge allein beweist vollständige Compliance.
 
 ---
 
-*Testen Sie die kostenlose Version: [Website scannen](/scanner) · [Preise 0/59/99 €](/#pricing)*
+*Testen Sie die kostenlose Version: [Website scannen](/scanner) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

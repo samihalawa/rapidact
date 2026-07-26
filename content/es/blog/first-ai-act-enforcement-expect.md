@@ -28,4 +28,4 @@ El objetivo nunca fue «evitar una multa el primer día» — es «no ser nunca 
 
 ---
 
-*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [precios 0/59/99 €](/#pricing)*
+*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

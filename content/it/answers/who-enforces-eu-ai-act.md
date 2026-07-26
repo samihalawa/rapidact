@@ -24,4 +24,4 @@ Le prime azioni sceglieranno obiettivi visibili e facili: brand noti con IA evid
 
 ---
 
-*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [prezzi 0/59/99 €](/#pricing)*
+*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [badge e scanner gratuiti + valutazione da 99 €](/#pricing)*

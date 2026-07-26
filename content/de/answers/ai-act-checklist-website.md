@@ -20,8 +20,8 @@ lang: de
 
 ## Der schnelle Weg
 
-Schritte 1, 2, 3 und 7 gibt es kostenlos mit RapidAct — ein Nachmittag, kein Projekt. [Preise — 0/59/99 € →](/#pricing)
+Schritte 1, 2, 3 und 7 gibt es kostenlos mit RapidAct — ein Nachmittag, kein Projekt. [Kostenloses Badge und Scan + 99-€-Bewertung →](/#pricing)
 
 ---
 
-*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

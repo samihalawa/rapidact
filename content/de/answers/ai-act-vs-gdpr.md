@@ -18,8 +18,8 @@ lang: de
 
 ## Wo sie sich treffen
 
-Ihr Evidence-Log: Wenn Sie Offenlegungsereignisse protokollieren, speichern Sie nur das Nötige (Ereignis, Seite, Zeit) — keine IPs oder Nutzerprofile. Unsorgfältig gemacht, kann der AI-Act-Nachweis ein DSGVO-Problem *schaffen*. RapidActs Evidence-Log speichert genau deshalb keine personenbezogenen Daten. [Wie es funktioniert →](/requirements/ai-disclosure-evidence)
+Ihr Nachweis sollte verhältnismäßig sein: System, Seite, Wortlaut, Verantwortliche und datierte Prüfung, ohne Besucher zu identifizieren. Das RapidAct-Badge verwendet keine Cookies, Speicherung oder Interaktionstracking. [Wie es funktioniert →](/requirements/ai-disclosure-evidence)
 
 ---
 
-*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

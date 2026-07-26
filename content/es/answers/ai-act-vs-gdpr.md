@@ -18,8 +18,8 @@ lang: es
 
 ## Donde se cruzan
 
-Tu registro de evidencia: si registras eventos de disclosure, guarda solo lo necesario (evento, página, hora) — no IPs ni perfiles de usuario. Hecho sin cuidado, demostrar el cumplimiento de la Ley de IA puede *crear* un problema de RGPD. El registro de RapidAct no guarda datos personales exactamente por eso. [Cómo funciona →](/requirements/ai-disclosure-evidence)
+Tu registro debe ser proporcionado: conserva sistema, página, texto, responsable y prueba fechada, sin identificar visitantes. La insignia RapidAct no usa cookies, almacenamiento ni rastreo de interacciones. [Cómo funciona →](/requirements/ai-disclosure-evidence)
 
 ---
 
-*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [precios 0/59/99 €](/#pricing)*
+*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

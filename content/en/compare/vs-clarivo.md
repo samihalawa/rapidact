@@ -5,19 +5,19 @@ lang: en
 ---
 # RapidAct vs Clarivo
 
-**Clarivo (free, WP) scans media metadata and adds chatbot notices. RapidAct covers the full loop: detection across 52 signatures, EN/ES disclosure, evidence log, plus off-WordPress stacks and done-for-you service.**
+**Clarivo focuses on WordPress media and notices. RapidAct provides a free 52-signature public-page scan and a configurable one-script disclosure badge for any stack, plus a €99 company-wide written assessment.**
 
 | | RapidAct | Clarivo |
 |---|---|---|
-| Price | Free + one-time tiers | Free |
-| Focus | Full Art. 50 loop | Media metadata + notices |
-| Stacks | WP, Wix, Shopify, any | WordPress |
-| Evidence log | Timestamped + export | Checklist tab |
-| Languages | EN/ES | EN-led |
+| Price | Free badge and scan + €99 assessment | Check current offer |
+| Focus | Public signals + interaction disclosure | Media metadata + notices |
+| Stacks | Any site that accepts a script | WordPress |
+| Visitor tracking | None in the badge | Check current product |
+| Legal classification | Only in the paid assessment | Not compared |
 
 ## The honest verdict
 
-Clarivo is a good free media-labeling tool. RapidAct is the operational kit — disclosure, evidence, and someone to install it if you'd rather not.
+Choose by scope: use a WordPress-focused media tool for that workflow, or RapidAct for a lightweight any-stack interaction badge and public scan. Neither tool alone proves full Article 50 compliance.
 
 ---
 

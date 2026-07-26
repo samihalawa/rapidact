@@ -22,4 +22,4 @@ Il tuo registro delle prove: se registri eventi di disclosure, conserva solo il 
 
 ---
 
-*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [prezzi 0/59/99 €](/#pricing)*
+*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [badge e scanner gratuiti + valutazione da 99 €](/#pricing)*

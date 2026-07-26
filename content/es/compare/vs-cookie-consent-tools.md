@@ -20,4 +20,4 @@ Si aprendiste el manual del banner de cookies en 2018, ya entiendes este mercado
 
 ---
 
-*Prueba la versión gratuita: [escanea tu web](/scanner) · [precios 0/59/99 €](/#pricing)*
+*Prueba la versión gratuita: [escanea tu web](/scanner) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

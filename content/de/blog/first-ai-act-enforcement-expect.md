@@ -28,4 +28,4 @@ Das Ziel war nie „keine Strafe am ersten Tag“ — es ist „nie das leichte 
 
 ---
 
-*Hier starten: [kostenloser Scan](/scanner) · [Lernzentrum](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Hier starten: [kostenloser Scan](/scanner) · [Lernzentrum](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

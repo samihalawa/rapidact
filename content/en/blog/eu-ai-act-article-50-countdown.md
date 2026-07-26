@@ -23,9 +23,9 @@ These aren't bad actors. They're normal businesses that either don't know, or mi
 ## The one-afternoon plan
 
 1. **Hour 1:** [scan your site](/scanner). Know what AI is publicly visible on it.
-2. **Hour 2:** install the disclosure layer (free plugin or snippet) and verify it live on your pages.
-3. **Hour 3:** label AI-generated media and sort your AI-text policy — label it or document the human review properly.
-4. **Hour 4:** turn on the evidence log and put a quarterly recheck in the calendar.
+2. **Hour 2:** establish provider and deployer roles, then install the free badge where a direct-interaction notice fits.
+3. **Hour 3:** separate deepfakes and public-interest text from the provider's machine-readable marking duty.
+4. **Hour 4:** record live URLs, wording and dated desktop/mobile proof, then put a quarterly recheck in the calendar.
 
 That's it. That's the whole thing for most websites. The companies scrambling in September will be the ones who assumed compliance meant consultants.
 

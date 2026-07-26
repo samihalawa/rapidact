@@ -29,4 +29,4 @@ Gratis: escanea tu web, instala la capa RapidAct, listo — el aviso aparece sob
 
 ---
 
-*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [precios 0/59/99 €](/#pricing)*
+*Herramientas gratis: [escanea tu web](/scanner) · [todas las guías](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

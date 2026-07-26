@@ -15,7 +15,9 @@ export default function PlatformPage() {
       <div className="min-h-screen bg-white">
         <SiteNav />
         <main className="mx-auto max-w-3xl px-4 py-24 text-center">
-          <h1 className="text-2xl font-bold text-[#16181d]">Platform guide not found</h1>
+          <h1 className="text-2xl font-bold text-[#16181d]">
+            Platform guide not found
+          </h1>
           <Link to="/" className="mt-4 inline-block text-[#1f3a5f] underline">
             Back to RapidAct
           </Link>
@@ -31,7 +33,9 @@ export default function PlatformPage() {
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <nav className="text-xs text-[#6b7280]">
-          <Link to="/" className="hover:text-[#16181d]">RapidAct</Link>
+          <Link to="/" className="hover:text-[#16181d]">
+            RapidAct
+          </Link>
           <span className="mx-2">/</span>
           <span>Platforms</span>
           <span className="mx-2">/</span>
@@ -41,15 +45,20 @@ export default function PlatformPage() {
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#16181d] sm:text-4xl">
           {guide.h1}
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">{guide.intro}</p>
+        <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">
+          {guide.intro}
+        </p>
 
         <section className="mt-10 rounded border border-[#e2e2dd] bg-[#f7f7f5] p-6">
           <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
-            <ScanSearch className="h-5 w-5 text-[#1f3a5f]" /> First: know what you're running
+            <ScanSearch className="h-5 w-5 text-[#1f3a5f]" /> First: know what
+            you're running
           </h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">{guide.detectionNote}</p>
+          <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">
+            {guide.detectionNote}
+          </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            {guide.commonWidgets.map((w) => (
+            {guide.commonWidgets.map(w => (
               <span
                 key={w}
                 className="rounded border border-[#e2e2dd] bg-white px-3 py-1 text-xs font-medium text-[#5c6370]"
@@ -62,11 +71,15 @@ export default function PlatformPage() {
 
         <section className="mt-10">
           <h2 className="flex items-center gap-2 text-xl font-bold text-[#16181d]">
-            <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Install it free on {guide.name}
+            <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Install it free on{" "}
+            {guide.name}
           </h2>
           <ol className="mt-4 space-y-3">
             {guide.freeInstall.map((s, i) => (
-              <li key={s} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#5c6370]">
+              <li
+                key={s}
+                className="flex items-start gap-3 text-[15px] leading-relaxed text-[#5c6370]"
+              >
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#16181d] text-xs font-bold text-white">
                   {i + 1}
                 </span>
@@ -74,11 +87,17 @@ export default function PlatformPage() {
               </li>
             ))}
           </ol>
+          <Link
+            to="/article-50#install"
+            className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
+          >
+            Copy the free badge code
+          </Link>
           <p className="mt-4 flex items-start gap-2 text-sm text-[#5c6370]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />
-            Not sure this is even the right fix for your case? The €99 pre-consultory report tells
-            you which of your AI systems the Act actually covers, on {guide.name} and everywhere
-            else you operate.
+            Not sure this is even the right fix for your case? The €99
+            pre-consultory report tells you which of your AI systems the Act
+            actually covers, on {guide.name} and everywhere else you operate.
           </p>
         </section>
 
@@ -89,7 +108,7 @@ export default function PlatformPage() {
             <Blocks className="h-4 w-4" /> Other platforms
           </h3>
           <div className="mt-3 flex flex-wrap gap-2">
-            {PLATFORMS.filter((p) => p.slug !== guide.slug).map((p) => (
+            {PLATFORMS.filter(p => p.slug !== guide.slug).map(p => (
               <Link
                 key={p.slug}
                 to={`/platforms/${p.slug}`}

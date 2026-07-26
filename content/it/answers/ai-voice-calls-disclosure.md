@@ -19,8 +19,8 @@ Insurtech spagnole gestiscono già la voce IA (costruita su piattaforme come Ele
 
 - Una frase iniziale nel flusso di chiamata: «Stai parlando con un assistente IA automatizzato.»
 - Documentata nei tuoi script IVR, con un percorso facile verso un umano.
-- Per il lato web (dove vive il chatbot), il livello gratuito RapidAct copre la disclosure. [Obblighi voce e chat →](/requirements/chatbot-ai-disclosure)
+- Per il chatbot web, adatta il [badge con un solo script](/article-50#install) quando è appropriato un avviso alla prima interazione. [Obblighi voce e chat →](/requirements/chatbot-ai-disclosure)
 
 ---
 
-*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [prezzi 0/59/99 €](/#pricing)*
+*Strumenti gratuiti: [scansiona il tuo sito](/scanner) · [tutte le guide](/learn) · [badge e scanner gratuiti + valutazione da 99 €](/#pricing)*

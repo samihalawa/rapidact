@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { CONVERT, REPORT } from "@/config";
-import { ENTITY, COMPANIES_HOUSE_URL, HAS_ENTITY_DETAILS } from "@/data/company";
+import {
+  ENTITY,
+  COMPANIES_HOUSE_URL,
+  HAS_ENTITY_DETAILS,
+} from "@/data/company";
 
 /** Shared conversion band used on every SEO page. */
 export default function CtaBand() {
@@ -11,13 +15,17 @@ export default function CtaBand() {
       <div className="hairline grid border-b lg:grid-cols-[1.1fr_1fr]">
         <div className="hairline border-b p-7 lg:border-r lg:border-b-0">
           <p className="eyebrow">Assessment</p>
-          <p className="ink mt-2 text-[19px] leading-snug font-semibold">{REPORT.name}</p>
+          <p className="ink mt-2 text-[19px] leading-snug font-semibold">
+            {REPORT.name}
+          </p>
           <p className="ink mt-4 text-[34px] leading-none font-bold">€99</p>
-          <p className="ink-soft mt-1.5 text-[13px]">Charged once, per company.</p>
+          <p className="ink-soft mt-1.5 text-[13px]">
+            Charged once, per company.
+          </p>
           <p className="ink-soft mt-4 text-[15px] leading-relaxed">
-            Tell us what your company runs. A specialist classifies every AI system against the
-            regulation and sets out what you must publish and document. Delivered within{" "}
-            {REPORT.delivery}, or refunded in full.
+            Tell us what your company runs. A specialist classifies every AI
+            system against the regulation and sets out what you must publish and
+            document. Delivered within {REPORT.delivery}, or refunded in full.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-4">
             <Button
@@ -28,7 +36,7 @@ export default function CtaBand() {
             </Button>
             <button
               onClick={() => navigate(CONVERT.example)}
-              className="text-[14px] font-semibold text-white/80 underline underline-offset-2 hover:text-white"
+              className="accent min-h-11 text-[14px] font-semibold underline underline-offset-2"
             >
               Read a specimen first
             </button>
@@ -45,8 +53,11 @@ export default function CtaBand() {
               "The documentation you must be able to produce",
               "A prioritised action list with deadlines",
               "A direct assessment from the person who prepared it",
-            ].map((f) => (
-              <li key={f} className="ink-soft flex gap-3 text-[14px] leading-relaxed">
+            ].map(f => (
+              <li
+                key={f}
+                className="ink-soft flex gap-3 text-[14px] leading-relaxed"
+              >
                 <span className="mono shrink-0 pt-0.5 text-[11px]">&bull;</span>
                 {f}
               </li>
@@ -60,7 +71,14 @@ export default function CtaBand() {
             >
               website scanner
             </button>{" "}
-            and the self-install disclosure layer are free, with or without an assessment.
+            and the{" "}
+            <button
+              onClick={() => navigate(CONVERT.badge)}
+              className="accent underline underline-offset-2"
+            >
+              one-script disclosure badge
+            </button>{" "}
+            are free, with or without an assessment.
           </p>
         </div>
       </div>

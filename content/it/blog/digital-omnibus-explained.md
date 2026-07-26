@@ -32,4 +32,4 @@ La soluzione è un pomeriggio: [scansionare](/scanner), dichiarare, etichettare,
 
 ---
 
-*Inizia qui: [scansione gratuita](/scanner) · [centro di apprendimento](/learn) · [prezzi 0/59/99 €](/#pricing)*
+*Inizia qui: [scansione gratuita](/scanner) · [centro di apprendimento](/learn) · [badge e scanner gratuiti + valutazione da 99 €](/#pricing)*

@@ -1,33 +1,33 @@
 ---
 title: "Divulgation IA de Yellow.ai — guide Article 50 | RapidAct"
-description: "Vous utilisez Yellow.ai sur votre site ? L'Article 50 vous impose la divulgation de l'IA, pas à Yellow.ai. Que faut-il ajouter avant le 2 août 2026 — et comment le faire gratuitement."
+description: "Examen technique de Article 50 pour ce fournisseur IA : détection publique, rôles de fournisseur et déployeur, badge gratuit à un script."
 lang: fr
 ---
-# Yellow.ai et le règlement européen sur l'IA : votre obligation, pas celle de Yellow.ai
+# Yellow.ai et le règlement européen sur IA : vérifiez le rôle Article 50
 
-Si votre site utilise **Yellow.ai**, les visiteurs qui lui parlent interagissent avec un système d'IA — et depuis le **2 août 2026**, l'Article 50(1) du règlement européen sur l'IA exige de les en informer clairement, avant le début de la conversation. Yellow.ai fournit l'outil ; **vous**, le déployeur, portez l'obligation légale.
+Une signature publique montre que ce fournisseur IA est présent sur la page. Il s agit d un signal technique, pas une décision sur le rôle juridique : établissez fournisseur, déployeur et si Article 50(1) exige une divulgation lors de la première interaction.
 
-## Pourquoi Yellow.ai est en plein dans le champ d'application
+## Pourquoi ce signal technique mérite examen
 
-Ses fonctions d'IA interagissent automatiquement avec les visiteurs de votre site. C'est exactement la situation pour laquelle l'Article 50 a été écrit : une personne interagissant avec un logiciel qui répond comme une personne. Notre base de détection identifie Yellow.ai sur une page en quelques secondes — niveau d'exposition : **élevé** — et un régulateur (ou un concurrent) peut faire la même vérification.
+Ses fonctions d'IA interagissent automatiquement avec les visiteurs de votre site. Il s agit d un signal technique à examiner au regard de l Article 50(1) si vous êtes le fournisseur responsable de la divulgation lors de la première interaction. Notre base de détection identifie Yellow.ai sur une page en quelques secondes — niveau d'exposition : **élevé** — et un régulateur (ou un concurrent) peut faire la même vérification.
 
-## Ce que la loi exige sur votre site
+## Ce que vous devez vérifier sur votre site
 
-- Un avis clair et visible indiquant que le visiteur interagit avec un système d'IA — dès le premier contact, pas caché dans les CGU.
-- Présent partout où l'interaction a lieu (widget de chat, messenger intégré, interface vocale).
-- Une formulation honnête : un prénom humain pour le bot ne supprime pas l'obligation — il augmente le risque.
+- Lorsque Article 50(1) s applique, une divulgation claire de interaction IA au plus tard au premier contact.
+- La divulgation dans la véritable surface interaction, pas seulement dans les conditions ou la page de confidentialité.
+- Une formulation adaptée au système, au rôle, au moment et à exception applicable.
 
 ## Corrigez gratuitement en quelques minutes
 
-1. [Scannez votre site](/scanner) — nous confirmons {name} et vérifions la présence d'une divulgation.
-2. Installez la couche gratuite RapidAct pour votre stack : [WordPress](/platforms/wordpress), [Wix](/platforms/wix), [Shopify](/platforms/shopify) ou [une balise script pour tout le reste](/platforms/custom-website).
-3. Même installation en une ligne — la couche RapidAct s'en charge.
-4. Activez le journal de preuves horodaté — votre preuve que la divulgation était en ligne.
+1. [Scannez votre site](/scanner) — nous confirmons la plateforme détectée et vérifions la présence d'une divulgation.
+2. Installez le [badge RapidAct](/article-50#install) avec un seul script et adaptez le texte au véritable système IA.
+3. Vérifiez si vous êtes le fournisseur responsable de la divulgation lors de la première interaction ; une détection technique ne détermine pas le rôle juridique.
+4. Publiez et consignez URL, formulation, responsable et date de vérification sur ordinateur et mobile.
 
 ## Les erreurs à éviter
 
 - Croire que la marque de Yellow.ai ou un avatar robot compte comme divulgation — non, sauf si l'utilisateur est clairement informé qu'il parle à une IA.
-- Se reposer sur la conformité du fournisseur — les obligations de l'Article 50 incombent au déployeur.
+- Ne supposez pas que le fournisseur technique ou le propriétaire du site porte toujours cette obligation ; établissez les rôles de fournisseur et de déployeur.
 - Attendre le « report de 2027 » — il concernait les règles haut risque, pas l'Article 50. [Ce qui a vraiment été reporté →](/answers/digital-omnibus-ai-act-delay)
 
-*Vous préférez que nous le fassions ? Le [pack à 59 €](/#pricing) arrive préconfiguré, ou nous installons tout pour 99 €.*
+*Le [rapport préconsultatif à 99 €](/report) classe les systèmes IA de entreprise et arrive par e-mail sous 24 à 48 h.*

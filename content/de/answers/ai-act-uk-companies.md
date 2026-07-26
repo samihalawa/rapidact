@@ -21,4 +21,4 @@ Dieselbe Lösung wie für alle: Offenlegung bei KI-Interaktionen, Labels auf syn
 
 ---
 
-*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

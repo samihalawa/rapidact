@@ -24,4 +24,4 @@ Frühe Durchsetzung wird sichtbare, leichte Ziele wählen: bekannte Marken mit o
 
 ---
 
-*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

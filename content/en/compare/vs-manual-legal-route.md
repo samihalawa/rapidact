@@ -1,22 +1,22 @@
 ---
 title: "RapidAct vs hiring a lawyer or consultant | RapidAct"
-description: "A lawyer gives you legal judgment for €300+/hour; a consultant gives you a report for €5,000+."
+description: "RapidAct provides technical classification and a disclosure badge; legal counsel provides legal opinions and representation."
 lang: en
 ---
 # RapidAct vs hiring a lawyer or consultant
 
-**A lawyer gives you legal judgment for €300+/hour; a consultant gives you a report for €5,000+. RapidAct gives you the installed, documented mechanics for €0–€99. They're complements: tooling for the 95% that's mechanical, lawyers for the 5% that's judgment.**
+**RapidAct and legal counsel do different jobs. RapidAct provides a free public-page scan, a free disclosure badge and a €99 technical pre-consultory assessment. A lawyer provides legal opinions, privilege and representation.**
 
 | | RapidAct | Lawyer / consultant |
 |---|---|---|
-| Cost | €0–€99 one-time | €300+/hr or €5k+ projects |
-| Speed | Minutes | Weeks |
-| Output | Installed disclosure + evidence | Advice, memos, risk analysis |
-| Best for | The mechanical 95% (disclose, label, log) | The judgment 5% (edge cases, high-risk) |
+| Cost | Free tools + €99 assessment | Set by the adviser |
+| Output | Technical inventory, classification and action plan | Legal opinion, advice or representation |
+| Disclosure UI | Free one-script badge | May be specified in advice |
+| Best for | Establishing the system and technical implementation | Questions that turn on legal interpretation or risk |
 
 ## The honest verdict
 
-Most Article 50 work for normal websites is mechanical: notices, labels, logs. Do that with tooling, and spend lawyer money only where there's real legal judgment to buy.
+Use RapidAct to establish the technical facts and implement a relevant interaction notice. Use qualified counsel whenever the answer turns on legal interpretation, a contested role, enforcement exposure or representation.
 
 ---
 

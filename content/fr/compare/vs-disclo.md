@@ -5,22 +5,21 @@ lang: fr
 ---
 # RapidAct vs Disclo
 
-**Disclo vend un badge chatbot hébergé à 19 €/mois avec compte externe et preuve hébergée. RapidAct offre le même résultat gratuitement (local, sans compte), avec un pack unique à 59 € et une installation clé en main à 99 € — sans abonnement, preuve sur votre propre serveur.**
+RapidAct propose un badge de divulgation IA gratuit, auto-hébergé et installé avec un seul script, ainsi qu un scanner gratuit des pages publiques. Le badge ne nécessite ni compte, ni cookies, ni suivi des visiteurs, ni journal de preuves.
 
-| | RapidAct | Disclo |
+| | RapidAct | Outils hébergés |
 |---|---|---|
-| Détection + badge | **Gratuit** | 19 €/mois |
-| Journal de preuves | Local, sur votre serveur | Hébergé (leur compte) |
-| Langues | EN/ES natif | Multi |
-| Signatures de fournisseurs | 52 | Centré chatbots |
-| Scanner (tout site) | Gratuit, + extension Chrome | — |
-| Installation clé en main | 99 € unique | — |
-| Dépendance | Aucune (GPL) | Abonnement |
+| Badge | **Installation gratuite avec un script** | Selon le fournisseur |
+| Compte obligatoire | Non | Souvent |
+| Suivi des visiteurs | Aucun dans le badge | Vérifier les conditions |
+| Scanner de page publique | Gratuit, 52 signatures techniques | Variable |
+| Évaluation de entreprise | 99 € une fois | Variable |
+| Classification juridique | Non incluse dans le badge ou le scanner | Vérifier le périmètre |
 
 ## Le verdict honnête
 
-Si vous voulez un service hébergé et aimez les abonnements, Disclo fonctionne. Si vous voulez le même résultat de conformité sans mensualité, sans compte externe et avec vos preuves sur votre propre infrastructure — c'est pour cela que RapidAct existe.
+Choisissez le badge RapidAct pour une couche de divulgation légère et configurable sous votre contrôle. Établissez d abord le système IA, votre rôle de fournisseur ou de déployeur et obligation Article 50 pertinente ; aucun badge ne prouve à lui seul une conformité complète.
 
 ---
 
-*Essayez la version gratuite : [scannez votre site](/scanner) · [prix 0/59/99 €](/#pricing)*
+*[Copier le badge gratuit](/article-50#install) · [scanner une page publique](/scanner) · [évaluation de entreprise — 99 €](/report)*

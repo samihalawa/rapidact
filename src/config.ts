@@ -33,6 +33,10 @@ export const CONVERT = {
   example: "/example-report",
   /** Free scanner, top of funnel, still free forever. */
   scanner: "/scanner",
+  /** Direct human help for visitors who are not ready to buy. */
+  whatsapp: "https://wa.me/34679794037",
+  /** One-script badge installer on the Article 50 guide. */
+  badge: "/article-50#install",
 } as const;
 
 /**

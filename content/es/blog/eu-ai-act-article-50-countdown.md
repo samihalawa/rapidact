@@ -35,4 +35,4 @@ El cumplimiento necesitará ejemplos visibles tempranos, y los reguladores (adem
 
 ---
 
-*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [precios 0/59/99 €](/#pricing)*
+*Empieza aquí: [escaneo gratis](/scanner) · [centro de aprendizaje](/learn) · [insignia y escáner gratis + evaluación de 99 €](/#pricing)*

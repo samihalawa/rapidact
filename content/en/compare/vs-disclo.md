@@ -5,22 +5,21 @@ lang: en
 ---
 # RapidAct vs Disclo
 
-**Disclo sells a hosted chatbot badge at €19/mo with an external account and hosted evidence. RapidAct gives the same outcome free (local, no account), plus a €99 one-time written assessment of every AI system you run — no subscription, evidence stored on your own server.**
+RapidAct now ships a free, self-hosted one-script AI disclosure badge plus a free public-page scanner. It uses no account, cookies, visitor tracking or evidence log.
 
-| | RapidAct | Disclo |
+| | RapidAct | Hosted disclosure tools |
 |---|---|---|
-| Detection + badge | **Free** | €19/mo |
-| Evidence log | Local, on your server | Hosted (their account) |
-| Languages | EN/ES native | Multi |
-| Vendor signatures | 52 | Chatbot-focused |
-| Scanner (any site) | Free, + Chrome extension | — |
-| Done-for-you install | €99 one-time | — |
-| Lock-in | None (GPL) | Subscription |
+| Badge | **Free one-script install** | Varies by vendor |
+| Account required | No | Often |
+| Visitor tracking | None in the badge | Check vendor terms |
+| Public-page scanner | Free, 52 technical signatures | Varies |
+| Company-wide assessment | €99 one-time | Varies |
+| Legal classification | Not included in the badge or scanner | Check scope |
 
 ## The honest verdict
 
-If you want a hosted service and like subscriptions, Disclo works. If you want the same compliance outcome with no monthly fee, no external account, and your evidence on your own infrastructure — that's why RapidAct exists.
+Choose the RapidAct badge when you want a lightweight, configurable disclosure layer you control. First establish the AI system, your provider or deployer role and the relevant Article 50 duty; no badge alone proves full compliance.
 
 ---
 
-*Try the free version: [scan your site](/scanner) · [full assessment — €99](/report)*
+*[Copy the free badge](/article-50#install) · [scan a public page](/scanner) · [company-wide assessment — €99](/report)*

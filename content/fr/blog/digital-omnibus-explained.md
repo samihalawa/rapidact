@@ -32,4 +32,4 @@ La solution est un après-midi : [scanner](/scanner), divulguer, étiqueter, enr
 
 ---
 
-*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [prix 0/59/99 €](/#pricing)*
+*Commencez ici : [scan gratuit](/scanner) · [centre d'apprentissage](/learn) · [badge et scan gratuits + évaluation à 99 €](/#pricing)*

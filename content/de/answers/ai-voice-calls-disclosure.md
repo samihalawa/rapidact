@@ -19,8 +19,8 @@ Spanische Insurtechs betreiben bereits Voice-KI (auf Plattformen wie ElevenLabs)
 
 - Ein eröffnender Satz im Anruffluss: „Sie sprechen mit einem automatisierten KI-Assistenten.“
 - Dokumentiert in Ihren IVR-Skripten, mit einfachem Weg zu einem Menschen.
-- Für die Website-Seite (wo der Chatbot lebt) deckt die kostenlose RapidAct-Ebene die Offenlegung. [Voice- und Chat-Pflichten →](/requirements/chatbot-ai-disclosure)
+- Für den Web-Chatbot passen Sie das [Ein-Skript-Badge](/article-50#install) an, wenn ein Hinweis zur direkten Interaktion passt. [Voice- und Chat-Pflichten →](/requirements/chatbot-ai-disclosure)
 
 ---
 
-*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [Preise 0/59/99 €](/#pricing)*
+*Kostenlose Tools: [Website scannen](/scanner) · [alle Leitfäden](/learn) · [kostenloses Badge und Scan + 99-€-Bewertung](/#pricing)*

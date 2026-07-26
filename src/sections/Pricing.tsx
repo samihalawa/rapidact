@@ -13,10 +13,10 @@ const freeTools = [
     to: CONVERT.scanner,
   },
   {
-    name: "Self-install disclosure layer",
-    text: "The visitor notice, AI content labels and evidence log, as a free plugin with guides for WordPress, Wix, Shopify or a plain script tag. Install it yourself and keep it.",
-    cta: "Read the guides",
-    to: "/article-50",
+    name: "One-script AI disclosure badge",
+    text: "A lightweight, privacy-preserving notice you can paste into WordPress, Wix, Shopify, Webflow or any custom site. No account, plugin or build step.",
+    cta: "Copy the install code",
+    to: CONVERT.badge,
   },
 ];
 
@@ -30,16 +30,20 @@ export default function Pricing() {
           One fee, charged once
         </h2>
         <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
-          The tools on this site are free and remain free. The fee is for a specialist reading your
-          case and putting the answer in writing.
+          The tools on this site are free and remain free. The fee is for a
+          specialist reading your case and putting the answer in writing.
         </p>
 
         <div className="hairline mt-10 border bg-white">
           <div className="hairline grid border-b lg:grid-cols-[22rem_1fr]">
             <div className="hairline border-b p-7 lg:border-r lg:border-b-0">
               <p className="eyebrow">Assessment</p>
-              <h3 className="ink mt-2 text-[19px] leading-snug font-semibold">{REPORT.name}</h3>
-              <p className="ink mt-5 text-[42px] leading-none font-bold tracking-tight">€99</p>
+              <h3 className="ink mt-2 text-[19px] leading-snug font-semibold">
+                {REPORT.name}
+              </h3>
+              <p className="ink mt-5 text-[42px] leading-none font-bold tracking-tight">
+                €99
+              </p>
               <p className="ink-soft mt-1.5 text-[13px]">
                 Charged once, per company. Not a subscription.
               </p>
@@ -50,8 +54,8 @@ export default function Pricing() {
                 Request the assessment
               </Button>
               <p className="ink-soft mt-3 text-[12px] leading-relaxed">
-                You enter your details first and review them before any payment is taken. Nothing
-                is charged on this website.
+                You enter your details first and review them before any payment
+                is taken. Nothing is charged on this website.
               </p>
               <button
                 onClick={() => navigate(CONVERT.example)}
@@ -64,9 +68,11 @@ export default function Pricing() {
             <div className="p-7">
               <p className="eyebrow">What the fee covers</p>
               <ul className="mt-4 space-y-3">
-                {REPORT_DELIVERABLES.map((d) => (
+                {REPORT_DELIVERABLES.map(d => (
                   <li key={d} className="flex gap-3 text-[15px]">
-                    <span className="ink-soft mono shrink-0 pt-0.5 text-[11px]">&bull;</span>
+                    <span className="ink-soft mono shrink-0 pt-0.5 text-[11px]">
+                      &bull;
+                    </span>
                     <span className="ink-soft leading-relaxed">{d}</span>
                   </li>
                 ))}
@@ -82,7 +88,9 @@ export default function Pricing() {
             ].map(([t, v]) => (
               <div key={t} className="px-6 py-4">
                 <dt className="eyebrow">{t}</dt>
-                <dd className="ink-soft mt-1 text-[13px] leading-relaxed">{v}</dd>
+                <dd className="ink-soft mt-1 text-[13px] leading-relaxed">
+                  {v}
+                </dd>
               </div>
             ))}
           </dl>
@@ -92,10 +100,15 @@ export default function Pricing() {
         <div className="mt-12">
           <p className="eyebrow">Free, with or without an assessment</p>
           <div className="hairline mt-4 grid border-t sm:grid-cols-2">
-            {freeTools.map((t) => (
-              <div key={t.name} className="hairline border-b py-6 sm:pr-8 sm:last:pl-8 sm:last:pr-0">
+            {freeTools.map(t => (
+              <div
+                key={t.name}
+                className="hairline border-b py-6 sm:pr-8 sm:last:pl-8 sm:last:pr-0"
+              >
                 <h3 className="ink text-[15px] font-semibold">{t.name}</h3>
-                <p className="ink-soft mt-2 text-[15px] leading-relaxed">{t.text}</p>
+                <p className="ink-soft mt-2 text-[15px] leading-relaxed">
+                  {t.text}
+                </p>
                 <button
                   onClick={() => navigate(t.to)}
                   className="accent mt-3 text-[14px] font-semibold underline underline-offset-2"
@@ -110,9 +123,9 @@ export default function Pricing() {
         <p className="ink-soft mt-8 max-w-3xl text-[13px] leading-relaxed">
           {HAS_VAT
             ? "Prices exclude VAT. A VAT invoice is issued for every payment."
-            : `An invoice is issued for every payment by ${ENTITY_DISPLAY_NAME}.`}{" "}
-          RapidAct produces technical and organisational compliance assessments. It is not a law
-          firm and the report is not legal advice.
+            : `An invoice is issued for every payment by ${ENTITY_DISPLAY_NAME}`}{" "}
+          RapidAct produces technical and organisational compliance assessments.
+          It is not a law firm and the report is not legal advice.
         </p>
       </div>
     </section>
