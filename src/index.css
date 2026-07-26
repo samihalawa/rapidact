@@ -23,7 +23,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
-    --radius: 0.625rem;
+    --radius: 0.25rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -73,39 +73,62 @@
     @apply bg-background text-foreground;
   }
 }
-/* ---- RapidAct design layer (reference: pastel mesh SaaS) ---- */
+/* ---- RapidAct design layer ------------------------------------------------
+   Register: professional services / regulatory. The reader is deciding whether
+   to send €99 to strangers for a compliance assessment, so the page should read
+   like an auditor's letterhead, not a software launch.
+
+   Rules this layer enforces:
+   - No gradients, no colour washes, no glow. Flat paper surfaces only.
+   - Colour carries meaning or it is not used. The only saturated colours in the
+     palette are the risk classifications, because those encode real state.
+   - Structure comes from 1px rules and alignment, not from shadows and pills.
+   - Radius stays small. Rounded-full reads consumer; square reads institution.
+--------------------------------------------------------------------------- */
 
 @layer base {
   html {
     font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* Institutional documents set numbers in columns; keep them aligned. */
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 @layer utilities {
-  /* Soft pastel mesh gradient like the reference hero */
-  .mesh-bg {
-    background-color: #f6f7fd;
-    background-image:
-      radial-gradient(at 12% 18%, rgba(191, 219, 254, 0.55) 0px, transparent 50%),
-      radial-gradient(at 85% 12%, rgba(233, 213, 255, 0.6) 0px, transparent 50%),
-      radial-gradient(at 92% 78%, rgba(252, 231, 243, 0.55) 0px, transparent 50%),
-      radial-gradient(at 8% 85%, rgba(207, 250, 254, 0.5) 0px, transparent 50%);
+  /* Paper: the page surface. Warm off-white, no gradient. */
+  .paper {
+    background-color: #ffffff;
+  }
+  /* Paper-alt: the recessed band used to separate sections without a card. */
+  .paper-alt {
+    background-color: #f7f7f5;
   }
   .ink {
-    color: #141b2e;
+    color: #16181d;
   }
   .ink-soft {
-    color: #5a6378;
+    color: #5c6370;
   }
-  .brand-gradient-text {
-    background: linear-gradient(92deg, #4f46e5 0%, #8b5cf6 55%, #d946ef 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Hairline: the workhorse divider. Structure comes from these, not shadows. */
+  .hairline {
+    border-color: #e2e2dd;
   }
-  .shadow-float {
-    box-shadow:
-      0 24px 60px -12px rgba(20, 27, 46, 0.18),
-      0 4px 16px -4px rgba(20, 27, 46, 0.08);
+  /* Eyebrow labels above section headings — small caps, wide tracking. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6b7280;
+  }
+  /* The single restrained accent. Deep slate blue, used for links and marks. */
+  .accent {
+    color: #1f3a5f;
+  }
+  /* Reference codes, refs and figures that must be read character by character. */
+  .mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
   }
 }

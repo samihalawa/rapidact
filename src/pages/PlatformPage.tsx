@@ -15,8 +15,8 @@ export default function PlatformPage() {
       <div className="min-h-screen bg-white">
         <SiteNav />
         <main className="mx-auto max-w-3xl px-4 py-24 text-center">
-          <h1 className="text-2xl font-bold text-[#141b2e]">Platform guide not found</h1>
-          <Link to="/" className="mt-4 inline-block text-[#6d5df6] underline">
+          <h1 className="text-2xl font-bold text-[#16181d]">Platform guide not found</h1>
+          <Link to="/" className="mt-4 inline-block text-[#1f3a5f] underline">
             Back to RapidAct
           </Link>
         </main>
@@ -30,29 +30,29 @@ export default function PlatformPage() {
       <Seo title={guide.metaTitle} description={guide.metaDescription} />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
-        <nav className="text-xs text-[#8a92a6]">
-          <Link to="/" className="hover:text-[#141b2e]">RapidAct</Link>
+        <nav className="text-xs text-[#6b7280]">
+          <Link to="/" className="hover:text-[#16181d]">RapidAct</Link>
           <span className="mx-2">/</span>
           <span>Platforms</span>
           <span className="mx-2">/</span>
-          <span className="text-[#3d445c]">{guide.name}</span>
+          <span className="text-[#5c6370]">{guide.name}</span>
         </nav>
 
-        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
+        <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-[#16181d] sm:text-4xl">
           {guide.h1}
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-[#3d445c]">{guide.intro}</p>
+        <p className="mt-5 text-lg leading-relaxed text-[#5c6370]">{guide.intro}</p>
 
-        <section className="mt-10 rounded-2xl border border-[#e7e9f2] bg-[#f8f9fc] p-6">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#141b2e]">
-            <ScanSearch className="h-5 w-5 text-[#6d5df6]" /> First: know what you're running
+        <section className="mt-10 rounded-2xl border border-[#e2e2dd] bg-[#f7f7f5] p-6">
+          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#16181d]">
+            <ScanSearch className="h-5 w-5 text-[#1f3a5f]" /> First: know what you're running
           </h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-[#3d445c]">{guide.detectionNote}</p>
+          <p className="mt-3 text-[15px] leading-relaxed text-[#5c6370]">{guide.detectionNote}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {guide.commonWidgets.map((w) => (
               <span
                 key={w}
-                className="rounded-full border border-[#e7e9f2] bg-white px-3 py-1 text-xs font-medium text-[#3d445c]"
+                className="rounded-full border border-[#e2e2dd] bg-white px-3 py-1 text-xs font-medium text-[#5c6370]"
               >
                 {w}
               </span>
@@ -61,20 +61,20 @@ export default function PlatformPage() {
         </section>
 
         <section className="mt-10">
-          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#141b2e]">
-            <ListChecks className="h-5 w-5 text-[#6d5df6]" /> Install it free on {guide.name}
+          <h2 className="flex items-center gap-2 text-xl font-extrabold text-[#16181d]">
+            <ListChecks className="h-5 w-5 text-[#1f3a5f]" /> Install it free on {guide.name}
           </h2>
           <ol className="mt-4 space-y-3">
             {guide.freeInstall.map((s, i) => (
-              <li key={s} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#3d445c]">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#141b2e] text-xs font-bold text-white">
+              <li key={s} className="flex items-start gap-3 text-[15px] leading-relaxed text-[#5c6370]">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#16181d] text-xs font-bold text-white">
                   {i + 1}
                 </span>
                 {s}
               </li>
             ))}
           </ol>
-          <p className="mt-4 flex items-start gap-2 text-sm text-[#5a6378]">
+          <p className="mt-4 flex items-start gap-2 text-sm text-[#5c6370]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />
             Not sure this is even the right fix for your case? The €99 pre-consultory report tells
             you which of your AI systems the Act actually covers, on {guide.name} and everywhere
@@ -84,8 +84,8 @@ export default function PlatformPage() {
 
         <CtaBand />
 
-        <section className="mt-12 border-t border-[#eef0f6] pt-8">
-          <h3 className="flex items-center gap-2 text-sm font-bold tracking-wide text-[#8a92a6] uppercase">
+        <section className="mt-12 border-t border-[#e2e2dd] pt-8">
+          <h3 className="flex items-center gap-2 text-sm font-bold tracking-wide text-[#6b7280] uppercase">
             <Blocks className="h-4 w-4" /> Other platforms
           </h3>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -93,7 +93,7 @@ export default function PlatformPage() {
               <Link
                 key={p.slug}
                 to={`/platforms/${p.slug}`}
-                className="rounded-full border border-[#e7e9f2] bg-white px-4 py-1.5 text-sm font-medium text-[#3d445c] hover:border-[#6d5df6] hover:text-[#6d5df6]"
+                className="rounded-full border border-[#e2e2dd] bg-white px-4 py-1.5 text-sm font-medium text-[#5c6370] hover:border-[#1f3a5f] hover:text-[#1f3a5f]"
               >
                 {p.name}
               </Link>

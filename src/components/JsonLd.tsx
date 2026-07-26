@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ENTITY } from "@/data/company";
 
 /** Injects JSON-LD structured data for SEO rich results. */
 export default function JsonLd({ data }: { data: object | object[] }) {
@@ -18,10 +19,39 @@ export const ORG_LD = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "RapidAct",
+  legalName: ENTITY.legalName || undefined,
   url: "https://rapidact.eu",
   logo: "https://rapidact.eu/favicon.svg",
   description:
-    "AI transparency tooling for EU AI Act Article 50 — scanner, disclosure layer and evidence log installed on your website.",
+    "EU AI Act compliance assessments for companies: which of your AI systems are covered, what you must disclose, and what documentation you must hold. Free website scanner and self-install disclosure layer.",
+  // Real, verifiable identity. Search engines surface this, and it is the same
+  // information a cautious buyer looks for before paying an unfamiliar company.
+  identifier: ENTITY.registrationNumber
+    ? {
+        "@type": "PropertyValue",
+        name: "Companies House registration number",
+        value: ENTITY.registrationNumber,
+      }
+    : undefined,
+  address: ENTITY.address
+    ? {
+        "@type": "PostalAddress",
+        streetAddress: "27 Old Gloucester Street",
+        addressLocality: "London",
+        postalCode: "WC1N 3AX",
+        addressCountry: "GB",
+      }
+    : undefined,
+  contactPoint: ENTITY.phone
+    ? {
+        "@type": "ContactPoint",
+        telephone: ENTITY.phone,
+        contactType: "customer service",
+        email: ENTITY.contactEmail || undefined,
+        areaServed: "EU",
+        availableLanguage: ["en", "es"],
+      }
+    : undefined,
 };
 
 export const PRODUCT_LD = {

@@ -1,102 +1,73 @@
 import { useNavigate } from "react-router";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  MessageSquareWarning,
-  FileClock,
-  Tags,
-  Layers,
-  BookOpenCheck,
-  ScanSearch,
-  ArrowRight,
-} from "lucide-react";
 import { CONVERT } from "@/config";
 
-const features = [
+const tools = [
   {
-    icon: ScanSearch,
-    title: "AI detection scanner",
-    text: "Paste your URL and see which AI systems are detectable on your site, matched against 52 known chatbot platforms, with the exact evidence found on each page.",
+    name: "AI detection scanner",
+    text: "Submit a URL and see which AI systems are detectable on the page, checked against 52 known chatbot platforms, with the specific evidence found for each match.",
   },
   {
-    icon: MessageSquareWarning,
-    title: "Visitor AI disclosure",
-    text: "The clear notice Article 50(1) demands, shown before anyone chats with your AI — in English and Spanish, styled to match your site.",
+    name: "Visitor AI disclosure",
+    text: "The notice Article 50(1) requires, shown before a visitor interacts with your AI, in English and Spanish, styled to match your site.",
   },
   {
-    icon: Tags,
-    title: "AI content labels",
-    text: "Ready-made labels for AI-generated images, video and text, using the EU-standard icon set — so synthetic content is marked, not debated.",
+    name: "AI content labels",
+    text: "Labels for AI-generated images, video and text using the EU standard icon set, so synthetic content is marked rather than argued about later.",
   },
   {
-    icon: FileClock,
-    title: "Timestamped evidence log",
-    text: "Every disclosure view logged with a time and a page. When a regulator, client or board asks you to prove it, you export a CSV instead of panicking.",
+    name: "Evidence log",
+    text: "Each disclosure view recorded with a page and a timestamp, exportable as CSV. Questions about what you displayed tend to arrive months afterwards, in writing.",
   },
   {
-    icon: Layers,
-    title: "Works on your stack",
-    text: "WordPress plugin, Wix app, Shopify block, or a single script tag for anything else. Your chatbot — Tidio, Botpress, Zendesk, Intercom — stays exactly as it is.",
+    name: "Platform coverage",
+    text: "A WordPress plugin, a Wix app, a Shopify block, or one script tag for anything else. Your existing chatbot, whether Tidio, Botpress, Zendesk or Intercom, is left untouched.",
   },
   {
-    icon: BookOpenCheck,
-    title: "Plain-English guides",
-    text: "No legal jargon, no technical jargon. Each guide explains what the rule means for your site and the exact clicks that satisfy it.",
+    name: "Implementation guides",
+    text: "What each rule requires for your platform and the specific steps that satisfy it, written without legal or technical jargon.",
   },
 ];
 
 /**
- * The free self-install layer. Secondary to the paid report, but kept prominent —
- * it is a genuine free offer and the main organic-search entry point to the site.
+ * The free self-install layer. Secondary to the paid assessment, but kept
+ * substantial: it is a genuine free offer and the main organic search entry
+ * point to the site.
  */
 export default function Features() {
   const navigate = useNavigate();
   return (
-    <section id="features" className="mesh-bg py-20">
+    <section id="features" className="paper hairline border-b py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#bbf7d0] bg-[#ecfdf5] px-3 py-1 text-xs font-bold text-[#047857]">
-            Free forever · no account needed
-          </span>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
-            The tools stay free. Always.
-          </h2>
-          <p className="mt-3 text-lg text-[#5a6378]">
-            Once you know what your company has to do, the technical part is not the hard part — so
-            we do not charge for it. Scan your site, install the disclosure layer, keep the evidence
-            log. €0, yours to keep, whether or not you ever buy a report.
-          </p>
-        </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <Card
-              key={f.title}
-              className="border-white/70 bg-white/85 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <CardHeader>
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0eeff]">
-                  <f.icon className="h-5 w-5 text-[#6d5df6]" />
-                </div>
-                <CardTitle className="pt-2 text-base font-bold text-[#141b2e]">{f.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm leading-relaxed text-[#5a6378]">{f.text}</p>
-              </CardContent>
-            </Card>
+        <p className="eyebrow">Free tools</p>
+        <h2 className="ink mt-3 max-w-2xl text-[28px] leading-tight font-bold tracking-[-0.015em] sm:text-[32px]">
+          The implementation tools cost nothing
+        </h2>
+        <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
+          Once you know what your company is required to do, the technical work is not the
+          difficult part, so we do not charge for it. Scan your site, install the disclosure layer,
+          keep the evidence log, whether or not you ever buy an assessment.
+        </p>
+
+        <div className="hairline mt-10 grid border-t sm:grid-cols-2 lg:grid-cols-3">
+          {tools.map((t) => (
+            <div key={t.name} className="hairline border-b py-6 sm:pr-8">
+              <h3 className="ink text-[15px] font-semibold">{t.name}</h3>
+              <p className="ink-soft mt-2 text-[15px] leading-relaxed">{t.text}</p>
+            </div>
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4 rounded-2xl border border-[#e7e9f2] bg-white/80 px-6 py-5 backdrop-blur">
-          <p className="flex-1 text-sm leading-relaxed text-[#5a6378]">
-            <strong className="text-[#141b2e]">Installing is the easy half.</strong> Knowing which
-            of your systems the AI Act actually covers — and what you must be able to prove — is the
-            half that costs companies money. That is what the report is for.
+        <div className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-2">
+          <p className="ink-soft max-w-2xl text-[15px] leading-relaxed">
+            Installing the notice is the straightforward half. Establishing which of your systems
+            the regulation covers, and what you must be able to produce on request, is the half
+            that costs companies money.
           </p>
           <button
             onClick={() => navigate(CONVERT.report)}
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#141b2e] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#232c4a]"
+            className="accent shrink-0 text-[14px] font-semibold underline underline-offset-2"
           >
-            Get my report — €99
-            <ArrowRight className="h-3.5 w-3.5" />
+            Request the assessment, €99
           </button>
         </div>
       </div>

@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { X, ShieldCheck } from "lucide-react";
 import { useNavigate } from "react-router";
+import { CONVERT } from "@/config";
 
 const STORAGE_KEY = "rapidact-widget-closed";
 
 /**
- * Our own product, running on our own site: the floating Article 50
- * transparency badge — small, closable, and a live demo for prospects.
+ * Our own product running on our own site: the Article 50 transparency badge.
+ *
+ * Deliberately plain. This badge is what a customer's visitors will see on their
+ * site, so it has to look like a compliance notice rather than a promotion. A
+ * glowing gradient chip would undermine the thing it is demonstrating.
  */
 export default function TransparencyWidget() {
   const [closed, setClosed] = useState(true); // hidden until hydrated
@@ -27,53 +31,55 @@ export default function TransparencyWidget() {
   return (
     <div className="fixed right-4 bottom-4 z-50 sm:right-6 sm:bottom-6">
       {open && (
-        <div className="mb-3 w-72 rounded-2xl border border-[#e7e9f2] bg-white p-5 shadow-2xl">
-          <p className="text-sm font-extrabold text-[#141b2e]">This is the product, live.</p>
-          <p className="mt-1.5 text-xs leading-relaxed text-[#5a6378]">
-            The badge you're looking at is the Article 50 disclosure layer running on our own site
-            — the same one your visitors would see on yours. Scanning and installing it are free.
-            Knowing which duties actually apply to your company is what the €99 report answers.
+        <div className="hairline mb-2 w-80 border bg-white p-5 shadow-lg">
+          <p className="ink text-[13px] font-semibold">This badge is the product, running live</p>
+          <p className="ink-soft mt-2 text-[13px] leading-relaxed">
+            What you are looking at is the Article 50 disclosure layer installed on our own site,
+            the same component your visitors would see on yours. Scanning your site and installing
+            this layer are free. Establishing which obligations apply to your company is what the
+            €99 assessment answers.
           </p>
-          <button
-            onClick={() => navigate("/scanner")}
-            className="mt-3 w-full rounded-full bg-[#141b2e] py-2 text-xs font-bold text-white hover:bg-[#232c4a]"
-          >
-            Scan your site free
-          </button>
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={() => navigate(CONVERT.report)}
+              className="flex-1 rounded bg-[#16181d] py-2 text-[13px] font-semibold text-white hover:bg-[#2b2f38]"
+            >
+              Request assessment
+            </button>
+            <button
+              onClick={() => navigate(CONVERT.scanner)}
+              className="hairline ink flex-1 rounded border bg-white py-2 text-[13px] font-semibold hover:bg-[#f7f7f5]"
+            >
+              Free scan
+            </button>
+          </div>
         </div>
       )}
 
-      {/* the badge itself — mirrors the inspiration: gradient ring, shield, byline */}
       <div
         role="note"
         aria-label="AI transparency disclosure"
-        className="relative rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 p-[2px] shadow-lg"
+        className="hairline flex items-center gap-2 rounded border bg-white py-1.5 pr-2 pl-2.5 shadow-sm"
       >
-        <div className="flex items-center gap-2 rounded-full bg-white/95 py-1.5 pr-2.5 pl-1.5 backdrop-blur">
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="flex items-center gap-2"
-            aria-expanded={open}
-            aria-label="About this AI transparency badge"
-          >
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-violet-500">
-              <ShieldCheck className="h-3.5 w-3.5 text-white" />
-            </span>
-            <span className="leading-none text-left">
-              <span className="block text-[11px] font-extrabold text-[#141b2e]">AI Transparency</span>
-              <span className="block text-[9px] font-semibold text-[#8a92a6]">
-                by <span className="bg-gradient-to-r from-blue-500 to-violet-500 bg-clip-text font-extrabold text-transparent">RapidAct</span>
-              </span>
-            </span>
-          </button>
-          <button
-            onClick={dismiss}
-            aria-label="Dismiss AI transparency badge"
-            className="ml-1 rounded-full p-0.5 text-[#8a92a6] transition hover:bg-[#f1f2f8] hover:text-[#141b2e]"
-          >
-            <X className="h-3 w-3" />
-          </button>
-        </div>
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="flex items-center gap-2"
+          aria-expanded={open}
+          aria-label="About this AI transparency badge"
+        >
+          <ShieldCheck className="h-4 w-4 text-[#1f3a5f]" />
+          <span className="text-left leading-tight">
+            <span className="ink block text-[11px] font-semibold">AI transparency</span>
+            <span className="ink-soft block text-[10px]">by RapidAct</span>
+          </span>
+        </button>
+        <button
+          onClick={dismiss}
+          aria-label="Dismiss AI transparency badge"
+          className="ink-soft ml-1 hover:text-[#16181d]"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
       </div>
     </div>
   );

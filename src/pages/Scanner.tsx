@@ -81,7 +81,7 @@ export default function Scanner() {
   };
 
   return (
-    <div className="mesh-bg min-h-screen">
+    <div className="paper min-h-screen">
       <Seo
         title="Free AI transparency scan + implementation plan | RapidAct"
         description="Scan your website free: detect AI chatbots missing the EU AI Act Article 50 disclosure, get a readiness score and a free plain-English implementation plan."
@@ -89,12 +89,12 @@ export default function Scanner() {
       <SiteNav />
       <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#141b2e] sm:text-5xl">
+          <h1 className="text-4xl font-extrabold tracking-tight text-[#16181d] sm:text-5xl">
             Scan your site.
             <br />
-            <span className="brand-gradient-text">Get your free fix-it plan.</span>
+            <span className="ink">Get your free fix-it plan.</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-[#5a6378]">
+          <p className="mx-auto mt-4 max-w-xl text-lg text-[#5c6370]">
             The same outside-in check a regulator — or your competitor — can run in 30 seconds.
             Free forever, no signup. You keep the plan either way.
           </p>
@@ -106,12 +106,12 @@ export default function Scanner() {
             onChange={(e) => setUrl(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && runScan()}
             placeholder="your-site.com"
-            className="h-12 rounded-full border-[#d8dce8] bg-white px-5 text-base"
+            className="h-12 rounded-full border-[#e2e2dd] bg-white px-5 text-base"
           />
           <Button
             onClick={runScan}
             disabled={scan.isPending || !url.trim()}
-            className="h-12 rounded-full bg-[#141b2e] px-6 font-semibold text-white hover:bg-[#232c4a]"
+            className="h-12 rounded-full bg-[#16181d] px-6 font-semibold text-white hover:bg-[#2b2f38]"
           >
             {scan.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <ScanSearch className="h-4 w-4" />}
             <span className="ml-2">{scan.isPending ? "Scanning…" : "Scan free"}</span>
@@ -119,7 +119,7 @@ export default function Scanner() {
         </div>
 
         {scan.isPending && (
-          <p className="mt-6 text-center text-sm text-[#8a92a6]">
+          <p className="mt-6 text-center text-sm text-[#6b7280]">
             Fetching the page and checking 52 signatures… usually under 15 seconds.
           </p>
         )}
@@ -145,38 +145,38 @@ export default function Scanner() {
         {result?.reachable && result.summary && (
           <div className="mt-10 space-y-5">
             {/* score card */}
-            <Card className="border-[#e7e9f2] bg-white shadow-sm">
+            <Card className="border-[#e2e2dd] bg-white shadow-sm">
               <CardContent className="flex flex-col items-center gap-6 pt-8 pb-8 sm:flex-row sm:justify-center sm:gap-12">
                 <div className="text-center">
                   <div className={`text-6xl font-extrabold ${scoreColor(result.score)}`}>
                     {result.score}
                   </div>
-                  <div className="mt-1 text-xs font-semibold tracking-wide text-[#8a92a6] uppercase">
+                  <div className="mt-1 text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
                     readiness / 100
                   </div>
                 </div>
                 <div className="text-center sm:text-left">
-                  <p className="text-lg font-bold text-[#141b2e]">{scoreLabel(result.score)}</p>
-                  <p className="mt-1 text-sm text-[#5a6378]">
+                  <p className="text-lg font-bold text-[#16181d]">{scoreLabel(result.score)}</p>
+                  <p className="mt-1 text-sm text-[#5c6370]">
                     {result.summary.total} AI touchpoint{result.summary.total === 1 ? "" : "s"} detected
                     · {result.summary.high} high-exposure ·{" "}
                     <span className="font-semibold text-[#dc2626]">
                       {result.summary.undisclosed} without visible AI disclosure
                     </span>
                   </p>
-                  <p className="mt-1 text-xs break-all text-[#8a92a6]">{result.summary.url}</p>
+                  <p className="mt-1 text-xs break-all text-[#6b7280]">{result.summary.url}</p>
                 </div>
               </CardContent>
             </Card>
 
             {/* findings */}
             {result.detected.map((d) => (
-              <Card key={d.id} className="border-[#e7e9f2] bg-white shadow-sm">
+              <Card key={d.id} className="border-[#e2e2dd] bg-white shadow-sm">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between gap-3">
-                    <CardTitle className="text-base font-bold text-[#141b2e]">
+                    <CardTitle className="text-base font-bold text-[#16181d]">
                       {d.name}
-                      <span className="ml-2 text-sm font-medium text-[#8a92a6]">Art. {d.article}</span>
+                      <span className="ml-2 text-sm font-medium text-[#6b7280]">Art. {d.article}</span>
                     </CardTitle>
                     <Badge
                       className={
@@ -193,7 +193,7 @@ export default function Scanner() {
                 </CardHeader>
                 <CardContent className="space-y-2">
                   {d.evidence.map((e) => (
-                    <p key={e} className="text-xs break-all text-[#8a92a6]">
+                    <p key={e} className="text-xs break-all text-[#6b7280]">
                       evidence: {e}
                     </p>
                   ))}
@@ -212,12 +212,12 @@ export default function Scanner() {
             ))}
 
             {!result.detected.length && (
-              <Card className="border-[#e7e9f2] bg-white shadow-sm">
+              <Card className="border-[#e2e2dd] bg-white shadow-sm">
                 <CardContent className="pt-6 text-center">
-                  <p className="font-semibold text-[#141b2e]">
+                  <p className="font-semibold text-[#16181d]">
                     No known AI chat signatures found on this page.
                   </p>
-                  <p className="mt-1 text-sm text-[#5a6378]">
+                  <p className="mt-1 text-sm text-[#5c6370]">
                     This covers 52 known vendor signatures — custom-built AI may still be present. If
                     you use AI for images, videos or text, the labeling rules may still apply to you.
                   </p>
@@ -226,17 +226,17 @@ export default function Scanner() {
             )}
 
             {/* FREE IMPLEMENTATION PLAN */}
-            <Card className="border-[#6d5df6] bg-white shadow-lg">
+            <Card className="border-[#1f3a5f] bg-white shadow-lg">
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0eeff]">
-                    <ClipboardList className="h-5 w-5 text-[#6d5df6]" />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f7f7f5]">
+                    <ClipboardList className="h-5 w-5 text-[#1f3a5f]" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl font-extrabold text-[#141b2e]">
+                    <CardTitle className="text-xl font-extrabold text-[#16181d]">
                       Your free implementation plan
                     </CardTitle>
-                    <p className="text-sm text-[#8a92a6]">Yours to keep — no email required.</p>
+                    <p className="text-sm text-[#6b7280]">Yours to keep — no email required.</p>
                   </div>
                 </div>
               </CardHeader>
@@ -244,23 +244,23 @@ export default function Scanner() {
                 {result.detected.map((d, i) => {
                   const plan = planItemFor(d);
                   return (
-                    <div key={d.id} className="rounded-xl border border-[#eef0f6] p-4">
-                      <p className="text-xs font-extrabold tracking-wide text-[#6d5df6] uppercase">
+                    <div key={d.id} className="rounded-xl border border-[#e2e2dd] p-4">
+                      <p className="text-xs font-extrabold tracking-wide text-[#1f3a5f] uppercase">
                         Step {i + 1} — {d.name}
                       </p>
-                      <p className="mt-2 text-sm leading-relaxed text-[#3d445c]">{plan.what}</p>
-                      <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#141b2e]">
-                        <Wrench className="mt-0.5 h-4 w-4 shrink-0 text-[#6d5df6]" />
+                      <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">{plan.what}</p>
+                      <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#16181d]">
+                        <Wrench className="mt-0.5 h-4 w-4 shrink-0 text-[#1f3a5f]" />
                         {plan.fix}
                       </p>
                     </div>
                   );
                 })}
-                <div className="rounded-xl border border-[#eef0f6] p-4">
-                  <p className="text-xs font-extrabold tracking-wide text-[#6d5df6] uppercase">
+                <div className="rounded-xl border border-[#e2e2dd] p-4">
+                  <p className="text-xs font-extrabold tracking-wide text-[#1f3a5f] uppercase">
                     Always-on step — your evidence
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#3d445c]">
+                  <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
                     Whatever you install, keep proof: which pages show the disclosure, and when.
                     Article 50 questions arrive months later, in writing. The RapidAct evidence log
                     records every disclosure view automatically.
@@ -270,7 +270,7 @@ export default function Scanner() {
             </Card>
 
             {/* CTAs + lead capture */}
-            <Card className="border-[#141b2e] bg-[#141b2e] text-white shadow-lg">
+            <Card className="border-[#16181d] bg-[#16181d] text-white shadow-lg">
               <CardContent className="flex flex-col gap-5 pt-7 pb-7">
                 <div className="grid gap-3 sm:grid-cols-[1.3fr_1fr]">
                   <button
@@ -319,7 +319,7 @@ export default function Scanner() {
                         onClick={() =>
                           lead.mutate({ email: email.trim(), url: result.summary.url, source: "scanner-plan" })
                         }
-                        className="h-11 rounded-full bg-[#ffd617] px-6 font-bold text-[#141b2e] hover:bg-[#ffe44d]"
+                        className="h-11 rounded-full bg-[#ffd617] px-6 font-bold text-[#16181d] hover:bg-[#ffe44d]"
                       >
                         {lead.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Send my plan"}
                       </Button>
@@ -352,7 +352,7 @@ export default function Scanner() {
               </CardContent>
             </Card>
 
-            <p className="text-center text-xs text-[#8a92a6]">
+            <p className="text-center text-xs text-[#6b7280]">
               Technical scan, not legal advice. Regulation (EU) 2024/1689, Art. 50 · fines up to €15M or
               3% of global turnover (Art. 99).
             </p>

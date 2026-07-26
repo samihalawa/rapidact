@@ -1,26 +1,21 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
-import { Check, ShieldCheck, ArrowRight, ScanSearch, Puzzle } from "lucide-react";
 import { CONVERT, REPORT } from "@/config";
 import { REPORT_DELIVERABLES } from "@/data/report";
-import Countdown from "@/components/Countdown";
+import { ENTITY_DISPLAY_NAME, HAS_VAT } from "@/data/company";
 
-/** The free tools that stay free — secondary to the paid report. */
+/** The free tools, kept genuinely free and stated as secondary. */
 const freeTools = [
   {
-    icon: ScanSearch,
-    name: "Site scanner",
-    price: "€0",
-    text: "Paste a URL, see which AI systems are detectable on your site and whether they are disclosed. Unlimited, no signup.",
-    cta: "Scan my site",
+    name: "Website scanner",
+    text: "Submit a URL and see which AI systems are detectable on your pages, checked against 52 known chatbot platforms, with the evidence found for each. Unlimited, no account.",
+    cta: "Scan a website",
     to: CONVERT.scanner,
   },
   {
-    icon: Puzzle,
     name: "Self-install disclosure layer",
-    price: "€0",
-    text: "The transparency badge, AI content labels and evidence log — free plugin and guides for WordPress, Wix, Shopify or any stack. Install it yourself, keep it forever.",
-    cta: "See the guides",
+    text: "The visitor notice, AI content labels and evidence log, as a free plugin with guides for WordPress, Wix, Shopify or a plain script tag. Install it yourself and keep it.",
+    cta: "Read the guides",
     to: "/article-50",
   },
 ];
@@ -28,112 +23,90 @@ const freeTools = [
 export default function Pricing() {
   const navigate = useNavigate();
   return (
-    <section id="pricing" className="bg-white py-20">
+    <section id="pricing" className="paper-alt hairline border-b py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-bold tracking-wide text-[#6d5df6] uppercase">Pricing</p>
-          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
-            One report. One price. No subscription.
-          </h2>
-          <p className="mt-3 text-lg text-[#5a6378]">
-            The tools on this site are free and stay free. What you pay for is a specialist telling
-            you, in writing, exactly where your company stands.
-          </p>
-          <Countdown className="mt-4" />
-        </div>
+        <p className="eyebrow">Fees</p>
+        <h2 className="ink mt-3 max-w-2xl text-[28px] leading-tight font-bold tracking-[-0.015em] sm:text-[32px]">
+          One fee, charged once
+        </h2>
+        <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
+          The tools on this site are free and remain free. The fee is for a specialist reading your
+          case and putting the answer in writing.
+        </p>
 
-        {/* primary offer */}
-        <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-3xl border border-[#141b2e] bg-[#141b2e] text-white shadow-2xl">
-          <div className="grid gap-8 p-8 sm:p-10 lg:grid-cols-[1fr_1.1fr]">
-            <div>
-              <span className="rounded-full bg-[#ffd617] px-3 py-1 text-[11px] font-extrabold tracking-wide text-[#141b2e] uppercase">
-                The report
-              </span>
-              <h3 className="mt-4 text-2xl leading-tight font-extrabold">{REPORT.name}</h3>
-              <div className="mt-4 flex items-baseline gap-2">
-                <span className="text-5xl font-extrabold tracking-tight">€99</span>
-                <span className="text-sm text-white/60">one-time · per company</span>
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-white/70">
-                The same model as a law firm's pre-consultation fee: you pay to have your case
-                properly looked at, and you walk away with a document you can act on.
+        <div className="hairline mt-10 border bg-white">
+          <div className="hairline grid border-b lg:grid-cols-[22rem_1fr]">
+            <div className="hairline border-b p-7 lg:border-r lg:border-b-0">
+              <p className="eyebrow">Assessment</p>
+              <h3 className="ink mt-2 text-[19px] leading-snug font-semibold">{REPORT.name}</h3>
+              <p className="ink mt-5 text-[42px] leading-none font-bold tracking-tight">€99</p>
+              <p className="ink-soft mt-1.5 text-[13px]">
+                Charged once, per company. Not a subscription.
               </p>
               <Button
-                className="mt-6 h-12 w-full rounded-full bg-white text-base font-bold text-[#141b2e] hover:bg-[#f1f2f8]"
+                className="mt-6 h-11 w-full rounded bg-[#16181d] text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
                 onClick={() => navigate(CONVERT.report)}
               >
-                Get my report
-                <ArrowRight className="ml-1.5 h-4 w-4" />
+                Request the assessment
               </Button>
-              <p className="mt-3 text-center text-xs text-white/50">
-                You fill in your details first — nothing is charged until you review them.
+              <p className="ink-soft mt-3 text-[12px] leading-relaxed">
+                You enter your details first and review them before any payment is taken. Nothing
+                is charged on this website.
               </p>
             </div>
 
-            <div className="lg:border-l lg:border-white/10 lg:pl-8">
-              <p className="text-xs font-bold tracking-wide text-[#ffd617] uppercase">
-                Everything included
-              </p>
+            <div className="p-7">
+              <p className="eyebrow">What the fee covers</p>
               <ul className="mt-4 space-y-3">
                 {REPORT_DELIVERABLES.map((d) => (
-                  <li key={d} className="flex items-start gap-2.5 text-sm">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#ffd617]" />
-                    <span className="leading-relaxed text-white/85">{d}</span>
+                  <li key={d} className="flex gap-3 text-[15px]">
+                    <span className="ink-soft mono shrink-0 pt-0.5 text-[11px]">&bull;</span>
+                    <span className="ink-soft leading-relaxed">{d}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 border-t border-white/10 bg-white/[0.03] px-8 py-4">
+          <dl className="grid divide-y divide-[#e2e2dd] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             {[
-              `Delivered in ${REPORT.delivery} or full refund`,
-              "One-time — never a subscription",
-              "VAT invoice included",
-              "Any company size",
-            ].map((g) => (
-              <span key={g} className="flex items-center gap-2 text-xs font-semibold text-white/70">
-                <ShieldCheck className="h-4 w-4 text-[#0e9f6e]" />
-                {g}
-              </span>
+              ["Delivery", `Within ${REPORT.delivery} of payment`],
+              ["If we miss it", "Refunded in full, on request"],
+              ["Payment handled by", "bunq. Card details never reach us"],
+            ].map(([t, v]) => (
+              <div key={t} className="px-6 py-4">
+                <dt className="eyebrow">{t}</dt>
+                <dd className="ink-soft mt-1 text-[13px] leading-relaxed">{v}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </div>
 
-        {/* free tools — secondary */}
-        <div className="mx-auto mt-10 max-w-4xl">
-          <p className="text-center text-sm font-semibold text-[#8a92a6]">
-            Free either way — with or without the report
-          </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        {/* Free tools, deliberately secondary */}
+        <div className="mt-12">
+          <p className="eyebrow">Free, with or without an assessment</p>
+          <div className="hairline mt-4 grid border-t sm:grid-cols-2">
             {freeTools.map((t) => (
-              <div
-                key={t.name}
-                className="rounded-2xl border border-[#e7e9f2] bg-[#f8f9fc] p-6 transition hover:border-[#6d5df6]/40"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white">
-                    <t.icon className="h-4 w-4 text-[#6d5df6]" />
-                  </div>
-                  <span className="text-lg font-extrabold text-[#141b2e]">{t.price}</span>
-                </div>
-                <p className="mt-3 text-base font-bold text-[#141b2e]">{t.name}</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-[#5a6378]">{t.text}</p>
+              <div key={t.name} className="hairline border-b py-6 sm:pr-8 sm:last:pl-8 sm:last:pr-0">
+                <h3 className="ink text-[15px] font-semibold">{t.name}</h3>
+                <p className="ink-soft mt-2 text-[15px] leading-relaxed">{t.text}</p>
                 <button
                   onClick={() => navigate(t.to)}
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#6d5df6] transition hover:gap-2.5"
+                  className="accent mt-3 text-[14px] font-semibold underline underline-offset-2"
                 >
                   {t.cta}
-                  <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="mt-8 text-center text-xs text-[#8a92a6]">
-          Prices exclude VAT. RapidAct produces technical and organisational compliance
-          assessments — it is not a law firm and the report is not legal advice.
+        <p className="ink-soft mt-8 max-w-3xl text-[13px] leading-relaxed">
+          {HAS_VAT
+            ? "Prices exclude VAT. A VAT invoice is issued for every payment."
+            : `An invoice is issued for every payment by ${ENTITY_DISPLAY_NAME}.`}{" "}
+          RapidAct produces technical and organisational compliance assessments. It is not a law
+          firm and the report is not legal advice.
         </p>
       </div>
     </section>

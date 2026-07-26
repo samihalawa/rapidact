@@ -1,57 +1,45 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
 import { CONVERT, REPORT } from "@/config";
 import { REPORT_CHAPTERS } from "@/data/report";
 
-/** The primary offer: what is actually inside the paid report. */
+/** What each section of the assessment contains, set out as a document outline. */
 export default function ReportOffer() {
   const navigate = useNavigate();
   return (
-    <section id="report" className="bg-white py-20">
+    <section id="report" className="paper-alt hairline border-b py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="max-w-2xl">
-          <p className="text-sm font-bold tracking-wide text-[#6d5df6] uppercase">
-            What you receive
-          </p>
-          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-[#141b2e] sm:text-4xl">
-            Six chapters that answer the only question that matters
-          </h2>
-          <p className="mt-3 text-lg text-[#5a6378]">
-            Not a checklist and not a template. A written assessment of{" "}
-            <em>your</em> systems, prepared by a specialist, in your inbox within {REPORT.delivery}.
-          </p>
-        </div>
+        <p className="eyebrow">Contents of the assessment</p>
+        <h2 className="ink mt-3 max-w-2xl text-[28px] leading-tight font-bold tracking-[-0.015em] sm:text-[32px]">
+          Six sections, written for your systems
+        </h2>
+        <p className="ink-soft mt-3 max-w-2xl text-[16px] leading-relaxed">
+          The same structure every time, so the document is comparable and auditable. The content
+          of each section is specific to what your company actually operates.
+        </p>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="hairline mt-10 border-t">
           {REPORT_CHAPTERS.map((c) => (
-            <Card
+            <div
               key={c.n}
-              className="border-[#e7e9f2] bg-white shadow-none transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="hairline grid gap-2 border-b py-6 sm:grid-cols-[3rem_1fr] sm:gap-6 lg:grid-cols-[3rem_16rem_1fr]"
             >
-              <CardHeader>
-                <span className="text-xs font-extrabold tracking-widest text-[#6d5df6]">{c.n}</span>
-                <CardTitle className="pt-1 text-base font-bold text-[#141b2e]">{c.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm leading-relaxed text-[#5a6378]">{c.text}</p>
-              </CardContent>
-            </Card>
+              <span className="mono ink-soft pt-0.5 text-[12px]">{c.n}</span>
+              <h3 className="ink text-[15px] font-semibold">{c.title}</h3>
+              <p className="ink-soft max-w-2xl text-[15px] leading-relaxed">{c.text}</p>
+            </div>
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center gap-4">
           <Button
-            size="lg"
-            className="rounded-full bg-[#141b2e] px-7 font-semibold text-white hover:bg-[#232c4a]"
+            className="rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
             onClick={() => navigate(CONVERT.report)}
           >
-            Get my report — €99
-            <ArrowRight className="ml-1.5 h-4 w-4" />
+            Request the assessment, €99
           </Button>
-          <p className="text-sm text-[#8a92a6]">
-            One-time payment · Delivered in {REPORT.delivery} or refunded in full
+          <p className="ink-soft text-sm">
+            Paid once. Delivered within {REPORT.delivery} or refunded in full.
           </p>
         </div>
       </div>
