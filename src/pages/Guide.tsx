@@ -151,6 +151,17 @@ export default function Guide() {
                 );
               })}
             </div>
+            <div className="mt-3 border border-[#d8d8d2] bg-[#eef5ff] p-4">
+              <p className="mono text-[10px] font-bold tracking-[0.08em] text-[#1f3a5f] uppercase">
+                Google Tag Manager
+              </p>
+              <h4 className="mt-2 text-base font-bold text-[#16181d]">
+                {copy.tagManagerTitle}
+              </h4>
+              <p className="mt-1 text-[13px] leading-relaxed text-[#5c6370]">
+                {copy.tagManagerBody}
+              </p>
+            </div>
           </div>
 
           <h3 className="mt-8 text-lg font-bold tracking-tight text-[#16181d]">

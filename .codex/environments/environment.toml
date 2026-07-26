@@ -3,4 +3,9 @@ version = 1
 name = "rapidact"
 
 [setup]
-script = "cd \"$CODEX_WORKTREE_PATH\" && npm run dev"
+script = ""
+
+[[actions]]
+name = "Run"
+icon = "run"
+command = "cd \"$CODEX_WORKTREE_PATH\" && npm run dev"

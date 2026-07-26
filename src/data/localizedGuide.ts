@@ -15,6 +15,8 @@ export type GuideCopy = {
   copied: string;
   installerTitle: string;
   installerBody: string;
+  tagManagerTitle: string;
+  tagManagerBody: string;
   anySiteTitle: string;
   openGuide: string;
   installers: Record<
@@ -60,6 +62,9 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installerTitle: "Choose the fastest installation",
     installerBody:
       "Each option is a thin installer for the same RapidAct runtime. Improvements load from rapidact.eu automatically; there is no copied engine to maintain.",
+    tagManagerTitle: "Already use Google Tag Manager?",
+    tagManagerBody:
+      "Create a Custom HTML tag, paste the hosted script below and trigger it on Initialization – All Pages. No RapidAct login or OAuth access is required.",
     anySiteTitle: "Any website: copy the hosted script",
     openGuide: "Installation guide",
     installers: {
@@ -121,6 +126,9 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installerTitle: "Elige la instalación más rápida",
     installerBody:
       "Cada opción es un instalador ligero para el mismo sistema RapidAct. Las mejoras se cargan automáticamente desde rapidact.eu, sin mantener copias.",
+    tagManagerTitle: "¿Ya usas Google Tag Manager?",
+    tagManagerBody:
+      "Crea una etiqueta HTML personalizada, pega el script alojado y actívala en Inicialización – Todas las páginas. No necesitas iniciar sesión en RapidAct ni usar OAuth.",
     anySiteTitle: "Cualquier web: copia el script alojado",
     openGuide: "Guía de instalación",
     installers: {
@@ -182,6 +190,9 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installerTitle: "Wählen Sie die schnellste Installation",
     installerBody:
       "Jede Option ist ein schlanker Installer für dieselbe RapidAct-Laufzeit. Verbesserungen werden automatisch von rapidact.eu geladen.",
+    tagManagerTitle: "Nutzen Sie bereits Google Tag Manager?",
+    tagManagerBody:
+      "Erstellen Sie ein benutzerdefiniertes HTML-Tag, fügen Sie das gehostete Skript ein und verwenden Sie Initialisierung – Alle Seiten. Kein RapidAct-Login oder OAuth-Zugriff nötig.",
     anySiteTitle: "Jede Website: gehostetes Skript kopieren",
     openGuide: "Installationsanleitung",
     installers: {
@@ -247,6 +258,9 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installerTitle: "Choisissez l’installation la plus rapide",
     installerBody:
       "Chaque option est un installateur léger pour le même moteur RapidAct. Les améliorations se chargent automatiquement depuis rapidact.eu.",
+    tagManagerTitle: "Vous utilisez déjà Google Tag Manager ?",
+    tagManagerBody:
+      "Créez une balise HTML personnalisée, collez le script hébergé et déclenchez-la sur Initialisation – Toutes les pages. Aucun compte RapidAct ni accès OAuth requis.",
     anySiteTitle: "Tout site : copiez le script hébergé",
     openGuide: "Guide d’installation",
     installers: {
@@ -307,6 +321,9 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installerTitle: "Scegli l’installazione più rapida",
     installerBody:
       "Ogni opzione è un installer leggero per lo stesso runtime RapidAct. I miglioramenti vengono caricati automaticamente da rapidact.eu.",
+    tagManagerTitle: "Usi già Google Tag Manager?",
+    tagManagerBody:
+      "Crea un tag HTML personalizzato, incolla lo script ospitato e attivalo su Inizializzazione – Tutte le pagine. Non servono accesso RapidAct o OAuth.",
     anySiteTitle: "Qualsiasi sito: copia lo script ospitato",
     openGuide: "Guida all’installazione",
     installers: {

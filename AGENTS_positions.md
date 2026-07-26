@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct platform installers | copied platform engines drifted from the hosted badge and created marketplace-shaped overhead | keep one canonical runtime on rapidact.eu with thin WordPress, Shopify, Wix, GTM, and Zaraz adapters | do not build a Shopify app, WordPress update server, OAuth flow, copied engine, or call an unpublished kit a marketplace app | verify package integrity, real WordPress activation, localized rendered downloads, and live ZIP responses
 RapidAct conversion page | the hero preview and later sections repeated the same offer details | show actual specimen pages in the hero and reserve detailed lists for their dedicated section | do not repeat long deliverable or free-tool explanations | verify the full page for repeated claims and a clear primary CTA
 RapidAct scanner conversion | a spinner made the public-page preview feel unfinished and gave failures no next step | show readable scan phases and a permanent full-assessment fallback | do not imply the technical preview makes a company compliant | verify progress, success, unreachable, and CTA events live
 RapidAct brand assets | redrawn SVG and generated marks drifted from the approved logo | use the exact tight-crop raster pack by purpose, plus semantic text for the wordmark and disclosure | do not redraw, stretch, or retain superseded marks | verify header, footer, badge, favicon, PWA, social, and five languages live
@@ -7,7 +8,18 @@ RapidAct responsive report rows | three children collapsed when the grid changed
 RapidAct mobile header | language selector displaced the conversion action | keep compact logo, two-letter language selector, and assessment CTA visible | do not replace the CTA with a hamburger or full language name | verify the real phone header and 44px targets
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
-RapidAct product claims | invented installers and evidence logging | promise only shipped badge/scanner/report | do not advertise plugins, apps, extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer proof
+RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, direct WordPress plugin, and Shopify/Wix install kits | do not call install kits marketplace apps or advertise extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer and download proof
+
+## 2026-07-26 — Platform adapters share one hosted runtime
+
+- Status: CURRENT
+- Project/root: `rapidact`; WordPress, Shopify, Wix, and the Article 50 installer page.
+- Mistake: copying detection engines and signature databases into each platform package, then presenting source-only Shopify extension files as an installable product.
+- Do: keep `rapidact-badge.js` canonical on `rapidact.eu`; ship a direct WordPress settings plugin, a Shopify Liquid kit, a Wix Custom Code kit, and paste-only GTM/Zaraz paths.
+- Don't: fork the runtime, build a Shopify app, WordPress update server or OAuth flow, add speculative evidence/license/database layers, or call Shopify/Wix kits marketplace apps.
+- Evidence: `integrations/`, `api/installers.test.ts`, disposable WordPress 6.8 activation proof, and localized `/article-50#install` browser checks in this task.
+- Trigger terms: WordPress plugin, Shopify app, Wix plugin, install kit, central updates, paid later, hosted runtime.
+- Verify before reuse: ZIP contents match source; WordPress activates and prints the canonical script; all five localized installer views have 44px actions and no horizontal overflow; live downloads return valid ZIPs.
 
 ## 2026-07-26 — The conversion page previews depth without repeating it
 
