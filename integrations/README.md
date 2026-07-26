@@ -1,23 +1,17 @@
-# RapidAct platform installers
+# RapidAct marketplace apps
 
-Every installer in this directory is a thin adapter for the same production
-runtime:
+RapidAct uses native marketplace distribution:
 
-`https://rapidact.eu/rapidact-badge.js`
+- `wordpress/` — WordPress.org plugin with the badge JavaScript and image
+  bundled locally.
+- `shopify/` — public OAuth app based on Shopify's official React Router
+  template, with a theme app extension.
+- `wix/` — Wix CLI app with a dashboard settings page and embedded-script
+  extension.
 
-The platform packages do not contain a second disclosure engine. Improvements
-to the hosted runtime therefore reach every installed site without requiring a
-new plugin, theme asset, or Wix snippet.
+Each app contains version `1.0.0` of the same disclosure runtime. The public
+`/badge-manifest.json` reports version metadata only. Executable updates are
+published through WordPress.org, Shopify app versions, and Wix app versions.
 
-- `wordpress/` — direct-upload WordPress plugin with a native settings page.
-- `shopify/` — reusable Liquid snippet and one render line for `theme.liquid`.
-- `wix/` — one Custom Code snippet for all published pages.
-- `google-tag-manager/` — one Custom HTML tag for sites already using GTM.
-- `cloudflare-zaraz/` — the same script through Zaraz Custom HTML.
-
-Build the downloadable packages from these source folders; do not edit the
-ZIP files directly.
-
-There is deliberately no Shopify app, WordPress update server, or OAuth
-connection. The small platform adapter stays stable while the hosted runtime
-receives improvements.
+There are no public ZIP downloads, ScriptTag integrations, GTM instructions,
+Zaraz instructions, or remote-code updaters.

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RapidAct AI Disclosure
  * Plugin URI: https://rapidact.eu/article-50
- * Description: Add a configurable, visitor-facing AI-use notice that stays current through RapidAct's hosted runtime.
+ * Description: Add a configurable, visitor-facing AI-use notice with a locally bundled runtime.
  * Version: 1.0.0
  * Requires at least: 6.0
  * Requires PHP: 7.4
@@ -17,8 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const RAPIDACT_AI_DISCLOSURE_OPTION = 'rapidact_ai_disclosure';
-const RAPIDACT_AI_DISCLOSURE_SCRIPT = 'https://rapidact.eu/rapidact-badge.js';
+const RAPIDACT_AI_DISCLOSURE_VERSION = '1.0.0';
+const RAPIDACT_AI_DISCLOSURE_OPTION  = 'rapidact_ai_disclosure';
+const RAPIDACT_AI_DISCLOSURE_HANDLE  = 'rapidact-ai-disclosure';
+const RAPIDACT_AI_DISCLOSURE_MANIFEST = 'https://rapidact.eu/badge-manifest.json';
 
 /**
  * Return the complete settings shape.
@@ -28,6 +30,7 @@ const RAPIDACT_AI_DISCLOSURE_SCRIPT = 'https://rapidact.eu/rapidact-badge.js';
 function rapidact_ai_disclosure_defaults() {
 	return array(
 		'enabled'     => '1',
+		'badge_id'    => '',
 		'language'    => 'auto',
 		'title'       => '',
 		'message'     => '',
@@ -36,6 +39,7 @@ function rapidact_ai_disclosure_defaults() {
 		'details_url' => '',
 		'position'    => 'right',
 		'color'       => '#1f3a5f',
+		'show_credit' => '0',
 	);
 }
 
@@ -54,31 +58,29 @@ register_activation_hook( __FILE__, 'rapidact_ai_disclosure_activate' );
  * @return array<string, string>
  */
 function rapidact_ai_disclosure_sanitize( $input ) {
-	$input    = is_array( $input ) ? $input : array();
-	$defaults = rapidact_ai_disclosure_defaults();
+	$input     = is_array( $input ) ? $input : array();
+	$defaults  = rapidact_ai_disclosure_defaults();
 	$languages = array( 'auto', 'en', 'es', 'de', 'fr', 'it' );
 	$positions = array( 'left', 'right' );
 	$color     = isset( $input['color'] ) ? sanitize_hex_color( $input['color'] ) : '';
 
 	return array(
 		'enabled'     => isset( $input['enabled'] ) ? '1' : '0',
-		'language'    => isset( $input['language'] ) && in_array( $input['language'], $languages, true )
-			? $input['language']
-			: $defaults['language'],
+		'badge_id'    => isset( $input['badge_id'] ) ? sanitize_key( $input['badge_id'] ) : '',
+		'language'    => isset( $input['language'] ) && in_array( $input['language'], $languages, true ) ? $input['language'] : $defaults['language'],
 		'title'       => isset( $input['title'] ) ? sanitize_text_field( $input['title'] ) : '',
 		'message'     => isset( $input['message'] ) ? sanitize_textarea_field( $input['message'] ) : '',
 		'system'      => isset( $input['system'] ) ? sanitize_text_field( $input['system'] ) : '',
 		'provider'    => isset( $input['provider'] ) ? sanitize_text_field( $input['provider'] ) : '',
 		'details_url' => isset( $input['details_url'] ) ? esc_url_raw( $input['details_url'] ) : '',
-		'position'    => isset( $input['position'] ) && in_array( $input['position'], $positions, true )
-			? $input['position']
-			: $defaults['position'],
+		'position'    => isset( $input['position'] ) && in_array( $input['position'], $positions, true ) ? $input['position'] : $defaults['position'],
 		'color'       => $color ? $color : $defaults['color'],
+		'show_credit' => isset( $input['show_credit'] ) ? '1' : '0',
 	);
 }
 
 /**
- * Register one array option through WordPress's native Settings API.
+ * Register the plugin's single option.
  */
 function rapidact_ai_disclosure_register_settings() {
 	register_setting(
@@ -127,6 +129,46 @@ function rapidact_ai_disclosure_text_input( $name, $options, $placeholder = '', 
 }
 
 /**
+ * Read the informational manifest only when the administrator requests it.
+ *
+ * @return string
+ */
+function rapidact_ai_disclosure_version_status() {
+	if ( ! isset( $_GET['rapidact_check_updates'] ) ) {
+		return '';
+	}
+
+	check_admin_referer( 'rapidact_check_updates' );
+	$response = wp_safe_remote_get(
+		RAPIDACT_AI_DISCLOSURE_MANIFEST,
+		array( 'timeout' => 5 )
+	);
+
+	if ( is_wp_error( $response ) ) {
+		return __( 'Version information is temporarily unavailable.', 'rapidact-ai-disclosure' );
+	}
+
+	$manifest = json_decode( wp_remote_retrieve_body( $response ), true );
+	$latest   = is_array( $manifest ) && isset( $manifest['platforms']['wordpress']['version'] )
+		? sanitize_text_field( $manifest['platforms']['wordpress']['version'] )
+		: '';
+
+	if ( ! $latest ) {
+		return __( 'The version response was not recognised.', 'rapidact-ai-disclosure' );
+	}
+
+	if ( version_compare( RAPIDACT_AI_DISCLOSURE_VERSION, $latest, '<' ) ) {
+		return sprintf(
+			/* translators: %s is the latest plugin version. */
+			__( 'Version %s is available through WordPress.org updates.', 'rapidact-ai-disclosure' ),
+			$latest
+		);
+	}
+
+	return __( 'You have the current WordPress.org version.', 'rapidact-ai-disclosure' );
+}
+
+/**
  * Render the compact native settings form.
  */
 function rapidact_ai_disclosure_render_settings_page() {
@@ -134,27 +176,25 @@ function rapidact_ai_disclosure_render_settings_page() {
 		return;
 	}
 
-	$options = wp_parse_args(
-		get_option( RAPIDACT_AI_DISCLOSURE_OPTION, array() ),
-		rapidact_ai_disclosure_defaults()
-	);
+	$options = wp_parse_args( get_option( RAPIDACT_AI_DISCLOSURE_OPTION, array() ), rapidact_ai_disclosure_defaults() );
+	$status  = rapidact_ai_disclosure_version_status();
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'RapidAct AI Disclosure', 'rapidact-ai-disclosure' ); ?></h1>
-		<p>
-			<?php esc_html_e( 'Publish a clear AI-use notice across your site. The visitor interface loads from rapidact.eu so improvements arrive without reinstalling the plugin.', 'rapidact-ai-disclosure' ); ?>
-		</p>
+		<p><?php esc_html_e( 'Publish a clear AI-use notice using the copy bundled with this plugin.', 'rapidact-ai-disclosure' ); ?></p>
+		<?php if ( $status ) : ?>
+			<div class="notice notice-info inline"><p><?php echo esc_html( $status ); ?></p></div>
+		<?php endif; ?>
 		<form action="options.php" method="post">
 			<?php settings_fields( 'rapidact_ai_disclosure' ); ?>
 			<table class="form-table" role="presentation">
 				<tr>
 					<th scope="row"><?php esc_html_e( 'Status', 'rapidact-ai-disclosure' ); ?></th>
-					<td>
-						<label>
-							<input type="checkbox" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[enabled]" value="1" <?php checked( $options['enabled'], '1' ); ?>>
-							<?php esc_html_e( 'Show the notice on the public site', 'rapidact-ai-disclosure' ); ?>
-						</label>
-					</td>
+					<td><label><input type="checkbox" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[enabled]" value="1" <?php checked( $options['enabled'], '1' ); ?>> <?php esc_html_e( 'Show the notice on the public site', 'rapidact-ai-disclosure' ); ?></label></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="rapidact-badge_id"><?php esc_html_e( 'Badge ID', 'rapidact-ai-disclosure' ); ?></label></th>
+					<td><?php rapidact_ai_disclosure_text_input( 'badge_id', $options, 'customer-badge-id' ); ?><p class="description"><?php esc_html_e( 'Optional identifier supplied by RapidAct.', 'rapidact-ai-disclosure' ); ?></p></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="rapidact-language"><?php esc_html_e( 'Language', 'rapidact-ai-disclosure' ); ?></label></th>
@@ -170,86 +210,47 @@ function rapidact_ai_disclosure_render_settings_page() {
 								'it'   => 'Italiano',
 							);
 							foreach ( $languages as $value => $label ) {
-								printf(
-									'<option value="%1$s" %2$s>%3$s</option>',
-									esc_attr( $value ),
-									selected( $options['language'], $value, false ),
-									esc_html( $label )
-								);
+								printf( '<option value="%1$s" %2$s>%3$s</option>', esc_attr( $value ), selected( $options['language'], $value, false ), esc_html( $label ) );
 							}
 							?>
 						</select>
 						<p class="description"><?php esc_html_e( 'Automatic follows the page or visitor language.', 'rapidact-ai-disclosure' ); ?></p>
 					</td>
 				</tr>
-				<tr>
-					<th scope="row"><label for="rapidact-title"><?php esc_html_e( 'Title', 'rapidact-ai-disclosure' ); ?></label></th>
-					<td>
-						<?php rapidact_ai_disclosure_text_input( 'title', $options, __( 'Use the translated default', 'rapidact-ai-disclosure' ) ); ?>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="rapidact-message"><?php esc_html_e( 'Visitor message', 'rapidact-ai-disclosure' ); ?></label></th>
-					<td>
-						<textarea class="large-text" rows="3" id="rapidact-message" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[message]" placeholder="<?php esc_attr_e( 'Use the translated default', 'rapidact-ai-disclosure' ); ?>"><?php echo esc_textarea( $options['message'] ); ?></textarea>
-						<p class="description"><?php esc_html_e( 'Leave blank for the built-in translated message, or describe the AI interaction precisely.', 'rapidact-ai-disclosure' ); ?></p>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="rapidact-system"><?php esc_html_e( 'System name', 'rapidact-ai-disclosure' ); ?></label></th>
-					<td><?php rapidact_ai_disclosure_text_input( 'system', $options, __( 'For example: Support assistant', 'rapidact-ai-disclosure' ) ); ?></td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="rapidact-provider"><?php esc_html_e( 'Responsible organisation', 'rapidact-ai-disclosure' ); ?></label></th>
-					<td><?php rapidact_ai_disclosure_text_input( 'provider', $options ); ?></td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="rapidact-details_url"><?php esc_html_e( 'More-information URL', 'rapidact-ai-disclosure' ); ?></label></th>
-					<td><?php rapidact_ai_disclosure_text_input( 'details_url', $options, 'https://example.com/ai-transparency', 'url' ); ?></td>
-				</tr>
+				<tr><th scope="row"><label for="rapidact-title"><?php esc_html_e( 'Title', 'rapidact-ai-disclosure' ); ?></label></th><td><?php rapidact_ai_disclosure_text_input( 'title', $options, __( 'Use the translated default', 'rapidact-ai-disclosure' ) ); ?></td></tr>
+				<tr><th scope="row"><label for="rapidact-message"><?php esc_html_e( 'Visitor message', 'rapidact-ai-disclosure' ); ?></label></th><td><textarea class="large-text" rows="3" id="rapidact-message" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[message]" placeholder="<?php esc_attr_e( 'Use the translated default', 'rapidact-ai-disclosure' ); ?>"><?php echo esc_textarea( $options['message'] ); ?></textarea></td></tr>
+				<tr><th scope="row"><label for="rapidact-system"><?php esc_html_e( 'System name', 'rapidact-ai-disclosure' ); ?></label></th><td><?php rapidact_ai_disclosure_text_input( 'system', $options, __( 'For example: Support assistant', 'rapidact-ai-disclosure' ) ); ?></td></tr>
+				<tr><th scope="row"><label for="rapidact-provider"><?php esc_html_e( 'Responsible organisation', 'rapidact-ai-disclosure' ); ?></label></th><td><?php rapidact_ai_disclosure_text_input( 'provider', $options ); ?></td></tr>
+				<tr><th scope="row"><label for="rapidact-details_url"><?php esc_html_e( 'More-information URL', 'rapidact-ai-disclosure' ); ?></label></th><td><?php rapidact_ai_disclosure_text_input( 'details_url', $options, 'https://example.com/ai-transparency', 'url' ); ?></td></tr>
 				<tr>
 					<th scope="row"><label for="rapidact-position"><?php esc_html_e( 'Position', 'rapidact-ai-disclosure' ); ?></label></th>
-					<td>
-						<select id="rapidact-position" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[position]">
-							<option value="right" <?php selected( $options['position'], 'right' ); ?>><?php esc_html_e( 'Bottom right', 'rapidact-ai-disclosure' ); ?></option>
-							<option value="left" <?php selected( $options['position'], 'left' ); ?>><?php esc_html_e( 'Bottom left', 'rapidact-ai-disclosure' ); ?></option>
-						</select>
-					</td>
+					<td><select id="rapidact-position" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[position]"><option value="right" <?php selected( $options['position'], 'right' ); ?>><?php esc_html_e( 'Bottom right', 'rapidact-ai-disclosure' ); ?></option><option value="left" <?php selected( $options['position'], 'left' ); ?>><?php esc_html_e( 'Bottom left', 'rapidact-ai-disclosure' ); ?></option></select></td>
 				</tr>
-				<tr>
-					<th scope="row"><label for="rapidact-color"><?php esc_html_e( 'Accent colour', 'rapidact-ai-disclosure' ); ?></label></th>
-					<td><?php rapidact_ai_disclosure_text_input( 'color', $options, '#1f3a5f' ); ?></td>
-				</tr>
+				<tr><th scope="row"><label for="rapidact-color"><?php esc_html_e( 'Accent colour', 'rapidact-ai-disclosure' ); ?></label></th><td><?php rapidact_ai_disclosure_text_input( 'color', $options, '#1f3a5f' ); ?></td></tr>
+				<tr><th scope="row"><?php esc_html_e( 'RapidAct credit', 'rapidact-ai-disclosure' ); ?></th><td><label><input type="checkbox" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[show_credit]" value="1" <?php checked( $options['show_credit'], '1' ); ?>> <?php esc_html_e( 'Show the optional RapidAct installation link', 'rapidact-ai-disclosure' ); ?></label></td></tr>
 			</table>
 			<?php submit_button(); ?>
 		</form>
-		<p>
-			<a href="https://rapidact.eu/article-50" target="_blank" rel="noopener">
-				<?php esc_html_e( 'Preview the notice and read the installation guide', 'rapidact-ai-disclosure' ); ?>
-			</a>
-		</p>
+		<p><a href="<?php echo esc_url( wp_nonce_url( admin_url( 'options-general.php?page=rapidact-ai-disclosure&rapidact_check_updates=1' ), 'rapidact_check_updates' ) ); ?>"><?php esc_html_e( 'Check published version information', 'rapidact-ai-disclosure' ); ?></a></p>
 	</div>
 	<?php
 }
 
 /**
- * Print the canonical hosted loader once, immediately before </body>.
+ * Add configuration to the locally bundled script tag.
+ *
+ * @param string $tag Script tag.
+ * @param string $handle Script handle.
+ * @return string
  */
-function rapidact_ai_disclosure_render_loader() {
-	if ( is_admin() ) {
-		return;
+function rapidact_ai_disclosure_script_attributes( $tag, $handle ) {
+	if ( RAPIDACT_AI_DISCLOSURE_HANDLE !== $handle ) {
+		return $tag;
 	}
 
-	$options = wp_parse_args(
-		get_option( RAPIDACT_AI_DISCLOSURE_OPTION, array() ),
-		rapidact_ai_disclosure_defaults()
-	);
-
-	if ( '1' !== $options['enabled'] ) {
-		return;
-	}
-
+	$options = wp_parse_args( get_option( RAPIDACT_AI_DISCLOSURE_OPTION, array() ), rapidact_ai_disclosure_defaults() );
 	$attributes = array(
+		'data-badge-id'    => $options['badge_id'],
 		'data-title'       => $options['title'],
 		'data-message'     => $options['message'],
 		'data-system'      => $options['system'],
@@ -257,18 +258,44 @@ function rapidact_ai_disclosure_render_loader() {
 		'data-details-url' => $options['details_url'],
 		'data-position'    => $options['position'],
 		'data-color'       => $options['color'],
+		'data-show-credit' => '1' === $options['show_credit'] ? 'true' : 'false',
+		'data-brand-src'   => plugins_url( 'assets/rapidact-exact-symbol.png', __FILE__ ),
 	);
 
 	if ( 'auto' !== $options['language'] ) {
 		$attributes['data-language'] = $options['language'];
 	}
 
-	echo '<script defer src="' . esc_url( RAPIDACT_AI_DISCLOSURE_SCRIPT ) . '"';
+	$serialized = '';
 	foreach ( $attributes as $name => $value ) {
 		if ( '' !== $value ) {
-			printf( ' %s="%s"', esc_attr( $name ), esc_attr( $value ) );
+			$serialized .= sprintf( ' %s="%s"', esc_attr( $name ), esc_attr( $value ) );
 		}
 	}
-	echo '></script>' . "\n";
+
+	return str_replace( ' src=', $serialized . ' src=', $tag );
 }
-add_action( 'wp_footer', 'rapidact_ai_disclosure_render_loader', 99 );
+add_filter( 'script_loader_tag', 'rapidact_ai_disclosure_script_attributes', 10, 2 );
+
+/**
+ * Enqueue the local runtime on public pages.
+ */
+function rapidact_ai_disclosure_enqueue() {
+	if ( is_admin() ) {
+		return;
+	}
+
+	$options = wp_parse_args( get_option( RAPIDACT_AI_DISCLOSURE_OPTION, array() ), rapidact_ai_disclosure_defaults() );
+	if ( '1' !== $options['enabled'] ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		RAPIDACT_AI_DISCLOSURE_HANDLE,
+		plugins_url( 'assets/rapidact-badge.js', __FILE__ ),
+		array(),
+		RAPIDACT_AI_DISCLOSURE_VERSION,
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'rapidact_ai_disclosure_enqueue' );

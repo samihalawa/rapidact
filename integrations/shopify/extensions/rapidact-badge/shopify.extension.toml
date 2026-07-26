@@ -1,0 +1,6 @@
+api_version = "2026-07"
+
+[[extensions]]
+name = "RapidAct AI disclosure"
+handle = "rapidact-badge"
+type = "theme"

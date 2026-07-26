@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "badgeVersion": "1.0.0",
+  "publishedAt": "2026-07-27",
+  "platforms": {
+    "wordpress": {
+      "version": "1.0.0",
+      "distribution": "wordpress.org"
+    },
+    "shopify": {
+      "version": "1.0.0",
+      "distribution": "shopify-app-store"
+    },
+    "wix": {
+      "version": "1.0.0",
+      "distribution": "wix-app-market"
+    }
+  }
+}

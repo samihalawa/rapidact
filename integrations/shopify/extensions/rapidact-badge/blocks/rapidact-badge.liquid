@@ -1,0 +1,92 @@
+<script
+  src="{{ 'rapidact-badge.js' | asset_url }}"
+  defer
+  data-badge-id="{{ block.settings.badge_id | escape }}"
+  data-language="{{ block.settings.language | escape }}"
+  data-title="{{ block.settings.title | escape }}"
+  data-message="{{ block.settings.message | escape }}"
+  data-system="{{ block.settings.system | escape }}"
+  data-provider="{{ block.settings.provider | escape }}"
+  data-details-url="{{ block.settings.details_url | escape }}"
+  data-position="{{ block.settings.position | escape }}"
+  data-color="{{ block.settings.color }}"
+  data-show-credit="{{ block.settings.show_credit }}"
+  data-brand-src="{{ 'rapidact-exact-symbol.png' | asset_url }}"
+></script>
+
+{% schema %}
+{
+  "name": "RapidAct AI disclosure",
+  "target": "body",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_id",
+      "label": "Badge ID",
+      "info": "Optional identifier supplied by RapidAct."
+    },
+    {
+      "type": "select",
+      "id": "language",
+      "label": "Language",
+      "default": "en",
+      "options": [
+        { "value": "en", "label": "English" },
+        { "value": "es", "label": "Español" },
+        { "value": "de", "label": "Deutsch" },
+        { "value": "fr", "label": "Français" },
+        { "value": "it", "label": "Italiano" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Leave blank for the translated default."
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Visitor message",
+      "info": "Leave blank for the translated default."
+    },
+    {
+      "type": "text",
+      "id": "system",
+      "label": "System name"
+    },
+    {
+      "type": "text",
+      "id": "provider",
+      "label": "Responsible organisation"
+    },
+    {
+      "type": "url",
+      "id": "details_url",
+      "label": "More-information URL"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "default": "right",
+      "options": [
+        { "value": "right", "label": "Bottom right" },
+        { "value": "left", "label": "Bottom left" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Accent colour",
+      "default": "#1f3a5f"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_credit",
+      "label": "Show optional RapidAct installation link",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

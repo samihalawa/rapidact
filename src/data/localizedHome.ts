@@ -108,7 +108,7 @@ const en: HomeCopy = {
     },
     {
       title: "Clear AI-use notice",
-      text: "A calm, visitor-facing disclosure for WordPress, Wix, Shopify, Webflow or any custom site. One script; no account, plugin or build step.",
+      text: "A calm visitor notice for WordPress, Shopify and Wix through native marketplace apps, plus one script for custom sites.",
       cta: "Add the notice",
     },
   ],
@@ -137,7 +137,7 @@ const en: HomeCopy = {
     },
     {
       title: "Platform coverage",
-      text: "One script works in WordPress, Wix, Shopify, Webflow or a custom app without changing your chatbot.",
+      text: "Native WordPress, Shopify and Wix apps bundle the notice; custom sites can use the standalone script.",
     },
     {
       title: "Implementation guides",
@@ -252,7 +252,7 @@ const es: HomeCopy = {
     },
     {
       title: "Aviso claro sobre el uso de IA",
-      text: "Un aviso sereno y visible para WordPress, Wix, Shopify, Webflow o una web propia. Un script, sin cuenta ni plugin.",
+      text: "Un aviso claro para WordPress, Shopify y Wix mediante aplicaciones nativas, más un script para webs propias.",
       cta: "Añadir el aviso",
     },
   ],
@@ -281,7 +281,7 @@ const es: HomeCopy = {
     },
     {
       title: "Compatible con plataformas",
-      text: "Un script para WordPress, Wix, Shopify, Webflow o una aplicación propia.",
+      text: "Aplicaciones nativas para WordPress, Shopify y Wix; script independiente para webs propias.",
     },
     {
       title: "Guías de implementación",
@@ -429,7 +429,7 @@ const de: HomeCopy = {
     },
     {
       title: "Klarer KI-Nutzungshinweis",
-      text: "Ruhiger Besucherhinweis für alle gängigen Plattformen. Ein Skript, ohne Konto oder Plugin.",
+      text: "Klarer Besucherhinweis über native WordPress-, Shopify- und Wix-Apps sowie ein Skript für eigene Websites.",
       cta: "Hinweis hinzufügen",
     },
   ],
@@ -458,7 +458,7 @@ const de: HomeCopy = {
     },
     {
       title: "Plattformübergreifend",
-      text: "Ein Skript für WordPress, Wix, Shopify, Webflow oder eigene Apps.",
+      text: "Native Apps für WordPress, Shopify und Wix; eigenständiges Skript für eigene Websites.",
     },
     {
       title: "Anleitungen",
@@ -606,7 +606,7 @@ const fr: HomeCopy = {
     },
     {
       title: "Avis clair sur l’usage de l’IA",
-      text: "Information claire et visible pour toutes les plateformes. Un script, sans compte ni plugin.",
+      text: "Avis clair via des applications natives WordPress, Shopify et Wix, plus un script pour les sites personnalisés.",
       cta: "Ajouter l’avis",
     },
   ],
@@ -635,7 +635,7 @@ const fr: HomeCopy = {
     },
     {
       title: "Toutes plateformes",
-      text: "Un script pour WordPress, Wix, Shopify, Webflow ou une application.",
+      text: "Applications natives pour WordPress, Shopify et Wix ; script autonome pour les sites personnalisés.",
     },
     {
       title: "Guides",
@@ -783,7 +783,7 @@ const it: HomeCopy = {
     },
     {
       title: "Avviso chiaro sull’uso dell’IA",
-      text: "Avviso sobrio e visibile per tutte le piattaforme. Uno script, senza account o plugin.",
+      text: "Avviso chiaro tramite app native WordPress, Shopify e Wix, più uno script per siti personalizzati.",
       cta: "Aggiungi l’avviso",
     },
   ],
@@ -812,7 +812,7 @@ const it: HomeCopy = {
     },
     {
       title: "Tutte le piattaforme",
-      text: "Uno script per WordPress, Wix, Shopify, Webflow o app personalizzate.",
+      text: "App native per WordPress, Shopify e Wix; script autonomo per siti personalizzati.",
     },
     { title: "Guide", text: "Passaggi concreti senza gergo legale o tecnico." },
   ],

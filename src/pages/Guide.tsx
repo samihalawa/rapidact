@@ -4,14 +4,12 @@ import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
 import CtaBand from "@/components/CtaBand";
-import { REQUIREMENTS } from "@/data/requirements";
 import { PLATFORMS } from "@/data/platforms";
 import {
   ArrowRight,
   Check,
   Code2,
   Copy,
-  Download,
   FileClock,
   MessagesSquare,
   Tags,
@@ -19,24 +17,21 @@ import {
 } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
-import { GUIDE_COPY } from "@/data/localizedGuide";
+import { GUIDE_CARDS, GUIDE_COPY } from "@/data/localizedGuide";
 
 const reqIcons = [MessagesSquare, Tags, Video, FileClock];
-const platformInstallers = [
+const marketplaceApps = [
   {
     slug: "wordpress" as const,
     name: "WordPress",
-    href: "/downloads/rapidact-wordpress.zip",
   },
   {
     slug: "shopify" as const,
     name: "Shopify",
-    href: "/downloads/rapidact-shopify.zip",
   },
   {
     slug: "wix" as const,
     name: "Wix",
-    href: "/downloads/rapidact-wix.zip",
   },
 ];
 
@@ -112,55 +107,37 @@ export default function Guide() {
               {copy.installerBody}
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              {platformInstallers.map(installer => {
-                const installerCopy = copy.installers[installer.slug];
+              {marketplaceApps.map(app => {
+                const installerCopy = copy.installers[app.slug];
                 return (
                   <article
-                    key={installer.slug}
+                    key={app.slug}
                     className="flex min-h-full flex-col border border-[#d8d8d2] bg-white p-4"
                   >
                     <p className="mono text-[10px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
                       {installerCopy.type}
                     </p>
                     <h4 className="mt-2 text-base font-bold text-[#16181d]">
-                      {installer.name}
+                      {app.name}
                     </h4>
                     <p className="mt-2 flex-1 text-[13px] leading-relaxed text-[#5c6370]">
                       {installerCopy.body}
                     </p>
-                    <a
-                      href={installer.href}
-                      download
+                    <Link
+                      to={path(`/platforms/${app.slug}`)}
                       onClick={() =>
-                        track("platform_installer_download", {
-                          platform: installer.slug,
+                        track("marketplace_app_guide", {
+                          platform: app.slug,
                         })
                       }
                       className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded bg-[#16181d] px-3 text-center text-[12px] font-bold text-white transition hover:bg-[#2b2f38] focus-visible:ring-2 focus-visible:ring-[#1f3a5f] focus-visible:ring-offset-2 focus-visible:outline-none"
                     >
-                      <Download className="h-4 w-4" aria-hidden="true" />
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
                       {installerCopy.action}
-                    </a>
-                    <Link
-                      to={path(`/platforms/${installer.slug}`)}
-                      className="mt-3 text-center text-[12px] font-semibold text-[#1f3a5f] underline underline-offset-2"
-                    >
-                      {copy.openGuide}
                     </Link>
                   </article>
                 );
               })}
-            </div>
-            <div className="mt-3 border border-[#d8d8d2] bg-[#eef5ff] p-4">
-              <p className="mono text-[10px] font-bold tracking-[0.08em] text-[#1f3a5f] uppercase">
-                Google Tag Manager
-              </p>
-              <h4 className="mt-2 text-base font-bold text-[#16181d]">
-                {copy.tagManagerTitle}
-              </h4>
-              <p className="mt-1 text-[13px] leading-relaxed text-[#5c6370]">
-                {copy.tagManagerBody}
-              </p>
             </div>
           </div>
 
@@ -247,7 +224,7 @@ export default function Guide() {
             {copy.dutiesTitle}
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {REQUIREMENTS.map((r, i) => {
+            {GUIDE_CARDS[lang].map((r, i) => {
               const Icon = reqIcons[i % reqIcons.length];
               return (
                 <Link
@@ -258,7 +235,7 @@ export default function Guide() {
                   <Icon className="h-5 w-5 text-[#1f3a5f]" />
                   <p className="mt-3 font-bold text-[#16181d]">{r.title}</p>
                   <p className="mt-1 line-clamp-2 text-sm text-[#5c6370]">
-                    {r.metaDescription}
+                    {r.description}
                   </p>
                   <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#1f3a5f]">
                     {copy.readGuide}{" "}

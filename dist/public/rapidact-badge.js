@@ -90,6 +90,11 @@
   var system = (script && script.dataset.system) || "";
   var provider = (script && script.dataset.provider) || "";
   var detailsUrl = (script && script.dataset.detailsUrl) || "";
+  var badgeId = (script && script.dataset.badgeId) || "";
+  var showCredit =
+    !script || typeof script.dataset.showCredit === "undefined"
+      ? true
+      : script.dataset.showCredit === "true";
   var position =
     script && script.dataset.position === "left" ? "left" : "right";
   var requestedAccent = (script && script.dataset.color) || "";
@@ -122,6 +127,7 @@
 
   var host = document.createElement("div");
   host.id = "rapidact-ai-disclosure";
+  if (badgeId) host.setAttribute("data-badge-id", badgeId);
   host.style.position = "fixed";
   host.style[position] = "max(16px, env(safe-area-inset-" + position + "))";
   host.style.bottom = "max(16px, env(safe-area-inset-bottom))";
@@ -197,9 +203,11 @@
     '<p class="ra-meta"></p>' +
     '<div class="ra-links">' +
     '<a class="ra-link ra-details" target="_blank" rel="noopener"></a>' +
-    '<a class="ra-link" href="https://rapidact.eu/article-50#install" target="_blank" rel="noopener">' +
-    copybook.install +
-    "</a>" +
+    (showCredit
+      ? '<a class="ra-link" href="https://rapidact.eu/article-50#install" target="_blank" rel="noopener">' +
+        copybook.install +
+        "</a>"
+      : "") +
     "</div>" +
     "</div>" +
     "</section>" +

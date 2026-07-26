@@ -9,10 +9,8 @@ import {
   ScanSearch,
   ListChecks,
   Blocks,
-  Download,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { track } from "@/lib/analytics";
 
 export default function PlatformPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -96,24 +94,13 @@ export default function PlatformPage() {
               </li>
             ))}
           </ol>
-          {guide.installer ? (
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href={guide.installer.href}
-                download
-                onClick={() =>
-                  track("platform_installer_download", {
-                    platform: guide.slug,
-                    source: "platform_guide",
-                  })
-                }
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
-              >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                {guide.installer.label}
-              </a>
+          {guide.marketplace ? (
+            <div className="mt-6 flex flex-wrap items-center gap-3 border border-[#d8d8d2] bg-[#f7f7f5] p-4">
+              <span className="inline-flex min-h-11 items-center justify-center rounded bg-[#16181d] px-5 text-sm font-bold text-white">
+                {guide.marketplace.label}
+              </span>
               <span className="mono text-[11px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
-                {guide.installer.format}
+                {guide.marketplace.status}
               </span>
             </div>
           ) : (

@@ -1,19 +1,18 @@
-# Install RapidAct on Wix
+# RapidAct for Wix
 
-This kit uses Wix's site-wide **Custom Code** setting. The notice always loads
-from `https://rapidact.eu/rapidact-badge.js`, so its design, accessibility, and
-translations stay current without editing the Wix site again.
+This Wix CLI app contains one dashboard page and one embedded-script extension.
+The site owner enters a Badge ID and language, then the dashboard calls Wix's
+`embedScript()` API. The badge JavaScript and image are bundled into the Wix app
+version; the public RapidAct manifest is used only for version awareness in the
+dashboard.
 
-## Install
+## Verify
 
-1. Publish the Wix site and connect its domain.
-2. In the site dashboard, open **Settings → Custom Code**.
-3. Choose **Add Custom Code** and paste `rapidact-custom-code.html`.
-4. Name it `RapidAct AI Disclosure`.
-5. Select **All pages** and **Load code on each new page**.
-6. Place the code in **Body – end**, apply it, and publish.
-7. Check the published site on desktop and mobile.
+```sh
+npm install
+npm run verify
+```
 
-Edit `data-system`, `data-provider`, `data-details-url`, `data-position`, and
-`data-color` before pasting. Leave out `data-language` to follow the page or
-visitor language automatically (English, Spanish, German, French, or Italian).
+To run the Wix sandbox, authenticate with `npx wix login`, link this source to
+the RapidAct app so the CLI creates `wix.config.json`, run `npm run release`
+once to register the embedded-script extension, and then run `npm run dev`.

@@ -1,0 +1,5 @@
+{
+  "$schema": "https://dev.wix.com/wix-cli/schemas/wix-config.json",
+  "appId": "c301e6f6-49fb-4885-bd5d-4f1317f21f5f",
+  "projectId": "rapid-act-ai-disclosure"
+}

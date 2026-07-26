@@ -1,6 +1,6 @@
 # INDEX
 
-RapidAct platform installers | copied platform engines drifted from the hosted badge and created marketplace-shaped overhead | keep one canonical runtime on rapidact.eu with thin WordPress, Shopify, Wix, GTM, and Zaraz adapters | do not build a Shopify app, WordPress update server, OAuth flow, copied engine, or call an unpublished kit a marketplace app | verify package integrity, real WordPress activation, localized rendered downloads, and live ZIP responses
+RapidAct marketplace apps | direct ZIP, theme-snippet, custom-code, GTM, and Zaraz delivery no longer matches the product direction | ship bundled WordPress.org, Shopify App Store, and Wix App Market packages with native platform versioning | do not load executable badge updates from the manifest or advertise unpublished listings as available | verify bundled runtime parity, native builds, sandbox installation, marketplace status copy, and live site claims
 RapidAct conversion page | the hero preview and later sections repeated the same offer details | show actual specimen pages in the hero and reserve detailed lists for their dedicated section | do not repeat long deliverable or free-tool explanations | verify the full page for repeated claims and a clear primary CTA
 RapidAct scanner conversion | a spinner made the public-page preview feel unfinished and gave failures no next step | show readable scan phases and a permanent full-assessment fallback | do not imply the technical preview makes a company compliant | verify progress, success, unreachable, and CTA events live
 RapidAct brand assets | redrawn SVG and generated marks drifted from the approved logo | use the exact tight-crop raster pack by purpose, plus semantic text for the wordmark and disclosure | do not redraw, stretch, or retain superseded marks | verify header, footer, badge, favicon, PWA, social, and five languages live
@@ -8,22 +8,33 @@ RapidAct responsive report rows | three children collapsed when the grid changed
 RapidAct mobile header | language selector displaced the conversion action | keep compact logo, two-letter language selector, and assessment CTA visible | do not replace the CTA with a hamburger or full language name | verify the real phone header and 44px targets
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
-RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, direct WordPress plugin, and Shopify/Wix install kits | do not call install kits marketplace apps or advertise extensions, hosted logs, or retired tiers | run product-claim sweep plus rendered installer and download proof
+RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+
+## 2026-07-27 — Platform distribution is marketplace-native
+
+- Status: CURRENT
+- Project/root: `rapidact`; WordPress.org, Shopify App Store, Wix App Market, and the Article 50 installer page.
+- Mistake: keeping direct ZIP, Liquid snippet, Custom Code, GTM, and Zaraz delivery after the product direction changed to official marketplace discovery and installation.
+- Do: bundle the badge in every package; use WordPress.org updates, Shopify OAuth plus a theme app extension, and Wix app versions plus an embedded-script dashboard.
+- Don't: execute code supplied by the hosted manifest, run a custom WordPress updater, or describe an app as marketplace-available before platform publication.
+- Evidence: explicit user reversal on 2026-07-27; official WordPress plugin guideline 8, Shopify App Store requirements, and Wix embedded-script/version documentation.
+- Trigger terms: marketplace, WordPress.org, Shopify app, Wix app, OAuth, update manifest, official distribution.
+- Verify before reuse: local bundle parity, platform build/validation, a real sandbox install for each linked developer account, and rendered website copy matching the literal marketplace state.
 
 ## 2026-07-26 — Platform adapters share one hosted runtime
 
-- Status: CURRENT
+- Status: SUPERSEDED
 - Project/root: `rapidact`; WordPress, Shopify, Wix, and the Article 50 installer page.
 - Mistake: copying detection engines and signature databases into each platform package, then presenting source-only Shopify extension files as an installable product.
 - Do: keep `rapidact-badge.js` canonical on `rapidact.eu`; ship a direct WordPress settings plugin, a Shopify Liquid kit, a Wix Custom Code kit, and paste-only GTM/Zaraz paths.
 - Don't: fork the runtime, build a Shopify app, WordPress update server or OAuth flow, add speculative evidence/license/database layers, or call Shopify/Wix kits marketplace apps.
 - Evidence: `integrations/`, `api/installers.test.ts`, disposable WordPress 6.8 activation proof, and localized `/article-50#install` browser checks in this task.
 - Trigger terms: WordPress plugin, Shopify app, Wix plugin, install kit, central updates, paid later, hosted runtime.
-- Verify before reuse: ZIP contents match source; WordPress activates and prints the canonical script; all five localized installer views have 44px actions and no horizontal overflow; live downloads return valid ZIPs.
+- Verify before reuse: do not reuse this approach without an explicit user reversal; the current marketplace-native entry above controls distribution.
 
 ## 2026-07-26 — The conversion page previews depth without repeating it
 
-- Status: CURRENT
+- Status: SUPERSEDED
 - Project/root: `rapidact`; homepage specimen, assessment outline, pricing, and free-tool sections.
 - Mistake: the hero reproduced all six assessment rows, then the next section repeated them; pricing also repeated the scanner and notice explanation shown later.
 - Do: use rendered pages from the real specimen in the hero, keep the full assessment outline in one section, and explain the free tools once.
@@ -107,4 +118,4 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Don't: treat a technical badge as a universal Article 50 certificate or assign provider/deployer duties from a public signature match alone.
 - Evidence: `public/rapidact-badge.js`, `src/pages/Guide.tsx`, `src/config.ts`, `api/badge.test.ts`, and the 2026-07-26 multilingual content sweep.
 - Trigger terms: badge, plugin, app, extension, evidence log, pricing tier, Article 50 role, conversion copy.
-- Verify before reuse: zero retired/invented-product matches, tests and build pass, copy interaction works, and desktop/mobile live pages show the badge plus exact WhatsApp destination.
+- Verify before reuse: keep the underlying claim discipline, but use the 2026-07-27 marketplace status and remove direct-download claims.

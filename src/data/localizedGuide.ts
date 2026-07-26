@@ -15,8 +15,6 @@ export type GuideCopy = {
   copied: string;
   installerTitle: string;
   installerBody: string;
-  tagManagerTitle: string;
-  tagManagerBody: string;
   anySiteTitle: string;
   openGuide: string;
   installers: Record<
@@ -41,6 +39,16 @@ export type GuideCopy = {
   platformsTitle: string;
 };
 
+export type GuideCardCopy = {
+  slug:
+    | "chatbot-ai-disclosure"
+    | "ai-content-labeling"
+    | "deepfake-labeling"
+    | "ai-disclosure-evidence";
+  title: string;
+  description: string;
+};
+
 export const GUIDE_COPY: Record<Lang, GuideCopy> = {
   en: {
     seoTitle: "EU AI Act Article 50: duties and free AI notice | RapidAct",
@@ -52,36 +60,33 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     noticeMessage:
       "This site uses an AI assistant. You are interacting with an AI system, not a person.",
     installLabel: "Free AI notice",
-    installTitle: "Publish your visitor notice in one paste",
+    installTitle: "Publish a clear AI notice for every visitor",
     installBody:
-      "Copy the script into your site-wide custom code, tailor the message and check the published notice as a visitor.",
+      "Use the official marketplace app for your platform, or the hosted script on a custom site. Tailor the message, publish it and check the result as a visitor.",
     preview: "Preview",
     installCode: "Install code",
     copy: "Copy code",
     copied: "Copied",
-    installerTitle: "Choose the fastest installation",
+    installerTitle: "Official marketplace apps",
     installerBody:
-      "Each option is a thin installer for the same RapidAct runtime. Improvements load from rapidact.eu automatically; there is no copied engine to maintain.",
-    tagManagerTitle: "Already use Google Tag Manager?",
-    tagManagerBody:
-      "Create a Custom HTML tag, paste the hosted script below and trigger it on Initialization – All Pages. No RapidAct login or OAuth access is required.",
+      "RapidAct is packaged for native WordPress, Shopify and Wix installation. Each marketplace controls executable updates; availability follows platform approval.",
     anySiteTitle: "Any website: copy the hosted script",
     openGuide: "Installation guide",
     installers: {
       wordpress: {
-        type: "Direct plugin · ZIP",
-        body: "Upload, activate and tailor the notice from WordPress Settings.",
-        action: "Download WordPress plugin",
+        type: "WordPress.org",
+        body: "Bundled plugin with a native settings screen and Badge ID.",
+        action: "View WordPress status",
       },
       shopify: {
-        type: "Theme kit · ZIP",
-        body: "Add one Liquid snippet and one render line to your storefront.",
-        action: "Download Shopify kit",
+        type: "Shopify App Store",
+        body: "OAuth app with a theme app embed and merchant settings.",
+        action: "View Shopify status",
       },
       wix: {
-        type: "Custom Code · ZIP",
-        body: "Paste once in Wix Custom Code and apply it to every page.",
-        action: "Download Wix kit",
+        type: "Wix App Market",
+        body: "Dashboard settings with a native embedded-script extension.",
+        action: "View Wix status",
       },
     },
     steps: [
@@ -116,36 +121,33 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     noticeMessage:
       "Este sitio utiliza un asistente de IA. Estás interactuando con un sistema de IA, no con una persona.",
     installLabel: "Aviso de IA gratuito",
-    installTitle: "Publica el aviso para visitantes con un solo pegado",
+    installTitle: "Publica un aviso de IA claro para cada visitante",
     installBody:
-      "Copia el script en el código global de tu web, adapta el mensaje y comprueba el aviso publicado como visitante.",
+      "Usa la app oficial de tu plataforma o el script alojado en una web propia. Adapta el mensaje, publícalo y comprueba el resultado como visitante.",
     preview: "Vista previa",
     installCode: "Código de instalación",
     copy: "Copiar código",
     copied: "Copiado",
-    installerTitle: "Elige la instalación más rápida",
+    installerTitle: "Aplicaciones oficiales",
     installerBody:
-      "Cada opción es un instalador ligero para el mismo sistema RapidAct. Las mejoras se cargan automáticamente desde rapidact.eu, sin mantener copias.",
-    tagManagerTitle: "¿Ya usas Google Tag Manager?",
-    tagManagerBody:
-      "Crea una etiqueta HTML personalizada, pega el script alojado y actívala en Inicialización – Todas las páginas. No necesitas iniciar sesión en RapidAct ni usar OAuth.",
+      "RapidAct se prepara para la instalación nativa en WordPress, Shopify y Wix. Cada plataforma controla las actualizaciones y la disponibilidad depende de su aprobación.",
     anySiteTitle: "Cualquier web: copia el script alojado",
     openGuide: "Guía de instalación",
     installers: {
       wordpress: {
-        type: "Plugin directo · ZIP",
-        body: "Súbelo, actívalo y adapta el aviso desde Ajustes de WordPress.",
-        action: "Descargar plugin WordPress",
+        type: "WordPress.org",
+        body: "Plugin incluido con ajustes nativos e ID de distintivo.",
+        action: "Ver estado de WordPress",
       },
       shopify: {
-        type: "Kit de tema · ZIP",
-        body: "Añade un snippet Liquid y una línea de renderizado a tu tienda.",
-        action: "Descargar kit Shopify",
+        type: "Shopify App Store",
+        body: "Aplicación OAuth con bloque de tema y ajustes del comercio.",
+        action: "Ver estado de Shopify",
       },
       wix: {
-        type: "Código personalizado · ZIP",
-        body: "Pégalo una vez en Código personalizado y aplícalo a todas las páginas.",
-        action: "Descargar kit Wix",
+        type: "Wix App Market",
+        body: "Ajustes en el panel y extensión de script insertado.",
+        action: "Ver estado de Wix",
       },
     },
     steps: [
@@ -180,36 +182,33 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     noticeMessage:
       "Diese Website nutzt einen KI-Assistenten. Sie interagieren mit einem KI-System, nicht mit einer Person.",
     installLabel: "Kostenloser KI-Hinweis",
-    installTitle: "Veröffentlichen Sie den Besucherhinweis mit einem Einfügen",
+    installTitle: "Veröffentlichen Sie einen klaren KI-Hinweis für alle Besucher",
     installBody:
-      "Kopieren Sie das Skript in den globalen Website-Code, passen Sie die Aussage an und prüfen Sie den veröffentlichten Hinweis als Besucher.",
+      "Nutzen Sie die offizielle Marketplace-App Ihrer Plattform oder das gehostete Skript auf einer eigenen Website. Passen Sie den Text an, veröffentlichen und prüfen Sie ihn als Besucher.",
     preview: "Vorschau",
     installCode: "Installationscode",
     copy: "Code kopieren",
     copied: "Kopiert",
-    installerTitle: "Wählen Sie die schnellste Installation",
+    installerTitle: "Offizielle Marketplace-Apps",
     installerBody:
-      "Jede Option ist ein schlanker Installer für dieselbe RapidAct-Laufzeit. Verbesserungen werden automatisch von rapidact.eu geladen.",
-    tagManagerTitle: "Nutzen Sie bereits Google Tag Manager?",
-    tagManagerBody:
-      "Erstellen Sie ein benutzerdefiniertes HTML-Tag, fügen Sie das gehostete Skript ein und verwenden Sie Initialisierung – Alle Seiten. Kein RapidAct-Login oder OAuth-Zugriff nötig.",
+      "RapidAct wird für die native Installation in WordPress, Shopify und Wix bereitgestellt. Updates erfolgen über die jeweilige Plattform; die Verfügbarkeit folgt nach Freigabe.",
     anySiteTitle: "Jede Website: gehostetes Skript kopieren",
     openGuide: "Installationsanleitung",
     installers: {
       wordpress: {
-        type: "Direktes Plugin · ZIP",
-        body: "Hochladen, aktivieren und den Hinweis in WordPress anpassen.",
-        action: "WordPress-Plugin laden",
+        type: "WordPress.org",
+        body: "Gebündeltes Plugin mit Einstellungen und Badge-ID.",
+        action: "WordPress-Status",
       },
       shopify: {
-        type: "Theme-Kit · ZIP",
-        body: "Ein Liquid-Snippet und eine Render-Zeile zum Shop hinzufügen.",
-        action: "Shopify-Kit laden",
+        type: "Shopify App Store",
+        body: "OAuth-App mit Theme-App-Embed und Händler-Einstellungen.",
+        action: "Shopify-Status",
       },
       wix: {
-        type: "Benutzerdefinierter Code · ZIP",
-        body: "Einmal in Wix einfügen und auf alle Seiten anwenden.",
-        action: "Wix-Kit laden",
+        type: "Wix App Market",
+        body: "Dashboard-Einstellungen und eingebettete Script-Erweiterung.",
+        action: "Wix-Status",
       },
     },
     steps: [
@@ -248,36 +247,33 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     noticeMessage:
       "Ce site utilise un assistant IA. Vous interagissez avec un système d’IA, pas avec une personne.",
     installLabel: "Avis IA gratuit",
-    installTitle: "Publiez l’avis visiteur en un seul collage",
+    installTitle: "Publiez un avis IA clair pour chaque visiteur",
     installBody:
-      "Copiez le script dans le code global du site, adaptez le message et vérifiez l’avis publié comme un visiteur.",
+      "Utilisez l’application officielle de votre plateforme ou le script hébergé sur un site personnalisé. Adaptez le message, publiez-le et vérifiez le résultat comme un visiteur.",
     preview: "Aperçu",
     installCode: "Code d’installation",
     copy: "Copier le code",
     copied: "Copié",
-    installerTitle: "Choisissez l’installation la plus rapide",
+    installerTitle: "Applications officielles",
     installerBody:
-      "Chaque option est un installateur léger pour le même moteur RapidAct. Les améliorations se chargent automatiquement depuis rapidact.eu.",
-    tagManagerTitle: "Vous utilisez déjà Google Tag Manager ?",
-    tagManagerBody:
-      "Créez une balise HTML personnalisée, collez le script hébergé et déclenchez-la sur Initialisation – Toutes les pages. Aucun compte RapidAct ni accès OAuth requis.",
+      "RapidAct est préparé pour une installation native sur WordPress, Shopify et Wix. Chaque plateforme contrôle les mises à jour et la disponibilité suit son approbation.",
     anySiteTitle: "Tout site : copiez le script hébergé",
     openGuide: "Guide d’installation",
     installers: {
       wordpress: {
-        type: "Extension directe · ZIP",
-        body: "Importez, activez et adaptez l’avis dans les réglages WordPress.",
-        action: "Télécharger pour WordPress",
+        type: "WordPress.org",
+        body: "Extension intégrée avec réglages natifs et identifiant de badge.",
+        action: "Voir l’état WordPress",
       },
       shopify: {
-        type: "Kit de thème · ZIP",
-        body: "Ajoutez un snippet Liquid et une ligne de rendu à la boutique.",
-        action: "Télécharger pour Shopify",
+        type: "Shopify App Store",
+        body: "Application OAuth avec intégration de thème et réglages.",
+        action: "Voir l’état Shopify",
       },
       wix: {
-        type: "Code personnalisé · ZIP",
-        body: "Collez-le une fois dans Wix et appliquez-le à toutes les pages.",
-        action: "Télécharger pour Wix",
+        type: "Wix App Market",
+        body: "Réglages du tableau de bord et extension de script intégrée.",
+        action: "Voir l’état Wix",
       },
     },
     steps: [
@@ -311,36 +307,33 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     noticeMessage:
       "Questo sito utilizza un assistente IA. Stai interagendo con un sistema di IA, non con una persona.",
     installLabel: "Avviso IA gratuito",
-    installTitle: "Pubblica l’avviso per i visitatori con un solo incolla",
+    installTitle: "Pubblica un avviso IA chiaro per ogni visitatore",
     installBody:
-      "Copia lo script nel codice globale del sito, adatta il messaggio e verifica l’avviso pubblicato come visitatore.",
+      "Usa l’app ufficiale della tua piattaforma o lo script ospitato su un sito personalizzato. Adatta il messaggio, pubblicalo e verifica il risultato come visitatore.",
     preview: "Anteprima",
     installCode: "Codice di installazione",
     copy: "Copia codice",
     copied: "Copiato",
-    installerTitle: "Scegli l’installazione più rapida",
+    installerTitle: "App ufficiali dei marketplace",
     installerBody:
-      "Ogni opzione è un installer leggero per lo stesso runtime RapidAct. I miglioramenti vengono caricati automaticamente da rapidact.eu.",
-    tagManagerTitle: "Usi già Google Tag Manager?",
-    tagManagerBody:
-      "Crea un tag HTML personalizzato, incolla lo script ospitato e attivalo su Inizializzazione – Tutte le pagine. Non servono accesso RapidAct o OAuth.",
+      "RapidAct è preparato per l’installazione nativa su WordPress, Shopify e Wix. Ogni piattaforma gestisce gli aggiornamenti e la disponibilità segue l’approvazione.",
     anySiteTitle: "Qualsiasi sito: copia lo script ospitato",
     openGuide: "Guida all’installazione",
     installers: {
       wordpress: {
-        type: "Plugin diretto · ZIP",
-        body: "Carica, attiva e personalizza l’avviso dalle impostazioni WordPress.",
-        action: "Scarica plugin WordPress",
+        type: "WordPress.org",
+        body: "Plugin incluso con impostazioni native e ID del badge.",
+        action: "Stato WordPress",
       },
       shopify: {
-        type: "Kit tema · ZIP",
-        body: "Aggiungi uno snippet Liquid e una riga di rendering al negozio.",
-        action: "Scarica kit Shopify",
+        type: "Shopify App Store",
+        body: "App OAuth con integrazione tema e impostazioni commerciante.",
+        action: "Stato Shopify",
       },
       wix: {
-        type: "Codice personalizzato · ZIP",
-        body: "Incolla una volta in Wix e applica il codice a tutte le pagine.",
-        action: "Scarica kit Wix",
+        type: "Wix App Market",
+        body: "Impostazioni dashboard ed estensione script integrata.",
+        action: "Stato Wix",
       },
     },
     steps: [
@@ -364,4 +357,137 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     readGuide: "Apri guida",
     platformsTitle: "Installa l’avviso sulla tua piattaforma",
   },
+};
+
+export const GUIDE_CARDS: Record<Lang, GuideCardCopy[]> = {
+  en: [
+    {
+      slug: "chatbot-ai-disclosure",
+      title: "Chatbot AI disclosure",
+      description:
+        "Article 50(1) requires providers of direct-interaction AI systems to tell people they are interacting with AI.",
+    },
+    {
+      slug: "ai-content-labeling",
+      title: "AI content labelling",
+      description:
+        "Separate machine-readable provider marking from visible disclosure duties for synthetic content.",
+    },
+    {
+      slug: "deepfake-labeling",
+      title: "Deepfake labelling",
+      description:
+        "Check which realistic AI-generated or manipulated media needs a visible disclosure.",
+    },
+    {
+      slug: "ai-disclosure-evidence",
+      title: "Evidence and records",
+      description:
+        "Keep the live URL, approved wording, owner, screenshots and review dates together.",
+    },
+  ],
+  es: [
+    {
+      slug: "chatbot-ai-disclosure",
+      title: "Aviso de IA en chatbots",
+      description:
+        "El artículo 50(1) exige que los proveedores informen cuando una persona interactúa directamente con una IA.",
+    },
+    {
+      slug: "ai-content-labeling",
+      title: "Etiquetado de contenido con IA",
+      description:
+        "Distingue el marcado legible por máquinas del proveedor y los avisos visibles sobre contenido sintético.",
+    },
+    {
+      slug: "deepfake-labeling",
+      title: "Etiquetado de deepfakes",
+      description:
+        "Comprueba qué imágenes, audio o vídeo realistas generados o alterados con IA necesitan un aviso visible.",
+    },
+    {
+      slug: "ai-disclosure-evidence",
+      title: "Pruebas y registros",
+      description:
+        "Conserva juntos la URL, el texto aprobado, el responsable, las capturas y las fechas de revisión.",
+    },
+  ],
+  de: [
+    {
+      slug: "chatbot-ai-disclosure",
+      title: "KI-Hinweis bei Chatbots",
+      description:
+        "Artikel 50(1) verlangt, dass Anbieter Menschen über die direkte Interaktion mit einem KI-System informieren.",
+    },
+    {
+      slug: "ai-content-labeling",
+      title: "Kennzeichnung von KI-Inhalten",
+      description:
+        "Trennen Sie maschinenlesbare Anbieterkennzeichnungen von sichtbaren Hinweisen auf synthetische Inhalte.",
+    },
+    {
+      slug: "deepfake-labeling",
+      title: "Deepfake-Kennzeichnung",
+      description:
+        "Prüfen Sie, welche realistischen KI-generierten oder manipulierten Medien einen sichtbaren Hinweis benötigen.",
+    },
+    {
+      slug: "ai-disclosure-evidence",
+      title: "Nachweise und Aufzeichnungen",
+      description:
+        "Bewahren Sie Live-URL, freigegebenen Text, Verantwortliche, Screenshots und Prüftermine zusammen auf.",
+    },
+  ],
+  fr: [
+    {
+      slug: "chatbot-ai-disclosure",
+      title: "Mention IA pour les chatbots",
+      description:
+        "L’article 50(1) impose aux fournisseurs d’informer les personnes lorsqu’elles interagissent directement avec une IA.",
+    },
+    {
+      slug: "ai-content-labeling",
+      title: "Étiquetage des contenus IA",
+      description:
+        "Distinguez le marquage lisible par machine du fournisseur et les mentions visibles sur les contenus synthétiques.",
+    },
+    {
+      slug: "deepfake-labeling",
+      title: "Étiquetage des deepfakes",
+      description:
+        "Vérifiez quels médias réalistes générés ou modifiés par IA nécessitent une mention visible.",
+    },
+    {
+      slug: "ai-disclosure-evidence",
+      title: "Preuves et registres",
+      description:
+        "Conservez ensemble l’URL, le texte approuvé, le responsable, les captures et les dates de contrôle.",
+    },
+  ],
+  it: [
+    {
+      slug: "chatbot-ai-disclosure",
+      title: "Avviso IA per i chatbot",
+      description:
+        "L’articolo 50(1) impone ai fornitori di informare le persone quando interagiscono direttamente con un sistema di IA.",
+    },
+    {
+      slug: "ai-content-labeling",
+      title: "Etichettatura dei contenuti IA",
+      description:
+        "Distingui la marcatura leggibile dalla macchina del fornitore dagli avvisi visibili sui contenuti sintetici.",
+    },
+    {
+      slug: "deepfake-labeling",
+      title: "Etichettatura dei deepfake",
+      description:
+        "Verifica quali contenuti realistici generati o modificati con IA richiedono un avviso visibile.",
+    },
+    {
+      slug: "ai-disclosure-evidence",
+      title: "Prove e registri",
+      description:
+        "Conserva insieme URL, testo approvato, responsabile, schermate e date di revisione.",
+    },
+  ],
 };

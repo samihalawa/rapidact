@@ -1,0 +1,5 @@
+{
+  "$schema": "https://dev.wix.com/wix-cli/schemas/wix-config.json",
+  "appId": "replace-with-the-linked-wix-app-id",
+  "projectId": "rapidact-wix-app"
+}

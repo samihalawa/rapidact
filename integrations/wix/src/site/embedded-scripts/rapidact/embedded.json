@@ -1,0 +1,7 @@
+{
+  "$schema": "https://dev.wix.com/wix-cli/schemas/embedded-script.json",
+  "id": "d8bf4b86-dc44-4bab-beb7-f863cf66d8c3",
+  "name": "RapidAct AI disclosure",
+  "scriptType": "FUNCTIONAL",
+  "placement": "BODY_END"
+}

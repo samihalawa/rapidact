@@ -1,37 +1,21 @@
-# Install RapidAct on Shopify
+# RapidAct for Shopify
 
-This kit adds one reusable Liquid snippet. It does not copy the RapidAct
-runtime into your theme; every storefront loads the current version from
-`https://rapidact.eu/rapidact-badge.js`.
+This is the minimum public Shopify app: the official React Router OAuth
+template, one embedded admin page, and one theme app extension. The storefront
+JavaScript and image are bundled in the extension and served by Shopify's CDN.
 
-## Install
+The public JSON manifest is used only to compare version numbers in the app
+home. Executable updates are released with `shopify app deploy` and Shopify app
+versioning.
 
-1. In Shopify, open **Online Store → Themes → … → Edit code**.
-2. Under **Snippets**, choose **Add a new snippet**, name it
-   `rapidact-disclosure`, and paste the contents of
-   `snippets/rapidact-disclosure.liquid`.
-3. Open `layout/theme.liquid` and paste this immediately before `</body>`:
+## Verify
 
-```liquid
-{% render 'rapidact-disclosure',
-  system: 'Shopping assistant',
-  provider: 'Your company',
-  details_url: '/pages/ai-transparency',
-  position: 'right',
-  color: '#1f3a5f'
-%}
+```sh
+npm install
+npm run verify
 ```
 
-4. Edit the values, save, and check the live storefront on desktop and mobile.
-
-The notice automatically follows the active Shopify storefront language for
-English, Spanish, German, French, and Italian. Other languages fall back to
-English.
-
-## Why this is a theme kit
-
-Shopify's one-click **App Embed** experience requires a distributed Shopify
-app and merchant activation in the theme editor. This package is the immediate
-two-file installation path and does not pretend to be an App Store listing.
-The same hosted runtime can later sit behind an App Embed without changing the
-visitor interface.
+For the real sandbox check, link the project with `npm run config:link`, run
+`npm run dev`, install it on a development store, enable the RapidAct app embed,
+enter a Badge ID, and confirm `#rapidact-ai-disclosure` appears on the published
+storefront.
