@@ -46,7 +46,7 @@ export default function SiteNav() {
             </span>
           </Link>
 
-          <nav className="ink-soft hidden items-center gap-5 text-[13px] md:flex">
+          <nav className="ink-soft hidden items-center gap-5 text-[13px] lg:flex">
             <a href={`${path("/")}#features`} className="whitespace-nowrap hover:text-[#16181d]">
               {t("nav.product")}
             </a>
@@ -78,8 +78,8 @@ export default function SiteNav() {
               className="h-11 rounded bg-[#16181d] px-3 text-[13px] font-semibold text-white hover:bg-[#2b2f38] sm:px-4 sm:text-[14px]"
               onClick={() => navigate(path(CONVERT.scanner))}
             >
-              <span className="sm:hidden">{t("nav.scanShort")}</span>
-              <span className="hidden sm:inline">{t("nav.scan")}</span>
+              <span className="lg:hidden">{t("nav.scanShort")}</span>
+              <span className="hidden lg:inline">{t("nav.scan")}</span>
             </Button>
           </div>
         </div>

@@ -14,7 +14,7 @@ export default function SiteFooter() {
   return (
     <footer className="border-t border-[#e2e2dd] bg-white">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_repeat(4,1fr)]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.3fr_repeat(4,minmax(0,1fr))]">
           <div>
             <div className="flex items-center gap-2.5" aria-label="RapidAct">
               <img

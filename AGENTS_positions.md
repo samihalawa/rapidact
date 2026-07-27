@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct scanner conversion gate | the company-assessment escalation appeared before the free result and email capture happened afterwards | require a closable email gate before scanning, then show PDF and complete-scan escalation only after the result | do not let Typebot replace the direct scanner or put full-scan sales copy before results | verify close/invalid/valid modal states, one-page PDF, prefilled WhatsApp, Close sync and five languages live
 RapidAct category positioning | a product-workflow hero still made the scanner, badge and report look like the category | lead with the EU AI Act transparency practice; present tools and assessment as its methods | do not call Agents AI Ltd. a law firm or let product mechanics displace Article 50 expertise | verify hero, metadata, structured data, specialist credentials, service scope and five languages live
 RapidAct product hierarchy | the paid assessment displaced the free operational product and made RapidAct read like a report shop | lead with discover, disclose, implement, assess; keep the assessment as paid escalation | do not use the specimen, report contents, pricing, and payment FAQ as the whole above-the-fold identity | verify hero, nav, section order, metadata, footer, CTA paths, and five languages at phone/tablet/desktop widths
 RapidAct marketplace apps | direct ZIP, theme-snippet, custom-code, GTM, and Zaraz delivery no longer matches the product direction | ship bundled WordPress.org, Shopify App Store, and Wix App Market packages with native platform versioning | do not load executable badge updates from the manifest or advertise unpublished listings as available | verify bundled runtime parity, native builds, sandbox installation, marketplace status copy, and live site claims
@@ -11,6 +12,17 @@ RapidAct mobile header | language selector displaced the conversion action | kee
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+
+## 2026-07-27 — Scanner qualifies first, escalates after the result
+
+- Status: CURRENT
+- Project/root: `rapidact`; `/scanner`, lead capture, result PDF and complete-scan conversion.
+- Mistake: letting visitors scan before providing an email, placing the full-assessment pitch before the result, and offering only a plain-text download.
+- Do: open a closable email gate from every scan trigger, accept any valid email, capture it before scanning, then provide the one-page PDF and prefilled WhatsApp complete-scan request after results.
+- Don't: make Typebot the only scan path, repeat the email form after results, or show the complete-scan pitch before the free result.
+- Evidence: explicit user correction on 2026-07-27; prior source had direct `runScan`, pre-result `fullLabel`, post-result email capture and `rapidact-scan.txt`.
+- Trigger terms: scanner modal, professional email, receive it, full scan, PDF, WhatsApp, Typebot, Close CRM.
+- Verify before reuse: exercise modal close/invalid/valid states, confirm no pre-result escalation, download and inspect a one-page PDF, inspect the encoded URL in WhatsApp, read back Close sync, and render all five languages on phone and desktop.
 
 ## 2026-07-27 — RapidAct leads with the EU AI Act transparency practice
 
@@ -69,7 +81,7 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 
 ## 2026-07-26 — Scanner progress must lead to the complete assessment
 
-- Status: CURRENT
+- Status: SUPERSEDED
 - Project/root: `rapidact`; free website scanner and paid-assessment conversion.
 - Mistake: a lone loading spinner made the real public-page scan feel like a placeholder, while blocked scans had no strong continuation path.
 - Do: show concise phases for the actual fetch, page read, signature check, and preview build; keep a compact €99 full-assessment CTA visible before and after results.

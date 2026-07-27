@@ -12,11 +12,22 @@ type ScannerCopy = {
   placeholder: string;
   scan: string;
   scanning: string;
+  emailGateLabel: string;
+  emailGateTitle: string;
+  emailGateBody: string;
+  emailGateField: string;
+  emailGateHint: string;
+  emailGateContinue: string;
+  emailGateCancel: string;
+  emailGateInvalid: string;
+  emailGateError: string;
   progress: string;
   stages: { label: string; detail: string }[];
   fullLabel: string;
+  fullTitle: string;
   fullBody: string;
   fullCta: string;
+  fullWhatsapp: string;
   failureTitle: string;
   rateLimited: string;
   invalidUrl: string;
@@ -46,6 +57,11 @@ type ScannerCopy = {
   copied: string;
   copyReport: string;
   download: string;
+  pdfTitle: string;
+  pdfGenerated: string;
+  pdfFindings: string;
+  pdfActions: string;
+  pdfScope: string;
   disclaimer: string;
   chatWhat: (name: string, disclosureFound: boolean) => string;
   chatFix: string;
@@ -70,6 +86,16 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     placeholder: "your-site.com",
     scan: "Scan website",
     scanning: "Scanning",
+    emailGateLabel: "Receive your scan",
+    emailGateTitle: "Where should we unlock the result?",
+    emailGateBody:
+      "Enter your work email to run the scan and access the one-page PDF. Any valid email address works.",
+    emailGateField: "Work email",
+    emailGateHint: "We use it for this scan and relevant follow-up.",
+    emailGateContinue: "Run free scan",
+    emailGateCancel: "Cancel",
+    emailGateInvalid: "Enter a valid email address.",
+    emailGateError: "We could not save your email. Please try again.",
     progress: "Public-page scan",
     stages: [
       {
@@ -89,10 +115,12 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
         detail: "Turning matches into a score and next actions.",
       },
     ],
-    fullLabel: "Company assessment",
+    fullLabel: "Free scan complete",
+    fullTitle: "This preview checks one public page",
     fullBody:
-      "The free scan sees one public page. The €99 assessment covers the AI your company operates, your provider or deployer role, required notices and a written action plan.",
+      "Other pages, private systems and internal AI use may still need review. Request the complete scan and a company-wide action plan.",
     fullCta: "Start assessment · €99",
+    fullWhatsapp: "Request complete scan",
     failureTitle: "This page could not be scanned",
     rateLimited: "Scan limit reached. Try again in a few minutes.",
     invalidUrl: "Enter a valid public website address.",
@@ -116,7 +144,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesBody:
       "The scan checks 52 vendor signatures. Custom AI and off-page systems may still require review.",
     planTitle: "Your implementation preview",
-    planSubtitle: "Copy or download it. No email required.",
+    planSubtitle: "Copy the result or download the one-page PDF.",
     step: "Action",
     alwaysStep: "Keep implementation evidence",
     evidenceBody:
@@ -127,12 +155,18 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Install the visitor notice · Free",
     noticeBody:
       "Copy one script, tailor the message and check the published result.",
-    leadDone: "Plan and install link sent.",
+    leadDone: "Scan unlocked.",
     emailPlaceholder: "Work email",
     sendPlan: "Email this plan",
     copied: "Copied",
     copyReport: "Copy results",
-    download: "Download .txt",
+    download: "Download PDF",
+    pdfTitle: "Public-page AI transparency scan",
+    pdfGenerated: "Generated",
+    pdfFindings: "Detected touchpoints",
+    pdfActions: "Priority actions",
+    pdfScope:
+      "Scope: automated review of one public page. Private systems, custom AI and organisational roles require a complete assessment.",
     disclaimer:
       "Technical public-page scan, not legal advice. Regulation (EU) 2024/1689, Article 50.",
     chatWhat: (name, disclosureFound) =>
@@ -164,6 +198,16 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     placeholder: "tu-web.es",
     scan: "Escanear web",
     scanning: "Escaneando",
+    emailGateLabel: "Recibe tu escaneo",
+    emailGateTitle: "¿Dónde desbloqueamos el resultado?",
+    emailGateBody:
+      "Introduce tu correo de trabajo para ejecutar el escaneo y acceder al PDF de una página. Se acepta cualquier correo válido.",
+    emailGateField: "Correo de trabajo",
+    emailGateHint: "Lo usamos para este escaneo y su seguimiento.",
+    emailGateContinue: "Ejecutar escaneo gratis",
+    emailGateCancel: "Cancelar",
+    emailGateInvalid: "Introduce un correo válido.",
+    emailGateError: "No hemos podido guardar el correo. Inténtalo de nuevo.",
     progress: "Escaneo de página pública",
     stages: [
       {
@@ -183,10 +227,12 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
         detail: "Convirtiendo las coincidencias en puntuación y acciones.",
       },
     ],
-    fullLabel: "Evaluación de empresa",
+    fullLabel: "Escaneo gratuito completado",
+    fullTitle: "Esta vista previa comprueba una página pública",
     fullBody:
-      "El escaneo gratuito ve una página pública. La evaluación de 99 € cubre la IA de la empresa, tu función, los avisos necesarios y un plan de acción escrito.",
+      "Otras páginas, los sistemas privados y el uso interno de IA pueden necesitar revisión. Solicita el escaneo completo y un plan para toda la empresa.",
     fullCta: "Iniciar evaluación · 99 €",
+    fullWhatsapp: "Solicitar escaneo completo",
     failureTitle: "No se ha podido escanear la página",
     rateLimited: "Límite de escaneos alcanzado. Inténtalo en unos minutos.",
     invalidUrl: "Introduce una dirección web pública válida.",
@@ -210,7 +256,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesBody:
       "El escaneo comprueba 52 firmas. La IA propia y los sistemas fuera de esta página pueden requerir revisión.",
     planTitle: "Vista previa de implementación",
-    planSubtitle: "Cópiala o descárgala. No necesitas correo.",
+    planSubtitle: "Copia el resultado o descarga el PDF de una página.",
     step: "Acción",
     alwaysStep: "Conserva las pruebas de implementación",
     evidenceBody:
@@ -221,12 +267,18 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Instala el aviso para visitantes · Gratis",
     noticeBody:
       "Copia un script, adapta el mensaje y comprueba el resultado publicado.",
-    leadDone: "Plan y enlace de instalación enviados.",
+    leadDone: "Escaneo desbloqueado.",
     emailPlaceholder: "Correo de trabajo",
     sendPlan: "Enviar por correo",
     copied: "Copiado",
     copyReport: "Copiar resultados",
-    download: "Descargar .txt",
+    download: "Descargar PDF",
+    pdfTitle: "Escaneo de transparencia de IA en página pública",
+    pdfGenerated: "Generado",
+    pdfFindings: "Puntos detectados",
+    pdfActions: "Acciones prioritarias",
+    pdfScope:
+      "Alcance: revisión automática de una página pública. Los sistemas privados, la IA propia y las funciones de la organización requieren una evaluación completa.",
     disclaimer:
       "Escaneo técnico de página pública, no asesoramiento jurídico. Reglamento (UE) 2024/1689, artículo 50.",
     chatWhat: (name, disclosureFound) =>
@@ -258,6 +310,17 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     placeholder: "ihre-website.de",
     scan: "Website scannen",
     scanning: "Scan läuft",
+    emailGateLabel: "Scan erhalten",
+    emailGateTitle: "Wohin dürfen wir das Ergebnis freischalten?",
+    emailGateBody:
+      "Geben Sie Ihre geschäftliche E-Mail ein, um den Scan zu starten und auf das einseitige PDF zuzugreifen. Jede gültige E-Mail-Adresse funktioniert.",
+    emailGateField: "Geschäftliche E-Mail",
+    emailGateHint: "Wir verwenden sie für diesen Scan und relevante Nachfragen.",
+    emailGateContinue: "Kostenlosen Scan starten",
+    emailGateCancel: "Abbrechen",
+    emailGateInvalid: "Geben Sie eine gültige E-Mail-Adresse ein.",
+    emailGateError:
+      "Die E-Mail konnte nicht gespeichert werden. Bitte erneut versuchen.",
     progress: "Öffentlicher Seiten-Scan",
     stages: [
       {
@@ -277,10 +340,12 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
         detail: "Treffer werden in Bewertung und Maßnahmen übersetzt.",
       },
     ],
-    fullLabel: "Unternehmensbewertung",
+    fullLabel: "Kostenloser Scan abgeschlossen",
+    fullTitle: "Diese Vorschau prüft eine öffentliche Seite",
     fullBody:
-      "Der kostenlose Scan sieht eine öffentliche Seite. Die 99-€-Bewertung umfasst eingesetzte KI, Ihre Rolle, erforderliche Hinweise und einen schriftlichen Maßnahmenplan.",
+      "Weitere Seiten, private Systeme und interne KI-Nutzung können weiterhin geprüft werden müssen. Fordern Sie den vollständigen Scan und einen unternehmensweiten Maßnahmenplan an.",
     fullCta: "Bewertung starten · 99 €",
+    fullWhatsapp: "Vollständigen Scan anfordern",
     failureTitle: "Diese Seite konnte nicht gescannt werden",
     rateLimited: "Scan-Limit erreicht. Versuchen Sie es in einigen Minuten.",
     invalidUrl: "Geben Sie eine gültige öffentliche Webadresse ein.",
@@ -304,7 +369,8 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesBody:
       "Der Scan prüft 52 Signaturen. Individuelle KI und interne Systeme können dennoch relevant sein.",
     planTitle: "Ihre Implementierungsvorschau",
-    planSubtitle: "Kopieren oder herunterladen. Keine E-Mail nötig.",
+    planSubtitle:
+      "Ergebnis kopieren oder als einseitiges PDF herunterladen.",
     step: "Maßnahme",
     alwaysStep: "Implementierungsnachweise sichern",
     evidenceBody:
@@ -315,12 +381,18 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Besucherhinweis installieren · Kostenlos",
     noticeBody:
       "Ein Skript kopieren, Aussage anpassen und Veröffentlichung prüfen.",
-    leadDone: "Plan und Installationslink wurden gesendet.",
+    leadDone: "Scan freigeschaltet.",
     emailPlaceholder: "Geschäftliche E-Mail",
     sendPlan: "Plan per E-Mail",
     copied: "Kopiert",
     copyReport: "Ergebnisse kopieren",
-    download: ".txt herunterladen",
+    download: "PDF herunterladen",
+    pdfTitle: "KI-Transparenzscan einer öffentlichen Seite",
+    pdfGenerated: "Erstellt",
+    pdfFindings: "Erkannte Berührungspunkte",
+    pdfActions: "Priorisierte Maßnahmen",
+    pdfScope:
+      "Umfang: automatisierte Prüfung einer öffentlichen Seite. Private Systeme, individuelle KI und Organisationsrollen erfordern eine vollständige Bewertung.",
     disclaimer:
       "Technischer Scan einer öffentlichen Seite, keine Rechtsberatung. Verordnung (EU) 2024/1689, Artikel 50.",
     chatWhat: (name, disclosureFound) =>
@@ -352,6 +424,18 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     placeholder: "votre-site.fr",
     scan: "Scanner le site",
     scanning: "Analyse en cours",
+    emailGateLabel: "Recevoir votre analyse",
+    emailGateTitle: "Où devons-nous débloquer le résultat ?",
+    emailGateBody:
+      "Saisissez votre e-mail professionnel pour lancer l’analyse et accéder au PDF d’une page. Toute adresse e-mail valide fonctionne.",
+    emailGateField: "E-mail professionnel",
+    emailGateHint:
+      "Nous l’utilisons pour cette analyse et son suivi pertinent.",
+    emailGateContinue: "Lancer l’analyse gratuite",
+    emailGateCancel: "Annuler",
+    emailGateInvalid: "Saisissez une adresse e-mail valide.",
+    emailGateError:
+      "Impossible d’enregistrer l’e-mail. Veuillez réessayer.",
     progress: "Scan de page publique",
     stages: [
       {
@@ -371,10 +455,12 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
         detail: "Conversion des correspondances en score et actions.",
       },
     ],
-    fullLabel: "Évaluation d’entreprise",
+    fullLabel: "Analyse gratuite terminée",
+    fullTitle: "Cet aperçu vérifie une page publique",
     fullBody:
-      "Le scan gratuit voit une page publique. L’évaluation à 99 € couvre l’IA utilisée par l’entreprise, votre rôle, les mentions requises et un plan écrit.",
+      "D’autres pages, systèmes privés et usages internes de l’IA peuvent encore nécessiter un examen. Demandez l’analyse complète et un plan d’action pour l’entreprise.",
     fullCta: "Commencer l’évaluation · 99 €",
+    fullWhatsapp: "Demander l’analyse complète",
     failureTitle: "Cette page n’a pas pu être scannée",
     rateLimited: "Limite de scans atteinte. Réessayez dans quelques minutes.",
     invalidUrl: "Saisissez une adresse de site public valide.",
@@ -398,7 +484,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesBody:
       "Le scan vérifie 52 signatures. L’IA sur mesure et les systèmes internes peuvent toujours être concernés.",
     planTitle: "Aperçu de mise en œuvre",
-    planSubtitle: "Copiez ou téléchargez. Aucun e-mail requis.",
+    planSubtitle: "Copiez le résultat ou téléchargez le PDF d’une page.",
     step: "Action",
     alwaysStep: "Conserver les preuves de mise en œuvre",
     evidenceBody:
@@ -409,12 +495,18 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Installer l’avis visiteur · Gratuit",
     noticeBody:
       "Copiez un script, adaptez le message et vérifiez le résultat publié.",
-    leadDone: "Plan et lien d’installation envoyés.",
+    leadDone: "Analyse débloquée.",
     emailPlaceholder: "E-mail professionnel",
     sendPlan: "Envoyer ce plan",
     copied: "Copié",
     copyReport: "Copier les résultats",
-    download: "Télécharger .txt",
+    download: "Télécharger le PDF",
+    pdfTitle: "Analyse de transparence IA d’une page publique",
+    pdfGenerated: "Généré",
+    pdfFindings: "Points de contact détectés",
+    pdfActions: "Actions prioritaires",
+    pdfScope:
+      "Portée : examen automatisé d’une page publique. Les systèmes privés, l’IA sur mesure et les rôles de l’organisation exigent une évaluation complète.",
     disclaimer:
       "Scan technique d’une page publique, pas un avis juridique. Règlement (UE) 2024/1689, article 50.",
     chatWhat: (name, disclosureFound) =>
@@ -446,6 +538,17 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     placeholder: "il-tuo-sito.it",
     scan: "Scansiona sito",
     scanning: "Scansione",
+    emailGateLabel: "Ricevi la scansione",
+    emailGateTitle: "Dove dobbiamo sbloccare il risultato?",
+    emailGateBody:
+      "Inserisci l’e-mail di lavoro per avviare la scansione e accedere al PDF di una pagina. Qualsiasi indirizzo e-mail valido è accettato.",
+    emailGateField: "E-mail di lavoro",
+    emailGateHint: "La usiamo per questa scansione e il relativo seguito.",
+    emailGateContinue: "Avvia scansione gratuita",
+    emailGateCancel: "Annulla",
+    emailGateInvalid: "Inserisci un indirizzo e-mail valido.",
+    emailGateError:
+      "Non è stato possibile salvare l’e-mail. Riprova.",
     progress: "Scansione pagina pubblica",
     stages: [
       {
@@ -465,10 +568,12 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
         detail: "Conversione delle corrispondenze in punteggio e azioni.",
       },
     ],
-    fullLabel: "Valutazione aziendale",
+    fullLabel: "Scansione gratuita completata",
+    fullTitle: "Questa anteprima controlla una pagina pubblica",
     fullBody:
-      "La scansione gratuita vede una pagina pubblica. La valutazione da 99 € copre l’IA aziendale, il ruolo, gli avvisi richiesti e un piano scritto.",
+      "Altre pagine, sistemi privati e usi interni dell’IA possono richiedere una verifica. Richiedi la scansione completa e un piano d’azione aziendale.",
     fullCta: "Inizia valutazione · 99 €",
+    fullWhatsapp: "Richiedi scansione completa",
     failureTitle: "Impossibile scansionare la pagina",
     rateLimited: "Limite di scansioni raggiunto. Riprova tra qualche minuto.",
     invalidUrl: "Inserisci un indirizzo web pubblico valido.",
@@ -492,7 +597,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesBody:
       "La scansione controlla 52 firme. L’IA personalizzata e i sistemi interni possono essere comunque rilevanti.",
     planTitle: "Anteprima di implementazione",
-    planSubtitle: "Copia o scarica. Nessuna e-mail richiesta.",
+    planSubtitle: "Copia il risultato o scarica il PDF di una pagina.",
     step: "Azione",
     alwaysStep: "Conserva le prove di implementazione",
     evidenceBody:
@@ -503,12 +608,18 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Installa l’avviso visitatore · Gratis",
     noticeBody:
       "Copia uno script, adatta il messaggio e verifica il risultato pubblicato.",
-    leadDone: "Piano e link di installazione inviati.",
+    leadDone: "Scansione sbloccata.",
     emailPlaceholder: "E-mail di lavoro",
     sendPlan: "Invia il piano",
     copied: "Copiato",
     copyReport: "Copia risultati",
-    download: "Scarica .txt",
+    download: "Scarica PDF",
+    pdfTitle: "Scansione trasparenza IA di una pagina pubblica",
+    pdfGenerated: "Generato",
+    pdfFindings: "Punti di contatto rilevati",
+    pdfActions: "Azioni prioritarie",
+    pdfScope:
+      "Ambito: verifica automatica di una pagina pubblica. Sistemi privati, IA personalizzata e ruoli organizzativi richiedono una valutazione completa.",
     disclaimer:
       "Scansione tecnica di una pagina pubblica, non consulenza legale. Regolamento (UE) 2024/1689, articolo 50.",
     chatWhat: (name, disclosureFound) =>

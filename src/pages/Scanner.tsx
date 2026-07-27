@@ -6,6 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { trpc } from "@/providers/trpc";
 import type { ScanResult, ScanFinding } from "@contracts/types";
 import { CONVERT } from "@/config";
@@ -21,6 +30,8 @@ import {
   ClipboardList,
   PackageCheck,
   Wrench,
+  MessageCircle,
+  Mail,
 } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
@@ -68,16 +79,15 @@ export default function Scanner() {
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
   const [result, setResult] = useState<ScanResult | null>(null);
-  const [leadDone, setLeadDone] = useState(false);
   const [copied, setCopied] = useState(false);
   const [scanActive, setScanActive] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
   const [scanStage, setScanStage] = useState(0);
+  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   const scan = trpc.scan.run.useMutation();
-  const lead = trpc.leads.capture.useMutation({
-    onSuccess: () => setLeadDone(true),
-  });
+  const lead = trpc.leads.capture.useMutation();
 
   useEffect(() => {
     if (!scanActive) return;
@@ -101,8 +111,7 @@ export default function Scanner() {
     return () => window.clearInterval(timer);
   }, [scanActive]);
 
-  const runScan = async () => {
-    const submittedUrl = url.trim();
+  const runScan = async (submittedUrl: string) => {
     if (!submittedUrl || scanActive) return;
     setResult(null);
     setScanProgress(8);
@@ -134,15 +143,66 @@ export default function Scanner() {
     }
   };
 
-  const downloadReport = () => {
-    if (!result?.report) return;
-    const blob = new Blob([result.report], { type: "text/plain" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "rapidact-scan.txt";
-    a.click();
-    URL.revokeObjectURL(a.href);
+  const requestScan = () => {
+    if (!url.trim() || scanActive) return;
+    setEmailError("");
+    setEmailDialogOpen(true);
+    track("scanner_email_gate_opened");
   };
+
+  const submitEmailGate = async () => {
+    const submittedEmail = email.trim();
+    const submittedUrl = url.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(submittedEmail)) {
+      setEmailError(copy.emailGateInvalid);
+      return;
+    }
+    setEmailError("");
+    try {
+      const captured = await lead.mutateAsync({
+        email: submittedEmail,
+        url: submittedUrl,
+        source: "scanner-gate",
+      });
+      track("scanner_lead_captured", { crm_status: captured.crm ?? "unknown" });
+      setEmailDialogOpen(false);
+      await runScan(submittedUrl);
+    } catch {
+      setEmailError(copy.emailGateError);
+      track("scanner_lead_capture_failed");
+    }
+  };
+
+  const downloadReport = async () => {
+    if (!result?.reachable) return;
+    const { downloadScanPdf } = await import("@/lib/scanPdf");
+    await downloadScanPdf({
+      result,
+      actionItems: [
+        ...result.detected.map(finding => planItemFor(finding, copy).fix),
+        copy.evidenceBody,
+      ],
+      copy: {
+        title: copy.pdfTitle,
+        generated: copy.pdfGenerated,
+        readiness: copy.readiness,
+        findings: copy.pdfFindings,
+        actions: copy.pdfActions,
+        scope: copy.pdfScope,
+        disclosureFound: copy.disclosureFound,
+        disclosureMissing: copy.disclosureMissing,
+      },
+    });
+    track("scanner_pdf_downloaded", {
+      detected_count: result.summary.total,
+    });
+  };
+
+  const completeScanUrl = result?.summary
+    ? `${CONVERT.whatsapp}?text=${encodeURIComponent(
+        `[REQUEST COMPLETE SCAN ${result.summary.url}]`
+      )}`
+    : CONVERT.whatsapp;
 
   return (
     <div className="paper min-h-screen">
@@ -160,28 +220,23 @@ export default function Scanner() {
           <p className="ink-soft mt-3 max-w-2xl text-[14px] leading-relaxed">
             {copy.scope}
           </p>
-          <p className="ink-soft mt-3 max-w-2xl text-[15px] leading-relaxed">
-            {copy.companyLead}{" "}
-            <button
-              onClick={() => navigate(path(CONVERT.report))}
-              className="accent font-semibold underline underline-offset-2"
-            >
-              {copy.companyLink}
-            </button>
-          </p>
         </div>
 
         <div className="mt-8 flex max-w-2xl gap-2">
           <Input
             value={url}
             onChange={e => setUrl(e.target.value)}
-            onKeyDown={e => e.key === "Enter" && runScan()}
+            onKeyDown={e => {
+              if (e.key !== "Enter") return;
+              e.preventDefault();
+              requestScan();
+            }}
             placeholder={copy.placeholder}
             className="hairline h-11 rounded border bg-white px-4 text-[15px]"
           />
           <Button
             data-analytics-event="scan_button_click"
-            onClick={runScan}
+            onClick={requestScan}
             disabled={scanActive || !url.trim()}
             className="h-11 rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
           >
@@ -195,6 +250,100 @@ export default function Scanner() {
             </span>
           </Button>
         </div>
+
+        <Dialog
+          open={emailDialogOpen}
+          onOpenChange={open => {
+            setEmailDialogOpen(open);
+            if (!open) setEmailError("");
+          }}
+        >
+          <DialogContent className="overflow-hidden border-[#cbd8ec] bg-white p-0 shadow-[0_28px_90px_rgba(3,18,61,0.28)] sm:max-w-md">
+            <div className="h-1.5 bg-gradient-to-r from-[#174a9b] via-[#2e8cff] to-[#53ddff]" />
+            <div className="p-6 sm:p-7">
+              <DialogHeader>
+                <div className="mb-1 flex h-11 w-11 items-center justify-center rounded-full bg-[#edf5ff]">
+                  <Mail className="h-5 w-5 text-[#174a9b]" />
+                </div>
+                <p className="eyebrow text-[#174a9b]">{copy.emailGateLabel}</p>
+                <DialogTitle className="text-[23px] leading-tight text-[#16181d]">
+                  {copy.emailGateTitle}
+                </DialogTitle>
+                <DialogDescription className="text-[14px] leading-relaxed text-[#5c6370]">
+                  {copy.emailGateBody}
+                </DialogDescription>
+              </DialogHeader>
+              <form
+                className="mt-5 space-y-3"
+                noValidate
+                onSubmit={event => {
+                  event.preventDefault();
+                  void submitEmailGate();
+                }}
+              >
+                <label
+                  htmlFor="scanner-email"
+                  className="block text-sm font-bold text-[#16181d]"
+                >
+                  {copy.emailGateField}
+                </label>
+                <Input
+                  id="scanner-email"
+                  type="email"
+                  autoComplete="email"
+                  autoFocus
+                  value={email}
+                  onChange={event => {
+                    setEmail(event.target.value);
+                    if (emailError) setEmailError("");
+                  }}
+                  placeholder="name@company.com"
+                  aria-invalid={Boolean(emailError)}
+                  aria-describedby="scanner-email-help scanner-email-error"
+                  className="h-12 rounded border-[#b9c8dc] bg-white px-4 text-[15px]"
+                />
+                <p
+                  id="scanner-email-help"
+                  className="text-xs leading-relaxed text-[#6b7280]"
+                >
+                  {copy.emailGateHint}
+                </p>
+                {emailError && (
+                  <p
+                    id="scanner-email-error"
+                    role="alert"
+                    className="text-sm font-semibold text-[#b42318]"
+                  >
+                    {emailError}
+                  </p>
+                )}
+                <DialogFooter className="pt-2">
+                  <DialogClose asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="min-h-11 rounded border-[#cbd5e1]"
+                    >
+                      {copy.emailGateCancel}
+                    </Button>
+                  </DialogClose>
+                  <Button
+                    type="submit"
+                    disabled={lead.isPending}
+                    className="min-h-11 rounded bg-[#174a9b] px-5 text-white hover:bg-[#123b7d]"
+                  >
+                    {lead.isPending ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <ScanSearch className="h-4 w-4" />
+                    )}
+                    <span className="ml-2">{copy.emailGateContinue}</span>
+                  </Button>
+                </DialogFooter>
+              </form>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {scanActive && (
           <section
@@ -240,23 +389,6 @@ export default function Scanner() {
             </div>
           </section>
         )}
-
-        <aside className="mt-6 flex max-w-2xl flex-col gap-4 rounded-xl border border-[#9fc5ff] bg-[#f3f8ff] p-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="max-w-xl">
-            <p className="eyebrow text-[#174a9b]">{copy.fullLabel}</p>
-            <p className="ink mt-2 text-[15px] leading-relaxed font-semibold">
-              {copy.fullBody}
-            </p>
-          </div>
-          <Button
-            data-analytics-event="scanner_full_assessment_click"
-            data-analytics-label="Scanner full assessment fallback"
-            onClick={() => navigate(path(CONVERT.report))}
-            className="min-h-11 shrink-0 rounded bg-[#174a9b] px-5 text-white hover:bg-[#123b7d]"
-          >
-            {copy.fullCta}
-          </Button>
-        </aside>
 
         {(scan.isError || (result && !result.reachable)) && (
           <Card className="mx-auto mt-10 max-w-xl border-[#fecaca] bg-[#fef2f2]">
@@ -429,65 +561,67 @@ export default function Scanner() {
               </CardContent>
             </Card>
 
-            {/* CTAs + lead capture */}
+            <Card className="overflow-hidden border-[#9fc5ff] bg-[#f3f8ff] shadow-[0_16px_40px_rgba(23,74,155,0.12)]">
+              <CardContent className="grid gap-6 pt-7 pb-7 sm:grid-cols-[1fr_auto] sm:items-center">
+                <div>
+                  <p className="eyebrow text-[#174a9b]">{copy.fullLabel}</p>
+                  <h2 className="ink mt-2 text-[22px] leading-tight font-bold">
+                    {copy.fullTitle}
+                  </h2>
+                  <p className="ink-soft mt-2 max-w-2xl text-[14px] leading-relaxed">
+                    {copy.fullBody}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Button
+                    asChild
+                    className="min-h-12 rounded bg-[#079455] px-5 font-bold text-white hover:bg-[#067647]"
+                  >
+                    <a
+                      href={completeScanUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-analytics-event="scanner_complete_scan_whatsapp_click"
+                      data-analytics-label={result.summary.url}
+                    >
+                      <MessageCircle className="mr-2 h-5 w-5" />
+                      {copy.fullWhatsapp}
+                    </a>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    data-analytics-event="scanner_result_assessment_click"
+                    onClick={() => navigate(path(CONVERT.report))}
+                    className="min-h-11 rounded border-[#174a9b] bg-white text-[#174a9b] hover:bg-[#e9f2ff]"
+                  >
+                    {copy.fullCta}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Next actions and downloadable evidence */}
             <Card className="border-[#16181d] bg-[#16181d] text-white shadow-lg">
               <CardContent className="flex flex-col gap-5 pt-7 pb-7">
-                <div className="grid gap-3 sm:grid-cols-[1.3fr_1fr]">
-                  <button
-                    onClick={() => navigate(path(CONVERT.report))}
-                    className="rounded border border-white/25 bg-white/10 p-4 text-left transition hover:bg-white/20"
-                  >
-                    <PackageCheck className="h-5 w-5 text-white" />
-                    <p className="mt-2 font-bold">{copy.assessmentTitle}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      {copy.assessmentBody} →
-                    </p>
-                  </button>
+                <div>
                   <button
                     onClick={() => navigate(path(CONVERT.badge))}
-                    className="rounded border border-white/15 p-4 text-left transition hover:bg-white/5"
+                    className="flex w-full items-start gap-3 rounded border border-white/15 p-4 text-left transition hover:bg-white/5"
                   >
                     <PackageCheck className="h-5 w-5 text-[#4ade80]" />
-                    <p className="mt-2 font-bold">{copy.noticeTitle}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-white/60">
-                      {copy.noticeBody} →
-                    </p>
+                    <span>
+                      <span className="block font-bold">{copy.noticeTitle}</span>
+                      <span className="mt-1 block text-xs leading-relaxed text-white/60">
+                        {copy.noticeBody} →
+                      </span>
+                    </span>
                   </button>
                 </div>
                 <div className="border-t border-white/10 pt-5">
-                  {leadDone ? (
-                    <p className="flex items-center gap-2 text-sm font-semibold text-[#4ade80]">
-                      <CheckCircle2 className="h-4 w-4" /> {copy.leadDone}
-                    </p>
-                  ) : (
-                    <div className="flex flex-col gap-2 sm:flex-row">
-                      <Input
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                        placeholder={copy.emailPlaceholder}
-                        autoComplete="email"
-                        className="h-11 flex-1 rounded border-white/20 bg-white/10 px-5 text-white placeholder:text-white/40"
-                      />
-                      <Button
-                        disabled={lead.isPending || !email.includes("@")}
-                        onClick={() =>
-                          lead.mutate({
-                            email: email.trim(),
-                            url: result.summary.url,
-                            source: "scanner-plan",
-                          })
-                        }
-                        className="h-11 rounded bg-white px-6 font-bold text-[#16181d] hover:bg-[#f7f7f5]"
-                      >
-                        {lead.isPending ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          copy.sendPlan
-                        )}
-                      </Button>
-                    </div>
-                  )}
-                  <div className="mt-4 flex gap-2">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-[#4ade80]">
+                    <CheckCircle2 className="h-4 w-4" /> {copy.leadDone}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
                     <Button
                       variant="outline"
                       size="sm"
@@ -508,7 +642,7 @@ export default function Scanner() {
                       variant="outline"
                       size="sm"
                       className="min-h-11 rounded border-white/25 bg-transparent text-white hover:bg-white/10"
-                      onClick={downloadReport}
+                      onClick={() => void downloadReport()}
                     >
                       <Download className="mr-2 h-3.5 w-3.5" /> {copy.download}
                     </Button>

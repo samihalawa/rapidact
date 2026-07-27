@@ -38,6 +38,7 @@ export interface LeadInput {
 
 export interface LeadResult {
   ok: boolean;
+  crm?: "synced" | "skipped" | "failed";
 }
 
 /** Intake for the paid EU AI Act Company Assessment. */
