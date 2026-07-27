@@ -28,6 +28,7 @@ type ScannerCopy = {
   fullBody: string;
   fullCta: string;
   fullWhatsapp: string;
+  guidedCta: string;
   failureTitle: string;
   rateLimited: string;
   invalidUrl: string;
@@ -121,6 +122,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Other pages, private systems and internal AI use may still need review. Request the complete scan and a company-wide action plan.",
     fullCta: "Start assessment · €99",
     fullWhatsapp: "Request complete scan",
+    guidedCta: "Prefer guided questions? Use the AI guide",
     failureTitle: "This page could not be scanned",
     rateLimited: "Scan limit reached. Try again in a few minutes.",
     invalidUrl: "Enter a valid public website address.",
@@ -233,6 +235,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Otras páginas, los sistemas privados y el uso interno de IA pueden necesitar revisión. Solicita el escaneo completo y un plan para toda la empresa.",
     fullCta: "Iniciar evaluación · 99 €",
     fullWhatsapp: "Solicitar escaneo completo",
+    guidedCta: "¿Prefieres preguntas guiadas? Usa la guía de IA",
     failureTitle: "No se ha podido escanear la página",
     rateLimited: "Límite de escaneos alcanzado. Inténtalo en unos minutos.",
     invalidUrl: "Introduce una dirección web pública válida.",
@@ -346,6 +349,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Weitere Seiten, private Systeme und interne KI-Nutzung können weiterhin geprüft werden müssen. Fordern Sie den vollständigen Scan und einen unternehmensweiten Maßnahmenplan an.",
     fullCta: "Bewertung starten · 99 €",
     fullWhatsapp: "Vollständigen Scan anfordern",
+    guidedCta: "Lieber geführte Fragen? KI-Leitfaden öffnen",
     failureTitle: "Diese Seite konnte nicht gescannt werden",
     rateLimited: "Scan-Limit erreicht. Versuchen Sie es in einigen Minuten.",
     invalidUrl: "Geben Sie eine gültige öffentliche Webadresse ein.",
@@ -461,6 +465,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "D’autres pages, systèmes privés et usages internes de l’IA peuvent encore nécessiter un examen. Demandez l’analyse complète et un plan d’action pour l’entreprise.",
     fullCta: "Commencer l’évaluation · 99 €",
     fullWhatsapp: "Demander l’analyse complète",
+    guidedCta: "Vous préférez être guidé ? Ouvrir le guide IA",
     failureTitle: "Cette page n’a pas pu être scannée",
     rateLimited: "Limite de scans atteinte. Réessayez dans quelques minutes.",
     invalidUrl: "Saisissez une adresse de site public valide.",
@@ -574,6 +579,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Altre pagine, sistemi privati e usi interni dell’IA possono richiedere una verifica. Richiedi la scansione completa e un piano d’azione aziendale.",
     fullCta: "Inizia valutazione · 99 €",
     fullWhatsapp: "Richiedi scansione completa",
+    guidedCta: "Preferisci domande guidate? Apri la guida IA",
     failureTitle: "Impossibile scansionare la pagina",
     rateLimited: "Limite di scansioni raggiunto. Riprova tra qualche minuto.",
     invalidUrl: "Inserisci un indirizzo web pubblico valido.",

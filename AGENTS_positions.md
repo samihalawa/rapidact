@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct Typebot guide | a copied AI example was live but failed with `No model provided`, while an open-ended loop had no reliable completion | use one optional finite assessment, explicit Kimi model, native lead endpoint, deterministic final links | do not replace the scanner, copy an unrelated bot, or rely on a published badge as runtime proof | verify the published viewer chat through CRM capture, AI answer, clean logs and final action links
 RapidAct scanner conversion gate | the company-assessment escalation appeared before the free result and email capture happened afterwards | require a closable email gate before scanning, then show PDF and complete-scan escalation only after the result | do not let Typebot replace the direct scanner or put full-scan sales copy before results | verify close/invalid/valid modal states, one-page PDF, prefilled WhatsApp, Close sync and five languages live
 RapidAct category positioning | a product-workflow hero still made the scanner, badge and report look like the category | lead with the EU AI Act transparency practice; present tools and assessment as its methods | do not call Agents AI Ltd. a law firm or let product mechanics displace Article 50 expertise | verify hero, metadata, structured data, specialist credentials, service scope and five languages live
 RapidAct product hierarchy | the paid assessment displaced the free operational product and made RapidAct read like a report shop | lead with discover, disclose, implement, assess; keep the assessment as paid escalation | do not use the specimen, report contents, pricing, and payment FAQ as the whole above-the-fold identity | verify hero, nav, section order, metadata, footer, CTA paths, and five languages at phone/tablet/desktop widths
@@ -12,6 +13,17 @@ RapidAct mobile header | language selector displaced the conversion action | kee
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+
+## 2026-07-27 — Typebot augments the scanner with one finite guided assessment
+
+- Status: CURRENT
+- Project/root: `rapidact`; Typebot workspace, published viewer and scanner result CTA.
+- Mistake: treating a published AI sample as working even though its OpenAI-compatible block had no model, then considering an open-ended assistant that could loop without producing a lead or next action.
+- Do: use the published `rapidact-guided-assessment` flow as an optional post-result path; collect website, need, email and context, call the native lead mutation, run one grounded Kimi recommendation, then end on scanner/report/WhatsApp links.
+- Don't: replace the native scanner, reuse the Oulang lead bot, auto-open a global bubble, or infer AI health from the Typebot “Live” label.
+- Evidence: Typebot viewer returned `No model provided` for the old sample; the Kimi `/models` response included `kimi-for-coding`; the repaired published flow ended with an AI recommendation and zero error logs.
+- Trigger terms: Typebot, AI guide, guided assessment, Kimi, Live, model, loop, optional form.
+- Verify before reuse: start the published viewer bot, complete every input, read back the RapidAct DB and Close record, confirm a non-empty AI answer, zero error logs and the final three action routes.
 
 ## 2026-07-27 — Scanner qualifies first, escalates after the result
 

@@ -32,6 +32,7 @@ import {
   Wrench,
   MessageCircle,
   Mail,
+  Bot,
 } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
@@ -203,6 +204,12 @@ export default function Scanner() {
         `[REQUEST COMPLETE SCAN ${result.summary.url}]`
       )}`
     : CONVERT.whatsapp;
+  const guidedAssessmentUrl = result?.summary
+    ? `${CONVERT.guidedAssessment}?${new URLSearchParams({
+        Website: result.summary.url,
+        Language: lang,
+      }).toString()}`
+    : CONVERT.guidedAssessment;
 
   return (
     <div className="paper min-h-screen">
@@ -596,6 +603,17 @@ export default function Scanner() {
                   >
                     {copy.fullCta}
                   </Button>
+                  <a
+                    href={guidedAssessmentUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-event="scanner_guided_assessment_click"
+                    data-analytics-label={result.summary.url}
+                    className="flex min-h-11 items-center justify-center rounded px-3 text-center text-[13px] font-semibold text-[#174a9b] underline decoration-[#9fc5ff] underline-offset-4 transition hover:bg-[#e9f2ff]"
+                  >
+                    <Bot className="mr-2 h-4 w-4 shrink-0" />
+                    {copy.guidedCta}
+                  </a>
                 </div>
               </CardContent>
             </Card>
