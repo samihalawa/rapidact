@@ -8,6 +8,7 @@ type Dictionary = Record<string, string>;
 
 const EN: Dictionary = {
   "nav.deadline": "EU AI Act Article 50 applies from 2 August 2026",
+  "nav.product": "How it works",
   "nav.assessment": "The assessment",
   "nav.specimen": "Specimen",
   "nav.fees": "Fees",
@@ -16,6 +17,7 @@ const EN: Dictionary = {
   "nav.badge": "AI notice",
   "nav.guides": "Guides",
   "nav.scan": "Free scan",
+  "nav.scanShort": "Scan",
   "nav.request": "Start assessment",
   "nav.requestShort": "Start",
   whatsapp: "Ask on WhatsApp",
@@ -24,16 +26,30 @@ const EN: Dictionary = {
     "Analytics and session replay show where this journey is unclear. Form answers, payment details and document contents are never sent to analytics.",
   "consent.allow": "Allow analytics",
   "consent.essential": "Essential only",
-  "hero.kicker": "EU AI Act, Article 50",
-  "hero.title": "Map your company’s AI Act duties in 24–48 hours",
+  "hero.kicker": "Article 50 implementation for working AI systems",
+  "hero.title": "Find your AI. Disclose it. Document what matters.",
   "hero.body":
-    "Get a written inventory of your AI systems, their risk classifications, the notices you need and a prioritised action plan.",
+    "RapidAct helps you detect public AI use, publish clear visitor notices, follow platform-specific implementation steps and assess the whole company when you need the complete picture.",
   "hero.price":
-    "The assessment costs €99, paid once. It reaches your inbox within 24–48h. If it does not arrive in that window, you are refunded in full.",
-  "hero.request": "Start the assessment",
+    "Start with the free tools. The specialist-reviewed company assessment is €99 once, delivered within 24–48h or fully refunded.",
+  "hero.scan": "Scan your website free",
+  "hero.request": "Assess my company",
   "hero.specimen": "View the sample PDF",
   "hero.badgeLead": "Need the technical notice only?",
   "hero.badgeLink": "Add a clear AI-use notice",
+  "hero.workflow": "RapidAct workflow",
+  "hero.workflowStatus": "One connected path",
+  "hero.workflow.scan": "Scan",
+  "hero.workflow.scanBody": "See public AI signals",
+  "hero.workflow.disclose": "Disclose",
+  "hero.workflow.discloseBody": "Publish the visitor notice",
+  "hero.workflow.implement": "Implement",
+  "hero.workflow.implementBody": "Follow platform guidance",
+  "hero.workflow.assess": "Assess",
+  "hero.workflow.assessBody": "Map the whole company",
+  "hero.workflowFoot":
+    "Use only the step you need, or move from detection to a complete company assessment.",
+  "hero.free": "Free",
   "report.label": "Contents of the assessment",
   "report.title": "Six sections. One clear action plan.",
   "report.body":
@@ -44,7 +60,7 @@ const EN: Dictionary = {
   "specialist.role": "Founder, Agents AI Ltd.",
   "specialist.human":
     "Sami reviews every assessment before delivery. Follow-up questions about your assessment are included.",
-  "trust.commitment": "Our commitment",
+  "trust.commitment": "Product model",
   "specimen.kicker": "Real multi-page specimen",
   "specimen.title": "Review the assessment before you buy",
   "specimen.body":
@@ -83,7 +99,7 @@ const EN: Dictionary = {
   "footer.office": "Registered office",
   "footer.contact": "Contact",
   "footer.description":
-    "Find out which AI systems the EU AI Act covers. The written assessment arrives within 24–48h for €99. The scanner and AI-use notice are free. Technical assessment, not legal advice.",
+    "Discover visible AI, publish clear notices, follow platform guidance and map the whole company when you need a specialist-reviewed assessment.",
   "footer.assessment": "The assessment, €99",
   "footer.scan": "Free website scan",
   "footer.badge": "AI notice installer",
@@ -106,6 +122,7 @@ const EN: Dictionary = {
 const ES: Dictionary = {
   "nav.deadline":
     "El artículo 50 de la Ley de IA de la UE se aplica desde el 2 de agosto de 2026",
+  "nav.product": "Cómo funciona",
   "nav.assessment": "La evaluación",
   "nav.specimen": "Muestra",
   "nav.fees": "Precio",
@@ -114,6 +131,7 @@ const ES: Dictionary = {
   "nav.badge": "Aviso de IA",
   "nav.guides": "Guías",
   "nav.scan": "Escaneo gratis",
+  "nav.scanShort": "Escanear",
   "nav.request": "Iniciar evaluación",
   "nav.requestShort": "Empezar",
   whatsapp: "Preguntar por WhatsApp",
@@ -122,16 +140,30 @@ const ES: Dictionary = {
     "La analítica y la reproducción de sesión muestran dónde se atasca el proceso. Nunca enviamos respuestas, pagos ni documentos a analítica.",
   "consent.allow": "Permitir analítica",
   "consent.essential": "Solo esencial",
-  "hero.kicker": "Ley de IA de la UE, artículo 50",
-  "hero.title": "Define las obligaciones de IA de tu empresa en 24–48 horas",
+  "hero.kicker": "Implementación del artículo 50 para sistemas de IA reales",
+  "hero.title": "Detecta tu IA. Comunícala. Documenta lo importante.",
   "hero.body":
-    "Recibe un inventario escrito de tus sistemas de IA, su clasificación, los avisos necesarios y un plan de acción priorizado.",
+    "RapidAct te ayuda a detectar el uso público de IA, publicar avisos claros, seguir pasos por plataforma y evaluar toda la empresa cuando necesitas la visión completa.",
   "hero.price":
-    "La evaluación cuesta 99 €, un solo pago. La recibes en 24–48 h o te devolvemos el importe.",
-  "hero.request": "Iniciar la evaluación",
+    "Empieza con las herramientas gratis. La evaluación revisada por un especialista cuesta 99 € una sola vez y llega en 24–48 h o se reembolsa.",
+  "hero.scan": "Escanear mi web gratis",
+  "hero.request": "Evaluar mi empresa",
   "hero.specimen": "Ver el PDF de muestra",
   "hero.badgeLead": "¿Solo necesitas el aviso técnico?",
   "hero.badgeLink": "Añade un aviso claro sobre el uso de IA",
+  "hero.workflow": "Flujo RapidAct",
+  "hero.workflowStatus": "Un proceso conectado",
+  "hero.workflow.scan": "Detectar",
+  "hero.workflow.scanBody": "Ver señales públicas de IA",
+  "hero.workflow.disclose": "Comunicar",
+  "hero.workflow.discloseBody": "Publicar el aviso al visitante",
+  "hero.workflow.implement": "Implementar",
+  "hero.workflow.implementBody": "Seguir la guía por plataforma",
+  "hero.workflow.assess": "Evaluar",
+  "hero.workflow.assessBody": "Revisar toda la empresa",
+  "hero.workflowFoot":
+    "Usa solo el paso que necesitas o avanza desde la detección hasta la evaluación completa.",
+  "hero.free": "Gratis",
   "report.label": "Contenido de la evaluación",
   "report.title": "Seis secciones. Un plan de acción claro.",
   "report.body":
@@ -142,7 +174,7 @@ const ES: Dictionary = {
   "specialist.role": "Fundador, Agents AI Ltd.",
   "specialist.human":
     "Sami revisa cada evaluación antes de entregarla. Las preguntas de seguimiento sobre tu evaluación están incluidas.",
-  "trust.commitment": "Nuestro compromiso",
+  "trust.commitment": "Modelo",
   "specimen.kicker": "Muestra real de varias páginas",
   "specimen.title": "Revisa la evaluación antes de comprar",
   "specimen.body":
@@ -181,7 +213,7 @@ const ES: Dictionary = {
   "footer.office": "Domicilio social",
   "footer.contact": "Contacto",
   "footer.description":
-    "Descubre qué sistemas cubre la Ley de IA. La evaluación escrita llega en 24–48 h por 99 €. El escáner y el aviso de IA son gratuitos. Evaluación técnica, no asesoramiento jurídico.",
+    "Detecta la IA visible, publica avisos claros, sigue guías por plataforma y evalúa toda la empresa cuando necesites una revisión especializada.",
   "footer.assessment": "La evaluación, 99 €",
   "footer.scan": "Escaneo web gratis",
   "footer.badge": "Instalador del aviso de IA",
@@ -203,6 +235,7 @@ const ES: Dictionary = {
 
 const DE: Dictionary = {
   "nav.deadline": "Artikel 50 des EU AI Act gilt seit 2. August 2026",
+  "nav.product": "So funktioniert es",
   "nav.assessment": "Bewertung",
   "nav.specimen": "Muster",
   "nav.fees": "Preis",
@@ -211,6 +244,7 @@ const DE: Dictionary = {
   "nav.badge": "KI-Hinweis",
   "nav.guides": "Leitfäden",
   "nav.scan": "Gratis-Scan",
+  "nav.scanShort": "Scannen",
   "nav.request": "Bewertung starten",
   "nav.requestShort": "Start",
   whatsapp: "Per WhatsApp fragen",
@@ -219,16 +253,30 @@ const DE: Dictionary = {
     "Analysen zeigen, wo der Ablauf unklar ist. Formulare, Zahlungen und Dokumente werden nie an Analytics gesendet.",
   "consent.allow": "Analyse erlauben",
   "consent.essential": "Nur erforderlich",
-  "hero.kicker": "EU AI Act, Artikel 50",
-  "hero.title": "Erfassen Sie Ihre KI-Pflichten innerhalb von 24–48 Stunden",
+  "hero.kicker": "Artikel-50-Umsetzung für reale KI-Systeme",
+  "hero.title": "KI finden. Klar offenlegen. Das Wesentliche dokumentieren.",
   "hero.body":
-    "Sie erhalten ein schriftliches KI-Inventar, Systemklassifizierungen, erforderliche Hinweise und einen priorisierten Maßnahmenplan.",
+    "RapidAct erkennt öffentliche KI-Nutzung, veröffentlicht klare Hinweise, führt durch die Plattformumsetzung und bewertet bei Bedarf das ganze Unternehmen.",
   "hero.price":
-    "Die Bewertung kostet einmalig 99 €. Sie erhalten sie innerhalb von 24–48 Stunden oder Ihr Geld zurück.",
-  "hero.request": "Bewertung starten",
+    "Starten Sie mit den kostenlosen Tools. Die geprüfte Unternehmensbewertung kostet einmalig 99 € und kommt in 24–48 Stunden oder wird erstattet.",
+  "hero.scan": "Website kostenlos scannen",
+  "hero.request": "Unternehmen bewerten",
   "hero.specimen": "Muster-PDF öffnen",
   "hero.badgeLead": "Nur den technischen Hinweis benötigt?",
   "hero.badgeLink": "Klaren KI-Hinweis hinzufügen",
+  "hero.workflow": "RapidAct-Ablauf",
+  "hero.workflowStatus": "Ein verbundener Weg",
+  "hero.workflow.scan": "Scannen",
+  "hero.workflow.scanBody": "Öffentliche KI-Signale sehen",
+  "hero.workflow.disclose": "Offenlegen",
+  "hero.workflow.discloseBody": "Besucherhinweis veröffentlichen",
+  "hero.workflow.implement": "Umsetzen",
+  "hero.workflow.implementBody": "Plattformanleitung nutzen",
+  "hero.workflow.assess": "Bewerten",
+  "hero.workflow.assessBody": "Ganzes Unternehmen erfassen",
+  "hero.workflowFoot":
+    "Nutzen Sie nur den nötigen Schritt oder gehen Sie bis zur vollständigen Unternehmensbewertung.",
+  "hero.free": "Gratis",
   "report.label": "Inhalt der Bewertung",
   "report.title": "Sechs Abschnitte. Ein klarer Maßnahmenplan.",
   "report.body":
@@ -239,7 +287,7 @@ const DE: Dictionary = {
   "specialist.role": "Gründer, Agents AI Ltd.",
   "specialist.human":
     "Sami prüft jede Bewertung vor der Auslieferung. Rückfragen zu Ihrer Bewertung sind inklusive.",
-  "trust.commitment": "Unser Versprechen",
+  "trust.commitment": "Modell",
   "specimen.kicker": "Echtes mehrseitiges Muster",
   "specimen.title": "Prüfen Sie die Bewertung vor dem Kauf",
   "specimen.body":
@@ -278,7 +326,7 @@ const DE: Dictionary = {
   "footer.office": "Geschäftsanschrift",
   "footer.contact": "Kontakt",
   "footer.description":
-    "Erfahren Sie, welche KI-Systeme der EU AI Act erfasst. Schriftliche Bewertung in 24–48 Stunden für 99 €. Scanner und KI-Hinweis sind kostenlos.",
+    "Sichtbare KI erkennen, klare Hinweise veröffentlichen, Plattformanleitungen nutzen und bei Bedarf das ganze Unternehmen bewerten.",
   "footer.assessment": "Bewertung, 99 €",
   "footer.scan": "Kostenloser Website-Scan",
   "footer.badge": "KI-Hinweis installieren",
@@ -301,6 +349,7 @@ const DE: Dictionary = {
 const FR: Dictionary = {
   "nav.deadline":
     "L’article 50 de l’AI Act européen s’applique depuis le 2 août 2026",
+  "nav.product": "Fonctionnement",
   "nav.assessment": "L’évaluation",
   "nav.specimen": "Spécimen",
   "nav.fees": "Tarif",
@@ -309,6 +358,7 @@ const FR: Dictionary = {
   "nav.badge": "Avis IA",
   "nav.guides": "Guides",
   "nav.scan": "Scan gratuit",
+  "nav.scanShort": "Scanner",
   "nav.request": "Commencer l’évaluation",
   "nav.requestShort": "Commencer",
   whatsapp: "Poser une question sur WhatsApp",
@@ -317,16 +367,30 @@ const FR: Dictionary = {
     "L’analyse montre où le parcours manque de clarté. Formulaires, paiements et documents ne sont jamais envoyés.",
   "consent.allow": "Autoriser l’analyse",
   "consent.essential": "Essentiel seulement",
-  "hero.kicker": "AI Act européen, article 50",
-  "hero.title": "Cartographiez vos obligations IA sous 24–48 heures",
+  "hero.kicker": "Mise en œuvre de l’article 50 pour les systèmes IA réels",
+  "hero.title": "Repérez votre IA. Signalez-la. Documentez l’essentiel.",
   "hero.body":
-    "Recevez un inventaire écrit de vos systèmes, leur classification, les mentions requises et un plan d’action priorisé.",
+    "RapidAct détecte l’IA visible, publie des avis clairs, guide la mise en œuvre par plateforme et évalue toute l’entreprise si nécessaire.",
   "hero.price":
-    "L’évaluation coûte 99 €, en un seul paiement. Vous la recevez sous 24–48 h ou êtes remboursé.",
-  "hero.request": "Commencer l’évaluation",
+    "Commencez avec les outils gratuits. L’évaluation vérifiée coûte 99 € une seule fois et arrive sous 24–48 h ou est remboursée.",
+  "hero.scan": "Scanner mon site gratuitement",
+  "hero.request": "Évaluer mon entreprise",
   "hero.specimen": "Voir le PDF exemple",
   "hero.badgeLead": "Besoin uniquement de la notice technique ?",
   "hero.badgeLink": "Ajouter un avis clair sur l’usage de l’IA",
+  "hero.workflow": "Parcours RapidAct",
+  "hero.workflowStatus": "Un parcours connecté",
+  "hero.workflow.scan": "Scanner",
+  "hero.workflow.scanBody": "Voir les signaux IA publics",
+  "hero.workflow.disclose": "Signaler",
+  "hero.workflow.discloseBody": "Publier l’avis visiteur",
+  "hero.workflow.implement": "Mettre en œuvre",
+  "hero.workflow.implementBody": "Suivre le guide plateforme",
+  "hero.workflow.assess": "Évaluer",
+  "hero.workflow.assessBody": "Cartographier l’entreprise",
+  "hero.workflowFoot":
+    "Utilisez uniquement l’étape nécessaire ou allez jusqu’à l’évaluation complète de l’entreprise.",
+  "hero.free": "Gratuit",
   "report.label": "Contenu de l’évaluation",
   "report.title": "Six sections. Un plan d’action clair.",
   "report.body":
@@ -337,7 +401,7 @@ const FR: Dictionary = {
   "specialist.role": "Fondateur, Agents AI Ltd.",
   "specialist.human":
     "Sami vérifie chaque évaluation avant livraison. Les questions de suivi sur votre évaluation sont incluses.",
-  "trust.commitment": "Notre engagement",
+  "trust.commitment": "Modèle",
   "specimen.kicker": "Vrai spécimen multipage",
   "specimen.title": "Examinez l’évaluation avant d’acheter",
   "specimen.body":
@@ -376,7 +440,7 @@ const FR: Dictionary = {
   "footer.office": "Siège social",
   "footer.contact": "Contact",
   "footer.description":
-    "Découvrez quels systèmes sont couverts par l’AI Act. Évaluation écrite sous 24–48 h pour 99 €. Scanner et avis IA gratuits.",
+    "Détectez l’IA visible, publiez des avis clairs, suivez les guides par plateforme et évaluez toute l’entreprise si nécessaire.",
   "footer.assessment": "Évaluation, 99 €",
   "footer.scan": "Scan gratuit",
   "footer.badge": "Installer l’avis IA",
@@ -398,6 +462,7 @@ const FR: Dictionary = {
 
 const IT: Dictionary = {
   "nav.deadline": "L’articolo 50 dell’AI Act UE si applica dal 2 agosto 2026",
+  "nav.product": "Come funziona",
   "nav.assessment": "La valutazione",
   "nav.specimen": "Esempio",
   "nav.fees": "Prezzo",
@@ -406,6 +471,7 @@ const IT: Dictionary = {
   "nav.badge": "Avviso IA",
   "nav.guides": "Guide",
   "nav.scan": "Scansione gratuita",
+  "nav.scanShort": "Scansiona",
   "nav.request": "Inizia la valutazione",
   "nav.requestShort": "Inizia",
   whatsapp: "Chiedi su WhatsApp",
@@ -414,16 +480,30 @@ const IT: Dictionary = {
     "L’analisi mostra dove il percorso non è chiaro. Moduli, pagamenti e documenti non vengono mai inviati.",
   "consent.allow": "Consenti analisi",
   "consent.essential": "Solo essenziale",
-  "hero.kicker": "AI Act UE, articolo 50",
-  "hero.title": "Mappa gli obblighi IA della tua azienda in 24–48 ore",
+  "hero.kicker": "Implementazione dell’articolo 50 per sistemi IA reali",
+  "hero.title": "Trova la tua IA. Dichiarala. Documenta ciò che conta.",
   "hero.body":
-    "Ricevi un inventario scritto dei sistemi IA, le classificazioni, gli avvisi necessari e un piano d’azione prioritario.",
+    "RapidAct rileva l’IA pubblica, pubblica avvisi chiari, guida l’implementazione per piattaforma e valuta tutta l’azienda quando serve.",
   "hero.price":
-    "La valutazione costa 99 €, una sola volta. Arriva entro 24–48 ore o ricevi il rimborso.",
-  "hero.request": "Inizia la valutazione",
+    "Inizia con gli strumenti gratuiti. La valutazione verificata costa 99 € una sola volta e arriva entro 24–48 ore o viene rimborsata.",
+  "hero.scan": "Scansiona gratis il sito",
+  "hero.request": "Valuta la mia azienda",
   "hero.specimen": "Apri il PDF di esempio",
   "hero.badgeLead": "Ti serve solo l’avviso tecnico?",
   "hero.badgeLink": "Aggiungi un avviso chiaro sull’uso dell’IA",
+  "hero.workflow": "Percorso RapidAct",
+  "hero.workflowStatus": "Un percorso connesso",
+  "hero.workflow.scan": "Scansiona",
+  "hero.workflow.scanBody": "Vedi i segnali IA pubblici",
+  "hero.workflow.disclose": "Dichiara",
+  "hero.workflow.discloseBody": "Pubblica l’avviso visitatori",
+  "hero.workflow.implement": "Implementa",
+  "hero.workflow.implementBody": "Segui la guida piattaforma",
+  "hero.workflow.assess": "Valuta",
+  "hero.workflow.assessBody": "Mappa tutta l’azienda",
+  "hero.workflowFoot":
+    "Usa solo il passaggio necessario o prosegui fino alla valutazione completa dell’azienda.",
+  "hero.free": "Gratis",
   "report.label": "Contenuto della valutazione",
   "report.title": "Sei sezioni. Un piano d’azione chiaro.",
   "report.body":
@@ -434,7 +514,7 @@ const IT: Dictionary = {
   "specialist.role": "Fondatore, Agents AI Ltd.",
   "specialist.human":
     "Sami verifica ogni valutazione prima della consegna. Le domande di follow-up sulla valutazione sono incluse.",
-  "trust.commitment": "Il nostro impegno",
+  "trust.commitment": "Modello",
   "specimen.kicker": "Esempio reale multipagina",
   "specimen.title": "Esamina la valutazione prima dell’acquisto",
   "specimen.body":
@@ -473,7 +553,7 @@ const IT: Dictionary = {
   "footer.office": "Sede legale",
   "footer.contact": "Contatti",
   "footer.description":
-    "Scopri quali sistemi copre l’AI Act UE. Valutazione scritta in 24–48 ore a 99 €. Scanner e avviso IA gratuiti.",
+    "Rileva l’IA visibile, pubblica avvisi chiari, segui le guide per piattaforma e valuta tutta l’azienda quando serve.",
   "footer.assessment": "Valutazione, 99 €",
   "footer.scan": "Scansione gratuita",
   "footer.badge": "Installa l’avviso IA",

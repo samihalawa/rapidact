@@ -45,7 +45,7 @@ export default function ReportOffer() {
             {t("hero.request")}, €99
           </Button>
           <p className="ink-soft text-sm">
-            {copy.chargedOnce} {copy.trustCommitment}
+            {copy.chargedOnce}
           </p>
         </div>
       </div>

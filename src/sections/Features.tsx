@@ -3,11 +3,7 @@ import { CONVERT } from "@/config";
 import { useI18n } from "@/lib/i18n";
 import { HOME_COPY } from "@/data/localizedHome";
 
-/**
- * The free self-install layer. Secondary to the paid assessment, but kept
- * substantial: it is a genuine free offer and the main organic search entry
- * point to the site.
- */
+/** The complete RapidAct workflow, from free detection to paid assessment. */
 export default function Features() {
   const navigate = useNavigate();
   const { lang, path, t } = useI18n();
@@ -23,9 +19,15 @@ export default function Features() {
           {copy.featuresIntro}
         </p>
 
-        <div className="hairline mt-10 grid border-t sm:grid-cols-2 lg:grid-cols-3">
-          {copy.features.map(tool => (
-            <div key={tool.title} className="hairline border-b py-6 sm:pr-8">
+        <div className="hairline mt-10 grid border-t sm:grid-cols-2 lg:grid-cols-4">
+          {copy.features.map((tool, index) => (
+            <div
+              key={tool.title}
+              className="hairline border-b py-6 sm:pr-8 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+            >
+              <span className="mono ink-soft text-[11px]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
               <h3 className="ink text-[15px] font-semibold">{tool.title}</h3>
               <p className="ink-soft mt-2 text-[15px] leading-relaxed">
                 {tool.text}
@@ -34,22 +36,34 @@ export default function Features() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <div className="mt-8">
           <p className="ink-soft max-w-2xl text-[15px] leading-relaxed">
             {copy.featuresClose}
           </p>
-          <button
-            onClick={() => navigate(path(CONVERT.badge))}
-            className="inline-flex min-h-11 items-center rounded bg-[#16181d] px-5 text-[14px] font-semibold text-white hover:bg-[#2b2f38]"
-          >
-            {copy.copyCode}
-          </button>
-          <button
-            onClick={() => navigate(path(CONVERT.report))}
-            className="accent shrink-0 text-[14px] font-semibold underline underline-offset-2"
-          >
-            {t("hero.request")}, €99
-          </button>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <button
+              data-analytics-event="free_scan_click"
+              data-analytics-label="Workflow scan CTA"
+              onClick={() => navigate(path(CONVERT.scanner))}
+              className="inline-flex min-h-11 items-center rounded bg-[#16181d] px-5 text-[14px] font-semibold text-white hover:bg-[#2b2f38]"
+            >
+              {t("hero.scan")}
+            </button>
+            <button
+              data-analytics-event="badge_installer_view"
+              data-analytics-label="Workflow notice CTA"
+              onClick={() => navigate(path(CONVERT.badge))}
+              className="hairline inline-flex min-h-11 items-center rounded border bg-white px-5 text-[14px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
+            >
+              {copy.copyCode}
+            </button>
+            <button
+              onClick={() => navigate(path(CONVERT.report))}
+              className="accent inline-flex min-h-11 items-center px-1 text-[14px] font-semibold underline underline-offset-2"
+            >
+              {t("hero.request")} · €99
+            </button>
+          </div>
         </div>
       </div>
     </section>

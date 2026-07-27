@@ -9,6 +9,8 @@ type Item = { title: string; text: string };
 type Faq = { q: string; a: string };
 
 export type HomeCopy = {
+  seoTitle: string;
+  seoDescription: string;
   statusFuture: (days: number) => string;
   statusLive: string;
   heroDisclaimer: string;
@@ -49,15 +51,19 @@ export type HomeCopy = {
 };
 
 const en: HomeCopy = {
+  seoTitle: "Article 50 tools, AI notices and company assessment | RapidAct",
+  seoDescription:
+    "Scan public AI use, publish a clear visitor notice, follow platform implementation guides and get a specialist-reviewed company assessment when you need the complete Article 50 picture.",
   statusFuture: days =>
     `Applies from 2 August 2026, in ${days} day${days === 1 ? "" : "s"}`,
   statusLive: "In force since 2 August 2026",
   heroDisclaimer:
-    "Technical and organisational assessment, not legal advice. Any point requiring a legal opinion is identified for counsel.",
+    "RapidAct provides technical implementation tools and specialist assessments, not legal advice. Any point requiring a legal opinion is identified for counsel.",
   prepared:
     "Prepared for your company specifically. Delivered as a written document to the address you give us, within 24–48h of payment.",
   chapters: REPORT_CHAPTERS,
-  trustCommitment: "Delivered within 24–48h of payment, or refunded in full.",
+  trustCommitment:
+    "Scanner, notice and guides are free. The full company assessment is a one-time €99.",
   procedureLabel: "Procedure",
   procedureTitle: "From intake to action plan",
   stepLabel: "Step",
@@ -108,57 +114,53 @@ const en: HomeCopy = {
     },
     {
       title: "Clear AI-use notice",
-      text: "A calm visitor notice for WordPress, Shopify and Wix through native marketplace apps, plus one script for custom sites.",
+      text: "A calm visitor notice with guided installation paths for WordPress, Shopify, Wix and custom sites.",
       cta: "Add the notice",
     },
   ],
   invoice:
     "An invoice is issued for every payment by Agents AI Ltd. RapidAct is not a law firm and the report is not legal advice.",
-  featuresLabel: "Free tools",
-  featuresTitle: "Scan your page. Publish the notice.",
+  featuresLabel: "How RapidAct works",
+  featuresTitle: "Use one tool, or follow the complete path.",
   featuresIntro:
-    "Check the AI signals visible on a public page, then add a clear visitor disclosure. Both tools are free.",
+    "Start with a public-page check, add the visitor-facing notice, follow the implementation guidance and escalate to a whole-company assessment only when you need it.",
   features: [
     {
-      title: "AI detection scanner",
-      text: "Checks a URL against 52 known chatbot platforms and shows the evidence behind each match.",
+      title: "Discover visible AI",
+      text: "Scan a public URL against 52 known chatbot platforms and inspect the evidence behind every match.",
     },
     {
-      title: "Visitor AI disclosure",
-      text: "A clear notice for interactive AI, visible wherever the interaction happens.",
+      title: "Disclose it clearly",
+      text: "Publish a configurable visitor notice wherever an AI interaction takes place.",
     },
     {
-      title: "Configurable",
-      text: "Set the system, provider, wording, details URL, position and colour without rebuilding the script.",
+      title: "Implement by platform",
+      text: "Follow specific WordPress, Shopify, Wix and custom-site setup and verification guidance.",
     },
     {
-      title: "Privacy-preserving",
-      text: "No cookies, profiles or visitor data. The notice makes no tracking request.",
-    },
-    {
-      title: "Platform coverage",
-      text: "Native WordPress, Shopify and Wix apps bundle the notice; custom sites can use the standalone script.",
-    },
-    {
-      title: "Implementation guides",
-      text: "Specific installation and verification steps for each supported platform.",
+      title: "Assess the whole company",
+      text: "Map systems, classifications, duties, evidence gaps and next actions in one specialist-reviewed document.",
     },
   ],
   featuresClose:
-    "The notice is the straightforward half. Establishing which systems are covered and what evidence you must produce is where the assessment helps.",
+    "The first three steps are free. The €99 assessment is for the wider company view that a public-page scan cannot provide.",
   copyCode: "Add the AI-use notice",
   questionsLabel: "Questions",
-  questionsTitle: "What companies ask before they pay",
+  questionsTitle: "What companies ask before they act",
   faqs: REPORT_FAQS,
 };
 
 const es: HomeCopy = {
   ...en,
+  seoTitle:
+    "Herramientas del artículo 50, avisos de IA y evaluación | RapidAct",
+  seoDescription:
+    "Escanea el uso público de IA, publica un aviso claro, sigue guías por plataforma y solicita una evaluación completa cuando necesites revisar toda la empresa.",
   statusFuture: days =>
     `Se aplica desde el 2 de agosto de 2026, dentro de ${days} día${days === 1 ? "" : "s"}`,
   statusLive: "En vigor desde el 2 de agosto de 2026",
   heroDisclaimer:
-    "RapidAct realiza evaluaciones técnicas y organizativas de cumplimiento. No es un despacho de abogados y el informe no constituye asesoramiento jurídico. Si una cuestión requiere una opinión legal, el informe lo indica y explica qué llevar a un abogado.",
+    "RapidAct ofrece herramientas técnicas de implementación y evaluaciones especializadas, no asesoramiento jurídico. Si una cuestión requiere una opinión legal, la identificamos para asesoría.",
   prepared:
     "Preparado específicamente para tu empresa y entregado por escrito en 24–48 h desde el pago.",
   chapters: [
@@ -193,7 +195,8 @@ const es: HomeCopy = {
       text: "Conclusión sobre tu posición, la primera acción y cualquier cuestión para asesoría jurídica.",
     },
   ],
-  trustCommitment: "Entrega en 24–48 h desde el pago o reembolso íntegro.",
+  trustCommitment:
+    "Escáner, aviso y guías gratis. La evaluación completa cuesta 99 €, un solo pago.",
   procedureLabel: "Proceso",
   procedureTitle: "Qué ocurre después del pago",
   stepLabel: "Paso",
@@ -252,47 +255,39 @@ const es: HomeCopy = {
     },
     {
       title: "Aviso claro sobre el uso de IA",
-      text: "Un aviso claro para WordPress, Shopify y Wix mediante aplicaciones nativas, más un script para webs propias.",
+      text: "Un aviso claro con rutas de instalación guiadas para WordPress, Shopify, Wix y webs propias.",
       cta: "Añadir el aviso",
     },
   ],
   invoice:
     "Agents AI Ltd. emite factura por cada pago. RapidAct no es un despacho de abogados y el informe no es asesoramiento jurídico.",
-  featuresLabel: "Herramientas gratuitas",
-  featuresTitle: "Escanea tu página. Publica el aviso.",
+  featuresLabel: "Cómo funciona RapidAct",
+  featuresTitle: "Usa una herramienta o sigue el proceso completo.",
   featuresIntro:
-    "Comprueba las señales de IA visibles en una página pública y añade un aviso claro. Ambas herramientas son gratuitas.",
+    "Empieza con una revisión pública, añade el aviso, sigue la guía de implementación y pasa a la evaluación de empresa solo cuando la necesites.",
   features: [
     {
-      title: "Escáner de detección de IA",
-      text: "Comprueba una URL frente a 52 plataformas y muestra la evidencia de cada coincidencia.",
+      title: "Detecta la IA visible",
+      text: "Escanea una URL pública frente a 52 plataformas y revisa la prueba de cada coincidencia.",
     },
     {
-      title: "Aviso de IA al visitante",
-      text: "Un aviso claro y visible allí donde ocurre la interacción.",
+      title: "Comunícala con claridad",
+      text: "Publica un aviso configurable allí donde ocurre cada interacción con IA.",
     },
     {
-      title: "Configurable",
-      text: "Define sistema, proveedor, texto, enlace, posición y color sin recompilar.",
+      title: "Implementa por plataforma",
+      text: "Sigue pasos específicos para WordPress, Shopify, Wix y webs propias, incluida la verificación.",
     },
     {
-      title: "Privado",
-      text: "Sin cookies, perfiles ni datos del visitante; el aviso no rastrea.",
-    },
-    {
-      title: "Compatible con plataformas",
-      text: "Aplicaciones nativas para WordPress, Shopify y Wix; script independiente para webs propias.",
-    },
-    {
-      title: "Guías de implementación",
-      text: "Pasos concretos para cada plataforma, sin jerga jurídica ni técnica.",
+      title: "Evalúa toda la empresa",
+      text: "Reúne sistemas, clasificaciones, obligaciones, carencias y acciones en un documento revisado por un especialista.",
     },
   ],
   featuresClose:
-    "Instalar el aviso es la parte sencilla. Determinar qué sistemas están cubiertos y qué pruebas debes conservar es la parte que resuelve la evaluación.",
+    "Los tres primeros pasos son gratis. La evaluación de 99 € cubre la visión completa que un escaneo público no puede ofrecer.",
   copyCode: "Añadir el aviso de IA",
   questionsLabel: "Preguntas",
-  questionsTitle: "Lo que preguntan las empresas antes de pagar",
+  questionsTitle: "Lo que preguntan las empresas antes de actuar",
   faqs: [
     {
       q: "¿Qué estoy pagando exactamente?",
@@ -331,10 +326,14 @@ const es: HomeCopy = {
 
 const de: HomeCopy = {
   ...en,
+  seoTitle:
+    "Artikel-50-Tools, KI-Hinweise und Unternehmensbewertung | RapidAct",
+  seoDescription:
+    "Öffentliche KI-Nutzung scannen, Besucherhinweise veröffentlichen, Plattformanleitungen nutzen und bei Bedarf das gesamte Unternehmen bewerten lassen.",
   statusFuture: days => `Gilt ab 2. August 2026, in ${days} Tagen`,
   statusLive: "Seit 2. August 2026 in Kraft",
   heroDisclaimer:
-    "RapidAct erstellt technische und organisatorische Compliance-Bewertungen. Wir sind keine Kanzlei; der Bericht ist keine Rechtsberatung. Rechtliche Fragen werden klar gekennzeichnet.",
+    "RapidAct bietet technische Umsetzungstools und Fachbewertungen, keine Rechtsberatung. Fragen, die eine Rechtsmeinung erfordern, werden klar gekennzeichnet.",
   prepared:
     "Speziell für Ihr Unternehmen erstellt und innerhalb von 24–48 Stunden nach Zahlung schriftlich geliefert.",
   chapters: [
@@ -370,7 +369,7 @@ const de: HomeCopy = {
     },
   ],
   trustCommitment:
-    "Lieferung innerhalb von 24–48 Stunden oder vollständige Erstattung.",
+    "Scanner, Hinweis und Leitfäden sind kostenlos. Die vollständige Bewertung kostet einmalig 99 €.",
   procedureLabel: "Ablauf",
   procedureTitle: "Was nach der Zahlung geschieht",
   stepLabel: "Schritt",
@@ -429,47 +428,39 @@ const de: HomeCopy = {
     },
     {
       title: "Klarer KI-Nutzungshinweis",
-      text: "Klarer Besucherhinweis über native WordPress-, Shopify- und Wix-Apps sowie ein Skript für eigene Websites.",
+      text: "Klarer Besucherhinweis mit geführten Installationswegen für WordPress, Shopify, Wix und eigene Websites.",
       cta: "Hinweis hinzufügen",
     },
   ],
   invoice:
     "Agents AI Ltd. stellt eine Rechnung aus. RapidAct ist keine Kanzlei; der Bericht ist keine Rechtsberatung.",
-  featuresLabel: "Kostenlose Tools",
-  featuresTitle: "Seite scannen. Hinweis veröffentlichen.",
+  featuresLabel: "So funktioniert RapidAct",
+  featuresTitle: "Ein Tool nutzen oder dem gesamten Ablauf folgen.",
   featuresIntro:
-    "Prüfen Sie sichtbare KI-Signale und fügen Sie einen klaren Besucherhinweis hinzu. Beide Tools sind kostenlos.",
+    "Beginnen Sie mit dem öffentlichen Check, fügen Sie den Hinweis hinzu, folgen Sie der Plattformanleitung und bewerten Sie das ganze Unternehmen nur bei Bedarf.",
   features: [
     {
-      title: "KI-Scanner",
-      text: "Prüft 52 Plattformen und zeigt den Nachweis jeder Erkennung.",
+      title: "Sichtbare KI erkennen",
+      text: "Öffentliche URL gegen 52 Plattformen prüfen und jeden Nachweis einsehen.",
     },
     {
-      title: "Besucherhinweis",
-      text: "Klarer Hinweis dort, wo die KI-Interaktion stattfindet.",
+      title: "Klar offenlegen",
+      text: "Konfigurierbaren Hinweis dort veröffentlichen, wo die KI-Interaktion stattfindet.",
     },
     {
-      title: "Konfigurierbar",
-      text: "System, Anbieter, Text, Link, Position und Farbe einstellen.",
+      title: "Nach Plattform umsetzen",
+      text: "Konkrete Einrichtung und Prüfung für WordPress, Shopify, Wix und eigene Websites.",
     },
     {
-      title: "Datensparsam",
-      text: "Keine Cookies, Profile oder Besucherdaten.",
-    },
-    {
-      title: "Plattformübergreifend",
-      text: "Native Apps für WordPress, Shopify und Wix; eigenständiges Skript für eigene Websites.",
-    },
-    {
-      title: "Anleitungen",
-      text: "Konkrete Schritte ohne Rechts- oder Technikjargon.",
+      title: "Ganzes Unternehmen bewerten",
+      text: "Systeme, Einstufungen, Pflichten, Nachweislücken und Maßnahmen in einem geprüften Dokument bündeln.",
     },
   ],
   featuresClose:
-    "Der Hinweis ist einfach. Welche Systeme erfasst sind und welche Nachweise nötig sind, klärt die Bewertung.",
+    "Die ersten drei Schritte sind kostenlos. Die 99-€-Bewertung liefert das Gesamtbild, das ein öffentlicher Scan nicht leisten kann.",
   copyCode: "KI-Hinweis hinzufügen",
   questionsLabel: "Fragen",
-  questionsTitle: "Was Unternehmen vor der Zahlung fragen",
+  questionsTitle: "Was Unternehmen vor dem Handeln fragen",
   faqs: [
     {
       q: "Wofür zahle ich 99 €?",
@@ -508,11 +499,15 @@ const de: HomeCopy = {
 
 const fr: HomeCopy = {
   ...de,
+  seoTitle:
+    "Outils article 50, avis IA et évaluation d’entreprise | RapidAct",
+  seoDescription:
+    "Scannez l’IA visible, publiez un avis clair, suivez les guides par plateforme et demandez une évaluation complète uniquement si nécessaire.",
   statusFuture: days =>
     `Applicable le 2 août 2026, dans ${days} jour${days === 1 ? "" : "s"}`,
   statusLive: "En vigueur depuis le 2 août 2026",
   heroDisclaimer:
-    "RapidAct réalise des évaluations techniques et organisationnelles. Nous ne sommes pas un cabinet d’avocats et le rapport n’est pas un avis juridique. Les questions juridiques sont signalées clairement.",
+    "RapidAct propose des outils techniques de mise en œuvre et des évaluations spécialisées, pas des conseils juridiques. Les questions nécessitant un avis juridique sont clairement signalées.",
   prepared:
     "Rédigé pour votre entreprise et livré par écrit sous 24–48 h après paiement.",
   chapters: [
@@ -547,7 +542,8 @@ const fr: HomeCopy = {
       text: "Conclusion, première action et questions à soumettre au conseil juridique.",
     },
   ],
-  trustCommitment: "Livré sous 24–48 h ou remboursé intégralement.",
+  trustCommitment:
+    "Scanner, avis et guides gratuits. L’évaluation complète coûte 99 €, une seule fois.",
   procedureLabel: "Procédure",
   procedureTitle: "Ce qui se passe après le paiement",
   stepLabel: "Étape",
@@ -606,47 +602,39 @@ const fr: HomeCopy = {
     },
     {
       title: "Avis clair sur l’usage de l’IA",
-      text: "Avis clair via des applications natives WordPress, Shopify et Wix, plus un script pour les sites personnalisés.",
+      text: "Avis clair avec des parcours d’installation guidés pour WordPress, Shopify, Wix et les sites personnalisés.",
       cta: "Ajouter l’avis",
     },
   ],
   invoice:
     "Agents AI Ltd. émet une facture. RapidAct n’est pas un cabinet d’avocats et le rapport n’est pas un avis juridique.",
-  featuresLabel: "Outils gratuits",
-  featuresTitle: "Scannez la page. Publiez la notice.",
+  featuresLabel: "Comment fonctionne RapidAct",
+  featuresTitle: "Utilisez un outil ou suivez le parcours complet.",
   featuresIntro:
-    "Vérifiez les signaux IA visibles puis ajoutez une notice claire. Les deux outils sont gratuits.",
+    "Commencez par le contrôle public, ajoutez l’avis, suivez le guide d’installation et passez à l’évaluation globale uniquement si nécessaire.",
   features: [
     {
-      title: "Scanner IA",
-      text: "Vérifie 52 plateformes et montre chaque preuve.",
+      title: "Détecter l’IA visible",
+      text: "Scannez une URL publique sur 52 plateformes et consultez chaque preuve.",
     },
     {
-      title: "Notice aux visiteurs",
-      text: "Une notice claire là où l’interaction IA a lieu.",
+      title: "La signaler clairement",
+      text: "Publiez un avis configurable là où chaque interaction IA se produit.",
     },
     {
-      title: "Configurable",
-      text: "Système, fournisseur, texte, lien, position et couleur.",
+      title: "Mettre en œuvre par plateforme",
+      text: "Suivez les étapes propres à WordPress, Shopify, Wix et aux sites personnalisés, vérification comprise.",
     },
     {
-      title: "Respectueux de la vie privée",
-      text: "Aucun cookie, profil ou donnée visiteur.",
-    },
-    {
-      title: "Toutes plateformes",
-      text: "Applications natives pour WordPress, Shopify et Wix ; script autonome pour les sites personnalisés.",
-    },
-    {
-      title: "Guides",
-      text: "Étapes concrètes sans jargon juridique ou technique.",
+      title: "Évaluer toute l’entreprise",
+      text: "Rassemblez systèmes, classifications, obligations, lacunes et actions dans un document vérifié.",
     },
   ],
   featuresClose:
-    "Installer la notice est simple. L’évaluation détermine quels systèmes sont couverts et quelles preuves conserver.",
+    "Les trois premières étapes sont gratuites. L’évaluation à 99 € apporte la vue d’ensemble qu’un scan public ne peut pas fournir.",
   copyCode: "Ajouter l’avis IA",
   questionsLabel: "Questions",
-  questionsTitle: "Ce que les entreprises demandent avant de payer",
+  questionsTitle: "Ce que les entreprises demandent avant d’agir",
   faqs: [
     {
       q: "Que couvrent exactement les 99 € ?",
@@ -685,11 +673,15 @@ const fr: HomeCopy = {
 
 const it: HomeCopy = {
   ...fr,
+  seoTitle:
+    "Strumenti articolo 50, avvisi IA e valutazione aziendale | RapidAct",
+  seoDescription:
+    "Scansiona l’IA visibile, pubblica un avviso chiaro, segui le guide per piattaforma e richiedi la valutazione completa solo quando serve.",
   statusFuture: days =>
     `Si applica dal 2 agosto 2026, tra ${days} giorn${days === 1 ? "o" : "i"}`,
   statusLive: "In vigore dal 2 agosto 2026",
   heroDisclaimer:
-    "RapidAct realizza valutazioni tecniche e organizzative di conformità. Non è uno studio legale e il report non è consulenza giuridica. Le questioni legali vengono indicate chiaramente.",
+    "RapidAct offre strumenti tecnici di implementazione e valutazioni specialistiche, non consulenza legale. Le questioni che richiedono un parere giuridico vengono indicate chiaramente.",
   prepared:
     "Preparato per la tua azienda e consegnato per iscritto entro 24–48 ore dal pagamento.",
   chapters: [
@@ -724,7 +716,8 @@ const it: HomeCopy = {
       text: "Conclusione, prima azione e domande da sottoporre al consulente legale.",
     },
   ],
-  trustCommitment: "Consegna entro 24–48 ore o rimborso completo.",
+  trustCommitment:
+    "Scanner, avviso e guide sono gratuiti. La valutazione completa costa 99 €, una sola volta.",
   procedureLabel: "Procedura",
   procedureTitle: "Cosa accade dopo il pagamento",
   stepLabel: "Fase",
@@ -783,44 +776,39 @@ const it: HomeCopy = {
     },
     {
       title: "Avviso chiaro sull’uso dell’IA",
-      text: "Avviso chiaro tramite app native WordPress, Shopify e Wix, più uno script per siti personalizzati.",
+      text: "Avviso chiaro con percorsi di installazione guidati per WordPress, Shopify, Wix e siti personalizzati.",
       cta: "Aggiungi l’avviso",
     },
   ],
   invoice:
     "Agents AI Ltd. emette fattura. RapidAct non è uno studio legale e il report non è consulenza giuridica.",
-  featuresLabel: "Strumenti gratuiti",
-  featuresTitle: "Scansiona la pagina. Pubblica l’avviso.",
+  featuresLabel: "Come funziona RapidAct",
+  featuresTitle: "Usa un singolo strumento o segui l’intero percorso.",
   featuresIntro:
-    "Controlla i segnali IA visibili e aggiungi un avviso chiaro. Entrambi gli strumenti sono gratuiti.",
+    "Inizia dal controllo pubblico, aggiungi l’avviso, segui la guida di implementazione e passa alla valutazione aziendale solo quando serve.",
   features: [
     {
-      title: "Scanner IA",
-      text: "Controlla 52 piattaforme e mostra ogni prova.",
+      title: "Rileva l’IA visibile",
+      text: "Scansiona un URL pubblico su 52 piattaforme e consulta ogni prova.",
     },
     {
-      title: "Avviso ai visitatori",
-      text: "Un avviso chiaro dove avviene l’interazione IA.",
+      title: "Dichiarala con chiarezza",
+      text: "Pubblica un avviso configurabile dove avviene ogni interazione IA.",
     },
     {
-      title: "Configurabile",
-      text: "Sistema, fornitore, testo, link, posizione e colore.",
+      title: "Implementa per piattaforma",
+      text: "Segui istruzioni specifiche per WordPress, Shopify, Wix e siti personalizzati, inclusa la verifica.",
     },
     {
-      title: "Rispetta la privacy",
-      text: "Nessun cookie, profilo o dato del visitatore.",
+      title: "Valuta tutta l’azienda",
+      text: "Riunisci sistemi, classificazioni, obblighi, lacune e azioni in un documento verificato.",
     },
-    {
-      title: "Tutte le piattaforme",
-      text: "App native per WordPress, Shopify e Wix; script autonomo per siti personalizzati.",
-    },
-    { title: "Guide", text: "Passaggi concreti senza gergo legale o tecnico." },
   ],
   featuresClose:
-    "Installare l’avviso è semplice. La valutazione stabilisce quali sistemi sono coperti e quali prove conservare.",
+    "I primi tre passaggi sono gratuiti. La valutazione da 99 € offre il quadro completo che una scansione pubblica non può fornire.",
   copyCode: "Aggiungi l’avviso IA",
   questionsLabel: "Domande",
-  questionsTitle: "Cosa chiedono le aziende prima di pagare",
+  questionsTitle: "Cosa chiedono le aziende prima di agire",
   faqs: [
     {
       q: "Cosa coprono esattamente i 99 €?",

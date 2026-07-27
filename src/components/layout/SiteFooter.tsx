@@ -36,9 +36,9 @@ export default function SiteFooter() {
             <h4 className="text-sm font-semibold text-[#16181d]">{t("footer.product")}</h4>
             <ul className="mt-4 space-y-2.5">
               {[
-                { label: t("footer.assessment"), href: "/report" },
                 { label: t("footer.scan"), href: "/scanner" },
                 { label: t("footer.badge"), href: "/article-50#install" },
+                { label: t("footer.assessment"), href: "/report" },
                 { label: t("footer.article"), href: "/article-50" },
                 { label: t("footer.guides"), href: "/learn" },
               ].map(l => (

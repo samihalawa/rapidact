@@ -47,23 +47,23 @@ export default function SiteNav() {
           </Link>
 
           <nav className="ink-soft hidden items-center gap-5 text-[13px] md:flex">
-            <a href={`${path("/")}#report`} className="whitespace-nowrap hover:text-[#16181d]">
-              {t("nav.assessment")}
+            <a href={`${path("/")}#features`} className="whitespace-nowrap hover:text-[#16181d]">
+              {t("nav.product")}
             </a>
-            <Link to={path(CONVERT.example)} className="whitespace-nowrap hover:text-[#16181d]">
-              {t("nav.specimen")}
-            </Link>
-            <a href={`${path("/")}#pricing`} className="whitespace-nowrap hover:text-[#16181d]">
-              {t("nav.fees")}
-            </a>
-            <a href={`${path("/")}#features`} className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline">
-              {t("nav.tools")}
-            </a>
-            <Link to={path("/article-50")} className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline">
-              {t("nav.article")}
+            <Link to={path(CONVERT.scanner)} className="whitespace-nowrap hover:text-[#16181d]">
+              {t("nav.scan")}
             </Link>
             <Link to={path(CONVERT.badge)} className="whitespace-nowrap hover:text-[#16181d]">
               {t("nav.badge")}
+            </Link>
+            <a href={`${path("/")}#report`} className="whitespace-nowrap hover:text-[#16181d]">
+              {t("nav.assessment")}
+            </a>
+            <Link to={path(CONVERT.example)} className="hidden whitespace-nowrap hover:text-[#16181d] xl:inline">
+              {t("nav.specimen")}
+            </Link>
+            <Link to={path("/article-50")} className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline">
+              {t("nav.article")}
             </Link>
             <Link to={path("/learn")} className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline">
               {t("nav.guides")}
@@ -72,20 +72,14 @@ export default function SiteNav() {
 
           <div className="flex items-center gap-3">
             <LanguageSelector />
-            <button
-              onClick={() => navigate(path(CONVERT.scanner))}
-              className="ink-soft hidden text-[14px] hover:text-[#16181d] sm:inline"
-            >
-              {t("nav.scan")}
-            </button>
             <Button
-              data-analytics-event="report_started"
-              data-analytics-label="Header assessment CTA"
+              data-analytics-event="free_scan_click"
+              data-analytics-label="Header free scan CTA"
               className="h-11 rounded bg-[#16181d] px-3 text-[13px] font-semibold text-white hover:bg-[#2b2f38] sm:px-4 sm:text-[14px]"
-              onClick={() => navigate(path(CONVERT.report))}
+              onClick={() => navigate(path(CONVERT.scanner))}
             >
-              <span className="sm:hidden">{t("nav.requestShort")}</span>
-              <span className="hidden sm:inline">{t("nav.request")}</span>
+              <span className="sm:hidden">{t("nav.scanShort")}</span>
+              <span className="hidden sm:inline">{t("nav.scan")}</span>
             </Button>
           </div>
         </div>

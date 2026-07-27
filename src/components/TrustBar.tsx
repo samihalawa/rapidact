@@ -2,14 +2,7 @@ import { ENTITY, COMPANIES_HOUSE_URL, HAS_ENTITY_DETAILS } from "@/data/company"
 import { useI18n } from "@/lib/i18n";
 import { HOME_COPY } from "@/data/localizedHome";
 
-/**
- * Who you are paying, stated plainly and made checkable.
- *
- * Placed directly beneath the hero and again beside the payment button, because
- * this is the moment the visitor silently asks "who actually receives this
- * money". A registered number they can verify on the public register answers it
- * far more convincingly than a badge or a testimonial.
- */
+/** Verifiable company identity and the plain free-to-paid product model. */
 export default function TrustBar() {
   const { lang, t } = useI18n();
   const copy = HOME_COPY[lang];

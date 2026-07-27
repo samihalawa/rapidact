@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct product hierarchy | the paid assessment displaced the free operational product and made RapidAct read like a report shop | lead with discover, disclose, implement, assess; keep the assessment as paid escalation | do not use the specimen, report contents, pricing, and payment FAQ as the whole above-the-fold identity | verify hero, nav, section order, metadata, footer, CTA paths, and five languages at phone/tablet/desktop widths
 RapidAct marketplace apps | direct ZIP, theme-snippet, custom-code, GTM, and Zaraz delivery no longer matches the product direction | ship bundled WordPress.org, Shopify App Store, and Wix App Market packages with native platform versioning | do not load executable badge updates from the manifest or advertise unpublished listings as available | verify bundled runtime parity, native builds, sandbox installation, marketplace status copy, and live site claims
 RapidAct conversion page | the hero preview and later sections repeated the same offer details | show actual specimen pages in the hero and reserve detailed lists for their dedicated section | do not repeat long deliverable or free-tool explanations | verify the full page for repeated claims and a clear primary CTA
 RapidAct scanner conversion | a spinner made the public-page preview feel unfinished and gave failures no next step | show readable scan phases and a permanent full-assessment fallback | do not imply the technical preview makes a company compliant | verify progress, success, unreachable, and CTA events live
@@ -9,6 +10,17 @@ RapidAct mobile header | language selector displaced the conversion action | kee
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+
+## 2026-07-27 — RapidAct is an implementation workflow, not a report shop
+
+- Status: CURRENT
+- Project/root: `rapidact`; homepage, navigation, metadata, footer, and localized conversion journey.
+- Mistake: allowing the €99 assessment, specimen, contents, procedure, pricing, and purchase FAQ to define almost the entire homepage before visitors saw the scanner, notice, platform guidance, or broader product.
+- Do: present one connected path—discover visible AI, disclose it, implement by platform, then assess the whole company when needed; keep the assessment as the paid escalation.
+- Don't: remove the assessment conversion or hide its proof; do not let report detail become the full product identity again.
+- Evidence: user correction on 2026-07-27 plus the supplied production-page text showing report-first copy from hero through footer.
+- Trigger terms: over report oriented, only about report, homepage positioning, product hierarchy, conversion.
+- Verify before reuse: render hero, navigation, section order, CTA destinations, metadata and footer in EN/ES/DE/FR/IT at phone, tablet and desktop widths.
 
 ## 2026-07-27 — Platform distribution is marketplace-native
 

@@ -23,7 +23,7 @@ export const ORG_LD = {
   url: "https://rapidact.eu",
   logo: "https://rapidact.eu/icons/icon-512x512.png",
   description:
-    "EU AI Act compliance assessments for companies: which of your AI systems are covered, what you must disclose, and what documentation you must hold. Free website scanner and self-install disclosure layer.",
+    "Article 50 implementation tools for companies: a free AI website scanner, visitor disclosure notice, platform guidance and a specialist-reviewed company assessment.",
   // Real, verifiable identity. Search engines surface this, and it is the same
   // information a cautious buyer looks for before paying an unfamiliar company.
   identifier: ENTITY.registrationNumber

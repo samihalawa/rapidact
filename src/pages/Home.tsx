@@ -10,24 +10,29 @@ import Specialist from "@/sections/Specialist";
 import Pricing from "@/sections/Pricing";
 import Features from "@/sections/Features";
 import Faq, { FAQS } from "@/sections/Faq";
+import { useI18n } from "@/lib/i18n";
+import { HOME_COPY } from "@/data/localizedHome";
 
 export default function Home() {
+  const { lang } = useI18n();
+  const copy = HOME_COPY[lang];
+
   return (
     <div className="paper min-h-screen">
       <Seo
-        title="EU AI Act compliance assessment for your company | RapidAct"
-        description="Find out which of your AI systems the EU AI Act covers. A specialist classifies every system, sets out your Article 50 duties and the documentation you must hold, and delivers the written assessment within 24–48h. €99, charged once."
+        title={copy.seoTitle}
+        description={copy.seoDescription}
       />
       <JsonLd data={[ORG_LD, PRODUCT_LD, faqLd(FAQS)]} />
       <SiteNav />
       <main>
         <Hero />
         <TrustBar />
+        <Features />
         <ReportOffer />
         <HowItWorks />
         <Specialist />
         <Pricing />
-        <Features />
         <Faq />
       </main>
       <SiteFooter />
