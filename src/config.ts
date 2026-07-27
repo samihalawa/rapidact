@@ -1,9 +1,9 @@
 /**
  * Conversion destinations — the only file to edit when the offer or payment link changes.
  *
- * The product is the **EU AI Act Company Assessment**: the company tells us
- * about its business and AI usage, pays a flat fee, and receives a written
- * assessment with system classifications and a prioritised action plan within 24–48h.
+ * RapidAct is the EU AI Act transparency practice. Its paid offer is the
+ * **EU AI Act Company Assessment**: the company describes its AI usage, pays a
+ * flat fee, and receives a written classification and action plan within 24–48h.
  *
  * Payment runs through a bunq.me request link. bunq.me accepts `amount` and
  * `description` query params, so each payment carries the buyer's reference code and
@@ -24,17 +24,17 @@ export const REPORT = {
 const BUNQ_HANDLE = "oulang";
 
 export const CONVERT = {
-  /** Booking for a live call (secondary — the report is the primary path). */
+  /** Booking for direct specialist help. */
   calBooking: "https://cal.com/oulang/aiact",
   /** Where every "get the report" CTA goes. */
   report: "/report",
   /** Published specimen of the deliverable, so buyers can read before paying. */
   example: "/example-report",
-  /** Free scanner, top of funnel, still free forever. */
+  /** Free public-page diagnostic. */
   scanner: "/scanner",
   /** Direct human help for visitors who are not ready to buy. */
   whatsapp: "https://wa.me/34679794037",
-  /** One-script AI-use notice installer on the Article 50 guide. */
+  /** AI-use notice, badge and platform implementation guidance. */
   badge: "/article-50#install",
 } as const;
 

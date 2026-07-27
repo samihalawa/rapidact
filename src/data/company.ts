@@ -43,17 +43,32 @@ export const COMPANIES_HOUSE_URL = `https://find-and-update.company-information.
 /** The person who performs and signs the assessments. */
 export const SPECIALIST = {
   name: "Sami Halawa",
-  role: `Founder, ${ENTITY.legalName}`,
+  role: `Founder & EU AI Act transparency specialist, ${ENTITY.legalName}`,
   /**
    * Keep this to genuine, checkable background. Do not add a legal
    * qualification unless one is actually held: for a compliance product, an
    * overstated credential is the failure mode that ends the business.
    */
-  bio: "I build and ship AI systems for a living, which is why this assessment is written by someone who can read your stack rather than only the regulation. Where a question turns on a point of law rather than on how a system is built, the report says so plainly and tells you what to take to a lawyer.",
+  bio: "I build and deploy AI systems and translate Article 50 into notices, implementation, and evidence for real technology. My completed training spans AI systems architecture, MLOps and LLMOps, AI governance, risk, audit, impact assessment, and ISO foundations.",
   photo:
     "https://media.licdn.com/dms/image/v2/D4E03AQFD2A_y1BfEjw/profile-displayphoto-scale_200_200/B4EZ7sD07AJUAg-/0/1782076887563?e=2147483647&v=beta&t=6HOB2IvnkZHwQGCbSNh0pf4hZJYwkbp90S6FZ5ixENM",
   linkedin: "https://www.linkedin.com/in/samihalawa/",
   email: ENTITY.contactEmail,
+  credentials: [
+    {
+      id: "systems-governance",
+      verifyUrl:
+        "https://www.coursera.org/verify/specialization/HZ7XDA9WCE2I",
+    },
+    {
+      id: "iso-foundations",
+      verifyUrl: "https://www.coursera.org/verify/0YTL5PHGC0O5",
+    },
+    {
+      id: "applied-ai",
+      verifyUrl: "",
+    },
+  ],
 } as const;
 
 /**

@@ -17,13 +17,14 @@ export default function JsonLd({ data }: { data: object | object[] }) {
 
 export const ORG_LD = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "ProfessionalService"],
   name: "RapidAct",
   legalName: ENTITY.legalName || undefined,
   url: "https://rapidact.eu",
   logo: "https://rapidact.eu/icons/icon-512x512.png",
   description:
-    "Article 50 implementation tools for companies: a free AI website scanner, visitor disclosure notice, platform guidance and a specialist-reviewed company assessment.",
+    "A specialist EU AI Act transparency practice helping companies scope Article 50 duties, publish AI notices, deploy disclosure plugins and badges, and document their implementation.",
+  slogan: "EU AI Act transparency, implemented and documented.",
   // Real, verifiable identity. Search engines surface this, and it is the same
   // information a cautious buyer looks for before paying an unfamiliar company.
   identifier: ENTITY.registrationNumber
@@ -57,27 +58,43 @@ export const ORG_LD = {
 export const PRODUCT_LD = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "EU AI Act Company Assessment",
-  serviceType: "EU AI Act compliance assessment",
+  name: "EU AI Act Transparency Implementation",
+  serviceType: "EU AI Act Article 50 transparency implementation",
   description:
-    "A specialist reviews your company's AI inventory, system classifications, Article 50 duties, evidence gaps and next actions. Delivered within 24–48 hours for a one-time €99 fee.",
+    "RapidAct combines Article 50 scoping, a public AI scanner, disclosure notices, platform plugins, an AI transparency badge and a specialist-reviewed company assessment.",
   provider: {
     "@type": "Organization",
     name: "RapidAct",
     url: "https://rapidact.eu",
   },
   areaServed: "EU",
-  url: "https://rapidact.eu/report",
-  offers: {
-    "@type": "Offer",
-    name: "EU AI Act Company Assessment",
-    price: "99",
-    priceCurrency: "EUR",
-    availability: "https://schema.org/InStock",
-    url: "https://rapidact.eu/report",
-    description:
-      "Company-specific AI inventory, system classifications, Article 50 duties, recommended disclosure wording, evidence gaps, prioritised action plan and specialist review. Delivered in 24–48 hours or fully refunded.",
-  },
+  url: "https://rapidact.eu",
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Public AI website scan",
+      price: "0",
+      priceCurrency: "EUR",
+      url: "https://rapidact.eu/scanner",
+    },
+    {
+      "@type": "Offer",
+      name: "Article 50 AI disclosure notice and implementation guidance",
+      price: "0",
+      priceCurrency: "EUR",
+      url: "https://rapidact.eu/article-50",
+    },
+    {
+      "@type": "Offer",
+      name: "EU AI Act Company Assessment",
+      price: "99",
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+      url: "https://rapidact.eu/report",
+      description:
+        "Company-specific AI inventory, system classifications, Article 50 duties, recommended disclosure wording, evidence gaps, prioritised action plan and specialist review. Delivered in 24–48 hours or fully refunded.",
+    },
+  ],
 };
 
 export function faqLd(faqs: { q: string; a: string }[]) {

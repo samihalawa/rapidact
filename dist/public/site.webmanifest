@@ -1,7 +1,7 @@
 {
   "name": "RapidAct",
   "short_name": "RapidAct",
-  "description": "EU AI Act assessments, implementation guidance and transparency tools.",
+  "description": "EU AI Act transparency specialists for Article 50 scoping, notices, plugins, badges and company assessments.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

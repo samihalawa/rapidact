@@ -51,14 +51,14 @@ export type HomeCopy = {
 };
 
 const en: HomeCopy = {
-  seoTitle: "Article 50 tools, AI notices and company assessment | RapidAct",
+  seoTitle: "EU AI Act transparency specialists & Article 50 tools | RapidAct",
   seoDescription:
-    "Scan public AI use, publish a clear visitor notice, follow platform implementation guides and get a specialist-reviewed company assessment when you need the complete Article 50 picture.",
+    "Specialist EU AI Act Article 50 practice for transparency scoping, AI notices, website scanning, WordPress, Shopify and Wix plugins, badges, evidence and company assessments.",
   statusFuture: days =>
     `Applies from 2 August 2026, in ${days} day${days === 1 ? "" : "s"}`,
   statusLive: "In force since 2 August 2026",
   heroDisclaimer:
-    "RapidAct provides technical implementation tools and specialist assessments, not legal advice. Any point requiring a legal opinion is identified for counsel.",
+    "RapidAct is the EU AI Act transparency practice of Agents AI Ltd. We provide technical and organisational implementation; questions requiring a formal legal opinion are isolated and prepared for counsel.",
   prepared:
     "Prepared for your company specifically. Delivered as a written document to the address you give us, within 24–48h of payment.",
   chapters: REPORT_CHAPTERS,
@@ -85,7 +85,7 @@ const en: HomeCopy = {
   delayText:
     "The postponement covered the high-risk rulebook: Annex III obligations moved to December 2027 and Annex I to August 2028. Article 50 transparency obligations remain on schedule from 2 August 2026. The assessment establishes which timetable and duty applies to each system.",
   specialistBio:
-    "I design and deploy AI systems, so the assessment connects the regulation to the technology your company operates. Legal questions are isolated and prepared for counsel.",
+    "I build and deploy AI systems, then translate Article 50 into the notice, implementation and evidence your real technology needs. That practical engineering background is reinforced by completed study in AI governance, audit, risk, impact assessment and ISO foundations.",
   specialistQuestions: "Questions before you buy:",
   specialistReply:
     "Replies normally come the same working day, and always inside the 24–48h report window.",
@@ -119,31 +119,31 @@ const en: HomeCopy = {
     },
   ],
   invoice:
-    "An invoice is issued for every payment by Agents AI Ltd. RapidAct is not a law firm and the report is not legal advice.",
-  featuresLabel: "How RapidAct works",
-  featuresTitle: "Use one tool, or follow the complete path.",
+    "Agents AI Ltd. issues an invoice for every payment. The service is technical and organisational; questions requiring a formal legal opinion are prepared for counsel.",
+  featuresLabel: "EU AI Act transparency practice",
+  featuresTitle: "One Article 50 practice. Four ways to act.",
   featuresIntro:
-    "Start with a public-page check, add the visitor-facing notice, follow the implementation guidance and escalate to a whole-company assessment only when you need it.",
+    "Use the technical layer you need or move through the full engagement: diagnose the touchpoint, apply the duty, implement the disclosure and document the company position.",
   features: [
     {
-      title: "Discover visible AI",
-      text: "Scan a public URL against 52 known chatbot platforms and inspect the evidence behind every match.",
+      title: "Scope the Article 50 touchpoint",
+      text: "Scan the public page, identify the AI interaction and establish which system and role need analysis.",
     },
     {
-      title: "Disclose it clearly",
-      text: "Publish a configurable visitor notice wherever an AI interaction takes place.",
+      title: "Apply the transparency duty",
+      text: "Translate the relevant Article 50 duty into clear wording, timing and placement for the real interaction.",
     },
     {
-      title: "Implement by platform",
-      text: "Follow specific WordPress, Shopify, Wix and custom-site setup and verification guidance.",
+      title: "Deploy the notice layer",
+      text: "Use the badge, WordPress, Shopify or Wix implementation path and verify the rendered disclosure.",
     },
     {
-      title: "Assess the whole company",
-      text: "Map systems, classifications, duties, evidence gaps and next actions in one specialist-reviewed document.",
+      title: "Document the company position",
+      text: "Map systems, classifications, duties, evidence gaps and next actions in one specialist-reviewed assessment.",
     },
   ],
   featuresClose:
-    "The first three steps are free. The €99 assessment is for the wider company view that a public-page scan cannot provide.",
+    "The scanner, notice, plugins, badge and implementation guidance are the technical methods. The €99 assessment adds the specialist company-wide analysis and written evidence plan.",
   copyCode: "Add the AI-use notice",
   questionsLabel: "Questions",
   questionsTitle: "What companies ask before they act",
@@ -153,14 +153,14 @@ const en: HomeCopy = {
 const es: HomeCopy = {
   ...en,
   seoTitle:
-    "Herramientas del artículo 50, avisos de IA y evaluación | RapidAct",
+    "Especialistas en transparencia de la Ley de IA y artículo 50 | RapidAct",
   seoDescription:
-    "Escanea el uso público de IA, publica un aviso claro, sigue guías por plataforma y solicita una evaluación completa cuando necesites revisar toda la empresa.",
+    "Práctica especializada en el artículo 50: alcance, avisos de IA, escáner web, plugins para WordPress, Shopify y Wix, distintivo, pruebas y evaluación.",
   statusFuture: days =>
     `Se aplica desde el 2 de agosto de 2026, dentro de ${days} día${days === 1 ? "" : "s"}`,
   statusLive: "En vigor desde el 2 de agosto de 2026",
   heroDisclaimer:
-    "RapidAct ofrece herramientas técnicas de implementación y evaluaciones especializadas, no asesoramiento jurídico. Si una cuestión requiere una opinión legal, la identificamos para asesoría.",
+    "RapidAct es la práctica de transparencia de la Ley de IA de Agents AI Ltd. Implementamos la capa técnica y organizativa; las cuestiones que exigen opinión jurídica formal se preparan para asesoría.",
   prepared:
     "Preparado específicamente para tu empresa y entregado por escrito en 24–48 h desde el pago.",
   chapters: [
@@ -218,7 +218,7 @@ const es: HomeCopy = {
   delayText:
     "El aplazamiento afectó a las reglas de alto riesgo: el Anexo III pasó a diciembre de 2027 y el Anexo I a agosto de 2028. La transparencia del artículo 50 mantiene el 2 de agosto de 2026. La evaluación determina qué calendario corresponde a cada sistema.",
   specialistBio:
-    "Construyo y despliego sistemas de IA, por eso la evaluación la redacta alguien capaz de leer tu arquitectura además del reglamento. Si una cuestión es jurídica, el informe lo indica y prepara lo que debes consultar.",
+    "Construyo y despliego sistemas de IA y traduzco el artículo 50 en avisos, implementación y pruebas para tecnología real. Esa experiencia se refuerza con formación completada en gobernanza, auditoría, riesgo, impacto y fundamentos ISO.",
   specialistQuestions: "Preguntas antes de comprar:",
   specialistReply:
     "Respondemos normalmente el mismo día laborable y siempre dentro del plazo de 24–48 h.",
@@ -260,31 +260,31 @@ const es: HomeCopy = {
     },
   ],
   invoice:
-    "Agents AI Ltd. emite factura por cada pago. RapidAct no es un despacho de abogados y el informe no es asesoramiento jurídico.",
-  featuresLabel: "Cómo funciona RapidAct",
-  featuresTitle: "Usa una herramienta o sigue el proceso completo.",
+    "Agents AI Ltd. emite factura por cada pago. El servicio es técnico y organizativo; las cuestiones que exigen opinión jurídica formal se preparan para asesoría.",
+  featuresLabel: "Práctica de transparencia de la Ley de IA",
+  featuresTitle: "Una práctica del artículo 50. Cuatro formas de actuar.",
   featuresIntro:
-    "Empieza con una revisión pública, añade el aviso, sigue la guía de implementación y pasa a la evaluación de empresa solo cuando la necesites.",
+    "Usa solo la capa que necesitas o sigue el servicio completo: diagnosticar el punto de contacto, aplicar la obligación, implementar el aviso y documentar la posición.",
   features: [
     {
-      title: "Detecta la IA visible",
-      text: "Escanea una URL pública frente a 52 plataformas y revisa la prueba de cada coincidencia.",
+      title: "Delimita el punto de contacto del artículo 50",
+      text: "Escanea la página, identifica la interacción con IA y determina qué sistema y rol deben analizarse.",
     },
     {
-      title: "Comunícala con claridad",
-      text: "Publica un aviso configurable allí donde ocurre cada interacción con IA.",
+      title: "Aplica la obligación de transparencia",
+      text: "Convierte el artículo 50 aplicable en texto, momento y ubicación claros para la interacción real.",
     },
     {
-      title: "Implementa por plataforma",
-      text: "Sigue pasos específicos para WordPress, Shopify, Wix y webs propias, incluida la verificación.",
+      title: "Despliega la capa de aviso",
+      text: "Usa el distintivo o la ruta de WordPress, Shopify o Wix y verifica el aviso ya publicado.",
     },
     {
-      title: "Evalúa toda la empresa",
-      text: "Reúne sistemas, clasificaciones, obligaciones, carencias y acciones en un documento revisado por un especialista.",
+      title: "Documenta la posición de la empresa",
+      text: "Reúne sistemas, clasificaciones, obligaciones, carencias y acciones en una evaluación especializada.",
     },
   ],
   featuresClose:
-    "Los tres primeros pasos son gratis. La evaluación de 99 € cubre la visión completa que un escaneo público no puede ofrecer.",
+    "El escáner, el aviso, los plugins, el distintivo y las guías son los métodos técnicos. La evaluación de 99 € añade el análisis especializado y el plan de pruebas de toda la empresa.",
   copyCode: "Añadir el aviso de IA",
   questionsLabel: "Preguntas",
   questionsTitle: "Lo que preguntan las empresas antes de actuar",
@@ -327,13 +327,13 @@ const es: HomeCopy = {
 const de: HomeCopy = {
   ...en,
   seoTitle:
-    "Artikel-50-Tools, KI-Hinweise und Unternehmensbewertung | RapidAct",
+    "Spezialisten für AI-Act-Transparenz & Artikel 50 | RapidAct",
   seoDescription:
-    "Öffentliche KI-Nutzung scannen, Besucherhinweise veröffentlichen, Plattformanleitungen nutzen und bei Bedarf das gesamte Unternehmen bewerten lassen.",
+    "Fachpraxis für Artikel 50: Scope, KI-Hinweise, Website-Scan, WordPress-, Shopify- und Wix-Plugins, Badge, Nachweise und Bewertung.",
   statusFuture: days => `Gilt ab 2. August 2026, in ${days} Tagen`,
   statusLive: "Seit 2. August 2026 in Kraft",
   heroDisclaimer:
-    "RapidAct bietet technische Umsetzungstools und Fachbewertungen, keine Rechtsberatung. Fragen, die eine Rechtsmeinung erfordern, werden klar gekennzeichnet.",
+    "RapidAct ist die AI-Act-Transparenzpraxis von Agents AI Ltd. Wir setzen die technische und organisatorische Ebene um; formelle Rechtsfragen werden für die Rechtsberatung vorbereitet.",
   prepared:
     "Speziell für Ihr Unternehmen erstellt und innerhalb von 24–48 Stunden nach Zahlung schriftlich geliefert.",
   chapters: [
@@ -391,7 +391,7 @@ const de: HomeCopy = {
   delayText:
     "Verschoben wurden Hochrisiko-Regeln. Die Transparenzpflichten aus Artikel 50 gelten weiter ab 2. August 2026. Der Bericht ordnet jedem System die richtige Frist zu.",
   specialistBio:
-    "Ich entwickle und betreibe KI-Systeme. Daher verbindet die Bewertung technische Praxis mit dem Regelwerk und markiert klar, wann Rechtsberatung nötig ist.",
+    "Ich entwickle und betreibe KI-Systeme und übersetze Artikel 50 in Hinweise, Umsetzung und Nachweise für reale Technik. Ergänzt wird diese Praxis durch Weiterbildung in Governance, Audit, Risiko, Folgenabschätzung und ISO-Grundlagen.",
   specialistQuestions: "Fragen vor dem Kauf:",
   specialistReply:
     "Antwort normalerweise am selben Werktag, immer innerhalb von 24–48 Stunden.",
@@ -433,31 +433,31 @@ const de: HomeCopy = {
     },
   ],
   invoice:
-    "Agents AI Ltd. stellt eine Rechnung aus. RapidAct ist keine Kanzlei; der Bericht ist keine Rechtsberatung.",
-  featuresLabel: "So funktioniert RapidAct",
-  featuresTitle: "Ein Tool nutzen oder dem gesamten Ablauf folgen.",
+    "Agents AI Ltd. stellt jede Rechnung aus. Die Leistung ist technisch und organisatorisch; formelle Rechtsfragen werden für die Rechtsberatung vorbereitet.",
+  featuresLabel: "Fachpraxis für AI-Act-Transparenz",
+  featuresTitle: "Eine Artikel-50-Praxis. Vier Wege zum Handeln.",
   featuresIntro:
-    "Beginnen Sie mit dem öffentlichen Check, fügen Sie den Hinweis hinzu, folgen Sie der Plattformanleitung und bewerten Sie das ganze Unternehmen nur bei Bedarf.",
+    "Nutzen Sie nur die benötigte Ebene oder den gesamten Auftrag: Kontaktpunkt diagnostizieren, Pflicht anwenden, Offenlegung umsetzen und Position dokumentieren.",
   features: [
     {
-      title: "Sichtbare KI erkennen",
-      text: "Öffentliche URL gegen 52 Plattformen prüfen und jeden Nachweis einsehen.",
+      title: "Artikel-50-Kontaktpunkt abgrenzen",
+      text: "Öffentliche Seite prüfen, KI-Interaktion erkennen und das zu bewertende System und die Rolle bestimmen.",
     },
     {
-      title: "Klar offenlegen",
-      text: "Konfigurierbaren Hinweis dort veröffentlichen, wo die KI-Interaktion stattfindet.",
+      title: "Transparenzpflicht anwenden",
+      text: "Die passende Artikel-50-Pflicht in klare Formulierung, Zeitpunkt und Platzierung übersetzen.",
     },
     {
-      title: "Nach Plattform umsetzen",
-      text: "Konkrete Einrichtung und Prüfung für WordPress, Shopify, Wix und eigene Websites.",
+      title: "Hinweisebene bereitstellen",
+      text: "Badge oder WordPress-, Shopify- und Wix-Weg nutzen und den sichtbaren Hinweis prüfen.",
     },
     {
-      title: "Ganzes Unternehmen bewerten",
-      text: "Systeme, Einstufungen, Pflichten, Nachweislücken und Maßnahmen in einem geprüften Dokument bündeln.",
+      title: "Unternehmensposition dokumentieren",
+      text: "Systeme, Einstufungen, Pflichten, Nachweislücken und Maßnahmen in einer Fachbewertung bündeln.",
     },
   ],
   featuresClose:
-    "Die ersten drei Schritte sind kostenlos. Die 99-€-Bewertung liefert das Gesamtbild, das ein öffentlicher Scan nicht leisten kann.",
+    "Scanner, Hinweis, Plugins, Badge und Leitfäden sind die technischen Methoden. Die 99-€-Bewertung ergänzt die fachliche Gesamtanalyse und den Nachweisplan.",
   copyCode: "KI-Hinweis hinzufügen",
   questionsLabel: "Fragen",
   questionsTitle: "Was Unternehmen vor dem Handeln fragen",
@@ -500,14 +500,14 @@ const de: HomeCopy = {
 const fr: HomeCopy = {
   ...de,
   seoTitle:
-    "Outils article 50, avis IA et évaluation d’entreprise | RapidAct",
+    "Spécialistes transparence AI Act & article 50 | RapidAct",
   seoDescription:
-    "Scannez l’IA visible, publiez un avis clair, suivez les guides par plateforme et demandez une évaluation complète uniquement si nécessaire.",
+    "Pratique spécialisée de l’article 50 : cadrage, avis IA, scan web, extensions WordPress, Shopify et Wix, badge, preuves et évaluation.",
   statusFuture: days =>
     `Applicable le 2 août 2026, dans ${days} jour${days === 1 ? "" : "s"}`,
   statusLive: "En vigueur depuis le 2 août 2026",
   heroDisclaimer:
-    "RapidAct propose des outils techniques de mise en œuvre et des évaluations spécialisées, pas des conseils juridiques. Les questions nécessitant un avis juridique sont clairement signalées.",
+    "RapidAct est la pratique de transparence AI Act d’Agents AI Ltd. Nous mettons en œuvre la couche technique et organisationnelle ; les questions juridiques formelles sont préparées pour conseil.",
   prepared:
     "Rédigé pour votre entreprise et livré par écrit sous 24–48 h après paiement.",
   chapters: [
@@ -565,7 +565,7 @@ const fr: HomeCopy = {
   delayText:
     "Le report concerne les règles à haut risque. Les obligations de transparence de l’article 50 restent applicables le 2 août 2026. Le rapport attribue le bon calendrier à chaque système.",
   specialistBio:
-    "Je conçois et déploie des systèmes d’IA. L’évaluation relie donc la réalité technique au règlement et indique clairement quand un avis juridique est nécessaire.",
+    "Je conçois et déploie des systèmes IA, puis je traduis l’article 50 en avis, mise en œuvre et preuves adaptés à la technologie réelle. Cette pratique est renforcée par des formations achevées en gouvernance, audit, risque, impact et fondamentaux ISO.",
   specialistQuestions: "Questions avant l’achat :",
   specialistReply:
     "Réponse généralement le jour ouvré même, toujours sous 24–48 h.",
@@ -607,31 +607,31 @@ const fr: HomeCopy = {
     },
   ],
   invoice:
-    "Agents AI Ltd. émet une facture. RapidAct n’est pas un cabinet d’avocats et le rapport n’est pas un avis juridique.",
-  featuresLabel: "Comment fonctionne RapidAct",
-  featuresTitle: "Utilisez un outil ou suivez le parcours complet.",
+    "Agents AI Ltd. émet chaque facture. Le service est technique et organisationnel ; les questions juridiques formelles sont préparées pour conseil.",
+  featuresLabel: "Pratique de transparence AI Act",
+  featuresTitle: "Une pratique de l’article 50. Quatre façons d’agir.",
   featuresIntro:
-    "Commencez par le contrôle public, ajoutez l’avis, suivez le guide d’installation et passez à l’évaluation globale uniquement si nécessaire.",
+    "Utilisez uniquement la couche nécessaire ou l’intervention complète : diagnostiquer le point de contact, appliquer l’obligation, déployer l’avis et documenter la position.",
   features: [
     {
-      title: "Détecter l’IA visible",
-      text: "Scannez une URL publique sur 52 plateformes et consultez chaque preuve.",
+      title: "Cadrer le point de contact article 50",
+      text: "Scannez la page, identifiez l’interaction IA et déterminez le système et le rôle à analyser.",
     },
     {
-      title: "La signaler clairement",
-      text: "Publiez un avis configurable là où chaque interaction IA se produit.",
+      title: "Appliquer l’obligation de transparence",
+      text: "Transformez l’article 50 applicable en texte, moment et emplacement clairs pour l’interaction réelle.",
     },
     {
-      title: "Mettre en œuvre par plateforme",
-      text: "Suivez les étapes propres à WordPress, Shopify, Wix et aux sites personnalisés, vérification comprise.",
+      title: "Déployer la couche d’avis",
+      text: "Utilisez le badge ou le parcours WordPress, Shopify ou Wix et vérifiez l’avis rendu.",
     },
     {
-      title: "Évaluer toute l’entreprise",
-      text: "Rassemblez systèmes, classifications, obligations, lacunes et actions dans un document vérifié.",
+      title: "Documenter la position de l’entreprise",
+      text: "Rassemblez systèmes, classifications, obligations, lacunes et actions dans une évaluation spécialisée.",
     },
   ],
   featuresClose:
-    "Les trois premières étapes sont gratuites. L’évaluation à 99 € apporte la vue d’ensemble qu’un scan public ne peut pas fournir.",
+    "Le scanner, l’avis, les extensions, le badge et les guides sont les méthodes techniques. L’évaluation à 99 € ajoute l’analyse globale et le plan de preuve.",
   copyCode: "Ajouter l’avis IA",
   questionsLabel: "Questions",
   questionsTitle: "Ce que les entreprises demandent avant d’agir",
@@ -674,14 +674,14 @@ const fr: HomeCopy = {
 const it: HomeCopy = {
   ...fr,
   seoTitle:
-    "Strumenti articolo 50, avvisi IA e valutazione aziendale | RapidAct",
+    "Specialisti trasparenza AI Act e articolo 50 | RapidAct",
   seoDescription:
-    "Scansiona l’IA visibile, pubblica un avviso chiaro, segui le guide per piattaforma e richiedi la valutazione completa solo quando serve.",
+    "Pratica specializzata nell’articolo 50: perimetro, avvisi IA, scanner web, plugin WordPress, Shopify e Wix, badge, prove e valutazione.",
   statusFuture: days =>
     `Si applica dal 2 agosto 2026, tra ${days} giorn${days === 1 ? "o" : "i"}`,
   statusLive: "In vigore dal 2 agosto 2026",
   heroDisclaimer:
-    "RapidAct offre strumenti tecnici di implementazione e valutazioni specialistiche, non consulenza legale. Le questioni che richiedono un parere giuridico vengono indicate chiaramente.",
+    "RapidAct è la pratica di trasparenza AI Act di Agents AI Ltd. Implementiamo il livello tecnico e organizzativo; le questioni giuridiche formali vengono preparate per il consulente.",
   prepared:
     "Preparato per la tua azienda e consegnato per iscritto entro 24–48 ore dal pagamento.",
   chapters: [
@@ -739,7 +739,7 @@ const it: HomeCopy = {
   delayText:
     "Il rinvio riguarda le regole ad alto rischio. Gli obblighi di trasparenza dell’articolo 50 restano fissati al 2 agosto 2026. Il report assegna il calendario corretto a ogni sistema.",
   specialistBio:
-    "Progetto e distribuisco sistemi di IA. La valutazione collega quindi la realtà tecnica al regolamento e indica quando serve un parere legale.",
+    "Progetto e distribuisco sistemi IA e traduco l’articolo 50 in avvisi, implementazione e prove per tecnologia reale. Questa pratica è rafforzata da formazione completata in governance, audit, rischio, impatto e basi ISO.",
   specialistQuestions: "Domande prima dell’acquisto:",
   specialistReply:
     "Risposta normalmente nello stesso giorno lavorativo, sempre entro 24–48 ore.",
@@ -781,31 +781,31 @@ const it: HomeCopy = {
     },
   ],
   invoice:
-    "Agents AI Ltd. emette fattura. RapidAct non è uno studio legale e il report non è consulenza giuridica.",
-  featuresLabel: "Come funziona RapidAct",
-  featuresTitle: "Usa un singolo strumento o segui l’intero percorso.",
+    "Agents AI Ltd. emette ogni fattura. Il servizio è tecnico e organizzativo; le questioni giuridiche formali vengono preparate per il consulente.",
+  featuresLabel: "Pratica di trasparenza AI Act",
+  featuresTitle: "Una pratica dell’articolo 50. Quattro modi di agire.",
   featuresIntro:
-    "Inizia dal controllo pubblico, aggiungi l’avviso, segui la guida di implementazione e passa alla valutazione aziendale solo quando serve.",
+    "Usa solo il livello necessario o l’intervento completo: diagnosticare il punto di contatto, applicare l’obbligo, implementare l’avviso e documentare la posizione.",
   features: [
     {
-      title: "Rileva l’IA visibile",
-      text: "Scansiona un URL pubblico su 52 piattaforme e consulta ogni prova.",
+      title: "Definisci il punto di contatto articolo 50",
+      text: "Scansiona la pagina, identifica l’interazione IA e determina sistema e ruolo da analizzare.",
     },
     {
-      title: "Dichiarala con chiarezza",
-      text: "Pubblica un avviso configurabile dove avviene ogni interazione IA.",
+      title: "Applica l’obbligo di trasparenza",
+      text: "Traduci l’articolo 50 applicabile in testo, tempistica e posizione chiari per l’interazione reale.",
     },
     {
-      title: "Implementa per piattaforma",
-      text: "Segui istruzioni specifiche per WordPress, Shopify, Wix e siti personalizzati, inclusa la verifica.",
+      title: "Distribuisci il livello di avviso",
+      text: "Usa il badge o il percorso WordPress, Shopify o Wix e verifica l’avviso pubblicato.",
     },
     {
-      title: "Valuta tutta l’azienda",
-      text: "Riunisci sistemi, classificazioni, obblighi, lacune e azioni in un documento verificato.",
+      title: "Documenta la posizione aziendale",
+      text: "Riunisci sistemi, classificazioni, obblighi, lacune e azioni in una valutazione specialistica.",
     },
   ],
   featuresClose:
-    "I primi tre passaggi sono gratuiti. La valutazione da 99 € offre il quadro completo che una scansione pubblica non può fornire.",
+    "Scanner, avviso, plugin, badge e guide sono i metodi tecnici. La valutazione da 99 € aggiunge l’analisi completa e il piano delle prove.",
   copyCode: "Aggiungi l’avviso IA",
   questionsLabel: "Domande",
   questionsTitle: "Cosa chiedono le aziende prima di agire",

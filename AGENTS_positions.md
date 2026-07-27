@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct category positioning | a product-workflow hero still made the scanner, badge and report look like the category | lead with the EU AI Act transparency practice; present tools and assessment as its methods | do not call Agents AI Ltd. a law firm or let product mechanics displace Article 50 expertise | verify hero, metadata, structured data, specialist credentials, service scope and five languages live
 RapidAct product hierarchy | the paid assessment displaced the free operational product and made RapidAct read like a report shop | lead with discover, disclose, implement, assess; keep the assessment as paid escalation | do not use the specimen, report contents, pricing, and payment FAQ as the whole above-the-fold identity | verify hero, nav, section order, metadata, footer, CTA paths, and five languages at phone/tablet/desktop widths
 RapidAct marketplace apps | direct ZIP, theme-snippet, custom-code, GTM, and Zaraz delivery no longer matches the product direction | ship bundled WordPress.org, Shopify App Store, and Wix App Market packages with native platform versioning | do not load executable badge updates from the manifest or advertise unpublished listings as available | verify bundled runtime parity, native builds, sandbox installation, marketplace status copy, and live site claims
 RapidAct conversion page | the hero preview and later sections repeated the same offer details | show actual specimen pages in the hero and reserve detailed lists for their dedicated section | do not repeat long deliverable or free-tool explanations | verify the full page for repeated claims and a clear primary CTA
@@ -10,6 +11,17 @@ RapidAct mobile header | language selector displaced the conversion action | kee
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+
+## 2026-07-27 — RapidAct leads with the EU AI Act transparency practice
+
+- Status: CURRENT
+- Project/root: `rapidact`; homepage category, SEO metadata, structured data, specialist proof and service scope.
+- Mistake: correcting the report-heavy page into a product workflow without making EU AI Act transparency expertise the primary category.
+- Do: position RapidAct as the EU AI Act transparency practice of Agents AI Ltd.; explain the scanner, notice, plugins, badge and assessment as methods used to scope, implement and document Article 50.
+- Don't: claim Agents AI Ltd. is a regulated law firm or let a tool become the category; formal legal opinions remain a counsel handoff.
+- Evidence: user correction on 2026-07-27; current CV plus verified Coursera specialization and BSI ISO/IEC 22989 certificate.
+- Trigger terms: AI Act focused, law firm, transparency practice, scanner, plugins, badge, specialist education, diplomas.
+- Verify before reuse: render hero and compact credentials, inspect SEO/JSON-LD/footer/service-scope copy, test both CTA paths, and confirm EN/ES/DE/FR/IT at phone and desktop widths.
 
 ## 2026-07-27 — RapidAct is an implementation workflow, not a report shop
 

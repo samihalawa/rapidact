@@ -56,7 +56,7 @@ export default function Seo({ title, description, canonical, alternates }: SeoPr
       "og:type": "website",
       "og:url": `https://rapidact.eu${window.location.pathname}`,
       "og:image": "https://rapidact.eu/social/rapidact-app-icon-navy-1200x1200.png",
-      "og:image:alt": "RapidAct — EU AI Act assessments",
+      "og:image:alt": "RapidAct — EU AI Act transparency specialists",
     };
     Object.entries(og).forEach(([property, content]) => {
       let tag = document.querySelector(`meta[property="${property}"]`);
