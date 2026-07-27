@@ -27,14 +27,28 @@ describe("RapidAct marketplace apps", () => {
     expect(JSON.stringify(manifest)).not.toContain("scriptUrl");
   });
 
-  it("does not advertise obsolete direct downloads", () => {
+  it("keeps direct install as a code fallback without obsolete downloads", () => {
     const source = [
       read("src/pages/Guide.tsx"),
       read("src/pages/PlatformPage.tsx"),
       read("src/data/platforms.ts"),
+      read("src/components/BadgeInstallDashboard.tsx"),
+      read("src/lib/badgeInstaller.ts"),
     ].join("\n");
     expect(source).not.toContain("/downloads/rapidact-");
     expect(source).not.toContain("platform_installer_download");
-    expect(source).not.toContain("Google Tag Manager");
+    expect(source).toContain("Google Tag Manager");
+    expect(source).toContain("https://rapidact.eu/rapidact-badge.js");
+    expect(source).toContain("manualFallback");
+  });
+
+  it("ships a local preview and all real display modes", () => {
+    const preview = read("public/badge-preview.html");
+    expect(preview).toContain('new URL("/rapidact-badge.js"');
+    for (const display of ["bubble", "standard", "popup"]) {
+      expect(runtime).toContain(`"${display}"`);
+    }
+    expect(runtime).toContain("targetSelector");
+    expect(runtime).toContain("ra-backdrop");
   });
 });

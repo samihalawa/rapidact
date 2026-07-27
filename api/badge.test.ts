@@ -42,6 +42,16 @@ describe("RapidAct disclosure badge", () => {
     expect(badge).toContain("supportedLanguages.indexOf(pathLanguage)");
   });
 
+  it("supports bubble, standard, and popup presentation modes", () => {
+    expect(badge).toContain(
+      'var supportedDisplays = ["bubble", "standard", "popup"]'
+    );
+    expect(badge).toContain('host.setAttribute("data-display", display)');
+    expect(badge).toContain("mount = document.querySelector(targetSelector)");
+    expect(badge).toContain('backdrop.addEventListener("click"');
+    expect(badge).toContain('closeButton.addEventListener("click"');
+  });
+
   it("uses the exact brand pack across browser and install surfaces", () => {
     expect(html).toContain('href="/favicon.ico"');
     expect(html).toContain('href="/apple-touch-icon.png"');

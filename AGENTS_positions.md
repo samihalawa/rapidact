@@ -4,7 +4,7 @@ RapidAct Typebot guide | a copied AI example was live but failed with `No model 
 RapidAct scanner conversion gate | the company-assessment escalation appeared before the free result and email capture happened afterwards | require a closable email gate before scanning, then show PDF and complete-scan escalation only after the result | do not let Typebot replace the direct scanner or put full-scan sales copy before results | verify close/invalid/valid modal states, one-page PDF, prefilled WhatsApp, Close sync and five languages live
 RapidAct category positioning | a product-workflow hero still made the scanner, badge and report look like the category | lead with the EU AI Act transparency practice; present tools and assessment as its methods | do not call Agents AI Ltd. a law firm or let product mechanics displace Article 50 expertise | verify hero, metadata, structured data, specialist credentials, service scope and five languages live
 RapidAct product hierarchy | the paid assessment displaced the free operational product and made RapidAct read like a report shop | lead with discover, disclose, implement, assess; keep the assessment as paid escalation | do not use the specimen, report contents, pricing, and payment FAQ as the whole above-the-fold identity | verify hero, nav, section order, metadata, footer, CTA paths, and five languages at phone/tablet/desktop widths
-RapidAct marketplace apps | direct ZIP, theme-snippet, custom-code, GTM, and Zaraz delivery no longer matches the product direction | ship bundled WordPress.org, Shopify App Store, and Wix App Market packages with native platform versioning | do not load executable badge updates from the manifest or advertise unpublished listings as available | verify bundled runtime parity, native builds, sandbox installation, marketplace status copy, and live site claims
+RapidAct installation dashboard | marketplace-only UI stranded users before listings were public, while one generic snippet hid platform and display differences | keep official marketplaces primary and expose exact manual fallback plus real Bubble, Standard, Popup and Iframe modes | do not advertise unpublished listings, publish direct ZIPs, or reuse chatbot-specific destinations | verify all platform/style snippets, bundled runtime parity, modal/copy/preview, five languages and live phone/desktop layouts
 RapidAct conversion page | the hero preview and later sections repeated the same offer details | show actual specimen pages in the hero and reserve detailed lists for their dedicated section | do not repeat long deliverable or free-tool explanations | verify the full page for repeated claims and a clear primary CTA
 RapidAct scanner conversion | a spinner made the public-page preview feel unfinished and gave failures no next step | show readable scan phases and a permanent full-assessment fallback | do not imply the technical preview makes a company compliant | verify progress, success, unreachable, and CTA events live
 RapidAct brand assets | redrawn SVG and generated marks drifted from the approved logo | use the exact tight-crop raster pack by purpose, plus semantic text for the wordmark and disclosure | do not redraw, stretch, or retain superseded marks | verify header, footer, badge, favicon, PWA, social, and five languages live
@@ -58,16 +58,27 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Trigger terms: over report oriented, only about report, homepage positioning, product hierarchy, conversion.
 - Verify before reuse: render hero, navigation, section order, CTA destinations, metadata and footer in EN/ES/DE/FR/IT at phone, tablet and desktop widths.
 
-## 2026-07-27 — Platform distribution is marketplace-native
+## 2026-07-27 — Marketplace-first installation keeps an exact direct fallback
 
 - Status: CURRENT
+- Project/root: `rapidact`; Article 50 installer, hosted badge runtime and native marketplace packages.
+- Mistake: removing manual installation entirely before public marketplace listings existed, then offering one generic script without real display or framework differences.
+- Do: keep WordPress.org, Shopify App Store and Wix App Market primary; while a verified listing URL is absent, provide stack-specific snippets for Bubble, Standard, Popup and Iframe using the canonical hosted script.
+- Don't: advertise an unpublished listing, distribute ZIPs, replace locally bundled marketplace assets with remote execution, or copy Typebot chat destinations and settings.
+- Evidence: explicit user correction on 2026-07-27, supplied Typebot screenshots as imperfect references, and local browser proof of the RapidAct platform grid, generated code, copy feedback and three runtime modes.
+- Trigger terms: install dashboard, Typebot Share, marketplace, manual fallback, Bubble, Standard, Popup, Iframe, GTM, React, Next.js.
+- Verify before reuse: test every platform/style generator pair, byte-compare marketplace runtime bundles, render the modal and preview at phone and desktop widths, verify EN/ES/DE/FR/IT, then inspect the live production route.
+
+## 2026-07-27 — Platform distribution is marketplace-native
+
+- Status: SUPERSEDED
 - Project/root: `rapidact`; WordPress.org, Shopify App Store, Wix App Market, and the Article 50 installer page.
 - Mistake: keeping direct ZIP, Liquid snippet, Custom Code, GTM, and Zaraz delivery after the product direction changed to official marketplace discovery and installation.
 - Do: bundle the badge in every package; use WordPress.org updates, Shopify OAuth plus a theme app extension, and Wix app versions plus an embedded-script dashboard.
 - Don't: execute code supplied by the hosted manifest, run a custom WordPress updater, or describe an app as marketplace-available before platform publication.
 - Evidence: explicit user reversal on 2026-07-27; official WordPress plugin guideline 8, Shopify App Store requirements, and Wix embedded-script/version documentation.
 - Trigger terms: marketplace, WordPress.org, Shopify app, Wix app, OAuth, update manifest, official distribution.
-- Verify before reuse: local bundle parity, platform build/validation, a real sandbox install for each linked developer account, and rendered website copy matching the literal marketplace state.
+- Verify before reuse: preserve the native marketplace packages and publication truth, but follow the marketplace-first installer entry above for the current direct-fallback rule.
 
 ## 2026-07-26 — Platform adapters share one hosted runtime
 

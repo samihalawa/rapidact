@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>RapidAct badge preview</title>
+    <style>
+      :root {
+        color: #16181d;
+        background: #edf3fa;
+        font-family:
+          Manrope,
+          "Avenir Next",
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background:
+          linear-gradient(rgba(23, 74, 155, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(23, 74, 155, 0.05) 1px, transparent 1px),
+          #edf3fa;
+        background-size: 28px 28px;
+      }
+
+      main {
+        width: min(860px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 42px 0;
+      }
+
+      .site {
+        overflow: hidden;
+        border: 1px solid #c6d5e8;
+        background: #fff;
+        box-shadow: 0 20px 70px rgba(3, 18, 61, 0.14);
+      }
+
+      .nav {
+        display: flex;
+        min-height: 58px;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #dbe5f2;
+        padding: 0 22px;
+      }
+
+      .brand {
+        color: #03123d;
+        font-size: 16px;
+        font-weight: 800;
+      }
+
+      .nav-lines,
+      .line {
+        border-radius: 99px;
+        background: #dce5f0;
+      }
+
+      .nav-lines {
+        width: 96px;
+        height: 8px;
+      }
+
+      .hero {
+        padding: 34px 22px 28px;
+      }
+
+      .eyebrow {
+        color: #174a9b;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 520px;
+        margin: 9px 0 13px;
+        color: #101c33;
+        font-size: clamp(26px, 5vw, 42px);
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+      }
+
+      .line {
+        width: min(520px, 82%);
+        height: 10px;
+        margin-top: 9px;
+      }
+
+      .line.short {
+        width: min(360px, 58%);
+      }
+
+      #rapidact-notice {
+        margin-top: 28px;
+      }
+
+      body[data-embedded="true"] main {
+        width: calc(100% - 24px);
+        padding: 12px 0;
+      }
+
+      body[data-embedded="true"] .site {
+        box-shadow: none;
+      }
+
+      @media (max-width: 520px) {
+        main {
+          padding: 18px 0;
+        }
+
+        .hero {
+          padding: 26px 16px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="site">
+        <div class="nav" aria-hidden="true">
+          <span class="brand">Example company</span>
+          <span class="nav-lines"></span>
+        </div>
+        <section class="hero">
+          <span class="eyebrow">Live website preview</span>
+          <h1>Your AI use is clear before the interaction begins.</h1>
+          <div class="line" aria-hidden="true"></div>
+          <div class="line short" aria-hidden="true"></div>
+          <div id="rapidact-notice"></div>
+        </section>
+      </div>
+    </main>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var supported = ["bubble", "standard", "popup"];
+        var requestedDisplay = params.get("display") || "bubble";
+        var display =
+          supported.indexOf(requestedDisplay) >= 0
+            ? requestedDisplay
+            : "bubble";
+        var language = params.get("language") || "en";
+        var message = params.get("message") || "";
+
+        document.documentElement.lang = language;
+        document.body.dataset.embedded = String(params.get("embedded") === "1");
+
+        var script = document.createElement("script");
+        script.src = new URL("/rapidact-badge.js", window.location.origin).href;
+        script.dataset.display = display;
+        script.dataset.language = language;
+        if (message) script.dataset.message = message;
+        if (display === "standard") {
+          script.dataset.target = "#rapidact-notice";
+        }
+        document.body.appendChild(script);
+      })();
+    </script>
+  </body>
+</html>

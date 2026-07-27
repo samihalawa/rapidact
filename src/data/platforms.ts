@@ -11,6 +11,7 @@ export interface PlatformGuide {
   marketplace?: {
     label: string;
     status: string;
+    url?: string;
   };
 }
 

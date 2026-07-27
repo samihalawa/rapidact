@@ -97,6 +97,13 @@
   var provider = (script && script.dataset.provider) || "";
   var detailsUrl = (script && script.dataset.detailsUrl) || "";
   var badgeId = (script && script.dataset.badgeId) || "";
+  var requestedDisplay = (script && script.dataset.display) || "bubble";
+  var supportedDisplays = ["bubble", "standard", "popup"];
+  var display =
+    supportedDisplays.indexOf(requestedDisplay) >= 0
+      ? requestedDisplay
+      : "bubble";
+  var targetSelector = (script && script.dataset.target) || "";
   var showCredit =
     !script || typeof script.dataset.showCredit === "undefined"
       ? true
@@ -116,14 +123,11 @@
       .replace(/'/g, "&#039;");
   };
   var safeTitle = escapeHtml(title);
-  var defaultBrandUrl =
-    "https://rapidact.eu/brand/rapidact-exact-symbol.png";
+  var defaultBrandUrl = "https://rapidact.eu/brand/rapidact-exact-symbol.png";
   try {
     if (script && script.src) {
-      defaultBrandUrl = new URL(
-        "brand/rapidact-exact-symbol.png",
-        script.src
-      ).href;
+      defaultBrandUrl = new URL("brand/rapidact-exact-symbol.png", script.src)
+        .href;
     }
   } catch (_error) {
     // The absolute production URL above remains the reliable fallback.
@@ -134,9 +138,16 @@
   var host = document.createElement("div");
   host.id = "rapidact-ai-disclosure";
   if (badgeId) host.setAttribute("data-badge-id", badgeId);
-  host.style.position = "fixed";
-  host.style[position] = "max(16px, env(safe-area-inset-" + position + "))";
-  host.style.bottom = "max(16px, env(safe-area-inset-bottom))";
+  host.setAttribute("data-display", display);
+  if (display === "standard") {
+    host.style.position = "relative";
+    host.style.display = "block";
+    host.style.width = "100%";
+  } else {
+    host.style.position = "fixed";
+    host.style[position] = "max(16px, env(safe-area-inset-" + position + "))";
+    host.style.bottom = "max(16px, env(safe-area-inset-bottom))";
+  }
   host.style.zIndex = "2147483000";
   host.style.fontFamily =
     '"Manrope", "Avenir Next", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
@@ -149,15 +160,20 @@
     ".ra-wrap{display:flex;flex-direction:column;align-items:" +
     (position === "left" ? "flex-start" : "flex-end") +
     ";gap:13px}" +
+    ".ra-backdrop{display:none}" +
     ".ra-panel{position:relative;display:none;width:min(390px,calc(100vw - 32px));overflow:hidden;border:1px solid #174a9b;border-radius:18px;background:#fff;color:#08152f;box-shadow:0 24px 70px rgba(1,17,58,.25),0 0 0 3px rgba(34,197,255,.08)}" +
     ".ra-panel[data-open=true]{display:block}" +
     ".ra-panel-brand{display:flex;min-height:78px;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(67,206,255,.35);background:#03123d;padding:11px 15px}" +
     ".ra-brand-lockup{display:flex;min-width:0;align-items:center;gap:10px}" +
+    ".ra-brand-actions{display:flex;align-items:center;gap:8px}" +
     ".ra-brand-image{display:block;width:auto;height:54px;flex:none}" +
     ".ra-brand-name{font-family:'Sora','Avenir Next',ui-sans-serif,system-ui,sans-serif;font-size:18px;line-height:1;font-weight:700;letter-spacing:-.045em;color:#fff;white-space:nowrap}" +
     ".ra-brand-name-accent{color:#53ddff}" +
     ".ra-brand-status{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(109,221,255,.5);border-radius:999px;background:rgba(11,76,169,.48);color:#e9f9ff;padding:6px 9px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}" +
     ".ra-brand-status::before{width:6px;height:6px;border-radius:50%;background:#53ddff;box-shadow:0 0 9px #53ddff;content:''}" +
+    ".ra-close{display:grid;width:44px;height:44px;place-items:center;border:1px solid rgba(109,221,255,.42);border-radius:999px;background:rgba(11,76,169,.3);color:#fff;cursor:pointer;font:700 22px/1 ui-sans-serif,system-ui,sans-serif}" +
+    ".ra-close:hover{background:rgba(34,116,221,.48)}" +
+    ".ra-close:focus-visible{outline:3px solid #53ddff;outline-offset:2px}" +
     ".ra-panel-body{padding:19px 20px 20px}" +
     ".ra-eyebrow{margin:0 0 7px;font-size:10px;line-height:1.2;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#4c6286}" +
     ".ra-title{margin:0;font-family:'Sora','Avenir Next',ui-sans-serif,system-ui,sans-serif;font-size:18px;line-height:1.3;font-weight:700;letter-spacing:-.025em}" +
@@ -183,12 +199,25 @@
     ".ra-button-status{display:block;margin-top:5px;max-width:145px;overflow:hidden;color:#dff8ff;font-size:8px;line-height:1;font-weight:800;letter-spacing:.085em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}" +
     ".ra-sr-only{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}" +
     "@media (max-width:520px){.ra-panel-brand{align-items:flex-start;flex-direction:column;gap:9px}.ra-links{align-items:flex-start;flex-direction:column;gap:9px}}" +
-    "@media (prefers-reduced-motion:no-preference){.ra-panel{animation:ra-in .16s ease-out}@keyframes ra-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}}" +
+    (display === "standard"
+      ? ".ra-wrap{display:block}.ra-panel{display:block;width:100%;max-width:760px;border-radius:14px;box-shadow:0 14px 42px rgba(1,17,58,.12)}.ra-button,.ra-close{display:none}"
+      : "") +
+    (display === "popup"
+      ? ".ra-backdrop[data-open=true]{position:fixed;z-index:0;inset:-100vh -100vw;display:block;background:rgba(3,18,61,.56);backdrop-filter:blur(4px)}.ra-panel{position:fixed;z-index:1;top:50%;left:50%;width:min(520px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow-y:auto;transform:translate(-50%,-50%)}"
+      : "") +
+    "@media (prefers-reduced-motion:no-preference){.ra-panel[data-open=true]{animation:ra-in .16s ease-out}@keyframes ra-in{from{opacity:0}to{opacity:1}}}" +
     "</style>" +
     '<div class="ra-wrap">' +
-    '<section class="ra-panel" role="dialog" aria-label="' +
+    '<div class="ra-backdrop" data-open="false" aria-hidden="true"></div>' +
+    '<section class="ra-panel" role="' +
+    (display === "standard" ? "region" : "dialog") +
+    '" aria-label="' +
     safeTitle +
-    '" data-open="false">' +
+    '" aria-modal="' +
+    (display === "popup" ? "true" : "false") +
+    '" tabindex="-1" data-open="' +
+    (display === "standard" ? "true" : "false") +
+    '">' +
     '<div class="ra-panel-brand">' +
     '<div class="ra-brand-lockup">' +
     '<img class="ra-brand-image" src="' +
@@ -196,8 +225,13 @@
     '" alt="" aria-hidden="true">' +
     '<span class="ra-brand-name">Rapid<span class="ra-brand-name-accent">Act</span></span>' +
     "</div>" +
+    '<span class="ra-brand-actions">' +
     '<span class="ra-brand-status">' +
     safeTitle +
+    "</span>" +
+    '<button class="ra-close" type="button" aria-label="' +
+    copybook.close +
+    '">&times;</button>' +
     "</span>" +
     "</div>" +
     '<div class="ra-panel-body">' +
@@ -242,6 +276,8 @@
 
   var panel = root.querySelector(".ra-panel");
   var button = root.querySelector(".ra-button");
+  var closeButton = root.querySelector(".ra-close");
+  var backdrop = root.querySelector(".ra-backdrop");
   var copy = root.querySelector(".ra-copy");
   var meta = root.querySelector(".ra-meta");
   var details = root.querySelector(".ra-details");
@@ -261,22 +297,47 @@
     details.remove();
   }
 
-  button.addEventListener("click", function () {
-    var open = panel.getAttribute("data-open") !== "true";
+  var setOpen = function (open, focusPanel) {
     panel.setAttribute("data-open", String(open));
+    backdrop.setAttribute("data-open", String(open && display === "popup"));
     button.setAttribute("aria-expanded", String(open));
     button.querySelector(".ra-button-sub").textContent = open
       ? copybook.close
       : copybook.open;
+    if (open && focusPanel) closeButton.focus();
+  };
+
+  button.addEventListener("click", function () {
+    var open = panel.getAttribute("data-open") !== "true";
+    setOpen(open, open && display === "popup");
+  });
+
+  closeButton.addEventListener("click", function () {
+    setOpen(false, false);
+    button.focus();
+  });
+
+  backdrop.addEventListener("click", function () {
+    setOpen(false, false);
+    button.focus();
   });
 
   document.addEventListener("keydown", function (event) {
     if (event.key !== "Escape") return;
-    panel.setAttribute("data-open", "false");
-    button.setAttribute("aria-expanded", "false");
-    button.querySelector(".ra-button-sub").textContent = copybook.open;
+    if (panel.getAttribute("data-open") !== "true" || display === "standard")
+      return;
+    setOpen(false, false);
+    button.focus();
   });
 
-  document.body.appendChild(host);
+  var mount = document.body;
+  if (display === "standard" && targetSelector) {
+    try {
+      mount = document.querySelector(targetSelector) || document.body;
+    } catch (_selectorError) {
+      mount = document.body;
+    }
+  }
+  mount.appendChild(host);
 })();
 </script>
