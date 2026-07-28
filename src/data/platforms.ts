@@ -1,5 +1,18 @@
+import type { Lang } from "@/lib/content";
+
+export const PLATFORM_SLUGS = [
+  "wordpress",
+  "wix",
+  "shopify",
+  "tidio",
+  "botpress",
+  "custom-website",
+] as const;
+
+export type PlatformSlug = (typeof PLATFORM_SLUGS)[number];
+
 export interface PlatformGuide {
-  slug: string;
+  slug: PlatformSlug;
   name: string;
   metaTitle: string;
   metaDescription: string;
@@ -159,6 +172,481 @@ export const PLATFORMS: PlatformGuide[] = [
   },
 ];
 
-export function getPlatform(slug: string): PlatformGuide | undefined {
-  return PLATFORMS.find(p => p.slug === slug);
+type PlatformPageCopy = {
+  notFound: string;
+  back: string;
+  platforms: string;
+  confirmTitle: string;
+  installTitle: (platform: PlatformGuide) => string;
+  addNotice: string;
+  assessment: (platform: PlatformGuide) => string;
+  otherPlatforms: string;
+};
+
+type PlatformLocale = {
+  names: Partial<Record<PlatformSlug, string>>;
+  metaTitle: (name: string) => string;
+  metaDescription: (name: string) => string;
+  customMetaTitle: string;
+  customMetaDescription: string;
+  h1: Record<PlatformSlug, string>;
+  intro: Record<PlatformSlug, string>;
+  detectionNote: Record<PlatformSlug, string>;
+  openInstaller: (name: string) => string;
+  customOpenInstaller: string;
+  placement: Record<PlatformSlug, string>;
+  configure: string;
+  verify: string;
+  specialInstall?: Partial<Record<PlatformSlug, string[]>>;
+  widgetLabels: Partial<Record<string, string>>;
+};
+
+export const PLATFORM_PAGE_COPY: Record<Lang, PlatformPageCopy> = {
+  en: {
+    notFound: "Platform guide not found",
+    back: "Back to RapidAct",
+    platforms: "Platforms",
+    confirmTitle: "Confirm the tool and its role",
+    installTitle: platform => `Install the notice on ${platform.name}`,
+    addNotice: "Add the AI-use notice",
+    assessment: platform =>
+      `Need to confirm which systems and duties apply? The €99 company assessment covers ${platform.name} and the other AI systems your organisation operates.`,
+    otherPlatforms: "Other platforms",
+  },
+  es: {
+    notFound: "No se ha encontrado la guía de la plataforma",
+    back: "Volver a RapidAct",
+    platforms: "Plataformas",
+    confirmTitle: "Confirma la herramienta y tu función",
+    installTitle: platform =>
+      platform.slug === "custom-website"
+        ? "Instala el aviso en tu web"
+        : `Instala el aviso en ${platform.name}`,
+    addNotice: "Añadir el aviso de uso de IA",
+    assessment: platform =>
+      `¿Necesitas confirmar qué sistemas y obligaciones se aplican? La evaluación de empresa de 99 € cubre ${
+        platform.slug === "custom-website" ? "tu web" : platform.name
+      } y el resto de sistemas de IA de tu organización.`,
+    otherPlatforms: "Otras plataformas",
+  },
+  de: {
+    notFound: "Plattform-Leitfaden nicht gefunden",
+    back: "Zurück zu RapidAct",
+    platforms: "Plattformen",
+    confirmTitle: "Tool und eigene Rolle prüfen",
+    installTitle: platform =>
+      platform.slug === "custom-website"
+        ? "Hinweis auf Ihrer Website installieren"
+        : `Hinweis auf ${platform.name} installieren`,
+    addNotice: "KI-Nutzungshinweis hinzufügen",
+    assessment: platform =>
+      `Müssen Sie klären, welche Systeme und Pflichten gelten? Das Unternehmens-Assessment für 99 € deckt ${
+        platform.slug === "custom-website" ? "Ihre Website" : platform.name
+      } und die weiteren KI-Systeme Ihrer Organisation ab.`,
+    otherPlatforms: "Weitere Plattformen",
+  },
+  fr: {
+    notFound: "Guide de plateforme introuvable",
+    back: "Retour à RapidAct",
+    platforms: "Plateformes",
+    confirmTitle: "Confirmez l’outil et votre rôle",
+    installTitle: platform =>
+      platform.slug === "custom-website"
+        ? "Installer la mention sur votre site"
+        : `Installer la mention sur ${platform.name}`,
+    addNotice: "Ajouter la mention d’utilisation de l’IA",
+    assessment: platform =>
+      `Besoin de confirmer les systèmes et obligations applicables ? L’évaluation d’entreprise à 99 € couvre ${
+        platform.slug === "custom-website" ? "votre site" : platform.name
+      } et les autres systèmes d’IA de votre organisation.`,
+    otherPlatforms: "Autres plateformes",
+  },
+  it: {
+    notFound: "Guida della piattaforma non trovata",
+    back: "Torna a RapidAct",
+    platforms: "Piattaforme",
+    confirmTitle: "Conferma lo strumento e il tuo ruolo",
+    installTitle: platform =>
+      platform.slug === "custom-website"
+        ? "Installa l’avviso sul tuo sito"
+        : `Installa l’avviso su ${platform.name}`,
+    addNotice: "Aggiungi l’avviso sull’uso dell’IA",
+    assessment: platform =>
+      `Devi confermare quali sistemi e obblighi si applicano? La valutazione aziendale da 99 € copre ${
+        platform.slug === "custom-website" ? "il tuo sito" : platform.name
+      } e gli altri sistemi di IA della tua organizzazione.`,
+    otherPlatforms: "Altre piattaforme",
+  },
+};
+
+const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
+  es: {
+    names: { "custom-website": "Cualquier web" },
+    metaTitle: name => `Aviso de IA en ${name} — artículo 50 | RapidAct`,
+    metaDescription: name =>
+      `Añade en ${name} un aviso claro de interacción con IA mediante RapidAct y comprueba el resultado en la web publicada.`,
+    customMetaTitle:
+      "Aviso de IA para cualquier web — un único script | RapidAct",
+    customMetaDescription:
+      "Añade un aviso claro de interacción con IA a una web propia, Webflow, Squarespace o React mediante un único script configurable.",
+    h1: {
+      wordpress: "Añade un aviso de IA en WordPress",
+      wix: "Añade un aviso de IA en Wix",
+      shopify: "Añade un aviso de IA en Shopify",
+      tidio: "Añade un aviso claro junto a Tidio o Lyro",
+      botpress: "Identifica claramente tu agente de Botpress como IA",
+      "custom-website": "Un script para el aviso de IA de cualquier web",
+    },
+    intro: {
+      wordpress:
+        "Si ofreces un asistente de IA bajo tu propio servicio o marca, el artículo 50(1) puede exigir un aviso claro antes de la primera interacción. El aviso gratuito de RapidAct añade esa capa visible sin sustituir la evaluación de tu función y alcance.",
+      wix: "Las webs de Wix suelen usar Wix Chat, Tidio u otra aplicación de IA. La obligación exacta depende de si eres proveedor o responsable del despliegue y de lo que haga el sistema. Cuando se exige un aviso de interacción directa, RapidAct lo añade mediante Código personalizado de Wix.",
+      shopify:
+        "Si tu tienda ofrece un asistente de compras o soporte con IA, puede ser necesario mostrar un aviso claro de interacción directa. El contenido generado por IA tiene reglas diferentes: clasifica primero el sistema y tu función, y usa el aviso donde corresponda.",
+      tidio:
+        "Lyro puede responder automáticamente a los visitantes. El artículo 50(1) atribuye el aviso de interacción directa al proveedor del sistema de IA, mientras que los responsables del despliegue tienen obligaciones distintas en otros supuestos. Confirma tu función y muestra el aviso antes del primer intercambio automatizado.",
+      botpress:
+        "Los agentes de Botpress mantienen conversaciones naturales y el visitante puede no saber que interactúa con IA. Si eres responsable del aviso de interacción directa, identifícalo antes de que empiece la conversación y usa un texto específico para ese sistema.",
+      "custom-website":
+        "En una web propia, Webflow, Squarespace o una aplicación React, la instalación técnica es la misma. Confirma primero si el artículo 50 exige un aviso de interacción directa para tu función y sistema; si lo exige, puedes añadirlo con un único script.",
+    },
+    detectionNote: {
+      wordpress:
+        "El escaneo gratuito abre la página pública renderizada y registra puntos de contacto funcionales con IA, el texto del aviso y la evidencia exacta. Otras páginas, plugins privados, IA interna y funciones contractuales quedan fuera del escaneo.",
+      wix: "El escaneo gratuito inspecciona la experiencia publicada de Wix, incluidos los widgets cargados en el navegador, y registra los puntos de contacto con IA o avisos visibles junto a la URL de origen.",
+      shopify:
+        "El escaneo abre la página renderizada de la tienda y registra puntos de contacto funcionales con IA, avisos visibles y la evidencia exacta. No abre otras páginas ni deduce si una imagen fue generada por IA cuando no puede observarlo directamente.",
+      tidio:
+        "El escaneo inspecciona la página como un visitante, registra las interacciones visibles de Tidio o Lyro y comprueba si el aviso puede verse realmente. Estas observaciones no determinan tu función jurídica.",
+      botpress:
+        "El escaneo solo registra una interacción de Botpress cuando observa evidencia directa en la página pública, junto con el texto visible del aviso y la URL de origen.",
+      "custom-website":
+        "El escaneo usa un navegador real para inspeccionar rápidamente la página pública renderizada. Informa solo de evidencia observada y señala claramente cuando no puede inspeccionar una página.",
+    },
+    openInstaller: name => `Abre el instalador de RapidAct y elige ${name}.`,
+    customOpenInstaller:
+      "Abre el instalador de RapidAct y elige la opción para cualquier web.",
+    placement: {
+      wordpress:
+        "Copia el script en un bloque HTML personalizado o en el pie común.",
+      wix: "Copia el script en Ajustes → Código personalizado → final del body.",
+      shopify:
+        "Copia el script en el tema, antes de la etiqueta de cierre del body.",
+      tidio: "Añade el script a la misma plantilla que carga Tidio o Lyro.",
+      botpress:
+        "Añade el script a todas las páginas donde se carga Botpress Webchat.",
+      "custom-website":
+        "Pega el script antes del cierre del body o en tu gestor de etiquetas.",
+    },
+    configure:
+      "Ajusta el idioma, el mensaje, la posición y el enlace de detalles.",
+    verify:
+      "Publica y abre la página en una ventana privada para comprobar que el aviso aparece antes de la interacción con IA.",
+    specialInstall: {
+      botpress: [
+        "Abre el instalador de avisos de RapidAct y copia el script de producción.",
+        "Añádelo a todas las páginas donde se carga Botpress Webchat y personaliza el título y el mensaje.",
+        "Repite también el aviso en el primer mensaje del bot y comprueba ambas superficies en una ventana privada.",
+      ],
+    },
+    widgetLabels: {
+      "Custom GPT apps": "Aplicaciones GPT personalizadas",
+      "Tidio live chat": "Chat en directo de Tidio",
+      "Tidio flows (automated replies)":
+        "Flujos de Tidio (respuestas automáticas)",
+      "Custom GPT-based agents": "Agentes basados en GPT personalizados",
+      "Voiceflow bots (similar setup)":
+        "Bots de Voiceflow (instalación similar)",
+      "Custom GPT assistants": "Asistentes GPT personalizados",
+      "Voice AI widgets": "Widgets de IA por voz",
+    },
+  },
+  de: {
+    names: { "custom-website": "Jede Website" },
+    metaTitle: name => `KI-Hinweis auf ${name} — Artikel 50 | RapidAct`,
+    metaDescription: name =>
+      `Fügen Sie auf ${name} mit RapidAct einen klaren KI-Interaktionshinweis ein und prüfen Sie die veröffentlichte Seite.`,
+    customMetaTitle:
+      "KI-Hinweis für jede Website — ein einziges Skript | RapidAct",
+    customMetaDescription:
+      "Fügen Sie einer eigenen Website, Webflow, Squarespace oder React mit einem konfigurierbaren Skript einen klaren KI-Interaktionshinweis hinzu.",
+    h1: {
+      wordpress: "KI-Hinweis in WordPress hinzufügen",
+      wix: "KI-Hinweis in Wix hinzufügen",
+      shopify: "KI-Hinweis in Shopify hinzufügen",
+      tidio: "Tidio oder Lyro mit einem klaren KI-Hinweis ergänzen",
+      botpress: "Botpress-Agenten klar als KI kennzeichnen",
+      "custom-website": "Ein Skript für den KI-Hinweis auf jeder Website",
+    },
+    intro: {
+      wordpress:
+        "Wenn Sie einen KI-Assistenten unter Ihrem eigenen Dienst oder Ihrer Marke anbieten, kann Artikel 50 Absatz 1 einen klaren Hinweis vor der ersten Interaktion verlangen. Der kostenlose RapidAct-Hinweis schafft diese sichtbare Ebene, ersetzt aber nicht die Prüfung Ihrer Rolle und des Anwendungsbereichs.",
+      wix: "Wix-Websites nutzen häufig Wix Chat, Tidio oder eine andere KI-App. Die genaue Pflicht hängt davon ab, ob Sie Anbieter oder Betreiber sind und was das System tut. Wenn ein Hinweis auf die direkte Interaktion erforderlich ist, fügt RapidAct ihn über den benutzerdefinierten Code von Wix ein.",
+      shopify:
+        "Wenn Ihr Shop einen KI-Einkaufs- oder Supportassistenten anbietet, kann ein klarer Hinweis auf die direkte Interaktion erforderlich sein. Für KI-generierte Inhalte gelten andere Regeln. Ordnen Sie zuerst System und Rolle ein und verwenden Sie den Hinweis dort, wo er passt.",
+      tidio:
+        "Lyro kann Besucher automatisch beantworten. Artikel 50 Absatz 1 legt den Hinweis auf die direkte Interaktion dem Anbieter des KI-Systems auf; Betreiber haben in anderen Fällen eigene Pflichten. Klären Sie Ihre Rolle und zeigen Sie den Hinweis vor dem ersten automatisierten Austausch.",
+      botpress:
+        "Botpress-Agenten können natürliche Gespräche führen, sodass Besucher die KI möglicherweise nicht erkennen. Wenn Sie für den Hinweis auf die direkte Interaktion verantwortlich sind, kennzeichnen Sie das System vor Gesprächsbeginn mit einem konkreten Text.",
+      "custom-website":
+        "Für eine eigene Website, Webflow, Squarespace oder eine React-App ist die technische Installation gleich. Prüfen Sie zuerst, ob Artikel 50 für Ihre Rolle und Ihr System einen Hinweis verlangt; falls ja, genügt ein einziges Skript.",
+    },
+    detectionNote: {
+      wordpress:
+        "Der kostenlose Scan öffnet die gerenderte öffentliche Seite und erfasst funktionale KI-Kontaktpunkte, sichtbare Hinweise und genaue Belege. Weitere Seiten, private Plugins, interne KI und vertragliche Rollen bleiben außerhalb des Scans.",
+      wix: "Der kostenlose Scan prüft die veröffentlichte Wix-Seite einschließlich clientseitig geladener Widgets und erfasst sichtbare KI-Kontaktpunkte oder Hinweise mit der Quell-URL.",
+      shopify:
+        "Der Scan öffnet die gerenderte Shop-Seite und erfasst funktionale KI-Kontaktpunkte, sichtbare Hinweise und genaue Belege. Er öffnet keine weiteren Seiten und leitet nicht ab, ob ein Bild KI-generiert ist, wenn dies nicht direkt erkennbar ist.",
+      tidio:
+        "Der Scan prüft die Seite aus Besuchersicht, erfasst sichtbare Tidio- oder Lyro-Interaktionen und kontrolliert, ob ein Hinweis tatsächlich erkennbar ist. Daraus wird Ihre rechtliche Rolle nicht abgeleitet.",
+      botpress:
+        "Der Scan erfasst eine Botpress-Interaktion nur bei direkter Evidenz auf der öffentlichen Seite, zusammen mit sichtbarem Hinweistext und Quell-URL.",
+      "custom-website":
+        "Der Scan nutzt einen echten Browser für eine schnelle Prüfung der gerenderten öffentlichen Seite. Er berichtet nur direkt beobachtete Evidenz und kennzeichnet Seiten, die nicht geprüft werden konnten.",
+    },
+    openInstaller: name =>
+      `Öffnen Sie den RapidAct-Installer und wählen Sie ${name}.`,
+    customOpenInstaller:
+      "Öffnen Sie den RapidAct-Installer und wählen Sie die Option für jede Website.",
+    placement: {
+      wordpress:
+        "Fügen Sie das Skript in einen Custom-HTML-Block oder den gemeinsamen Footer ein.",
+      wix: "Fügen Sie das Skript unter Einstellungen → Benutzerdefinierter Code → Ende des body ein.",
+      shopify:
+        "Fügen Sie das Skript im Theme vor dem schließenden body-Tag ein.",
+      tidio:
+        "Fügen Sie das Skript in dieselbe Vorlage ein, die Tidio oder Lyro lädt.",
+      botpress:
+        "Fügen Sie das Skript auf jeder Seite ein, auf der Botpress Webchat geladen wird.",
+      "custom-website":
+        "Fügen Sie das Skript vor dem schließenden body-Tag oder im Tag Manager ein.",
+    },
+    configure:
+      "Passen Sie Sprache, Text, Position und den Link zu weiteren Informationen an.",
+    verify:
+      "Veröffentlichen Sie die Seite und prüfen Sie in einem privaten Fenster, dass der Hinweis vor der KI-Interaktion erscheint.",
+    specialInstall: {
+      botpress: [
+        "Öffnen Sie den RapidAct-Installer und kopieren Sie das Produktionsskript.",
+        "Fügen Sie es auf jeder Seite mit Botpress Webchat ein und passen Sie Titel und Text an.",
+        "Wiederholen Sie den Hinweis auch in der ersten Bot-Nachricht und prüfen Sie beide Stellen in einem privaten Fenster.",
+      ],
+    },
+    widgetLabels: {
+      "Custom GPT apps": "Benutzerdefinierte GPT-Apps",
+      "Tidio live chat": "Tidio-Livechat",
+      "Tidio flows (automated replies)":
+        "Tidio-Flows (automatisierte Antworten)",
+      "Custom GPT-based agents": "Benutzerdefinierte GPT-basierte Agenten",
+      "Voiceflow bots (similar setup)": "Voiceflow-Bots (ähnliche Einrichtung)",
+      "Custom GPT assistants": "Benutzerdefinierte GPT-Assistenten",
+      "Voice AI widgets": "Sprach-KI-Widgets",
+    },
+  },
+  fr: {
+    names: { "custom-website": "Tout site web" },
+    metaTitle: name => `Mention IA sur ${name} — article 50 | RapidAct`,
+    metaDescription: name =>
+      `Ajoutez sur ${name} une mention claire d’interaction avec l’IA grâce à RapidAct et vérifiez la page publiée.`,
+    customMetaTitle:
+      "Mention IA pour tout site web — un seul script | RapidAct",
+    customMetaDescription:
+      "Ajoutez une mention claire d’interaction avec l’IA à un site sur mesure, Webflow, Squarespace ou React grâce à un script configurable.",
+    h1: {
+      wordpress: "Ajouter une mention IA sur WordPress",
+      wix: "Ajouter une mention IA sur Wix",
+      shopify: "Ajouter une mention IA sur Shopify",
+      tidio: "Ajouter une mention IA claire à Tidio ou Lyro",
+      botpress: "Identifier clairement votre agent Botpress comme une IA",
+      "custom-website": "Un script pour la mention IA de tout site web",
+    },
+    intro: {
+      wordpress:
+        "Si vous proposez un assistant IA sous votre propre service ou marque, l’article 50, paragraphe 1, peut imposer une mention claire avant la première interaction. La mention gratuite RapidAct ajoute cette couche visible sans remplacer l’analyse de votre rôle et du périmètre.",
+      wix: "Les sites Wix utilisent souvent Wix Chat, Tidio ou une autre application d’IA. L’obligation exacte dépend de votre rôle de fournisseur ou de déployeur et de la fonction du système. Lorsqu’une mention d’interaction directe est requise, RapidAct l’ajoute via le code personnalisé de Wix.",
+      shopify:
+        "Si votre boutique propose un assistant d’achat ou de support fondé sur l’IA, une mention claire d’interaction directe peut être nécessaire. Les contenus générés par l’IA relèvent de règles distinctes : classez d’abord le système et votre rôle, puis utilisez la mention là où elle convient.",
+      tidio:
+        "Lyro peut répondre automatiquement aux visiteurs. L’article 50, paragraphe 1, impose la mention d’interaction directe au fournisseur du système d’IA, tandis que les déployeurs ont des obligations distinctes dans d’autres cas. Confirmez votre rôle et affichez la mention avant le premier échange automatisé.",
+      botpress:
+        "Les agents Botpress peuvent tenir des conversations naturelles, si bien qu’un visiteur peut ne pas savoir qu’il échange avec une IA. Si vous êtes responsable de la mention d’interaction directe, identifiez le système avant le début de l’échange avec un texte précis.",
+      "custom-website":
+        "Pour un site sur mesure, Webflow, Squarespace ou une application React, l’installation technique est identique. Vérifiez d’abord si l’article 50 exige une mention pour votre rôle et votre système ; si oui, un seul script suffit.",
+    },
+    detectionNote: {
+      wordpress:
+        "L’analyse gratuite ouvre la page publique rendue et relève les points de contact IA fonctionnels, les mentions visibles et les preuves exactes. Les autres pages, extensions privées, IA internes et rôles contractuels restent hors périmètre.",
+      wix: "L’analyse gratuite inspecte l’expérience Wix publiée, y compris les widgets chargés côté client, et relève les points de contact IA ou mentions visibles avec leur URL source.",
+      shopify:
+        "L’analyse ouvre la page rendue de la boutique et relève les points de contact IA fonctionnels, les mentions visibles et les preuves exactes. Elle n’ouvre pas d’autres pages et ne déduit pas qu’une image est générée par l’IA si cela n’est pas directement observable.",
+      tidio:
+        "L’analyse inspecte la page comme un visiteur, relève les interactions Tidio ou Lyro visibles et vérifie si la mention est réellement observable. Ces observations ne déterminent pas votre rôle juridique.",
+      botpress:
+        "L’analyse ne relève une interaction Botpress que lorsqu’une preuve directe est visible sur la page publique, avec le texte de la mention et l’URL source.",
+      "custom-website":
+        "L’analyse utilise un navigateur réel pour inspecter rapidement la page publique rendue. Elle rapporte uniquement les preuves observées et signale clairement toute page qu’elle n’a pas pu inspecter.",
+    },
+    openInstaller: name =>
+      `Ouvrez l’installateur RapidAct et choisissez ${name}.`,
+    customOpenInstaller:
+      "Ouvrez l’installateur RapidAct et choisissez l’option pour tout site web.",
+    placement: {
+      wordpress:
+        "Collez le script dans un bloc HTML personnalisé ou dans le pied de page commun.",
+      wix: "Collez le script dans Paramètres → Code personnalisé → fin du body.",
+      shopify:
+        "Collez le script dans le thème avant la balise de fermeture du body.",
+      tidio:
+        "Ajoutez le script au même modèle que celui qui charge Tidio ou Lyro.",
+      botpress: "Ajoutez le script à chaque page qui charge Botpress Webchat.",
+      "custom-website":
+        "Collez le script avant la fermeture du body ou dans votre gestionnaire de balises.",
+    },
+    configure:
+      "Adaptez la langue, le message, la position et le lien vers les détails.",
+    verify:
+      "Publiez puis ouvrez la page dans une fenêtre privée pour vérifier que la mention apparaît avant l’interaction avec l’IA.",
+    specialInstall: {
+      botpress: [
+        "Ouvrez l’installateur RapidAct et copiez le script de production.",
+        "Ajoutez-le à chaque page qui charge Botpress Webchat, puis adaptez le titre et le message.",
+        "Répétez aussi la mention dans le premier message du bot et vérifiez les deux emplacements dans une fenêtre privée.",
+      ],
+    },
+    widgetLabels: {
+      "Custom GPT apps": "Applications GPT personnalisées",
+      "Tidio live chat": "Chat en direct Tidio",
+      "Tidio flows (automated replies)":
+        "Scénarios Tidio (réponses automatisées)",
+      "Custom GPT-based agents": "Agents fondés sur des GPT personnalisés",
+      "Voiceflow bots (similar setup)":
+        "Bots Voiceflow (installation similaire)",
+      "Custom GPT assistants": "Assistants GPT personnalisés",
+      "Voice AI widgets": "Widgets d’IA vocale",
+    },
+  },
+  it: {
+    names: { "custom-website": "Qualsiasi sito" },
+    metaTitle: name => `Avviso IA su ${name} — articolo 50 | RapidAct`,
+    metaDescription: name =>
+      `Aggiungi su ${name} un chiaro avviso di interazione con l’IA tramite RapidAct e verifica la pagina pubblicata.`,
+    customMetaTitle:
+      "Avviso IA per qualsiasi sito — un unico script | RapidAct",
+    customMetaDescription:
+      "Aggiungi un chiaro avviso di interazione con l’IA a un sito personalizzato, Webflow, Squarespace o React con uno script configurabile.",
+    h1: {
+      wordpress: "Aggiungi un avviso IA a WordPress",
+      wix: "Aggiungi un avviso IA a Wix",
+      shopify: "Aggiungi un avviso IA a Shopify",
+      tidio: "Aggiungi un avviso IA chiaro a Tidio o Lyro",
+      botpress: "Identifica chiaramente il tuo agente Botpress come IA",
+      "custom-website": "Uno script per l’avviso IA di qualsiasi sito",
+    },
+    intro: {
+      wordpress:
+        "Se offri un assistente IA con il tuo servizio o marchio, l’articolo 50(1) può richiedere un avviso chiaro prima della prima interazione. L’avviso gratuito RapidAct aggiunge questo livello visibile senza sostituire la valutazione del ruolo e dell’ambito.",
+      wix: "I siti Wix usano spesso Wix Chat, Tidio o un’altra app di IA. L’obbligo esatto dipende dal ruolo di fornitore o deployer e da ciò che fa il sistema. Quando serve un avviso di interazione diretta, RapidAct lo aggiunge tramite il Codice personalizzato di Wix.",
+      shopify:
+        "Se il negozio offre un assistente IA per acquisti o supporto, può essere necessario mostrare un chiaro avviso di interazione diretta. I contenuti generati dall’IA seguono regole diverse: classifica prima il sistema e il tuo ruolo, poi usa l’avviso dove appropriato.",
+      tidio:
+        "Lyro può rispondere automaticamente ai visitatori. L’articolo 50(1) attribuisce l’avviso di interazione diretta al fornitore del sistema di IA, mentre i deployer hanno obblighi distinti in altri casi. Conferma il tuo ruolo e mostra l’avviso prima del primo scambio automatizzato.",
+      botpress:
+        "Gli agenti Botpress possono sostenere conversazioni naturali e il visitatore potrebbe non sapere di interagire con un’IA. Se sei responsabile dell’avviso di interazione diretta, identifica il sistema prima dell’inizio dello scambio con un testo specifico.",
+      "custom-website":
+        "Per un sito personalizzato, Webflow, Squarespace o un’app React, l’installazione tecnica è la stessa. Verifica prima se l’articolo 50 richiede un avviso per il tuo ruolo e sistema; in tal caso basta un unico script.",
+    },
+    detectionNote: {
+      wordpress:
+        "La scansione gratuita apre la pagina pubblica renderizzata e registra i punti di contatto IA funzionali, gli avvisi visibili e le prove esatte. Altre pagine, plugin privati, IA interna e ruoli contrattuali restano fuori dall’analisi.",
+      wix: "La scansione gratuita ispeziona l’esperienza Wix pubblicata, inclusi i widget caricati nel browser, e registra i punti di contatto IA o gli avvisi visibili con l’URL di origine.",
+      shopify:
+        "La scansione apre la pagina renderizzata del negozio e registra i punti di contatto IA funzionali, gli avvisi visibili e le prove esatte. Non apre altre pagine e non deduce che un’immagine sia generata dall’IA se non è direttamente osservabile.",
+      tidio:
+        "La scansione ispeziona la pagina come un visitatore, registra le interazioni Tidio o Lyro visibili e verifica se l’avviso è realmente osservabile. Queste osservazioni non determinano il tuo ruolo giuridico.",
+      botpress:
+        "La scansione registra un’interazione Botpress solo quando osserva prove dirette sulla pagina pubblica, insieme al testo visibile dell’avviso e all’URL di origine.",
+      "custom-website":
+        "La scansione usa un browser reale per controllare rapidamente la pagina pubblica renderizzata. Riporta solo le prove osservate e segnala chiaramente le pagine che non può ispezionare.",
+    },
+    openInstaller: name =>
+      `Apri il programma di installazione RapidAct e scegli ${name}.`,
+    customOpenInstaller:
+      "Apri il programma di installazione RapidAct e scegli l’opzione per qualsiasi sito.",
+    placement: {
+      wordpress:
+        "Incolla lo script in un blocco HTML personalizzato o nel footer condiviso.",
+      wix: "Incolla lo script in Impostazioni → Codice personalizzato → fine del body.",
+      shopify: "Incolla lo script nel tema prima del tag di chiusura del body.",
+      tidio: "Aggiungi lo script allo stesso modello che carica Tidio o Lyro.",
+      botpress:
+        "Aggiungi lo script a ogni pagina in cui viene caricato Botpress Webchat.",
+      "custom-website":
+        "Incolla lo script prima della chiusura del body o nel tag manager.",
+    },
+    configure: "Imposta lingua, messaggio, posizione e link ai dettagli.",
+    verify:
+      "Pubblica e apri la pagina in una finestra privata per verificare che l’avviso appaia prima dell’interazione con l’IA.",
+    specialInstall: {
+      botpress: [
+        "Apri il programma di installazione RapidAct e copia lo script di produzione.",
+        "Aggiungilo a ogni pagina che carica Botpress Webchat e personalizza titolo e messaggio.",
+        "Ripeti l’avviso anche nel primo messaggio del bot e verifica entrambe le posizioni in una finestra privata.",
+      ],
+    },
+    widgetLabels: {
+      "Custom GPT apps": "App GPT personalizzate",
+      "Tidio live chat": "Chat dal vivo di Tidio",
+      "Tidio flows (automated replies)":
+        "Flussi Tidio (risposte automatizzate)",
+      "Custom GPT-based agents": "Agenti basati su GPT personalizzati",
+      "Voiceflow bots (similar setup)": "Bot Voiceflow (configurazione simile)",
+      "Custom GPT assistants": "Assistenti GPT personalizzati",
+      "Voice AI widgets": "Widget di IA vocale",
+    },
+  },
+};
+
+function localizePlatform(base: PlatformGuide, lang: Lang): PlatformGuide {
+  if (lang === "en") return base;
+
+  const copy = PLATFORM_LOCALES[lang];
+  const name = copy.names[base.slug] ?? base.name;
+  return {
+    ...base,
+    name,
+    metaTitle:
+      base.slug === "custom-website"
+        ? copy.customMetaTitle
+        : copy.metaTitle(name),
+    metaDescription:
+      base.slug === "custom-website"
+        ? copy.customMetaDescription
+        : copy.metaDescription(name),
+    h1: copy.h1[base.slug],
+    intro: copy.intro[base.slug],
+    detectionNote: copy.detectionNote[base.slug],
+    freeInstall: copy.specialInstall?.[base.slug] ?? [
+      base.slug === "custom-website"
+        ? copy.customOpenInstaller
+        : copy.openInstaller(name),
+      copy.placement[base.slug],
+      copy.configure,
+      copy.verify,
+    ],
+    commonWidgets: base.commonWidgets.map(
+      widget => copy.widgetLabels[widget] ?? widget
+    ),
+  };
+}
+
+export function getPlatforms(lang: Lang = "en"): PlatformGuide[] {
+  return PLATFORMS.map(platform => localizePlatform(platform, lang));
+}
+
+export function getPlatform(
+  slug: PlatformSlug | string,
+  lang: Lang = "en"
+): PlatformGuide | undefined {
+  const platform = PLATFORMS.find(p => p.slug === slug);
+  return platform ? localizePlatform(platform, lang) : undefined;
 }

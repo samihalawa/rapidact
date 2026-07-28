@@ -1,17 +1,19 @@
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
-import { CONVERT, REPORT } from "@/config";
+import { CONVERT } from "@/config";
 import {
   ENTITY,
   COMPANIES_HOUSE_URL,
   HAS_ENTITY_DETAILS,
 } from "@/data/company";
+import { REPORT_COPY } from "@/data/localizedReport";
 import { useI18n } from "@/lib/i18n";
 
 /** Shared conversion band used on every SEO page. */
 export default function CtaBand() {
   const navigate = useNavigate();
-  const { path, t } = useI18n();
+  const { lang, path, t } = useI18n();
+  const reportCopy = REPORT_COPY[lang];
   const contents = [
     "cta.item1",
     "cta.item2",
@@ -24,9 +26,9 @@ export default function CtaBand() {
     <div className="hairline mt-12 border bg-white">
       <div className="hairline grid border-b lg:grid-cols-[1.1fr_1fr]">
         <div className="hairline border-b p-7 lg:border-r lg:border-b-0">
-          <p className="eyebrow">{t("cta.label")}</p>
+          <p className="eyebrow">{t("nav.assessment")}</p>
           <p className="ink mt-2 text-[19px] leading-snug font-semibold">
-            {REPORT.name}
+            {t("cta.label")}
           </p>
           <p className="ink mt-4 text-[34px] leading-none font-bold">€99</p>
           <p className="ink-soft mt-1.5 text-[13px]">{t("cta.once")}</p>
@@ -83,14 +85,15 @@ export default function CtaBand() {
 
       {HAS_ENTITY_DETAILS && (
         <p className="ink-soft bg-[#f7f7f5] px-7 py-3 text-[12px] leading-relaxed">
-          Sold by {ENTITY.legalName}, {ENTITY.address}, {ENTITY.country}.{" "}
+          {reportCopy.soldBy} {ENTITY.legalName}, {ENTITY.address},{" "}
+          {ENTITY.country}.{" "}
           <a
             href={COMPANIES_HOUSE_URL}
             target="_blank"
             rel="noopener"
             className="accent mono underline underline-offset-2"
           >
-            Companies House No. {ENTITY.registrationNumber}
+            {t("footer.house")} {ENTITY.registrationNumber}
           </a>
         </p>
       )}

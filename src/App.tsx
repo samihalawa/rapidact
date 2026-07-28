@@ -55,7 +55,7 @@ export default function App() {
         href={CONVERT.whatsapp}
         target="_blank"
         rel="noopener"
-        aria-label="Ask RapidAct on WhatsApp"
+        aria-label={`${t("whatsapp")} — RapidAct`}
         data-analytics-event="support_contact_click"
         data-analytics-label="WhatsApp floating widget"
         className="fixed right-4 bottom-4 z-50 inline-flex min-h-12 items-center gap-2 rounded-md bg-[#128c5e] px-3.5 text-[13px] font-bold text-white shadow-lg transition hover:bg-[#0f7a52] focus-visible:ring-4 focus-visible:ring-[#128c5e]/25 focus-visible:outline-none sm:right-6 sm:bottom-6"

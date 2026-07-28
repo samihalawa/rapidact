@@ -20,6 +20,9 @@ const EN: Dictionary = {
   "nav.scanShort": "Scan",
   "nav.menu": "Open menu",
   "nav.language": "Language",
+  "nav.home": "Home",
+  "nav.close": "Close",
+  "nav.menuDescription": "RapidAct navigation and language",
   "nav.request": "Start assessment",
   "nav.requestShort": "Start",
   whatsapp: "Ask on WhatsApp",
@@ -148,6 +151,9 @@ const ES: Dictionary = {
   "nav.scanShort": "Escanear",
   "nav.menu": "Abrir menú",
   "nav.language": "Idioma",
+  "nav.home": "Inicio",
+  "nav.close": "Cerrar",
+  "nav.menuDescription": "Navegación e idioma de RapidAct",
   "nav.request": "Iniciar evaluación",
   "nav.requestShort": "Empezar",
   whatsapp: "Preguntar por WhatsApp",
@@ -275,6 +281,9 @@ const DE: Dictionary = {
   "nav.scanShort": "Scannen",
   "nav.menu": "Menü öffnen",
   "nav.language": "Sprache",
+  "nav.home": "Startseite",
+  "nav.close": "Schließen",
+  "nav.menuDescription": "RapidAct-Navigation und Sprache",
   "nav.request": "Bewertung starten",
   "nav.requestShort": "Start",
   whatsapp: "Per WhatsApp fragen",
@@ -403,6 +412,9 @@ const FR: Dictionary = {
   "nav.scanShort": "Scanner",
   "nav.menu": "Ouvrir le menu",
   "nav.language": "Langue",
+  "nav.home": "Accueil",
+  "nav.close": "Fermer",
+  "nav.menuDescription": "Navigation et langue de RapidAct",
   "nav.request": "Commencer l’évaluation",
   "nav.requestShort": "Commencer",
   whatsapp: "Poser une question sur WhatsApp",
@@ -530,6 +542,9 @@ const IT: Dictionary = {
   "nav.scanShort": "Scansiona",
   "nav.menu": "Apri menu",
   "nav.language": "Lingua",
+  "nav.home": "Home",
+  "nav.close": "Chiudi",
+  "nav.menuDescription": "Navigazione e lingua di RapidAct",
   "nav.request": "Inizia la valutazione",
   "nav.requestShort": "Inizia",
   whatsapp: "Chiedi su WhatsApp",
@@ -738,13 +753,13 @@ export function useI18n(): I18nValue {
 }
 
 export function LanguageSelector() {
-  const { lang, setLanguage } = useI18n();
+  const { lang, setLanguage, t } = useI18n();
   return (
     <label
       className="relative inline-flex h-11 items-center"
-      aria-label="Language"
+      aria-label={t("nav.language")}
     >
-      <span className="sr-only">Language</span>
+      <span className="sr-only">{t("nav.language")}</span>
       <select
         value={lang}
         onChange={event => setLanguage(event.target.value as Lang)}

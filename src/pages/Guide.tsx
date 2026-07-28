@@ -4,7 +4,7 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
 import CtaBand from "@/components/CtaBand";
 import BadgeInstallDashboard from "@/components/BadgeInstallDashboard";
-import { PLATFORMS } from "@/data/platforms";
+import { getPlatforms } from "@/data/platforms";
 import {
   ArrowRight,
   FileClock,
@@ -20,6 +20,7 @@ const reqIcons = [MessagesSquare, Tags, Video, FileClock];
 export default function Guide() {
   const { lang, path } = useI18n();
   const copy = GUIDE_COPY[lang];
+  const platforms = getPlatforms(lang);
 
   return (
     <div className="min-h-screen bg-white">
@@ -102,7 +103,7 @@ export default function Guide() {
             {copy.platformsTitle}
           </h2>
           <div className="mt-4 flex flex-wrap gap-2">
-            {PLATFORMS.map(p => (
+            {platforms.map(p => (
               <Link
                 key={p.slug}
                 to={path(`/platforms/${p.slug}`)}

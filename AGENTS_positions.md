@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct localized platform guides | translating only a shared shell flattened product-specific guidance and produced broken custom-site grammar | localize each platform's role, evidence boundary and install nuance independently | do not interpolate a generic platform name into legal or technical sentences | verify 24 localized routes, semantic tests, language-specific accessibility labels and phone/desktop overflow
 RapidAct scanner result integrity | optional Anchor fields can arrive as JSON null and URL edits can leave a prior result visible | normalize nullable optional evidence at the parser boundary, clear result state on every new input, and report observed counts rather than a compliance-like score | do not reject a valid scan because absent evidence is null, attribute an old result to a new URL, or imply 100 means compliant | verify deepswapai.io completes, the inspected URL matches, changing input removes the result, and the three-step result renders in five languages on phone/desktop
 RapidAct scanner engine | a broad three-page, 80-step Anchor task made the free preview slow and encouraged false-positive exploration | make one strict four-step Anchor `perform-web-task` call that inspects only the submitted rendered page | do not navigate, simulate percentage progress, silently downgrade, or treat AI-related content and badges as functional AI | verify live duration, exactly one inspected URL, functional evidence, failure/retry, five languages, PDF, phone/desktop and production
 RapidAct Typebot guide | a copied AI example was live but failed with `No model provided`, while an open-ended loop had no reliable completion | use one optional finite assessment, explicit Kimi model, native lead endpoint, deterministic final links | do not replace the scanner, copy an unrelated bot, or rely on a published badge as runtime proof | verify the published viewer chat through CRM capture, AI answer, clean logs and final action links
@@ -15,6 +16,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, or pageview-only measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader and a published GA4 product-event tag | do not track localhost, emit repeated PostHog opt-ins, double-send custom events, or reuse another product property | prove exact GA4/PostHog event payloads, replay/errors, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-28 — Platform translations preserve platform-specific meaning
+
+- Status: CURRENT
+- Project/root: `rapidact`; localized platform guides, shared navigation and installer links.
+- Mistake: a generic translated template inserted platform names into every sentence, produced phrases such as “site in Any website,” and removed Shopify content-label, Tidio/Lyro role and Botpress first-message guidance.
+- Do: translate each platform’s actual role, evidence boundary and installation nuance; localize the home, language and close labels and preserve the locale in breadcrumbs and not-found links.
+- Don't: infer localization quality from a translated heading or interpolate a generic platform label into legal or technical copy.
+- Evidence: independent critique on 2026-07-28; `src/data/platforms.ts`, `platforms.test.ts`, and local 375/1280px browser audit of 24 routes.
+- Trigger terms: multilingual, platform guide, Any website, Tidio, Lyro, Shopify, Botpress, language selector.
+- Verify before reuse: run semantic tests, inspect all 24 localized routes for `html[lang]`, title, H1 and overflow, then open the mobile drawer and confirm localized accessibility names.
 
 ## 2026-07-28 — Public installation copy describes only working paths
 

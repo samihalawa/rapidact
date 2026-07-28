@@ -13,9 +13,8 @@ Each app contains version `1.0.0` of the same disclosure runtime. The public
 `/badge-manifest.json` reports version metadata only. Executable updates are
 published through WordPress.org, Shopify app versions, and Wix app versions.
 
-Until a marketplace listing is public, the website installer provides a direct
-fallback that loads `https://rapidact.eu/rapidact-badge.js`. It supports four
-real display modes:
+The website installer provides a direct installation path that loads
+`https://rapidact.eu/rapidact-badge.js`. It supports four real display modes:
 
 - `bubble` — the recommended floating badge and expandable notice.
 - `standard` — the full notice rendered inside a selected page container.
@@ -40,6 +39,6 @@ replace those packages or their platform-native update paths.
 5. Add the new platform to the generator test matrix in
    `src/lib/badgeInstaller.test.ts`.
 
-Do not publish direct ZIP downloads or remote-code updaters. When a marketplace
-listing becomes public, add its verified listing URL to the platform data and
-make that install action primary while retaining the manual fallback.
+Do not publish direct ZIP downloads or remote-code updaters. Add a marketplace
+install action only when its verified listing URL exists in the platform data;
+retain the direct installation path for customers who need it.

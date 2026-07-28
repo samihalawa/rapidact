@@ -4,6 +4,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -35,7 +36,11 @@ export default function SiteNav() {
 
       <div className="hairline border-b bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-14 sm:px-6">
-          <Link to={path("/")} className="shrink-0" aria-label="RapidAct home">
+          <Link
+            to={path("/")}
+            className="shrink-0"
+            aria-label={`RapidAct — ${t("nav.home")}`}
+          >
             <span className="flex items-center gap-2">
               <img
                 src="/brand/rapidact-exact-symbol.png"
@@ -117,11 +122,17 @@ export default function SiteNav() {
                   <Menu className="h-5 w-5" aria-hidden="true" />
                 </button>
               </SheetTrigger>
-              <SheetContent className="w-[min(88vw,22rem)] bg-white p-0">
+              <SheetContent
+                closeLabel={t("nav.close")}
+                className="w-[min(88vw,22rem)] bg-white p-0"
+              >
                 <SheetHeader className="border-b border-[#dbe3ee] p-5 pr-14 text-left">
                   <SheetTitle className="brand-wordmark text-xl text-[#03123d]">
                     Rapid<span className="text-[#087ee8]">Act</span>
                   </SheetTitle>
+                  <SheetDescription className="sr-only">
+                    {t("nav.menuDescription")}
+                  </SheetDescription>
                 </SheetHeader>
                 <nav className="flex flex-col px-5">
                   {[
