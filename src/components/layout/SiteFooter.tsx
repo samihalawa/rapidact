@@ -8,9 +8,10 @@ import {
   ENTITY_DISPLAY_NAME,
 } from "@/data/company";
 import { useI18n } from "@/lib/i18n";
+import { PARTNERS_COPY } from "@/data/localizedPartners";
 
 export default function SiteFooter() {
-  const { path, t } = useI18n();
+  const { lang, path, t } = useI18n();
   return (
     <footer className="border-t border-[#e2e2dd] bg-white">
       <div className="mx-auto max-w-6xl px-4 pt-14 pb-36 sm:px-6 sm:py-14">
@@ -33,12 +34,15 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-[#16181d]">{t("footer.product")}</h4>
+            <h4 className="text-sm font-semibold text-[#16181d]">
+              {t("footer.product")}
+            </h4>
             <ul className="mt-4 space-y-2.5">
               {[
                 { label: t("footer.scan"), href: "/scanner" },
                 { label: t("footer.badge"), href: "/article-50#install" },
                 { label: t("footer.assessment"), href: "/report" },
+                { label: PARTNERS_COPY[lang].footerLabel, href: "/partners" },
                 { label: t("footer.article"), href: "/article-50" },
                 { label: t("footer.guides"), href: "/learn" },
               ].map(l => (
@@ -65,7 +69,9 @@ export default function SiteFooter() {
                     to={path(`/requirements/${r.slug}`)}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
-                    {t(`footer.${r.slug === "chatbot-ai-disclosure" ? "chatbot" : r.slug === "ai-content-labeling" ? "content" : r.slug === "deepfake-labeling" ? "deepfake" : "evidence"}`)}
+                    {t(
+                      `footer.${r.slug === "chatbot-ai-disclosure" ? "chatbot" : r.slug === "ai-content-labeling" ? "content" : r.slug === "deepfake-labeling" ? "deepfake" : "evidence"}`
+                    )}
                   </Link>
                 </li>
               ))}
@@ -73,7 +79,9 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-[#16181d]">{t("footer.platforms")}</h4>
+            <h4 className="text-sm font-semibold text-[#16181d]">
+              {t("footer.platforms")}
+            </h4>
             <ul className="mt-4 space-y-2.5">
               {PLATFORMS.map(p => (
                 <li key={p.slug}>
@@ -89,7 +97,9 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-[#16181d]">{t("footer.legal")}</h4>
+            <h4 className="text-sm font-semibold text-[#16181d]">
+              {t("footer.legal")}
+            </h4>
             <ul className="mt-4 space-y-2.5">
               {[
                 { label: t("footer.privacy"), href: "/privacy" },
@@ -162,11 +172,10 @@ export default function SiteFooter() {
 
         <div className="hairline ink-soft mt-8 flex flex-col items-start justify-between gap-3 border-t pt-6 text-[12px] sm:flex-row sm:items-center">
           <span>
-            © {new Date().getFullYear()} {ENTITY_DISPLAY_NAME} {t("footer.copyright")}
+            © {new Date().getFullYear()} {ENTITY_DISPLAY_NAME}{" "}
+            {t("footer.copyright")}
           </span>
-          <span>
-            {t("footer.regulation")}
-          </span>
+          <span>{t("footer.regulation")}</span>
         </div>
       </div>
     </footer>

@@ -1,8 +1,17 @@
 import { Link, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { CONVERT } from "@/config";
 import { ENTITY, HAS_ENTITY_DETAILS } from "@/data/company";
 import { LanguageSelector, useI18n } from "@/lib/i18n";
+import { Menu } from "lucide-react";
 
 export default function SiteNav() {
   const navigate = useNavigate();
@@ -13,9 +22,7 @@ export default function SiteNav() {
       {HAS_ENTITY_DETAILS && (
         <div className="hidden border-b border-[#2b2f38] bg-[#16181d] md:block">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-1.5 sm:px-6">
-            <p className="text-[12px] text-white/60">
-              {t("nav.deadline")}
-            </p>
+            <p className="text-[12px] text-white/60">{t("nav.deadline")}</p>
             <a
               href={`tel:${ENTITY.phone.replace(/\s/g, "")}`}
               className="mono text-[12px] text-white/80 hover:text-white"
@@ -28,11 +35,7 @@ export default function SiteNav() {
 
       <div className="hairline border-b bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-14 sm:px-6">
-          <Link
-            to={path("/")}
-            className="shrink-0"
-            aria-label="RapidAct home"
-          >
+          <Link to={path("/")} className="shrink-0" aria-label="RapidAct home">
             <span className="flex items-center gap-2">
               <img
                 src="/brand/rapidact-exact-symbol.png"
@@ -47,31 +50,54 @@ export default function SiteNav() {
           </Link>
 
           <nav className="ink-soft hidden items-center gap-5 text-[13px] lg:flex">
-            <a href={`${path("/")}#features`} className="whitespace-nowrap hover:text-[#16181d]">
+            <a
+              href={`${path("/")}#features`}
+              className="whitespace-nowrap hover:text-[#16181d]"
+            >
               {t("nav.product")}
             </a>
-            <Link to={path(CONVERT.scanner)} className="whitespace-nowrap hover:text-[#16181d]">
+            <Link
+              to={path(CONVERT.scanner)}
+              className="whitespace-nowrap hover:text-[#16181d]"
+            >
               {t("nav.scan")}
             </Link>
-            <Link to={path(CONVERT.badge)} className="whitespace-nowrap hover:text-[#16181d]">
+            <Link
+              to={path(CONVERT.badge)}
+              className="whitespace-nowrap hover:text-[#16181d]"
+            >
               {t("nav.badge")}
             </Link>
-            <a href={`${path("/")}#report`} className="whitespace-nowrap hover:text-[#16181d]">
+            <a
+              href={`${path("/")}#report`}
+              className="whitespace-nowrap hover:text-[#16181d]"
+            >
               {t("nav.assessment")}
             </a>
-            <Link to={path(CONVERT.example)} className="hidden whitespace-nowrap hover:text-[#16181d] xl:inline">
+            <Link
+              to={path(CONVERT.example)}
+              className="hidden whitespace-nowrap hover:text-[#16181d] xl:inline"
+            >
               {t("nav.specimen")}
             </Link>
-            <Link to={path("/article-50")} className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline">
+            <Link
+              to={path("/article-50")}
+              className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline"
+            >
               {t("nav.article")}
             </Link>
-            <Link to={path("/learn")} className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline">
+            <Link
+              to={path("/learn")}
+              className="hidden whitespace-nowrap hover:text-[#16181d] 2xl:inline"
+            >
               {t("nav.guides")}
             </Link>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <LanguageSelector />
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden lg:block">
+              <LanguageSelector />
+            </div>
             <Button
               data-analytics-event="free_scan_click"
               data-analytics-label="Header free scan CTA"
@@ -81,6 +107,67 @@ export default function SiteNav() {
               <span className="lg:hidden">{t("nav.scanShort")}</span>
               <span className="hidden lg:inline">{t("nav.scan")}</span>
             </Button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <button
+                  type="button"
+                  aria-label={t("nav.menu")}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded border border-[#cbd5e1] bg-white text-[#03123d] transition hover:bg-[#f4f7fb] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:outline-none lg:hidden"
+                >
+                  <Menu className="h-5 w-5" aria-hidden="true" />
+                </button>
+              </SheetTrigger>
+              <SheetContent className="w-[min(88vw,22rem)] bg-white p-0">
+                <SheetHeader className="border-b border-[#dbe3ee] p-5 pr-14 text-left">
+                  <SheetTitle className="brand-wordmark text-xl text-[#03123d]">
+                    Rapid<span className="text-[#087ee8]">Act</span>
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col px-5">
+                  {[
+                    {
+                      label: t("nav.product"),
+                      href: `${path("/")}#features`,
+                      external: true,
+                    },
+                    { label: t("nav.scan"), href: path(CONVERT.scanner) },
+                    { label: t("nav.badge"), href: path(CONVERT.badge) },
+                    {
+                      label: t("nav.assessment"),
+                      href: `${path("/")}#report`,
+                      external: true,
+                    },
+                    { label: t("nav.specimen"), href: path(CONVERT.example) },
+                    { label: t("nav.article"), href: path("/article-50") },
+                    { label: t("nav.guides"), href: path("/learn") },
+                  ].map(item => (
+                    <SheetClose asChild key={`${item.label}-${item.href}`}>
+                      {item.external ? (
+                        <a
+                          href={item.href}
+                          className="flex min-h-12 items-center border-b border-[#edf0f4] text-sm font-semibold text-[#334155]"
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={item.href}
+                          className="flex min-h-12 items-center border-b border-[#edf0f4] text-sm font-semibold text-[#334155]"
+                        >
+                          {item.label}
+                        </Link>
+                      )}
+                    </SheetClose>
+                  ))}
+                </nav>
+                <div className="mt-auto border-t border-[#dbe3ee] p-5">
+                  <p className="mb-2 text-xs font-bold tracking-[0.1em] text-[#64748b] uppercase">
+                    {t("nav.language")}
+                  </p>
+                  <LanguageSelector />
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>

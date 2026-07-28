@@ -5,7 +5,12 @@ import type { ScanStartResult, ScanStatusResult } from "@contracts/types";
 import { getDb } from "../queries/connection";
 import { scans } from "@db/schema";
 import { env } from "../lib/env";
-import { mapAnchorResult, readAnchorScan, startAnchorScan } from "../lib/anchor";
+import {
+  anchorResultMatchesUrl,
+  mapAnchorResult,
+  readAnchorScan,
+  startAnchorScan,
+} from "../lib/anchor";
 
 const hits = new Map<string, number[]>();
 const persistedWorkflows = new Set<string>();
@@ -14,7 +19,9 @@ const TOKEN_TTL_MS = 30 * 60 * 1000;
 function rateLimited(ip: string): boolean {
   const now = Date.now();
   const windowMs = 10 * 60 * 1000;
-  const list = (hits.get(ip) ?? []).filter((timestamp) => now - timestamp < windowMs);
+  const list = (hits.get(ip) ?? []).filter(
+    timestamp => now - timestamp < windowMs
+  );
   if (list.length >= 20) return true;
   list.push(now);
   hits.set(ip, list);
@@ -22,9 +29,15 @@ function rateLimited(ip: string): boolean {
 }
 
 function normalizeUrl(raw: string): string {
-  const withProtocol = /^https?:\/\//i.test(raw.trim()) ? raw.trim() : `https://${raw.trim()}`;
+  const withProtocol = /^https?:\/\//i.test(raw.trim())
+    ? raw.trim()
+    : `https://${raw.trim()}`;
   const parsed = new URL(withProtocol);
-  if (!["http:", "https:"].includes(parsed.protocol) || parsed.username || parsed.password) {
+  if (
+    !["http:", "https:"].includes(parsed.protocol) ||
+    parsed.username ||
+    parsed.password
+  ) {
     throw new Error("invalid-url");
   }
   return parsed.toString();
@@ -68,10 +81,15 @@ function readWorkflowToken(token: string): WorkflowToken {
   const expectedSignature = signature(encoded);
   const supplied = Buffer.from(suppliedSignature);
   const expected = Buffer.from(expectedSignature);
-  if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) {
+  if (
+    supplied.length !== expected.length ||
+    !timingSafeEqual(supplied, expected)
+  ) {
     throw new Error("invalid-scan-token");
   }
-  const payload = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8")) as WorkflowToken;
+  const payload = JSON.parse(
+    Buffer.from(encoded, "base64url").toString("utf8")
+  ) as WorkflowToken;
   if (
     !payload.workflowId ||
     !payload.url ||
@@ -83,8 +101,12 @@ function readWorkflowToken(token: string): WorkflowToken {
   return payload;
 }
 
-async function persistCompletedScan(workflowId: string, result: ScanStatusResult) {
-  if (result.status !== "completed" || persistedWorkflows.has(workflowId)) return;
+async function persistCompletedScan(
+  workflowId: string,
+  result: ScanStatusResult
+) {
+  if (result.status !== "completed" || persistedWorkflows.has(workflowId))
+    return;
   persistedWorkflows.add(workflowId);
   try {
     await getDb()
@@ -125,7 +147,11 @@ export const scanRouter = createRouter({
         const workflowId = await startAnchorScan(url, env.anchorBrowserApiKey);
         return {
           ok: true,
-          token: createWorkflowToken({ workflowId, url, createdAt: Date.now() }),
+          token: createWorkflowToken({
+            workflowId,
+            url,
+            createdAt: Date.now(),
+          }),
         };
       } catch (error) {
         console.error("anchor-scan-start-failed", error);
@@ -147,8 +173,18 @@ export const scanRouter = createRouter({
       }
 
       try {
-        const state = await readAnchorScan(workflow.workflowId, env.anchorBrowserApiKey);
+        const state = await readAnchorScan(
+          workflow.workflowId,
+          env.anchorBrowserApiKey
+        );
         if (state.status !== "completed") return state;
+        if (!anchorResultMatchesUrl(workflow.url, state.observed)) {
+          console.error("anchor-scan-domain-mismatch", {
+            requestedUrl: workflow.url,
+            observedUrls: state.observed.pages_visited.map(page => page.url),
+          });
+          return { status: "failed", error: "anchor-domain-mismatch" };
+        }
         const result: ScanStatusResult = {
           status: "completed",
           result: mapAnchorResult(workflow.url, state.observed),
@@ -167,7 +203,10 @@ export const scanRouter = createRouter({
       return {
         totalScans: rows.length,
         avgScore: rows.length
-          ? Math.round(rows.reduce((total, row) => total + (row.score ?? 0), 0) / rows.length)
+          ? Math.round(
+              rows.reduce((total, row) => total + (row.score ?? 0), 0) /
+                rows.length
+            )
           : null,
       };
     } catch {

@@ -15,6 +15,7 @@ const staticRoutes = [
   ["/report", "1.0"],
   ["/example-report", "0.9"],
   ["/scanner", "0.9"],
+  ["/partners", "0.9"],
   ["/article-50", "0.9"],
   ["/learn", "0.9"],
   ["/privacy", "0.3"],
@@ -47,7 +48,10 @@ function collectMarkdown() {
         if (/^draft:\s*true/m.test(raw)) continue;
         const slug = file.replace(/\.md$/, "");
         const prefix = lang === "en" ? "" : `/${lang}`;
-        out.push([`${prefix}/${type}/${slug}`, type === "blog" ? "0.6" : "0.7"]);
+        out.push([
+          `${prefix}/${type}/${slug}`,
+          type === "blog" ? "0.6" : "0.7",
+        ]);
       }
     }
   }
@@ -60,7 +64,7 @@ const xml =
   urls
     .map(
       ([u, p]) =>
-        `  <url><loc>${BASE}${u}</loc><changefreq>weekly</changefreq><priority>${p}</priority></url>`,
+        `  <url><loc>${BASE}${u}</loc><changefreq>weekly</changefreq><priority>${p}</priority></url>`
     )
     .join("\n") +
   "\n</urlset>\n";

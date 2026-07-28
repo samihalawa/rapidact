@@ -31,11 +31,9 @@ import {
   Wrench,
   MessageCircle,
   Mail,
-  Bot,
   CalendarDays,
   ArrowRight,
   Eye,
-  FileText,
 } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
@@ -93,7 +91,8 @@ export default function Scanner() {
     track("scan_started", { has_protocol: /^https?:\/\//i.test(submittedUrl) });
     const scanStartedAt = Date.now();
     const elapsedTimer = window.setInterval(() => {
-      setScanElapsed(Math.floor((Date.now() - scanStartedAt) / 1_000));
+      const elapsed = Math.floor((Date.now() - scanStartedAt) / 1_000);
+      setScanElapsed(elapsed);
     }, 1_000);
 
     try {
@@ -116,6 +115,8 @@ export default function Scanner() {
           track("scan_failed", { error_type: state.error });
           return;
         }
+        setScanStage(2);
+        await wait(350);
         completed = state.result;
         break;
       }
@@ -215,12 +216,7 @@ export default function Scanner() {
         `[REQUEST COMPLETE SCAN ${result.summary.url}]`
       )}`
     : CONVERT.whatsapp;
-  const guidedAssessmentUrl = result?.summary
-    ? `${CONVERT.guidedAssessment}?${new URLSearchParams({
-        Website: result.summary.url,
-        Language: lang,
-      }).toString()}`
-    : CONVERT.guidedAssessment;
+  const progressPercent = Math.round(((scanStage + 1) / 3) * 100);
 
   return (
     <div className="paper min-h-screen">
@@ -241,7 +237,11 @@ export default function Scanner() {
         </div>
 
         <div className="mt-8 flex max-w-2xl flex-col gap-2 sm:flex-row">
+          <label htmlFor="scanner-url" className="sr-only">
+            {copy.urlLabel}
+          </label>
           <Input
+            id="scanner-url"
             value={url}
             onChange={e => {
               setUrl(e.target.value);
@@ -255,6 +255,7 @@ export default function Scanner() {
               requestScan();
             }}
             placeholder={copy.placeholder}
+            disabled={scanActive}
             className="hairline h-11 min-w-0 rounded border bg-white px-4 text-[15px]"
           />
           <Button
@@ -393,16 +394,25 @@ export default function Scanner() {
             <div
               role="progressbar"
               aria-label={copy.stages[scanStage].label}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={progressPercent}
               aria-valuetext={copy.stages[scanStage].detail}
               className="mt-4 h-2 overflow-hidden rounded-full bg-[#e5ebf4]"
             >
-              <div className="h-full w-full animate-pulse rounded-full bg-gradient-to-r from-[#d9e6fb] via-[#1f5fd2] to-[#d9e6fb]" />
+              <div
+                className="h-full rounded-full bg-[#1f5fd2] transition-[width] duration-1000 ease-out"
+                style={{ width: `${progressPercent}%` }}
+              />
             </div>
           </section>
         )}
 
         {scanError && (
-          <Card className="mt-8 max-w-2xl border-[#fecaca] bg-[#fef2f2]">
+          <Card
+            role="alert"
+            className="mt-8 max-w-2xl border-[#fecaca] bg-[#fef2f2]"
+          >
             <CardContent className="flex items-start gap-3 pt-6 pb-6">
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[#dc2626]" />
               <div>
@@ -444,7 +454,7 @@ export default function Scanner() {
         {result?.reachable && result.summary && (
           <div className="mt-10 space-y-4">
             <section className="overflow-hidden rounded-xl border border-[#cbd8ec] bg-white shadow-[0_16px_45px_rgba(3,18,61,0.09)]">
-              <div className="flex flex-col gap-4 bg-[#03123d] px-5 py-5 text-white sm:flex-row sm:items-center sm:justify-between sm:px-7">
+              <div className="flex bg-[#03123d] px-5 py-5 text-white sm:px-7">
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/25 font-mono text-sm font-bold">
                     01
@@ -458,9 +468,6 @@ export default function Scanner() {
                     </p>
                   </div>
                 </div>
-                <Badge className="w-fit border border-white/20 bg-white/10 text-white hover:bg-white/10">
-                  Anchor Browser
-                </Badge>
               </div>
 
               <div className="p-5 sm:p-7">
@@ -566,7 +573,9 @@ export default function Scanner() {
                                 {d.evidence.map(item => (
                                   <p key={item}>— {item}</p>
                                 ))}
-                                <p>{copy.source}: {d.sourceUrl}</p>
+                                <p>
+                                  {copy.source}: {d.sourceUrl}
+                                </p>
                               </div>
                             </details>
                           </div>
@@ -588,6 +597,31 @@ export default function Scanner() {
                     </ul>
                   </div>
                 )}
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <Button
+                    variant="outline"
+                    className="min-h-11 rounded"
+                    onClick={() => {
+                      navigator.clipboard.writeText(result.report).then(() => {
+                        setCopied(true);
+                        track("scanner_results_copied");
+                        setTimeout(() => setCopied(false), 1500);
+                      });
+                    }}
+                  >
+                    <Copy className="mr-2 h-4 w-4" />
+                    {copied ? copy.copied : copy.copyReport}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="min-h-11 rounded"
+                    onClick={() => void downloadReport()}
+                  >
+                    <Download className="mr-2 h-4 w-4" />
+                    {copy.download}
+                  </Button>
+                </div>
               </div>
             </section>
 
@@ -617,14 +651,14 @@ export default function Scanner() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
-                <div className="flex flex-col justify-center gap-3 p-6 sm:p-8">
+                <div className="flex flex-col justify-center gap-1 border-t border-[#dbe3ee] p-6 sm:p-8 lg:border-t-0 lg:border-l">
                   <a
                     href={CONVERT.calBooking}
                     target="_blank"
                     rel="noopener noreferrer"
                     data-analytics-event="scanner_booking_click"
                     data-analytics-label={result.summary.url}
-                    className="inline-flex min-h-12 items-center justify-center rounded border border-[#174a9b] px-4 text-center text-sm font-bold text-[#174a9b] transition hover:bg-[#edf5ff]"
+                    className="inline-flex min-h-11 items-center rounded px-3 text-sm font-semibold text-[#174a9b] transition hover:bg-[#edf5ff]"
                   >
                     <CalendarDays className="mr-2 h-5 w-5" />
                     {copy.bookCall}
@@ -635,21 +669,10 @@ export default function Scanner() {
                     rel="noopener noreferrer"
                     data-analytics-event="scanner_complete_scan_whatsapp_click"
                     data-analytics-label={result.summary.url}
-                    className="inline-flex min-h-12 items-center justify-center rounded border border-[#a7d9c7] px-4 text-center text-sm font-bold text-[#087a55] transition hover:bg-[#f0fbf7]"
+                    className="inline-flex min-h-11 items-center rounded px-3 text-sm font-semibold text-[#087a55] transition hover:bg-[#f0fbf7]"
                   >
                     <MessageCircle className="mr-2 h-5 w-5" />
                     {copy.fullWhatsapp}
-                  </a>
-                  <a
-                    href={guidedAssessmentUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-analytics-event="scanner_guided_assessment_click"
-                    data-analytics-label={result.summary.url}
-                    className="flex min-h-11 items-center justify-center rounded px-3 text-center text-[13px] font-semibold text-[#174a9b] transition hover:bg-[#edf5ff]"
-                  >
-                    <Bot className="mr-2 h-4 w-4 shrink-0" />
-                    {copy.guidedCta}
                   </a>
                 </div>
               </div>
@@ -662,74 +685,29 @@ export default function Scanner() {
                 </span>
                 <div>
                   <h2 className="text-xl font-bold text-[#16181d]">
-                    {copy.planTitle}
+                    {copy.noticeTitle}
                   </h2>
                   <p className="mt-1 text-sm text-[#5c6370]">
-                    {copy.planSubtitle}
+                    {copy.noticeBody}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-lg border border-[#d9e2ee] bg-white p-4">
-                  <div className="flex items-start gap-3">
-                    <FileText className="h-5 w-5 shrink-0 text-[#174a9b]" />
-                    <div>
-                      <p className="font-bold text-[#16181d]">
-                        {copy.alwaysStep}
-                      </p>
-                      <p className="mt-1 text-xs leading-relaxed text-[#6b7280]">
-                        {copy.evidenceBody}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="min-h-11 rounded"
-                      onClick={() => {
-                        navigator.clipboard
-                          .writeText(result.report)
-                          .then(() => {
-                            setCopied(true);
-                            track("scanner_results_copied");
-                            setTimeout(() => setCopied(false), 1500);
-                          });
-                      }}
-                    >
-                      <Copy className="mr-2 h-3.5 w-3.5" />
-                      {copied ? copy.copied : copy.copyReport}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="min-h-11 rounded"
-                      onClick={() => void downloadReport()}
-                    >
-                      <Download className="mr-2 h-3.5 w-3.5" />
-                      {copy.download}
-                    </Button>
-                  </div>
-                </div>
-
+              <div className="mt-6">
                 <button
                   type="button"
                   onClick={() => navigate(path(CONVERT.badge))}
                   data-analytics-event="scanner_notice_install_click"
-                  className="group rounded-lg border border-[#bfd3ee] bg-[#edf5ff] p-4 text-left transition hover:border-[#174a9b]"
+                  className="group w-full rounded-lg border border-[#bfd3ee] bg-[#edf5ff] p-4 text-left transition hover:border-[#174a9b]"
                 >
                   <div className="flex items-start gap-3">
                     <PackageCheck className="h-5 w-5 shrink-0 text-[#174a9b]" />
                     <span>
-                      <span className="block font-bold text-[#16181d]">
-                        {copy.noticeTitle}
-                      </span>
-                      <span className="mt-1 block text-xs leading-relaxed text-[#5c6370]">
+                      <span className="block text-sm leading-relaxed text-[#5c6370]">
                         {copy.noticeBody}
                       </span>
-                      <span className="mt-4 inline-flex items-center text-sm font-bold text-[#174a9b]">
-                        {copy.noticeTitle}
+                      <span className="mt-3 inline-flex items-center text-sm font-bold text-[#174a9b]">
+                        {copy.noticeCta}
                         <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
                       </span>
                     </span>

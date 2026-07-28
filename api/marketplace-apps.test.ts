@@ -20,11 +20,10 @@ describe("RapidAct marketplace apps", () => {
   it("keeps the manifest informational and platform releases native", () => {
     const manifest = JSON.parse(read("public/badge-manifest.json"));
     expect(manifest.badgeVersion).toBe("1.0.0");
-    expect(manifest.platforms.wordpress.distribution).toBe("wordpress.org");
-    expect(manifest.platforms.shopify.distribution).toBe("shopify-app-store");
-    expect(manifest.platforms.wix.distribution).toBe("wix-app-market");
     expect(JSON.stringify(manifest)).not.toContain("downloadUrl");
     expect(JSON.stringify(manifest)).not.toContain("scriptUrl");
+    expect(JSON.stringify(manifest)).not.toContain("market");
+    expect(JSON.stringify(manifest)).not.toContain("pending");
   });
 
   it("keeps direct install as a code fallback without obsolete downloads", () => {

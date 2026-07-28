@@ -32,9 +32,10 @@ export const CONVERT = {
   example: "/example-report",
   /** Free public-page diagnostic. */
   scanner: "/scanner",
+  /** Simple commercial route for legal, assurance and delivery partners. */
+  partners: "/partners",
   /** Optional conversational route for visitors who want guided questions. */
-  guidedAssessment:
-    "https://bot.megawebs.com/rapidact-guided-assessment",
+  guidedAssessment: "https://bot.megawebs.com/rapidact-guided-assessment",
   /** Direct human help for visitors who are not ready to buy. */
   whatsapp: "https://wa.me/34679794037",
   /** AI-use notice, badge and platform implementation guidance. */

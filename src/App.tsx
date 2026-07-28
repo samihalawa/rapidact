@@ -10,6 +10,7 @@ import ContentHub from "./pages/ContentHub";
 import ContentPage from "./pages/ContentPage";
 import Report from "./pages/Report";
 import ExampleReport from "./pages/ExampleReport";
+import Partners from "./pages/Partners";
 import { MessageCircle } from "lucide-react";
 import { CONVERT } from "./config";
 import { useI18n } from "@/lib/i18n";
@@ -37,6 +38,8 @@ export default function App() {
         <Route path="/:lang/report" element={<Report />} />
         <Route path="/example-report" element={<ExampleReport />} />
         <Route path="/:lang/example-report" element={<ExampleReport />} />
+        <Route path="/partners" element={<Partners />} />
+        <Route path="/:lang/partners" element={<Partners />} />
         {/* Legacy intake path — kept so old links and payment redirects still land. */}
         <Route path="/start" element={<Report />} />
         <Route path="/:lang/start" element={<Report />} />

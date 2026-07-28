@@ -1,20 +1,42 @@
 # INDEX
 
 RapidAct scanner result integrity | optional Anchor fields can arrive as JSON null and URL edits can leave a prior result visible | normalize nullable optional evidence at the parser boundary, clear result state on every new input, and report observed counts rather than a compliance-like score | do not reject a valid scan because absent evidence is null, attribute an old result to a new URL, or imply 100 means compliant | verify deepswapai.io completes, the inspected URL matches, changing input removes the result, and the three-step result renders in five languages on phone/desktop
-RapidAct scanner engine | a broad three-page, 80-step Anchor task made the free preview slow and encouraged false-positive exploration | make one strict six-step Anchor `perform-web-task` call that inspects only the submitted rendered page | do not navigate, simulate percentage progress, silently downgrade, or treat AI-related content and badges as functional AI | verify live duration, exactly one inspected URL, functional evidence, failure/retry, five languages, PDF, phone/desktop and production
+RapidAct scanner engine | a broad three-page, 80-step Anchor task made the free preview slow and encouraged false-positive exploration | make one strict four-step Anchor `perform-web-task` call that inspects only the submitted rendered page | do not navigate, simulate percentage progress, silently downgrade, or treat AI-related content and badges as functional AI | verify live duration, exactly one inspected URL, functional evidence, failure/retry, five languages, PDF, phone/desktop and production
 RapidAct Typebot guide | a copied AI example was live but failed with `No model provided`, while an open-ended loop had no reliable completion | use one optional finite assessment, explicit Kimi model, native lead endpoint, deterministic final links | do not replace the scanner, copy an unrelated bot, or rely on a published badge as runtime proof | verify the published viewer chat through CRM capture, AI answer, clean logs and final action links
 RapidAct scanner conversion gate | the company-assessment escalation appeared before the free result and email capture happened afterwards | require a closable email gate before scanning, then show PDF and complete-scan escalation only after the result | do not let Typebot replace the direct scanner or put full-scan sales copy before results | verify close/invalid/valid modal states, one-page PDF, prefilled WhatsApp, Close sync and five languages live
 RapidAct category positioning | a product-workflow hero still made the scanner, badge and report look like the category | lead with the EU AI Act transparency practice; present tools and assessment as its methods | do not call Agents AI Ltd. a law firm or let product mechanics displace Article 50 expertise | verify hero, metadata, structured data, specialist credentials, service scope and five languages live
 RapidAct product hierarchy | the paid assessment displaced the free operational product and made RapidAct read like a report shop | lead with discover, disclose, implement, assess; keep the assessment as paid escalation | do not use the specimen, report contents, pricing, and payment FAQ as the whole above-the-fold identity | verify hero, nav, section order, metadata, footer, CTA paths, and five languages at phone/tablet/desktop widths
-RapidAct installation dashboard | marketplace-only UI stranded users before listings were public, while one generic snippet hid platform and display differences | keep official marketplaces primary and expose exact manual fallback plus real Bubble, Standard, Popup and Iframe modes | do not advertise unpublished listings, publish direct ZIPs, reuse chatbot-specific destinations, or report a copy conversion before the clipboard succeeds | verify all platform/style snippets, bundled runtime parity, clipboard success/error feedback, preview, five languages and live phone/desktop layouts
+RapidAct installation dashboard | marketplace-only UI stranded users before listings were public, while pending-publication labels exposed internal release state | show only working direct platform installation until a real listing URL is verified; retain native packages internally | do not advertise unpublished listings, expose submission status, publish direct ZIPs, or report a copy conversion before the clipboard succeeds | verify all platform/style snippets, bundled runtime parity, clipboard feedback, preview, no pending copy, five languages and live phone/desktop layouts
 RapidAct conversion page | the hero preview and later sections repeated the same offer details | show actual specimen pages in the hero and reserve detailed lists for their dedicated section | do not repeat long deliverable or free-tool explanations | verify the full page for repeated claims and a clear primary CTA
 RapidAct scanner conversion | a spinner made the public-page preview feel unfinished and gave failures no next step | show readable scan phases and a permanent full-assessment fallback | do not imply the technical preview makes a company compliant | verify progress, success, unreachable, and CTA events live
 RapidAct brand assets | redrawn SVG and generated marks drifted from the approved logo | use the exact tight-crop raster pack by purpose, plus semantic text for the wordmark and disclosure | do not redraw, stretch, or retain superseded marks | verify header, footer, badge, favicon, PWA, social, and five languages live
 RapidAct responsive report rows | three children collapsed when the grid changed from two to three columns | place the description explicitly at each breakpoint | do not rely on implicit grid flow across column-count changes | verify 640–1023px and desktop rendered rows
-RapidAct mobile header | language selector displaced the conversion action | keep compact logo, two-letter language selector, and assessment CTA visible | do not replace the CTA with a hamburger or full language name | verify the real phone header and 44px targets
+RapidAct mobile header | the language selector displaced navigation and the conversion action | keep compact logo, 44px Scan CTA and 44px menu; place the small language selector inside the drawer | do not expose the desktop nav or language selector in the phone header | verify the real phone/tablet header, drawer links, language control, no overflow and 44px targets
 RapidAct analytics | shared, local, duplicated, or pageview-only measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader and a published GA4 product-event tag | do not track localhost, emit repeated PostHog opt-ins, double-send custom events, or reuse another product property | prove exact GA4/PostHog event payloads, replay/errors, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
-RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-28 — Public installation copy describes only working paths
+
+- Status: CURRENT
+- Project/root: `rapidact`; Article 50 installer, platform guides, badge manifest and native packages.
+- Mistake: public tiles and metadata described store submission or publication state even though no verified listing URL existed.
+- Do: present the exact direct installation path for every platform; retain locally bundled WordPress, Shopify and Wix packages as internal release assets until an actual listing URL is verified.
+- Don't: expose “submission build”, “awaiting”, “pending”, directory-review labels or marketplace distribution values in the customer-facing site or public badge manifest.
+- Evidence: user correction on 2026-07-28, customer-facing `rg` sweep, simplified `BadgeInstallDashboard.tsx`, `platforms.ts` and `badge-manifest.json`.
+- Trigger terms: marketplace, directory, publication, submission build, awaiting, pending, app store, installer.
+- Verify before reuse: render installer/platform routes in five languages, search built assets for unfinished copy, byte-compare the three native runtime bundles, and add a store action only with a live verified URL.
+
+## 2026-07-28 — Mobile navigation uses one compact menu
+
+- Status: CURRENT
+- Project/root: `rapidact`; shared phone/tablet header and localized navigation.
+- Mistake: the visible language selector replaced the expected menu and left core routes unreachable from the phone header.
+- Do: keep logo, short Scan CTA and 44px menu visible; put all navigation links and the small language selector inside the drawer.
+- Don't: show the desktop nav or standalone language selector below `lg`, or hide the Scan conversion action in the drawer.
+- Evidence: user correction on 2026-07-28 plus rendered 375px proof showing 55×44 Scan, 44×44 menu and `scrollWidth === innerWidth`.
+- Trigger terms: phone, hamburger, menu, language selector, responsive header, conversion CTA.
+- Verify before reuse: open/close the drawer at phone and tablet widths, select each language, inspect all links and ensure no horizontal overflow or sub-44px controls.
 
 ## 2026-07-28 — Scanner results must remain attributable and accept provider nulls
 
@@ -32,9 +54,9 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Status: CURRENT
 - Project/root: `rapidact`; `/scanner`, `api/routers/scan.ts`, Anchor Browser `perform-web-task`.
 - Mistake: expanding the free preview to three pages and 80 browser steps made it take 61 seconds; a looser reduced prompt then misclassified Article 50 links and the RapidAct notice badge as AI systems.
-- Do: run one server-side six-step Anchor task on only the submitted rendered page; report only functional controls that accept AI input or return AI output, with directly visible disclosure evidence.
+- Do: run one server-side four-step Anchor task on only the submitted rendered page; report only functional controls that accept AI input or return AI output, with directly visible disclosure evidence.
 - Don't: navigate, click, submit, perform Article 5/Annex III review, treat AI-related content as a touchpoint, silently downgrade, or show a simulated completion percentage.
-- Evidence: direct Anchor workflow `77587` completed in 19 seconds with one visited URL and zero false touchpoints; workflow `77586` is the falsified loose-prompt comparison.
+- Evidence: direct Anchor workflow `78338` completed the requested `deepswapai.io` page in four steps with one visited URL and a directly observed face-swap finding; workflow `77586` is the falsified loose-prompt comparison.
 - Trigger terms: scanner speed, less complete, one page, Anchor Browser, prompt, progress, false positive, fallback.
 - Verify before reuse: time the production flow, require exactly one inspected URL and functional evidence, exercise partial/error/retry, inspect PDF plus EN/ES/DE/FR/IT phone/desktop UI, and prove production uses the pushed commit.
 
@@ -84,14 +106,14 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 
 ## 2026-07-27 — Marketplace-first installation keeps an exact direct fallback
 
-- Status: CURRENT
+- Status: SUPERSEDED
 - Project/root: `rapidact`; Article 50 installer, hosted badge runtime and native marketplace packages.
 - Mistake: removing manual installation entirely before public marketplace listings existed, then offering one generic script without real display or framework differences.
 - Do: keep WordPress.org, Shopify App Store and Wix App Market primary; while a verified listing URL is absent, provide stack-specific snippets for Bubble, Standard, Popup and Iframe using the canonical hosted script.
 - Don't: advertise an unpublished listing, distribute ZIPs, replace locally bundled marketplace assets with remote execution, or copy Typebot chat destinations and settings.
 - Evidence: explicit user correction on 2026-07-27, supplied Typebot screenshots as imperfect references, and 2026-07-28 live browser proof that the old copy handler could fail without feedback before the guarded clipboard path was added.
 - Trigger terms: install dashboard, Typebot Share, marketplace, manual fallback, Bubble, Standard, Popup, Iframe, GTM, React, Next.js.
-- Verify before reuse: test every platform/style generator pair, byte-compare marketplace runtime bundles, verify the clipboard contents or explicit failure state, render modal/preview at phone and desktop widths, verify EN/ES/DE/FR/IT, then inspect production.
+- Verify before reuse: preserve the native package assets, but follow the 2026-07-28 public-installation entry above until real listing URLs are verified.
 
 ## 2026-07-27 — Platform distribution is marketplace-native
 
@@ -161,14 +183,14 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 
 ## 2026-07-26 — Mobile navigation preserves the conversion path
 
-- Status: CURRENT
+- Status: SUPERSEDED
 - Project/root: `rapidact`; responsive header and localized buyer journey.
 - Mistake: allowing a large language control or generic mobile menu to replace the primary assessment action.
 - Do: keep the compact horizontal brand, two-letter language selector, and short localized assessment CTA visible on phones.
 - Don't: hide the conversion action behind a hamburger or show a full-width language picker.
 - Evidence: user correction in this task; `SiteNav.tsx` and `i18n.tsx` implement the compact header and 44px controls.
 - Trigger terms: phone, responsive, header, language selector, hamburger, conversion CTA.
-- Verify before reuse: inspect the rendered header at a real phone viewport, then desktop; confirm no wrap, clipping, overlap, or sub-44px control.
+- Verify before reuse: follow the 2026-07-28 compact-menu entry above; keep the Scan CTA visible and move language selection into the drawer.
 
 ## 2026-07-28 — Analytics is production-only and forwards product events through GTM
 
@@ -201,4 +223,4 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Don't: treat a technical badge as a universal Article 50 certificate or assign provider/deployer duties from a public signature match alone.
 - Evidence: `public/rapidact-badge.js`, `src/pages/Guide.tsx`, `src/config.ts`, `api/badge.test.ts`, and the 2026-07-26 multilingual content sweep.
 - Trigger terms: badge, plugin, app, extension, evidence log, pricing tier, Article 50 role, conversion copy.
-- Verify before reuse: keep the underlying claim discipline, but use the 2026-07-27 marketplace status and remove direct-download claims.
+- Verify before reuse: keep the underlying claim discipline, but follow the 2026-07-28 public-installation entry and keep marketplace release state off customer-facing surfaces.

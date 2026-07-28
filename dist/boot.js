@@ -48242,6 +48242,7 @@ var anchorOutputSchema = {
     scan_status: { type: "string", enum: ["COMPLETE", "PARTIAL"] },
     pages_visited: {
       type: "array",
+      minItems: 1,
       maxItems: 1,
       items: {
         type: "object",
@@ -48316,7 +48317,7 @@ var anchorResultSchema = external_exports.object({
       url: external_exports.string().min(1),
       title: external_exports.string()
     })
-  ).max(1),
+  ).min(1).max(1),
   ai_touchpoints: external_exports.array(
     external_exports.object({
       name: external_exports.string().min(1),
@@ -48355,8 +48356,14 @@ var startResponseSchema = external_exports.object({
   })
 });
 var statusResponseSchema = external_exports.object({
-  status: external_exports.string(),
-  result: external_exports.unknown().optional()
+  status: external_exports.string().optional(),
+  result: external_exports.unknown().optional(),
+  data: external_exports.object({
+    status: external_exports.string().optional(),
+    result: external_exports.unknown().optional()
+  }).optional()
+}).refine((payload) => Boolean(payload.status ?? payload.data?.status), {
+  message: "Anchor status response is missing a status"
 });
 var ANCHOR_SCAN_PROMPT = `Perform one fast visual inspection of only the supplied rendered page, then return.
 
@@ -48381,7 +48388,7 @@ function buildAnchorScanRequest(url2) {
     provider: "gemini",
     model: "gemini-2.5-flash-lite",
     detect_elements: false,
-    max_steps: 6,
+    max_steps: 4,
     output_schema: anchorOutputSchema,
     async: true
   };
@@ -48416,12 +48423,13 @@ async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
     }
   );
   const payload = statusResponseSchema.parse(await readJson(response));
-  const status = payload.status.toUpperCase();
+  const status = (payload.status ?? payload.data?.status ?? "").toUpperCase();
+  const result = payload.result ?? payload.data?.result;
   if (status === "RUNNING" || status === "PENDING" || status === "QUEUED") {
     return { status: "running" };
   }
   if (status === "FAILED" || status === "CANCELLED") {
-    const message = typeof payload.result === "string" && payload.result.trim() ? payload.result.trim() : `anchor-${status.toLowerCase()}`;
+    const message = typeof result === "string" && result.trim() ? result.trim() : `anchor-${status.toLowerCase()}`;
     return { status: "failed", error: message };
   }
   if (status !== "COMPLETED") {
@@ -48430,7 +48438,7 @@ async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
       error: `anchor-unknown-status-${status.toLowerCase()}`
     };
   }
-  let rawResult = payload.result;
+  let rawResult = result;
   if (typeof rawResult === "string") {
     try {
       rawResult = JSON.parse(rawResult);
@@ -48443,6 +48451,27 @@ async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
     return { status: "failed", error: "anchor-invalid-result" };
   }
   return { status: "completed", observed: parsed.data };
+}
+function canonicalHost(value) {
+  return new URL(value).hostname.toLowerCase().replace(/^www\./, "");
+}
+function hostsAreRelated(first, second) {
+  const a = canonicalHost(first);
+  const b = canonicalHost(second);
+  return a === b || a.endsWith(`.${b}`) || b.endsWith(`.${a}`);
+}
+function anchorResultMatchesUrl(requestedUrl, observed) {
+  const evidenceUrls = [
+    ...observed.pages_visited.map((page) => page.url),
+    ...observed.ai_touchpoints.map((touchpoint) => touchpoint.source_url)
+  ];
+  return evidenceUrls.length > 0 && evidenceUrls.every((url2) => {
+    try {
+      return hostsAreRelated(requestedUrl, url2);
+    } catch {
+      return false;
+    }
+  });
 }
 function scoreOf(detected) {
   let score = 100;
@@ -48542,7 +48571,9 @@ var TOKEN_TTL_MS = 30 * 60 * 1e3;
 function rateLimited(ip) {
   const now = Date.now();
   const windowMs = 10 * 60 * 1e3;
-  const list = (hits.get(ip) ?? []).filter((timestamp2) => now - timestamp2 < windowMs);
+  const list = (hits.get(ip) ?? []).filter(
+    (timestamp2) => now - timestamp2 < windowMs
+  );
   if (list.length >= 20) return true;
   list.push(now);
   hits.set(ip, list);
@@ -48578,14 +48609,17 @@ function readWorkflowToken(token) {
   if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) {
     throw new Error("invalid-scan-token");
   }
-  const payload = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8"));
+  const payload = JSON.parse(
+    Buffer.from(encoded, "base64url").toString("utf8")
+  );
   if (!payload.workflowId || !payload.url || !Number.isFinite(payload.createdAt) || Date.now() - payload.createdAt > TOKEN_TTL_MS) {
     throw new Error("expired-scan-token");
   }
   return payload;
 }
 async function persistCompletedScan(workflowId, result) {
-  if (result.status !== "completed" || persistedWorkflows.has(workflowId)) return;
+  if (result.status !== "completed" || persistedWorkflows.has(workflowId))
+    return;
   persistedWorkflows.add(workflowId);
   try {
     await getDb().insert(scans).values({
@@ -48616,7 +48650,11 @@ var scanRouter = createRouter({
       const workflowId = await startAnchorScan(url2, env.anchorBrowserApiKey);
       return {
         ok: true,
-        token: createWorkflowToken({ workflowId, url: url2, createdAt: Date.now() })
+        token: createWorkflowToken({
+          workflowId,
+          url: url2,
+          createdAt: Date.now()
+        })
       };
     } catch (error48) {
       console.error("anchor-scan-start-failed", error48);
@@ -48634,8 +48672,18 @@ var scanRouter = createRouter({
       };
     }
     try {
-      const state = await readAnchorScan(workflow.workflowId, env.anchorBrowserApiKey);
+      const state = await readAnchorScan(
+        workflow.workflowId,
+        env.anchorBrowserApiKey
+      );
       if (state.status !== "completed") return state;
+      if (!anchorResultMatchesUrl(workflow.url, state.observed)) {
+        console.error("anchor-scan-domain-mismatch", {
+          requestedUrl: workflow.url,
+          observedUrls: state.observed.pages_visited.map((page) => page.url)
+        });
+        return { status: "failed", error: "anchor-domain-mismatch" };
+      }
       const result = {
         status: "completed",
         result: mapAnchorResult(workflow.url, state.observed)
@@ -48652,7 +48700,9 @@ var scanRouter = createRouter({
       const rows = await getDb().select().from(scans);
       return {
         totalScans: rows.length,
-        avgScore: rows.length ? Math.round(rows.reduce((total, row) => total + (row.score ?? 0), 0) / rows.length) : null
+        avgScore: rows.length ? Math.round(
+          rows.reduce((total, row) => total + (row.score ?? 0), 0) / rows.length
+        ) : null
       };
     } catch {
       return { totalScans: 0, avgScore: null };
@@ -48725,8 +48775,10 @@ async function syncScannerLeadToClose({
     )
   );
   const detail = [
-    source === "report-intake" ? "RapidAct \u20AC99 assessment intake" : "RapidAct scanner lead",
+    source === "report-intake" ? "RapidAct \u20AC99 assessment intake" : source === "partner-intake" ? "RapidAct partner enquiry" : "RapidAct scanner lead",
     `Source: ${source}`,
+    company ? `Company: ${company}` : "",
+    contactName ? `Contact: ${contactName}` : "",
     url2 ? `Website: ${url2}` : "",
     ...details
   ].filter(Boolean).join("\n");
@@ -48746,7 +48798,7 @@ async function syncScannerLeadToClose({
     "/lead/",
     apiKey,
     {
-      name: source === "report-intake" && company ? `RapidAct Assessment \u2014 ${company}` : `RapidAct Scanner \u2014 ${websiteName(url2)}`,
+      name: source === "report-intake" && company ? `RapidAct Assessment \u2014 ${company}` : source === "partner-intake" && company ? `RapidAct Partner \u2014 ${company}` : `RapidAct Scanner \u2014 ${websiteName(url2)}`,
       url: url2,
       description: detail,
       contacts: [
@@ -48767,7 +48819,12 @@ var leadsRouter = createRouter({
     external_exports.object({
       email: external_exports.string().email().max(255),
       url: external_exports.string().max(1e3).optional(),
-      source: external_exports.string().max(64).optional()
+      source: external_exports.string().max(64).optional(),
+      name: external_exports.string().max(160).optional(),
+      company: external_exports.string().max(200).optional(),
+      partnerType: external_exports.string().max(80).optional(),
+      clientVolume: external_exports.string().max(80).optional(),
+      notes: external_exports.string().max(2e3).optional()
     })
   ).mutation(async ({ input }) => {
     let stored = false;
@@ -48785,7 +48842,14 @@ var leadsRouter = createRouter({
       crm = await syncScannerLeadToClose({
         email: input.email,
         url: input.url,
-        source: input.source ?? "scanner"
+        source: input.source ?? "scanner",
+        company: input.company,
+        contactName: input.name,
+        details: [
+          input.partnerType ? `Partner type: ${input.partnerType}` : "",
+          input.clientVolume ? `Potential client volume: ${input.clientVolume}` : "",
+          input.notes ? `Context: ${input.notes}` : ""
+        ].filter(Boolean)
       });
     } catch {
       crm = "failed";

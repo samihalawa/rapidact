@@ -8,30 +8,24 @@ export interface PlatformGuide {
   detectionNote: string;
   freeInstall: string[];
   commonWidgets: string[];
-  marketplace?: {
-    label: string;
-    status: string;
-    url?: string;
-  };
 }
 
 export const PLATFORMS: PlatformGuide[] = [
   {
     slug: "wordpress",
     name: "WordPress",
-    metaTitle:
-      "AI disclosure on WordPress — native Article 50 plugin | RapidAct",
+    metaTitle: "AI disclosure on WordPress — Article 50 setup | RapidAct",
     metaDescription:
-      "Add a clear AI-interaction notice to WordPress with the native RapidAct plugin. Bundled code, configurable copy, no visitor tracking.",
-    h1: "AI disclosure on WordPress — native plugin",
+      "Add a clear AI-interaction notice to WordPress with one configurable RapidAct script and no visitor tracking.",
+    h1: "Add an AI disclosure notice to WordPress",
     intro:
       "If you provide an AI assistant under your own service or brand, Article 50(1) may require a clear notice before the first interaction. The free RapidAct notice gives you that visible technical layer without replacing the role and scope assessment.",
     detectionNote:
       "Run the free website scan first. A live browser performs a fast inspection of the submitted rendered page for functional AI touchpoints, disclosure wording and exact source evidence. Other pages, private plugins, back-office AI and contractual roles remain outside the free scan.",
     freeInstall: [
-      "Find RapidAct AI Disclosure in Plugins → Add New after its WordPress.org publication.",
-      "Install, activate, then open Settings → RapidAct AI Disclosure.",
-      "Enter the optional Badge ID and choose the language, message, system, details URL, position and colour.",
+      "Open the RapidAct installer and choose WordPress.",
+      "Copy the generated script into a Custom HTML block or your shared footer.",
+      "Choose the language, message, position and colour.",
       "Open the live page in a private window and verify the notice is visible before a visitor starts the AI interaction.",
     ],
     commonWidgets: [
@@ -43,10 +37,6 @@ export const PLATFORMS: PlatformGuide[] = [
       "Chatbase",
       "JivoChat",
     ],
-    marketplace: {
-      label: "WordPress.org plugin",
-      status: "Submission build ready · awaiting directory publication",
-    },
   },
   {
     slug: "wix",
@@ -54,23 +44,19 @@ export const PLATFORMS: PlatformGuide[] = [
     metaTitle:
       "AI disclosure on Wix — EU AI Act Article 50 setup guide | RapidAct",
     metaDescription:
-      "Add a configurable AI-interaction notice to Wix through the native RapidAct App Market app and embedded-script extension.",
-    h1: "AI disclosure on Wix — native marketplace app",
+      "Add a configurable AI-interaction notice to Wix through the site-wide Custom Code panel.",
+    h1: "Add an AI disclosure notice to Wix",
     intro:
-      "Wix sites often run Wix Chat, Tidio or another AI app. Your exact duty depends on whether you are the provider or deployer and what the system does. Where a direct-interaction notice is required, RapidAct adds the visible notice through a native dashboard setup.",
+      "Wix sites often run Wix Chat, Tidio or another AI app. Your exact duty depends on whether you are the provider or deployer and what the system does. Where a direct-interaction notice is required, RapidAct adds the visible notice through Wix Custom Code.",
     detectionNote:
       "Run the free scan first: a live browser inspects the published Wix experience, including client-rendered widgets, and records any visible AI touchpoints or disclosure wording with the source URL.",
     freeInstall: [
-      "Install RapidAct from the Wix App Market after publication.",
-      "Open RapidAct Setup in the Wix dashboard and enter the optional Badge ID and language.",
-      "Activate the notice, then publish the site.",
+      "Open the RapidAct installer and choose Wix.",
+      "Copy the generated script into Settings → Custom Code → Body end.",
+      "Choose the language and notice details, then publish the site.",
       "Open the published page in a private window and verify the notice appears before the first AI interaction.",
     ],
     commonWidgets: ["Wix Chat (AI)", "Tidio", "Chatbase", "Custom GPT apps"],
-    marketplace: {
-      label: "Wix App Market app",
-      status: "Submitted to Wix for App Market review",
-    },
   },
   {
     slug: "shopify",
@@ -78,16 +64,16 @@ export const PLATFORMS: PlatformGuide[] = [
     metaTitle:
       "AI disclosure on Shopify — EU AI Act Article 50 for online stores | RapidAct",
     metaDescription:
-      "Add a clear AI-interaction notice to Shopify through a native OAuth app and theme app embed, with configurable merchant settings.",
-    h1: "AI disclosure on Shopify — native app embed",
+      "Add a clear AI-interaction notice to Shopify through the storefront theme with configurable wording.",
+    h1: "Add an AI disclosure notice to Shopify",
     intro:
       "If your store provides an AI shopping or support assistant, you may need a clear direct-interaction notice. AI-generated content has separate rules, so first classify the system and your role; use the notice where it fits.",
     detectionNote:
       "The free scan opens the submitted rendered storefront page, then records functional AI touchpoints, disclosure wording and exact source evidence. It does not open other pages or infer whether an image was AI-generated when that is not directly observable.",
     freeInstall: [
-      "Install RapidAct from the Shopify App Store after publication and complete Shopify OAuth.",
-      "Open the app, follow its theme-editor link and enable the RapidAct app embed.",
-      "Enter the Badge ID, language and notice details, then save the theme.",
+      "Open the RapidAct installer and choose Shopify.",
+      "Copy the generated script into the theme before the closing body tag.",
+      "Choose the language and notice details, then save the theme.",
       "Open the storefront in a private window and verify the disclosure is visible before the first AI interaction.",
     ],
     commonWidgets: [
@@ -97,10 +83,6 @@ export const PLATFORMS: PlatformGuide[] = [
       "Chatty",
       "Rep AI",
     ],
-    marketplace: {
-      label: "Shopify App Store app",
-      status: "Submission build ready · awaiting App Store publication",
-    },
   },
   {
     slug: "tidio",

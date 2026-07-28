@@ -67,6 +67,11 @@ export interface LeadInput {
   email: string;
   url?: string;
   source?: string;
+  name?: string;
+  company?: string;
+  partnerType?: string;
+  clientVolume?: string;
+  notes?: string;
 }
 
 export interface LeadResult {

@@ -94,23 +94,12 @@ export default function PlatformPage() {
               </li>
             ))}
           </ol>
-          {guide.marketplace ? (
-            <div className="mt-6 flex flex-wrap items-center gap-3 border border-[#d8d8d2] bg-[#f7f7f5] p-4">
-              <span className="inline-flex min-h-11 items-center justify-center rounded bg-[#16181d] px-5 text-sm font-bold text-white">
-                {guide.marketplace.label}
-              </span>
-              <span className="mono text-[11px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
-                {guide.marketplace.status}
-              </span>
-            </div>
-          ) : (
-            <Link
-              to={path("/article-50#install")}
-              className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
-            >
-              Add the AI-use notice
-            </Link>
-          )}
+          <Link
+            to={path("/article-50#install")}
+            className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
+          >
+            Add the AI-use notice
+          </Link>
           <p className="mt-4 flex items-start gap-2 text-sm text-[#5c6370]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />
             Need to confirm which systems and duties apply? The €99 company

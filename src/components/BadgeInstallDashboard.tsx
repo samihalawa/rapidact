@@ -1,19 +1,16 @@
 import { useMemo, useState, type ComponentType } from "react";
-import { Link } from "react-router";
 import {
   AppWindow,
   BadgeCheck,
   Blocks,
   Braces,
   Check,
-  Clock3,
   Code2,
   Copy,
   ExternalLink,
   Frame,
   LayoutPanelTop,
   MessageSquareMore,
-  PackageCheck,
   PanelsTopLeft,
   ShoppingBag,
   Tag,
@@ -34,13 +31,11 @@ import {
 import { track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 import type { GuideCopy } from "@/data/localizedGuide";
-import { PLATFORMS } from "@/data/platforms";
 
 type PlatformOption = {
   id: BadgePlatform;
   name: string;
   label: string;
-  marketplace: boolean;
   icon: ComponentType<{
     className?: string;
     "aria-hidden"?: boolean | "true" | "false";
@@ -51,57 +46,49 @@ const platforms: PlatformOption[] = [
   {
     id: "wordpress",
     name: "WordPress",
-    label: "WordPress.org",
-    marketplace: true,
+    label: "Custom HTML",
     icon: PanelsTopLeft,
   },
   {
     id: "shopify",
     name: "Shopify",
-    label: "App Store",
-    marketplace: true,
+    label: "Theme code",
     icon: ShoppingBag,
   },
   {
     id: "wix",
     name: "Wix",
-    label: "App Market",
-    marketplace: true,
+    label: "Custom code",
     icon: Blocks,
   },
   {
     id: "html",
     name: "HTML & JavaScript",
     label: "One script",
-    marketplace: false,
     icon: Code2,
   },
   {
     id: "react",
     name: "React",
     label: "Component",
-    marketplace: false,
     icon: Braces,
   },
   {
     id: "nextjs",
     name: "Next.js",
     label: "Client component",
-    marketplace: false,
     icon: AppWindow,
   },
   {
     id: "gtm",
     name: "Google Tag Manager",
     label: "Custom HTML tag",
-    marketplace: false,
     icon: Tag,
   },
   {
     id: "webflow",
     name: "Webflow",
     label: "Custom code",
-    marketplace: false,
     icon: LayoutPanelTop,
   },
 ];
@@ -155,18 +142,13 @@ export default function BadgeInstallDashboard({
 }: {
   guideCopy: GuideCopy;
 }) {
-  const { lang, path } = useI18n();
+  const { lang } = useI18n();
   const copy = INSTALLER_COPY[lang];
   const [selected, setSelected] = useState<PlatformOption | null>(null);
   const [display, setDisplay] = useState<BadgeDisplay>("bubble");
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">(
     "idle"
   );
-  const selectedPlatformGuide = selected
-    ? PLATFORMS.find(platform => platform.slug === selected.id)
-    : undefined;
-  const marketplaceUrl = selectedPlatformGuide?.marketplace?.url;
-
   const snippet = useMemo(
     () =>
       selected
@@ -309,12 +291,8 @@ export default function BadgeInstallDashboard({
                   <span className="grid h-11 w-11 place-items-center border border-[#b9d8ff] bg-[#eef6ff] text-[#174a9b]">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
-                  <span
-                    className={`mono text-[9px] font-bold tracking-[0.08em] uppercase ${
-                      platform.marketplace ? "text-[#0c7251]" : "text-[#6b7280]"
-                    }`}
-                  >
-                    {platform.marketplace ? copy.marketplace : copy.direct}
+                  <span className="mono text-[9px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
+                    {copy.direct}
                   </span>
                 </div>
                 <p className="mt-4 text-[15px] leading-tight font-bold text-[#16181d] sm:text-base">
@@ -345,7 +323,7 @@ export default function BadgeInstallDashboard({
             <>
               <DialogHeader className="border-b border-[#d8d8d2] px-5 py-5 pr-16 text-left sm:px-7">
                 <p className="mono text-[10px] font-bold tracking-[0.1em] text-[#174a9b] uppercase">
-                  {selected.marketplace ? copy.marketplace : copy.direct}
+                  {copy.direct}
                 </p>
                 <DialogTitle className="text-2xl leading-tight font-bold tracking-tight text-[#16181d] sm:text-3xl">
                   {copy.installOn} {selected.name}
@@ -410,81 +388,7 @@ export default function BadgeInstallDashboard({
 
               <div className="grid min-w-0 gap-0 lg:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)]">
                 <div className="min-w-0 p-5 sm:p-7">
-                  {selected.marketplace ? (
-                    <div
-                      className={`border p-4 ${
-                        marketplaceUrl
-                          ? "border-[#b8dfd1] bg-[#f1faf6]"
-                          : "border-[#e5d5a8] bg-[#fffaf0]"
-                      }`}
-                    >
-                      <div className="flex items-start gap-3">
-                        {marketplaceUrl ? (
-                          <PackageCheck
-                            className="mt-0.5 h-5 w-5 shrink-0 text-[#0c7251]"
-                            aria-hidden="true"
-                          />
-                        ) : (
-                          <Clock3
-                            className="mt-0.5 h-5 w-5 shrink-0 text-[#8a6314]"
-                            aria-hidden="true"
-                          />
-                        )}
-                        <div>
-                          <h3
-                            className={`text-sm font-bold ${
-                              marketplaceUrl
-                                ? "text-[#123f31]"
-                                : "text-[#65480c]"
-                            }`}
-                          >
-                            {marketplaceUrl
-                              ? selectedPlatformGuide?.marketplace?.label
-                              : copy.marketplacePending}
-                          </h3>
-                          <p
-                            className={`mt-1 text-xs leading-relaxed ${
-                              marketplaceUrl
-                                ? "text-[#3f6659]"
-                                : "text-[#735f35]"
-                            }`}
-                          >
-                            {marketplaceUrl
-                              ? selectedPlatformGuide?.marketplace?.status
-                              : copy.marketplacePendingBody}
-                          </p>
-                          {marketplaceUrl ? (
-                            <a
-                              href={marketplaceUrl}
-                              target="_blank"
-                              rel="noopener"
-                              className="mt-3 inline-flex min-h-11 items-center gap-2 border border-[#0c7251] bg-[#0c7251] px-3 text-xs font-bold text-white transition hover:bg-[#095f44] focus-visible:ring-2 focus-visible:ring-[#0c7251] focus-visible:ring-offset-2 focus-visible:outline-none"
-                            >
-                              {copy.installFrom}{" "}
-                              {selectedPlatformGuide?.marketplace?.label}
-                              <ExternalLink
-                                className="h-3.5 w-3.5"
-                                aria-hidden="true"
-                              />
-                            </a>
-                          ) : (
-                            <Link
-                              to={path(`/platforms/${selected.id}`)}
-                              className="mt-3 inline-flex min-h-11 items-center gap-2 border border-[#8a6314] bg-white px-3 text-xs font-bold text-[#65480c] transition hover:bg-[#fff5d9] focus-visible:ring-2 focus-visible:ring-[#8a6314] focus-visible:ring-offset-2 focus-visible:outline-none"
-                            >
-                              {copy.viewStatus}
-                              <ExternalLink
-                                className="h-3.5 w-3.5"
-                                aria-hidden="true"
-                              />
-                            </Link>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ) : null}
-
-                  <div className={selected.marketplace ? "mt-6" : ""}>
+                  <div>
                     <p className="eyebrow text-[#174a9b]">
                       {copy.manualFallback}
                     </p>

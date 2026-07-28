@@ -3,16 +3,11 @@ import type { Lang } from "@/lib/content";
 export type InstallerCopy = {
   choosePlatform: string;
   choosePlatformBody: string;
-  marketplace: string;
   direct: string;
   recommended: string;
   installOn: string;
   chooseDisplay: string;
   installAndVerify: string;
-  marketplacePending: string;
-  marketplacePendingBody: string;
-  installFrom: string;
-  viewStatus: string;
   manualFallback: string;
   manualFallbackBody: string;
   code: string;
@@ -34,19 +29,13 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
   en: {
     choosePlatform: "Choose your platform",
     choosePlatformBody:
-      "Start with the official marketplace app where available. Until publication, use the exact manual fallback for your stack.",
-    marketplace: "Marketplace",
+      "Choose your platform to get the exact working installation steps and code.",
     direct: "Direct install",
     recommended: "Recommended",
     installOn: "Install RapidAct on",
     chooseDisplay: "Choose how the notice appears",
     installAndVerify: "Install and verify",
-    marketplacePending: "Marketplace publication pending",
-    marketplacePendingBody:
-      "The native app is prepared, but the public listing is not yet available. Use the manual fallback now or check the latest review status.",
-    installFrom: "Install from",
-    viewStatus: "View marketplace status",
-    manualFallback: "Manual fallback",
+    manualFallback: "Installation",
     manualFallbackBody:
       "Paste this code in the location shown, publish, then open the live page as a visitor.",
     code: "Installation code",
@@ -89,19 +78,13 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
   es: {
     choosePlatform: "Elige tu plataforma",
     choosePlatformBody:
-      "Empieza con la app oficial cuando esté disponible. Hasta su publicación, usa el método manual exacto para tu web.",
-    marketplace: "Marketplace",
+      "Elige tu plataforma para obtener los pasos y el código exactos de instalación.",
     direct: "Instalación directa",
     recommended: "Recomendado",
     installOn: "Instala RapidAct en",
     chooseDisplay: "Elige cómo aparece el aviso",
     installAndVerify: "Instala y comprueba",
-    marketplacePending: "Publicación pendiente",
-    marketplacePendingBody:
-      "La app nativa está preparada, pero la ficha pública aún no está disponible. Usa la alternativa manual o consulta el estado de revisión.",
-    installFrom: "Instalar desde",
-    viewStatus: "Ver estado del marketplace",
-    manualFallback: "Alternativa manual",
+    manualFallback: "Instalación",
     manualFallbackBody:
       "Pega este código en la ubicación indicada, publica y abre la web como visitante.",
     code: "Código de instalación",
@@ -144,19 +127,13 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
   de: {
     choosePlatform: "Plattform auswählen",
     choosePlatformBody:
-      "Nutzen Sie die offizielle Marketplace-App, sobald sie verfügbar ist. Bis dahin erhalten Sie den passenden manuellen Einbau.",
-    marketplace: "Marketplace",
+      "Wählen Sie Ihre Plattform für die passenden Installationsschritte und den fertigen Code.",
     direct: "Direkte Installation",
     recommended: "Empfohlen",
     installOn: "RapidAct installieren auf",
     chooseDisplay: "Darstellung des Hinweises",
     installAndVerify: "Installieren und prüfen",
-    marketplacePending: "Veröffentlichung ausstehend",
-    marketplacePendingBody:
-      "Die native App ist vorbereitet, die öffentliche Listung aber noch nicht verfügbar. Nutzen Sie vorerst den manuellen Einbau oder prüfen Sie den Review-Status.",
-    installFrom: "Installieren über",
-    viewStatus: "Marketplace-Status ansehen",
-    manualFallback: "Manueller Einbau",
+    manualFallback: "Installation",
     manualFallbackBody:
       "Code an der angegebenen Stelle einfügen, veröffentlichen und die Live-Seite als Besucher öffnen.",
     code: "Installationscode",
@@ -199,19 +176,13 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
   fr: {
     choosePlatform: "Choisissez votre plateforme",
     choosePlatformBody:
-      "Privilégiez l’application officielle lorsqu’elle est disponible. Avant sa publication, utilisez l’installation manuelle adaptée.",
-    marketplace: "Marketplace",
+      "Choisissez votre plateforme pour obtenir les étapes et le code d’installation exacts.",
     direct: "Installation directe",
     recommended: "Recommandé",
     installOn: "Installer RapidAct sur",
     chooseDisplay: "Choisissez l’affichage",
     installAndVerify: "Installer et vérifier",
-    marketplacePending: "Publication en attente",
-    marketplacePendingBody:
-      "L’application native est prête, mais sa fiche publique n’est pas encore disponible. Utilisez l’alternative manuelle ou consultez l’état de la révision.",
-    installFrom: "Installer depuis",
-    viewStatus: "Voir l’état du marketplace",
-    manualFallback: "Alternative manuelle",
+    manualFallback: "Installation",
     manualFallbackBody:
       "Collez ce code à l’emplacement indiqué, publiez puis ouvrez la page comme un visiteur.",
     code: "Code d’installation",
@@ -254,19 +225,13 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
   it: {
     choosePlatform: "Scegli la piattaforma",
     choosePlatformBody:
-      "Usa l’app ufficiale quando disponibile. Fino alla pubblicazione, segui l’installazione manuale adatta al tuo sito.",
-    marketplace: "Marketplace",
+      "Scegli la piattaforma per ottenere i passaggi e il codice di installazione esatti.",
     direct: "Installazione diretta",
     recommended: "Consigliato",
     installOn: "Installa RapidAct su",
     chooseDisplay: "Scegli come appare l’avviso",
     installAndVerify: "Installa e verifica",
-    marketplacePending: "Pubblicazione in attesa",
-    marketplacePendingBody:
-      "L’app nativa è pronta, ma la scheda pubblica non è ancora disponibile. Usa l’alternativa manuale o controlla lo stato della revisione.",
-    installFrom: "Installa da",
-    viewStatus: "Vedi stato marketplace",
-    manualFallback: "Alternativa manuale",
+    manualFallback: "Installazione",
     manualFallbackBody:
       "Incolla il codice nella posizione indicata, pubblica e apri il sito come visitatore.",
     code: "Codice di installazione",

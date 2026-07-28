@@ -20,6 +20,7 @@ const anchorOutputSchema = {
     scan_status: { type: "string", enum: ["COMPLETE", "PARTIAL"] },
     pages_visited: {
       type: "array",
+      minItems: 1,
       maxItems: 1,
       items: {
         type: "object",
@@ -97,6 +98,7 @@ const anchorResultSchema = z.object({
         title: z.string(),
       })
     )
+    .min(1)
     .max(1),
   ai_touchpoints: z.array(
     z.object({
@@ -140,10 +142,20 @@ const startResponseSchema = z.object({
   }),
 });
 
-const statusResponseSchema = z.object({
-  status: z.string(),
-  result: z.unknown().optional(),
-});
+const statusResponseSchema = z
+  .object({
+    status: z.string().optional(),
+    result: z.unknown().optional(),
+    data: z
+      .object({
+        status: z.string().optional(),
+        result: z.unknown().optional(),
+      })
+      .optional(),
+  })
+  .refine(payload => Boolean(payload.status ?? payload.data?.status), {
+    message: "Anchor status response is missing a status",
+  });
 
 export type AnchorObservedResult = z.infer<typeof anchorResultSchema>;
 
@@ -171,7 +183,7 @@ export function buildAnchorScanRequest(url: string) {
     provider: "gemini",
     model: "gemini-2.5-flash-lite",
     detect_elements: false,
-    max_steps: 6,
+    max_steps: 4,
     output_schema: anchorOutputSchema,
     async: true,
   };
@@ -221,15 +233,16 @@ export async function readAnchorScan(
     }
   );
   const payload = statusResponseSchema.parse(await readJson(response));
-  const status = payload.status.toUpperCase();
+  const status = (payload.status ?? payload.data?.status ?? "").toUpperCase();
+  const result = payload.result ?? payload.data?.result;
 
   if (status === "RUNNING" || status === "PENDING" || status === "QUEUED") {
     return { status: "running" };
   }
   if (status === "FAILED" || status === "CANCELLED") {
     const message =
-      typeof payload.result === "string" && payload.result.trim()
-        ? payload.result.trim()
+      typeof result === "string" && result.trim()
+        ? result.trim()
         : `anchor-${status.toLowerCase()}`;
     return { status: "failed", error: message };
   }
@@ -240,7 +253,7 @@ export async function readAnchorScan(
     };
   }
 
-  let rawResult = payload.result;
+  let rawResult = result;
   if (typeof rawResult === "string") {
     try {
       rawResult = JSON.parse(rawResult);
@@ -253,6 +266,37 @@ export async function readAnchorScan(
     return { status: "failed", error: "anchor-invalid-result" };
   }
   return { status: "completed", observed: parsed.data };
+}
+
+function canonicalHost(value: string) {
+  return new URL(value).hostname.toLowerCase().replace(/^www\./, "");
+}
+
+function hostsAreRelated(first: string, second: string) {
+  const a = canonicalHost(first);
+  const b = canonicalHost(second);
+  return a === b || a.endsWith(`.${b}`) || b.endsWith(`.${a}`);
+}
+
+export function anchorResultMatchesUrl(
+  requestedUrl: string,
+  observed: AnchorObservedResult
+) {
+  const evidenceUrls = [
+    ...observed.pages_visited.map(page => page.url),
+    ...observed.ai_touchpoints.map(touchpoint => touchpoint.source_url),
+  ];
+
+  return (
+    evidenceUrls.length > 0 &&
+    evidenceUrls.every(url => {
+      try {
+        return hostsAreRelated(requestedUrl, url);
+      } catch {
+        return false;
+      }
+    })
+  );
 }
 
 function scoreOf(detected: ScanFinding[]): number {

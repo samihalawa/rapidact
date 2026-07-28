@@ -7,6 +7,7 @@ type ScannerCopy = {
   title: string;
   intro: string;
   scope: string;
+  urlLabel: string;
   placeholder: string;
   scan: string;
   scanning: string;
@@ -28,7 +29,6 @@ type ScannerCopy = {
   fullCta: string;
   fullWhatsapp: string;
   bookCall: string;
-  guidedCta: string;
   failureTitle: string;
   rateLimited: string;
   invalidUrl: string;
@@ -46,14 +46,12 @@ type ScannerCopy = {
   disclosureMissing: string;
   noSignaturesTitle: string;
   noSignaturesBody: string;
-  planTitle: string;
-  planSubtitle: string;
-  alwaysStep: string;
   evidenceBody: string;
   assessmentTitle: string;
   assessmentBody: string;
   noticeTitle: string;
   noticeBody: string;
+  noticeCta: string;
   copied: string;
   copyReport: string;
   download: string;
@@ -78,15 +76,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Check one page for visible AI",
     intro:
       "Enter a public URL. RapidAct checks the rendered page for visitor-facing AI controls and visible disclosure.",
-    scope:
-      "Fast preview · one page · no form submissions",
+    scope: "Fast preview · one page · no form submissions",
+    urlLabel: "Website address",
     placeholder: "your-site.com",
     scan: "Scan website",
     scanning: "Scanning",
     emailGateLabel: "Receive your scan",
-    emailGateTitle: "Where should we unlock the result?",
+    emailGateTitle: "Where should we send the result?",
     emailGateBody:
-      "Enter your work email to run the scan and access the one-page PDF. Any valid email address works.",
+      "Enter your email to run the scan and receive the one-page PDF. Any valid email address works.",
     emailGateField: "Work email",
     emailGateHint: "We use it for this scan and relevant follow-up.",
     emailGateContinue: "Run free scan",
@@ -104,7 +102,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       {
         label: "Checking the rendered page",
         detail:
-          "Anchor is checking visible functional AI and disclosure evidence.",
+          "The secure browser is checking visible AI and disclosure evidence.",
+      },
+      {
+        label: "Preparing your result",
+        detail: "Structuring the observed evidence and your next action.",
       },
     ],
     fullLabel: "Free scan complete",
@@ -113,7 +115,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     fullCta: "Start assessment · €99",
     fullWhatsapp: "Request complete scan",
     bookCall: "Book a specialist call",
-    guidedCta: "Prefer guided questions? Use the AI guide",
     failureTitle: "This page could not be scanned",
     rateLimited: "Scan limit reached. Try again in a few minutes.",
     invalidUrl: "Enter a valid public website address.",
@@ -138,9 +139,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesTitle: "No visible AI touchpoints observed",
     noSignaturesBody:
       "Anchor did not directly observe a functional AI touchpoint on this page. This is not evidence that none exists elsewhere.",
-    planTitle: "Your implementation preview",
-    planSubtitle: "Copy the result or download the one-page PDF.",
-    alwaysStep: "Keep implementation evidence",
     evidenceBody:
       "Record the live URL, approved wording, provider or deployer role, owner, publication date and desktop/mobile check. The notice does not create an evidence log.",
     assessmentTitle: "Assess the whole company · €99",
@@ -149,6 +147,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Install the visitor notice · Free",
     noticeBody:
       "Copy one script, tailor the message and check the published result.",
+    noticeCta: "Open installer",
     copied: "Copied",
     copyReport: "Copy results",
     download: "Download PDF",
@@ -181,15 +180,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Comprueba una página en busca de IA visible",
     intro:
       "Introduce una URL pública. RapidAct revisa la página renderizada para detectar controles de IA y avisos visibles.",
-    scope:
-      "Vista previa rápida · una página · sin enviar formularios",
+    scope: "Vista previa rápida · una página · sin enviar formularios",
+    urlLabel: "Dirección del sitio web",
     placeholder: "tu-web.es",
     scan: "Escanear web",
     scanning: "Escaneando",
     emailGateLabel: "Recibe tu escaneo",
-    emailGateTitle: "¿Dónde desbloqueamos el resultado?",
+    emailGateTitle: "¿Dónde enviamos el resultado?",
     emailGateBody:
-      "Introduce tu correo de trabajo para ejecutar el escaneo y acceder al PDF de una página. Se acepta cualquier correo válido.",
+      "Introduce tu correo para ejecutar el escaneo y recibir el PDF de una página. Se acepta cualquier correo válido.",
     emailGateField: "Correo de trabajo",
     emailGateHint: "Lo usamos para este escaneo y su seguimiento.",
     emailGateContinue: "Ejecutar escaneo gratis",
@@ -206,7 +205,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
       {
         label: "Revisando la página renderizada",
-        detail: "Anchor comprueba funciones de IA visibles y sus avisos.",
+        detail: "El navegador seguro comprueba la IA visible y sus avisos.",
+      },
+      {
+        label: "Preparando el resultado",
+        detail: "Estructurando las pruebas observadas y la siguiente acción.",
       },
     ],
     fullLabel: "Escaneo gratuito completado",
@@ -215,7 +218,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     fullCta: "Iniciar evaluación · 99 €",
     fullWhatsapp: "Solicitar escaneo completo",
     bookCall: "Reservar llamada con un especialista",
-    guidedCta: "¿Prefieres preguntas guiadas? Usa la guía de IA",
     failureTitle: "No se ha podido escanear la página",
     rateLimited: "Límite de escaneos alcanzado. Inténtalo en unos minutos.",
     invalidUrl: "Introduce una dirección web pública válida.",
@@ -240,9 +242,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesTitle: "No se observaron puntos de IA visibles",
     noSignaturesBody:
       "Anchor no observó directamente una función de IA interactiva en esta página. Esto no demuestra que no exista en otras páginas.",
-    planTitle: "Vista previa de implementación",
-    planSubtitle: "Copia el resultado o descarga el PDF de una página.",
-    alwaysStep: "Conserva las pruebas de implementación",
     evidenceBody:
       "Registra la URL, el texto aprobado, la función, el responsable, la fecha y la comprobación en móvil y ordenador. El aviso no crea un registro de pruebas.",
     assessmentTitle: "Evalúa toda la empresa · 99 €",
@@ -251,6 +250,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Instala el aviso para visitantes · Gratis",
     noticeBody:
       "Copia un script, adapta el mensaje y comprueba el resultado publicado.",
+    noticeCta: "Abrir instalador",
     copied: "Copiado",
     copyReport: "Copiar resultados",
     download: "Descargar PDF",
@@ -283,15 +283,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Eine Seite auf sichtbare KI prüfen",
     intro:
       "Geben Sie eine öffentliche URL ein. RapidAct prüft die gerenderte Seite auf KI-Funktionen für Besucher und sichtbare Hinweise.",
-    scope:
-      "Schnelle Vorschau · eine Seite · keine Formulare",
+    scope: "Schnelle Vorschau · eine Seite · keine Formulare",
+    urlLabel: "Website-Adresse",
     placeholder: "ihre-website.de",
     scan: "Website scannen",
     scanning: "Scan läuft",
     emailGateLabel: "Scan erhalten",
-    emailGateTitle: "Wohin dürfen wir das Ergebnis freischalten?",
+    emailGateTitle: "Wohin sollen wir das Ergebnis senden?",
     emailGateBody:
-      "Geben Sie Ihre geschäftliche E-Mail ein, um den Scan zu starten und auf das einseitige PDF zuzugreifen. Jede gültige E-Mail-Adresse funktioniert.",
+      "Geben Sie Ihre E-Mail ein, um den Scan zu starten und das einseitige PDF zu erhalten. Jede gültige E-Mail-Adresse funktioniert.",
     emailGateField: "Geschäftliche E-Mail",
     emailGateHint:
       "Wir verwenden sie für diesen Scan und relevante Nachfragen.",
@@ -310,7 +310,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
       {
         label: "Gerenderte Seite wird geprüft",
-        detail: "Anchor prüft sichtbare funktionale KI und deren Hinweise.",
+        detail: "Der sichere Browser prüft sichtbare KI und deren Hinweise.",
+      },
+      {
+        label: "Ergebnis wird vorbereitet",
+        detail: "Beobachtete Nachweise und nächste Schritte werden geordnet.",
       },
     ],
     fullLabel: "Kostenloser Scan abgeschlossen",
@@ -319,7 +323,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     fullCta: "Bewertung starten · 99 €",
     fullWhatsapp: "Vollständigen Scan anfordern",
     bookCall: "Fachgespräch buchen",
-    guidedCta: "Lieber geführte Fragen? KI-Leitfaden öffnen",
     failureTitle: "Diese Seite konnte nicht gescannt werden",
     rateLimited: "Scan-Limit erreicht. Versuchen Sie es in einigen Minuten.",
     invalidUrl: "Geben Sie eine gültige öffentliche Webadresse ein.",
@@ -344,9 +347,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesTitle: "Keine sichtbaren KI-Kontaktpunkte beobachtet",
     noSignaturesBody:
       "Anchor hat auf dieser Seite keinen funktionalen KI-Kontaktpunkt direkt beobachtet. Dies beweist nicht, dass anderswo keiner existiert.",
-    planTitle: "Ihre Implementierungsvorschau",
-    planSubtitle: "Ergebnis kopieren oder als einseitiges PDF herunterladen.",
-    alwaysStep: "Implementierungsnachweise sichern",
     evidenceBody:
       "Dokumentieren Sie URL, Freigabetext, Rolle, Verantwortlichen, Datum und Desktop-/Mobilprüfung. Der Hinweis erstellt kein Nachweisprotokoll.",
     assessmentTitle: "Gesamtes Unternehmen bewerten · 99 €",
@@ -355,6 +355,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Besucherhinweis installieren · Kostenlos",
     noticeBody:
       "Ein Skript kopieren, Aussage anpassen und Veröffentlichung prüfen.",
+    noticeCta: "Installer öffnen",
     copied: "Kopiert",
     copyReport: "Ergebnisse kopieren",
     download: "PDF herunterladen",
@@ -387,15 +388,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Vérifiez une page pour l’IA visible",
     intro:
       "Saisissez une URL publique. RapidAct vérifie la page rendue pour repérer les fonctions IA destinées aux visiteurs et les mentions visibles.",
-    scope:
-      "Aperçu rapide · une page · aucun formulaire envoyé",
+    scope: "Aperçu rapide · une page · aucun formulaire envoyé",
+    urlLabel: "Adresse du site web",
     placeholder: "votre-site.fr",
     scan: "Scanner le site",
     scanning: "Analyse en cours",
     emailGateLabel: "Recevoir votre analyse",
-    emailGateTitle: "Où devons-nous débloquer le résultat ?",
+    emailGateTitle: "Où devons-nous envoyer le résultat ?",
     emailGateBody:
-      "Saisissez votre e-mail professionnel pour lancer l’analyse et accéder au PDF d’une page. Toute adresse e-mail valide fonctionne.",
+      "Saisissez votre e-mail pour lancer l’analyse et recevoir le PDF d’une page. Toute adresse e-mail valide fonctionne.",
     emailGateField: "E-mail professionnel",
     emailGateHint:
       "Nous l’utilisons pour cette analyse et son suivi pertinent.",
@@ -414,7 +415,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
       {
         label: "Inspection de la page rendue",
-        detail: "Anchor vérifie les fonctions IA visibles et leurs mentions.",
+        detail: "Le navigateur sécurisé vérifie l’IA visible et ses mentions.",
+      },
+      {
+        label: "Préparation du résultat",
+        detail: "Structuration des preuves observées et de l’action suivante.",
       },
     ],
     fullLabel: "Analyse gratuite terminée",
@@ -423,7 +428,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     fullCta: "Commencer l’évaluation · 99 €",
     fullWhatsapp: "Demander l’analyse complète",
     bookCall: "Réserver un appel spécialiste",
-    guidedCta: "Vous préférez être guidé ? Ouvrir le guide IA",
     failureTitle: "Cette page n’a pas pu être scannée",
     rateLimited: "Limite de scans atteinte. Réessayez dans quelques minutes.",
     invalidUrl: "Saisissez une adresse de site public valide.",
@@ -448,9 +452,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesTitle: "Aucun point de contact IA visible observé",
     noSignaturesBody:
       "Anchor n’a observé directement aucun point de contact IA fonctionnel sur cette page. Cela ne prouve pas qu’il n’en existe pas ailleurs.",
-    planTitle: "Aperçu de mise en œuvre",
-    planSubtitle: "Copiez le résultat ou téléchargez le PDF d’une page.",
-    alwaysStep: "Conserver les preuves de mise en œuvre",
     evidenceBody:
       "Conservez l’URL, le texte approuvé, le rôle, le responsable, la date et la vérification ordinateur/mobile. L’avis ne crée pas de journal de preuves.",
     assessmentTitle: "Évaluer toute l’entreprise · 99 €",
@@ -459,6 +460,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Installer l’avis visiteur · Gratuit",
     noticeBody:
       "Copiez un script, adaptez le message et vérifiez le résultat publié.",
+    noticeCta: "Ouvrir l’installation",
     copied: "Copié",
     copyReport: "Copier les résultats",
     download: "Télécharger le PDF",
@@ -491,15 +493,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Controlla una pagina per l’IA visibile",
     intro:
       "Inserisci un URL pubblico. RapidAct controlla la pagina renderizzata per rilevare funzioni IA rivolte ai visitatori e avvisi visibili.",
-    scope:
-      "Anteprima rapida · una pagina · nessun modulo inviato",
+    scope: "Anteprima rapida · una pagina · nessun modulo inviato",
+    urlLabel: "Indirizzo del sito web",
     placeholder: "il-tuo-sito.it",
     scan: "Scansiona sito",
     scanning: "Scansione",
     emailGateLabel: "Ricevi la scansione",
-    emailGateTitle: "Dove dobbiamo sbloccare il risultato?",
+    emailGateTitle: "Dove dobbiamo inviare il risultato?",
     emailGateBody:
-      "Inserisci l’e-mail di lavoro per avviare la scansione e accedere al PDF di una pagina. Qualsiasi indirizzo e-mail valido è accettato.",
+      "Inserisci l’e-mail per avviare la scansione e ricevere il PDF di una pagina. Qualsiasi indirizzo e-mail valido è accettato.",
     emailGateField: "E-mail di lavoro",
     emailGateHint: "La usiamo per questa scansione e il relativo seguito.",
     emailGateContinue: "Avvia scansione gratuita",
@@ -516,7 +518,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
       {
         label: "Controllo della pagina renderizzata",
-        detail: "Anchor verifica le funzioni IA visibili e i relativi avvisi.",
+        detail: "Il browser sicuro verifica l’IA visibile e i relativi avvisi.",
+      },
+      {
+        label: "Preparazione del risultato",
+        detail: "Organizzazione delle prove osservate e della prossima azione.",
       },
     ],
     fullLabel: "Scansione gratuita completata",
@@ -525,7 +531,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     fullCta: "Inizia valutazione · 99 €",
     fullWhatsapp: "Richiedi scansione completa",
     bookCall: "Prenota una chiamata specialistica",
-    guidedCta: "Preferisci domande guidate? Apri la guida IA",
     failureTitle: "Impossibile scansionare la pagina",
     rateLimited: "Limite di scansioni raggiunto. Riprova tra qualche minuto.",
     invalidUrl: "Inserisci un indirizzo web pubblico valido.",
@@ -550,9 +555,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noSignaturesTitle: "Nessun punto di contatto IA visibile osservato",
     noSignaturesBody:
       "Anchor non ha osservato direttamente funzioni IA interattive su questa pagina. Ciò non dimostra che non esistano altrove.",
-    planTitle: "Anteprima di implementazione",
-    planSubtitle: "Copia il risultato o scarica il PDF di una pagina.",
-    alwaysStep: "Conserva le prove di implementazione",
     evidenceBody:
       "Registra URL, testo approvato, ruolo, responsabile, data e verifica desktop/mobile. L’avviso non crea un registro di prove.",
     assessmentTitle: "Valuta tutta l’azienda · 99 €",
@@ -561,6 +563,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Installa l’avviso visitatore · Gratis",
     noticeBody:
       "Copia uno script, adatta il messaggio e verifica il risultato pubblicato.",
+    noticeCta: "Apri installazione",
     copied: "Copiato",
     copyReport: "Copia risultati",
     download: "Scarica PDF",

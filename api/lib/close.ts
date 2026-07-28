@@ -96,8 +96,12 @@ export async function syncScannerLeadToClose({
   const detail = [
     source === "report-intake"
       ? "RapidAct €99 assessment intake"
-      : "RapidAct scanner lead",
+      : source === "partner-intake"
+        ? "RapidAct partner enquiry"
+        : "RapidAct scanner lead",
     `Source: ${source}`,
+    company ? `Company: ${company}` : "",
+    contactName ? `Contact: ${contactName}` : "",
     url ? `Website: ${url}` : "",
     ...details,
   ]
@@ -124,7 +128,9 @@ export async function syncScannerLeadToClose({
       name:
         source === "report-intake" && company
           ? `RapidAct Assessment — ${company}`
-          : `RapidAct Scanner — ${websiteName(url)}`,
+          : source === "partner-intake" && company
+            ? `RapidAct Partner — ${company}`
+            : `RapidAct Scanner — ${websiteName(url)}`,
       url,
       description: detail,
       contacts: [

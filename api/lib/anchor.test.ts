@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   ANCHOR_SCAN_PROMPT,
+  anchorResultMatchesUrl,
   buildAnchorScanRequest,
   mapAnchorResult,
   readAnchorScan,
@@ -50,7 +51,7 @@ describe("Anchor scanner contract", () => {
     expect(request.provider).toBe("gemini");
     expect(request.model).toBe("gemini-2.5-flash-lite");
     expect(request.detect_elements).toBe(false);
-    expect(request.max_steps).toBe(6);
+    expect(request.max_steps).toBe(4);
     expect(request.async).toBe(true);
     expect(request.output_schema.properties.pages_visited.maxItems).toBe(1);
     expect(request.output_schema.properties.scan_status.enum).toEqual([
@@ -147,6 +148,42 @@ describe("Anchor scanner contract", () => {
     if (state.status === "completed") {
       expect(state.observed.ai_touchpoints[0].disclosure_text).toBeUndefined();
     }
+  });
+
+  it("accepts a completed result nested under data", async () => {
+    const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
+      void args;
+      return new Response(
+        JSON.stringify({
+          data: {
+            status: "COMPLETED",
+            result: JSON.stringify(observed),
+          },
+        }),
+        { status: 200 }
+      );
+    });
+
+    const state = await readAnchorScan(
+      "78008",
+      "test-key",
+      fetchMock as typeof fetch
+    );
+
+    expect(state.status).toBe("completed");
+  });
+
+  it("rejects results whose observed host does not match the requested host", () => {
+    expect(anchorResultMatchesUrl("https://www.example.com", observed)).toBe(
+      true
+    );
+    expect(
+      anchorResultMatchesUrl("https://deepswapai.io", {
+        ...observed,
+        pages_visited: [{ url: "https://oulang.ai", title: "Oulang" }],
+        ai_touchpoints: [],
+      })
+    ).toBe(false);
   });
 
   it("rejects completed task text instead of generating substitute results", async () => {

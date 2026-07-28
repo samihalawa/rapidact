@@ -18,6 +18,8 @@ const EN: Dictionary = {
   "nav.guides": "Guides",
   "nav.scan": "Free scan",
   "nav.scanShort": "Scan",
+  "nav.menu": "Open menu",
+  "nav.language": "Language",
   "nav.request": "Start assessment",
   "nav.requestShort": "Start",
   whatsapp: "Ask on WhatsApp",
@@ -55,7 +57,8 @@ const EN: Dictionary = {
   "report.body":
     "A consistent, reviewable structure tailored to the systems your company operates.",
   "specialist.label": "Specialist practice",
-  "specialist.title": "Production AI experience, grounded in governance and audit",
+  "specialist.title":
+    "Production AI experience, grounded in governance and audit",
   "specialist.verify": "View Sami on LinkedIn",
   "specialist.role": "Founder & EU AI Act transparency specialist",
   "specialist.human":
@@ -65,12 +68,10 @@ const EN: Dictionary = {
     "AI systems, MLOps & governance",
   "specialist.credential.systems-governance.body":
     "Completed three-course specialization in RAG/LLM architecture, MLOps/LLMOps, AI risk, audit and governance.",
-  "specialist.credential.iso-foundations.title":
-    "ISO/IEC 22989:2023",
+  "specialist.credential.iso-foundations.title": "ISO/IEC 22989:2023",
   "specialist.credential.iso-foundations.body":
     "Completed the BSI-authorized course in AI concepts, terminology and management foundations.",
-  "specialist.credential.applied-ai.title":
-    "EU AI Act & ISO readiness",
+  "specialist.credential.applied-ai.title": "EU AI Act & ISO readiness",
   "specialist.credential.applied-ai.body":
     "Completed coursework in the EU AI Act, ISO 42001/23894, impact assessment, trustworthy AI and secure agent integrations.",
   "trust.commitment": "Product model",
@@ -145,6 +146,8 @@ const ES: Dictionary = {
   "nav.guides": "Guías",
   "nav.scan": "Escaneo gratis",
   "nav.scanShort": "Escanear",
+  "nav.menu": "Abrir menú",
+  "nav.language": "Idioma",
   "nav.request": "Iniciar evaluación",
   "nav.requestShort": "Empezar",
   whatsapp: "Preguntar por WhatsApp",
@@ -182,7 +185,8 @@ const ES: Dictionary = {
   "report.body":
     "Una estructura coherente y revisable, adaptada a los sistemas que utiliza tu empresa.",
   "specialist.label": "Práctica especializada",
-  "specialist.title": "Experiencia en IA de producción, reforzada con gobernanza y auditoría",
+  "specialist.title":
+    "Experiencia en IA de producción, reforzada con gobernanza y auditoría",
   "specialist.verify": "Ver a Sami en LinkedIn",
   "specialist.role": "Fundador y especialista en transparencia de la Ley de IA",
   "specialist.human":
@@ -192,12 +196,10 @@ const ES: Dictionary = {
     "Sistemas de IA, MLOps y gobernanza",
   "specialist.credential.systems-governance.body":
     "Especialización de tres cursos completada en RAG/LLM, MLOps/LLMOps, riesgo, auditoría y gobernanza de IA.",
-  "specialist.credential.iso-foundations.title":
-    "ISO/IEC 22989:2023",
+  "specialist.credential.iso-foundations.title": "ISO/IEC 22989:2023",
   "specialist.credential.iso-foundations.body":
     "Curso autorizado por BSI completado sobre conceptos, terminología y fundamentos de gestión de IA.",
-  "specialist.credential.applied-ai.title":
-    "Ley de IA y preparación ISO",
+  "specialist.credential.applied-ai.title": "Ley de IA y preparación ISO",
   "specialist.credential.applied-ai.body":
     "Formación completada en Ley de IA, ISO 42001/23894, impacto, IA confiable e integraciones seguras de agentes.",
   "trust.commitment": "Modelo",
@@ -271,6 +273,8 @@ const DE: Dictionary = {
   "nav.guides": "Leitfäden",
   "nav.scan": "Gratis-Scan",
   "nav.scanShort": "Scannen",
+  "nav.menu": "Menü öffnen",
+  "nav.language": "Sprache",
   "nav.request": "Bewertung starten",
   "nav.requestShort": "Start",
   whatsapp: "Per WhatsApp fragen",
@@ -308,7 +312,8 @@ const DE: Dictionary = {
   "report.body":
     "Eine einheitliche, prüfbare Struktur für die Systeme, die Ihr Unternehmen einsetzt.",
   "specialist.label": "Fachpraxis",
-  "specialist.title": "Produktive KI-Erfahrung, fundiert durch Governance und Audit",
+  "specialist.title":
+    "Produktive KI-Erfahrung, fundiert durch Governance und Audit",
   "specialist.verify": "Sami auf LinkedIn ansehen",
   "specialist.role": "Gründer & Spezialist für AI-Act-Transparenz",
   "specialist.human":
@@ -318,12 +323,10 @@ const DE: Dictionary = {
     "KI-Systeme, MLOps & Governance",
   "specialist.credential.systems-governance.body":
     "Dreiteilige Spezialisierung zu RAG/LLM, MLOps/LLMOps, KI-Risiko, Audit und Governance abgeschlossen.",
-  "specialist.credential.iso-foundations.title":
-    "ISO/IEC 22989:2023",
+  "specialist.credential.iso-foundations.title": "ISO/IEC 22989:2023",
   "specialist.credential.iso-foundations.body":
     "Von BSI autorisierter Kurs zu KI-Begriffen, Terminologie und Managementgrundlagen abgeschlossen.",
-  "specialist.credential.applied-ai.title":
-    "EU AI Act & ISO-Bereitschaft",
+  "specialist.credential.applied-ai.title": "EU AI Act & ISO-Bereitschaft",
   "specialist.credential.applied-ai.body":
     "Weiterbildung zu EU AI Act, ISO 42001/23894, Folgenabschätzung, vertrauenswürdiger KI und sicheren Agenten.",
   "trust.commitment": "Modell",
@@ -398,6 +401,8 @@ const FR: Dictionary = {
   "nav.guides": "Guides",
   "nav.scan": "Scan gratuit",
   "nav.scanShort": "Scanner",
+  "nav.menu": "Ouvrir le menu",
+  "nav.language": "Langue",
   "nav.request": "Commencer l’évaluation",
   "nav.requestShort": "Commencer",
   whatsapp: "Poser une question sur WhatsApp",
@@ -435,7 +440,8 @@ const FR: Dictionary = {
   "report.body":
     "Une structure cohérente et vérifiable, adaptée aux systèmes utilisés par votre entreprise.",
   "specialist.label": "Pratique spécialisée",
-  "specialist.title": "Expérience de l’IA en production, ancrée dans la gouvernance et l’audit",
+  "specialist.title":
+    "Expérience de l’IA en production, ancrée dans la gouvernance et l’audit",
   "specialist.verify": "Voir Sami sur LinkedIn",
   "specialist.role": "Fondateur et spécialiste de la transparence AI Act",
   "specialist.human":
@@ -445,12 +451,10 @@ const FR: Dictionary = {
     "Systèmes IA, MLOps et gouvernance",
   "specialist.credential.systems-governance.body":
     "Spécialisation de trois cours achevée en RAG/LLM, MLOps/LLMOps, risque, audit et gouvernance IA.",
-  "specialist.credential.iso-foundations.title":
-    "ISO/IEC 22989:2023",
+  "specialist.credential.iso-foundations.title": "ISO/IEC 22989:2023",
   "specialist.credential.iso-foundations.body":
     "Cours autorisé par BSI achevé sur les concepts, la terminologie et les bases de gestion de l’IA.",
-  "specialist.credential.applied-ai.title":
-    "AI Act et préparation ISO",
+  "specialist.credential.applied-ai.title": "AI Act et préparation ISO",
   "specialist.credential.applied-ai.body":
     "Formation achevée en AI Act, ISO 42001/23894, analyse d’impact, IA de confiance et agents sécurisés.",
   "trust.commitment": "Modèle",
@@ -524,6 +528,8 @@ const IT: Dictionary = {
   "nav.guides": "Guide",
   "nav.scan": "Scansione gratuita",
   "nav.scanShort": "Scansiona",
+  "nav.menu": "Apri menu",
+  "nav.language": "Lingua",
   "nav.request": "Inizia la valutazione",
   "nav.requestShort": "Inizia",
   whatsapp: "Chiedi su WhatsApp",
@@ -561,7 +567,8 @@ const IT: Dictionary = {
   "report.body":
     "Una struttura coerente e verificabile, adattata ai sistemi utilizzati dalla tua azienda.",
   "specialist.label": "Pratica specializzata",
-  "specialist.title": "Esperienza IA in produzione, fondata su governance e audit",
+  "specialist.title":
+    "Esperienza IA in produzione, fondata su governance e audit",
   "specialist.verify": "Vedi Sami su LinkedIn",
   "specialist.role": "Fondatore e specialista di trasparenza AI Act",
   "specialist.human":
@@ -571,12 +578,10 @@ const IT: Dictionary = {
     "Sistemi IA, MLOps e governance",
   "specialist.credential.systems-governance.body":
     "Specializzazione di tre corsi completata in RAG/LLM, MLOps/LLMOps, rischio, audit e governance IA.",
-  "specialist.credential.iso-foundations.title":
-    "ISO/IEC 22989:2023",
+  "specialist.credential.iso-foundations.title": "ISO/IEC 22989:2023",
   "specialist.credential.iso-foundations.body":
     "Corso autorizzato BSI completato su concetti, terminologia e basi di gestione dell’IA.",
-  "specialist.credential.applied-ai.title":
-    "AI Act e preparazione ISO",
+  "specialist.credential.applied-ai.title": "AI Act e preparazione ISO",
   "specialist.credential.applied-ai.body":
     "Formazione completata su AI Act, ISO 42001/23894, impatto, IA affidabile e integrazioni sicure di agenti.",
   "trust.commitment": "Modello",

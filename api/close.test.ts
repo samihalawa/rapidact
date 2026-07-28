@@ -83,6 +83,39 @@ describe("RapidAct scanner lead sync", () => {
     expect(noteBody.note).toContain("https://example.com/pricing");
   });
 
+  it("keeps partner identity when adding a note to an existing contact", async () => {
+    const fetchImpl = vi
+      .fn()
+      .mockResolvedValueOnce(
+        jsonResponse({
+          data: [
+            {
+              id: "cont_partner",
+              lead_id: "lead_existing_partner",
+              emails: [{ email: "partner@example.com" }],
+            },
+          ],
+        })
+      )
+      .mockResolvedValueOnce(jsonResponse({ id: "acti_partner" }));
+
+    await syncScannerLeadToClose({
+      email: "partner@example.com",
+      url: "https://partner.example",
+      source: "partner-intake",
+      company: "Partner Advisory",
+      contactName: "Alex Partner",
+      details: ["Partner type: legal"],
+      apiKey: "test-key",
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+    });
+
+    const noteBody = JSON.parse(fetchImpl.mock.calls[1][1].body as string);
+    expect(noteBody.note).toContain("Company: Partner Advisory");
+    expect(noteBody.note).toContain("Contact: Alex Partner");
+    expect(noteBody.note).toContain("Partner type: legal");
+  });
+
   it("creates a company assessment lead with the full intake context", async () => {
     const fetchImpl = vi
       .fn()
@@ -105,5 +138,34 @@ describe("RapidAct scanner lead sync", () => {
     expect(createBody.description).toContain("Reference: RAPID1");
     expect(createBody.description).toContain("AI systems: chatbot, content");
     expect(createBody.contacts[0].name).toBe("Buyer Ltd");
+  });
+
+  it("creates a partner lead with the partner profile and opportunity context", async () => {
+    const fetchImpl = vi
+      .fn()
+      .mockResolvedValueOnce(jsonResponse({ data: [], cursor: null }))
+      .mockResolvedValueOnce(jsonResponse({ id: "lead_partner" }));
+
+    await syncScannerLeadToClose({
+      email: "partner@example.com",
+      url: "https://partner.example",
+      source: "partner-intake",
+      company: "Partner Advisory",
+      contactName: "Alex Partner",
+      details: [
+        "Partner type: Legal & privacy advisory",
+        "Potential client volume: 1–5 clients",
+      ],
+      apiKey: "test-key",
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+    });
+
+    const createBody = JSON.parse(fetchImpl.mock.calls[1][1].body as string);
+    expect(createBody.name).toBe("RapidAct Partner — Partner Advisory");
+    expect(createBody.description).toContain("RapidAct partner enquiry");
+    expect(createBody.description).toContain(
+      "Partner type: Legal & privacy advisory"
+    );
+    expect(createBody.contacts[0].name).toBe("Alex Partner");
   });
 });
