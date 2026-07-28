@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct scanner engine | retaining the static HTML scanner or adding a downgrade path after Anchor was chosen would preserve competing behavior | make one server-side Anchor `perform-web-task` call with a bounded prompt and structured output the only scan engine | do not simulate deep-scan progress, silently downgrade, or return substitute results when Anchor fails | verify live Anchor response shape, inspected URLs/evidence/blockers, explicit failure/retry, five languages, PDF, phone/desktop and production
 RapidAct Typebot guide | a copied AI example was live but failed with `No model provided`, while an open-ended loop had no reliable completion | use one optional finite assessment, explicit Kimi model, native lead endpoint, deterministic final links | do not replace the scanner, copy an unrelated bot, or rely on a published badge as runtime proof | verify the published viewer chat through CRM capture, AI answer, clean logs and final action links
 RapidAct scanner conversion gate | the company-assessment escalation appeared before the free result and email capture happened afterwards | require a closable email gate before scanning, then show PDF and complete-scan escalation only after the result | do not let Typebot replace the direct scanner or put full-scan sales copy before results | verify close/invalid/valid modal states, one-page PDF, prefilled WhatsApp, Close sync and five languages live
 RapidAct category positioning | a product-workflow hero still made the scanner, badge and report look like the category | lead with the EU AI Act transparency practice; present tools and assessment as its methods | do not call Agents AI Ltd. a law firm or let product mechanics displace Article 50 expertise | verify hero, metadata, structured data, specialist credentials, service scope and five languages live
@@ -13,6 +14,17 @@ RapidAct mobile header | language selector displaced the conversion action | kee
 RapidAct analytics | shared or duplicated measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, one GTM loader, Consent Mode, and Cloudflare gateway | do not double-load gtag or reuse another product property | prove live events, replay, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+
+## 2026-07-28 — Anchor is the primary public scanner engine
+
+- Status: CURRENT
+- Project/root: `rapidact`; `/scanner`, `api/routers/scan.ts`, Anchor Browser `perform-web-task`.
+- Mistake: preserving the one-page static HTML signature scan as primary—or as a fallback—after the user explicitly chose a prompted Anchor Browser scan with no fallback behavior.
+- Do: make one bounded server-side Anchor task with `url`, `prompt`, `output_schema`, and finite steps the only scan engine; derive UI results solely from returned observations.
+- Don't: run competing scans, silently downgrade on failure, hardcode compliance outcomes, or simulate deep-scan progress.
+- Evidence: explicit user corrections on 2026-07-28; current source advances progress from elapsed time and fetches one HTML response, while the current Anchor API exposes prompted tasks and structured output.
+- Trigger terms: scanner engine, Anchor Browser, perform-web-task, prompt, deep scan, progress, fallback, no fallback.
+- Verify before reuse: read a real Anchor response and visited-route evidence, exercise success/partial/error/retry paths, inspect PDF and EN/ES/DE/FR/IT phone/desktop UI, then prove the deployed production route uses the pushed commit.
 
 ## 2026-07-27 — Typebot augments the scanner with one finite guided assessment
 
@@ -107,11 +119,11 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Status: SUPERSEDED
 - Project/root: `rapidact`; free website scanner and paid-assessment conversion.
 - Mistake: a lone loading spinner made the real public-page scan feel like a placeholder, while blocked scans had no strong continuation path.
-- Do: show concise phases for the actual fetch, page read, signature check, and preview build; keep a compact €99 full-assessment CTA visible before and after results.
+- Do: historical note only; the 2026-07-28 Anchor-only scanner entry supersedes its static-signature phases and failure fallback.
 - Don't: say the automated page preview performs a complete company scan or makes the site compliant.
 - Evidence: user correction in this task; `src/pages/Scanner.tsx` now separates the public-page preview from private systems, roles, disclosures, and the written action plan.
 - Trigger terms: scanner, spinner, progress, preview, fallback, full scan, compliance.
-- Verify before reuse: render progress through completion; test reachable, unreachable, and transport-error states; confirm scan and fallback analytics events fire once.
+- Verify before reuse: do not restore this failure CTA or signature-scan architecture; follow the current Anchor-only entry.
 
 ## 2026-07-26 — Exact tight-crop pack is the only active RapidAct mark
 

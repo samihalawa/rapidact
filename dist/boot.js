@@ -27607,6 +27607,7 @@ var init_env = __esm({
     env = {
       appId: required2("APP_ID"),
       appSecret: required2("APP_SECRET"),
+      anchorBrowserApiKey: required2("ANCHOR_BROWSER_API_KEY"),
       isProduction: process.env.NODE_ENV === "production",
       databaseUrl: required2("DATABASE_URL")
     };
@@ -34446,6 +34447,9 @@ var t = initTRPC.context().create({
 });
 var createRouter = t.router;
 var publicQuery = t.procedure;
+
+// api/routers/scan.ts
+import { createHmac, timingSafeEqual } from "node:crypto";
 
 // node_modules/zod/v4/classic/external.js
 var external_exports = {};
@@ -48215,1436 +48219,422 @@ function date4(params) {
 // node_modules/zod/v4/classic/external.js
 config(en_default());
 
-// contracts/signatures.ts
-var AI_SIGNATURES = [
-  {
-    "id": "intercom",
-    "name": "Intercom / Fin AI Agent",
-    "vendor": "Intercom",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "intercomcdn.com",
-        "widget.intercom.io"
-      ],
-      "iframes": [
-        "intercom"
-      ],
-      "dom": [
-        "#intercom-container",
-        "iframe[name*='intercom']",
-        ".intercom-lightweight-app"
-      ],
-      "globals": [
-        "Intercom",
-        "intercomSettings"
-      ]
-    }
-  },
-  {
-    "id": "zendesk",
-    "name": "Zendesk Messaging / AI Agents",
-    "vendor": "Zendesk",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "static.zdassets.com",
-        "zdassets.com/ekr"
-      ],
-      "iframes": [
-        "zendesk"
-      ],
-      "dom": [
-        ".zEWidget-launcher",
-        "#launcher",
-        "iframe[title*='Zendesk']",
-        "iframe[src*='zendesk.com/embeddables']"
-      ],
-      "globals": [
-        "zE",
-        "$zopim"
-      ]
-    }
-  },
-  {
-    "id": "tidio",
-    "name": "Tidio (+ Lyro AI)",
-    "vendor": "Tidio",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "code.tidio.co"
-      ],
-      "iframes": [
-        "tidio"
-      ],
-      "dom": [
-        "#tidio-chat",
-        "iframe[src*='tidio']"
-      ],
-      "globals": [
-        "tidioChatApi"
-      ]
-    }
-  },
-  {
-    "id": "tawkto",
-    "name": "Tawk.to (+ AI Assist)",
-    "vendor": "Tawk.to",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "embed.tawk.to"
-      ],
-      "iframes": [
-        "tawk.to"
-      ],
-      "dom": [
-        "iframe[src*='tawk.to']"
-      ],
-      "globals": [
-        "Tawk_API"
-      ]
-    }
-  },
-  {
-    "id": "crisp",
-    "name": "Crisp (+ MagicReply AI)",
-    "vendor": "Crisp",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "client.crisp.chat"
-      ],
-      "iframes": [
-        "crisp"
-      ],
-      "dom": [
-        ".crisp-client",
-        "iframe[src*='crisp']"
-      ],
-      "globals": [
-        "CRISP_WEBSITE_ID",
-        "$crisp"
-      ]
-    }
-  },
-  {
-    "id": "livechat",
-    "name": "LiveChat / ChatBot.com",
-    "vendor": "Text Inc.",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "cdn.livechatinc.com",
-        "static-chat.com",
-        "chatbot.com"
-      ],
-      "iframes": [
-        "livechatinc",
-        "chatbot"
-      ],
-      "dom": [
-        "#chat-widget-container",
-        "iframe[src*='livechatinc']"
-      ],
-      "globals": [
-        "LiveChatWidget",
-        "__lc"
-      ]
-    }
-  },
-  {
-    "id": "drift",
-    "name": "Drift / Salesloft AI",
-    "vendor": "Salesloft",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "js.driftt.com",
-        "drift.com"
-      ],
-      "iframes": [
-        "drift"
-      ],
-      "dom": [
-        "#drift-widget",
-        "iframe[src*='drift']"
-      ],
-      "globals": [
-        "drift",
-        "driftt"
-      ]
-    }
-  },
-  {
-    "id": "hubspot",
-    "name": "HubSpot Chat / AI",
-    "vendor": "HubSpot",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "js.hs-scripts.com",
-        "js.hscollectedforms.net",
-        "js.hs-analytics.net"
-      ],
-      "iframes": [
-        "hubspot"
-      ],
-      "dom": [
-        "#hubspot-messages-iframe-container",
-        "iframe[src*='hubspot']"
-      ],
-      "globals": [
-        "HubSpotConversations"
-      ]
-    }
-  },
-  {
-    "id": "freshchat",
-    "name": "Freshchat / Freddy AI",
-    "vendor": "Freshworks",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "snippets.freshchat.io",
-        "fw-cdn.com"
-      ],
-      "iframes": [
-        "freshchat"
-      ],
-      "dom": [
-        "#fc_widget",
-        "iframe[src*='freshchat']"
-      ],
-      "globals": [
-        "fcWidget",
-        "FreshworksWidget"
-      ]
-    }
-  },
-  {
-    "id": "smartsupp",
-    "name": "Smartsupp AI Chatbot",
-    "vendor": "Smartsupp",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "smartsuppchat.com",
-        "smartsupp.com"
-      ],
-      "iframes": [
-        "smartsupp"
-      ],
-      "dom": [
-        "#smartsupp-widget-container",
-        "iframe[src*='smartsupp']"
-      ],
-      "globals": [
-        "smartsupp"
-      ]
-    }
-  },
-  {
-    "id": "chatra",
-    "name": "Chatra",
-    "vendor": "Chatra",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "call.chatra.io"
-      ],
-      "iframes": [
-        "chatra"
-      ],
-      "dom": [
-        "iframe[src*='chatra']"
-      ],
-      "globals": [
-        "ChatraID",
-        "Chatra"
-      ]
-    }
-  },
-  {
-    "id": "jivochat",
-    "name": "JivoChat",
-    "vendor": "JivoChat",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "code.jivosite.com"
-      ],
-      "iframes": [
-        "jivosite"
-      ],
-      "dom": [
-        "iframe[src*='jivosite']"
-      ],
-      "globals": [
-        "jivo_api"
-      ]
-    }
-  },
-  {
-    "id": "userlike",
-    "name": "Userlike AI",
-    "vendor": "Userlike",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "userlike-cdn-widgets.s3",
-        "userlike.com"
-      ],
-      "iframes": [
-        "userlike"
-      ],
-      "dom": [
-        "iframe[src*='userlike']"
-      ],
-      "globals": [
-        "userlike"
-      ]
-    }
-  },
-  {
-    "id": "olark",
-    "name": "Olark",
-    "vendor": "Olark",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "static.olark.com"
-      ],
-      "iframes": [
-        "olark"
-      ],
-      "dom": [
-        "#olark-box-wrapper",
-        "iframe[src*='olark']"
-      ],
-      "globals": [
-        "olark"
-      ]
-    }
-  },
-  {
-    "id": "chaport",
-    "name": "Chaport",
-    "vendor": "Chaport",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "app.chaport.com"
-      ],
-      "iframes": [
-        "chaport"
-      ],
-      "dom": [
-        "iframe[src*='chaport']"
-      ],
-      "globals": [
-        "chaport"
-      ]
-    }
-  },
-  {
-    "id": "formilla",
-    "name": "Formilla AI",
-    "vendor": "Formilla",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "formilla.com"
-      ],
-      "iframes": [
-        "formilla"
-      ],
-      "dom": [
-        "iframe[src*='formilla']"
-      ],
-      "globals": [
-        "Formilla"
-      ]
-    }
-  },
-  {
-    "id": "gorgias",
-    "name": "Gorgias AI Agent",
-    "vendor": "Gorgias",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "gorgias.chat",
-        "client-api.gorgias"
-      ],
-      "iframes": [
-        "gorgias"
-      ],
-      "dom": [
-        "#gorgias-chat-container",
-        "iframe[src*='gorgias']"
-      ],
-      "globals": [
-        "GorgiasChat"
-      ]
-    }
-  },
-  {
-    "id": "oct8ne",
-    "name": "oct8ne",
-    "vendor": "oct8ne",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "oct8ne.com",
-        "oct8ne-cdn"
-      ],
-      "iframes": [
-        "oct8ne"
-      ],
-      "dom": [
-        "chat-oct8ne",
-        "iframe[src*='oct8ne']",
-        "[id*='oct8ne']"
-      ],
-      "globals": [
-        "oct8ne"
-      ]
-    }
-  },
-  {
-    "id": "landbot",
-    "name": "Landbot AI Agents",
-    "vendor": "Landbot",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "landbot.io",
-        "static.landbot.io"
-      ],
-      "iframes": [
-        "landbot.io",
-        "landbot.app"
-      ],
-      "dom": [
-        "div[id^='landbot']",
-        "iframe[src*='landbot']"
-      ],
-      "globals": [
-        "Landbot",
-        "myLandbot"
-      ]
-    }
-  },
-  {
-    "id": "chatbase",
-    "name": "Chatbase",
-    "vendor": "Chatbase",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "chatbase.co"
-      ],
-      "iframes": [
-        "chatbase.co"
-      ],
-      "dom": [
-        "iframe[src*='chatbase.co']"
-      ],
-      "globals": [
-        "chatbase"
-      ]
-    }
-  },
-  {
-    "id": "botpress",
-    "name": "Botpress",
-    "vendor": "Botpress",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "botpress.cloud",
-        "cdn.botpress"
-      ],
-      "iframes": [
-        "botpress"
-      ],
-      "dom": [
-        "#botpress-widget-container",
-        "iframe[src*='botpress']"
-      ],
-      "globals": [
-        "botpressWebChat"
-      ]
-    }
-  },
-  {
-    "id": "voiceflow",
-    "name": "Voiceflow",
-    "vendor": "Voiceflow",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "cdn.voiceflow.com",
-        "voiceflow.com"
-      ],
-      "iframes": [
-        "voiceflow"
-      ],
-      "dom": [
-        "iframe[src*='voiceflow']",
-        "#voiceflow-chat"
-      ],
-      "globals": [
-        "voiceflow"
-      ]
-    }
-  },
-  {
-    "id": "manychat",
-    "name": "ManyChat",
-    "vendor": "ManyChat",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "widget.manychat.com",
-        "mccdn.me"
-      ],
-      "iframes": [
-        "manychat"
-      ],
-      "dom": [
-        "iframe[src*='manychat']"
-      ],
-      "globals": [
-        "ManyChat"
-      ]
-    }
-  },
-  {
-    "id": "qualified",
-    "name": "Qualified AI (Piper)",
-    "vendor": "Qualified",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "cdn.qualified.com",
-        "js.qualified.com"
-      ],
-      "iframes": [
-        "qualified"
-      ],
-      "dom": [
-        "iframe[src*='qualified']"
-      ],
-      "globals": [
-        "qualified"
-      ]
-    }
-  },
-  {
-    "id": "liveperson",
-    "name": "LivePerson Conversational AI",
-    "vendor": "LivePerson",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "liveperson.net",
-        "lpsnmedia.net"
-      ],
-      "iframes": [
-        "liveperson"
-      ],
-      "dom": [
-        "iframe[src*='liveperson']",
-        "div[id*='lp_']"
-      ],
-      "globals": [
-        "lpTag"
-      ]
-    }
-  },
-  {
-    "id": "genesys",
-    "name": "Genesys Cloud CX Bots",
-    "vendor": "Genesys",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "genesys.cloud",
-        "mypurecloud.com"
-      ],
-      "iframes": [
-        "purecloud"
-      ],
-      "dom": [
-        "iframe[src*='purecloud']"
-      ],
-      "globals": [
-        "Genesys"
-      ]
-    }
-  },
-  {
-    "id": "ada",
-    "name": "Ada AI Agent",
-    "vendor": "Ada",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "static.ada.support"
-      ],
-      "iframes": [
-        "ada.support"
-      ],
-      "dom": [
-        "#ada-chat-frame",
-        "iframe[src*='ada.support']"
-      ],
-      "globals": [
-        "adaEmbed"
-      ]
-    }
-  },
-  {
-    "id": "cognigy",
-    "name": "Cognigy.AI",
-    "vendor": "Cognigy",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "cognigy.com",
-        "cognigy.ai"
-      ],
-      "iframes": [
-        "cognigy"
-      ],
-      "dom": [
-        "iframe[src*='cognigy']"
-      ],
-      "globals": [
-        "cognigy"
-      ]
-    }
-  },
-  {
-    "id": "verloop",
-    "name": "Verloop.io",
-    "vendor": "Verloop",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "verloop.io"
-      ],
-      "iframes": [
-        "verloop"
-      ],
-      "dom": [
-        "iframe[src*='verloop']"
-      ],
-      "globals": [
-        "Verloop"
-      ]
-    }
-  },
-  {
-    "id": "yellowai",
-    "name": "Yellow.ai",
-    "vendor": "Yellow.ai",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "cdn.yellowmessenger.com",
-        "yellow.ai"
-      ],
-      "iframes": [
-        "yellowmessenger"
-      ],
-      "dom": [
-        "iframe[src*='yellowmessenger']"
-      ],
-      "globals": [
-        "YM"
-      ]
-    }
-  },
-  {
-    "id": "kommunicate",
-    "name": "Kommunicate AI",
-    "vendor": "Kommunicate",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "widget.kommunicate.io"
-      ],
-      "iframes": [
-        "kommunicate"
-      ],
-      "dom": [
-        "iframe[src*='kommunicate']"
-      ],
-      "globals": [
-        "kommunicate"
-      ]
-    }
-  },
-  {
-    "id": "trengo",
-    "name": "Trengo AI",
-    "vendor": "Trengo",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "static.trengo.com",
-        "trengo.com"
-      ],
-      "iframes": [
-        "trengo"
-      ],
-      "dom": [
-        "iframe[src*='trengo']"
-      ],
-      "globals": [
-        "Trengo"
-      ]
-    }
-  },
-  {
-    "id": "helpscout",
-    "name": "Help Scout Beacon / AI",
-    "vendor": "Help Scout",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "beacon-v2.helpscout.net"
-      ],
-      "iframes": [
-        "helpscout"
-      ],
-      "dom": [
-        "iframe[src*='helpscout']"
-      ],
-      "globals": [
-        "Beacon"
-      ]
-    }
-  },
-  {
-    "id": "zoho",
-    "name": "Zoho SalesIQ / Zobot",
-    "vendor": "Zoho",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "salesiq.zoho.com",
-        "salesiq.zohopublic.com"
-      ],
-      "iframes": [
-        "salesiq"
-      ],
-      "dom": [
-        "iframe[src*='salesiq']",
-        "#zsiqwidget"
-      ],
-      "globals": [
-        "$zoho"
-      ]
-    }
-  },
-  {
-    "id": "wpbot",
-    "name": "WPBot / ChatBot for WordPress",
-    "vendor": "QuantumCloud",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [],
-      "iframes": [],
-      "dom": [
-        "#wp-chatbot-wrapper",
-        ".wp-chatbot-wrapper",
-        "#wpChatbot"
-      ],
-      "globals": [
-        "wpbot"
-      ]
-    }
-  },
-  {
-    "id": "cliengo",
-    "name": "Cliengo",
-    "vendor": "Cliengo",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "cliengo.com"
-      ],
-      "iframes": [
-        "cliengo"
-      ],
-      "dom": [
-        "iframe[src*='cliengo']"
-      ],
-      "globals": [
-        "cliengo"
-      ]
-    }
-  },
-  {
-    "id": "collectchat",
-    "name": "Collect.chat",
-    "vendor": "Collect.chat",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "collect.chat"
-      ],
-      "iframes": [
-        "collect.chat"
-      ],
-      "dom": [
-        "iframe[src*='collect.chat']"
-      ],
-      "globals": [
-        "collectchat"
-      ]
-    }
-  },
-  {
-    "id": "continually",
-    "name": "Continually",
-    "vendor": "Continually",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "continual.ly"
-      ],
-      "iframes": [
-        "continual.ly"
-      ],
-      "dom": [
-        "iframe[src*='continual.ly']"
-      ],
-      "globals": [
-        "Continually"
-      ]
-    }
-  },
-  {
-    "id": "aivo",
-    "name": "Aivo AgentBot",
-    "vendor": "Aivo",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "aivo.co",
-        "whisnumessenger"
-      ],
-      "iframes": [
-        "aivo"
-      ],
-      "dom": [
-        "iframe[src*='aivo']"
-      ],
-      "globals": [
-        "Aivo"
-      ]
-    }
-  },
-  {
-    "id": "watson",
-    "name": "IBM watsonx Assistant",
-    "vendor": "IBM",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "web-chat.global.assistant.watson"
-      ],
-      "iframes": [
-        "watson"
-      ],
-      "dom": [
-        "iframe[src*='watson']"
-      ],
-      "globals": [
-        "watsonAssistantChatOptions"
-      ]
-    }
-  },
-  {
-    "id": "salesforce",
-    "name": "Salesforce Einstein Bots",
-    "vendor": "Salesforce",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "service.force.com",
-        "salesforceliveagent.com"
-      ],
-      "iframes": [
-        "force.com"
-      ],
-      "dom": [
-        "iframe[src*='salesforceliveagent']"
-      ],
-      "globals": [
-        "embedded_svc"
-      ]
-    }
-  },
-  {
-    "id": "interakt",
-    "name": "Interakt AI",
-    "vendor": "Interakt",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "interakt.chat"
-      ],
-      "iframes": [
-        "interakt"
-      ],
-      "dom": [
-        "iframe[src*='interakt']"
-      ],
-      "globals": [
-        "interakt"
-      ]
-    }
-  },
-  {
-    "id": "tars",
-    "name": "Tars Chatbots",
-    "vendor": "Tars",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "tars-file-upload.s3",
-        "hellotars.com"
-      ],
-      "iframes": [
-        "hellotars"
-      ],
-      "dom": [
-        "iframe[src*='hellotars']"
-      ],
-      "globals": [
-        "Tars"
-      ]
-    }
-  },
-  {
-    "id": "pandorabots",
-    "name": "Pandorabots",
-    "vendor": "Pandorabots",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "pandorabots.com"
-      ],
-      "iframes": [
-        "pandorabots"
-      ],
-      "dom": [
-        "iframe[src*='pandorabots']"
-      ],
-      "globals": [
-        "pandorabots"
-      ]
-    }
-  },
-  {
-    "id": "willdesk",
-    "name": "Willdesk AI (Shopify)",
-    "vendor": "Channelwill",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "willdesk.com"
-      ],
-      "iframes": [
-        "willdesk"
-      ],
-      "dom": [
-        "iframe[src*='willdesk']"
-      ],
-      "globals": [
-        "willdesk"
-      ]
-    }
-  },
-  {
-    "id": "chatty",
-    "name": "Chatty AI (Shopify)",
-    "vendor": "Chatty",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "medium",
-    "patterns": {
-      "scripts": [
-        "chattyapp.com"
-      ],
-      "iframes": [
-        "chattyapp"
-      ],
-      "dom": [
-        "iframe[src*='chattyapp']"
-      ],
-      "globals": [
-        "chatty"
-      ]
-    }
-  },
-  {
-    "id": "repai",
-    "name": "Rep AI (Shopify)",
-    "vendor": "Rep AI",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "rep.ai",
-        "hellorep.ai"
-      ],
-      "iframes": [
-        "rep.ai"
-      ],
-      "dom": [
-        "iframe[src*='rep.ai']"
-      ],
-      "globals": [
-        "repAI"
-      ]
-    }
-  },
-  {
-    "id": "doofinder",
-    "name": "Doofinder AI Search",
-    "vendor": "Doofinder",
-    "category": "search",
-    "article": "50(1)",
-    "severity": "low",
-    "patterns": {
-      "scripts": [
-        "doofinder.com",
-        "doofinder"
-      ],
-      "iframes": [],
-      "dom": [
-        "#doofinder-container",
-        ".df-layer"
-      ],
-      "globals": [
-        "doofinder"
-      ]
-    }
-  },
-  {
-    "id": "algolia",
-    "name": "Algolia AI Search",
-    "vendor": "Algolia",
-    "category": "search",
-    "article": "50(1)",
-    "severity": "low",
-    "patterns": {
-      "scripts": [
-        "algolia.net",
-        "algolianet.com"
-      ],
-      "iframes": [],
-      "dom": [
-        "#algolia-autocomplete",
-        ".ais-search-box"
-      ],
-      "globals": [
-        "algoliasearch"
-      ]
-    }
-  },
-  {
-    "id": "klevu",
-    "name": "Klevu AI Search",
-    "vendor": "Klevu",
-    "category": "search",
-    "article": "50(1)",
-    "severity": "low",
-    "patterns": {
-      "scripts": [
-        "klevu.com"
-      ],
-      "iframes": [],
-      "dom": [
-        "#klevu-search",
-        ".klevu-fluid"
-      ],
-      "globals": [
-        "klevu"
-      ]
-    }
-  },
-  {
-    "id": "openai-embed",
-    "name": "OpenAI/GPT embedded assistant",
-    "vendor": "Custom/LLM",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "openai.com"
-      ],
-      "iframes": [
-        "openai",
-        "chatgpt"
-      ],
-      "dom": [
-        "iframe[src*='openai']",
-        "iframe[src*='chatgpt']"
-      ],
-      "globals": [
-        "openai"
-      ]
-    }
-  },
-  {
-    "id": "dialogflow",
-    "name": "Google Dialogflow Messenger",
-    "vendor": "Google",
-    "category": "chat",
-    "article": "50(1)",
-    "severity": "high",
-    "patterns": {
-      "scripts": [
-        "dialogflow.cloud.google.com",
-        "www.gstatic.com/dialogflow-console"
-      ],
-      "iframes": [
-        "dialogflow"
-      ],
-      "dom": [
-        "df-messenger",
-        "df-messenger-chat"
-      ],
-      "globals": [
-        "dfMessenger"
-      ]
-    }
-  }
-];
-
 // api/routers/scan.ts
 init_connection();
 init_schema2();
+init_env();
+
+// api/lib/anchor.ts
+var ANCHOR_TASK_URL = "https://api.anchorbrowser.io/v1/tools/perform-web-task";
+var anchorOutputSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: [
+    "scan_status",
+    "pages_visited",
+    "ai_touchpoints",
+    "broken_elements",
+    "risk_indicators",
+    "blockers",
+    "summary"
+  ],
+  properties: {
+    scan_status: { type: "string", enum: ["COMPLETE", "PARTIAL"] },
+    pages_visited: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["url", "title"],
+        properties: {
+          url: { type: "string" },
+          title: { type: "string" }
+        }
+      }
+    },
+    ai_touchpoints: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: [
+          "name",
+          "vendor",
+          "category",
+          "source_url",
+          "evidence",
+          "disclosure_observed",
+          "severity"
+        ],
+        properties: {
+          name: { type: "string" },
+          vendor: { type: "string" },
+          category: { type: "string" },
+          source_url: { type: "string" },
+          evidence: { type: "array", items: { type: "string" } },
+          disclosure_observed: { type: "boolean" },
+          disclosure_text: { type: "string" },
+          severity: { type: "string", enum: ["high", "medium", "low"] }
+        }
+      }
+    },
+    broken_elements: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["url", "description"],
+        properties: {
+          url: { type: "string" },
+          description: { type: "string" }
+        }
+      }
+    },
+    risk_indicators: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["area", "source_url", "evidence", "reason"],
+        properties: {
+          area: { type: "string", enum: ["article_5", "annex_3"] },
+          source_url: { type: "string" },
+          evidence: { type: "string" },
+          reason: { type: "string" }
+        }
+      }
+    },
+    blockers: { type: "array", items: { type: "string" } },
+    summary: { type: "string" }
+  }
+};
+var anchorResultSchema = external_exports.object({
+  scan_status: external_exports.enum(["COMPLETE", "PARTIAL"]),
+  pages_visited: external_exports.array(
+    external_exports.object({
+      url: external_exports.string().min(1),
+      title: external_exports.string()
+    })
+  ),
+  ai_touchpoints: external_exports.array(
+    external_exports.object({
+      name: external_exports.string().min(1),
+      vendor: external_exports.string(),
+      category: external_exports.string(),
+      source_url: external_exports.string().min(1),
+      evidence: external_exports.array(external_exports.string().min(1)),
+      disclosure_observed: external_exports.boolean(),
+      disclosure_text: external_exports.string().optional(),
+      severity: external_exports.enum(["high", "medium", "low"])
+    })
+  ),
+  broken_elements: external_exports.array(
+    external_exports.object({
+      url: external_exports.string().min(1),
+      description: external_exports.string().min(1)
+    })
+  ),
+  risk_indicators: external_exports.array(
+    external_exports.object({
+      area: external_exports.enum(["article_5", "annex_3"]),
+      source_url: external_exports.string().min(1),
+      evidence: external_exports.string().min(1),
+      reason: external_exports.string().min(1)
+    })
+  ),
+  blockers: external_exports.array(external_exports.string().min(1)),
+  summary: external_exports.string().min(1)
+});
+var startResponseSchema = external_exports.object({
+  data: external_exports.object({
+    workflow_id: external_exports.union([external_exports.string(), external_exports.number()]).transform(String),
+    status: external_exports.string()
+  })
+});
+var statusResponseSchema = external_exports.object({
+  status: external_exports.string(),
+  result: external_exports.unknown().optional()
+});
+var ANCHOR_SCAN_PROMPT = `Inspect this public website as a real visitor for a RapidAct EU AI Act transparency preview.
+
+Visit the supplied URL and at most two additional important same-origin public pages by following real links that are visible on the rendered website. Never invent or guess a route. If a followed link resolves to the same content as the entry page, do not count it as a distinct inspected page; choose another real visible link instead. Prioritise pages that expose user-facing AI functionality, such as product, search, demo, or assistant pages. Do not sign in, submit forms, make purchases, accept destructive prompts, or change any website data.
+
+Observe and report only evidence visible in the rendered website or its loaded public resources:
+1. User-facing AI assistants, chatbots, generative features, translation, recommendation, synthetic-media, voice, or automated decision touchpoints.
+2. Vendor or product identity when directly observable.
+3. Exact disclosure wording that tells a visitor they are interacting with AI, and the URL where it appears.
+4. Exact evidence for every touchpoint. Include a touchpoint only when the rendered interaction explicitly identifies itself as AI, actually produces an AI-generated or automated decision output during this inspection, or a loaded public resource directly identifies the AI product or vendor.
+5. Clearly broken visible interface elements encountered during inspection.
+6. Separately flagged indicators that may warrant human review under Article 5 or Annex III. These are indicators only, never legal classifications.
+
+Exclude ordinary contact links or buttons such as WhatsApp, email, or telephone; language selectors; analytics or session-replay tools; cookie controls; transparency badges or notices that merely describe another system; and unexercised marketing claims. Do not treat the absence of an AI disclosure on a non-AI feature as a finding.
+
+Return COMPLETE only when the planned public pages were inspected. Return PARTIAL when robots, consent walls, authentication, navigation failures, time limits, or another blocker prevented part of the inspection. List every inspected URL and every blocker. Do not invent systems, hidden pages, legal conclusions, compliance scores, PASS/FAIL outcomes, or evidence that was not directly observed.`;
+function buildAnchorScanRequest(url2) {
+  return {
+    url: url2,
+    prompt: ANCHOR_SCAN_PROMPT,
+    agent: "browser-use",
+    detect_elements: true,
+    max_steps: 80,
+    output_schema: anchorOutputSchema,
+    async: true
+  };
+}
+async function readJson(response) {
+  const text2 = await response.text();
+  if (!response.ok) {
+    throw new Error(`anchor-http-${response.status}`);
+  }
+  try {
+    return JSON.parse(text2);
+  } catch {
+    throw new Error("anchor-invalid-json");
+  }
+}
+async function startAnchorScan(url2, apiKey, fetchImpl = fetch) {
+  const response = await fetchImpl(ANCHOR_TASK_URL, {
+    method: "POST",
+    headers: {
+      "anchor-api-key": apiKey,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(buildAnchorScanRequest(url2))
+  });
+  return startResponseSchema.parse(await readJson(response)).data.workflow_id;
+}
+async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
+  const response = await fetchImpl(`${ANCHOR_TASK_URL}/${encodeURIComponent(workflowId)}/status`, {
+    headers: { "anchor-api-key": apiKey }
+  });
+  const payload = statusResponseSchema.parse(await readJson(response));
+  const status = payload.status.toUpperCase();
+  if (status === "RUNNING" || status === "PENDING" || status === "QUEUED") {
+    return { status: "running" };
+  }
+  if (status === "FAILED" || status === "CANCELLED") {
+    const message = typeof payload.result === "string" && payload.result.trim() ? payload.result.trim() : `anchor-${status.toLowerCase()}`;
+    return { status: "failed", error: message };
+  }
+  if (status !== "COMPLETED") {
+    return { status: "failed", error: `anchor-unknown-status-${status.toLowerCase()}` };
+  }
+  let rawResult = payload.result;
+  if (typeof rawResult === "string") {
+    try {
+      rawResult = JSON.parse(rawResult);
+    } catch {
+      return { status: "failed", error: "anchor-invalid-result" };
+    }
+  }
+  const parsed = anchorResultSchema.safeParse(rawResult);
+  if (!parsed.success) {
+    return { status: "failed", error: "anchor-invalid-result" };
+  }
+  return { status: "completed", observed: parsed.data };
+}
+function scoreOf(detected) {
+  let score = 100;
+  for (const finding of detected) {
+    if (finding.existingDisclosureFound) continue;
+    score -= finding.severity === "high" ? 40 : finding.severity === "medium" ? 25 : 10;
+  }
+  return Math.max(0, score);
+}
+function findingId(name2, index) {
+  const slug = name2.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 48);
+  return `${slug || "touchpoint"}-${index + 1}`;
+}
+function mapAnchorResult(url2, observed) {
+  const detected = observed.ai_touchpoints.map((touchpoint, index) => ({
+    id: findingId(touchpoint.name, index),
+    name: touchpoint.name,
+    vendor: touchpoint.vendor || "Not identified",
+    category: touchpoint.category,
+    article: "50",
+    severity: touchpoint.severity,
+    sourceUrl: touchpoint.source_url,
+    evidence: touchpoint.disclosure_text ? [...touchpoint.evidence, `Visible disclosure: \u201C${touchpoint.disclosure_text}\u201D`] : touchpoint.evidence,
+    existingDisclosureFound: touchpoint.disclosure_observed
+  }));
+  const summary = {
+    total: detected.length,
+    high: detected.filter((finding) => finding.severity === "high").length,
+    undisclosed: detected.filter((finding) => !finding.existingDisclosureFound).length,
+    scannedAt: (/* @__PURE__ */ new Date()).toISOString(),
+    url: url2,
+    scanStatus: observed.scan_status.toLowerCase(),
+    pagesVisited: observed.pages_visited,
+    blockers: observed.blockers,
+    brokenElements: observed.broken_elements.map((item) => ({
+      url: item.url,
+      description: item.description
+    })),
+    riskIndicators: observed.risk_indicators.map((item) => ({
+      area: item.area,
+      sourceUrl: item.source_url,
+      evidence: item.evidence,
+      reason: item.reason
+    })),
+    engine: "anchor-browser"
+  };
+  const score = scoreOf(detected);
+  const lines = [
+    "RAPIDACT PUBLIC-WEBSITE AI TRANSPARENCY SCAN",
+    `URL: ${url2}`,
+    `Status: ${summary.scanStatus.toUpperCase()}`,
+    `Scanned: ${summary.scannedAt}`,
+    `Pages inspected: ${summary.pagesVisited.map((page) => page.url).join(", ") || "none"}`,
+    `Visible-readiness score: ${score}/100`,
+    `AI touchpoints observed: ${summary.total}`,
+    "",
+    observed.summary,
+    ""
+  ];
+  for (const finding of detected) {
+    lines.push(`[${finding.severity.toUpperCase()}] ${finding.name} (${finding.vendor})`);
+    lines.push(`Source: ${finding.sourceUrl}`);
+    for (const evidence of finding.evidence) lines.push(`Evidence: ${evidence}`);
+    lines.push(
+      `Visible AI disclosure observed: ${finding.existingDisclosureFound ? "yes" : "not observed"}`,
+      ""
+    );
+  }
+  if (summary.blockers.length) {
+    lines.push("BLOCKERS");
+    for (const blocker of summary.blockers) lines.push(`- ${blocker}`);
+    lines.push("");
+  }
+  lines.push(
+    "Scope: rendered public-website observations from the URLs listed above. This output does not classify the organisation or its systems legally."
+  );
+  return {
+    detected,
+    score,
+    summary,
+    report: lines.join("\n"),
+    reachable: true
+  };
+}
+
+// api/routers/scan.ts
 var hits = /* @__PURE__ */ new Map();
+var persistedWorkflows = /* @__PURE__ */ new Set();
+var TOKEN_TTL_MS = 30 * 60 * 1e3;
 function rateLimited(ip) {
   const now = Date.now();
   const windowMs = 10 * 60 * 1e3;
-  const list = (hits.get(ip) ?? []).filter((t2) => now - t2 < windowMs);
+  const list = (hits.get(ip) ?? []).filter((timestamp2) => now - timestamp2 < windowMs);
   if (list.length >= 20) return true;
   list.push(now);
   hits.set(ip, list);
   return false;
 }
 function normalizeUrl(raw2) {
-  let u = raw2.trim();
-  if (!/^https?:\/\//i.test(u)) u = "https://" + u;
-  const parsed = new URL(u);
-  if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("bad-protocol");
+  const withProtocol = /^https?:\/\//i.test(raw2.trim()) ? raw2.trim() : `https://${raw2.trim()}`;
+  const parsed = new URL(withProtocol);
+  if (!["http:", "https:"].includes(parsed.protocol) || parsed.username || parsed.password) {
+    throw new Error("invalid-url");
+  }
   return parsed.toString();
 }
-function assertPublicHost(u) {
-  const host = new URL(u).hostname.toLowerCase();
+function assertPublicHost(url2) {
+  const host = new URL(url2).hostname.toLowerCase();
   const blocked = host === "localhost" || host.endsWith(".local") || host.endsWith(".internal") || /^127\./.test(host) || /^10\./.test(host) || /^192\.168\./.test(host) || /^169\.254\./.test(host) || /^172\.(1[6-9]|2\d|3[01])\./.test(host) || host === "0.0.0.0" || host === "[::1]";
-  if (blocked) throw new Error("private-host");
+  if (blocked) throw new Error("invalid-url");
 }
-var DISCLOSURE_PROBES = [
-  "you are interacting with an ai",
-  "interacting with an ai system",
-  "i am an ai",
-  "ai assistant",
-  "automated assistant",
-  "virtual assistant",
-  "chatbot",
-  "soy una ia",
-  "soy un asistente virtual",
-  "asistente de ia",
-  "sistema de ia",
-  "respuestas autom\xE1ticas",
-  "je suis une ia",
-  "ich bin eine ki",
-  "assistente virtuale"
-];
-function matchGlobal(g, rawHtml) {
-  if (g.length < 2) return false;
-  const esc2 = g.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const re = new RegExp(`window\\.${esc2}(?=[^\\w$]|$)|[(=,;{]\\s*${esc2}(?=[^\\w$]|$)`);
-  return re.test(rawHtml);
+function signature(value) {
+  if (!env.appSecret) throw new Error("scanner-token-secret-missing");
+  return createHmac("sha256", env.appSecret).update(value).digest("base64url");
 }
-function matchSignature(sig, html, rawHtml, scripts, iframes) {
-  const evidence = [];
-  const p = sig.patterns;
-  for (const needle of p.scripts) {
-    const n = needle.toLowerCase();
-    if (scripts.some((s) => s.includes(n))) {
-      evidence.push(`script src contains "${needle}"`);
-      break;
-    }
-  }
-  for (const needle of p.iframes) {
-    const n = needle.toLowerCase();
-    if (iframes.some((s) => s.includes(n))) {
-      evidence.push(`iframe src contains "${needle}"`);
-      break;
-    }
-  }
-  if (!evidence.length) {
-    for (const needle of [...p.scripts, ...p.iframes]) {
-      if (needle && html.includes(needle.toLowerCase())) {
-        evidence.push(`page HTML references "${needle}"`);
-        break;
-      }
-    }
-  }
-  if (!evidence.length) {
-    for (const g of p.globals) {
-      if (g && matchGlobal(g, rawHtml)) {
-        evidence.push(`inline loader references "${g}"`);
-        break;
-      }
-    }
-  }
-  if (!evidence.length) return null;
-  const disclosed = DISCLOSURE_PROBES.some((probe) => html.includes(probe));
-  return {
-    id: sig.id,
-    name: sig.name,
-    vendor: sig.vendor,
-    category: sig.category,
-    article: sig.article,
-    severity: sig.severity,
-    evidence,
-    existingDisclosureFound: disclosed
-  };
+function createWorkflowToken(payload) {
+  const encoded = Buffer.from(JSON.stringify(payload)).toString("base64url");
+  return `${encoded}.${signature(encoded)}`;
 }
-function scoreOf(detected) {
-  let score = 100;
-  for (const d of detected) {
-    if (d.existingDisclosureFound) continue;
-    score -= d.severity === "high" ? 40 : d.severity === "medium" ? 25 : 10;
+function readWorkflowToken(token) {
+  const [encoded, suppliedSignature] = token.split(".");
+  if (!encoded || !suppliedSignature) throw new Error("invalid-scan-token");
+  const expectedSignature = signature(encoded);
+  const supplied = Buffer.from(suppliedSignature);
+  const expected = Buffer.from(expectedSignature);
+  if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) {
+    throw new Error("invalid-scan-token");
   }
-  return Math.max(0, score);
+  const payload = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8"));
+  if (!payload.workflowId || !payload.url || !Number.isFinite(payload.createdAt) || Date.now() - payload.createdAt > TOKEN_TTL_MS) {
+    throw new Error("expired-scan-token");
+  }
+  return payload;
 }
-function buildReport(result) {
-  const s = result.summary;
-  const lines = [];
-  lines.push("RAPIDACT AI TRANSPARENCY SCAN");
-  lines.push(`URL: ${s.url}`);
-  lines.push(`Scanned: ${s.scannedAt}`);
-  lines.push(`Score: ${result.score}/100`);
-  lines.push(
-    `AI touchpoints detected: ${s.total} (high-severity: ${s.high}, without visible AI disclosure: ${s.undisclosed})`
-  );
-  lines.push("");
-  if (!result.detected.length) {
-    lines.push("No known AI chat/assistant signatures detected on this page.");
-  }
-  for (const d of result.detected) {
-    lines.push(`[${d.severity.toUpperCase()}] ${d.name} (${d.vendor}) \u2014 Art. ${d.article}`);
-    for (const e of d.evidence) lines.push(`   evidence: ${e}`);
-    lines.push(
-      `   disclosure found: ${d.existingDisclosureFound ? "yes" : "NO \u2014 Art. 50(1) requires informing users they interact with AI"}`
-    );
-    lines.push("");
-  }
-  lines.push(
-    "Reference: Regulation (EU) 2024/1689, Article 50 (applies from 2 Aug 2026). Fines up to EUR 15M or 3% of global turnover (Art. 99)."
-  );
-  lines.push("Scan by RapidAct \u2014 automated transparency tooling. This is a technical scan, not legal advice.");
-  return lines.join("\n");
-}
-async function fetchHtml(url2) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 12e3);
+async function persistCompletedScan(workflowId, result) {
+  if (result.status !== "completed" || persistedWorkflows.has(workflowId)) return;
+  persistedWorkflows.add(workflowId);
   try {
-    const res = await fetch(url2, {
-      signal: controller.signal,
-      redirect: "follow",
-      headers: {
-        // Fetch what a real visitor sees; many storefronts 403 obvious bots.
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "accept-language": "en-US,en;q=0.9,es;q=0.8"
-      }
+    await getDb().insert(scans).values({
+      url: result.result.summary.url.slice(0, 1e3),
+      score: result.result.score,
+      totalDetected: result.result.summary.total,
+      undisclosed: result.result.summary.undisclosed,
+      reachable: 1,
+      report: result.result.report
     });
-    if (!res.ok) throw new Error(`http-${res.status}`);
-    const reader = res.body?.getReader();
-    if (!reader) return "";
-    const decoder = new TextDecoder();
-    let html = "";
-    const MAX = 15e5;
-    for (; ; ) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      html += decoder.decode(value, { stream: true });
-      if (html.length > MAX) break;
-    }
-    return html;
-  } finally {
-    clearTimeout(timer);
+  } catch (error48) {
+    persistedWorkflows.delete(workflowId);
+    console.error("scan-persist-failed", error48);
   }
 }
 var scanRouter = createRouter({
-  run: publicQuery.input(external_exports.object({ url: external_exports.string().min(3).max(500) })).mutation(async ({ input, ctx }) => {
+  start: publicQuery.input(external_exports.object({ url: external_exports.string().min(3).max(500) })).mutation(async ({ input, ctx }) => {
     const ip = ctx.req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? ctx.req.headers.get("x-real-ip") ?? "unknown";
-    if (rateLimited(ip)) {
-      return { reachable: false, error: "rate-limited", detected: [], score: 0, summary: null };
-    }
+    if (rateLimited(ip)) return { ok: false, error: "rate-limited" };
     let url2;
     try {
       url2 = normalizeUrl(input.url);
       assertPublicHost(url2);
     } catch {
-      return { reachable: false, error: "invalid-url", detected: [], score: 0, summary: null };
+      return { ok: false, error: "invalid-url" };
     }
-    let htmlRaw;
     try {
-      htmlRaw = await fetchHtml(url2);
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : "fetch-failed";
-      return { reachable: false, error: msg, detected: [], score: 0, summary: null };
+      const workflowId = await startAnchorScan(url2, env.anchorBrowserApiKey);
+      return {
+        ok: true,
+        token: createWorkflowToken({ workflowId, url: url2, createdAt: Date.now() })
+      };
+    } catch (error48) {
+      console.error("anchor-scan-start-failed", error48);
+      return { ok: false, error: "anchor-unavailable" };
     }
-    const html = htmlRaw.toLowerCase();
-    const scripts = [...html.matchAll(/<script[^>]+src=["']([^"']+)["']/g)].map((m) => m[1]);
-    const iframes = [...html.matchAll(/<iframe[^>]+src=["']([^"']+)["']/g)].map((m) => m[1]);
-    const detected = [];
-    for (const sig of AI_SIGNATURES) {
-      const hit = matchSignature(sig, html, htmlRaw, scripts, iframes);
-      if (hit) detected.push(hit);
-    }
-    const base = {
-      detected,
-      score: scoreOf(detected),
-      summary: {
-        total: detected.length,
-        high: detected.filter((d) => d.severity === "high").length,
-        undisclosed: detected.filter((d) => !d.existingDisclosureFound).length,
-        scannedAt: (/* @__PURE__ */ new Date()).toISOString(),
-        url: url2
-      },
-      reachable: true
-    };
-    const result = { ...base, report: buildReport(base) };
+  }),
+  status: publicQuery.input(external_exports.object({ token: external_exports.string().min(20).max(4e3) })).mutation(async ({ input }) => {
+    let workflow;
     try {
-      await getDb().insert(scans).values({
-        url: url2.slice(0, 1e3),
-        score: result.score,
-        totalDetected: result.summary.total,
-        undisclosed: result.summary.undisclosed,
-        reachable: 1,
-        report: result.report
-      });
-    } catch (e) {
-      console.error("scan-persist-failed", e);
+      workflow = readWorkflowToken(input.token);
+    } catch (error48) {
+      return {
+        status: "failed",
+        error: error48 instanceof Error ? error48.message : "invalid-scan-token"
+      };
     }
-    return result;
+    try {
+      const state = await readAnchorScan(workflow.workflowId, env.anchorBrowserApiKey);
+      if (state.status !== "completed") return state;
+      const result = {
+        status: "completed",
+        result: mapAnchorResult(workflow.url, state.observed)
+      };
+      await persistCompletedScan(workflow.workflowId, result);
+      return result;
+    } catch (error48) {
+      console.error("anchor-scan-status-failed", error48);
+      return { status: "failed", error: "anchor-status-unavailable" };
+    }
   }),
   stats: publicQuery.query(async () => {
     try {
       const rows = await getDb().select().from(scans);
       return {
         totalScans: rows.length,
-        avgScore: rows.length ? Math.round(rows.reduce((a, r) => a + (r.score ?? 0), 0) / rows.length) : null
+        avgScore: rows.length ? Math.round(rows.reduce((total, row) => total + (row.score ?? 0), 0) / rows.length) : null
       };
     } catch {
       return { totalScans: 0, avgScore: null };

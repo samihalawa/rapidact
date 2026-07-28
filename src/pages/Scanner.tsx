@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
@@ -50,8 +50,6 @@ function scoreLabel(score: number, labels: [string, string, string]) {
   return labels[0];
 }
 
-const MIN_SCAN_DISPLAY_MS = 2_800;
-
 function wait(ms: number) {
   return new Promise(resolve => window.setTimeout(resolve, ms));
 }
@@ -82,63 +80,70 @@ export default function Scanner() {
   const [result, setResult] = useState<ScanResult | null>(null);
   const [copied, setCopied] = useState(false);
   const [scanActive, setScanActive] = useState(false);
-  const [scanProgress, setScanProgress] = useState(0);
   const [scanStage, setScanStage] = useState(0);
+  const [scanError, setScanError] = useState("");
   const [emailDialogOpen, setEmailDialogOpen] = useState(false);
   const [emailError, setEmailError] = useState("");
 
-  const scan = trpc.scan.run.useMutation();
+  const startScan = trpc.scan.start.useMutation();
+  const scanStatus = trpc.scan.status.useMutation();
   const lead = trpc.leads.capture.useMutation();
-
-  useEffect(() => {
-    if (!scanActive) return;
-    const startedAt = Date.now();
-    const timer = window.setInterval(() => {
-      const elapsed = Date.now() - startedAt;
-      if (elapsed < 650) {
-        setScanStage(0);
-        setScanProgress(Math.min(22, 8 + Math.round(elapsed / 48)));
-      } else if (elapsed < 1_350) {
-        setScanStage(1);
-        setScanProgress(Math.min(48, 24 + Math.round((elapsed - 650) / 30)));
-      } else if (elapsed < 2_100) {
-        setScanStage(2);
-        setScanProgress(Math.min(74, 50 + Math.round((elapsed - 1_350) / 31)));
-      } else {
-        setScanStage(3);
-        setScanProgress(Math.min(94, 76 + Math.round((elapsed - 2_100) / 250)));
-      }
-    }, 120);
-    return () => window.clearInterval(timer);
-  }, [scanActive]);
 
   const runScan = async (submittedUrl: string) => {
     if (!submittedUrl || scanActive) return;
     setResult(null);
-    setScanProgress(8);
+    setScanError("");
     setScanStage(0);
     setScanActive(true);
-    const startedAt = Date.now();
+    startScan.reset();
+    scanStatus.reset();
     track("scan_started", { has_protocol: /^https?:\/\//i.test(submittedUrl) });
 
     try {
-      const next = (await scan.mutateAsync({
-        url: submittedUrl,
-      })) as ScanResult;
-      await wait(Math.max(0, MIN_SCAN_DISPLAY_MS - (Date.now() - startedAt)));
-      setScanStage(3);
-      setScanProgress(100);
-      await wait(180);
-      setResult(next);
+      const started = await startScan.mutateAsync({ url: submittedUrl });
+      if (!started.ok) {
+        setScanError(started.error);
+        track("scan_failed", { error_type: started.error });
+        return;
+      }
+
+      setScanStage(1);
+      const deadline = Date.now() + 5 * 60 * 1000;
+      let completed: ScanResult | null = null;
+      while (Date.now() < deadline) {
+        await wait(2_000);
+        const state = await scanStatus.mutateAsync({ token: started.token });
+        if (state.status === "running") continue;
+        if (state.status === "failed") {
+          setScanError(state.error);
+          track("scan_failed", { error_type: state.error });
+          return;
+        }
+        completed = state.result;
+        break;
+      }
+
+      if (!completed) {
+        setScanError("anchor-timeout");
+        track("scan_failed", { error_type: "anchor-timeout" });
+        return;
+      }
+
+      setScanStage(2);
+      setResult(completed);
       track("scan_completed", {
-        reachable: next.reachable,
-        detected_count: next.summary?.total ?? 0,
-        high_exposure_count: next.summary?.high ?? 0,
-        undisclosed_count: next.summary?.undisclosed ?? 0,
+        reachable: completed.reachable,
+        scan_status: completed.summary.scanStatus,
+        pages_visited: completed.summary.pagesVisited.length,
+        detected_count: completed.summary.total,
+        high_exposure_count: completed.summary.high,
+        undisclosed_count: completed.summary.undisclosed,
       });
     } catch (error) {
       const typedError = error as { data?: { code?: string } };
-      track("scan_failed", { error_type: typedError.data?.code || "unknown" });
+      const errorType = typedError.data?.code || "anchor-unavailable";
+      setScanError(errorType);
+      track("scan_failed", { error_type: errorType });
     } finally {
       setScanActive(false);
     }
@@ -190,6 +195,9 @@ export default function Scanner() {
         findings: copy.pdfFindings,
         actions: copy.pdfActions,
         scope: copy.pdfScope,
+        status: copy.scanStatus[result.summary.scanStatus],
+        pages: copy.pagesInspected,
+        blockers: copy.blockersTitle,
         disclosureFound: copy.disclosureFound,
         disclosureMissing: copy.disclosureMissing,
       },
@@ -360,31 +368,41 @@ export default function Scanner() {
             <div className="flex items-start justify-between gap-5">
               <div>
                 <p className="eyebrow">{copy.progress}</p>
-                <p className="ink mt-2 text-[16px] font-bold">
-                  {copy.stages[scanStage].label}
+                  <p className="ink mt-2 text-[16px] font-bold">
+                    {copy.stages[scanStage].label}
                 </p>
                 <p className="ink-soft mt-1 text-[13px] leading-relaxed">
                   {copy.stages[scanStage].detail}
                 </p>
               </div>
               <span className="shrink-0 font-mono text-[13px] font-semibold text-[#1f3a5f]">
-                {scanProgress}%
+                {scanStage + 1}/{copy.stages.length}
               </span>
             </div>
             <div
               role="progressbar"
               aria-label={copy.stages[scanStage].label}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={scanProgress}
+              aria-valuemin={1}
+              aria-valuemax={copy.stages.length}
+              aria-valuenow={scanStage + 1}
               className="mt-4 h-2 overflow-hidden rounded-full bg-[#e5ebf4]"
             >
               <div
-                className="h-full rounded-full bg-[#1f5fd2] transition-[width] duration-300 ease-out"
-                style={{ width: `${scanProgress}%` }}
+                className={`h-full rounded-full bg-[#1f5fd2] transition-[width] duration-300 ease-out ${
+                  scanStage === 1 ? "animate-pulse" : ""
+                }`}
+                style={{
+                  width: `${((scanStage + 1) / copy.stages.length) * 100}%`,
+                }}
               />
             </div>
-            <div className="mt-4 grid grid-cols-4 gap-2" aria-hidden="true">
+            <div
+              className="mt-4 grid gap-2"
+              style={{
+                gridTemplateColumns: `repeat(${copy.stages.length}, minmax(0, 1fr))`,
+              }}
+              aria-hidden="true"
+            >
               {copy.stages.map((stage, index) => (
                 <span
                   key={stage.label}
@@ -397,7 +415,7 @@ export default function Scanner() {
           </section>
         )}
 
-        {(scan.isError || (result && !result.reachable)) && (
+        {scanError && (
           <Card className="mx-auto mt-10 max-w-xl border-[#fecaca] bg-[#fef2f2]">
             <CardContent className="flex items-start gap-3 pt-6 pb-6">
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[#dc2626]" />
@@ -406,23 +424,19 @@ export default function Scanner() {
                   {copy.failureTitle}
                 </p>
                 <p className="mt-1 text-sm text-[#b91c1c]">
-                  {result?.error === "rate-limited"
+                  {scanError === "rate-limited"
                     ? copy.rateLimited
-                    : result?.error === "invalid-url"
+                    : scanError === "invalid-url"
                       ? copy.invalidUrl
-                      : copy.unreachable(
-                          result?.error ??
-                            scan.error?.data?.code ??
-                            "unreachable"
-                        )}
+                      : copy.unreachable(scanError)}
                 </p>
                 <button
                   type="button"
-                  data-analytics-event="scanner_failure_assessment_click"
-                  onClick={() => navigate(path(CONVERT.report))}
-                  className="mt-3 min-h-11 rounded bg-[#991b1b] px-4 text-sm font-bold text-white"
+                  data-analytics-event="scanner_retry_click"
+                  onClick={() => void runScan(url.trim())}
+                  className="mt-3 min-h-11 rounded bg-[#991b1b] px-4 text-sm font-bold text-white transition hover:bg-[#7f1d1d]"
                 >
-                  {copy.failureCta}
+                  {copy.failureRetry}
                 </button>
               </div>
             </CardContent>
@@ -462,6 +476,53 @@ export default function Scanner() {
               </CardContent>
             </Card>
 
+            <Card
+              className={
+                result.summary.scanStatus === "partial"
+                  ? "border-[#f4c96b] bg-[#fff9e8]"
+                  : "border-[#a7d9c7] bg-[#f0fbf7]"
+              }
+            >
+              <CardContent className="pt-6 pb-6">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p className="font-bold text-[#16181d]">
+                    {copy.scanStatus[result.summary.scanStatus]}
+                  </p>
+                  <Badge className="bg-white text-[#1f3a5f] hover:bg-white">
+                    Anchor Browser
+                  </Badge>
+                </div>
+                <p className="mt-4 text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
+                  {copy.pagesInspected}
+                </p>
+                <ul className="mt-2 space-y-1.5">
+                  {result.summary.pagesVisited.map(page => (
+                    <li
+                      key={page.url}
+                      className="text-sm leading-relaxed break-all text-[#5c6370]"
+                    >
+                      <span className="font-semibold text-[#16181d]">
+                        {page.title || new URL(page.url).hostname}
+                      </span>{" "}
+                      — {page.url}
+                    </li>
+                  ))}
+                </ul>
+                {result.summary.blockers.length > 0 && (
+                  <>
+                    <p className="mt-5 text-xs font-bold tracking-wide text-[#8a5a00] uppercase">
+                      {copy.blockersTitle}
+                    </p>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[#6b4f16]">
+                      {result.summary.blockers.map(blocker => (
+                        <li key={blocker}>{blocker}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+
             {/* findings */}
             {result.detected.map(d => (
               <Card key={d.id} className="border-[#e2e2dd] bg-white shadow-sm">
@@ -487,6 +548,9 @@ export default function Scanner() {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-2">
+                  <p className="text-xs break-all text-[#6b7280]">
+                    {copy.source}: {d.sourceUrl}
+                  </p>
                   {d.evidence.map(e => (
                     <p key={e} className="text-xs break-all text-[#6b7280]">
                       {copy.evidence}: {e}
@@ -515,6 +579,44 @@ export default function Scanner() {
                   <p className="mt-1 text-sm text-[#5c6370]">
                     {copy.noSignaturesBody}
                   </p>
+                </CardContent>
+              </Card>
+            )}
+
+            {result.summary.brokenElements.length > 0 && (
+              <Card className="border-[#f4c96b] bg-[#fffdf5]">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">{copy.brokenElementsTitle}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {result.summary.brokenElements.map(item => (
+                    <div key={`${item.url}-${item.description}`}>
+                      <p className="text-sm text-[#16181d]">{item.description}</p>
+                      <p className="mt-1 text-xs break-all text-[#6b7280]">{item.url}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
+
+            {result.summary.riskIndicators.length > 0 && (
+              <Card className="border-[#d8c7f1] bg-[#faf7ff]">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">{copy.riskIndicatorsTitle}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {result.summary.riskIndicators.map(item => (
+                    <div key={`${item.area}-${item.sourceUrl}-${item.evidence}`}>
+                      <Badge className="bg-[#ede4fb] text-[#5b348b] hover:bg-[#ede4fb]">
+                        {item.area === "article_5" ? "Article 5" : "Annex III"}
+                      </Badge>
+                      <p className="mt-2 text-sm text-[#16181d]">{item.reason}</p>
+                      <p className="mt-1 text-xs text-[#5c6370]">{item.evidence}</p>
+                      <p className="mt-1 text-xs break-all text-[#6b7280]">
+                        {item.sourceUrl}
+                      </p>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
             )}

@@ -16,9 +16,11 @@ export default function Privacy() {
               What we collect
             </h2>
             <p className="mt-2">
-              <strong>Scanner:</strong> when you scan a URL, we fetch that
-              page's public HTML and store the URL, the resulting score and the
-              report so you can retrieve them.
+              <strong>Scanner:</strong> when you scan a URL, an Anchor Browser
+              task inspects that rendered public website and up to two relevant
+              same-origin pages. We store the submitted URL, inspected URLs,
+              observed evidence, resulting score and report so you can retrieve
+              them.
               <strong> Email capture:</strong> if you give us your email, we
               store it with the scanned URL and the form source to send you what
               you asked for. That's all.

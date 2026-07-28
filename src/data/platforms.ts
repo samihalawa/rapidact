@@ -27,7 +27,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "If you provide an AI assistant under your own service or brand, Article 50(1) may require a clear notice before the first interaction. The free RapidAct notice gives you that visible technical layer without replacing the role and scope assessment.",
     detectionNote:
-      "Run the free website scan first. It checks the public page against 52 known AI-chat signatures and reports whether disclosure wording is visible. It cannot inspect private plugins, custom back-office AI or your contractual role.",
+      "Run the free website scan first. A live browser inspects the rendered site and its most relevant public pages for visible AI touchpoints, disclosure wording and exact source evidence. Private plugins, back-office AI and contractual roles remain outside the public scan.",
     freeInstall: [
       "Find RapidAct AI Disclosure in Plugins → Add New after its WordPress.org publication.",
       "Install, activate, then open Settings → RapidAct AI Disclosure.",
@@ -59,7 +59,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "Wix sites often run Wix Chat, Tidio or another AI app. Your exact duty depends on whether you are the provider or deployer and what the system does. Where a direct-interaction notice is required, RapidAct adds the visible notice through a native dashboard setup.",
     detectionNote:
-      "Run the free scan first: it checks your published Wix site for known chat widgets and shows whether any disclosure is already visible. Wix renders widgets client-side, so the scan reads what your visitors actually receive.",
+      "Run the free scan first: a live browser inspects the published Wix experience, including client-rendered widgets, and records any visible AI touchpoints or disclosure wording with the source URL.",
     freeInstall: [
       "Install RapidAct from the Wix App Market after publication.",
       "Open RapidAct Setup in the Wix dashboard and enter the optional Badge ID and language.",
@@ -83,7 +83,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "If your store provides an AI shopping or support assistant, you may need a clear direct-interaction notice. AI-generated content has separate rules, so first classify the system and your role; use the notice where it fits.",
     detectionNote:
-      "The free scan checks the public storefront for common Shopify AI-chat signatures and visible disclosure wording. It cannot determine whether a product image was generated or materially altered by AI.",
+      "The free scan opens the rendered storefront and relevant public pages, then records visible AI touchpoints, disclosure wording and exact source evidence. It does not infer whether an image was AI-generated when that is not directly observable.",
     freeInstall: [
       "Install RapidAct from the Shopify App Store after publication and complete Shopify OAuth.",
       "Open the app, follow its theme-editor link and enable the RapidAct app embed.",
@@ -113,7 +113,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "Lyro can answer visitors automatically. Article 50(1) places the direct-interaction notice on the AI-system provider, while deployers have distinct duties in other Article 50 cases. Establish your role first, then make the notice clear before the first automated exchange.",
     detectionNote:
-      "The free scan recognizes Tidio's public loader and checks whether AI-disclosure wording is visible on the page. A technical match does not by itself determine your legal role or full set of duties.",
+      "The free scan inspects the rendered page as a visitor, records visible Tidio or Lyro interactions and checks whether disclosure wording is actually observable. These observations do not determine your legal role.",
     freeInstall: [
       "Keep Tidio exactly as it is — you don't need to change vendors.",
       "Open the RapidAct notice installer and copy the production script.",
@@ -137,7 +137,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "Botpress agents can hold natural conversations, so visitors may not know they are interacting with AI. If you are the provider responsible for the direct-interaction notice, disclose that fact before the exchange starts and keep the wording specific to the system.",
     detectionNote:
-      "Botpress webchat embeds load from botpress.cloud — our signature database fingerprints them along with 50+ other platforms and checks for visible disclosure wording.",
+      "The free scan opens the rendered site and records a Botpress interaction only when it can observe direct evidence on the public page, together with any visible disclosure wording and the source URL.",
     freeInstall: [
       "Open the RapidAct notice installer and copy the production script.",
       "Add it to every page where the Botpress webchat loads and customize the title and message.",
@@ -160,7 +160,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "Custom site, Webflow, Squarespace or a React app: the technical installation is the same. First establish whether Article 50 requires a direct-interaction notice for your role and system; if it does, the notice is one script you can paste yourself.",
     detectionNote:
-      "The free scan reads your public HTML for 52 AI chat signatures. If your AI is fully custom, the scan won't name it — but your developers know it's there, and the disclosure works the same way.",
+      "The free scan uses a live browser to inspect the rendered public experience rather than relying on a fixed signature list. It reports directly observed evidence and clearly marks any pages it could not inspect.",
     freeInstall: [
       "Copy the RapidAct snippet from the guide page.",
       "Paste it before the closing body tag of your pages (or in your tag manager).",

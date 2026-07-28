@@ -33,7 +33,7 @@ export const REQUIREMENTS: RequirementGuide[] = [
       "Article 50(1) of Regulation (EU) 2024/1689 requires providers to design direct-interaction AI systems so people are informed they are interacting with AI, unless that is obvious to a reasonably well-informed, observant and circumspect person. The information must be clear, distinguishable and accessible at the latest at first interaction. Article 99 sets a maximum fine of €15 million or 3% of worldwide annual turnover, subject to proportionality and the specific case.",
     deadline: "2 August 2026.",
     freeSteps: [
-      "Scan the public page to identify known chatbot signatures and visible disclosure wording.",
+      "Scan the rendered public website to record visible AI interactions, disclosure wording and exact source URLs.",
       "Confirm who is the provider, who is the deployer and whether an exception applies.",
       "Install the free one-script RapidAct badge and tailor the wording to the actual system.",
       "Verify the live desktop and mobile experience before the first interaction, then record the URL, wording, owner and verification date.",

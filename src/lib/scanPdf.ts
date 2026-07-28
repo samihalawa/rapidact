@@ -8,6 +8,9 @@ export type ScanPdfCopy = {
   findings: string;
   actions: string;
   scope: string;
+  status: string;
+  pages: string;
+  blockers: string;
   disclosureFound: string;
   disclosureMissing: string;
 };
@@ -90,13 +93,26 @@ export function createScanPdf({
   pdf.setFontSize(9);
   pdf.setTextColor(MUTED);
   pdf.text(generated, margin + 28, y);
+  pdf.setFont("helvetica", "bold");
+  pdf.setTextColor(result.summary.scanStatus === "partial" ? "#9a6700" : "#0e7c57");
+  pdf.text(copy.status.toUpperCase(), width - margin, y, { align: "right" });
 
   y += 10;
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(17);
   pdf.setTextColor(INK);
   pdf.text(ellipsis(result.summary.url, 75), margin, y);
-  y += 7;
+  y += 6;
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(7.5);
+  pdf.setTextColor(MUTED);
+  const pageUrls = result.summary.pagesVisited.map(page => page.url).join(" · ") || result.summary.url;
+  pdf.text(
+    `${copy.pages}: ${ellipsis(pageUrls, 155)}`,
+    margin,
+    y
+  );
+  y += 6;
   pdf.setDrawColor(LINE);
   pdf.setLineWidth(0.35);
   pdf.line(margin, y, width - margin, y);
@@ -132,7 +148,7 @@ export function createScanPdf({
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(9);
     pdf.setTextColor(MUTED);
-    pdf.text("No known public-page AI signatures detected.", margin, y + 2);
+    pdf.text("No visible public-page AI touchpoints were observed.", margin, y + 2);
     y += 10;
   } else {
     findings.forEach((finding, index) => {
@@ -185,7 +201,14 @@ export function createScanPdf({
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(7.8);
   pdf.setTextColor("#6b4f16");
-  pdf.text(pdf.splitTextToSize(copy.scope, contentWidth - 8).slice(0, 3), margin + 4, scopeY + 6);
+  const scopeText = result.summary.blockers.length
+    ? `${copy.blockers}: ${result.summary.blockers.join("; ")}. ${copy.scope}`
+    : copy.scope;
+  pdf.text(
+    pdf.splitTextToSize(scopeText, contentWidth - 8).slice(0, 3),
+    margin + 4,
+    scopeY + 6
+  );
 
   pdf.setDrawColor(LINE);
   pdf.line(margin, 282, width - margin, 282);

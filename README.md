@@ -2,7 +2,7 @@
 
 AI transparency tooling for EU AI Act Article 50 — detect AI chatbots, disclose to visitors, keep evidence.
 
-- **Landing + scanner**: React 19 + Vite + Tailwind + shadcn/ui (frontend), Hono + tRPC (API), Drizzle + MySQL (leads & scans)
+- **Landing + scanner**: React 19 + Vite + Tailwind + shadcn/ui (frontend), Hono + tRPC (API), Anchor Browser (rendered public-site inspection), Drizzle + MySQL (leads & scans)
 - **Deploy**: Dockerfile → Coolify from GitHub (`main` = production)
 
 ## Scripts
@@ -12,7 +12,7 @@ AI transparency tooling for EU AI Act Article 50 — detect AI chatbots, disclos
 - `npm run db:push` — sync schema (leads, scans tables)
 
 ## Env
-`DATABASE_URL`, `APP_ID`, `APP_SECRET` (set in Coolify, never committed)
+`DATABASE_URL`, `APP_ID`, `APP_SECRET`, `ANCHOR_BROWSER_API_KEY` (set in Coolify, never committed)
 
 ## Deploy status
 

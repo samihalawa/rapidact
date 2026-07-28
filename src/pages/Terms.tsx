@@ -18,9 +18,9 @@ export default function Terms() {
             <p className="mt-2">
               RapidAct provides a public website scanner, a configurable
               one-script AI-use notice, educational guides and a paid written
-              company assessment. The scanner detects public technical signals;
-              it does not classify every AI system or determine legal
-              responsibility.
+              company assessment. The scanner records rendered public-page
+              observations and any inspection blockers; it does not classify
+              every AI system or determine legal responsibility.
             </p>
           </section>
           <section>

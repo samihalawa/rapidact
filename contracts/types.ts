@@ -9,8 +9,26 @@ export interface ScanFinding {
   category: string;
   article: string;
   severity: "high" | "medium" | "low";
+  sourceUrl: string;
   evidence: string[];
   existingDisclosureFound: boolean;
+}
+
+export interface ScanPage {
+  url: string;
+  title: string;
+}
+
+export interface ScanBrokenElement {
+  url: string;
+  description: string;
+}
+
+export interface ScanRiskIndicator {
+  area: "article_5" | "annex_3";
+  sourceUrl: string;
+  evidence: string;
+  reason: string;
 }
 
 export interface ScanSummary {
@@ -19,6 +37,12 @@ export interface ScanSummary {
   undisclosed: number;
   scannedAt: string;
   url: string;
+  scanStatus: "complete" | "partial";
+  pagesVisited: ScanPage[];
+  blockers: string[];
+  brokenElements: ScanBrokenElement[];
+  riskIndicators: ScanRiskIndicator[];
+  engine: "anchor-browser";
 }
 
 export interface ScanResult {
@@ -29,6 +53,15 @@ export interface ScanResult {
   reachable: boolean;
   error?: string;
 }
+
+export type ScanStartResult =
+  | { ok: true; token: string }
+  | { ok: false; error: "invalid-url" | "rate-limited" | "anchor-unavailable" };
+
+export type ScanStatusResult =
+  | { status: "running" }
+  | { status: "failed"; error: string }
+  | { status: "completed"; result: ScanResult };
 
 export interface LeadInput {
   email: string;

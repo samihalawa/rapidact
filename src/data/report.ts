@@ -87,6 +87,6 @@ export const REPORT_FAQS = [
   },
   {
     q: "What data do you need, and what do you do with it?",
-    a: "The intake form: your company, site, sector, size and which AI you use. We use it to prepare your report and for nothing else. It is never resold or added to a marketing list. The free scanner fetches only the public HTML of a URL you submit.",
+    a: "The intake form: your company, site, sector, size and which AI you use. We use it to prepare your report and for nothing else. It is never resold or added to a marketing list. The free scanner uses a remote browser to inspect only the submitted public website and up to two relevant same-origin public pages.",
   },
 ];
