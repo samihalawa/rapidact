@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { getConsent, initAnalytics, setConsent, track, trackPageView } from "@/lib/analytics";
+import {
+  getConsent,
+  initAnalytics,
+  isAnalyticsHost,
+  setConsent,
+  track,
+  trackPageView,
+} from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 
 export default function Analytics() {
   const location = useLocation();
   const { t } = useI18n();
+  const enabled = isAnalyticsHost();
   const [choice, setChoice] = useState(getConsent());
 
   useEffect(() => {
@@ -23,18 +31,23 @@ export default function Analytics() {
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      const target = (event.target as Element | null)?.closest<HTMLElement>("[data-analytics-event]");
+      const target = (event.target as Element | null)?.closest<HTMLElement>(
+        "[data-analytics-event]"
+      );
       if (!target) return;
       track(target.dataset.analyticsEvent || "cta_clicked", {
-        action_label: target.dataset.analyticsLabel || target.textContent?.trim().slice(0, 80),
-        destination: target instanceof HTMLAnchorElement ? target.href : undefined,
+        action_label:
+          target.dataset.analyticsLabel ||
+          target.textContent?.trim().slice(0, 80),
+        destination:
+          target instanceof HTMLAnchorElement ? target.href : undefined,
       });
     };
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, []);
 
-  if (choice) return null;
+  if (!enabled || choice) return null;
 
   return (
     <aside

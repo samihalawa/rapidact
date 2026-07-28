@@ -18,6 +18,7 @@ export type InstallerCopy = {
   code: string;
   copy: string;
   copied: string;
+  copyFailed: string;
   close: string;
   preview: string;
   previewTitle: string;
@@ -51,6 +52,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     code: "Installation code",
     copy: "Copy code",
     copied: "Copied",
+    copyFailed: "Select and copy the code below",
     close: "Close installer",
     preview: "Open live preview",
     previewTitle: "Live preview",
@@ -105,6 +107,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     code: "Código de instalación",
     copy: "Copiar código",
     copied: "Copiado",
+    copyFailed: "Selecciona y copia el código",
     close: "Cerrar instalador",
     preview: "Abrir vista previa",
     previewTitle: "Vista previa",
@@ -159,6 +162,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     code: "Installationscode",
     copy: "Code kopieren",
     copied: "Kopiert",
+    copyFailed: "Code unten auswählen und kopieren",
     close: "Installer schließen",
     preview: "Live-Vorschau öffnen",
     previewTitle: "Live-Vorschau",
@@ -213,6 +217,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     code: "Code d’installation",
     copy: "Copier le code",
     copied: "Copié",
+    copyFailed: "Sélectionnez et copiez le code",
     close: "Fermer l’installateur",
     preview: "Ouvrir l’aperçu",
     previewTitle: "Aperçu en direct",
@@ -267,6 +272,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     code: "Codice di installazione",
     copy: "Copia codice",
     copied: "Copiato",
+    copyFailed: "Seleziona e copia il codice",
     close: "Chiudi installazione",
     preview: "Apri anteprima",
     previewTitle: "Anteprima",

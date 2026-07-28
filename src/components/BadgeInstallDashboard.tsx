@@ -159,7 +159,9 @@ export default function BadgeInstallDashboard({
   const copy = INSTALLER_COPY[lang];
   const [selected, setSelected] = useState<PlatformOption | null>(null);
   const [display, setDisplay] = useState<BadgeDisplay>("bubble");
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "failed">(
+    "idle"
+  );
   const selectedPlatformGuide = selected
     ? PLATFORMS.find(platform => platform.slug === selected.id)
     : undefined;
@@ -191,30 +193,52 @@ export default function BadgeInstallDashboard({
   const selectPlatform = (platform: PlatformOption) => {
     setSelected(platform);
     setDisplay("bubble");
-    setCopied(false);
+    setCopyStatus("idle");
     track("badge_installer_platform_selected", { platform: platform.id });
   };
 
   const copySnippet = async () => {
     if (!selected) return;
+    let didCopy = false;
     try {
       await navigator.clipboard.writeText(snippet);
+      didCopy = true;
     } catch {
       const textarea = document.createElement("textarea");
       textarea.value = snippet;
+      textarea.readOnly = true;
       textarea.style.position = "fixed";
-      textarea.style.opacity = "0";
+      textarea.style.top = "0";
+      textarea.style.left = "0";
+      textarea.style.width = "1px";
+      textarea.style.height = "1px";
+      textarea.style.opacity = "0.01";
       document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      textarea.remove();
+      try {
+        textarea.focus();
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+        didCopy = document.execCommand("copy");
+      } catch {
+        didCopy = false;
+      } finally {
+        textarea.remove();
+      }
+    }
+    if (!didCopy) {
+      setCopyStatus("failed");
+      track("badge_installer_copy_failed", {
+        installer: selected.id,
+        display,
+      });
+      return;
     }
     track("badge_installer_copy", {
       installer: selected.id,
       display,
     });
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
+    setCopyStatus("copied");
+    window.setTimeout(() => setCopyStatus("idle"), 2500);
   };
 
   return (
@@ -347,7 +371,7 @@ export default function BadgeInstallDashboard({
                         aria-pressed={active}
                         onClick={() => {
                           setDisplay(option);
-                          setCopied(false);
+                          setCopyStatus("idle");
                           track("badge_installer_display_selected", {
                             platform: selected.id,
                             display: option,
@@ -483,12 +507,16 @@ export default function BadgeInstallDashboard({
                         className="inline-flex min-h-11 items-center gap-2 px-2 text-xs font-bold text-white transition hover:text-[#75e2ff] focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
                         aria-live="polite"
                       >
-                        {copied ? (
+                        {copyStatus === "copied" ? (
                           <Check className="h-4 w-4" aria-hidden="true" />
                         ) : (
                           <Copy className="h-4 w-4" aria-hidden="true" />
                         )}
-                        {copied ? copy.copied : copy.copy}
+                        {copyStatus === "copied"
+                          ? copy.copied
+                          : copyStatus === "failed"
+                            ? copy.copyFailed
+                            : copy.copy}
                       </button>
                     </div>
                     <pre className="max-h-80 overflow-auto p-4 text-[11px] leading-relaxed sm:text-xs">

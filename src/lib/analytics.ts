@@ -6,11 +6,14 @@ export const ANALYTICS = {
   googleAdsId: "AW-18196170782",
   posthogKey: "phc_tKAxP5F6oRE3XHximxQYW8dMX4gtE9XYBraJ4PNwfemk",
   posthogHost: "https://posthog.megawebs.com",
-  release: "2026-07-26",
+  release: "2026-07-28",
 } as const;
 
 export type ConsentChoice = "all" | "essential";
-export type EventProperties = Record<string, string | number | boolean | undefined>;
+export type EventProperties = Record<
+  string,
+  string | number | boolean | undefined
+>;
 
 declare global {
   interface Window {
@@ -20,7 +23,14 @@ declare global {
 }
 
 const CONSENT_KEY = "rapidact-consent-v1";
+const ANALYTICS_HOSTS = new Set(["rapidact.eu", "www.rapidact.eu"]);
 let initialized = false;
+
+export function isAnalyticsHost(
+  hostname = typeof location === "undefined" ? "" : location.hostname
+) {
+  return ANALYTICS_HOSTS.has(hostname.toLowerCase());
+}
 
 export function getConsent(): ConsentChoice | null {
   const value = localStorage.getItem(CONSENT_KEY);
@@ -40,13 +50,15 @@ function googleConsent(choice: ConsentChoice | null) {
 }
 
 export function initAnalytics() {
-  if (initialized) return;
+  if (initialized || !isAnalyticsHost()) return;
   initialized = true;
 
   window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(...args: unknown[]) {
-    window.dataLayer.push(args);
-  };
+  window.gtag =
+    window.gtag ||
+    function gtag(...args: unknown[]) {
+      window.dataLayer.push(args);
+    };
 
   const consent = getConsent();
   googleConsent(consent);
@@ -85,16 +97,26 @@ export function initAnalytics() {
   });
 
   if (consent === "all") {
-    posthog.opt_in_capturing();
+    if (!posthog.has_opted_in_capturing()) {
+      posthog.opt_in_capturing({ captureEventName: false });
+    }
     posthog.startSessionRecording();
   }
 }
 
 export function setConsent(choice: ConsentChoice) {
   localStorage.setItem(CONSENT_KEY, choice);
+  if (!isAnalyticsHost()) {
+    window.dispatchEvent(
+      new CustomEvent("rapidact:consent", { detail: choice })
+    );
+    return;
+  }
   googleConsent(choice);
   if (choice === "all") {
-    posthog.opt_in_capturing();
+    if (!posthog.has_opted_in_capturing()) {
+      posthog.opt_in_capturing({ captureEventName: false });
+    }
     posthog.startSessionRecording();
     track("consent_updated", { analytics: true, advertising: true });
   } else {
@@ -114,14 +136,15 @@ function baseProperties(): EventProperties {
 }
 
 export function track(name: string, properties: EventProperties = {}) {
+  if (!isAnalyticsHost()) return;
   const payload = { ...baseProperties(), ...properties };
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: name, ...payload });
-  window.gtag?.("event", name, payload);
   if (getConsent() === "all") posthog.capture(name, payload);
 }
 
 export function trackPageView() {
+  if (!isAnalyticsHost()) return;
   const payload = {
     ...baseProperties(),
     page_title: document.title,
