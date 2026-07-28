@@ -385,6 +385,9 @@ export default function Scanner() {
                 {copy.elapsed(scanElapsed)}
               </span>
             </div>
+            <p className="ink-soft mt-3 text-xs leading-relaxed">
+              {copy.progressScope}
+            </p>
             <div
               role="progressbar"
               aria-label={copy.stages[scanStage].label}
@@ -393,9 +396,6 @@ export default function Scanner() {
             >
               <div className="h-full w-full animate-pulse rounded-full bg-gradient-to-r from-[#d9e6fb] via-[#1f5fd2] to-[#d9e6fb]" />
             </div>
-            <p className="ink-soft mt-3 text-xs leading-relaxed">
-              {copy.progressScope}
-            </p>
           </section>
         )}
 
