@@ -50,6 +50,10 @@ export function stableEventId(namespace: string, seed: string) {
   return `${namespace}_${(hash >>> 0).toString(36)}`;
 }
 
+export function googleTransportUrl(origin: string) {
+  return `${origin.replace(/\/+$/, "")}/metrics`;
+}
+
 export function claimSessionEvent(eventId: string, storage?: EventStorage) {
   try {
     const target = storage ?? window.sessionStorage;
@@ -102,7 +106,7 @@ export function initAnalytics() {
   window.gtag("config", ANALYTICS.ga4MeasurementId, {
     send_page_view: false,
     allow_google_signals: consent === "all",
-    transport_url: "/metrics",
+    transport_url: googleTransportUrl(location.origin),
     first_party_collection: true,
   });
   window.gtag("config", ANALYTICS.googleAdsId, {

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   ANALYTICS_EVENTS,
   claimSessionEvent,
+  googleTransportUrl,
   isAnalyticsHost,
   isLeadRetained,
   stableEventId,
@@ -18,6 +19,17 @@ describe("analytics host filtering", () => {
     expect(isAnalyticsHost("127.0.0.1")).toBe(false);
     expect(isAnalyticsHost("localhost")).toBe(false);
     expect(isAnalyticsHost("rapidact.megawebs.com")).toBe(false);
+  });
+});
+
+describe("Google Tag Gateway", () => {
+  it("uses the absolute first-party transport URL Google expects", () => {
+    expect(googleTransportUrl("https://rapidact.eu")).toBe(
+      "https://rapidact.eu/metrics"
+    );
+    expect(googleTransportUrl("https://www.rapidact.eu/")).toBe(
+      "https://www.rapidact.eu/metrics"
+    );
   });
 });
 
