@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct partner distribution | copying enterprise partner-program complexity would slow the first referral and obscure the €99 entry offer | use one paid-discovery assessment, explicit €69 partner cost, typed legal/audit/delivery entry points and partner-owned follow-on fees | do not add tiers, certification, portals, minimums or unverified applicability claims | verify economics, first-client form, typed deep links, CRM capture and sent-message destinations
 RapidAct localized platform guides | translating only a shared shell flattened product-specific guidance and produced broken custom-site grammar | localize each platform's role, evidence boundary and install nuance independently | do not interpolate a generic platform name into legal or technical sentences | verify 24 localized routes, semantic tests, language-specific accessibility labels and phone/desktop overflow
 RapidAct scanner result integrity | optional Anchor fields can arrive as JSON null and URL edits can leave a prior result visible | normalize nullable optional evidence at the parser boundary, clear result state on every new input, and report observed counts rather than a compliance-like score | do not reject a valid scan because absent evidence is null, attribute an old result to a new URL, or imply 100 means compliant | verify deepswapai.io completes, the inspected URL matches, changing input removes the result, and the three-step result renders in five languages on phone/desktop
 RapidAct scanner engine | a broad three-page, 80-step Anchor task made the free preview slow and encouraged false-positive exploration | make one strict four-step Anchor `perform-web-task` call that inspects only the submitted rendered page | do not navigate, simulate percentage progress, silently downgrade, or treat AI-related content and badges as functional AI | verify live duration, exactly one inspected URL, functional evidence, failure/retry, five languages, PDF, phone/desktop and production
@@ -16,6 +17,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, or pageview-only measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader and a published GA4 product-event tag | do not track localhost, emit repeated PostHog opt-ins, double-send custom events, or reuse another product property | prove exact GA4/PostHog event payloads, replay/errors, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-28 — Partner distribution starts with one paid client discovery
+
+- Status: CURRENT
+- Project/root: `rapidact`; `/partners`, partner lead capture and outbound partner campaign.
+- Mistake: a copied enterprise partner programme would add tiers, certification, portals and onboarding before a first paid referral; generic partner links also default every recipient to the legal motion.
+- Do: sell one €99 Article 50 company assessment as paid discovery at a €69 founding-partner cost, let the partner choose the client price and keep all follow-on service fees, and deep-link legal, audit and delivery firms to their exact motion.
+- Don't: claim Article 50 applicability before assessment or require a dashboard, minimum, certification or programme onboarding.
+- Evidence: current-thread Drata comparison, two independent pre-send critiques, `src/data/localizedPartners.ts`, `src/pages/Partners.tsx` and the 30-row Close campaign.
+- Trigger terms: partner, affiliate, reseller, audit firm, law firm, referral, white label, Drata.
+- Verify before reuse: render the three typed routes in five languages, submit a first-client enquiry through Close, and read back exact recipient, sender, link type and sent state for outreach.
 
 ## 2026-07-28 — Platform translations preserve platform-specific meaning
 
