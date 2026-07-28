@@ -6,7 +6,14 @@ export const ANALYTICS = {
   googleAdsId: "AW-18196170782",
   posthogKey: "phc_tKAxP5F6oRE3XHximxQYW8dMX4gtE9XYBraJ4PNwfemk",
   posthogHost: "https://posthog.megawebs.com",
-  release: "2026-07-28",
+  release: "2026-07-29",
+} as const;
+
+export const ANALYTICS_EVENTS = {
+  scannerLeadCaptured: "scanner_lead_captured",
+  reportSubmitted: "report_submitted",
+  paymentInitiated: "payment_initiated",
+  purchase: "purchase",
 } as const;
 
 export type ConsentChoice = "all" | "essential";
@@ -14,6 +21,7 @@ export type EventProperties = Record<
   string,
   string | number | boolean | undefined
 >;
+type EventStorage = Pick<Storage, "getItem" | "setItem">;
 
 declare global {
   interface Window {
@@ -25,6 +33,34 @@ declare global {
 const CONSENT_KEY = "rapidact-consent-v1";
 const ANALYTICS_HOSTS = new Set(["rapidact.eu", "www.rapidact.eu"]);
 let initialized = false;
+
+export function isLeadRetained(result: {
+  stored: boolean;
+  crm?: "synced" | "skipped" | "failed";
+}) {
+  return result.stored || result.crm === "synced";
+}
+
+export function stableEventId(namespace: string, seed: string) {
+  let hash = 2166136261;
+  for (const character of `${namespace}:${seed}`) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `${namespace}_${(hash >>> 0).toString(36)}`;
+}
+
+export function claimSessionEvent(eventId: string, storage?: EventStorage) {
+  try {
+    const target = storage ?? window.sessionStorage;
+    if (target.getItem(eventId)) return false;
+    target.setItem(eventId, "1");
+    return true;
+  } catch {
+    // Analytics must not block the user when browser storage is unavailable.
+    return true;
+  }
+}
 
 export function isAnalyticsHost(
   hostname = typeof location === "undefined" ? "" : location.hostname
@@ -138,8 +174,7 @@ function baseProperties(): EventProperties {
 export function track(name: string, properties: EventProperties = {}) {
   if (!isAnalyticsHost()) return;
   const payload = { ...baseProperties(), ...properties };
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: name, ...payload });
+  window.gtag?.("event", name, payload);
   if (getConsent() === "all") posthog.capture(name, payload);
 }
 

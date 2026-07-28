@@ -35,7 +35,11 @@ import {
   ArrowRight,
   Eye,
 } from "lucide-react";
-import { track } from "@/lib/analytics";
+import {
+  ANALYTICS_EVENTS,
+  isLeadRetained,
+  track,
+} from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 import { SCANNER_COPY } from "@/data/localizedScanner";
 
@@ -171,7 +175,18 @@ export default function Scanner() {
         url: submittedUrl,
         source: "scanner-gate",
       });
-      track("scanner_lead_captured", {
+      if (!isLeadRetained(captured)) {
+        setEmailError(copy.emailGateError);
+        track("scanner_lead_capture_failed", {
+          stored: captured.stored,
+          crm_status: captured.crm ?? "unknown",
+          failure_type: "lead_not_retained",
+        });
+        return;
+      }
+      track(ANALYTICS_EVENTS.scannerLeadCaptured, {
+        lead_type: "free_scan",
+        lead_source: "scanner_email_gate",
         stored: captured.stored,
         crm_status: captured.crm ?? "unknown",
       });
@@ -179,7 +194,9 @@ export default function Scanner() {
       await runScan(submittedUrl);
     } catch {
       setEmailError(copy.emailGateError);
-      track("scanner_lead_capture_failed");
+      track("scanner_lead_capture_failed", {
+        failure_type: "request_failed",
+      });
     }
   };
 

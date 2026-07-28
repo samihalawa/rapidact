@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct conversion truth | fulfilled API calls and repeat checkout clicks can inflate key events without retained leads or new intent | gate lead conversions on DB or CRM retention, keep partner success CRM-backed, and dedupe checkout initiation per reference/session | do not equate mutation fulfillment with captured lead, emit success and failure for one attempt, or treat initiation value as revenue | verify forced-failure branches, repeat payment clicks, GTM parameter forwarding and purchase remains provider-confirmed only
 RapidAct partner distribution | copying enterprise partner-program complexity would slow the first referral and obscure the €99 entry offer | use one paid-discovery assessment, explicit €69 partner cost, typed legal/audit/delivery entry points and partner-owned follow-on fees | do not add tiers, certification, portals, minimums or unverified applicability claims | verify economics, first-client form, typed deep links, CRM capture and sent-message destinations
 RapidAct localized platform guides | translating only a shared shell flattened product-specific guidance and produced broken custom-site grammar | localize each platform's role, evidence boundary and install nuance independently | do not interpolate a generic platform name into legal or technical sentences | verify 24 localized routes, semantic tests, language-specific accessibility labels and phone/desktop overflow
 RapidAct scanner result integrity | optional Anchor fields can arrive as JSON null and URL edits can leave a prior result visible | normalize nullable optional evidence at the parser boundary, clear result state on every new input, and report observed counts rather than a compliance-like score | do not reject a valid scan because absent evidence is null, attribute an old result to a new URL, or imply 100 means compliant | verify deepswapai.io completes, the inspected URL matches, changing input removes the result, and the three-step result renders in five languages on phone/desktop
@@ -14,9 +15,31 @@ RapidAct scanner conversion | a spinner made the public-page preview feel unfini
 RapidAct brand assets | redrawn SVG and generated marks drifted from the approved logo | use the exact tight-crop raster pack by purpose, plus semantic text for the wordmark and disclosure | do not redraw, stretch, or retain superseded marks | verify header, footer, badge, favicon, PWA, social, and five languages live
 RapidAct responsive report rows | three children collapsed when the grid changed from two to three columns | place the description explicitly at each breakpoint | do not rely on implicit grid flow across column-count changes | verify 640–1023px and desktop rendered rows
 RapidAct mobile header | the language selector displaced navigation and the conversion action | keep compact logo, 44px Scan CTA and 44px menu; place the small language selector inside the drawer | do not expose the desktop nav or language selector in the phone header | verify the real phone/tablet header, drawer links, language control, no overflow and 44px targets
-RapidAct analytics | shared, local, duplicated, or pageview-only measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader and a published GA4 product-event tag | do not track localhost, emit repeated PostHog opt-ins, double-send custom events, or reuse another product property | prove exact GA4/PostHog event payloads, replay/errors, gateway config, and Ads link
+RapidAct analytics | shared, local, duplicated, pageview-only, or name-only measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader and one direct Google-tag event command per product event | do not track localhost, emit repeated PostHog opt-ins, keep the incomplete GTM product tag active, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-29 — Conversion events require retained leads and unique checkout intent
+
+- Status: CURRENT
+- Project/root: `rapidact`; scanner gate, assessment intake, partner intake and bunq checkout analytics.
+- Mistake: fulfilled lead mutations were counted as conversions even when neither DB nor Close retained the lead; partner intake could emit success and failure together, and repeated checkout clicks could multiply €99 initiation value.
+- Do: emit lead conversions only when DB storage or the required CRM path succeeds, make success/failure mutually exclusive, and dedupe `payment_initiated` per non-PII checkout ID within the browser session.
+- Don't: treat mutation fulfillment as capture proof, count checkout initiation as revenue, or emit `purchase` without provider confirmation and a stable transaction ID.
+- Evidence: independent analytics critique on 2026-07-29; `api/routers/leads.ts`, `api/routers/report.ts`, `src/pages/{Scanner,Report,Partners}.tsx`.
+- Trigger terms: key event, lead, retained, stored, CRM, duplicate, bunq, checkout, purchase, value.
+- Verify before reuse: exercise retained/unretained branches, repeat one payment click, inspect the published GTM parameter map, and read exact GA4/PostHog payloads.
+
+## 2026-07-29 — Product-event parameters use the loaded Google tag directly
+
+- Status: CURRENT
+- Project/root: `rapidact`; GA4/GTM custom product-event forwarding.
+- Mistake: the GTM GA4 product-event tag forwarded `{{Event}}` but its published Event Parameters table was empty, so event names arrived while diagnostic and value fields were dropped.
+- Do: keep the single GTM loader and Google configuration tag, send each custom event once through the already-loaded `gtag` command with its complete payload, and keep the incomplete GTM product tag paused.
+- Don't: combine direct custom-event commands with an active GTM product-event tag, add another Google loader, or infer parameter receipt from an event name.
+- Evidence: authenticated GTM read on 2026-07-29 showed measurement `G-PEFSF0DS02`, event name `{{Event}}` and zero published event-parameter rows; `src/lib/analytics.ts`.
+- Trigger terms: GA4, GTM, parameter, event name, value, currency, checkout ID, lead source, duplicate.
+- Verify before reuse: publish the paused tag, capture one live Google collect body, confirm exact parameters, and verify PostHog receives the same event payload once.
 
 ## 2026-07-28 — Partner distribution starts with one paid client discovery
 
@@ -218,7 +241,7 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 
 ## 2026-07-28 — Analytics is production-only and forwards product events through GTM
 
-- Status: CURRENT
+- Status: SUPERSEDED
 - Project/root: `rapidact`; acquisition, conversion, consent, and replay measurement.
 - Mistake: localhost shared the production PostHog project, each load emitted `$opt_in`, and GTM had only an all-pages Google tag—so GA4 recorded pageviews but none of RapidAct's conversion events.
 - Do: allow analytics only on `rapidact.eu`/`www`, suppress PostHog's automatic opt-in event, push each product event once, and publish one GA4 Event tag triggered by the bounded RapidAct event-name regex.
@@ -226,6 +249,7 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Evidence: PostHog 24-hour host/event queries, live CDP payload `en=badge_installer_platform_selected`, GTM container version 4, and `src/lib/analytics.ts` on 2026-07-28.
 - Trigger terms: GA4, GTM, missing events, localhost, `$opt_in`, PostHog, consent, replay, conversion.
 - Verify before reuse: one GTM loader; zero analytics scripts on localhost; exact GA4 collect `postData` and PostHog event; replay/error counts; Ads link; gateway `enabled=true`, `setUpTag=false`.
+- Superseded by: the 2026-07-29 direct Google-tag event entry after the live GTM tag was found to forward event names without parameters.
 
 ## 2026-07-26 — Production serves the committed distribution bundle
 

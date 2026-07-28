@@ -13,12 +13,19 @@ import {
   HAS_ENTITY_DETAILS,
 } from "@/data/company";
 import { Loader2, ArrowLeft, Copy, Check, ChevronDown } from "lucide-react";
-import { track } from "@/lib/analytics";
+import {
+  ANALYTICS_EVENTS,
+  claimSessionEvent,
+  isLeadRetained,
+  stableEventId,
+  track,
+} from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 import { REPORT_COPY } from "@/data/localizedReport";
 import { HOME_COPY } from "@/data/localizedHome";
 
 const SIZES = ["1–10", "11–50", "51–250", "251–1000", "1000+"];
+const PAYMENT_EVENT_PREFIX = "rapidact-payment-initiated:";
 
 /** Small square selectable chip. Square, not pill: this is a form, not a launch page. */
 function Chip({
@@ -63,12 +70,23 @@ export default function Report() {
   const request = trpc.report.request.useMutation({
     onSuccess: r => {
       setRef(r.ref);
-      track("report_submitted", {
-        company_size: size || "not_provided",
-        sector: sector || "not_provided",
-        ai_system_count: systems.length,
-        crm_status: r.crm,
-      });
+      if (isLeadRetained(r)) {
+        track(ANALYTICS_EVENTS.reportSubmitted, {
+          lead_type: "paid_assessment",
+          lead_source: "assessment_intake",
+          company_size: size || "not_provided",
+          sector: sector || "not_provided",
+          ai_system_count: systems.length,
+          stored: r.stored,
+          crm_status: r.crm,
+        });
+      } else {
+        track("report_submission_failed", {
+          failure_type: "lead_not_retained",
+          stored: r.stored,
+          crm_status: r.crm,
+        });
+      }
     },
     onError: error =>
       track("report_submission_failed", {
@@ -116,6 +134,20 @@ export default function Report() {
     void navigator.clipboard.writeText(ref);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const trackPaymentInitiated = () => {
+    if (!ref) return;
+    const checkoutId = stableEventId("checkout", ref);
+    const storageKey = `${PAYMENT_EVENT_PREFIX}${checkoutId}`;
+    if (!claimSessionEvent(storageKey)) return;
+    track(ANALYTICS_EVENTS.paymentInitiated, {
+      value: REPORT.price,
+      currency: REPORT.currency,
+      payment_provider: "bunq",
+      product_name: REPORT.name,
+      checkout_id: checkoutId,
+    });
   };
 
   return (
@@ -166,8 +198,7 @@ export default function Report() {
                   target="_blank"
                   rel="noopener"
                   className="block"
-                  data-analytics-event="payment_initiated"
-                  data-analytics-label="bunq report payment"
+                  onClick={trackPaymentInitiated}
                 >
                   <Button className="h-12 w-full rounded bg-[#16181d] text-[15px] font-semibold text-white hover:bg-[#2b2f38]">
                     {copy.pay}

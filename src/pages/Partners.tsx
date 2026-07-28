@@ -68,19 +68,23 @@ export default function Partners() {
         notes: notes.trim() || undefined,
         source: "partner-intake",
       });
-      track("partner_application_submitted", {
-        partner_type: profile,
-        stored: result.stored,
-        crm_status: result.crm ?? "unknown",
-      });
       if (result.crm !== "synced") {
         setSubmitError(true);
         track("partner_application_failed", {
           partner_type: profile,
+          stored: result.stored,
+          crm_status: result.crm ?? "unknown",
           failure_type: "crm_not_synced",
         });
         return;
       }
+      track("partner_application_submitted", {
+        lead_type: "partner",
+        lead_source: "partner_intake",
+        partner_type: profile,
+        stored: result.stored,
+        crm_status: result.crm,
+      });
       setSubmitted(true);
     } catch {
       setSubmitError(true);
