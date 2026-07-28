@@ -4,6 +4,7 @@ import { createRouter, publicQuery } from "../middleware";
 import { getDb } from "../queries/connection";
 import { leads, reportRequests } from "@db/schema";
 import type { ReportRequestResult } from "@contracts/types";
+import { syncScannerLeadToClose } from "../lib/close";
 
 /**
  * Reference code the buyer sees and that travels in the bunq payment description.
@@ -101,17 +102,40 @@ export const reportRouter = createRouter({
         },
       ];
 
+      let stored = false;
       for (const attempt of attempts) {
         try {
           await attempt();
-          return { ok: true, ref, stored: true };
+          stored = true;
+          break;
         } catch {
           // Try the next fallback.
         }
       }
 
-      // Nothing could be stored. The buyer still gets a ref, and it travels in the
-      // bunq payment description — so the payment stays identifiable either way.
-      return { ok: true, ref, stored: false };
+      let crm: ReportRequestResult["crm"] = "skipped";
+      try {
+        crm = await syncScannerLeadToClose({
+          email: row.email,
+          url: row.website ?? undefined,
+          source: "report-intake",
+          company: row.company,
+          contactName: row.company,
+          details: [
+            `Reference: ${ref}`,
+            row.country ? `Country: ${row.country}` : "",
+            row.companySize ? `Company size: ${row.companySize}` : "",
+            row.sector ? `Sector: ${row.sector}` : "",
+            row.aiSystems ? `AI systems: ${row.aiSystems}` : "",
+            row.notes ? `Notes: ${row.notes}` : "",
+          ].filter(Boolean),
+        });
+      } catch {
+        crm = "failed";
+      }
+
+      // The buyer always gets a usable payment reference. Persistence and CRM
+      // delivery are reported independently so neither masks the other.
+      return { ok: true, ref, stored, crm };
     }),
 });

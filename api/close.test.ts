@@ -82,4 +82,28 @@ describe("RapidAct scanner lead sync", () => {
     expect(noteBody.lead_id).toBe("lead_existing");
     expect(noteBody.note).toContain("https://example.com/pricing");
   });
+
+  it("creates a company assessment lead with the full intake context", async () => {
+    const fetchImpl = vi
+      .fn()
+      .mockResolvedValueOnce(jsonResponse({ data: [], cursor: null }))
+      .mockResolvedValueOnce(jsonResponse({ id: "lead_report" }));
+
+    await syncScannerLeadToClose({
+      email: "buyer@example.com",
+      url: "https://buyer.example",
+      source: "report-intake",
+      company: "Buyer Ltd",
+      contactName: "Buyer Ltd",
+      details: ["Reference: RAPID1", "AI systems: chatbot, content"],
+      apiKey: "test-key",
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+    });
+
+    const createBody = JSON.parse(fetchImpl.mock.calls[1][1].body as string);
+    expect(createBody.name).toBe("RapidAct Assessment — Buyer Ltd");
+    expect(createBody.description).toContain("Reference: RAPID1");
+    expect(createBody.description).toContain("AI systems: chatbot, content");
+    expect(createBody.contacts[0].name).toBe("Buyer Ltd");
+  });
 });

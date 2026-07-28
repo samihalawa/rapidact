@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct scanner result integrity | optional Anchor fields can arrive as JSON null and URL edits can leave a prior result visible | normalize nullable optional evidence at the parser boundary, clear result state on every new input, and report observed counts rather than a compliance-like score | do not reject a valid scan because absent evidence is null, attribute an old result to a new URL, or imply 100 means compliant | verify deepswapai.io completes, the inspected URL matches, changing input removes the result, and the three-step result renders in five languages on phone/desktop
 RapidAct scanner engine | a broad three-page, 80-step Anchor task made the free preview slow and encouraged false-positive exploration | make one strict six-step Anchor `perform-web-task` call that inspects only the submitted rendered page | do not navigate, simulate percentage progress, silently downgrade, or treat AI-related content and badges as functional AI | verify live duration, exactly one inspected URL, functional evidence, failure/retry, five languages, PDF, phone/desktop and production
 RapidAct Typebot guide | a copied AI example was live but failed with `No model provided`, while an open-ended loop had no reliable completion | use one optional finite assessment, explicit Kimi model, native lead endpoint, deterministic final links | do not replace the scanner, copy an unrelated bot, or rely on a published badge as runtime proof | verify the published viewer chat through CRM capture, AI answer, clean logs and final action links
 RapidAct scanner conversion gate | the company-assessment escalation appeared before the free result and email capture happened afterwards | require a closable email gate before scanning, then show PDF and complete-scan escalation only after the result | do not let Typebot replace the direct scanner or put full-scan sales copy before results | verify close/invalid/valid modal states, one-page PDF, prefilled WhatsApp, Close sync and five languages live
@@ -14,6 +15,17 @@ RapidAct mobile header | language selector displaced the conversion action | kee
 RapidAct analytics | shared, local, duplicated, or pageview-only measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader and a published GA4 product-event tag | do not track localhost, emit repeated PostHog opt-ins, double-send custom events, or reuse another product property | prove exact GA4/PostHog event payloads, replay/errors, gateway config, and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
+
+## 2026-07-28 — Scanner results must remain attributable and accept provider nulls
+
+- Status: CURRENT
+- Project/root: `rapidact`; `/scanner`, `api/lib/anchor.ts`, localized result UI and PDF.
+- Mistake: the parser rejected a successful Anchor result when Gemini returned `disclosure_text: null`; editing the input could also leave the previous site’s result visible, and the numeric readiness score looked like a compliance verdict.
+- Do: normalize nullable optional evidence at the provider boundary, clear all result/error/copy state when the URL changes, and present one observed-touchpoint count followed by assessment and implementation steps.
+- Don't: expose internal Anchor codes, keep a result after its input changes, or describe a one-page observation as a readiness score out of 100.
+- Evidence: direct Anchor workflow `78007` returned the requested `deepswapai.io` page with `disclosure_text: null`; the production defect showed `deepswapai.io` in the field while the result still named `oulang.ai`.
+- Trigger terms: anchor-invalid-result, deepswapai.io, stale result, wrong URL, score 100, too many sections, scanner conversion.
+- Verify before reuse: complete a live `deepswapai.io` scan, match the exact inspected URL/title, change the input and confirm the result disappears, inspect the three numbered sections plus PDF in EN/ES/DE/FR/IT at phone and desktop widths.
 
 ## 2026-07-28 — The free Anchor scan is a strict one-page preview
 

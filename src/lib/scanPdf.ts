@@ -123,7 +123,7 @@ export function createScanPdf({
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(25);
   pdf.setTextColor(BLUE);
-  pdf.text(String(result.score), margin + 8, y + 18);
+  pdf.text(String(result.summary.total), margin + 8, y + 18);
   pdf.setFontSize(8);
   pdf.setTextColor(MUTED);
   pdf.text(copy.readiness.toUpperCase(), margin + 30, y + 10);
@@ -131,7 +131,7 @@ export function createScanPdf({
   pdf.setFontSize(9.5);
   pdf.setTextColor(INK);
   pdf.text(
-    `${result.summary.total} AI · ${result.summary.high} high · ${result.summary.undisclosed} undisclosed`,
+    `${result.summary.undisclosed} without visible disclosure · ${result.summary.pagesVisited.length} public page`,
     margin + 30,
     y + 18
   );

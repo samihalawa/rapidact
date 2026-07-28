@@ -115,6 +115,40 @@ describe("Anchor scanner contract", () => {
     }
   });
 
+  it("accepts the null optional disclosure text returned by Gemini", async () => {
+    const withNullDisclosure = {
+      ...observed,
+      ai_touchpoints: [
+        {
+          ...observed.ai_touchpoints[0],
+          disclosure_observed: false,
+          disclosure_text: null,
+        },
+      ],
+    };
+    const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
+      void args;
+      return new Response(
+        JSON.stringify({
+          status: "COMPLETED",
+          result: JSON.stringify(withNullDisclosure),
+        }),
+        { status: 200 }
+      );
+    });
+
+    const state = await readAnchorScan(
+      "78007",
+      "test-key",
+      fetchMock as typeof fetch
+    );
+
+    expect(state.status).toBe("completed");
+    if (state.status === "completed") {
+      expect(state.observed.ai_touchpoints[0].disclosure_text).toBeUndefined();
+    }
+  });
+
   it("rejects completed task text instead of generating substitute results", async () => {
     const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
       void args;

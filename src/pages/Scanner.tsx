@@ -5,7 +5,7 @@ import Seo from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogClose,
@@ -27,28 +27,19 @@ import {
   Copy,
   Download,
   ShieldAlert,
-  ClipboardList,
   PackageCheck,
   Wrench,
   MessageCircle,
   Mail,
   Bot,
+  CalendarDays,
+  ArrowRight,
+  Eye,
+  FileText,
 } from "lucide-react";
 import { track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 import { SCANNER_COPY } from "@/data/localizedScanner";
-
-function scoreColor(score: number) {
-  if (score >= 80) return "text-[#0e9f6e]";
-  if (score >= 50) return "text-[#d97706]";
-  return "text-[#dc2626]";
-}
-
-function scoreLabel(score: number, labels: [string, string, string]) {
-  if (score >= 80) return labels[2];
-  if (score >= 50) return labels[1];
-  return labels[0];
-}
 
 function wait(ms: number) {
   return new Promise(resolve => window.setTimeout(resolve, ms));
@@ -157,6 +148,9 @@ export default function Scanner() {
 
   const requestScan = () => {
     if (!url.trim() || scanActive) return;
+    setResult(null);
+    setScanError("");
+    setCopied(false);
     setEmailError("");
     setEmailDialogOpen(true);
     track("scanner_email_gate_opened");
@@ -176,7 +170,10 @@ export default function Scanner() {
         url: submittedUrl,
         source: "scanner-gate",
       });
-      track("scanner_lead_captured", { crm_status: captured.crm ?? "unknown" });
+      track("scanner_lead_captured", {
+        stored: captured.stored,
+        crm_status: captured.crm ?? "unknown",
+      });
       setEmailDialogOpen(false);
       await runScan(submittedUrl);
     } catch {
@@ -243,23 +240,28 @@ export default function Scanner() {
           </p>
         </div>
 
-        <div className="mt-8 flex max-w-2xl gap-2">
+        <div className="mt-8 flex max-w-2xl flex-col gap-2 sm:flex-row">
           <Input
             value={url}
-            onChange={e => setUrl(e.target.value)}
+            onChange={e => {
+              setUrl(e.target.value);
+              setResult(null);
+              setScanError("");
+              setCopied(false);
+            }}
             onKeyDown={e => {
               if (e.key !== "Enter") return;
               e.preventDefault();
               requestScan();
             }}
             placeholder={copy.placeholder}
-            className="hairline h-11 rounded border bg-white px-4 text-[15px]"
+            className="hairline h-11 min-w-0 rounded border bg-white px-4 text-[15px]"
           />
           <Button
             data-analytics-event="scan_button_click"
             onClick={requestScan}
             disabled={scanActive || !url.trim()}
-            className="h-11 rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
+            className="h-11 w-full rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38] sm:w-auto"
           >
             {scanActive ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -400,7 +402,7 @@ export default function Scanner() {
         )}
 
         {scanError && (
-          <Card className="mx-auto mt-10 max-w-xl border-[#fecaca] bg-[#fef2f2]">
+          <Card className="mt-8 max-w-2xl border-[#fecaca] bg-[#fef2f2]">
             <CardContent className="flex items-start gap-3 pt-6 pb-6">
               <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-[#dc2626]" />
               <div>
@@ -414,87 +416,169 @@ export default function Scanner() {
                       ? copy.invalidUrl
                       : copy.unreachable(scanError)}
                 </p>
-                <button
-                  type="button"
-                  data-analytics-event="scanner_retry_click"
-                  onClick={() => void runScan(url.trim())}
-                  className="mt-3 min-h-11 rounded bg-[#991b1b] px-4 text-sm font-bold text-white transition hover:bg-[#7f1d1d]"
-                >
-                  {copy.failureRetry}
-                </button>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    data-analytics-event="scanner_retry_click"
+                    onClick={() => void runScan(url.trim())}
+                    className="min-h-11 rounded bg-[#991b1b] px-4 text-sm font-bold text-white transition hover:bg-[#7f1d1d]"
+                  >
+                    {copy.failureRetry}
+                  </button>
+                  <a
+                    href={CONVERT.calBooking}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-event="scanner_booking_click"
+                    className="inline-flex min-h-11 items-center rounded border border-[#f2a7a7] bg-white px-4 text-sm font-bold text-[#991b1b] transition hover:bg-[#fff7f7]"
+                  >
+                    <CalendarDays className="mr-2 h-4 w-4" />
+                    {copy.bookCall}
+                  </a>
+                </div>
               </div>
             </CardContent>
           </Card>
         )}
 
         {result?.reachable && result.summary && (
-          <div className="mt-10 space-y-5">
-            {/* score card */}
-            <Card className="border-[#e2e2dd] bg-white shadow-sm">
-              <CardContent className="flex flex-col items-center gap-6 pt-8 pb-8 sm:flex-row sm:justify-center sm:gap-12">
-                <div className="text-center">
-                  <div
-                    className={`text-6xl font-bold ${scoreColor(result.score)}`}
-                  >
-                    {result.score}
-                  </div>
-                  <div className="mt-1 text-xs font-semibold tracking-wide text-[#6b7280] uppercase">
-                    {copy.readiness}
+          <div className="mt-10 space-y-4">
+            <section className="overflow-hidden rounded-xl border border-[#cbd8ec] bg-white shadow-[0_16px_45px_rgba(3,18,61,0.09)]">
+              <div className="flex flex-col gap-4 bg-[#03123d] px-5 py-5 text-white sm:flex-row sm:items-center sm:justify-between sm:px-7">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/25 font-mono text-sm font-bold">
+                    01
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold tracking-[0.14em] text-[#8fddff] uppercase">
+                      {copy.scanStatus[result.summary.scanStatus]}
+                    </p>
+                    <p className="mt-1 max-w-xl text-sm break-all text-white/70">
+                      {result.summary.url}
+                    </p>
                   </div>
                 </div>
-                <div className="text-center sm:text-left">
-                  <p className="text-lg font-bold text-[#16181d]">
-                    {scoreLabel(result.score, copy.scoreLabels)}
-                  </p>
-                  <p className="mt-1 text-sm text-[#5c6370]">
-                    {copy.summary(
-                      result.summary.total,
-                      result.summary.high,
-                      result.summary.undisclosed
-                    )}
-                  </p>
-                  <p className="mt-1 text-xs break-all text-[#6b7280]">
-                    {result.summary.url}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+                <Badge className="w-fit border border-white/20 bg-white/10 text-white hover:bg-white/10">
+                  Anchor Browser
+                </Badge>
+              </div>
 
-            <Card
-              className={
-                result.summary.scanStatus === "partial"
-                  ? "border-[#f4c96b] bg-[#fff9e8]"
-                  : "border-[#a7d9c7] bg-[#f0fbf7]"
-              }
-            >
-              <CardContent className="pt-6 pb-6">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="font-bold text-[#16181d]">
-                    {copy.scanStatus[result.summary.scanStatus]}
-                  </p>
-                  <Badge className="bg-white text-[#1f3a5f] hover:bg-white">
-                    Anchor Browser
-                  </Badge>
+              <div className="p-5 sm:p-7">
+                <div className="grid gap-5 sm:grid-cols-[auto_1fr] sm:items-center">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[#edf5ff] text-[#174a9b]">
+                    <span className="text-4xl font-bold">
+                      {result.summary.total}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="flex items-start gap-3">
+                      <Eye className="mt-0.5 h-5 w-5 shrink-0 text-[#174a9b]" />
+                      <div>
+                        <h2 className="text-xl font-bold text-[#16181d]">
+                          {result.detected.length
+                            ? copy.summary(
+                                result.summary.total,
+                                result.summary.high,
+                                result.summary.undisclosed
+                              )
+                            : copy.noSignaturesTitle}
+                        </h2>
+                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#5c6370]">
+                          {result.detected.length
+                            ? copy.fullBody
+                            : copy.noSignaturesBody}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="mt-4 text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
-                  {copy.pagesInspected}
-                </p>
-                <ul className="mt-2 space-y-1.5">
+
+                <div className="mt-6 rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-4">
+                  <p className="text-xs font-bold tracking-[0.12em] text-[#1f3a5f] uppercase">
+                    {copy.pagesInspected}
+                  </p>
                   {result.summary.pagesVisited.map(page => (
-                    <li
+                    <p
                       key={page.url}
-                      className="text-sm leading-relaxed break-all text-[#5c6370]"
+                      className="mt-1 text-sm leading-relaxed break-all text-[#5c6370]"
                     >
                       <span className="font-semibold text-[#16181d]">
                         {page.title || new URL(page.url).hostname}
                       </span>{" "}
                       — {page.url}
-                    </li>
+                    </p>
                   ))}
-                </ul>
+                </div>
+
+                {result.detected.length > 0 && (
+                  <div className="mt-6 divide-y divide-[#e2e8f0] border-y border-[#e2e8f0]">
+                    {result.detected.map(d => {
+                      const plan = planItemFor(d, copy);
+                      return (
+                        <div key={d.id} className="py-5">
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div>
+                              <p className="font-bold text-[#16181d]">
+                                {d.name}
+                              </p>
+                              <p className="mt-1 text-xs text-[#6b7280]">
+                                {d.category} · {copy.article} {d.article}
+                              </p>
+                            </div>
+                            <Badge
+                              className={
+                                d.severity === "high"
+                                  ? "bg-[#fde2e2] text-[#b42318] hover:bg-[#fde2e2]"
+                                  : d.severity === "medium"
+                                    ? "bg-[#fdf0d9] text-[#9a6700] hover:bg-[#fdf0d9]"
+                                    : "bg-[#e2e8f8] text-[#174a9b] hover:bg-[#e2e8f8]"
+                              }
+                            >
+                              {d.severity}
+                            </Badge>
+                          </div>
+                          <p
+                            className={`mt-3 flex items-start gap-2 text-sm font-semibold ${
+                              d.existingDisclosureFound
+                                ? "text-[#087a55]"
+                                : "text-[#b42318]"
+                            }`}
+                          >
+                            {d.existingDisclosureFound ? (
+                              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
+                            ) : (
+                              <XCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                            )}
+                            {d.existingDisclosureFound
+                              ? copy.disclosureFound
+                              : copy.disclosureMissing}
+                          </p>
+                          <div className="mt-3 rounded-md bg-[#f8fafc] p-3">
+                            <p className="flex items-start gap-2 text-sm leading-relaxed text-[#334155]">
+                              <Wrench className="mt-0.5 h-4 w-4 shrink-0 text-[#174a9b]" />
+                              {plan.fix}
+                            </p>
+                            <details className="mt-2">
+                              <summary className="min-h-11 cursor-pointer py-3 text-xs font-bold text-[#174a9b]">
+                                {copy.evidence}
+                              </summary>
+                              <div className="space-y-1 pb-2 text-xs leading-relaxed break-all text-[#6b7280]">
+                                {d.evidence.map(item => (
+                                  <p key={item}>— {item}</p>
+                                ))}
+                                <p>{copy.source}: {d.sourceUrl}</p>
+                              </div>
+                            </details>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
                 {result.summary.blockers.length > 0 && (
-                  <>
-                    <p className="mt-5 text-xs font-bold tracking-wide text-[#8a5a00] uppercase">
+                  <div className="mt-5 rounded-lg border border-[#f4c96b] bg-[#fff9e8] p-4">
+                    <p className="text-xs font-bold tracking-wide text-[#8a5a00] uppercase">
                       {copy.blockersTitle}
                     </p>
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[#6b4f16]">
@@ -502,278 +586,161 @@ export default function Scanner() {
                         <li key={blocker}>{blocker}</li>
                       ))}
                     </ul>
-                  </>
+                  </div>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </section>
 
-            {/* findings */}
-            {result.detected.map(d => (
-              <Card key={d.id} className="border-[#e2e2dd] bg-white shadow-sm">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between gap-3">
-                    <CardTitle className="text-base font-bold text-[#16181d]">
-                      {d.name}
-                      <span className="ml-2 text-sm font-medium text-[#6b7280]">
-                        {copy.article} {d.article}
-                      </span>
-                    </CardTitle>
-                    <Badge
-                      className={
-                        d.severity === "high"
-                          ? "bg-[#fde2e2] text-[#dc2626] hover:bg-[#fde2e2]"
-                          : d.severity === "medium"
-                            ? "bg-[#fdf0d9] text-[#d97706] hover:bg-[#fdf0d9]"
-                            : "bg-[#e2e8f8] text-[#3556e8] hover:bg-[#e2e8f8]"
-                      }
-                    >
-                      {d.severity}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <p className="text-xs break-all text-[#6b7280]">
-                    {copy.source}: {d.sourceUrl}
-                  </p>
-                  {d.evidence.map(e => (
-                    <p key={e} className="text-xs break-all text-[#6b7280]">
-                      {copy.evidence}: {e}
-                    </p>
-                  ))}
-                  {d.existingDisclosureFound ? (
-                    <p className="flex items-center gap-2 pt-1 text-sm font-semibold text-[#0e9f6e]">
-                      <CheckCircle2 className="h-4 w-4" />{" "}
-                      {copy.disclosureFound}
-                    </p>
-                  ) : (
-                    <p className="flex items-center gap-2 pt-1 text-sm font-semibold text-[#dc2626]">
-                      <XCircle className="h-4 w-4" /> {copy.disclosureMissing}
-                    </p>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-
-            {!result.detected.length && (
-              <Card className="border-[#e2e2dd] bg-white shadow-sm">
-                <CardContent className="pt-6 text-center">
-                  <p className="font-semibold text-[#16181d]">
-                    {copy.noSignaturesTitle}
-                  </p>
-                  <p className="mt-1 text-sm text-[#5c6370]">
-                    {copy.noSignaturesBody}
-                  </p>
-                </CardContent>
-              </Card>
-            )}
-
-            {result.summary.brokenElements.length > 0 && (
-              <Card className="border-[#f4c96b] bg-[#fffdf5]">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">
-                    {copy.brokenElementsTitle}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {result.summary.brokenElements.map(item => (
-                    <div key={`${item.url}-${item.description}`}>
-                      <p className="text-sm text-[#16181d]">
-                        {item.description}
-                      </p>
-                      <p className="mt-1 text-xs break-all text-[#6b7280]">
-                        {item.url}
-                      </p>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            )}
-
-            {result.summary.riskIndicators.length > 0 && (
-              <Card className="border-[#d8c7f1] bg-[#faf7ff]">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">
-                    {copy.riskIndicatorsTitle}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {result.summary.riskIndicators.map(item => (
-                    <div
-                      key={`${item.area}-${item.sourceUrl}-${item.evidence}`}
-                    >
-                      <Badge className="bg-[#ede4fb] text-[#5b348b] hover:bg-[#ede4fb]">
-                        {item.area === "article_5" ? "Article 5" : "Annex III"}
-                      </Badge>
-                      <p className="mt-2 text-sm text-[#16181d]">
-                        {item.reason}
-                      </p>
-                      <p className="mt-1 text-xs text-[#5c6370]">
-                        {item.evidence}
-                      </p>
-                      <p className="mt-1 text-xs break-all text-[#6b7280]">
-                        {item.sourceUrl}
-                      </p>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            )}
-
-            {/* FREE IMPLEMENTATION PLAN */}
-            <Card className="border-[#1f3a5f] bg-white shadow-lg">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-[#f7f7f5]">
-                    <ClipboardList className="h-5 w-5 text-[#1f3a5f]" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl font-bold text-[#16181d]">
-                      {copy.planTitle}
-                    </CardTitle>
-                    <p className="text-sm text-[#6b7280]">
-                      {copy.planSubtitle}
+            <section className="overflow-hidden rounded-xl border border-[#9fc5ff] bg-white shadow-[0_16px_45px_rgba(23,74,155,0.11)]">
+              <div className="grid lg:grid-cols-[1.35fr_0.9fr]">
+                <div className="bg-gradient-to-br from-[#03123d] to-[#174a9b] p-6 text-white sm:p-8">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 font-mono text-sm font-bold">
+                      02
+                    </span>
+                    <p className="text-xs font-bold tracking-[0.14em] text-[#8fddff] uppercase">
+                      {copy.fullLabel}
                     </p>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-5">
-                {result.detected.map((d, i) => {
-                  const plan = planItemFor(d, copy);
-                  return (
-                    <div
-                      key={d.id}
-                      className="rounded border border-[#e2e2dd] p-4"
-                    >
-                      <p className="text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
-                        {copy.step} {i + 1} — {d.name}
-                      </p>
-                      <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
-                        {plan.what}
-                      </p>
-                      <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-[#16181d]">
-                        <Wrench className="mt-0.5 h-4 w-4 shrink-0 text-[#1f3a5f]" />
-                        {plan.fix}
-                      </p>
-                    </div>
-                  );
-                })}
-                <div className="rounded border border-[#e2e2dd] p-4">
-                  <p className="text-xs font-bold tracking-wide text-[#1f3a5f] uppercase">
-                    {copy.alwaysStep}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
-                    {copy.evidenceBody}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden border-[#9fc5ff] bg-[#f3f8ff] shadow-[0_16px_40px_rgba(23,74,155,0.12)]">
-              <CardContent className="grid gap-6 pt-7 pb-7 sm:grid-cols-[1fr_auto] sm:items-center">
-                <div>
-                  <p className="eyebrow text-[#174a9b]">{copy.fullLabel}</p>
-                  <h2 className="ink mt-2 text-[22px] leading-tight font-bold">
-                    {copy.fullTitle}
+                  <h2 className="mt-5 text-2xl font-bold">
+                    {copy.assessmentTitle}
                   </h2>
-                  <p className="ink-soft mt-2 max-w-2xl text-[14px] leading-relaxed">
-                    {copy.fullBody}
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/75">
+                    {copy.assessmentBody}
                   </p>
-                </div>
-                <div className="flex flex-col gap-2">
                   <Button
-                    asChild
-                    className="min-h-12 rounded bg-[#079455] px-5 font-bold text-white hover:bg-[#067647]"
-                  >
-                    <a
-                      href={completeScanUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-analytics-event="scanner_complete_scan_whatsapp_click"
-                      data-analytics-label={result.summary.url}
-                    >
-                      <MessageCircle className="mr-2 h-5 w-5" />
-                      {copy.fullWhatsapp}
-                    </a>
-                  </Button>
-                  <Button
-                    variant="outline"
                     data-analytics-event="scanner_result_assessment_click"
                     onClick={() => navigate(path(CONVERT.report))}
-                    className="min-h-11 rounded border-[#174a9b] bg-white text-[#174a9b] hover:bg-[#e9f2ff]"
+                    className="mt-6 min-h-12 w-full rounded bg-white px-5 font-bold text-[#03123d] hover:bg-[#eaf5ff] sm:w-auto"
                   >
                     {copy.fullCta}
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
+                </div>
+                <div className="flex flex-col justify-center gap-3 p-6 sm:p-8">
+                  <a
+                    href={CONVERT.calBooking}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-event="scanner_booking_click"
+                    data-analytics-label={result.summary.url}
+                    className="inline-flex min-h-12 items-center justify-center rounded border border-[#174a9b] px-4 text-center text-sm font-bold text-[#174a9b] transition hover:bg-[#edf5ff]"
+                  >
+                    <CalendarDays className="mr-2 h-5 w-5" />
+                    {copy.bookCall}
+                  </a>
+                  <a
+                    href={completeScanUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-event="scanner_complete_scan_whatsapp_click"
+                    data-analytics-label={result.summary.url}
+                    className="inline-flex min-h-12 items-center justify-center rounded border border-[#a7d9c7] px-4 text-center text-sm font-bold text-[#087a55] transition hover:bg-[#f0fbf7]"
+                  >
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    {copy.fullWhatsapp}
+                  </a>
                   <a
                     href={guidedAssessmentUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     data-analytics-event="scanner_guided_assessment_click"
                     data-analytics-label={result.summary.url}
-                    className="flex min-h-11 items-center justify-center rounded px-3 text-center text-[13px] font-semibold text-[#174a9b] underline decoration-[#9fc5ff] underline-offset-4 transition hover:bg-[#e9f2ff]"
+                    className="flex min-h-11 items-center justify-center rounded px-3 text-center text-[13px] font-semibold text-[#174a9b] transition hover:bg-[#edf5ff]"
                   >
                     <Bot className="mr-2 h-4 w-4 shrink-0" />
                     {copy.guidedCta}
                   </a>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </section>
 
-            {/* Next actions and downloadable evidence */}
-            <Card className="border-[#16181d] bg-[#16181d] text-white shadow-lg">
-              <CardContent className="flex flex-col gap-5 pt-7 pb-7">
+            <section className="rounded-xl border border-[#d9e2ee] bg-[#f8fafc] p-5 sm:p-7">
+              <div className="flex items-start gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#03123d] font-mono text-sm font-bold text-white">
+                  03
+                </span>
                 <div>
-                  <button
-                    onClick={() => navigate(path(CONVERT.badge))}
-                    className="flex w-full items-start gap-3 rounded border border-white/15 p-4 text-left transition hover:bg-white/5"
-                  >
-                    <PackageCheck className="h-5 w-5 text-[#4ade80]" />
-                    <span>
-                      <span className="block font-bold">
-                        {copy.noticeTitle}
-                      </span>
-                      <span className="mt-1 block text-xs leading-relaxed text-white/60">
-                        {copy.noticeBody} →
-                      </span>
-                    </span>
-                  </button>
-                </div>
-                <div className="border-t border-white/10 pt-5">
-                  <p className="flex items-center gap-2 text-sm font-semibold text-[#4ade80]">
-                    <CheckCircle2 className="h-4 w-4" /> {copy.leadDone}
+                  <h2 className="text-xl font-bold text-[#16181d]">
+                    {copy.planTitle}
+                  </h2>
+                  <p className="mt-1 text-sm text-[#5c6370]">
+                    {copy.planSubtitle}
                   </p>
+                </div>
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-lg border border-[#d9e2ee] bg-white p-4">
+                  <div className="flex items-start gap-3">
+                    <FileText className="h-5 w-5 shrink-0 text-[#174a9b]" />
+                    <div>
+                      <p className="font-bold text-[#16181d]">
+                        {copy.alwaysStep}
+                      </p>
+                      <p className="mt-1 text-xs leading-relaxed text-[#6b7280]">
+                        {copy.evidenceBody}
+                      </p>
+                    </div>
+                  </div>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="min-h-11 rounded border-white/25 bg-transparent text-white hover:bg-white/10"
+                      className="min-h-11 rounded"
                       onClick={() => {
                         navigator.clipboard
                           .writeText(result.report)
                           .then(() => {
                             setCopied(true);
+                            track("scanner_results_copied");
                             setTimeout(() => setCopied(false), 1500);
                           });
                       }}
                     >
-                      <Copy className="mr-2 h-3.5 w-3.5" />{" "}
+                      <Copy className="mr-2 h-3.5 w-3.5" />
                       {copied ? copy.copied : copy.copyReport}
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
-                      className="min-h-11 rounded border-white/25 bg-transparent text-white hover:bg-white/10"
+                      className="min-h-11 rounded"
                       onClick={() => void downloadReport()}
                     >
-                      <Download className="mr-2 h-3.5 w-3.5" /> {copy.download}
+                      <Download className="mr-2 h-3.5 w-3.5" />
+                      {copy.download}
                     </Button>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
 
-            <p className="text-center text-xs text-[#6b7280]">
-              {copy.disclaimer}
-            </p>
+                <button
+                  type="button"
+                  onClick={() => navigate(path(CONVERT.badge))}
+                  data-analytics-event="scanner_notice_install_click"
+                  className="group rounded-lg border border-[#bfd3ee] bg-[#edf5ff] p-4 text-left transition hover:border-[#174a9b]"
+                >
+                  <div className="flex items-start gap-3">
+                    <PackageCheck className="h-5 w-5 shrink-0 text-[#174a9b]" />
+                    <span>
+                      <span className="block font-bold text-[#16181d]">
+                        {copy.noticeTitle}
+                      </span>
+                      <span className="mt-1 block text-xs leading-relaxed text-[#5c6370]">
+                        {copy.noticeBody}
+                      </span>
+                      <span className="mt-4 inline-flex items-center text-sm font-bold text-[#174a9b]">
+                        {copy.noticeTitle}
+                        <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
+                      </span>
+                    </span>
+                  </div>
+                </button>
+              </div>
+
+              <p className="mt-5 text-center text-xs text-[#6b7280]">
+                {copy.disclaimer}
+              </p>
+            </section>
           </div>
         )}
       </main>

@@ -15,6 +15,9 @@ type SyncLeadOptions = {
   email: string;
   url?: string;
   source: string;
+  company?: string;
+  contactName?: string;
+  details?: string[];
   apiKey?: string;
   fetchImpl?: typeof fetch;
 };
@@ -58,6 +61,9 @@ export async function syncScannerLeadToClose({
   email,
   url,
   source,
+  company,
+  contactName,
+  details = [],
   apiKey = process.env.CLOSE_API_KEY,
   fetchImpl = fetch,
 }: SyncLeadOptions): Promise<CloseSyncResult> {
@@ -88,9 +94,12 @@ export async function syncScannerLeadToClose({
   );
 
   const detail = [
-    "RapidAct scanner lead",
+    source === "report-intake"
+      ? "RapidAct €99 assessment intake"
+      : "RapidAct scanner lead",
     `Source: ${source}`,
     url ? `Website: ${url}` : "",
+    ...details,
   ]
     .filter(Boolean)
     .join("\n");
@@ -112,12 +121,15 @@ export async function syncScannerLeadToClose({
     "/lead/",
     apiKey,
     {
-      name: `RapidAct Scanner — ${websiteName(url)}`,
+      name:
+        source === "report-intake" && company
+          ? `RapidAct Assessment — ${company}`
+          : `RapidAct Scanner — ${websiteName(url)}`,
       url,
       description: detail,
       contacts: [
         {
-          name: normalizedEmail.split("@")[0],
+          name: contactName?.trim() || normalizedEmail.split("@")[0],
           emails: [{ email: normalizedEmail, type: "office" }],
         },
       ],

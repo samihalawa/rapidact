@@ -106,7 +106,12 @@ const anchorResultSchema = z.object({
       source_url: z.string().min(1),
       evidence: z.array(z.string().min(1)),
       disclosure_observed: z.boolean(),
-      disclosure_text: z.string().optional(),
+      // Gemini can serialize an absent optional string as JSON null even when
+      // the output schema marks the property as optional.
+      disclosure_text: z
+        .string()
+        .nullish()
+        .transform(value => value ?? undefined),
       severity: z.enum(["high", "medium", "low"]),
     })
   ),
@@ -325,7 +330,6 @@ export function mapAnchorResult(
     `Status: ${summary.scanStatus.toUpperCase()}`,
     `Scanned: ${summary.scannedAt}`,
     `Pages inspected: ${summary.pagesVisited.map(page => page.url).join(", ") || "none"}`,
-    `Visible-readiness score: ${score}/100`,
     `AI touchpoints observed: ${summary.total}`,
     "",
     observed.summary,

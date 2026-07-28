@@ -42,7 +42,7 @@ describe("RapidAct scan PDF", () => {
       copy: {
         title: "Public-page AI transparency scan",
         generated: "Generated",
-        readiness: "visible readiness / 100",
+        readiness: "visible AI controls",
         findings: "Detected touchpoints",
         actions: "Priority actions",
         scope: "Scope: automated review of one public page.",

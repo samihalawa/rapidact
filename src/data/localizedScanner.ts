@@ -7,8 +7,6 @@ type ScannerCopy = {
   title: string;
   intro: string;
   scope: string;
-  companyLead: string;
-  companyLink: string;
   placeholder: string;
   scan: string;
   scanning: string;
@@ -26,10 +24,10 @@ type ScannerCopy = {
   elapsed: (seconds: number) => string;
   stages: { label: string; detail: string }[];
   fullLabel: string;
-  fullTitle: string;
   fullBody: string;
   fullCta: string;
   fullWhatsapp: string;
+  bookCall: string;
   guidedCta: string;
   failureTitle: string;
   rateLimited: string;
@@ -39,10 +37,7 @@ type ScannerCopy = {
   scanStatus: Record<"complete" | "partial", string>;
   pagesInspected: string;
   blockersTitle: string;
-  brokenElementsTitle: string;
-  riskIndicatorsTitle: string;
   source: string;
-  scoreLabels: [string, string, string];
   readiness: string;
   summary: (total: number, high: number, undisclosed: number) => string;
   article: string;
@@ -53,16 +48,12 @@ type ScannerCopy = {
   noSignaturesBody: string;
   planTitle: string;
   planSubtitle: string;
-  step: string;
   alwaysStep: string;
   evidenceBody: string;
   assessmentTitle: string;
   assessmentBody: string;
   noticeTitle: string;
   noticeBody: string;
-  leadDone: string;
-  emailPlaceholder: string;
-  sendPlan: string;
   copied: string;
   copyReport: string;
   download: string;
@@ -84,14 +75,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     seoDescription:
       "Scan a public page for visible AI tools and disclosure wording, then get practical next steps.",
     eyebrow: "Free public-page scan",
-    title: "Check your website’s visible AI disclosures",
+    title: "Check one page for visible AI",
     intro:
-      "Enter a public URL. RapidAct opens that rendered page and records functional AI touchpoints, visible disclosures and exact evidence.",
+      "Enter a public URL. RapidAct checks the rendered page for visitor-facing AI controls and visible disclosure.",
     scope:
-      "This fast preview checks one public page only. It does not click, submit forms or turn visible signals into legal conclusions.",
-    companyLead:
-      "Need the company-wide view, including private systems and a written action plan?",
-    companyLink: "Start the €99 assessment",
+      "Fast preview · one page · no form submissions",
     placeholder: "your-site.com",
     scan: "Scan website",
     scanning: "Scanning",
@@ -120,17 +108,17 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
     ],
     fullLabel: "Free scan complete",
-    fullTitle: "This preview checks the submitted public page",
     fullBody:
       "Other pages, private systems and internal AI use may still need review. Request the complete scan and a company-wide action plan.",
     fullCta: "Start assessment · €99",
     fullWhatsapp: "Request complete scan",
+    bookCall: "Book a specialist call",
     guidedCta: "Prefer guided questions? Use the AI guide",
     failureTitle: "This page could not be scanned",
     rateLimited: "Scan limit reached. Try again in a few minutes.",
     invalidUrl: "Enter a valid public website address.",
-    unreachable: error =>
-      `The Anchor inspection stopped (${error}). Retry to scan again.`,
+    unreachable: () =>
+      "We could not read a reliable result. Retry once or book a specialist review.",
     failureRetry: "Retry this scan",
     scanStatus: {
       complete: "Public-page inspection complete",
@@ -138,15 +126,8 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     },
     pagesInspected: "Page inspected",
     blockersTitle: "Inspection blockers",
-    brokenElementsTitle: "Visible interface issues observed",
-    riskIndicatorsTitle: "Indicators for human review",
     source: "Source",
-    scoreLabels: [
-      "High visible exposure — review now",
-      "Disclosure gaps found",
-      "Low visible exposure",
-    ],
-    readiness: "visible readiness / 100",
+    readiness: "visible AI controls",
     summary: (total, high, undisclosed) =>
       `${total} AI touchpoint${total === 1 ? "" : "s"} · ${high} high exposure · ${undisclosed} without visible disclosure`,
     article: "Article",
@@ -159,7 +140,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Anchor did not directly observe a functional AI touchpoint on this page. This is not evidence that none exists elsewhere.",
     planTitle: "Your implementation preview",
     planSubtitle: "Copy the result or download the one-page PDF.",
-    step: "Action",
     alwaysStep: "Keep implementation evidence",
     evidenceBody:
       "Record the live URL, approved wording, provider or deployer role, owner, publication date and desktop/mobile check. The notice does not create an evidence log.",
@@ -169,9 +149,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Install the visitor notice · Free",
     noticeBody:
       "Copy one script, tailor the message and check the published result.",
-    leadDone: "Scan unlocked.",
-    emailPlaceholder: "Work email",
-    sendPlan: "Email this plan",
     copied: "Copied",
     copyReport: "Copy results",
     download: "Download PDF",
@@ -201,14 +178,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     seoDescription:
       "Escanea una página pública para detectar IA visible y avisos, y recibe próximos pasos prácticos.",
     eyebrow: "Escaneo gratuito de página pública",
-    title: "Comprueba los avisos de IA visibles en tu web",
+    title: "Comprueba una página en busca de IA visible",
     intro:
-      "Introduce una URL pública. RapidAct abre esa página renderizada y registra funciones de IA, avisos visibles y pruebas exactas.",
+      "Introduce una URL pública. RapidAct revisa la página renderizada para detectar controles de IA y avisos visibles.",
     scope:
-      "Esta vista previa rápida revisa una sola página pública. No hace clic, no envía formularios ni convierte señales visibles en conclusiones jurídicas.",
-    companyLead:
-      "¿Necesitas revisar toda la empresa, incluidos sistemas privados y un plan escrito?",
-    companyLink: "Iniciar la evaluación de 99 €",
+      "Vista previa rápida · una página · sin enviar formularios",
     placeholder: "tu-web.es",
     scan: "Escanear web",
     scanning: "Escaneando",
@@ -236,17 +210,17 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
     ],
     fullLabel: "Escaneo gratuito completado",
-    fullTitle: "Esta vista previa comprueba la página pública enviada",
     fullBody:
       "Otras páginas, los sistemas privados y el uso interno de IA pueden necesitar revisión. Solicita el escaneo completo y un plan para toda la empresa.",
     fullCta: "Iniciar evaluación · 99 €",
     fullWhatsapp: "Solicitar escaneo completo",
+    bookCall: "Reservar llamada con un especialista",
     guidedCta: "¿Prefieres preguntas guiadas? Usa la guía de IA",
     failureTitle: "No se ha podido escanear la página",
     rateLimited: "Límite de escaneos alcanzado. Inténtalo en unos minutos.",
     invalidUrl: "Introduce una dirección web pública válida.",
-    unreachable: error =>
-      `La inspección de Anchor se ha detenido (${error}). Reintenta el escaneo.`,
+    unreachable: () =>
+      "No hemos podido leer un resultado fiable. Reinténtalo una vez o reserva una revisión.",
     failureRetry: "Reintentar este escaneo",
     scanStatus: {
       complete: "Inspección de la página pública completada",
@@ -254,15 +228,8 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     },
     pagesInspected: "Página inspeccionada",
     blockersTitle: "Bloqueos de la inspección",
-    brokenElementsTitle: "Problemas visibles de interfaz observados",
-    riskIndicatorsTitle: "Indicadores para revisión humana",
     source: "Fuente",
-    scoreLabels: [
-      "Exposición visible alta — revísala ahora",
-      "Faltan avisos visibles",
-      "Exposición visible baja",
-    ],
-    readiness: "preparación visible / 100",
+    readiness: "controles de IA visibles",
     summary: (total, high, undisclosed) =>
       `${total} punto${total === 1 ? "" : "s"} de IA · ${high} de exposición alta · ${undisclosed} sin aviso visible`,
     article: "Artículo",
@@ -275,7 +242,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Anchor no observó directamente una función de IA interactiva en esta página. Esto no demuestra que no exista en otras páginas.",
     planTitle: "Vista previa de implementación",
     planSubtitle: "Copia el resultado o descarga el PDF de una página.",
-    step: "Acción",
     alwaysStep: "Conserva las pruebas de implementación",
     evidenceBody:
       "Registra la URL, el texto aprobado, la función, el responsable, la fecha y la comprobación en móvil y ordenador. El aviso no crea un registro de pruebas.",
@@ -285,9 +251,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Instala el aviso para visitantes · Gratis",
     noticeBody:
       "Copia un script, adapta el mensaje y comprueba el resultado publicado.",
-    leadDone: "Escaneo desbloqueado.",
-    emailPlaceholder: "Correo de trabajo",
-    sendPlan: "Enviar por correo",
     copied: "Copiado",
     copyReport: "Copiar resultados",
     download: "Descargar PDF",
@@ -317,14 +280,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     seoDescription:
       "Scannen Sie eine öffentliche Seite nach sichtbarer KI und Hinweisen und erhalten Sie konkrete nächste Schritte.",
     eyebrow: "Kostenloser Scan öffentlicher Seiten",
-    title: "Prüfen Sie die sichtbaren KI-Hinweise Ihrer Website",
+    title: "Eine Seite auf sichtbare KI prüfen",
     intro:
-      "Geben Sie eine öffentliche URL ein. RapidAct öffnet diese gerenderte Seite und erfasst funktionale KI-Kontaktpunkte, sichtbare Hinweise und genaue Belege.",
+      "Geben Sie eine öffentliche URL ein. RapidAct prüft die gerenderte Seite auf KI-Funktionen für Besucher und sichtbare Hinweise.",
     scope:
-      "Diese schnelle Vorschau prüft nur eine öffentliche Seite. Sie klickt nicht, sendet keine Formulare und zieht keine automatischen rechtlichen Schlüsse.",
-    companyLead:
-      "Benötigen Sie die unternehmensweite Sicht einschließlich interner Systeme und Maßnahmenplan?",
-    companyLink: "99-€-Bewertung starten",
+      "Schnelle Vorschau · eine Seite · keine Formulare",
     placeholder: "ihre-website.de",
     scan: "Website scannen",
     scanning: "Scan läuft",
@@ -354,17 +314,17 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
     ],
     fullLabel: "Kostenloser Scan abgeschlossen",
-    fullTitle: "Diese Vorschau prüft die eingegebene öffentliche Seite",
     fullBody:
       "Weitere Seiten, private Systeme und interne KI-Nutzung können weiterhin geprüft werden müssen. Fordern Sie den vollständigen Scan und einen unternehmensweiten Maßnahmenplan an.",
     fullCta: "Bewertung starten · 99 €",
     fullWhatsapp: "Vollständigen Scan anfordern",
+    bookCall: "Fachgespräch buchen",
     guidedCta: "Lieber geführte Fragen? KI-Leitfaden öffnen",
     failureTitle: "Diese Seite konnte nicht gescannt werden",
     rateLimited: "Scan-Limit erreicht. Versuchen Sie es in einigen Minuten.",
     invalidUrl: "Geben Sie eine gültige öffentliche Webadresse ein.",
-    unreachable: error =>
-      `Die Anchor-Prüfung wurde beendet (${error}). Starten Sie den Scan erneut.`,
+    unreachable: () =>
+      "Es konnte kein verlässliches Ergebnis gelesen werden. Versuchen Sie es erneut oder buchen Sie eine Prüfung.",
     failureRetry: "Scan erneut versuchen",
     scanStatus: {
       complete: "Prüfung der öffentlichen Seite abgeschlossen",
@@ -372,15 +332,8 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     },
     pagesInspected: "Geprüfte Seite",
     blockersTitle: "Prüfungsblocker",
-    brokenElementsTitle: "Beobachtete sichtbare Oberflächenfehler",
-    riskIndicatorsTitle: "Indikatoren zur menschlichen Prüfung",
     source: "Quelle",
-    scoreLabels: [
-      "Hohe sichtbare Exposition — jetzt prüfen",
-      "Hinweislücken gefunden",
-      "Niedrige sichtbare Exposition",
-    ],
-    readiness: "sichtbare Bereitschaft / 100",
+    readiness: "sichtbare KI-Funktionen",
     summary: (total, high, undisclosed) =>
       `${total} KI-Kontaktpunkt${total === 1 ? "" : "e"} · ${high} hohe Exposition · ${undisclosed} ohne sichtbaren Hinweis`,
     article: "Artikel",
@@ -393,7 +346,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Anchor hat auf dieser Seite keinen funktionalen KI-Kontaktpunkt direkt beobachtet. Dies beweist nicht, dass anderswo keiner existiert.",
     planTitle: "Ihre Implementierungsvorschau",
     planSubtitle: "Ergebnis kopieren oder als einseitiges PDF herunterladen.",
-    step: "Maßnahme",
     alwaysStep: "Implementierungsnachweise sichern",
     evidenceBody:
       "Dokumentieren Sie URL, Freigabetext, Rolle, Verantwortlichen, Datum und Desktop-/Mobilprüfung. Der Hinweis erstellt kein Nachweisprotokoll.",
@@ -403,9 +355,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Besucherhinweis installieren · Kostenlos",
     noticeBody:
       "Ein Skript kopieren, Aussage anpassen und Veröffentlichung prüfen.",
-    leadDone: "Scan freigeschaltet.",
-    emailPlaceholder: "Geschäftliche E-Mail",
-    sendPlan: "Plan per E-Mail",
     copied: "Kopiert",
     copyReport: "Ergebnisse kopieren",
     download: "PDF herunterladen",
@@ -435,14 +384,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     seoDescription:
       "Scannez une page publique pour détecter l’IA visible et les mentions, puis obtenez des actions concrètes.",
     eyebrow: "Scan gratuit d’une page publique",
-    title: "Vérifiez les mentions IA visibles sur votre site",
+    title: "Vérifiez une page pour l’IA visible",
     intro:
-      "Saisissez une URL publique. RapidAct ouvre cette page rendue et relève les fonctions IA, les mentions visibles et les preuves exactes.",
+      "Saisissez une URL publique. RapidAct vérifie la page rendue pour repérer les fonctions IA destinées aux visiteurs et les mentions visibles.",
     scope:
-      "Cet aperçu rapide inspecte une seule page publique. Il ne clique pas, n’envoie aucun formulaire et ne produit aucune conclusion juridique automatique.",
-    companyLead:
-      "Besoin d’une vue globale, y compris les systèmes internes et un plan écrit ?",
-    companyLink: "Commencer l’évaluation à 99 €",
+      "Aperçu rapide · une page · aucun formulaire envoyé",
     placeholder: "votre-site.fr",
     scan: "Scanner le site",
     scanning: "Analyse en cours",
@@ -472,17 +418,17 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
     ],
     fullLabel: "Analyse gratuite terminée",
-    fullTitle: "Cet aperçu vérifie la page publique soumise",
     fullBody:
       "D’autres pages, systèmes privés et usages internes de l’IA peuvent encore nécessiter un examen. Demandez l’analyse complète et un plan d’action pour l’entreprise.",
     fullCta: "Commencer l’évaluation · 99 €",
     fullWhatsapp: "Demander l’analyse complète",
+    bookCall: "Réserver un appel spécialiste",
     guidedCta: "Vous préférez être guidé ? Ouvrir le guide IA",
     failureTitle: "Cette page n’a pas pu être scannée",
     rateLimited: "Limite de scans atteinte. Réessayez dans quelques minutes.",
     invalidUrl: "Saisissez une adresse de site public valide.",
-    unreachable: error =>
-      `L’inspection Anchor s’est arrêtée (${error}). Relancez l’analyse.`,
+    unreachable: () =>
+      "Impossible de lire un résultat fiable. Réessayez une fois ou réservez une vérification.",
     failureRetry: "Relancer cette analyse",
     scanStatus: {
       complete: "Inspection de la page publique terminée",
@@ -490,15 +436,8 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     },
     pagesInspected: "Page inspectée",
     blockersTitle: "Blocages de l’inspection",
-    brokenElementsTitle: "Problèmes d’interface visibles observés",
-    riskIndicatorsTitle: "Indicateurs à examiner",
     source: "Source",
-    scoreLabels: [
-      "Exposition visible élevée — à examiner",
-      "Mentions manquantes",
-      "Faible exposition visible",
-    ],
-    readiness: "préparation visible / 100",
+    readiness: "fonctions IA visibles",
     summary: (total, high, undisclosed) =>
       `${total} point${total === 1 ? "" : "s"} de contact IA · ${high} forte exposition · ${undisclosed} sans mention visible`,
     article: "Article",
@@ -511,7 +450,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Anchor n’a observé directement aucun point de contact IA fonctionnel sur cette page. Cela ne prouve pas qu’il n’en existe pas ailleurs.",
     planTitle: "Aperçu de mise en œuvre",
     planSubtitle: "Copiez le résultat ou téléchargez le PDF d’une page.",
-    step: "Action",
     alwaysStep: "Conserver les preuves de mise en œuvre",
     evidenceBody:
       "Conservez l’URL, le texte approuvé, le rôle, le responsable, la date et la vérification ordinateur/mobile. L’avis ne crée pas de journal de preuves.",
@@ -521,9 +459,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Installer l’avis visiteur · Gratuit",
     noticeBody:
       "Copiez un script, adaptez le message et vérifiez le résultat publié.",
-    leadDone: "Analyse débloquée.",
-    emailPlaceholder: "E-mail professionnel",
-    sendPlan: "Envoyer ce plan",
     copied: "Copié",
     copyReport: "Copier les résultats",
     download: "Télécharger le PDF",
@@ -553,14 +488,11 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     seoDescription:
       "Scansiona una pagina pubblica per rilevare IA visibile e avvisi, poi ottieni azioni concrete.",
     eyebrow: "Scansione gratuita di pagina pubblica",
-    title: "Controlla gli avvisi IA visibili sul tuo sito",
+    title: "Controlla una pagina per l’IA visibile",
     intro:
-      "Inserisci un URL pubblico. RapidAct apre quella pagina renderizzata e registra funzioni IA, avvisi visibili e prove precise.",
+      "Inserisci un URL pubblico. RapidAct controlla la pagina renderizzata per rilevare funzioni IA rivolte ai visitatori e avvisi visibili.",
     scope:
-      "Questa anteprima rapida controlla una sola pagina pubblica. Non fa clic, non invia moduli e non produce conclusioni legali automatiche.",
-    companyLead:
-      "Ti serve la visione aziendale completa, inclusi sistemi interni e piano scritto?",
-    companyLink: "Inizia la valutazione da 99 €",
+      "Anteprima rapida · una pagina · nessun modulo inviato",
     placeholder: "il-tuo-sito.it",
     scan: "Scansiona sito",
     scanning: "Scansione",
@@ -588,17 +520,17 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       },
     ],
     fullLabel: "Scansione gratuita completata",
-    fullTitle: "Questa anteprima controlla la pagina pubblica inviata",
     fullBody:
       "Altre pagine, sistemi privati e usi interni dell’IA possono richiedere una verifica. Richiedi la scansione completa e un piano d’azione aziendale.",
     fullCta: "Inizia valutazione · 99 €",
     fullWhatsapp: "Richiedi scansione completa",
+    bookCall: "Prenota una chiamata specialistica",
     guidedCta: "Preferisci domande guidate? Apri la guida IA",
     failureTitle: "Impossibile scansionare la pagina",
     rateLimited: "Limite di scansioni raggiunto. Riprova tra qualche minuto.",
     invalidUrl: "Inserisci un indirizzo web pubblico valido.",
-    unreachable: error =>
-      `L’ispezione Anchor si è interrotta (${error}). Riprova la scansione.`,
+    unreachable: () =>
+      "Non è stato possibile leggere un risultato affidabile. Riprova o prenota una verifica.",
     failureRetry: "Riprova questa scansione",
     scanStatus: {
       complete: "Ispezione della pagina pubblica completata",
@@ -606,15 +538,8 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     },
     pagesInspected: "Pagina ispezionata",
     blockersTitle: "Blocchi dell’ispezione",
-    brokenElementsTitle: "Problemi visibili dell’interfaccia osservati",
-    riskIndicatorsTitle: "Indicatori da verificare",
     source: "Fonte",
-    scoreLabels: [
-      "Esposizione visibile alta — verifica ora",
-      "Avvisi mancanti",
-      "Esposizione visibile bassa",
-    ],
-    readiness: "preparazione visibile / 100",
+    readiness: "funzioni IA visibili",
     summary: (total, high, undisclosed) =>
       `${total} punto${total === 1 ? "" : "i"} di contatto IA · ${high} alta esposizione · ${undisclosed} senza avviso visibile`,
     article: "Articolo",
@@ -627,7 +552,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Anchor non ha osservato direttamente funzioni IA interattive su questa pagina. Ciò non dimostra che non esistano altrove.",
     planTitle: "Anteprima di implementazione",
     planSubtitle: "Copia il risultato o scarica il PDF di una pagina.",
-    step: "Azione",
     alwaysStep: "Conserva le prove di implementazione",
     evidenceBody:
       "Registra URL, testo approvato, ruolo, responsabile, data e verifica desktop/mobile. L’avviso non crea un registro di prove.",
@@ -637,9 +561,6 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     noticeTitle: "Installa l’avviso visitatore · Gratis",
     noticeBody:
       "Copia uno script, adatta il messaggio e verifica il risultato pubblicato.",
-    leadDone: "Scansione sbloccata.",
-    emailPlaceholder: "E-mail di lavoro",
-    sendPlan: "Invia il piano",
     copied: "Copiato",
     copyReport: "Copia risultati",
     download: "Scarica PDF",

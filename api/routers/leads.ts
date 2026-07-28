@@ -15,13 +15,19 @@ export const leadsRouter = createRouter({
       }),
     )
     .mutation(async ({ input }): Promise<LeadResult> => {
-      await getDb()
-        .insert(leads)
-        .values({
+      let stored = false;
+      try {
+        await getDb().insert(leads).values({
           email: input.email,
           url: input.url ?? null,
           source: input.source ?? "scanner",
         });
+        stored = true;
+      } catch {
+        // Close remains an independent delivery path when the database is
+        // temporarily unavailable.
+      }
+
       let crm: LeadResult["crm"] = "skipped";
       try {
         crm = await syncScannerLeadToClose({
@@ -32,6 +38,6 @@ export const leadsRouter = createRouter({
       } catch {
         crm = "failed";
       }
-      return { ok: true, crm };
+      return { ok: true, stored, crm };
     }),
 });

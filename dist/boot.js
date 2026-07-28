@@ -48325,7 +48325,9 @@ var anchorResultSchema = external_exports.object({
       source_url: external_exports.string().min(1),
       evidence: external_exports.array(external_exports.string().min(1)),
       disclosure_observed: external_exports.boolean(),
-      disclosure_text: external_exports.string().optional(),
+      // Gemini can serialize an absent optional string as JSON null even when
+      // the output schema marks the property as optional.
+      disclosure_text: external_exports.string().nullish().transform((value) => value ?? void 0),
       severity: external_exports.enum(["high", "medium", "low"])
     })
   ),
@@ -48499,7 +48501,6 @@ function mapAnchorResult(url2, observed) {
     `Status: ${summary.scanStatus.toUpperCase()}`,
     `Scanned: ${summary.scannedAt}`,
     `Pages inspected: ${summary.pagesVisited.map((page) => page.url).join(", ") || "none"}`,
-    `Visible-readiness score: ${score}/100`,
     `AI touchpoints observed: ${summary.total}`,
     "",
     observed.summary,
@@ -48694,6 +48695,9 @@ async function syncScannerLeadToClose({
   email: email3,
   url: url2,
   source,
+  company,
+  contactName,
+  details = [],
   apiKey = process.env.CLOSE_API_KEY,
   fetchImpl = fetch
 }) {
@@ -48721,9 +48725,10 @@ async function syncScannerLeadToClose({
     )
   );
   const detail = [
-    "RapidAct scanner lead",
+    source === "report-intake" ? "RapidAct \u20AC99 assessment intake" : "RapidAct scanner lead",
     `Source: ${source}`,
-    url2 ? `Website: ${url2}` : ""
+    url2 ? `Website: ${url2}` : "",
+    ...details
   ].filter(Boolean).join("\n");
   if (existingContact?.lead_id) {
     await closeRequest(
@@ -48741,12 +48746,12 @@ async function syncScannerLeadToClose({
     "/lead/",
     apiKey,
     {
-      name: `RapidAct Scanner \u2014 ${websiteName(url2)}`,
+      name: source === "report-intake" && company ? `RapidAct Assessment \u2014 ${company}` : `RapidAct Scanner \u2014 ${websiteName(url2)}`,
       url: url2,
       description: detail,
       contacts: [
         {
-          name: normalizedEmail.split("@")[0],
+          name: contactName?.trim() || normalizedEmail.split("@")[0],
           emails: [{ email: normalizedEmail, type: "office" }]
         }
       ]
@@ -48765,11 +48770,16 @@ var leadsRouter = createRouter({
       source: external_exports.string().max(64).optional()
     })
   ).mutation(async ({ input }) => {
-    await getDb().insert(leads).values({
-      email: input.email,
-      url: input.url ?? null,
-      source: input.source ?? "scanner"
-    });
+    let stored = false;
+    try {
+      await getDb().insert(leads).values({
+        email: input.email,
+        url: input.url ?? null,
+        source: input.source ?? "scanner"
+      });
+      stored = true;
+    } catch {
+    }
     let crm = "skipped";
     try {
       crm = await syncScannerLeadToClose({
@@ -48780,7 +48790,7 @@ var leadsRouter = createRouter({
     } catch {
       crm = "failed";
     }
-    return { ok: true, crm };
+    return { ok: true, stored, crm };
   })
 });
 
@@ -48863,14 +48873,36 @@ var reportRouter = createRouter({
         });
       }
     ];
+    let stored = false;
     for (const attempt of attempts) {
       try {
         await attempt();
-        return { ok: true, ref, stored: true };
+        stored = true;
+        break;
       } catch {
       }
     }
-    return { ok: true, ref, stored: false };
+    let crm = "skipped";
+    try {
+      crm = await syncScannerLeadToClose({
+        email: row.email,
+        url: row.website ?? void 0,
+        source: "report-intake",
+        company: row.company,
+        contactName: row.company,
+        details: [
+          `Reference: ${ref}`,
+          row.country ? `Country: ${row.country}` : "",
+          row.companySize ? `Company size: ${row.companySize}` : "",
+          row.sector ? `Sector: ${row.sector}` : "",
+          row.aiSystems ? `AI systems: ${row.aiSystems}` : "",
+          row.notes ? `Notes: ${row.notes}` : ""
+        ].filter(Boolean)
+      });
+    } catch {
+      crm = "failed";
+    }
+    return { ok: true, ref, stored, crm };
   })
 });
 

@@ -71,6 +71,7 @@ export interface LeadInput {
 
 export interface LeadResult {
   ok: boolean;
+  stored: boolean;
   crm?: "synced" | "skipped" | "failed";
 }
 
@@ -92,4 +93,6 @@ export interface ReportRequestResult {
   ref: string;
   /** False when the intake could not be persisted — the buyer is never blocked by this. */
   stored: boolean;
+  /** Server-side Close CRM delivery status for this intake. */
+  crm: "synced" | "skipped" | "failed";
 }

@@ -67,6 +67,7 @@ export default function Report() {
         company_size: size || "not_provided",
         sector: sector || "not_provided",
         ai_system_count: systems.length,
+        crm_status: r.crm,
       });
     },
     onError: error =>
