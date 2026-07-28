@@ -687,9 +687,6 @@ export default function Scanner() {
                   <h2 className="text-xl font-bold text-[#16181d]">
                     {copy.noticeTitle}
                   </h2>
-                  <p className="mt-1 text-sm text-[#5c6370]">
-                    {copy.noticeBody}
-                  </p>
                 </div>
               </div>
 
