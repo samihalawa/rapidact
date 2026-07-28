@@ -1,6 +1,6 @@
 # INDEX
 
-RapidAct scanner engine | retaining the static HTML scanner or adding a downgrade path after Anchor was chosen would preserve competing behavior | make one server-side Anchor `perform-web-task` call with a bounded prompt and structured output the only scan engine | do not simulate deep-scan progress, silently downgrade, or return substitute results when Anchor fails | verify live Anchor response shape, inspected URLs/evidence/blockers, explicit failure/retry, five languages, PDF, phone/desktop and production
+RapidAct scanner engine | a broad three-page, 80-step Anchor task made the free preview slow and encouraged false-positive exploration | make one strict six-step Anchor `perform-web-task` call that inspects only the submitted rendered page | do not navigate, simulate percentage progress, silently downgrade, or treat AI-related content and badges as functional AI | verify live duration, exactly one inspected URL, functional evidence, failure/retry, five languages, PDF, phone/desktop and production
 RapidAct Typebot guide | a copied AI example was live but failed with `No model provided`, while an open-ended loop had no reliable completion | use one optional finite assessment, explicit Kimi model, native lead endpoint, deterministic final links | do not replace the scanner, copy an unrelated bot, or rely on a published badge as runtime proof | verify the published viewer chat through CRM capture, AI answer, clean logs and final action links
 RapidAct scanner conversion gate | the company-assessment escalation appeared before the free result and email capture happened afterwards | require a closable email gate before scanning, then show PDF and complete-scan escalation only after the result | do not let Typebot replace the direct scanner or put full-scan sales copy before results | verify close/invalid/valid modal states, one-page PDF, prefilled WhatsApp, Close sync and five languages live
 RapidAct category positioning | a product-workflow hero still made the scanner, badge and report look like the category | lead with the EU AI Act transparency practice; present tools and assessment as its methods | do not call Agents AI Ltd. a law firm or let product mechanics displace Article 50 expertise | verify hero, metadata, structured data, specialist credentials, service scope and five languages live
@@ -15,16 +15,16 @@ RapidAct analytics | shared, local, duplicated, or pageview-only measurement obs
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report, and marketplace apps at their literal current review status | do not advertise direct downloads or call submission builds published marketplace apps | run product-claim sweep plus rendered marketplace-status proof
 
-## 2026-07-28 — Anchor is the primary public scanner engine
+## 2026-07-28 — The free Anchor scan is a strict one-page preview
 
 - Status: CURRENT
 - Project/root: `rapidact`; `/scanner`, `api/routers/scan.ts`, Anchor Browser `perform-web-task`.
-- Mistake: preserving the one-page static HTML signature scan as primary—or as a fallback—after the user explicitly chose a prompted Anchor Browser scan with no fallback behavior.
-- Do: make one bounded server-side Anchor task with `url`, `prompt`, `output_schema`, and finite steps the only scan engine; derive UI results solely from returned observations.
-- Don't: run competing scans, silently downgrade on failure, hardcode compliance outcomes, or simulate deep-scan progress.
-- Evidence: explicit user corrections on 2026-07-28; current source advances progress from elapsed time and fetches one HTML response, while the current Anchor API exposes prompted tasks and structured output.
-- Trigger terms: scanner engine, Anchor Browser, perform-web-task, prompt, deep scan, progress, fallback, no fallback.
-- Verify before reuse: read a real Anchor response and visited-route evidence, exercise success/partial/error/retry paths, inspect PDF and EN/ES/DE/FR/IT phone/desktop UI, then prove the deployed production route uses the pushed commit.
+- Mistake: expanding the free preview to three pages and 80 browser steps made it take 61 seconds; a looser reduced prompt then misclassified Article 50 links and the RapidAct notice badge as AI systems.
+- Do: run one server-side six-step Anchor task on only the submitted rendered page; report only functional controls that accept AI input or return AI output, with directly visible disclosure evidence.
+- Don't: navigate, click, submit, perform Article 5/Annex III review, treat AI-related content as a touchpoint, silently downgrade, or show a simulated completion percentage.
+- Evidence: direct Anchor workflow `77587` completed in 19 seconds with one visited URL and zero false touchpoints; workflow `77586` is the falsified loose-prompt comparison.
+- Trigger terms: scanner speed, less complete, one page, Anchor Browser, prompt, progress, false positive, fallback.
+- Verify before reuse: time the production flow, require exactly one inspected URL and functional evidence, exercise partial/error/retry, inspect PDF plus EN/ES/DE/FR/IT phone/desktop UI, and prove production uses the pushed commit.
 
 ## 2026-07-27 — Typebot augments the scanner with one finite guided assessment
 

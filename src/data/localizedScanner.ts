@@ -22,6 +22,8 @@ type ScannerCopy = {
   emailGateInvalid: string;
   emailGateError: string;
   progress: string;
+  progressScope: string;
+  elapsed: (seconds: number) => string;
   stages: { label: string; detail: string }[];
   fullLabel: string;
   fullTitle: string;
@@ -84,9 +86,9 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     eyebrow: "Free public-page scan",
     title: "Check your website’s visible AI disclosures",
     intro:
-      "Enter a public URL. RapidAct opens the rendered website, follows its most relevant public pages and records visible AI touchpoints, disclosures and exact evidence.",
+      "Enter a public URL. RapidAct opens that rendered page and records functional AI touchpoints, visible disclosures and exact evidence.",
     scope:
-      "The browser inspects up to three public pages. It reports only what it can directly observe and never turns signals into automatic legal conclusions.",
+      "This fast preview checks one public page only. It does not click, submit forms or turn visible signals into legal conclusions.",
     companyLead:
       "Need the company-wide view, including private systems and a written action plan?",
     companyLink: "Start the €99 assessment",
@@ -104,22 +106,21 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateInvalid: "Enter a valid email address.",
     emailGateError: "We could not save your email. Please try again.",
     progress: "Public-page scan",
+    progressScope: "One page only · no forms or additional pages opened",
+    elapsed: seconds => `${seconds}s elapsed`,
     stages: [
       {
         label: "Starting the browser",
         detail: "Validating the address and creating the live inspection.",
       },
       {
-        label: "Inspecting the rendered website",
-        detail: "Anchor is visiting relevant public pages and collecting visible evidence.",
-      },
-      {
-        label: "Evidence verified",
-        detail: "The structured observations are ready.",
+        label: "Checking the rendered page",
+        detail:
+          "Anchor is checking visible functional AI and disclosure evidence.",
       },
     ],
     fullLabel: "Free scan complete",
-    fullTitle: "This preview checks the public pages it could reach",
+    fullTitle: "This preview checks the submitted public page",
     fullBody:
       "Other pages, private systems and internal AI use may still need review. Request the complete scan and a company-wide action plan.",
     fullCta: "Start assessment · €99",
@@ -128,13 +129,14 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     failureTitle: "This page could not be scanned",
     rateLimited: "Scan limit reached. Try again in a few minutes.",
     invalidUrl: "Enter a valid public website address.",
-    unreachable: error => `The Anchor inspection stopped (${error}). Retry to scan again.`,
+    unreachable: error =>
+      `The Anchor inspection stopped (${error}). Retry to scan again.`,
     failureRetry: "Retry this scan",
     scanStatus: {
       complete: "Public-page inspection complete",
       partial: "Partial inspection — review the blockers",
     },
-    pagesInspected: "Pages inspected",
+    pagesInspected: "Page inspected",
     blockersTitle: "Inspection blockers",
     brokenElementsTitle: "Visible interface issues observed",
     riskIndicatorsTitle: "Indicators for human review",
@@ -154,7 +156,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "No disclosure wording found — review your role and first-interaction notice",
     noSignaturesTitle: "No visible AI touchpoints observed",
     noSignaturesBody:
-      "Anchor did not directly observe a public AI touchpoint on the pages listed above. This is not evidence that none exists elsewhere.",
+      "Anchor did not directly observe a functional AI touchpoint on this page. This is not evidence that none exists elsewhere.",
     planTitle: "Your implementation preview",
     planSubtitle: "Copy the result or download the one-page PDF.",
     step: "Action",
@@ -178,7 +180,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     pdfFindings: "Detected touchpoints",
     pdfActions: "Priority actions",
     pdfScope:
-      "Scope: rendered public-page observations from the URLs listed in this PDF. Partial scans identify their blockers. Private systems and organisational roles are outside this scan.",
+      "Scope: a fast rendered-page observation of the single URL listed in this PDF. Other pages, private systems and organisational roles are outside this scan.",
     disclaimer:
       "Technical public-page scan, not legal advice. Regulation (EU) 2024/1689, Article 50.",
     chatWhat: (name, disclosureFound) =>
@@ -201,9 +203,9 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     eyebrow: "Escaneo gratuito de página pública",
     title: "Comprueba los avisos de IA visibles en tu web",
     intro:
-      "Introduce una URL pública. RapidAct abre la web renderizada, sigue sus páginas públicas más relevantes y registra puntos de IA, avisos y pruebas exactas.",
+      "Introduce una URL pública. RapidAct abre esa página renderizada y registra funciones de IA, avisos visibles y pruebas exactas.",
     scope:
-      "El navegador revisa hasta tres páginas públicas. Solo informa de lo que observa directamente y no convierte señales en conclusiones jurídicas automáticas.",
+      "Esta vista previa rápida revisa una sola página pública. No hace clic, no envía formularios ni convierte señales visibles en conclusiones jurídicas.",
     companyLead:
       "¿Necesitas revisar toda la empresa, incluidos sistemas privados y un plan escrito?",
     companyLink: "Iniciar la evaluación de 99 €",
@@ -221,22 +223,20 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateInvalid: "Introduce un correo válido.",
     emailGateError: "No hemos podido guardar el correo. Inténtalo de nuevo.",
     progress: "Escaneo de página pública",
+    progressScope: "Una sola página · sin formularios ni páginas adicionales",
+    elapsed: seconds => `${seconds} s`,
     stages: [
       {
         label: "Iniciando el navegador",
         detail: "Validando la dirección y creando la inspección en vivo.",
       },
       {
-        label: "Inspeccionando la web renderizada",
-        detail: "Anchor visita páginas públicas relevantes y recoge pruebas visibles.",
-      },
-      {
-        label: "Pruebas verificadas",
-        detail: "Las observaciones estructuradas están listas.",
+        label: "Revisando la página renderizada",
+        detail: "Anchor comprueba funciones de IA visibles y sus avisos.",
       },
     ],
     fullLabel: "Escaneo gratuito completado",
-    fullTitle: "Esta vista previa comprueba las páginas públicas accesibles",
+    fullTitle: "Esta vista previa comprueba la página pública enviada",
     fullBody:
       "Otras páginas, los sistemas privados y el uso interno de IA pueden necesitar revisión. Solicita el escaneo completo y un plan para toda la empresa.",
     fullCta: "Iniciar evaluación · 99 €",
@@ -249,10 +249,10 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       `La inspección de Anchor se ha detenido (${error}). Reintenta el escaneo.`,
     failureRetry: "Reintentar este escaneo",
     scanStatus: {
-      complete: "Inspección de páginas públicas completada",
+      complete: "Inspección de la página pública completada",
       partial: "Inspección parcial — revisa los bloqueos",
     },
-    pagesInspected: "Páginas inspeccionadas",
+    pagesInspected: "Página inspeccionada",
     blockersTitle: "Bloqueos de la inspección",
     brokenElementsTitle: "Problemas visibles de interfaz observados",
     riskIndicatorsTitle: "Indicadores para revisión humana",
@@ -272,7 +272,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "No se encontró un aviso — revisa tu función y la primera interacción",
     noSignaturesTitle: "No se observaron puntos de IA visibles",
     noSignaturesBody:
-      "Anchor no observó directamente un punto de IA público en las páginas indicadas. Esto no demuestra que no exista en otras páginas.",
+      "Anchor no observó directamente una función de IA interactiva en esta página. Esto no demuestra que no exista en otras páginas.",
     planTitle: "Vista previa de implementación",
     planSubtitle: "Copia el resultado o descarga el PDF de una página.",
     step: "Acción",
@@ -296,7 +296,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     pdfFindings: "Puntos detectados",
     pdfActions: "Acciones prioritarias",
     pdfScope:
-      "Alcance: observaciones de las páginas públicas indicadas en este PDF. Los escaneos parciales muestran sus bloqueos. Los sistemas privados quedan fuera.",
+      "Alcance: observación rápida de la única URL indicada en este PDF. Otras páginas y los sistemas privados quedan fuera.",
     disclaimer:
       "Escaneo técnico de página pública, no asesoramiento jurídico. Reglamento (UE) 2024/1689, artículo 50.",
     chatWhat: (name, disclosureFound) =>
@@ -319,9 +319,9 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     eyebrow: "Kostenloser Scan öffentlicher Seiten",
     title: "Prüfen Sie die sichtbaren KI-Hinweise Ihrer Website",
     intro:
-      "Geben Sie eine öffentliche URL ein. RapidAct öffnet die gerenderte Website, folgt wichtigen öffentlichen Seiten und erfasst sichtbare KI-Kontaktpunkte, Hinweise und genaue Belege.",
+      "Geben Sie eine öffentliche URL ein. RapidAct öffnet diese gerenderte Seite und erfasst funktionale KI-Kontaktpunkte, sichtbare Hinweise und genaue Belege.",
     scope:
-      "Der Browser prüft bis zu drei öffentliche Seiten. Er meldet nur direkt Beobachtetes und erzeugt keine automatischen rechtlichen Schlussfolgerungen.",
+      "Diese schnelle Vorschau prüft nur eine öffentliche Seite. Sie klickt nicht, sendet keine Formulare und zieht keine automatischen rechtlichen Schlüsse.",
     companyLead:
       "Benötigen Sie die unternehmensweite Sicht einschließlich interner Systeme und Maßnahmenplan?",
     companyLink: "99-€-Bewertung starten",
@@ -333,29 +333,28 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateBody:
       "Geben Sie Ihre geschäftliche E-Mail ein, um den Scan zu starten und auf das einseitige PDF zuzugreifen. Jede gültige E-Mail-Adresse funktioniert.",
     emailGateField: "Geschäftliche E-Mail",
-    emailGateHint: "Wir verwenden sie für diesen Scan und relevante Nachfragen.",
+    emailGateHint:
+      "Wir verwenden sie für diesen Scan und relevante Nachfragen.",
     emailGateContinue: "Kostenlosen Scan starten",
     emailGateCancel: "Abbrechen",
     emailGateInvalid: "Geben Sie eine gültige E-Mail-Adresse ein.",
     emailGateError:
       "Die E-Mail konnte nicht gespeichert werden. Bitte erneut versuchen.",
     progress: "Öffentlicher Seiten-Scan",
+    progressScope: "Nur eine Seite · keine Formulare oder weiteren Seiten",
+    elapsed: seconds => `${seconds} s`,
     stages: [
       {
         label: "Browser wird gestartet",
         detail: "Adresse wird validiert und die Live-Prüfung erstellt.",
       },
       {
-        label: "Gerenderte Website wird geprüft",
-        detail: "Anchor besucht relevante öffentliche Seiten und sammelt sichtbare Belege.",
-      },
-      {
-        label: "Belege verifiziert",
-        detail: "Die strukturierten Beobachtungen sind bereit.",
+        label: "Gerenderte Seite wird geprüft",
+        detail: "Anchor prüft sichtbare funktionale KI und deren Hinweise.",
       },
     ],
     fullLabel: "Kostenloser Scan abgeschlossen",
-    fullTitle: "Diese Vorschau prüft die erreichbaren öffentlichen Seiten",
+    fullTitle: "Diese Vorschau prüft die eingegebene öffentliche Seite",
     fullBody:
       "Weitere Seiten, private Systeme und interne KI-Nutzung können weiterhin geprüft werden müssen. Fordern Sie den vollständigen Scan und einen unternehmensweiten Maßnahmenplan an.",
     fullCta: "Bewertung starten · 99 €",
@@ -368,10 +367,10 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       `Die Anchor-Prüfung wurde beendet (${error}). Starten Sie den Scan erneut.`,
     failureRetry: "Scan erneut versuchen",
     scanStatus: {
-      complete: "Prüfung öffentlicher Seiten abgeschlossen",
+      complete: "Prüfung der öffentlichen Seite abgeschlossen",
       partial: "Teilprüfung — Blocker prüfen",
     },
-    pagesInspected: "Geprüfte Seiten",
+    pagesInspected: "Geprüfte Seite",
     blockersTitle: "Prüfungsblocker",
     brokenElementsTitle: "Beobachtete sichtbare Oberflächenfehler",
     riskIndicatorsTitle: "Indikatoren zur menschlichen Prüfung",
@@ -391,10 +390,9 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Kein Hinweis gefunden — Rolle und erste Interaktion prüfen",
     noSignaturesTitle: "Keine sichtbaren KI-Kontaktpunkte beobachtet",
     noSignaturesBody:
-      "Anchor hat auf den aufgeführten Seiten keinen öffentlichen KI-Kontaktpunkt direkt beobachtet. Dies beweist nicht, dass anderswo keiner existiert.",
+      "Anchor hat auf dieser Seite keinen funktionalen KI-Kontaktpunkt direkt beobachtet. Dies beweist nicht, dass anderswo keiner existiert.",
     planTitle: "Ihre Implementierungsvorschau",
-    planSubtitle:
-      "Ergebnis kopieren oder als einseitiges PDF herunterladen.",
+    planSubtitle: "Ergebnis kopieren oder als einseitiges PDF herunterladen.",
     step: "Maßnahme",
     alwaysStep: "Implementierungsnachweise sichern",
     evidenceBody:
@@ -416,7 +414,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     pdfFindings: "Erkannte Berührungspunkte",
     pdfActions: "Priorisierte Maßnahmen",
     pdfScope:
-      "Umfang: Beobachtungen der in diesem PDF aufgeführten öffentlichen Seiten. Teilprüfungen nennen ihre Blocker. Private Systeme liegen außerhalb dieses Scans.",
+      "Umfang: schnelle Beobachtung der einzigen in diesem PDF aufgeführten URL. Weitere Seiten und private Systeme liegen außerhalb dieses Scans.",
     disclaimer:
       "Technischer Scan einer öffentlichen Seite, keine Rechtsberatung. Verordnung (EU) 2024/1689, Artikel 50.",
     chatWhat: (name, disclosureFound) =>
@@ -439,9 +437,9 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     eyebrow: "Scan gratuit d’une page publique",
     title: "Vérifiez les mentions IA visibles sur votre site",
     intro:
-      "Saisissez une URL publique. RapidAct ouvre le site rendu, suit ses pages publiques les plus pertinentes et relève les points de contact IA, mentions et preuves exactes.",
+      "Saisissez une URL publique. RapidAct ouvre cette page rendue et relève les fonctions IA, les mentions visibles et les preuves exactes.",
     scope:
-      "Le navigateur inspecte jusqu’à trois pages publiques. Il ne rapporte que ce qu’il observe directement et ne produit aucune conclusion juridique automatique.",
+      "Cet aperçu rapide inspecte une seule page publique. Il ne clique pas, n’envoie aucun formulaire et ne produit aucune conclusion juridique automatique.",
     companyLead:
       "Besoin d’une vue globale, y compris les systèmes internes et un plan écrit ?",
     companyLink: "Commencer l’évaluation à 99 €",
@@ -458,25 +456,23 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateContinue: "Lancer l’analyse gratuite",
     emailGateCancel: "Annuler",
     emailGateInvalid: "Saisissez une adresse e-mail valide.",
-    emailGateError:
-      "Impossible d’enregistrer l’e-mail. Veuillez réessayer.",
+    emailGateError: "Impossible d’enregistrer l’e-mail. Veuillez réessayer.",
     progress: "Scan de page publique",
+    progressScope: "Une seule page · aucun formulaire ni page supplémentaire",
+    elapsed: seconds => `${seconds} s`,
     stages: [
       {
         label: "Démarrage du navigateur",
-        detail: "Validation de l’adresse et création de l’inspection en direct.",
+        detail:
+          "Validation de l’adresse et création de l’inspection en direct.",
       },
       {
-        label: "Inspection du site rendu",
-        detail: "Anchor visite les pages publiques pertinentes et recueille les preuves visibles.",
-      },
-      {
-        label: "Preuves vérifiées",
-        detail: "Les observations structurées sont prêtes.",
+        label: "Inspection de la page rendue",
+        detail: "Anchor vérifie les fonctions IA visibles et leurs mentions.",
       },
     ],
     fullLabel: "Analyse gratuite terminée",
-    fullTitle: "Cet aperçu vérifie les pages publiques accessibles",
+    fullTitle: "Cet aperçu vérifie la page publique soumise",
     fullBody:
       "D’autres pages, systèmes privés et usages internes de l’IA peuvent encore nécessiter un examen. Demandez l’analyse complète et un plan d’action pour l’entreprise.",
     fullCta: "Commencer l’évaluation · 99 €",
@@ -489,10 +485,10 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       `L’inspection Anchor s’est arrêtée (${error}). Relancez l’analyse.`,
     failureRetry: "Relancer cette analyse",
     scanStatus: {
-      complete: "Inspection des pages publiques terminée",
+      complete: "Inspection de la page publique terminée",
       partial: "Inspection partielle — vérifiez les blocages",
     },
-    pagesInspected: "Pages inspectées",
+    pagesInspected: "Page inspectée",
     blockersTitle: "Blocages de l’inspection",
     brokenElementsTitle: "Problèmes d’interface visibles observés",
     riskIndicatorsTitle: "Indicateurs à examiner",
@@ -512,7 +508,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Aucune mention trouvée — vérifiez le rôle et la première interaction",
     noSignaturesTitle: "Aucun point de contact IA visible observé",
     noSignaturesBody:
-      "Anchor n’a observé directement aucun point de contact IA public sur les pages listées. Cela ne prouve pas qu’il n’en existe pas ailleurs.",
+      "Anchor n’a observé directement aucun point de contact IA fonctionnel sur cette page. Cela ne prouve pas qu’il n’en existe pas ailleurs.",
     planTitle: "Aperçu de mise en œuvre",
     planSubtitle: "Copiez le résultat ou téléchargez le PDF d’une page.",
     step: "Action",
@@ -536,7 +532,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     pdfFindings: "Points de contact détectés",
     pdfActions: "Actions prioritaires",
     pdfScope:
-      "Portée : observations des pages publiques listées dans ce PDF. Les analyses partielles indiquent leurs blocages. Les systèmes privés sont hors périmètre.",
+      "Portée : observation rapide de l’unique URL listée dans ce PDF. Les autres pages et les systèmes privés sont hors périmètre.",
     disclaimer:
       "Scan technique d’une page publique, pas un avis juridique. Règlement (UE) 2024/1689, article 50.",
     chatWhat: (name, disclosureFound) =>
@@ -559,9 +555,9 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     eyebrow: "Scansione gratuita di pagina pubblica",
     title: "Controlla gli avvisi IA visibili sul tuo sito",
     intro:
-      "Inserisci un URL pubblico. RapidAct apre il sito renderizzato, segue le pagine pubbliche più rilevanti e registra punti di contatto IA, avvisi e prove precise.",
+      "Inserisci un URL pubblico. RapidAct apre quella pagina renderizzata e registra funzioni IA, avvisi visibili e prove precise.",
     scope:
-      "Il browser ispeziona fino a tre pagine pubbliche. Riporta solo ciò che osserva direttamente e non produce conclusioni legali automatiche.",
+      "Questa anteprima rapida controlla una sola pagina pubblica. Non fa clic, non invia moduli e non produce conclusioni legali automatiche.",
     companyLead:
       "Ti serve la visione aziendale completa, inclusi sistemi interni e piano scritto?",
     companyLink: "Inizia la valutazione da 99 €",
@@ -577,25 +573,22 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateContinue: "Avvia scansione gratuita",
     emailGateCancel: "Annulla",
     emailGateInvalid: "Inserisci un indirizzo e-mail valido.",
-    emailGateError:
-      "Non è stato possibile salvare l’e-mail. Riprova.",
+    emailGateError: "Non è stato possibile salvare l’e-mail. Riprova.",
     progress: "Scansione pagina pubblica",
+    progressScope: "Una sola pagina · nessun modulo o pagina aggiuntiva",
+    elapsed: seconds => `${seconds} s`,
     stages: [
       {
         label: "Avvio del browser",
         detail: "Convalida dell’indirizzo e creazione dell’ispezione dal vivo.",
       },
       {
-        label: "Ispezione del sito renderizzato",
-        detail: "Anchor visita le pagine pubbliche rilevanti e raccoglie prove visibili.",
-      },
-      {
-        label: "Prove verificate",
-        detail: "Le osservazioni strutturate sono pronte.",
+        label: "Controllo della pagina renderizzata",
+        detail: "Anchor verifica le funzioni IA visibili e i relativi avvisi.",
       },
     ],
     fullLabel: "Scansione gratuita completata",
-    fullTitle: "Questa anteprima controlla le pagine pubbliche accessibili",
+    fullTitle: "Questa anteprima controlla la pagina pubblica inviata",
     fullBody:
       "Altre pagine, sistemi privati e usi interni dell’IA possono richiedere una verifica. Richiedi la scansione completa e un piano d’azione aziendale.",
     fullCta: "Inizia valutazione · 99 €",
@@ -608,10 +601,10 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       `L’ispezione Anchor si è interrotta (${error}). Riprova la scansione.`,
     failureRetry: "Riprova questa scansione",
     scanStatus: {
-      complete: "Ispezione delle pagine pubbliche completata",
+      complete: "Ispezione della pagina pubblica completata",
       partial: "Ispezione parziale — controlla i blocchi",
     },
-    pagesInspected: "Pagine ispezionate",
+    pagesInspected: "Pagina ispezionata",
     blockersTitle: "Blocchi dell’ispezione",
     brokenElementsTitle: "Problemi visibili dell’interfaccia osservati",
     riskIndicatorsTitle: "Indicatori da verificare",
@@ -631,7 +624,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Nessun avviso trovato — verifica ruolo e prima interazione",
     noSignaturesTitle: "Nessun punto di contatto IA visibile osservato",
     noSignaturesBody:
-      "Anchor non ha osservato direttamente punti di contatto IA pubblici nelle pagine elencate. Ciò non dimostra che non esistano altrove.",
+      "Anchor non ha osservato direttamente funzioni IA interattive su questa pagina. Ciò non dimostra che non esistano altrove.",
     planTitle: "Anteprima di implementazione",
     planSubtitle: "Copia il risultato o scarica il PDF di una pagina.",
     step: "Azione",
@@ -655,7 +648,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     pdfFindings: "Punti di contatto rilevati",
     pdfActions: "Azioni prioritarie",
     pdfScope:
-      "Ambito: osservazioni delle pagine pubbliche elencate nel PDF. Le scansioni parziali indicano i blocchi. I sistemi privati sono fuori ambito.",
+      "Ambito: osservazione rapida dell’unico URL elencato nel PDF. Le altre pagine e i sistemi privati sono fuori ambito.",
     disclaimer:
       "Scansione tecnica di una pagina pubblica, non consulenza legale. Regolamento (UE) 2024/1689, articolo 50.",
     chatWhat: (name, disclosureFound) =>

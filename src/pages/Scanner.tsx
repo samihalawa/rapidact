@@ -81,6 +81,7 @@ export default function Scanner() {
   const [copied, setCopied] = useState(false);
   const [scanActive, setScanActive] = useState(false);
   const [scanStage, setScanStage] = useState(0);
+  const [scanElapsed, setScanElapsed] = useState(0);
   const [scanError, setScanError] = useState("");
   const [emailDialogOpen, setEmailDialogOpen] = useState(false);
   const [emailError, setEmailError] = useState("");
@@ -94,10 +95,15 @@ export default function Scanner() {
     setResult(null);
     setScanError("");
     setScanStage(0);
+    setScanElapsed(0);
     setScanActive(true);
     startScan.reset();
     scanStatus.reset();
     track("scan_started", { has_protocol: /^https?:\/\//i.test(submittedUrl) });
+    const scanStartedAt = Date.now();
+    const elapsedTimer = window.setInterval(() => {
+      setScanElapsed(Math.floor((Date.now() - scanStartedAt) / 1_000));
+    }, 1_000);
 
     try {
       const started = await startScan.mutateAsync({ url: submittedUrl });
@@ -108,10 +114,10 @@ export default function Scanner() {
       }
 
       setScanStage(1);
-      const deadline = Date.now() + 5 * 60 * 1000;
+      const deadline = Date.now() + 90 * 1_000;
       let completed: ScanResult | null = null;
       while (Date.now() < deadline) {
-        await wait(2_000);
+        await wait(1_250);
         const state = await scanStatus.mutateAsync({ token: started.token });
         if (state.status === "running") continue;
         if (state.status === "failed") {
@@ -129,7 +135,6 @@ export default function Scanner() {
         return;
       }
 
-      setScanStage(2);
       setResult(completed);
       track("scan_completed", {
         reachable: completed.reachable,
@@ -145,6 +150,7 @@ export default function Scanner() {
       setScanError(errorType);
       track("scan_failed", { error_type: errorType });
     } finally {
+      window.clearInterval(elapsedTimer);
       setScanActive(false);
     }
   };
@@ -368,50 +374,28 @@ export default function Scanner() {
             <div className="flex items-start justify-between gap-5">
               <div>
                 <p className="eyebrow">{copy.progress}</p>
-                  <p className="ink mt-2 text-[16px] font-bold">
-                    {copy.stages[scanStage].label}
+                <p className="ink mt-2 text-[16px] font-bold">
+                  {copy.stages[scanStage].label}
                 </p>
                 <p className="ink-soft mt-1 text-[13px] leading-relaxed">
                   {copy.stages[scanStage].detail}
                 </p>
               </div>
               <span className="shrink-0 font-mono text-[13px] font-semibold text-[#1f3a5f]">
-                {scanStage + 1}/{copy.stages.length}
+                {copy.elapsed(scanElapsed)}
               </span>
             </div>
             <div
               role="progressbar"
               aria-label={copy.stages[scanStage].label}
-              aria-valuemin={1}
-              aria-valuemax={copy.stages.length}
-              aria-valuenow={scanStage + 1}
+              aria-valuetext={copy.stages[scanStage].detail}
               className="mt-4 h-2 overflow-hidden rounded-full bg-[#e5ebf4]"
             >
-              <div
-                className={`h-full rounded-full bg-[#1f5fd2] transition-[width] duration-300 ease-out ${
-                  scanStage === 1 ? "animate-pulse" : ""
-                }`}
-                style={{
-                  width: `${((scanStage + 1) / copy.stages.length) * 100}%`,
-                }}
-              />
+              <div className="h-full w-full animate-pulse rounded-full bg-gradient-to-r from-[#d9e6fb] via-[#1f5fd2] to-[#d9e6fb]" />
             </div>
-            <div
-              className="mt-4 grid gap-2"
-              style={{
-                gridTemplateColumns: `repeat(${copy.stages.length}, minmax(0, 1fr))`,
-              }}
-              aria-hidden="true"
-            >
-              {copy.stages.map((stage, index) => (
-                <span
-                  key={stage.label}
-                  className={`h-1 rounded-full ${
-                    index <= scanStage ? "bg-[#1f5fd2]" : "bg-[#e5ebf4]"
-                  }`}
-                />
-              ))}
-            </div>
+            <p className="ink-soft mt-3 text-xs leading-relaxed">
+              {copy.progressScope}
+            </p>
           </section>
         )}
 
@@ -586,13 +570,19 @@ export default function Scanner() {
             {result.summary.brokenElements.length > 0 && (
               <Card className="border-[#f4c96b] bg-[#fffdf5]">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base">{copy.brokenElementsTitle}</CardTitle>
+                  <CardTitle className="text-base">
+                    {copy.brokenElementsTitle}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {result.summary.brokenElements.map(item => (
                     <div key={`${item.url}-${item.description}`}>
-                      <p className="text-sm text-[#16181d]">{item.description}</p>
-                      <p className="mt-1 text-xs break-all text-[#6b7280]">{item.url}</p>
+                      <p className="text-sm text-[#16181d]">
+                        {item.description}
+                      </p>
+                      <p className="mt-1 text-xs break-all text-[#6b7280]">
+                        {item.url}
+                      </p>
                     </div>
                   ))}
                 </CardContent>
@@ -602,16 +592,24 @@ export default function Scanner() {
             {result.summary.riskIndicators.length > 0 && (
               <Card className="border-[#d8c7f1] bg-[#faf7ff]">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base">{copy.riskIndicatorsTitle}</CardTitle>
+                  <CardTitle className="text-base">
+                    {copy.riskIndicatorsTitle}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {result.summary.riskIndicators.map(item => (
-                    <div key={`${item.area}-${item.sourceUrl}-${item.evidence}`}>
+                    <div
+                      key={`${item.area}-${item.sourceUrl}-${item.evidence}`}
+                    >
                       <Badge className="bg-[#ede4fb] text-[#5b348b] hover:bg-[#ede4fb]">
                         {item.area === "article_5" ? "Article 5" : "Annex III"}
                       </Badge>
-                      <p className="mt-2 text-sm text-[#16181d]">{item.reason}</p>
-                      <p className="mt-1 text-xs text-[#5c6370]">{item.evidence}</p>
+                      <p className="mt-2 text-sm text-[#16181d]">
+                        {item.reason}
+                      </p>
+                      <p className="mt-1 text-xs text-[#5c6370]">
+                        {item.evidence}
+                      </p>
                       <p className="mt-1 text-xs break-all text-[#6b7280]">
                         {item.sourceUrl}
                       </p>
@@ -730,7 +728,9 @@ export default function Scanner() {
                   >
                     <PackageCheck className="h-5 w-5 text-[#4ade80]" />
                     <span>
-                      <span className="block font-bold">{copy.noticeTitle}</span>
+                      <span className="block font-bold">
+                        {copy.noticeTitle}
+                      </span>
                       <span className="mt-1 block text-xs leading-relaxed text-white/60">
                         {copy.noticeBody} →
                       </span>

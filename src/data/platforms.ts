@@ -27,7 +27,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "If you provide an AI assistant under your own service or brand, Article 50(1) may require a clear notice before the first interaction. The free RapidAct notice gives you that visible technical layer without replacing the role and scope assessment.",
     detectionNote:
-      "Run the free website scan first. A live browser inspects the rendered site and its most relevant public pages for visible AI touchpoints, disclosure wording and exact source evidence. Private plugins, back-office AI and contractual roles remain outside the public scan.",
+      "Run the free website scan first. A live browser performs a fast inspection of the submitted rendered page for functional AI touchpoints, disclosure wording and exact source evidence. Other pages, private plugins, back-office AI and contractual roles remain outside the free scan.",
     freeInstall: [
       "Find RapidAct AI Disclosure in Plugins → Add New after its WordPress.org publication.",
       "Install, activate, then open Settings → RapidAct AI Disclosure.",
@@ -83,7 +83,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "If your store provides an AI shopping or support assistant, you may need a clear direct-interaction notice. AI-generated content has separate rules, so first classify the system and your role; use the notice where it fits.",
     detectionNote:
-      "The free scan opens the rendered storefront and relevant public pages, then records visible AI touchpoints, disclosure wording and exact source evidence. It does not infer whether an image was AI-generated when that is not directly observable.",
+      "The free scan opens the submitted rendered storefront page, then records functional AI touchpoints, disclosure wording and exact source evidence. It does not open other pages or infer whether an image was AI-generated when that is not directly observable.",
     freeInstall: [
       "Install RapidAct from the Shopify App Store after publication and complete Shopify OAuth.",
       "Open the app, follow its theme-editor link and enable the RapidAct app embed.",
@@ -160,7 +160,7 @@ export const PLATFORMS: PlatformGuide[] = [
     intro:
       "Custom site, Webflow, Squarespace or a React app: the technical installation is the same. First establish whether Article 50 requires a direct-interaction notice for your role and system; if it does, the notice is one script you can paste yourself.",
     detectionNote:
-      "The free scan uses a live browser to inspect the rendered public experience rather than relying on a fixed signature list. It reports directly observed evidence and clearly marks any pages it could not inspect.",
+      "The free scan uses a live browser for a fast inspection of the submitted rendered public page rather than relying on a fixed signature list. It reports directly observed evidence and clearly marks a page it could not inspect.",
     freeInstall: [
       "Copy the RapidAct snippet from the guide page.",
       "Paste it before the closing body tag of your pages (or in your tag manager).",

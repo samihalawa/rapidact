@@ -17,10 +17,10 @@ export default function Privacy() {
             </h2>
             <p className="mt-2">
               <strong>Scanner:</strong> when you scan a URL, an Anchor Browser
-              task inspects that rendered public website and up to two relevant
-              same-origin pages. We store the submitted URL, inspected URLs,
-              observed evidence, resulting score and report so you can retrieve
-              them.
+              task performs a fast inspection of that single rendered public
+              page. It does not open other pages or submit forms. We store the
+              submitted URL, observed evidence, resulting score and report so
+              you can retrieve them.
               <strong> Email capture:</strong> if you give us your email, we
               store it with the scanned URL and the form source to send you what
               you asked for. That's all.
@@ -50,8 +50,8 @@ export default function Privacy() {
               Intake answers, email addresses, payment details and report
               contents are not included in analytics events. “Essential only”
               keeps analytics and advertising storage denied through Google
-              Consent Mode and disables PostHog capture and session replay.
-              You can reset this choice by clearing this site's browser data.
+              Consent Mode and disables PostHog capture and session replay. You
+              can reset this choice by clearing this site's browser data.
             </p>
           </section>
           <section>
@@ -59,9 +59,9 @@ export default function Privacy() {
               What we never do
             </h2>
             <p className="mt-2">
-              We don't sell personal data. Scan results are never published
-              with identifying site ownership, and a completed intake is not
-              sent to analytics or advertising systems.
+              We don't sell personal data. Scan results are never published with
+              identifying site ownership, and a completed intake is not sent to
+              analytics or advertising systems.
             </p>
           </section>
           <section>

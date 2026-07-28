@@ -9,16 +9,13 @@ import {
 
 const observed = {
   scan_status: "PARTIAL" as const,
-  pages_visited: [
-    { url: "https://example.com/", title: "Example" },
-    { url: "https://example.com/support", title: "Support" },
-  ],
+  pages_visited: [{ url: "https://example.com/", title: "Example" }],
   ai_touchpoints: [
     {
       name: "Support assistant",
       vendor: "Example AI",
       category: "chat",
-      source_url: "https://example.com/support",
+      source_url: "https://example.com/",
       evidence: ["A visible launcher says Ask our AI assistant"],
       disclosure_observed: true,
       disclosure_text: "You are chatting with an AI assistant",
@@ -27,20 +24,20 @@ const observed = {
   ],
   broken_elements: [
     {
-      url: "https://example.com/support",
+      url: "https://example.com/",
       description: "The close button did not respond.",
     },
   ],
   risk_indicators: [
     {
       area: "annex_3" as const,
-      source_url: "https://example.com/support",
+      source_url: "https://example.com/",
       evidence: "The page describes automated applicant screening.",
       reason: "The described use warrants human review.",
     },
   ],
   blockers: ["The pricing page required authentication."],
-  summary: "Two public pages were inspected and one AI assistant was observed.",
+  summary: "One public page was inspected and one AI assistant was observed.",
 };
 
 describe("Anchor scanner contract", () => {
@@ -50,14 +47,21 @@ describe("Anchor scanner contract", () => {
     expect(request.url).toBe("https://example.com");
     expect(request.prompt).toBe(ANCHOR_SCAN_PROMPT);
     expect(request.agent).toBe("browser-use");
-    expect(request.max_steps).toBe(80);
+    expect(request.provider).toBe("gemini");
+    expect(request.model).toBe("gemini-2.5-flash-lite");
+    expect(request.detect_elements).toBe(false);
+    expect(request.max_steps).toBe(6);
     expect(request.async).toBe(true);
-    expect(request.output_schema.properties.scan_status.enum).toEqual(["COMPLETE", "PARTIAL"]);
+    expect(request.output_schema.properties.pages_visited.maxItems).toBe(1);
+    expect(request.output_schema.properties.scan_status.enum).toEqual([
+      "COMPLETE",
+      "PARTIAL",
+    ]);
     expect(request).not.toHaveProperty("task");
-    expect(ANCHOR_SCAN_PROMPT).toContain("at most two additional important same-origin public pages");
-    expect(ANCHOR_SCAN_PROMPT).toContain("Never invent or guess a route");
-    expect(ANCHOR_SCAN_PROMPT).toContain("Exclude ordinary contact links");
-    expect(ANCHOR_SCAN_PROMPT).toContain("Do not invent systems");
+    expect(ANCHOR_SCAN_PROMPT).toContain("only the supplied rendered page");
+    expect(ANCHOR_SCAN_PROMPT).toContain("Do not click, navigate, submit");
+    expect(ANCHOR_SCAN_PROMPT).toContain("are never AI touchpoints");
+    expect(ANCHOR_SCAN_PROMPT).toContain("Never infer systems");
   });
 
   it("reads the current workflow id response shape", async () => {
@@ -65,12 +69,16 @@ describe("Anchor scanner contract", () => {
       void args;
       return new Response(
         JSON.stringify({ data: { workflow_id: "77113", status: "running" } }),
-        { status: 200 },
+        { status: 200 }
       );
     });
 
     await expect(
-      startAnchorScan("https://example.com", "test-key", fetchMock as typeof fetch),
+      startAnchorScan(
+        "https://example.com",
+        "test-key",
+        fetchMock as typeof fetch
+      )
     ).resolves.toBe("77113");
     const init = fetchMock.mock.calls[0]?.[1];
     expect(init).toBeDefined();
@@ -89,15 +97,21 @@ describe("Anchor scanner contract", () => {
           result: JSON.stringify(observed),
           data: { status: "COMPLETED" },
         }),
-        { status: 200 },
+        { status: 200 }
       );
     });
 
-    const state = await readAnchorScan("77113", "test-key", fetchMock as typeof fetch);
+    const state = await readAnchorScan(
+      "77113",
+      "test-key",
+      fetchMock as typeof fetch
+    );
     expect(state.status).toBe("completed");
     if (state.status === "completed") {
-      expect(state.observed.pages_visited).toHaveLength(2);
-      expect(state.observed.blockers).toEqual(["The pricing page required authentication."]);
+      expect(state.observed.pages_visited).toHaveLength(1);
+      expect(state.observed.blockers).toEqual([
+        "The pricing page required authentication.",
+      ]);
     }
   });
 
@@ -109,12 +123,12 @@ describe("Anchor scanner contract", () => {
           status: "COMPLETED",
           result: "The task encountered an error.",
         }),
-        { status: 200 },
+        { status: 200 }
       );
     });
 
     await expect(
-      readAnchorScan("77113", "test-key", fetchMock as typeof fetch),
+      readAnchorScan("77113", "test-key", fetchMock as typeof fetch)
     ).resolves.toEqual({ status: "failed", error: "anchor-invalid-result" });
   });
 
@@ -123,14 +137,16 @@ describe("Anchor scanner contract", () => {
 
     expect(result.summary.engine).toBe("anchor-browser");
     expect(result.summary.scanStatus).toBe("partial");
-    expect(result.summary.pagesVisited).toHaveLength(2);
+    expect(result.summary.pagesVisited).toHaveLength(1);
     expect(result.summary.blockers).toHaveLength(1);
     expect(result.detected[0]).toMatchObject({
       name: "Support assistant",
-      sourceUrl: "https://example.com/support",
+      sourceUrl: "https://example.com/",
       existingDisclosureFound: true,
     });
     expect(result.report).toContain("Status: PARTIAL");
-    expect(result.report).toContain("The pricing page required authentication.");
+    expect(result.report).toContain(
+      "The pricing page required authentication."
+    );
   });
 });

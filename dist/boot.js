@@ -48242,6 +48242,7 @@ var anchorOutputSchema = {
     scan_status: { type: "string", enum: ["COMPLETE", "PARTIAL"] },
     pages_visited: {
       type: "array",
+      maxItems: 1,
       items: {
         type: "object",
         additionalProperties: false,
@@ -48315,7 +48316,7 @@ var anchorResultSchema = external_exports.object({
       url: external_exports.string().min(1),
       title: external_exports.string()
     })
-  ),
+  ).max(1),
   ai_touchpoints: external_exports.array(
     external_exports.object({
       name: external_exports.string().min(1),
@@ -48355,28 +48356,30 @@ var statusResponseSchema = external_exports.object({
   status: external_exports.string(),
   result: external_exports.unknown().optional()
 });
-var ANCHOR_SCAN_PROMPT = `Inspect this public website as a real visitor for a RapidAct EU AI Act transparency preview.
+var ANCHOR_SCAN_PROMPT = `Perform one fast visual inspection of only the supplied rendered page, then return.
 
-Visit the supplied URL and at most two additional important same-origin public pages by following real links that are visible on the rendered website. Never invent or guess a route. If a followed link resolves to the same content as the entry page, do not count it as a distinct inspected page; choose another real visible link instead. Prioritise pages that expose user-facing AI functionality, such as product, search, demo, or assistant pages. Do not sign in, submit forms, make purchases, accept destructive prompts, or change any website data.
+Do not click, navigate, submit, open menus, inspect other pages, or perform an exhaustive audit. Report a visitor-facing AI touchpoint only when this page contains a functional control through which the visitor can directly provide input to an AI system or directly receive an AI-generated or automated-decision output.
 
-Observe and report only evidence visible in the rendered website or its loaded public resources:
-1. User-facing AI assistants, chatbots, generative features, translation, recommendation, synthetic-media, voice, or automated decision touchpoints.
-2. Vendor or product identity when directly observable.
-3. Exact disclosure wording that tells a visitor they are interacting with AI, and the URL where it appears.
-4. Exact evidence for every touchpoint. Include a touchpoint only when the rendered interaction explicitly identifies itself as AI, actually produces an AI-generated or automated decision output during this inspection, or a loaded public resource directly identifies the AI product or vendor.
-5. Clearly broken visible interface elements encountered during inspection.
-6. Separately flagged indicators that may warrant human review under Article 5 or Annex III. These are indicators only, never legal classifications.
+Text, links, cards, legal guidance, articles, examples, marketing copy, AI notices, compliance badges, and disclosure templates that merely discuss AI are never AI touchpoints. WhatsApp, email, telephone, analytics, cookie, and language controls are never AI touchpoints.
 
-Exclude ordinary contact links or buttons such as WhatsApp, email, or telephone; language selectors; analytics or session-replay tools; cookie controls; transparency badges or notices that merely describe another system; and unexercised marketing claims. Do not treat the absence of an AI disclosure on a non-AI feature as a finding.
+For each real touchpoint:
+1. Quote the visible functional evidence and use the supplied URL as the source URL.
+2. Identify the vendor only when it is directly visible; otherwise use an empty string.
+3. Record whether disclosure is visible next to or before the interaction.
+4. Use severity high when disclosure is not visible, medium when it is unclear, and low when it is visible.
 
-Return COMPLETE only when the planned public pages were inspected. Return PARTIAL when robots, consent walls, authentication, navigation failures, time limits, or another blocker prevented part of the inspection. List every inspected URL and every blocker. Do not invent systems, hidden pages, legal conclusions, compliance scores, PASS/FAIL outcomes, or evidence that was not directly observed.`;
+If no feature meets this strict functional test, return an empty ai_touchpoints array. This free preview does not inspect interface defects or classify Article 5 or Annex III risk, so return empty broken_elements and risk_indicators arrays.
+
+Return COMPLETE after this page renders. Return PARTIAL only if the page itself cannot be inspected, and list the blocker. Never infer systems, hidden pages, legal conclusions, compliance scores, or evidence that was not directly observed.`;
 function buildAnchorScanRequest(url2) {
   return {
     url: url2,
     prompt: ANCHOR_SCAN_PROMPT,
     agent: "browser-use",
-    detect_elements: true,
-    max_steps: 80,
+    provider: "gemini",
+    model: "gemini-2.5-flash-lite",
+    detect_elements: false,
+    max_steps: 6,
     output_schema: anchorOutputSchema,
     async: true
   };
@@ -48404,9 +48407,12 @@ async function startAnchorScan(url2, apiKey, fetchImpl = fetch) {
   return startResponseSchema.parse(await readJson(response)).data.workflow_id;
 }
 async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
-  const response = await fetchImpl(`${ANCHOR_TASK_URL}/${encodeURIComponent(workflowId)}/status`, {
-    headers: { "anchor-api-key": apiKey }
-  });
+  const response = await fetchImpl(
+    `${ANCHOR_TASK_URL}/${encodeURIComponent(workflowId)}/status`,
+    {
+      headers: { "anchor-api-key": apiKey }
+    }
+  );
   const payload = statusResponseSchema.parse(await readJson(response));
   const status = payload.status.toUpperCase();
   if (status === "RUNNING" || status === "PENDING" || status === "QUEUED") {
@@ -48417,7 +48423,10 @@ async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
     return { status: "failed", error: message };
   }
   if (status !== "COMPLETED") {
-    return { status: "failed", error: `anchor-unknown-status-${status.toLowerCase()}` };
+    return {
+      status: "failed",
+      error: `anchor-unknown-status-${status.toLowerCase()}`
+    };
   }
   let rawResult = payload.result;
   if (typeof rawResult === "string") {
@@ -48446,17 +48455,22 @@ function findingId(name2, index) {
   return `${slug || "touchpoint"}-${index + 1}`;
 }
 function mapAnchorResult(url2, observed) {
-  const detected = observed.ai_touchpoints.map((touchpoint, index) => ({
-    id: findingId(touchpoint.name, index),
-    name: touchpoint.name,
-    vendor: touchpoint.vendor || "Not identified",
-    category: touchpoint.category,
-    article: "50",
-    severity: touchpoint.severity,
-    sourceUrl: touchpoint.source_url,
-    evidence: touchpoint.disclosure_text ? [...touchpoint.evidence, `Visible disclosure: \u201C${touchpoint.disclosure_text}\u201D`] : touchpoint.evidence,
-    existingDisclosureFound: touchpoint.disclosure_observed
-  }));
+  const detected = observed.ai_touchpoints.map(
+    (touchpoint, index) => ({
+      id: findingId(touchpoint.name, index),
+      name: touchpoint.name,
+      vendor: touchpoint.vendor || "Not identified",
+      category: touchpoint.category,
+      article: "50",
+      severity: touchpoint.severity,
+      sourceUrl: touchpoint.source_url,
+      evidence: touchpoint.disclosure_text ? [
+        ...touchpoint.evidence,
+        `Visible disclosure: \u201C${touchpoint.disclosure_text}\u201D`
+      ] : touchpoint.evidence,
+      existingDisclosureFound: touchpoint.disclosure_observed
+    })
+  );
   const summary = {
     total: detected.length,
     high: detected.filter((finding) => finding.severity === "high").length,
@@ -48492,9 +48506,12 @@ function mapAnchorResult(url2, observed) {
     ""
   ];
   for (const finding of detected) {
-    lines.push(`[${finding.severity.toUpperCase()}] ${finding.name} (${finding.vendor})`);
+    lines.push(
+      `[${finding.severity.toUpperCase()}] ${finding.name} (${finding.vendor})`
+    );
     lines.push(`Source: ${finding.sourceUrl}`);
-    for (const evidence of finding.evidence) lines.push(`Evidence: ${evidence}`);
+    for (const evidence of finding.evidence)
+      lines.push(`Evidence: ${evidence}`);
     lines.push(
       `Visible AI disclosure observed: ${finding.existingDisclosureFound ? "yes" : "not observed"}`,
       ""
@@ -48506,7 +48523,7 @@ function mapAnchorResult(url2, observed) {
     lines.push("");
   }
   lines.push(
-    "Scope: rendered public-website observations from the URLs listed above. This output does not classify the organisation or its systems legally."
+    "Scope: a fast rendered-page observation of the single URL listed above. This output does not inspect other pages, private systems, or classify the organisation or its systems legally."
   );
   return {
     detected,
