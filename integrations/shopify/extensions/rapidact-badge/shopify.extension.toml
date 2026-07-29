@@ -3,4 +3,5 @@ api_version = "2026-07"
 [[extensions]]
 name = "RapidAct AI disclosure"
 handle = "rapidact-badge"
+uid = "9e467129-774f-96b1-2259-f44a27db2e7f0eca0810"
 type = "theme"
