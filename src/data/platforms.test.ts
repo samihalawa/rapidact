@@ -156,4 +156,16 @@ describe("localized platform guides", () => {
       expect(labels).toContain("Intercom Fin");
     }
   });
+
+  it("uses the official Wix installation flow in every language", () => {
+    for (const lang of LANGS) {
+      const wix = getPlatform("wix", lang);
+
+      expect(wix).toBeDefined();
+      expect(wix!.installUrl).toBe("https://wix.to/JKi80ih");
+      expectNonEmpty(PLATFORM_PAGE_COPY[lang].installOfficial(wix!));
+      expect(PLATFORM_PAGE_COPY[lang].installOfficial(wix!)).toContain("Wix");
+      expect(wix!.freeInstall[0]).toMatch(/Wix/);
+    }
+  });
 });

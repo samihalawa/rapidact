@@ -21,6 +21,7 @@ export interface PlatformGuide {
   detectionNote: string;
   freeInstall: string[];
   commonWidgets: string[];
+  installUrl?: string;
 }
 
 export const PLATFORMS: PlatformGuide[] = [
@@ -64,10 +65,11 @@ export const PLATFORMS: PlatformGuide[] = [
       "Wix sites often run Wix Chat, Tidio or another AI app. Your exact duty depends on whether you are the provider or deployer and what the system does. Where a direct-interaction notice is required, RapidAct adds the visible notice through Wix Custom Code.",
     detectionNote:
       "Run the free scan first: a live browser inspects the published Wix experience, including client-rendered widgets, and records any visible AI touchpoints or disclosure wording with the source URL.",
+    installUrl: "https://wix.to/JKi80ih",
     freeInstall: [
-      "Open the RapidAct installer and choose Wix.",
-      "Copy the generated script into Settings → Custom Code → Body end.",
-      "Choose the language and notice details, then publish the site.",
+      "Select Install on Wix to open the official Wix installation flow.",
+      "Choose the Wix site where you want to add RapidAct and confirm the installation.",
+      "Choose the language and notice details, then publish the site. Manual code remains available as an alternative.",
       "Open the published page in a private window and verify the notice appears before the first AI interaction.",
     ],
     commonWidgets: ["Wix Chat (AI)", "Tidio", "Chatbase", "Custom GPT apps"],
@@ -180,6 +182,7 @@ type PlatformPageCopy = {
   confirmTitle: string;
   installTitle: (platform: PlatformGuide) => string;
   addNotice: string;
+  installOfficial: (platform: PlatformGuide) => string;
   assessment: (platform: PlatformGuide) => string;
   otherPlatforms: string;
 };
@@ -210,6 +213,7 @@ export const PLATFORM_PAGE_COPY: Record<Lang, PlatformPageCopy> = {
     confirmTitle: "Confirm the tool and its role",
     installTitle: platform => `Install the notice on ${platform.name}`,
     addNotice: "Add the AI-use notice",
+    installOfficial: platform => `Install RapidAct on ${platform.name}`,
     assessment: platform =>
       `Need to confirm which systems and duties apply? The €99 company assessment covers ${platform.name} and the other AI systems your organisation operates.`,
     otherPlatforms: "Other platforms",
@@ -224,6 +228,7 @@ export const PLATFORM_PAGE_COPY: Record<Lang, PlatformPageCopy> = {
         ? "Instala el aviso en tu web"
         : `Instala el aviso en ${platform.name}`,
     addNotice: "Añadir el aviso de uso de IA",
+    installOfficial: platform => `Instalar RapidAct en ${platform.name}`,
     assessment: platform =>
       `¿Necesitas confirmar qué sistemas y obligaciones se aplican? La evaluación de empresa de 99 € cubre ${
         platform.slug === "custom-website" ? "tu web" : platform.name
@@ -240,6 +245,7 @@ export const PLATFORM_PAGE_COPY: Record<Lang, PlatformPageCopy> = {
         ? "Hinweis auf Ihrer Website installieren"
         : `Hinweis auf ${platform.name} installieren`,
     addNotice: "KI-Nutzungshinweis hinzufügen",
+    installOfficial: platform => `RapidAct auf ${platform.name} installieren`,
     assessment: platform =>
       `Müssen Sie klären, welche Systeme und Pflichten gelten? Das Unternehmens-Assessment für 99 € deckt ${
         platform.slug === "custom-website" ? "Ihre Website" : platform.name
@@ -256,6 +262,7 @@ export const PLATFORM_PAGE_COPY: Record<Lang, PlatformPageCopy> = {
         ? "Installer la mention sur votre site"
         : `Installer la mention sur ${platform.name}`,
     addNotice: "Ajouter la mention d’utilisation de l’IA",
+    installOfficial: platform => `Installer RapidAct sur ${platform.name}`,
     assessment: platform =>
       `Besoin de confirmer les systèmes et obligations applicables ? L’évaluation d’entreprise à 99 € couvre ${
         platform.slug === "custom-website" ? "votre site" : platform.name
@@ -272,6 +279,7 @@ export const PLATFORM_PAGE_COPY: Record<Lang, PlatformPageCopy> = {
         ? "Installa l’avviso sul tuo sito"
         : `Installa l’avviso su ${platform.name}`,
     addNotice: "Aggiungi l’avviso sull’uso dell’IA",
+    installOfficial: platform => `Installa RapidAct su ${platform.name}`,
     assessment: platform =>
       `Devi confermare quali sistemi e obblighi si applicano? La valutazione aziendale da 99 € copre ${
         platform.slug === "custom-website" ? "il tuo sito" : platform.name
@@ -330,7 +338,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Descarga el ZIP del plugin, súbelo desde Plugins → Añadir plugin → Subir plugin y actívalo.",
-      wix: "Copia el script en Ajustes → Código personalizado → final del body.",
+      wix: "Usa el botón oficial de instalación de Wix para añadir RapidAct a tu web. El código manual queda como alternativa.",
       shopify:
         "Copia el script en el tema, antes de la etiqueta de cierre del body.",
       tidio: "Añade el script a la misma plantilla que carga Tidio o Lyro.",
@@ -349,6 +357,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
         "Descarga el ZIP del plugin y súbelo desde Plugins → Añadir plugin → Subir plugin.",
         "Activa el plugin y abre Ajustes → RapidAct AI Disclosure para adaptar el aviso.",
         "Guarda y comprueba la web publicada en una ventana privada.",
+      ],
+      wix: [
+        "Pulsa Instalar en Wix para abrir la instalación oficial.",
+        "Elige la web de Wix donde quieres añadir RapidAct y confirma la instalación.",
+        "Configura el idioma y los detalles del aviso, y publica la web. El código manual sigue disponible como alternativa.",
+        "Abre la web publicada en una ventana privada y comprueba que el aviso aparece antes de la primera interacción con IA.",
       ],
       botpress: [
         "Abre el instalador de avisos de RapidAct y copia el script de producción.",
@@ -418,7 +432,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Laden Sie die Plugin-ZIP herunter, öffnen Sie Plugins → Installieren → Plugin hochladen und aktivieren Sie sie.",
-      wix: "Fügen Sie das Skript unter Einstellungen → Benutzerdefinierter Code → Ende des body ein.",
+      wix: "Installieren Sie RapidAct über die offizielle Wix-Schaltfläche. Die manuelle Code-Installation bleibt als Alternative verfügbar.",
       shopify:
         "Fügen Sie das Skript im Theme vor dem schließenden body-Tag ein.",
       tidio:
@@ -438,6 +452,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
         "Laden Sie die Plugin-ZIP herunter und öffnen Sie Plugins → Installieren → Plugin hochladen.",
         "Aktivieren Sie das Plugin und passen Sie den Hinweis unter Einstellungen → RapidAct AI Disclosure an.",
         "Speichern Sie und prüfen Sie die veröffentlichte Website in einem privaten Fenster.",
+      ],
+      wix: [
+        "Wählen Sie Auf Wix installieren, um die offizielle Installation zu öffnen.",
+        "Wählen Sie die Wix-Website aus, auf der RapidAct hinzugefügt werden soll, und bestätigen Sie die Installation.",
+        "Konfigurieren Sie Sprache und Hinweisinformationen und veröffentlichen Sie die Website. Die manuelle Code-Installation bleibt als Alternative verfügbar.",
+        "Öffnen Sie die veröffentlichte Website in einem privaten Fenster und prüfen Sie, dass der Hinweis vor der ersten KI-Interaktion erscheint.",
       ],
       botpress: [
         "Öffnen Sie den RapidAct-Installer und kopieren Sie das Produktionsskript.",
@@ -506,7 +526,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Téléchargez le ZIP, ouvrez Extensions → Ajouter une extension → Téléverser une extension, puis activez-le.",
-      wix: "Collez le script dans Paramètres → Code personnalisé → fin du body.",
+      wix: "Utilisez le bouton d’installation officiel de Wix pour ajouter RapidAct. Le code manuel reste disponible comme alternative.",
       shopify:
         "Collez le script dans le thème avant la balise de fermeture du body.",
       tidio:
@@ -525,6 +545,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
         "Téléchargez le ZIP puis ouvrez Extensions → Ajouter une extension → Téléverser une extension.",
         "Activez l’extension et adaptez la mention dans Réglages → RapidAct AI Disclosure.",
         "Enregistrez et vérifiez le site publié dans une fenêtre privée.",
+      ],
+      wix: [
+        "Sélectionnez Installer sur Wix pour ouvrir l’installation officielle.",
+        "Choisissez le site Wix auquel ajouter RapidAct et confirmez l’installation.",
+        "Configurez la langue et les détails de la mention, puis publiez le site. Le code manuel reste disponible comme alternative.",
+        "Ouvrez le site publié dans une fenêtre privée et vérifiez que la mention apparaît avant la première interaction avec l’IA.",
       ],
       botpress: [
         "Ouvrez l’installateur RapidAct et copiez le script de production.",
@@ -594,7 +620,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Scarica lo ZIP, apri Plugin → Aggiungi plugin → Carica plugin e attivalo.",
-      wix: "Incolla lo script in Impostazioni → Codice personalizzato → fine del body.",
+      wix: "Usa il pulsante di installazione ufficiale di Wix per aggiungere RapidAct. Il codice manuale resta disponibile come alternativa.",
       shopify: "Incolla lo script nel tema prima del tag di chiusura del body.",
       tidio: "Aggiungi lo script allo stesso modello che carica Tidio o Lyro.",
       botpress:
@@ -611,6 +637,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
         "Scarica lo ZIP e apri Plugin → Aggiungi plugin → Carica plugin.",
         "Attiva il plugin e personalizza l’avviso in Impostazioni → RapidAct AI Disclosure.",
         "Salva e verifica il sito pubblicato in una finestra privata.",
+      ],
+      wix: [
+        "Seleziona Installa su Wix per aprire l’installazione ufficiale.",
+        "Scegli il sito Wix a cui aggiungere RapidAct e conferma l’installazione.",
+        "Configura la lingua e i dettagli dell’avviso, quindi pubblica il sito. Il codice manuale resta disponibile come alternativa.",
+        "Apri il sito pubblicato in una finestra privata e verifica che l’avviso appaia prima della prima interazione con l’IA.",
       ],
       botpress: [
         "Apri il programma di installazione RapidAct e copia lo script di produzione.",

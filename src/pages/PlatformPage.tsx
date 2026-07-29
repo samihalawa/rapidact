@@ -8,8 +8,15 @@ import {
   getPlatforms,
   PLATFORM_PAGE_COPY,
 } from "@/data/platforms";
-import { CheckCircle2, ScanSearch, ListChecks, Blocks } from "lucide-react";
+import {
+  CheckCircle2,
+  ScanSearch,
+  ListChecks,
+  Blocks,
+  ExternalLink,
+} from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { track } from "@/lib/analytics";
 
 export default function PlatformPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -96,12 +103,31 @@ export default function PlatformPage() {
               </li>
             ))}
           </ol>
-          <Link
-            to={path("/article-50#install")}
-            className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
-          >
-            {copy.addNotice}
-          </Link>
+          {guide.installUrl ? (
+            <a
+              href={guide.installUrl}
+              target="_blank"
+              rel="noopener"
+              onClick={() =>
+                track("badge_installer_marketplace_clicked", {
+                  installer: guide.slug,
+                  marketplace: guide.slug,
+                  source: "platform_guide",
+                })
+              }
+              className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
+            >
+              {copy.installOfficial(guide)}
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
+          ) : (
+            <Link
+              to={path("/article-50#install")}
+              className="mt-6 inline-flex min-h-12 items-center justify-center rounded bg-[#16181d] px-6 text-sm font-bold text-white transition hover:bg-[#2b2f38]"
+            >
+              {copy.addNotice}
+            </Link>
+          )}
           <p className="mt-4 flex items-start gap-2 text-sm text-[#5c6370]">
             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0e9f6e]" />
             {copy.assessment(guide)}

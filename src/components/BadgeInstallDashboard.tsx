@@ -99,6 +99,7 @@ const displayIcons: Record<
 };
 
 const displayOrder: BadgeDisplay[] = ["bubble", "standard", "popup", "iframe"];
+const WIX_INSTALL_URL = "https://wix.to/JKi80ih";
 
 function HighlightedCode({ code }: { code: string }) {
   const tokens = code.split(
@@ -220,6 +221,13 @@ export default function BadgeInstallDashboard({
       installer: "wordpress",
       package_format: "zip",
       package_version: "1.0.0",
+    });
+  };
+
+  const trackWixInstall = () => {
+    track("badge_installer_marketplace_clicked", {
+      installer: "wix",
+      marketplace: "wix",
     });
   };
 
@@ -378,6 +386,34 @@ export default function BadgeInstallDashboard({
                         ))}
                       </ol>
                     </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {selected.id === "wix" ? (
+                <div className="border-b border-[#b9c9df] bg-[#eaf3ff] px-5 py-5 sm:px-7">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="eyebrow text-[#174a9b]">
+                        {copy.recommended}
+                      </p>
+                      <h3 className="mt-1 text-xl font-bold text-[#16181d]">
+                        {copy.wixInstallTitle}
+                      </h3>
+                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#4e5968]">
+                        {copy.wixInstallBody}
+                      </p>
+                    </div>
+                    <a
+                      href={WIX_INSTALL_URL}
+                      target="_blank"
+                      rel="noopener"
+                      onClick={trackWixInstall}
+                      className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 bg-[#0b2a5b] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#174a9b] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
+                    >
+                      {copy.installWix}
+                      <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                    </a>
                   </div>
                 </div>
               ) : null}

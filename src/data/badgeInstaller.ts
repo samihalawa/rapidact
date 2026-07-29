@@ -15,6 +15,9 @@ export type InstallerCopy = {
   downloadWordpress: string;
   wordpressStepsTitle: string;
   wordpressSteps: [string, string, string];
+  wixInstallTitle: string;
+  wixInstallBody: string;
+  installWix: string;
   manualOption: string;
   manualFallback: string;
   manualFallbackBody: string;
@@ -55,6 +58,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Choose the downloaded ZIP, then select Install Now and Activate.",
       "Open Settings → RapidAct AI Disclosure, tailor the notice and save.",
     ],
+    wixInstallTitle: "Install RapidAct directly on Wix",
+    wixInstallBody:
+      "Open the official Wix installation flow. Wix will guide you through adding RapidAct to your site—no code required.",
+    installWix: "Install on Wix",
     manualOption: "Or install with code",
     manualFallback: "Installation",
     manualFallbackBody:
@@ -126,6 +133,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Elige el ZIP descargado y pulsa Instalar ahora y Activar.",
       "Abre Ajustes → RapidAct AI Disclosure, adapta el aviso y guarda.",
     ],
+    wixInstallTitle: "Instala RapidAct directamente en Wix",
+    wixInstallBody:
+      "Abre la instalación oficial de Wix. Wix te guiará para añadir RapidAct a tu web sin utilizar código.",
+    installWix: "Instalar en Wix",
     manualOption: "O instalar con código",
     manualFallback: "Instalación",
     manualFallbackBody:
@@ -197,6 +208,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Die ZIP-Datei auswählen, Jetzt installieren und Aktivieren wählen.",
       "Einstellungen → RapidAct AI Disclosure öffnen, Hinweis anpassen und speichern.",
     ],
+    wixInstallTitle: "RapidAct direkt auf Wix installieren",
+    wixInstallBody:
+      "Öffnen Sie die offizielle Wix-Installation. Wix führt Sie ohne Code durch das Hinzufügen von RapidAct zu Ihrer Website.",
+    installWix: "Auf Wix installieren",
     manualOption: "Oder mit Code installieren",
     manualFallback: "Installation",
     manualFallbackBody:
@@ -268,6 +283,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Choisissez le ZIP, puis Installer maintenant et Activer.",
       "Ouvrez Réglages → RapidAct AI Disclosure, adaptez l’avis et enregistrez.",
     ],
+    wixInstallTitle: "Installer RapidAct directement sur Wix",
+    wixInstallBody:
+      "Ouvrez le parcours d’installation officiel de Wix. Wix vous guide pour ajouter RapidAct à votre site sans code.",
+    installWix: "Installer sur Wix",
     manualOption: "Ou installer avec du code",
     manualFallback: "Installation",
     manualFallbackBody:
@@ -339,6 +358,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Scegli lo ZIP, quindi Installa ora e Attiva.",
       "Apri Impostazioni → RapidAct AI Disclosure, personalizza l’avviso e salva.",
     ],
+    wixInstallTitle: "Installa RapidAct direttamente su Wix",
+    wixInstallBody:
+      "Apri il percorso di installazione ufficiale di Wix. Wix ti guiderà nell’aggiunta di RapidAct al sito senza codice.",
+    installWix: "Installa su Wix",
     manualOption: "Oppure installa con il codice",
     manualFallback: "Installazione",
     manualFallbackBody:
