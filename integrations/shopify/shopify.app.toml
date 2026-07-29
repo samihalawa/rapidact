@@ -2,7 +2,7 @@
 
 client_id = "05a1f1697afe5b4c0c8fefe2acd297e2"
 name = "RapidAct"
-application_url = "https://shopify.rapidact.eu"
+application_url = "https://connect.rapidact.eu"
 embedded = true
 
 [access_scopes]
@@ -35,4 +35,4 @@ api_version = "2026-07"
   compliance_topics = [ "shop/redact" ]
 
 [auth]
-redirect_urls = [ "https://shopify.rapidact.eu/auth/callback" ]
+redirect_urls = [ "https://connect.rapidact.eu/auth/callback" ]

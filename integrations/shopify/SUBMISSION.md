@@ -1,7 +1,7 @@
 # Shopify App Store submission
 
 The production app is linked to the RapidAct public Shopify app, hosted at
-`https://shopify.rapidact.eu`, released as version `1.0.0` and installed on the
+`https://connect.rapidact.eu`, released as version `1.0.0` and installed on the
 RapidAct development store. Public distribution is selected. Shopify requires
 the Partner account's one-time App Store registration and business-account
 attestation before the review form becomes available; do not invent or commit
