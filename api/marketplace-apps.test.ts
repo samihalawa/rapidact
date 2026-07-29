@@ -35,7 +35,7 @@ describe("RapidAct marketplace apps", () => {
       read("src/lib/badgeInstaller.ts"),
     ].join("\n");
     expect(source).toContain("/downloads/rapidact-ai-disclosure.zip");
-    expect(source).toContain("badge_installer_download");
+    expect(source).toContain("badge_installer_download_clicked");
     expect(source).toContain("Google Tag Manager");
     expect(source).toContain("https://rapidact.eu/rapidact-badge.js");
     expect(source).toContain("manualFallback");

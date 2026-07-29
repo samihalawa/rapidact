@@ -216,7 +216,7 @@ export default function BadgeInstallDashboard({
   };
 
   const trackWordpressDownload = () => {
-    track("badge_installer_download", {
+    track("badge_installer_download_clicked", {
       installer: "wordpress",
       package_format: "zip",
       package_version: "1.0.0",
@@ -351,7 +351,7 @@ export default function BadgeInstallDashboard({
                         {copy.wordpressDownloadBody}
                       </p>
                       <a
-                        href="/downloads/rapidact-ai-disclosure.zip"
+                        href="/downloads/rapidact-ai-disclosure.zip?v=1.0.0"
                         download
                         onClick={trackWordpressDownload}
                         className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 bg-[#0b2a5b] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#174a9b] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"

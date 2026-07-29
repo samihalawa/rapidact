@@ -61,7 +61,7 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Mistake: the GTM GA4 product-event tag initially had no parameter rows; a subsequent direct `gtag("event")` workaround left commands in `dataLayer` without producing post-load custom-event requests.
 - Do: keep one GTM loader and Google configuration tag, push each custom event once as a named data-layer object, reset every mapped field before applying the current payload, map every commercial parameter explicitly in the generic GA4 event tag, and use an absolute same-origin `https://…/metrics` transport.
 - Don't: combine direct custom-event commands with the active GTM product-event tag, allow top-level data-layer values to leak into later events, add another Google loader, pass relative `/metrics` (Google interprets it as host `https://metrics`), or infer parameter receipt from an event name.
-- Evidence: authenticated GTM read and live CDP on 2026-07-29; independent reviewer found mapped version-2 data-layer variables could inherit an earlier €99 payload; `src/lib/analytics.ts`.
+- Evidence: authenticated GTM read and live CDP on 2026-07-29; a fresh production request contained `en=badge_installer_platform_selected`, and a retained scanner lead contained `en=scanner_lead_captured`, `_c=1`, `stored=true`, and `crm_status=synced`; `src/lib/analytics.ts`.
 - Trigger terms: GA4, GTM, parameter, event name, value, currency, checkout ID, lead source, duplicate.
 - Verify before reuse: keep apex and `www` DNS proxied, GET the gateway config, publish the mapped GTM tag, capture a live payment→lead sequence, prove the lead request has no stale payment fields, and verify PostHog receives the same events once.
 
@@ -116,7 +116,7 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Mistake: the parser rejected a successful Anchor result when Gemini returned `disclosure_text: null`; editing the input could also leave the previous site’s result visible, and the numeric readiness score looked like a compliance verdict.
 - Do: normalize nullable optional evidence at the provider boundary, clear all result/error/copy state when the URL changes, and present one observed-touchpoint count followed by assessment and implementation steps.
 - Don't: expose internal Anchor codes, keep a result after its input changes, or describe a one-page observation as a readiness score out of 100.
-- Evidence: direct Anchor workflow `78007` returned the requested `deepswapai.io` page with `disclosure_text: null`; the production defect showed `deepswapai.io` in the field while the result still named `oulang.ai`.
+- Evidence: direct Anchor workflow `78007` returned `disclosure_text: null`; a fresh production scan on 2026-07-29 inspected exactly `https://deepswapai.io/`, returned title “Deepswapai.io - Free Unlimited,” and identified one Face Swap touchpoint.
 - Trigger terms: anchor-invalid-result, deepswapai.io, stale result, wrong URL, score 100, too many sections, scanner conversion.
 - Verify before reuse: complete a live `deepswapai.io` scan, match the exact inspected URL/title, change the input and confirm the result disappears, inspect the three numbered sections plus PDF in EN/ES/DE/FR/IT at phone and desktop widths.
 

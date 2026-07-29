@@ -3,7 +3,7 @@
 ## Link and test
 
 1. Authenticate with `npx wix login`.
-2. Create the RapidAct app in Wix Dev Center or scaffold the official Mixpanel
+2. Create the RapidAct app in Wix Dev Center or scaffold the official Wix
    embedded-script template, then link this project so the CLI writes the real
    `wix.config.json`.
 3. Run `npm run release` once. Wix must register the embedded-script extension
