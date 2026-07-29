@@ -1,8 +1,9 @@
 # WordPress.org submission
 
-RapidAct AI Disclosure is distributed only through the WordPress Plugin
-Directory. The public plugin bundles its JavaScript and image; the RapidAct
-manifest is informational and never supplies executable code.
+RapidAct AI Disclosure is submitted to the WordPress Plugin Directory and is
+also available as the same downloadable ZIP from RapidAct while directory
+review is in progress. The plugin bundles its JavaScript and image and never
+downloads executable code.
 
 ## Verify
 
@@ -26,4 +27,6 @@ Then install the plugin on a disposable WordPress site, save a Badge ID in
 5. Tag `1.0.0` in SVN. Future releases are uploaded through the same SVN
    repository and reach sites through WordPress's native updater.
 
-Do not publish a separate ZIP download or configure a custom update server.
+The direct ZIP is generated from this exact source with
+`npm run package:wordpress`. WordPress.org remains the update channel; do not
+configure a custom update server.

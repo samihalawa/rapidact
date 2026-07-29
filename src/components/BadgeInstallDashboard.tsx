@@ -7,6 +7,7 @@ import {
   Check,
   Code2,
   Copy,
+  Download,
   ExternalLink,
   Frame,
   LayoutPanelTop,
@@ -35,7 +36,6 @@ import type { GuideCopy } from "@/data/localizedGuide";
 type PlatformOption = {
   id: BadgePlatform;
   name: string;
-  label: string;
   icon: ComponentType<{
     className?: string;
     "aria-hidden"?: boolean | "true" | "false";
@@ -46,49 +46,41 @@ const platforms: PlatformOption[] = [
   {
     id: "wordpress",
     name: "WordPress",
-    label: "Custom HTML",
     icon: PanelsTopLeft,
   },
   {
     id: "shopify",
     name: "Shopify",
-    label: "Theme code",
     icon: ShoppingBag,
   },
   {
     id: "wix",
     name: "Wix",
-    label: "Custom code",
     icon: Blocks,
   },
   {
     id: "html",
     name: "HTML & JavaScript",
-    label: "One script",
     icon: Code2,
   },
   {
     id: "react",
     name: "React",
-    label: "Component",
     icon: Braces,
   },
   {
     id: "nextjs",
     name: "Next.js",
-    label: "Client component",
     icon: AppWindow,
   },
   {
     id: "gtm",
     name: "Google Tag Manager",
-    label: "Custom HTML tag",
     icon: Tag,
   },
   {
     id: "webflow",
     name: "Webflow",
-    label: "Custom code",
     icon: LayoutPanelTop,
   },
 ];
@@ -223,6 +215,14 @@ export default function BadgeInstallDashboard({
     window.setTimeout(() => setCopyStatus("idle"), 2500);
   };
 
+  const trackWordpressDownload = () => {
+    track("badge_installer_download", {
+      installer: "wordpress",
+      package_format: "zip",
+      package_version: "1.0.0",
+    });
+  };
+
   return (
     <>
       <section
@@ -292,14 +292,16 @@ export default function BadgeInstallDashboard({
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <span className="mono text-[9px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
-                    {copy.direct}
+                    {platform.id === "wordpress"
+                      ? copy.pluginAndCode
+                      : copy.direct}
                   </span>
                 </div>
                 <p className="mt-4 text-[15px] leading-tight font-bold text-[#16181d] sm:text-base">
                   {platform.name}
                 </p>
                 <p className="mt-1 text-[11px] text-[#6b7280]">
-                  {platform.label}
+                  {copy.platformLabels[platform.id]}
                 </p>
               </button>
             );
@@ -323,7 +325,9 @@ export default function BadgeInstallDashboard({
             <>
               <DialogHeader className="border-b border-[#d8d8d2] px-5 py-5 pr-16 text-left sm:px-7">
                 <p className="mono text-[10px] font-bold tracking-[0.1em] text-[#174a9b] uppercase">
-                  {copy.direct}
+                  {selected.id === "wordpress"
+                    ? copy.pluginAndCode
+                    : copy.direct}
                 </p>
                 <DialogTitle className="text-2xl leading-tight font-bold tracking-tight text-[#16181d] sm:text-3xl">
                   {copy.installOn} {selected.name}
@@ -332,6 +336,51 @@ export default function BadgeInstallDashboard({
                   {copy.chooseDisplay}
                 </DialogDescription>
               </DialogHeader>
+
+              {selected.id === "wordpress" ? (
+                <div className="border-b border-[#b9c9df] bg-[#eaf3ff] px-5 py-5 sm:px-7">
+                  <div className="grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+                    <div>
+                      <p className="eyebrow text-[#174a9b]">
+                        {copy.recommended}
+                      </p>
+                      <h3 className="mt-1 text-xl font-bold text-[#16181d]">
+                        {copy.wordpressDownloadTitle}
+                      </h3>
+                      <p className="mt-2 max-w-xl text-sm leading-relaxed text-[#4e5968]">
+                        {copy.wordpressDownloadBody}
+                      </p>
+                      <a
+                        href="/downloads/rapidact-ai-disclosure.zip"
+                        download
+                        onClick={trackWordpressDownload}
+                        className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 bg-[#0b2a5b] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#174a9b] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
+                      >
+                        <Download className="h-4 w-4" aria-hidden="true" />
+                        {copy.downloadWordpress}
+                      </a>
+                    </div>
+                    <div className="border border-[#b9c9df] bg-white p-4 sm:p-5">
+                      <p className="text-sm font-bold text-[#16181d]">
+                        {copy.wordpressStepsTitle}
+                      </p>
+                      <ol className="mt-3 space-y-3">
+                        {copy.wordpressSteps.map((step, index) => (
+                          <li
+                            key={step}
+                            className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 text-sm leading-relaxed text-[#4e5968]"
+                          >
+                            <span className="mono grid h-7 w-7 place-items-center bg-[#0b2a5b] text-[10px] font-bold text-white">
+                              {index + 1}
+                            </span>
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
 
               <div className="border-b border-[#d8d8d2] bg-[#f7f7f5] px-4 py-4 sm:px-7">
                 <div
@@ -390,7 +439,9 @@ export default function BadgeInstallDashboard({
                 <div className="min-w-0 p-5 sm:p-7">
                   <div>
                     <p className="eyebrow text-[#174a9b]">
-                      {copy.manualFallback}
+                      {selected.id === "wordpress"
+                        ? copy.manualOption
+                        : copy.manualFallback}
                     </p>
                     <h3 className="mt-1 text-lg font-bold text-[#16181d]">
                       {copy.location}: {copy.locations[selected.id]}

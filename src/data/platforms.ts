@@ -37,8 +37,9 @@ export const PLATFORMS: PlatformGuide[] = [
       "Run the free website scan first. A live browser performs a fast inspection of the submitted rendered page for functional AI touchpoints, disclosure wording and exact source evidence. Other pages, private plugins, back-office AI and contractual roles remain outside the free scan.",
     freeInstall: [
       "Open the RapidAct installer and choose WordPress.",
-      "Copy the generated script into a Custom HTML block or your shared footer.",
-      "Choose the language, message, position and colour.",
+      "Download the WordPress plugin ZIP.",
+      "In WordPress, open Plugins → Add New Plugin → Upload Plugin, then install and activate the ZIP.",
+      "Open Settings → RapidAct AI Disclosure and choose the language, message, position and colour.",
       "Open the live page in a private window and verify the notice is visible before a visitor starts the AI interaction.",
     ],
     commonWidgets: [
@@ -328,7 +329,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Abre el instalador de RapidAct y elige la opción para cualquier web.",
     placement: {
       wordpress:
-        "Copia el script en un bloque HTML personalizado o en el pie común.",
+        "Descarga el ZIP del plugin, súbelo desde Plugins → Añadir plugin → Subir plugin y actívalo.",
       wix: "Copia el script en Ajustes → Código personalizado → final del body.",
       shopify:
         "Copia el script en el tema, antes de la etiqueta de cierre del body.",
@@ -343,6 +344,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     verify:
       "Publica y abre la página en una ventana privada para comprobar que el aviso aparece antes de la interacción con IA.",
     specialInstall: {
+      wordpress: [
+        "Abre el instalador de RapidAct y elige WordPress.",
+        "Descarga el ZIP del plugin y súbelo desde Plugins → Añadir plugin → Subir plugin.",
+        "Activa el plugin y abre Ajustes → RapidAct AI Disclosure para adaptar el aviso.",
+        "Guarda y comprueba la web publicada en una ventana privada.",
+      ],
       botpress: [
         "Abre el instalador de avisos de RapidAct y copia el script de producción.",
         "Añádelo a todas las páginas donde se carga Botpress Webchat y personaliza el título y el mensaje.",
@@ -410,7 +417,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Öffnen Sie den RapidAct-Installer und wählen Sie die Option für jede Website.",
     placement: {
       wordpress:
-        "Fügen Sie das Skript in einen Custom-HTML-Block oder den gemeinsamen Footer ein.",
+        "Laden Sie die Plugin-ZIP herunter, öffnen Sie Plugins → Installieren → Plugin hochladen und aktivieren Sie sie.",
       wix: "Fügen Sie das Skript unter Einstellungen → Benutzerdefinierter Code → Ende des body ein.",
       shopify:
         "Fügen Sie das Skript im Theme vor dem schließenden body-Tag ein.",
@@ -426,6 +433,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     verify:
       "Veröffentlichen Sie die Seite und prüfen Sie in einem privaten Fenster, dass der Hinweis vor der KI-Interaktion erscheint.",
     specialInstall: {
+      wordpress: [
+        "Öffnen Sie den RapidAct-Installer und wählen Sie WordPress.",
+        "Laden Sie die Plugin-ZIP herunter und öffnen Sie Plugins → Installieren → Plugin hochladen.",
+        "Aktivieren Sie das Plugin und passen Sie den Hinweis unter Einstellungen → RapidAct AI Disclosure an.",
+        "Speichern Sie und prüfen Sie die veröffentlichte Website in einem privaten Fenster.",
+      ],
       botpress: [
         "Öffnen Sie den RapidAct-Installer und kopieren Sie das Produktionsskript.",
         "Fügen Sie es auf jeder Seite mit Botpress Webchat ein und passen Sie Titel und Text an.",
@@ -492,7 +505,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Ouvrez l’installateur RapidAct et choisissez l’option pour tout site web.",
     placement: {
       wordpress:
-        "Collez le script dans un bloc HTML personnalisé ou dans le pied de page commun.",
+        "Téléchargez le ZIP, ouvrez Extensions → Ajouter une extension → Téléverser une extension, puis activez-le.",
       wix: "Collez le script dans Paramètres → Code personnalisé → fin du body.",
       shopify:
         "Collez le script dans le thème avant la balise de fermeture du body.",
@@ -507,6 +520,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     verify:
       "Publiez puis ouvrez la page dans une fenêtre privée pour vérifier que la mention apparaît avant l’interaction avec l’IA.",
     specialInstall: {
+      wordpress: [
+        "Ouvrez l’installateur RapidAct et choisissez WordPress.",
+        "Téléchargez le ZIP puis ouvrez Extensions → Ajouter une extension → Téléverser une extension.",
+        "Activez l’extension et adaptez la mention dans Réglages → RapidAct AI Disclosure.",
+        "Enregistrez et vérifiez le site publié dans une fenêtre privée.",
+      ],
       botpress: [
         "Ouvrez l’installateur RapidAct et copiez le script de production.",
         "Ajoutez-le à chaque page qui charge Botpress Webchat, puis adaptez le titre et le message.",
@@ -574,7 +593,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Apri il programma di installazione RapidAct e scegli l’opzione per qualsiasi sito.",
     placement: {
       wordpress:
-        "Incolla lo script in un blocco HTML personalizzato o nel footer condiviso.",
+        "Scarica lo ZIP, apri Plugin → Aggiungi plugin → Carica plugin e attivalo.",
       wix: "Incolla lo script in Impostazioni → Codice personalizzato → fine del body.",
       shopify: "Incolla lo script nel tema prima del tag di chiusura del body.",
       tidio: "Aggiungi lo script allo stesso modello che carica Tidio o Lyro.",
@@ -587,6 +606,12 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     verify:
       "Pubblica e apri la pagina in una finestra privata per verificare che l’avviso appaia prima dell’interazione con l’IA.",
     specialInstall: {
+      wordpress: [
+        "Apri il programma di installazione RapidAct e scegli WordPress.",
+        "Scarica lo ZIP e apri Plugin → Aggiungi plugin → Carica plugin.",
+        "Attiva il plugin e personalizza l’avviso in Impostazioni → RapidAct AI Disclosure.",
+        "Salva e verifica il sito pubblicato in una finestra privata.",
+      ],
       botpress: [
         "Apri il programma di installazione RapidAct e copia lo script di produzione.",
         "Aggiungilo a ogni pagina che carica Botpress Webchat e personalizza titolo e messaggio.",

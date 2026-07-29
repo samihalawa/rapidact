@@ -1,0 +1,35 @@
+name: WordPress Plugin Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "integrations/wordpress/rapidact-ai-disclosure/**"
+      - "public/downloads/rapidact-ai-disclosure.zip"
+      - "scripts/package-wordpress.mjs"
+      - "scripts/verify-marketplace.mjs"
+      - ".github/workflows/wordpress-plugin-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plugin-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+
+      - name: Verify PHP syntax
+        run: php -l integrations/wordpress/rapidact-ai-disclosure/rapidact-ai-disclosure.php
+
+      - name: Run WordPress Plugin Check
+        uses: WordPress/plugin-check-action@v1.1.6
+        with:
+          build-dir: integrations/wordpress/rapidact-ai-disclosure

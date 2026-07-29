@@ -21,7 +21,6 @@ The plugin stays small:
 * a locally bundled disclosure script and brand image
 * no custom database tables, visitor tracking, cookies, or remote executable code
 * an optional Badge ID field
-* an optional, administrator-initiated version-information check
 
 The public notice runs entirely from files included in the plugin. WordPress.org
 delivers plugin updates through the normal WordPress update screen.
@@ -40,17 +39,10 @@ delivers plugin updates through the normal WordPress update screen.
 
 No. The JavaScript and brand image are bundled in the plugin.
 
-= What does the version check send? =
-
-Only an administrator can trigger it. WordPress requests a public JSON manifest
-from rapidact.eu and compares version numbers. It never downloads or executes
-code; WordPress.org remains the plugin update channel.
-
 == Privacy ==
 
 The public notice does not contact RapidAct, set cookies, use local storage, or
-track visitors. The optional administrator-initiated version check requests the
-public manifest at https://rapidact.eu/badge-manifest.json.
+track visitors.
 
 == Changelog ==
 

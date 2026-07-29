@@ -26,7 +26,7 @@ describe("RapidAct marketplace apps", () => {
     expect(JSON.stringify(manifest)).not.toContain("pending");
   });
 
-  it("keeps direct install as a code fallback without obsolete downloads", () => {
+  it("offers the WordPress package and keeps direct code alternatives", () => {
     const source = [
       read("src/pages/Guide.tsx"),
       read("src/pages/PlatformPage.tsx"),
@@ -34,8 +34,8 @@ describe("RapidAct marketplace apps", () => {
       read("src/components/BadgeInstallDashboard.tsx"),
       read("src/lib/badgeInstaller.ts"),
     ].join("\n");
-    expect(source).not.toContain("/downloads/rapidact-");
-    expect(source).not.toContain("platform_installer_download");
+    expect(source).toContain("/downloads/rapidact-ai-disclosure.zip");
+    expect(source).toContain("badge_installer_download");
     expect(source).toContain("Google Tag Manager");
     expect(source).toContain("https://rapidact.eu/rapidact-badge.js");
     expect(source).toContain("manualFallback");

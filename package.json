@@ -12,6 +12,7 @@
     "check": "tsc -b",
     "format": "prettier --write .",
     "test": "vitest run",
+    "package:wordpress": "node scripts/package-wordpress.mjs",
     "verify:wordpress": "node scripts/verify-marketplace.mjs wordpress",
     "verify:shopify": "npm --prefix integrations/shopify run verify && node scripts/verify-marketplace.mjs shopify",
     "verify:wix": "npm --prefix integrations/wix run verify && node scripts/verify-marketplace.mjs wix",

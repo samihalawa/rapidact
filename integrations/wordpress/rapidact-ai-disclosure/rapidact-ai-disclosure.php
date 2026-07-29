@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 const RAPIDACT_AI_DISCLOSURE_VERSION = '1.0.0';
 const RAPIDACT_AI_DISCLOSURE_OPTION  = 'rapidact_ai_disclosure';
 const RAPIDACT_AI_DISCLOSURE_HANDLE  = 'rapidact-ai-disclosure';
-const RAPIDACT_AI_DISCLOSURE_MANIFEST = 'https://rapidact.eu/badge-manifest.json';
 
 /**
  * Return the complete settings shape.
@@ -129,46 +128,6 @@ function rapidact_ai_disclosure_text_input( $name, $options, $placeholder = '', 
 }
 
 /**
- * Read the informational manifest only when the administrator requests it.
- *
- * @return string
- */
-function rapidact_ai_disclosure_version_status() {
-	if ( ! isset( $_GET['rapidact_check_updates'] ) ) {
-		return '';
-	}
-
-	check_admin_referer( 'rapidact_check_updates' );
-	$response = wp_safe_remote_get(
-		RAPIDACT_AI_DISCLOSURE_MANIFEST,
-		array( 'timeout' => 5 )
-	);
-
-	if ( is_wp_error( $response ) ) {
-		return __( 'Version information is temporarily unavailable.', 'rapidact-ai-disclosure' );
-	}
-
-	$manifest = json_decode( wp_remote_retrieve_body( $response ), true );
-	$latest   = is_array( $manifest ) && isset( $manifest['platforms']['wordpress']['version'] )
-		? sanitize_text_field( $manifest['platforms']['wordpress']['version'] )
-		: '';
-
-	if ( ! $latest ) {
-		return __( 'The version response was not recognised.', 'rapidact-ai-disclosure' );
-	}
-
-	if ( version_compare( RAPIDACT_AI_DISCLOSURE_VERSION, $latest, '<' ) ) {
-		return sprintf(
-			/* translators: %s is the latest plugin version. */
-			__( 'Version %s is available through WordPress.org updates.', 'rapidact-ai-disclosure' ),
-			$latest
-		);
-	}
-
-	return __( 'You have the current WordPress.org version.', 'rapidact-ai-disclosure' );
-}
-
-/**
  * Render the compact native settings form.
  */
 function rapidact_ai_disclosure_render_settings_page() {
@@ -177,14 +136,10 @@ function rapidact_ai_disclosure_render_settings_page() {
 	}
 
 	$options = wp_parse_args( get_option( RAPIDACT_AI_DISCLOSURE_OPTION, array() ), rapidact_ai_disclosure_defaults() );
-	$status  = rapidact_ai_disclosure_version_status();
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'RapidAct AI Disclosure', 'rapidact-ai-disclosure' ); ?></h1>
 		<p><?php esc_html_e( 'Publish a clear AI-use notice using the copy bundled with this plugin.', 'rapidact-ai-disclosure' ); ?></p>
-		<?php if ( $status ) : ?>
-			<div class="notice notice-info inline"><p><?php echo esc_html( $status ); ?></p></div>
-		<?php endif; ?>
 		<form action="options.php" method="post">
 			<?php settings_fields( 'rapidact_ai_disclosure' ); ?>
 			<table class="form-table" role="presentation">
@@ -230,9 +185,8 @@ function rapidact_ai_disclosure_render_settings_page() {
 				<tr><th scope="row"><?php esc_html_e( 'RapidAct credit', 'rapidact-ai-disclosure' ); ?></th><td><label><input type="checkbox" name="<?php echo esc_attr( RAPIDACT_AI_DISCLOSURE_OPTION ); ?>[show_credit]" value="1" <?php checked( $options['show_credit'], '1' ); ?>> <?php esc_html_e( 'Show the optional RapidAct installation link', 'rapidact-ai-disclosure' ); ?></label></td></tr>
 			</table>
 			<?php submit_button(); ?>
-		</form>
-		<p><a href="<?php echo esc_url( wp_nonce_url( admin_url( 'options-general.php?page=rapidact-ai-disclosure&rapidact_check_updates=1' ), 'rapidact_check_updates' ) ); ?>"><?php esc_html_e( 'Check published version information', 'rapidact-ai-disclosure' ); ?></a></p>
-	</div>
+			</form>
+		</div>
 	<?php
 }
 
