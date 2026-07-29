@@ -24,14 +24,24 @@ function expectLocalAsset(path) {
 }
 
 expect(
-  manifest.platforms?.[platform]?.version === "1.0.0",
-  `${platform}: manifest version is missing`
+  manifest.schemaVersion === 1 &&
+    typeof manifest.badgeVersion === "string" &&
+    /^\d+\.\d+\.\d+$/.test(manifest.badgeVersion),
+  "public badge manifest metadata is invalid"
+);
+expect(
+  !Object.hasOwn(manifest, "platforms"),
+  "public badge manifest must not expose unverified marketplace status"
 );
 
 if (platform === "wordpress") {
   const plugin =
     "integrations/wordpress/rapidact-ai-disclosure/rapidact-ai-disclosure.php";
   const php = read(plugin);
+  expect(
+    php.includes(` * Version: ${manifest.badgeVersion}`),
+    "WordPress: plugin version does not match the bundled badge version"
+  );
   expectLocalAsset(
     "integrations/wordpress/rapidact-ai-disclosure/assets/rapidact-badge.js"
   );
@@ -61,10 +71,15 @@ if (platform === "wordpress") {
 }
 
 if (platform === "shopify") {
+  const packageJson = JSON.parse(read("integrations/shopify/package.json"));
   const liquid = read(
     "integrations/shopify/extensions/rapidact-badge/blocks/rapidact-badge.liquid"
   );
   const config = read("integrations/shopify/shopify.app.toml");
+  expect(
+    packageJson.version === manifest.badgeVersion,
+    "Shopify: app version does not match the bundled badge version"
+  );
   expectLocalAsset(
     "integrations/shopify/extensions/rapidact-badge/assets/rapidact-badge.js"
   );
@@ -88,9 +103,14 @@ if (platform === "shopify") {
 }
 
 if (platform === "wix") {
+  const packageJson = JSON.parse(read("integrations/wix/package.json"));
   const hook = read("integrations/wix/src/dashboard/hooks/wix-embeds.ts");
   const html = read(
     "integrations/wix/src/site/embedded-scripts/rapidact/embedded.html"
+  );
+  expect(
+    packageJson.version === manifest.badgeVersion,
+    "Wix: app version does not match the bundled badge version"
   );
   expectLocalAsset(
     "integrations/wix/src/site/embedded-scripts/rapidact/assets/rapidact-badge.js"
@@ -104,5 +124,5 @@ if (platform === "wix") {
 }
 
 process.stdout.write(
-  `✓ ${platform}: bundled badge, customer configuration, and native-version manifest metadata verified\n`
+  `✓ ${platform}: bundled badge, customer configuration, local package version, and public badge metadata verified\n`
 );
