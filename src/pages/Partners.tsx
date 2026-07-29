@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CONVERT } from "@/config";
 import { PARTNERS_COPY, type PartnerProfileId } from "@/data/localizedPartners";
-import { track } from "@/lib/analytics";
+import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 import { trpc } from "@/providers/trpc";
 
@@ -78,7 +78,7 @@ export default function Partners() {
         });
         return;
       }
-      track("partner_application_submitted", {
+      track(ANALYTICS_EVENTS.partnerApplicationSubmitted, {
         lead_type: "partner",
         lead_source: "partner_intake",
         partner_type: profile,

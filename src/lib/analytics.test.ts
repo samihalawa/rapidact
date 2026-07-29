@@ -39,6 +39,7 @@ describe("canonical commercial events", () => {
     expect(ANALYTICS_EVENTS).toEqual({
       scannerLeadCaptured: "scanner_lead_captured",
       reportSubmitted: "report_submitted",
+      partnerApplicationSubmitted: "partner_application_submitted",
       paymentInitiated: "payment_initiated",
       purchase: "purchase",
     });

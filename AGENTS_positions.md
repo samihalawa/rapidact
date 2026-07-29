@@ -24,7 +24,7 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Status: CURRENT
 - Project/root: `rapidact`; scanner gate, assessment intake, partner intake and bunq checkout analytics.
 - Mistake: fulfilled lead mutations were counted as conversions even when neither DB nor Close retained the lead; partner intake could emit success and failure together, and repeated checkout clicks could multiply €99 initiation value.
-- Do: emit lead conversions only when DB storage or the required CRM path succeeds, make success/failure mutually exclusive, and dedupe `payment_initiated` per non-PII checkout ID within the browser session.
+- Do: emit canonical scanner, assessment and partner lead conversions only when DB storage or the required CRM path succeeds, make success/failure mutually exclusive, and dedupe `payment_initiated` per non-PII checkout ID within the browser session.
 - Don't: treat mutation fulfillment as capture proof, count checkout initiation as revenue, or emit `purchase` without provider confirmation and a stable transaction ID.
 - Evidence: independent analytics critique on 2026-07-29; `api/routers/leads.ts`, `api/routers/report.ts`, `src/pages/{Scanner,Report,Partners}.tsx`.
 - Trigger terms: key event, lead, retained, stored, CRM, duplicate, bunq, checkout, purchase, value.

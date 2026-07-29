@@ -12,6 +12,7 @@ export const ANALYTICS = {
 export const ANALYTICS_EVENTS = {
   scannerLeadCaptured: "scanner_lead_captured",
   reportSubmitted: "report_submitted",
+  partnerApplicationSubmitted: "partner_application_submitted",
   paymentInitiated: "payment_initiated",
   purchase: "purchase",
 } as const;
