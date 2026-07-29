@@ -1,5 +1,6 @@
 # INDEX
 
+Marketplace review locks | a submitted Wix app rejects new CLI releases and GitHub-hosted Plugin Check cannot start while Actions billing is locked | read the live store status first and run the same WordPress Plugin Check locally with wp-env when CI cannot start | do not mistake a review lock or runner billing failure for an app-code failure | verify exact dashboard status, local Plugin Check JSON, PHP lint, and the submitted package bytes
 RapidAct WordPress installation | code-only installation excludes nontechnical users before the directory listing is live | offer the exact bundled plugin as a downloadable ZIP with three native WordPress steps, while keeping code as an alternative | do not expose review status, use a custom updater or ship a ZIP that differs from the submission source | byte-compare ZIP/source, run Plugin Check, test upload/activate/settings, verify the live download and submit the same ZIP to WordPress.org
 RapidAct conversion truth | fulfilled API calls and repeat checkout clicks can inflate key events without retained leads or new intent | gate lead conversions on DB or CRM retention, keep partner success CRM-backed, and dedupe checkout initiation per reference/session | do not equate mutation fulfillment with captured lead, emit success and failure for one attempt, or treat initiation value as revenue | verify forced-failure branches, repeat payment clicks, GTM parameter forwarding and purchase remains provider-confirmed only
 RapidAct partner distribution | copying enterprise partner-program complexity would slow the first referral and obscure the €99 entry offer | use one paid-discovery assessment, explicit €69 partner cost, typed legal/audit/delivery entry points and partner-owned follow-on fees | do not add tiers, certification, portals, minimums or unverified applicability claims | verify economics, first-client form, typed deep links, CRM capture and sent-message destinations
@@ -19,6 +20,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale data-layer values, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, reset all mapped fields per event, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, let commercial fields persist between events, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-29 — Marketplace review locks are state, not release failures
+
+- Status: CURRENT
+- Project/root: `rapidact`; Wix App ID `c301e6f6-49fb-4885-bd5d-4f1317f21f5f` and WordPress Plugin Check.
+- Mistake: retrying a Wix CLI release without first reading its distribution state, then treating a GitHub runner failure as a plugin failure.
+- Do: read the live marketplace dashboard first; a submitted app is intentionally non-editable. When GitHub Actions cannot start, reproduce the official Plugin Check action locally with `wp-env`.
+- Don't: withdraw or overwrite an in-review app, weaken functionality to silence an intentional sitewide-script warning, or infer PHP/plugin failure from an unstarted runner.
+- Evidence: Wix dashboard showed `SUBMITTED`, released `1.0`, `Blockers (0)`, and “AI review is in progress”; GitHub annotation said the job never started because account billing is locked; local Plugin Check 2.0.0 completed with no errors.
+- Trigger terms: app not editable, submitted, AI review, release version, plugin check, no steps, billing issue.
+- Verify before reuse: refresh the exact store status, run PHP lint and local Plugin Check against the packaged source, and byte-compare the submitted/download ZIP.
 
 ## 2026-07-29 — WordPress offers the exact plugin ZIP before directory publication
 

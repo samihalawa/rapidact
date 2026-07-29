@@ -4,7 +4,7 @@
  * Plugin URI: https://rapidact.eu/article-50
  * Description: Add a configurable, visitor-facing AI-use notice with a locally bundled runtime.
  * Version: 1.0.0
- * Requires at least: 6.0
+ * Requires at least: 6.3
  * Requires PHP: 7.4
  * Author: RapidAct
  * Author URI: https://rapidact.eu
@@ -249,7 +249,10 @@ function rapidact_ai_disclosure_enqueue() {
 		plugins_url( 'assets/rapidact-badge.js', __FILE__ ),
 		array(),
 		RAPIDACT_AI_DISCLOSURE_VERSION,
-		true
+		array(
+			'strategy'  => 'defer',
+			'in_footer' => true,
+		)
 	);
 }
 add_action( 'wp_enqueue_scripts', 'rapidact_ai_disclosure_enqueue' );
