@@ -15,7 +15,7 @@ RapidAct scanner conversion | a spinner made the public-page preview feel unfini
 RapidAct brand assets | redrawn SVG and generated marks drifted from the approved logo | use the exact tight-crop raster pack by purpose, plus semantic text for the wordmark and disclosure | do not redraw, stretch, or retain superseded marks | verify header, footer, badge, favicon, PWA, social, and five languages live
 RapidAct responsive report rows | three children collapsed when the grid changed from two to three columns | place the description explicitly at each breakpoint | do not rely on implicit grid flow across column-count changes | verify 640–1023px and desktop rendered rows
 RapidAct mobile header | the language selector displaced navigation and the conversion action | keep compact logo, 44px Scan CTA and 44px menu; place the small language selector inside the drawer | do not expose the desktop nav or language selector in the phone header | verify the real phone/tablet header, drawer links, language control, no overflow and 44px targets
-RapidAct analytics | shared, local, duplicated, pageview-only, name-only, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one direct Google-tag event command per product event and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, keep the incomplete GTM product tag active, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
+RapidAct analytics | shared, local, duplicated, pageview-only, name-only, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
 
@@ -30,16 +30,16 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Trigger terms: key event, lead, retained, stored, CRM, duplicate, bunq, checkout, purchase, value.
 - Verify before reuse: exercise retained/unretained branches, repeat one payment click, inspect the published GTM parameter map, and read exact GA4/PostHog payloads.
 
-## 2026-07-29 — Product-event parameters use the loaded Google tag directly
+## 2026-07-29 — Product events use one mapped GTM data-layer path
 
 - Status: CURRENT
 - Project/root: `rapidact`; GA4/GTM custom product-event forwarding.
-- Mistake: the GTM GA4 product-event tag forwarded `{{Event}}` but its published Event Parameters table was empty, so event names arrived while diagnostic and value fields were dropped.
-- Do: keep the single GTM loader and Google configuration tag, send each custom event once through the already-loaded `gtag` command with its complete payload, keep the incomplete GTM product tag paused, and use an absolute same-origin `https://…/metrics` transport.
-- Don't: combine direct custom-event commands with an active GTM product-event tag, add another Google loader, pass relative `/metrics` (Google interprets it as host `https://metrics`), or infer parameter receipt from an event name.
-- Evidence: authenticated GTM read on 2026-07-29 showed measurement `G-PEFSF0DS02`, event name `{{Event}}` and zero published event-parameter rows; live CDP later showed relative transport failing as `https://metrics/g/collect` with `ERR_NAME_NOT_RESOLVED`; `src/lib/analytics.ts`.
+- Mistake: the GTM GA4 product-event tag initially had no parameter rows; a subsequent direct `gtag("event")` workaround left commands in `dataLayer` without producing post-load custom-event requests.
+- Do: keep one GTM loader and Google configuration tag, push each custom event once as a named data-layer object, map every commercial parameter explicitly in the generic GA4 event tag, and use an absolute same-origin `https://…/metrics` transport.
+- Don't: combine direct custom-event commands with the active GTM product-event tag, add another Google loader, pass relative `/metrics` (Google interprets it as host `https://metrics`), or infer parameter receipt from an event name.
+- Evidence: authenticated GTM read and live CDP on 2026-07-29; repeated post-load direct `gtag` commands produced no request, while the page-view gateway returned `204`; `src/lib/analytics.ts`.
 - Trigger terms: GA4, GTM, parameter, event name, value, currency, checkout ID, lead source, duplicate.
-- Verify before reuse: keep apex and `www` DNS proxied, GET the gateway config, capture one live same-origin Google collect request, confirm exact parameters, and verify PostHog receives the same event payload once.
+- Verify before reuse: keep apex and `www` DNS proxied, GET the gateway config, publish the mapped GTM tag, capture one live same-origin product-event request with exact parameters, and verify PostHog receives the same product event once.
 
 ## 2026-07-28 — Partner distribution starts with one paid client discovery
 

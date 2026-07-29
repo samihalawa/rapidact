@@ -178,7 +178,8 @@ function baseProperties(): EventProperties {
 export function track(name: string, properties: EventProperties = {}) {
   if (!isAnalyticsHost()) return;
   const payload = { ...baseProperties(), ...properties };
-  window.gtag?.("event", name, payload);
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: name, ...payload });
   if (getConsent() === "all") posthog.capture(name, payload);
 }
 
