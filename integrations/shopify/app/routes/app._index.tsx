@@ -76,7 +76,7 @@ export default function Index() {
       const idToken = await shopify.idToken();
       if (disposed) return;
 
-      await fetch(window.location.pathname, {
+      await fetch(`${window.location.pathname}.data?index`, {
         method: "POST",
         headers: {
           Accept: "application/json",
