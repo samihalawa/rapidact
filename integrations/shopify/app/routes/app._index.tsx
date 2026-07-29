@@ -4,7 +4,8 @@ import type {
   LoaderFunctionArgs,
 } from "react-router";
 import { useEffect } from "react";
-import { useFetcher, useLoaderData, useRouteError } from "react-router";
+import { useLoaderData, useRouteError } from "react-router";
+import { useAppBridge } from "@shopify/app-bridge-react";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../shopify.server";
 
@@ -64,17 +65,32 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
-  const sessionFetcher = useFetcher<typeof action>();
+  const shopify = useAppBridge();
   const updateAvailable = data.latestVersion !== data.bundledVersion;
 
   useEffect(() => {
-    if (
-      sessionFetcher.state === "idle" &&
-      sessionFetcher.data === undefined
-    ) {
-      sessionFetcher.submit({}, { method: "post" });
-    }
-  }, [sessionFetcher]);
+    let disposed = false;
+
+    const authenticateClientRequest = async () => {
+      await shopify.ready;
+      const idToken = await shopify.idToken();
+      if (disposed) return;
+
+      await fetch(window.location.pathname, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+      });
+    };
+
+    void authenticateClientRequest().catch(() => undefined);
+
+    return () => {
+      disposed = true;
+    };
+  }, [shopify]);
 
   return (
     <s-page heading="RapidAct AI disclosure">
