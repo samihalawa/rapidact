@@ -1,8 +1,10 @@
 import type {
+  ActionFunctionArgs,
   HeadersFunction,
   LoaderFunctionArgs,
 } from "react-router";
-import { useLoaderData, useRouteError } from "react-router";
+import { useEffect } from "react";
+import { useFetcher, useLoaderData, useRouteError } from "react-router";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../shopify.server";
 
@@ -15,6 +17,11 @@ type BadgeManifest = {
       version?: string;
     };
   };
+};
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const { session } = await authenticate.admin(request);
+  return { authenticated: Boolean(session.shop) };
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -57,7 +64,17 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Index() {
   const data = useLoaderData<typeof loader>();
+  const sessionFetcher = useFetcher<typeof action>();
   const updateAvailable = data.latestVersion !== data.bundledVersion;
+
+  useEffect(() => {
+    if (
+      sessionFetcher.state === "idle" &&
+      sessionFetcher.data === undefined
+    ) {
+      sessionFetcher.submit({}, { method: "post" });
+    }
+  }, [sessionFetcher]);
 
   return (
     <s-page heading="RapidAct AI disclosure">

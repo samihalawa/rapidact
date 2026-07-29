@@ -123,6 +123,8 @@ if (platform === "shopify") {
     "integrations/shopify/extensions/rapidact-badge/blocks/rapidact-badge.liquid"
   );
   const config = read("integrations/shopify/shopify.app.toml");
+  const appLayout = read("integrations/shopify/app/routes/app.tsx");
+  const appIndex = read("integrations/shopify/app/routes/app._index.tsx");
   expect(
     packageJson.version === manifest.badgeVersion,
     "Shopify: app version does not match the bundled badge version"
@@ -139,12 +141,29 @@ if (platform === "shopify") {
     expect(liquid.includes(required), `Shopify: missing ${required}`);
   }
   for (const required of [
+    'application_url = "https://connect.rapidact.eu"',
     'api_version = "2026-07"',
     "customers/data_request",
     "customers/redact",
     "shop/redact",
   ]) {
     expect(config.includes(required), `Shopify: missing ${required}`);
+  }
+  for (const required of [
+    "authenticate.admin(request)",
+    "<AppProvider embedded apiKey={apiKey}>",
+  ]) {
+    expect(appLayout.includes(required), `Shopify: missing ${required}`);
+  }
+  for (const required of [
+    "export const action",
+    "authenticate.admin(request)",
+    'sessionFetcher.submit({}, { method: "post" })',
+  ]) {
+    expect(
+      appIndex.includes(required),
+      `Shopify: session-token request missing ${required}`
+    );
   }
   expect(!config.includes("ScriptTag"), "Shopify: ScriptTag must not be used");
 }

@@ -1,8 +1,9 @@
 # RapidAct Shopify App Store listing
 
 This is the copy and evidence set for the first English listing. Keep the
-listing aligned with the released `1.0.0` app and do not describe assessment or
-scanner functionality that is not part of the Shopify app.
+listing aligned with Shopify release `1.0.1` and bundled badge version `1.0.0`.
+Do not describe assessment or scanner functionality that is not part of the
+Shopify app.
 
 ## Listing identity
 
