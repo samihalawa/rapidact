@@ -1,5 +1,12 @@
 # Shopify App Store submission
 
+The production app is linked to the RapidAct public Shopify app, hosted at
+`https://shopify.rapidact.eu`, released as version `1.0.0` and installed on the
+RapidAct development store. Public distribution is selected. Shopify requires
+the Partner account's one-time App Store registration and business-account
+attestation before the review form becomes available; do not invent or commit
+those account-owner answers.
+
 ## Link and test
 
 1. Create or select the RapidAct public app in the Shopify Partner Dashboard.
@@ -21,7 +28,8 @@
    `SHOPIFY_APP_URL`, and `SCOPES`.
 3. Run `npm run deploy` to create the native Shopify app and extension version.
 4. Complete the App Store listing, pricing, support, privacy, testing
-   instructions, and review credentials in Partner Dashboard.
+   instructions, and review credentials in Partner Dashboard using
+   `STORE_LISTING.md`.
 5. Submit the public distribution version for Shopify review.
 
 Do not ship ScriptTag or theme-file mutations. The theme app extension is the
