@@ -29,7 +29,7 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Mistake: treating `shopify app deploy` as hosting/submission, using a provider-named domain, assuming an authenticated SSR loader would satisfy Shopify's session-token telemetry, or sending the bearer token to a parent document that does not own the index action.
 - Do: host on a neutral RapidAct domain with persistent Prisma storage, use `AppProvider`, and trigger one client request to an `authenticate.admin` action before completing the review checks.
 - Don't: rely on initial document authentication, use a provider-named host, expose the secret, mutate theme files, claim a released version is listed, or attest to an owner agreement without confirmation.
-- Evidence: on 2026-07-29 the live checklist marked App Bridge green but session-token authentication red after the scheduled check; `app._index.tsx` now posts through `useFetcher` to an authenticated action.
+- Evidence: on 2026-07-29 `app._index.tsx` posted a bearer token to its authenticated index action, the scheduled provider check advanced to `Ready to submit`, and Shopify accepted the submission with `Submitted` plus `We're assigning a reviewer`; post-approval visibility is fully public.
 - Trigger terms: Shopify, OAuth, app URL, domain, public distribution, theme app extension, CLI release, App Store, registration.
 - Verify before reuse: neutral DNS/TLS, matching app URL, loaded embedded app, bearer-token client action returning 200, active embed plus storefront badge, both embedded checks green, submitted provider state, and local/remote Git SHA.
 
@@ -38,9 +38,9 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Status: CURRENT
 - Project/root: `rapidact`; Wix App ID `c301e6f6-49fb-4885-bd5d-4f1317f21f5f`, Wix distribution dashboard and WordPress Plugin Check.
 - Mistake: treating `Blockers (0)`, a previous release, or a client-side “submitted” toast as proof that Wix review accepted a new submission, then guessing at code changes without the reviewer ticket.
-- Do: read the exact Wix status and rejection feedback first. After any submission action, hard-reload the submit and distribution pages; if the state does not persist or `/distribute/submit` fails independently, use app-development support to recover the ticket and provider surface.
+- Do: read the exact Wix status and rejection feedback first. After any submission action, hard-reload the submit and distribution pages; require the owner's explicit acceptance before checking Wix's Partner Agreement.
 - Don't: invent the rejection reason, repeat a non-persisting submission, accept the Partner Agreement without owner confirmation, or infer app-code failure from a dashboard 500 or an unstarted GitHub runner.
-- Evidence: the dashboard showed `DECLINED`, released `1.0`, `Blockers (0)`, and `Error 500`; clicking `Submit and Publish` produced a success toast, but a hard reload restored the enabled button and the distribution page still said `Submit your app for review`. Wix support case `3000008679` is awaiting a human response.
+- Evidence: the dashboard first showed `DECLINED`, `Blockers (0)`, and `Error 500`; a transient success toast did not persist. The provider page later recovered to `You're all set to publish`, with the final action disabled only until `I have read and agree to the Partner's Agreement` is checked. Wix support case `3000008679` remains open.
 - Trigger terms: declined, rejected, Blockers 0, rejection ticket, submit page, Error 500, app not editable, plugin check.
 - Verify before reuse: obtain the exact reviewer feedback, repair that stated defect, re-run Wix checks, and prove a resubmission persists after hard reload; separately run PHP lint, local Plugin Check, and byte-compare the WordPress ZIP.
 
