@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ANALYTICS_EVENTS,
+  buildDataLayerEvent,
   claimSessionEvent,
   googleTransportUrl,
   isAnalyticsHost,
@@ -64,5 +65,31 @@ describe("canonical commercial events", () => {
     expect(eventId).not.toBe(stableEventId("checkout", "RA-5678"));
     expect(claimSessionEvent(eventId, storage)).toBe(true);
     expect(claimSessionEvent(eventId, storage)).toBe(false);
+  });
+
+  it("clears mapped GTM values before every distinct product event", () => {
+    const payment = buildDataLayerEvent("payment_initiated", {
+      value: 99,
+      currency: "EUR",
+      payment_provider: "bunq",
+    });
+    const lead = buildDataLayerEvent("report_submitted", {
+      lead_type: "paid_assessment",
+      stored: true,
+    });
+
+    expect(payment).toMatchObject({
+      value: 99,
+      currency: "EUR",
+      payment_provider: "bunq",
+    });
+    expect(lead).toMatchObject({
+      lead_type: "paid_assessment",
+      stored: true,
+    });
+    expect(lead.value).toBeUndefined();
+    expect(lead.currency).toBeUndefined();
+    expect(lead.payment_provider).toBeUndefined();
+    expect(lead.checkout_id).toBeUndefined();
   });
 });

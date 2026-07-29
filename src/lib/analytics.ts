@@ -23,6 +23,23 @@ export type EventProperties = Record<
 >;
 type EventStorage = Pick<Storage, "getItem" | "setItem">;
 
+export const GTM_EVENT_PARAMETERS = [
+  "value",
+  "currency",
+  "payment_provider",
+  "product_name",
+  "checkout_id",
+  "lead_type",
+  "lead_source",
+  "stored",
+  "crm_status",
+  "company_size",
+  "sector",
+  "ai_system_count",
+  "transaction_id",
+  "partner_type",
+] as const;
+
 declare global {
   interface Window {
     dataLayer: unknown[];
@@ -175,11 +192,21 @@ function baseProperties(): EventProperties {
   };
 }
 
+export function buildDataLayerEvent(
+  name: string,
+  properties: EventProperties
+): EventProperties & { event: string } {
+  const clearedParameters = Object.fromEntries(
+    GTM_EVENT_PARAMETERS.map((parameter) => [parameter, undefined])
+  );
+  return { event: name, ...clearedParameters, ...properties };
+}
+
 export function track(name: string, properties: EventProperties = {}) {
   if (!isAnalyticsHost()) return;
   const payload = { ...baseProperties(), ...properties };
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: name, ...payload });
+  window.dataLayer.push(buildDataLayerEvent(name, payload));
   if (getConsent() === "all") posthog.capture(name, payload);
 }
 
