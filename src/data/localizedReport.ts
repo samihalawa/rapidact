@@ -91,7 +91,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     step1: "Step 1 of 2",
     intakeTitle: "Start your company assessment",
     intakeBody:
-      "Add your company and the AI systems you know about. We will examine any gaps or uncertainties.",
+      "Start with your company name and work email. Add any useful context only if you have it.",
     company: "Company name",
     email: "Work email",
     invalidEmail: "Enter a valid email address.",
@@ -100,7 +100,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     countriesPlaceholder: "Spain, Germany, UK",
     optionalContext: "Add more context",
     optionalContextHint:
-      "Optional: countries, size, sector and anything you want us to examine.",
+      "Optional: website, known AI, countries, size, sector and anything you want us to examine.",
     size: "Company size",
     sizeNote:
       "Obligations depend on what a system does, not company size. Size affects penalty calculations, not whether the duty applies.",
@@ -111,7 +111,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "For example: we run an AI voice agent for bookings and are unsure whether it is covered.",
     sendError:
       "Your details could not be sent. Try again, or contact us directly and we will take them by email.",
-    continue: "Continue to payment",
+    continue: "Review €99 payment",
     continuing: "Saving…",
     noCharge: "No charge yet. Confirm the €99 fee and seller on the next step.",
     buying: "You are buying",
@@ -167,7 +167,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     step1: "Paso 1 de 2",
     intakeTitle: "Inicia la evaluación de tu empresa",
     intakeBody:
-      "Añade tu empresa y los sistemas de IA que conozcas. Revisaremos cualquier duda o carencia.",
+      "Empieza con el nombre de la empresa y tu correo de trabajo. Añade más contexto solo si lo tienes.",
     company: "Nombre de la empresa",
     email: "Correo de trabajo",
     invalidEmail: "Introduce una dirección de correo válida.",
@@ -176,7 +176,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     countriesPlaceholder: "España, Alemania, Reino Unido",
     optionalContext: "Añadir más contexto",
     optionalContextHint:
-      "Opcional: países, tamaño, sector y cualquier punto que quieras que revisemos.",
+      "Opcional: web, IA conocidas, países, tamaño, sector y cualquier punto que quieras que revisemos.",
     size: "Tamaño de la empresa",
     sizeNote:
       "Las obligaciones dependen de lo que hace el sistema, no del tamaño. El tamaño afecta al cálculo de sanciones.",
@@ -187,7 +187,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Por ejemplo: utilizamos un agente de voz para reservas y no sabemos si está cubierto.",
     sendError:
       "No se han podido enviar los datos. Inténtalo de nuevo o contáctanos y los recogeremos por correo.",
-    continue: "Continuar al pago",
+    continue: "Revisar el pago de 99 €",
     continuing: "Guardando…",
     noCharge:
       "Todavía no se cobra nada. Confirma el precio de 99 € y el vendedor en el siguiente paso.",
@@ -265,7 +265,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     step1: "Schritt 1 von 2",
     intakeTitle: "Starten Sie Ihre Unternehmensbewertung",
     intakeBody:
-      "Beginnen Sie mit Ihrem Unternehmen und der KI, die Sie bereits kennen. Unklare Punkte sind Teil unserer Bewertung.",
+      "Starten Sie mit Unternehmensname und geschäftlicher E-Mail. Weitere Angaben sind nur optional.",
     company: "Unternehmensname",
     email: "Geschäftliche E-Mail",
     invalidEmail: "Geben Sie eine gültige E-Mail-Adresse ein.",
@@ -274,7 +274,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     countriesPlaceholder: "Deutschland, Spanien, UK",
     optionalContext: "Mehr Kontext hinzufügen",
     optionalContextHint:
-      "Optional: Länder, Größe, Branche und alles, was wir gezielt prüfen sollen.",
+      "Optional: Website, bekannte KI, Länder, Größe, Branche und alles, was wir gezielt prüfen sollen.",
     size: "Unternehmensgröße",
     sizeNote:
       "Pflichten richten sich nach der Funktion des Systems, nicht nach der Größe. Die Größe beeinflusst die Bußgeldberechnung.",
@@ -285,7 +285,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Zum Beispiel: Wir nutzen einen KI-Sprachagenten für Buchungen und kennen unsere Pflicht nicht.",
     sendError:
       "Die Angaben konnten nicht gesendet werden. Versuchen Sie es erneut oder kontaktieren Sie uns per E-Mail.",
-    continue: "Weiter zur Zahlung",
+    continue: "Zahlung über 99 € prüfen",
     continuing: "Speichern…",
     noCharge:
       "Hier wird nichts berechnet. Preis und Verkäufer sehen Sie vor der Zahlung.",
@@ -360,7 +360,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     step1: "Étape 1 sur 2",
     intakeTitle: "Commencez l’évaluation de votre entreprise",
     intakeBody:
-      "Commencez par votre entreprise et les IA que vous connaissez déjà. Les points incertains font partie de notre évaluation.",
+      "Commencez par le nom de l’entreprise et votre e-mail professionnel. Le reste est facultatif.",
     company: "Nom de l’entreprise",
     email: "E-mail professionnel",
     invalidEmail: "Saisissez une adresse e-mail valide.",
@@ -369,7 +369,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     countriesPlaceholder: "France, Espagne, Allemagne",
     optionalContext: "Ajouter du contexte",
     optionalContextHint:
-      "Facultatif : pays, taille, secteur et tout point à examiner.",
+      "Facultatif : site, IA connues, pays, taille, secteur et tout point à examiner.",
     size: "Taille de l’entreprise",
     sizeNote:
       "Les obligations dépendent de la fonction du système, pas de la taille. La taille influe sur le calcul des sanctions.",
@@ -380,7 +380,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Par exemple : nous utilisons un agent vocal pour les réservations et ignorons s’il est couvert.",
     sendError:
       "Impossible d’envoyer vos informations. Réessayez ou contactez-nous par e-mail.",
-    continue: "Continuer vers le paiement",
+    continue: "Vérifier le paiement de 99 €",
     continuing: "Enregistrement…",
     noCharge:
       "Aucun débit ici. Le prix et le vendeur sont affichés avant le paiement.",
@@ -458,7 +458,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     step1: "Passaggio 1 di 2",
     intakeTitle: "Inizia la valutazione della tua azienda",
     intakeBody:
-      "Inizia dall’azienda e dalle IA che conosci già. I punti poco chiari fanno parte della nostra valutazione.",
+      "Inizia con il nome dell’azienda e l’e-mail di lavoro. Aggiungi altro contesto solo se lo hai.",
     company: "Nome dell’azienda",
     email: "E-mail di lavoro",
     invalidEmail: "Inserisci un indirizzo email valido.",
@@ -467,7 +467,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     countriesPlaceholder: "Italia, Spagna, Germania",
     optionalContext: "Aggiungi altro contesto",
     optionalContextHint:
-      "Facoltativo: paesi, dimensioni, settore e qualsiasi punto da esaminare.",
+      "Facoltativo: sito, IA note, paesi, dimensioni, settore e qualsiasi punto da esaminare.",
     size: "Dimensioni dell’azienda",
     sizeNote:
       "Gli obblighi dipendono dalla funzione del sistema, non dalle dimensioni. Le dimensioni incidono sul calcolo delle sanzioni.",
@@ -477,7 +477,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     notesPlaceholder:
       "Ad esempio: usiamo un agente vocale per le prenotazioni e non sappiamo se è coperto.",
     sendError: "Impossibile inviare i dati. Riprova o contattaci via e-mail.",
-    continue: "Continua al pagamento",
+    continue: "Verifica il pagamento di 99 €",
     continuing: "Salvataggio…",
     noCharge:
       "Qui non viene addebitato nulla. Vedrai prezzo e venditore prima del pagamento.",

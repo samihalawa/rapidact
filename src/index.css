@@ -72,6 +72,11 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Keep the paid intake and payment actions unobstructed on small screens. */
+  body[data-conversion-flow] #rapidact-ai-disclosure {
+    display: none !important;
+  }
 }
 /* ---- RapidAct design layer ------------------------------------------------
    Register: professional services / regulatory. The reader is deciding whether

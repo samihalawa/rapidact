@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct paid conversion flow | global fixed badge and WhatsApp controls can cover the primary CTA on phone screens | suppress floating controls only on report/start routes while retaining them elsewhere | do not let persistent support/compliance widgets compete with or obstruct payment progression | verify 390px report CTA is clear, five localized routes have two primary fields, and homepage still shows both widgets
 RapidAct commercial analytics | browser and Tag Assistant QA can produce plausible leads, key events and funnel activity that are not buyer demand | persist an explicit QA session classification, mark PostHog users natively as internal/test, and keep the paid assessment as the first commercial CTA without removing the free qualification path | do not diagnose price or checkout from test conversions, hardcode one device ID, or add more conversion sections | verify QA and external properties separately in GA4/PostHog, CRM lead identities, assessment click routing and zero unclassified verification events
 RapidAct production asset continuity | a cached HTML shell can reference a hashed bundle removed by the next deploy and leave a blank page while the independently loaded badge still appears | prevent HTML-shell caching while retaining hashed asset caching | do not diagnose the bundle from the badge alone, treat a cache-busted load as enough, or delete old assets while serving reusable HTML | verify old-URL failure, fresh HTML asset reference, HTML no-store header, referenced asset 200 and rendered route after consecutive deploys
 RapidAct lead email capture | browser and API validation drift turned malformed input into a false storage error, while generic DB retention cannot preserve partner context | use one shared validator and normalizer, classify server validation errors accurately, allow scanner retention through DB or CRM, and keep partner success CRM-backed | do not use looser client regexes, report invalid input as a save outage, or count a generic lead row as a complete partner enquiry | verify valid and invalid browser states, normalized API input, scanner retention, and partner metadata in Close
@@ -24,6 +25,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale data-layer values, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, reset all mapped fields per event, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, let commercial fields persist between events, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-30 — Paid conversion routes keep floating controls off the CTA
+
+- Status: CURRENT
+- Project/root: `rapidact`; localized `/report` and legacy `/start` conversion routes.
+- Mistake: the fixed disclosure badge and WhatsApp widget covered the full-width €99 review button at 390px, making the primary action harder to see and tap.
+- Do: keep the paid path to company plus work email, place optional context in one disclosure, and suppress both floating controls only during report/start progression.
+- Don't: remove the widgets site-wide, hide optional assessment context, or diagnose form friction as the main revenue cause from one ambiguous visit.
+- Evidence: 2026-07-30 rendered mobile screenshot and retained QA submission reference `HTW3X6`; `src/App.tsx`, `src/pages/Report.tsx`, `src/index.css`.
+- Trigger terms: mobile CTA, widget overlap, badge, WhatsApp, report form, payment.
+- Verify before reuse: at 390px the CTA is unobstructed; all five locales expose two primary fields; step 2 opens with a €99 bunq URL; homepage still displays both widgets.
 
 ## 2026-07-30 — Commercial funnels exclude persistent QA sessions
 

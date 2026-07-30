@@ -296,6 +296,22 @@ export default function Report() {
                 {copy.intakeBody}
               </p>
 
+              <div className="hairline mt-5 grid gap-2 border-y py-4 text-[12px] lg:hidden">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span className="ink font-semibold">€99</span>
+                  <span className="ink-soft">{copy.chargedOnce}</span>
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                  <span className="ink-soft">{copy.deliveryPromise}</span>
+                  <a
+                    href={path(CONVERT.example)}
+                    className="accent font-semibold underline underline-offset-2"
+                  >
+                    {copy.specimen}
+                  </a>
+                </div>
+              </div>
+
               <div className="hairline mt-8 space-y-5 border bg-white p-5 sm:p-7">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
@@ -339,35 +355,6 @@ export default function Report() {
                       </p>
                     )}
                   </div>
-                  <div className="sm:col-span-2">
-                    <label className="ink block text-[13px] font-semibold">
-                      {copy.website}
-                    </label>
-                    <Input
-                      value={website}
-                      onChange={e => setWebsite(e.target.value)}
-                      placeholder="https://company.com"
-                      className="hairline mt-1.5 h-11 rounded border"
-                      autoComplete="url"
-                    />
-                  </div>
-                </div>
-
-                <div className="hairline border-t pt-5">
-                  <label className="ink block text-[13px] font-semibold">
-                    {copy.systems}
-                  </label>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {copy.systemsList.map(option => (
-                      <Chip
-                        key={option.value}
-                        active={systems.includes(option.value)}
-                        onClick={() => toggle(option.value)}
-                      >
-                        {option.label}
-                      </Chip>
-                    ))}
-                  </div>
                 </div>
 
                 <details className="group hairline border-t pt-1">
@@ -385,6 +372,36 @@ export default function Report() {
                   </summary>
 
                   <div className="hairline grid gap-5 border-t bg-[#f7f7f5] p-4 sm:grid-cols-2 sm:p-5">
+                    <div className="sm:col-span-2">
+                      <label className="ink block text-[13px] font-semibold">
+                        {copy.website}
+                      </label>
+                      <Input
+                        value={website}
+                        onChange={e => setWebsite(e.target.value)}
+                        placeholder="https://company.com"
+                        className="hairline mt-1.5 h-11 rounded border bg-white"
+                        autoComplete="url"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="ink block text-[13px] font-semibold">
+                        {copy.systems}
+                      </label>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {copy.systemsList.map(option => (
+                          <Chip
+                            key={option.value}
+                            active={systems.includes(option.value)}
+                            onClick={() => toggle(option.value)}
+                          >
+                            {option.label}
+                          </Chip>
+                        ))}
+                      </div>
+                    </div>
+
                     <div>
                       <label className="ink block text-[13px] font-semibold">
                         {copy.countries}
