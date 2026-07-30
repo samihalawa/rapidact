@@ -250,7 +250,7 @@ export default function BadgeInstallDashboard({
           <div className="grid grid-cols-3 border border-[#d8d8d2] bg-white">
             {[
               ["01", copy.choosePlatform],
-              ["02", copy.chooseDisplay],
+              ["02", copy.chooseSetup],
               ["03", copy.installAndVerify],
             ].map(([number, label]) => (
               <div
@@ -302,7 +302,9 @@ export default function BadgeInstallDashboard({
                   <span className="mono text-[9px] font-bold tracking-[0.08em] text-[#6b7280] uppercase">
                     {platform.id === "wordpress"
                       ? copy.pluginAndCode
-                      : copy.direct}
+                      : platform.id === "wix"
+                        ? copy.officialWixApp
+                        : copy.direct}
                   </span>
                 </div>
                 <p className="mt-4 text-[15px] leading-tight font-bold text-[#16181d] sm:text-base">
@@ -335,13 +337,19 @@ export default function BadgeInstallDashboard({
                 <p className="mono text-[10px] font-bold tracking-[0.1em] text-[#174a9b] uppercase">
                   {selected.id === "wordpress"
                     ? copy.pluginAndCode
-                    : copy.direct}
+                    : selected.id === "wix"
+                      ? copy.officialWixApp
+                      : copy.direct}
                 </p>
                 <DialogTitle className="text-2xl leading-tight font-bold tracking-tight text-[#16181d] sm:text-3xl">
-                  {copy.installOn} {selected.name}
+                  {selected.id === "wix"
+                    ? copy.wixInstallTitle
+                    : `${copy.installOn} ${selected.name}`}
                 </DialogTitle>
                 <DialogDescription className="max-w-2xl text-sm leading-relaxed text-[#5c6370]">
-                  {copy.chooseDisplay}
+                  {selected.id === "wix"
+                    ? copy.wixInstallBody
+                    : copy.chooseDisplay}
                 </DialogDescription>
               </DialogHeader>
 
@@ -391,176 +399,198 @@ export default function BadgeInstallDashboard({
               ) : null}
 
               {selected.id === "wix" ? (
-                <div className="border-b border-[#b9c9df] bg-[#eaf3ff] px-5 py-5 sm:px-7">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="eyebrow text-[#174a9b]">
-                        {copy.recommended}
-                      </p>
-                      <h3 className="mt-1 text-xl font-bold text-[#16181d]">
-                        {copy.wixInstallTitle}
-                      </h3>
-                      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#4e5968]">
-                        {copy.wixInstallBody}
-                      </p>
-                    </div>
+                <div className="grid gap-0 bg-[#eaf3ff] lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.82fr)]">
+                  <div className="px-5 py-6 sm:px-7 sm:py-7">
+                    <h3 className="text-lg font-bold text-[#16181d]">
+                      {copy.wixStepsTitle}
+                    </h3>
+                    <ol className="mt-4 space-y-3">
+                      {copy.wixSteps.map((step, index) => (
+                        <li
+                          key={step}
+                          className="grid grid-cols-[2rem_minmax(0,1fr)] items-start gap-3 text-sm leading-relaxed text-[#4e5968]"
+                        >
+                          <span className="mono grid h-8 w-8 place-items-center bg-[#0b2a5b] text-[10px] font-bold text-white">
+                            {index + 1}
+                          </span>
+                          <span className="pt-1">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
                     <a
                       href={WIX_INSTALL_URL}
                       target="_blank"
                       rel="noopener"
                       onClick={trackWixInstall}
-                      className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 bg-[#0b2a5b] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#174a9b] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
+                      className="mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 bg-[#0b2a5b] px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-[#174a9b] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none sm:w-auto"
                     >
                       {copy.installWix}
                       <ExternalLink className="h-4 w-4" aria-hidden="true" />
                     </a>
                   </div>
+                  <div className="border-t border-[#b9c9df] bg-white p-4 sm:p-5 lg:border-t-0 lg:border-l">
+                    <p className="mono text-[10px] font-bold tracking-[0.08em] text-[#174a9b] uppercase">
+                      {copy.previewTitle}
+                    </p>
+                    <div className="mt-3 overflow-hidden border border-[#cbd8ec] bg-[#f7f7f5]">
+                      <iframe
+                        src={previewUrl}
+                        title={copy.previewTitle}
+                        className="h-56 w-full bg-white sm:h-64"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
                 </div>
               ) : null}
 
-              <div className="border-b border-[#d8d8d2] bg-[#f7f7f5] px-4 py-4 sm:px-7">
-                <div
-                  className="grid grid-cols-2 gap-2 lg:grid-cols-4"
-                  role="group"
-                  aria-label={copy.chooseDisplay}
-                >
-                  {displayOrder.map(option => {
-                    const Icon = displayIcons[option];
-                    const active = display === option;
-                    return (
-                      <button
-                        key={option}
-                        type="button"
-                        aria-pressed={active}
-                        onClick={() => {
-                          setDisplay(option);
-                          setCopyStatus("idle");
-                          track("badge_installer_display_selected", {
-                            platform: selected.id,
-                            display: option,
-                          });
-                        }}
-                        className={`relative min-h-28 border p-3 text-left transition focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none sm:min-h-32 sm:p-4 ${
-                          active
-                            ? "border-[#174a9b] bg-white shadow-[inset_0_0_0_1px_#174a9b]"
-                            : "border-[#d8d8d2] bg-white/70 hover:border-[#8aa9d0]"
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <Icon
-                            className={`h-5 w-5 ${
-                              active ? "text-[#174a9b]" : "text-[#6b7280]"
+              {selected.id !== "wix" ? (
+                <>
+                  <div className="border-b border-[#d8d8d2] bg-[#f7f7f5] px-4 py-4 sm:px-7">
+                    <div
+                      className="grid grid-cols-2 gap-2 lg:grid-cols-4"
+                      role="group"
+                      aria-label={copy.chooseDisplay}
+                    >
+                      {displayOrder.map(option => {
+                        const Icon = displayIcons[option];
+                        const active = display === option;
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            aria-pressed={active}
+                            onClick={() => {
+                              setDisplay(option);
+                              setCopyStatus("idle");
+                              track("badge_installer_display_selected", {
+                                platform: selected.id,
+                                display: option,
+                              });
+                            }}
+                            className={`relative min-h-28 border p-3 text-left transition focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none sm:min-h-32 sm:p-4 ${
+                              active
+                                ? "border-[#174a9b] bg-white shadow-[inset_0_0_0_1px_#174a9b]"
+                                : "border-[#d8d8d2] bg-white/70 hover:border-[#8aa9d0]"
                             }`}
+                          >
+                            <div className="flex items-start justify-between gap-2">
+                              <Icon
+                                className={`h-5 w-5 ${
+                                  active ? "text-[#174a9b]" : "text-[#6b7280]"
+                                }`}
+                                aria-hidden="true"
+                              />
+                              {option === "bubble" ? (
+                                <span className="bg-[#174a9b] px-1.5 py-1 text-[8px] leading-none font-bold tracking-[0.06em] text-white uppercase">
+                                  {copy.recommended}
+                                </span>
+                              ) : null}
+                            </div>
+                            <p className="mt-3 text-sm font-bold text-[#16181d]">
+                              {copy.styles[option].name}
+                            </p>
+                            <p className="mt-1 text-[11px] leading-snug text-[#5c6370] sm:text-xs">
+                              {copy.styles[option].description}
+                            </p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="grid min-w-0 gap-0 lg:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)]">
+                    <div className="min-w-0 p-5 sm:p-7">
+                      <div>
+                        <p className="eyebrow text-[#174a9b]">
+                          {selected.id === "wordpress"
+                            ? copy.manualOption
+                            : copy.manualFallback}
+                        </p>
+                        <h3 className="mt-1 text-lg font-bold text-[#16181d]">
+                          {copy.location}: {copy.locations[selected.id]}
+                        </h3>
+                        <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
+                          {copy.manualFallbackBody}
+                        </p>
+                      </div>
+
+                      <div className="mt-5 overflow-hidden border border-[#203457] bg-[#07132d]">
+                        <div className="flex min-h-12 items-center justify-between gap-3 border-b border-white/15 px-3 sm:px-4">
+                          <span className="mono text-[10px] font-bold tracking-[0.1em] text-white/55 uppercase">
+                            {copy.code}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={copySnippet}
+                            className="inline-flex min-h-11 items-center gap-2 px-2 text-xs font-bold text-white transition hover:text-[#75e2ff] focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                            aria-live="polite"
+                          >
+                            {copyStatus === "copied" ? (
+                              <Check className="h-4 w-4" aria-hidden="true" />
+                            ) : (
+                              <Copy className="h-4 w-4" aria-hidden="true" />
+                            )}
+                            {copyStatus === "copied"
+                              ? copy.copied
+                              : copyStatus === "failed"
+                                ? copy.copyFailed
+                                : copy.copy}
+                          </button>
+                        </div>
+                        <pre className="max-h-80 overflow-auto p-4 text-[11px] leading-relaxed sm:text-xs">
+                          <HighlightedCode code={snippet} />
+                        </pre>
+                      </div>
+                    </div>
+
+                    <aside className="border-t border-[#d8d8d2] bg-[#eef3f8] p-5 sm:p-7 lg:border-t-0 lg:border-l">
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <p className="eyebrow text-[#174a9b]">
+                            {copy.previewTitle}
+                          </p>
+                          <p className="mt-1 text-sm font-bold text-[#16181d]">
+                            {copy.styles[display].name}
+                          </p>
+                        </div>
+                        <a
+                          href={previewUrl}
+                          target="_blank"
+                          rel="noopener"
+                          onClick={() =>
+                            track("badge_installer_preview", {
+                              platform: selected.id,
+                              display,
+                            })
+                          }
+                          className="inline-flex min-h-11 items-center gap-2 border border-[#174a9b] bg-white px-3 text-xs font-bold text-[#174a9b] transition hover:bg-[#e7f1ff] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none"
+                        >
+                          {copy.preview}
+                          <ExternalLink
+                            className="h-3.5 w-3.5"
                             aria-hidden="true"
                           />
-                          {option === "bubble" ? (
-                            <span className="bg-[#174a9b] px-1.5 py-1 text-[8px] leading-none font-bold tracking-[0.06em] text-white uppercase">
-                              {copy.recommended}
-                            </span>
-                          ) : null}
+                        </a>
+                      </div>
+                      <div className="mt-4 overflow-hidden border border-[#b9c9df] bg-white shadow-[0_12px_35px_rgba(3,18,61,0.12)]">
+                        <div className="flex items-center gap-1.5 border-b border-[#d8d8d2] bg-[#f7f7f5] px-3 py-2">
+                          <span className="h-2 w-2 rounded-full bg-[#c9ced6]" />
+                          <span className="h-2 w-2 rounded-full bg-[#c9ced6]" />
+                          <span className="h-2 w-2 rounded-full bg-[#174a9b]" />
                         </div>
-                        <p className="mt-3 text-sm font-bold text-[#16181d]">
-                          {copy.styles[option].name}
-                        </p>
-                        <p className="mt-1 text-[11px] leading-snug text-[#5c6370] sm:text-xs">
-                          {copy.styles[option].description}
-                        </p>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="grid min-w-0 gap-0 lg:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)]">
-                <div className="min-w-0 p-5 sm:p-7">
-                  <div>
-                    <p className="eyebrow text-[#174a9b]">
-                      {selected.id === "wordpress"
-                        ? copy.manualOption
-                        : copy.manualFallback}
-                    </p>
-                    <h3 className="mt-1 text-lg font-bold text-[#16181d]">
-                      {copy.location}: {copy.locations[selected.id]}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
-                      {copy.manualFallbackBody}
-                    </p>
+                        <iframe
+                          key={previewUrl}
+                          src={previewUrl}
+                          title={`${copy.previewTitle}: ${copy.styles[display].name}`}
+                          sandbox="allow-scripts allow-popups"
+                          className="h-80 w-full border-0"
+                        />
+                      </div>
+                    </aside>
                   </div>
-
-                  <div className="mt-5 overflow-hidden border border-[#203457] bg-[#07132d]">
-                    <div className="flex min-h-12 items-center justify-between gap-3 border-b border-white/15 px-3 sm:px-4">
-                      <span className="mono text-[10px] font-bold tracking-[0.1em] text-white/55 uppercase">
-                        {copy.code}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={copySnippet}
-                        className="inline-flex min-h-11 items-center gap-2 px-2 text-xs font-bold text-white transition hover:text-[#75e2ff] focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
-                        aria-live="polite"
-                      >
-                        {copyStatus === "copied" ? (
-                          <Check className="h-4 w-4" aria-hidden="true" />
-                        ) : (
-                          <Copy className="h-4 w-4" aria-hidden="true" />
-                        )}
-                        {copyStatus === "copied"
-                          ? copy.copied
-                          : copyStatus === "failed"
-                            ? copy.copyFailed
-                            : copy.copy}
-                      </button>
-                    </div>
-                    <pre className="max-h-80 overflow-auto p-4 text-[11px] leading-relaxed sm:text-xs">
-                      <HighlightedCode code={snippet} />
-                    </pre>
-                  </div>
-                </div>
-
-                <aside className="border-t border-[#d8d8d2] bg-[#eef3f8] p-5 sm:p-7 lg:border-t-0 lg:border-l">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="eyebrow text-[#174a9b]">
-                        {copy.previewTitle}
-                      </p>
-                      <p className="mt-1 text-sm font-bold text-[#16181d]">
-                        {copy.styles[display].name}
-                      </p>
-                    </div>
-                    <a
-                      href={previewUrl}
-                      target="_blank"
-                      rel="noopener"
-                      onClick={() =>
-                        track("badge_installer_preview", {
-                          platform: selected.id,
-                          display,
-                        })
-                      }
-                      className="inline-flex min-h-11 items-center gap-2 border border-[#174a9b] bg-white px-3 text-xs font-bold text-[#174a9b] transition hover:bg-[#e7f1ff] focus-visible:ring-2 focus-visible:ring-[#174a9b] focus-visible:ring-offset-2 focus-visible:outline-none"
-                    >
-                      {copy.preview}
-                      <ExternalLink
-                        className="h-3.5 w-3.5"
-                        aria-hidden="true"
-                      />
-                    </a>
-                  </div>
-                  <div className="mt-4 overflow-hidden border border-[#b9c9df] bg-white shadow-[0_12px_35px_rgba(3,18,61,0.12)]">
-                    <div className="flex items-center gap-1.5 border-b border-[#d8d8d2] bg-[#f7f7f5] px-3 py-2">
-                      <span className="h-2 w-2 rounded-full bg-[#c9ced6]" />
-                      <span className="h-2 w-2 rounded-full bg-[#c9ced6]" />
-                      <span className="h-2 w-2 rounded-full bg-[#174a9b]" />
-                    </div>
-                    <iframe
-                      key={previewUrl}
-                      src={previewUrl}
-                      title={`${copy.previewTitle}: ${copy.styles[display].name}`}
-                      sandbox="allow-scripts allow-popups"
-                      className="h-80 w-full border-0"
-                    />
-                  </div>
-                </aside>
-              </div>
+                </>
+              ) : null}
             </>
           ) : null}
         </DialogContent>

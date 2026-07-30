@@ -166,6 +166,9 @@ describe("localized platform guides", () => {
       expectNonEmpty(PLATFORM_PAGE_COPY[lang].installOfficial(wix!));
       expect(PLATFORM_PAGE_COPY[lang].installOfficial(wix!)).toContain("Wix");
       expect(wix!.freeInstall[0]).toMatch(/Wix/);
+      expect([wix!.intro, ...wix!.freeInstall].join(" "), lang).not.toMatch(
+        /manual code|código manual|manuelle code|code manuel|codice manuale|custom code|código personalizado|benutzerdefinierten code|code personnalisé|codice personalizzato/i
+      );
     }
   });
 });

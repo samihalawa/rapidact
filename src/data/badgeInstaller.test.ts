@@ -31,4 +31,15 @@ describe("badge installer copy", () => {
       );
     }
   });
+
+  it("presents Wix as one official, non-technical installation path", () => {
+    for (const [language, copy] of Object.entries(INSTALLER_COPY)) {
+      expect(copy.officialWixApp, language).not.toBe("");
+      expect(copy.wixSteps, language).toHaveLength(3);
+      expect(copy.platformLabels.wix, language).toBe(copy.officialWixApp);
+      expect(copy.locations.wix, language).not.toMatch(
+        /custom code|código personalizado|benutzerdefinierter code|code personnalisé|codice personalizzato/i
+      );
+    }
+  });
 });

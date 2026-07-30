@@ -59,17 +59,17 @@ export const PLATFORMS: PlatformGuide[] = [
     metaTitle:
       "AI disclosure on Wix — EU AI Act Article 50 setup guide | RapidAct",
     metaDescription:
-      "Add a configurable AI-interaction notice to Wix through the site-wide Custom Code panel.",
+      "Add an EU AI Act Article 50 notice to your Wix site with the official RapidAct app. Tailor the message and publish without code.",
     h1: "Add an AI disclosure notice to Wix",
     intro:
-      "Wix sites often run Wix Chat, Tidio or another AI app. Your exact duty depends on whether you are the provider or deployer and what the system does. Where a direct-interaction notice is required, RapidAct adds the visible notice through Wix Custom Code.",
+      "Wix sites often use AI chat, assistants or generated content. RapidAct adds one clear visitor notice across your site through the official Wix app, with no code or page-by-page editing.",
     detectionNote:
       "Run the free scan first: a live browser inspects the published Wix experience, including client-rendered widgets, and records any visible AI touchpoints or disclosure wording with the source URL.",
     installUrl: "https://wix.to/JKi80ih",
     freeInstall: [
       "Select Install on Wix to open the official Wix installation flow.",
       "Choose the Wix site where you want to add RapidAct and confirm the installation.",
-      "Choose the language and notice details, then publish the site. Manual code remains available as an alternative.",
+      "Choose the language and notice details, then publish the site.",
       "Open the published page in a private window and verify the notice appears before the first AI interaction.",
     ],
     commonWidgets: ["Wix Chat (AI)", "Tidio", "Chatbase", "Custom GPT apps"],
@@ -309,7 +309,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     intro: {
       wordpress:
         "Si ofreces un asistente de IA bajo tu propio servicio o marca, el artículo 50(1) puede exigir un aviso claro antes de la primera interacción. El aviso gratuito de RapidAct añade esa capa visible sin sustituir la evaluación de tu función y alcance.",
-      wix: "Las webs de Wix suelen usar Wix Chat, Tidio u otra aplicación de IA. La obligación exacta depende de si eres proveedor o responsable del despliegue y de lo que haga el sistema. Cuando se exige un aviso de interacción directa, RapidAct lo añade mediante Código personalizado de Wix.",
+      wix: "Las webs de Wix suelen usar chats, asistentes o contenido generado con IA. RapidAct añade un aviso claro para visitantes en toda la web mediante la aplicación oficial de Wix, sin código ni edición página por página.",
       shopify:
         "Si tu tienda ofrece un asistente de compras o soporte con IA, puede ser necesario mostrar un aviso claro de interacción directa. El contenido generado por IA tiene reglas diferentes: clasifica primero el sistema y tu función, y usa el aviso donde corresponda.",
       tidio:
@@ -338,7 +338,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Descarga el ZIP del plugin, súbelo desde Plugins → Añadir plugin → Subir plugin y actívalo.",
-      wix: "Usa el botón oficial de instalación de Wix para añadir RapidAct a tu web. El código manual queda como alternativa.",
+      wix: "Usa el botón oficial de instalación de Wix para añadir RapidAct a tu web sin código.",
       shopify:
         "Copia el script en el tema, antes de la etiqueta de cierre del body.",
       tidio: "Añade el script a la misma plantilla que carga Tidio o Lyro.",
@@ -361,7 +361,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       wix: [
         "Pulsa Instalar en Wix para abrir la instalación oficial.",
         "Elige la web de Wix donde quieres añadir RapidAct y confirma la instalación.",
-        "Configura el idioma y los detalles del aviso, y publica la web. El código manual sigue disponible como alternativa.",
+        "Configura el idioma y los detalles del aviso, y publica la web.",
         "Abre la web publicada en una ventana privada y comprueba que el aviso aparece antes de la primera interacción con IA.",
       ],
       botpress: [
@@ -402,7 +402,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     intro: {
       wordpress:
         "Wenn Sie einen KI-Assistenten unter Ihrem eigenen Dienst oder Ihrer Marke anbieten, kann Artikel 50 Absatz 1 einen klaren Hinweis vor der ersten Interaktion verlangen. Der kostenlose RapidAct-Hinweis schafft diese sichtbare Ebene, ersetzt aber nicht die Prüfung Ihrer Rolle und des Anwendungsbereichs.",
-      wix: "Wix-Websites nutzen häufig Wix Chat, Tidio oder eine andere KI-App. Die genaue Pflicht hängt davon ab, ob Sie Anbieter oder Betreiber sind und was das System tut. Wenn ein Hinweis auf die direkte Interaktion erforderlich ist, fügt RapidAct ihn über den benutzerdefinierten Code von Wix ein.",
+      wix: "Wix-Websites nutzen häufig KI-Chats, Assistenten oder KI-generierte Inhalte. RapidAct fügt über die offizielle Wix-App einen klaren Besucherhinweis auf der gesamten Website hinzu – ohne Code oder seitenweise Bearbeitung.",
       shopify:
         "Wenn Ihr Shop einen KI-Einkaufs- oder Supportassistenten anbietet, kann ein klarer Hinweis auf die direkte Interaktion erforderlich sein. Für KI-generierte Inhalte gelten andere Regeln. Ordnen Sie zuerst System und Rolle ein und verwenden Sie den Hinweis dort, wo er passt.",
       tidio:
@@ -432,7 +432,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Laden Sie die Plugin-ZIP herunter, öffnen Sie Plugins → Installieren → Plugin hochladen und aktivieren Sie sie.",
-      wix: "Installieren Sie RapidAct über die offizielle Wix-Schaltfläche. Die manuelle Code-Installation bleibt als Alternative verfügbar.",
+      wix: "Installieren Sie RapidAct über die offizielle Wix-Schaltfläche – ohne Code.",
       shopify:
         "Fügen Sie das Skript im Theme vor dem schließenden body-Tag ein.",
       tidio:
@@ -456,7 +456,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       wix: [
         "Wählen Sie Auf Wix installieren, um die offizielle Installation zu öffnen.",
         "Wählen Sie die Wix-Website aus, auf der RapidAct hinzugefügt werden soll, und bestätigen Sie die Installation.",
-        "Konfigurieren Sie Sprache und Hinweisinformationen und veröffentlichen Sie die Website. Die manuelle Code-Installation bleibt als Alternative verfügbar.",
+        "Konfigurieren Sie Sprache und Hinweisinformationen und veröffentlichen Sie die Website.",
         "Öffnen Sie die veröffentlichte Website in einem privaten Fenster und prüfen Sie, dass der Hinweis vor der ersten KI-Interaktion erscheint.",
       ],
       botpress: [
@@ -496,7 +496,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     intro: {
       wordpress:
         "Si vous proposez un assistant IA sous votre propre service ou marque, l’article 50, paragraphe 1, peut imposer une mention claire avant la première interaction. La mention gratuite RapidAct ajoute cette couche visible sans remplacer l’analyse de votre rôle et du périmètre.",
-      wix: "Les sites Wix utilisent souvent Wix Chat, Tidio ou une autre application d’IA. L’obligation exacte dépend de votre rôle de fournisseur ou de déployeur et de la fonction du système. Lorsqu’une mention d’interaction directe est requise, RapidAct l’ajoute via le code personnalisé de Wix.",
+      wix: "Les sites Wix utilisent souvent des chats, assistants ou contenus générés par IA. RapidAct ajoute une mention claire pour les visiteurs sur tout le site via l’application Wix officielle, sans code ni modification page par page.",
       shopify:
         "Si votre boutique propose un assistant d’achat ou de support fondé sur l’IA, une mention claire d’interaction directe peut être nécessaire. Les contenus générés par l’IA relèvent de règles distinctes : classez d’abord le système et votre rôle, puis utilisez la mention là où elle convient.",
       tidio:
@@ -526,7 +526,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Téléchargez le ZIP, ouvrez Extensions → Ajouter une extension → Téléverser une extension, puis activez-le.",
-      wix: "Utilisez le bouton d’installation officiel de Wix pour ajouter RapidAct. Le code manuel reste disponible comme alternative.",
+      wix: "Utilisez le bouton d’installation officiel de Wix pour ajouter RapidAct sans code.",
       shopify:
         "Collez le script dans le thème avant la balise de fermeture du body.",
       tidio:
@@ -549,7 +549,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       wix: [
         "Sélectionnez Installer sur Wix pour ouvrir l’installation officielle.",
         "Choisissez le site Wix auquel ajouter RapidAct et confirmez l’installation.",
-        "Configurez la langue et les détails de la mention, puis publiez le site. Le code manuel reste disponible comme alternative.",
+        "Configurez la langue et les détails de la mention, puis publiez le site.",
         "Ouvrez le site publié dans une fenêtre privée et vérifiez que la mention apparaît avant la première interaction avec l’IA.",
       ],
       botpress: [
@@ -590,7 +590,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     intro: {
       wordpress:
         "Se offri un assistente IA con il tuo servizio o marchio, l’articolo 50(1) può richiedere un avviso chiaro prima della prima interazione. L’avviso gratuito RapidAct aggiunge questo livello visibile senza sostituire la valutazione del ruolo e dell’ambito.",
-      wix: "I siti Wix usano spesso Wix Chat, Tidio o un’altra app di IA. L’obbligo esatto dipende dal ruolo di fornitore o deployer e da ciò che fa il sistema. Quando serve un avviso di interazione diretta, RapidAct lo aggiunge tramite il Codice personalizzato di Wix.",
+      wix: "I siti Wix usano spesso chat, assistenti o contenuti generati con l’IA. RapidAct aggiunge un avviso chiaro per i visitatori su tutto il sito tramite l’app Wix ufficiale, senza codice o modifiche pagina per pagina.",
       shopify:
         "Se il negozio offre un assistente IA per acquisti o supporto, può essere necessario mostrare un chiaro avviso di interazione diretta. I contenuti generati dall’IA seguono regole diverse: classifica prima il sistema e il tuo ruolo, poi usa l’avviso dove appropriato.",
       tidio:
@@ -620,7 +620,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
     placement: {
       wordpress:
         "Scarica lo ZIP, apri Plugin → Aggiungi plugin → Carica plugin e attivalo.",
-      wix: "Usa il pulsante di installazione ufficiale di Wix per aggiungere RapidAct. Il codice manuale resta disponibile come alternativa.",
+      wix: "Usa il pulsante di installazione ufficiale di Wix per aggiungere RapidAct senza codice.",
       shopify: "Incolla lo script nel tema prima del tag di chiusura del body.",
       tidio: "Aggiungi lo script allo stesso modello che carica Tidio o Lyro.",
       botpress:
@@ -641,7 +641,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       wix: [
         "Seleziona Installa su Wix per aprire l’installazione ufficiale.",
         "Scegli il sito Wix a cui aggiungere RapidAct e conferma l’installazione.",
-        "Configura la lingua e i dettagli dell’avviso, quindi pubblica il sito. Il codice manuale resta disponibile come alternativa.",
+        "Configura la lingua e i dettagli dell’avviso, quindi pubblica il sito.",
         "Apri il sito pubblicato in una finestra privata e verifica che l’avviso appaia prima della prima interazione con l’IA.",
       ],
       botpress: [

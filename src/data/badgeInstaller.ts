@@ -6,8 +6,10 @@ export type InstallerCopy = {
   choosePlatformBody: string;
   direct: string;
   pluginAndCode: string;
+  officialWixApp: string;
   recommended: string;
   installOn: string;
+  chooseSetup: string;
   chooseDisplay: string;
   installAndVerify: string;
   wordpressDownloadTitle: string;
@@ -17,6 +19,8 @@ export type InstallerCopy = {
   wordpressSteps: [string, string, string];
   wixInstallTitle: string;
   wixInstallBody: string;
+  wixStepsTitle: string;
+  wixSteps: [string, string, string];
   installWix: string;
   manualOption: string;
   manualFallback: string;
@@ -44,8 +48,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Choose your platform to get the simplest working installation path.",
     direct: "Direct install",
     pluginAndCode: "Plugin or code",
+    officialWixApp: "Official Wix app",
     recommended: "Recommended",
     installOn: "Install RapidAct on",
+    chooseSetup: "Choose the setup",
     chooseDisplay: "Choose how the notice appears",
     installAndVerify: "Install and verify",
     wordpressDownloadTitle: "Download the WordPress plugin",
@@ -58,10 +64,16 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Choose the downloaded ZIP, then select Install Now and Activate.",
       "Open Settings → RapidAct AI Disclosure, tailor the notice and save.",
     ],
-    wixInstallTitle: "Install RapidAct directly on Wix",
+    wixInstallTitle: "Add EU AI Act Badge to your Wix site",
     wixInstallBody:
-      "Open the official Wix installation flow. Wix will guide you through adding RapidAct to your site—no code required.",
-    installWix: "Install on Wix",
+      "Choose your site, tailor the notice and publish. Wix handles the installation—no code required.",
+    wixStepsTitle: "From install to published notice",
+    wixSteps: [
+      "Add EU AI Act Badge to your Wix site.",
+      "Choose the language and notice text.",
+      "Publish and check what visitors see.",
+    ],
+    installWix: "Add EU AI Act Badge to Wix",
     manualOption: "Or install with code",
     manualFallback: "Installation",
     manualFallbackBody:
@@ -77,7 +89,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     platformLabels: {
       wordpress: "Plugin or code",
       shopify: "Theme code",
-      wix: "Custom code",
+      wix: "Official Wix app",
       html: "One script",
       react: "Component",
       nextjs: "Client component",
@@ -87,7 +99,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     locations: {
       wordpress: "a Custom HTML block or your site footer",
       shopify: "Online Store → Themes → Edit code, before </body>",
-      wix: "Settings → Custom Code → Body end",
+      wix: "the official Wix installation flow",
       html: "your shared layout, before </body>",
       react: "a component rendered on every AI-enabled route",
       nextjs: "a client component in your root layout",
@@ -119,8 +131,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Elige tu plataforma para obtener la forma de instalación más sencilla.",
     direct: "Instalación directa",
     pluginAndCode: "Plugin o código",
+    officialWixApp: "Aplicación oficial de Wix",
     recommended: "Recomendado",
     installOn: "Instala RapidAct en",
+    chooseSetup: "Elige la configuración",
     chooseDisplay: "Elige cómo aparece el aviso",
     installAndVerify: "Instala y comprueba",
     wordpressDownloadTitle: "Descarga el plugin de WordPress",
@@ -133,10 +147,16 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Elige el ZIP descargado y pulsa Instalar ahora y Activar.",
       "Abre Ajustes → RapidAct AI Disclosure, adapta el aviso y guarda.",
     ],
-    wixInstallTitle: "Instala RapidAct directamente en Wix",
+    wixInstallTitle: "Añade EU AI Act Badge a tu web de Wix",
     wixInstallBody:
-      "Abre la instalación oficial de Wix. Wix te guiará para añadir RapidAct a tu web sin utilizar código.",
-    installWix: "Instalar en Wix",
+      "Elige tu web, adapta el aviso y publica. Wix se encarga de la instalación, sin código.",
+    wixStepsTitle: "De la instalación al aviso publicado",
+    wixSteps: [
+      "Añade EU AI Act Badge a tu web de Wix.",
+      "Elige el idioma y el texto del aviso.",
+      "Publica y comprueba lo que ven tus visitantes.",
+    ],
+    installWix: "Añadir EU AI Act Badge a Wix",
     manualOption: "O instalar con código",
     manualFallback: "Instalación",
     manualFallbackBody:
@@ -152,7 +172,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     platformLabels: {
       wordpress: "Plugin o código",
       shopify: "Código del tema",
-      wix: "Código personalizado",
+      wix: "Aplicación oficial de Wix",
       html: "Un script",
       react: "Componente",
       nextjs: "Componente cliente",
@@ -162,7 +182,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     locations: {
       wordpress: "un bloque HTML personalizado o el pie de la web",
       shopify: "Tienda online → Temas → Editar código, antes de </body>",
-      wix: "Ajustes → Código personalizado → Final del body",
+      wix: "el proceso oficial de instalación de Wix",
       html: "la plantilla común, antes de </body>",
       react: "un componente visible en cada ruta con IA",
       nextjs: "un componente cliente del layout raíz",
@@ -194,8 +214,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Wählen Sie Ihre Plattform für den einfachsten funktionierenden Installationsweg.",
     direct: "Direkte Installation",
     pluginAndCode: "Plugin oder Code",
+    officialWixApp: "Offizielle Wix-App",
     recommended: "Empfohlen",
     installOn: "RapidAct installieren auf",
+    chooseSetup: "Einrichtung auswählen",
     chooseDisplay: "Darstellung des Hinweises",
     installAndVerify: "Installieren und prüfen",
     wordpressDownloadTitle: "WordPress-Plugin herunterladen",
@@ -208,10 +230,16 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Die ZIP-Datei auswählen, Jetzt installieren und Aktivieren wählen.",
       "Einstellungen → RapidAct AI Disclosure öffnen, Hinweis anpassen und speichern.",
     ],
-    wixInstallTitle: "RapidAct direkt auf Wix installieren",
+    wixInstallTitle: "EU AI Act Badge zur Wix-Website hinzufügen",
     wixInstallBody:
-      "Öffnen Sie die offizielle Wix-Installation. Wix führt Sie ohne Code durch das Hinzufügen von RapidAct zu Ihrer Website.",
-    installWix: "Auf Wix installieren",
+      "Website auswählen, Hinweis anpassen und veröffentlichen. Wix übernimmt die Installation – ohne Code.",
+    wixStepsTitle: "Von der Installation zum veröffentlichten Hinweis",
+    wixSteps: [
+      "EU AI Act Badge zur Wix-Website hinzufügen.",
+      "Sprache und Hinweistext auswählen.",
+      "Veröffentlichen und die Besucheransicht prüfen.",
+    ],
+    installWix: "EU AI Act Badge zu Wix hinzufügen",
     manualOption: "Oder mit Code installieren",
     manualFallback: "Installation",
     manualFallbackBody:
@@ -227,7 +255,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     platformLabels: {
       wordpress: "Plugin oder Code",
       shopify: "Theme-Code",
-      wix: "Benutzerdefinierter Code",
+      wix: "Offizielle Wix-App",
       html: "Ein Skript",
       react: "Komponente",
       nextjs: "Client-Komponente",
@@ -237,7 +265,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     locations: {
       wordpress: "einen individuellen HTML-Block oder den Website-Footer",
       shopify: "Onlineshop → Themes → Code bearbeiten, vor </body>",
-      wix: "Einstellungen → Benutzerdefinierter Code → Body-Ende",
+      wix: "den offiziellen Wix-Installationsablauf",
       html: "das gemeinsame Layout, vor </body>",
       react: "eine Komponente auf jeder KI-fähigen Route",
       nextjs: "eine Client-Komponente im Root-Layout",
@@ -269,8 +297,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Choisissez votre plateforme pour obtenir la méthode d’installation la plus simple.",
     direct: "Installation directe",
     pluginAndCode: "Extension ou code",
+    officialWixApp: "Application Wix officielle",
     recommended: "Recommandé",
     installOn: "Installer RapidAct sur",
+    chooseSetup: "Choisissez la configuration",
     chooseDisplay: "Choisissez l’affichage",
     installAndVerify: "Installer et vérifier",
     wordpressDownloadTitle: "Télécharger l’extension WordPress",
@@ -283,10 +313,16 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Choisissez le ZIP, puis Installer maintenant et Activer.",
       "Ouvrez Réglages → RapidAct AI Disclosure, adaptez l’avis et enregistrez.",
     ],
-    wixInstallTitle: "Installer RapidAct directement sur Wix",
+    wixInstallTitle: "Ajoutez EU AI Act Badge à votre site Wix",
     wixInstallBody:
-      "Ouvrez le parcours d’installation officiel de Wix. Wix vous guide pour ajouter RapidAct à votre site sans code.",
-    installWix: "Installer sur Wix",
+      "Choisissez votre site, adaptez la mention et publiez. Wix gère l’installation, sans code.",
+    wixStepsTitle: "De l’installation à la mention publiée",
+    wixSteps: [
+      "Ajoutez EU AI Act Badge à votre site Wix.",
+      "Choisissez la langue et le texte de la mention.",
+      "Publiez et vérifiez ce que voient les visiteurs.",
+    ],
+    installWix: "Ajouter EU AI Act Badge à Wix",
     manualOption: "Ou installer avec du code",
     manualFallback: "Installation",
     manualFallbackBody:
@@ -302,7 +338,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     platformLabels: {
       wordpress: "Extension ou code",
       shopify: "Code du thème",
-      wix: "Code personnalisé",
+      wix: "Application Wix officielle",
       html: "Un script",
       react: "Composant",
       nextjs: "Composant client",
@@ -312,7 +348,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     locations: {
       wordpress: "un bloc HTML personnalisé ou le pied de page",
       shopify: "Boutique en ligne → Thèmes → Modifier le code, avant </body>",
-      wix: "Paramètres → Code personnalisé → Fin du body",
+      wix: "le parcours d’installation officiel de Wix",
       html: "le modèle partagé, avant </body>",
       react: "un composant présent sur chaque route avec IA",
       nextjs: "un composant client du layout racine",
@@ -344,8 +380,10 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Scegli la piattaforma per ottenere il metodo di installazione più semplice.",
     direct: "Installazione diretta",
     pluginAndCode: "Plugin o codice",
+    officialWixApp: "App Wix ufficiale",
     recommended: "Consigliato",
     installOn: "Installa RapidAct su",
+    chooseSetup: "Scegli la configurazione",
     chooseDisplay: "Scegli come appare l’avviso",
     installAndVerify: "Installa e verifica",
     wordpressDownloadTitle: "Scarica il plugin WordPress",
@@ -358,10 +396,16 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Scegli lo ZIP, quindi Installa ora e Attiva.",
       "Apri Impostazioni → RapidAct AI Disclosure, personalizza l’avviso e salva.",
     ],
-    wixInstallTitle: "Installa RapidAct direttamente su Wix",
+    wixInstallTitle: "Aggiungi EU AI Act Badge al tuo sito Wix",
     wixInstallBody:
-      "Apri il percorso di installazione ufficiale di Wix. Wix ti guiderà nell’aggiunta di RapidAct al sito senza codice.",
-    installWix: "Installa su Wix",
+      "Scegli il sito, personalizza l’avviso e pubblica. Wix gestisce l’installazione, senza codice.",
+    wixStepsTitle: "Dall’installazione all’avviso pubblicato",
+    wixSteps: [
+      "Aggiungi EU AI Act Badge al tuo sito Wix.",
+      "Scegli la lingua e il testo dell’avviso.",
+      "Pubblica e controlla ciò che vedono i visitatori.",
+    ],
+    installWix: "Aggiungi EU AI Act Badge a Wix",
     manualOption: "Oppure installa con il codice",
     manualFallback: "Installazione",
     manualFallbackBody:
@@ -377,7 +421,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     platformLabels: {
       wordpress: "Plugin o codice",
       shopify: "Codice del tema",
-      wix: "Codice personalizzato",
+      wix: "App Wix ufficiale",
       html: "Uno script",
       react: "Componente",
       nextjs: "Componente client",
@@ -387,7 +431,7 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
     locations: {
       wordpress: "un blocco HTML personalizzato o il footer del sito",
       shopify: "Negozio online → Temi → Modifica codice, prima di </body>",
-      wix: "Impostazioni → Codice personalizzato → Fine del body",
+      wix: "il percorso di installazione ufficiale di Wix",
       html: "il layout condiviso, prima di </body>",
       react: "un componente su ogni route con IA",
       nextjs: "un componente client nel layout principale",
