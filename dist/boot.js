@@ -28787,10 +28787,14 @@ var init_serve_static = __esm({
 // api/lib/vite.ts
 var vite_exports = {};
 __export(vite_exports, {
+  isSpaRouteRequest: () => isSpaRouteRequest,
   serveStaticFiles: () => serveStaticFiles
 });
 import fs from "fs";
 import path from "path";
+function isSpaRouteRequest(method, pathname) {
+  return (method === "GET" || method === "HEAD") && path.extname(pathname) === "";
+}
 function serveStaticFiles(app2) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
   app2.use("*", async (c, next) => {
@@ -28801,8 +28805,7 @@ function serveStaticFiles(app2) {
   });
   app2.use("*", serveStatic({ root: "./dist/public" }));
   app2.notFound((c) => {
-    const accept = c.req.header("accept") ?? "";
-    if (!accept.includes("text/html")) {
+    if (!isSpaRouteRequest(c.req.method, c.req.path)) {
       c.header("Cache-Control", "no-store");
       return c.json({ error: "Not Found" }, 404);
     }

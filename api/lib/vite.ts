@@ -6,6 +6,10 @@ import path from "path";
 
 type App = Hono<{ Bindings: HttpBindings }>;
 
+export function isSpaRouteRequest(method: string, pathname: string) {
+  return (method === "GET" || method === "HEAD") && path.extname(pathname) === "";
+}
+
 export function serveStaticFiles(app: App) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
 
@@ -19,8 +23,7 @@ export function serveStaticFiles(app: App) {
   app.use("*", serveStatic({ root: "./dist/public" }));
 
   app.notFound((c) => {
-    const accept = c.req.header("accept") ?? "";
-    if (!accept.includes("text/html")) {
+    if (!isSpaRouteRequest(c.req.method, c.req.path)) {
       c.header("Cache-Control", "no-store");
       return c.json({ error: "Not Found" }, 404);
     }

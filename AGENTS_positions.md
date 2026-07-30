@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct SPA direct routes | Accept-header-only fallback makes extensionless conversion links return JSON 404 to previews and plain clients | serve the SPA shell for extensionless GET/HEAD requests while preserving asset and mutation 404s | do not infer browser failure from a default curl probe or serve index HTML for every missing asset | verify browser Accept and */* on localized conversion routes, missing assets, rendered pages and the deployed bundle
 RapidAct outbound drafts | Gmail-only checks can miss existing Close drafts and create duplicate send risk | search the lead and email activities first, then update one canonical Close draft in place | do not infer “no Gmail draft” means no draft or keep competing versions across systems | verify exact lead/contact/recipient, draft status, subject/body read-back and one eventual send activity
 RapidAct conversion consent | a fixed analytics prompt can cover the first paid-form fields and CTA on a new mobile visit | render the same two consent choices as an in-flow banner on report/start while retaining the compact fixed prompt elsewhere | do not remove consent choices, hide the explanatory copy, or add another modal before payment | verify the fresh-storage report route at 320/375/392px with the prompt in document flow, both controls at least 44px, no horizontal overflow and the form visible below
 RapidAct localized report width | long translated compound words can preserve intrinsic grid width and push the phone page beyond its viewport | constrain both report grid children and allow heading/chapter hyphenation | do not shorten substantive localized content or trust one language at one width | verify all five report locales at 320, 375 and 392px with document width equal to viewport and a 48px enabled CTA
@@ -28,6 +29,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale data-layer values, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, reset all mapped fields per event, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, let commercial fields persist between events, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-30 — Extensionless direct routes do not depend on Accept
+
+- Status: CURRENT
+- Project/root: `rapidact`; Hono static delivery for React Router routes.
+- Mistake: a default curl probe received JSON 404 and was initially read as a browser outage; browser navigation already worked because it sent `Accept: text/html`, while link previews and plain clients still failed.
+- Do: serve `index.html` for extensionless `GET` and `HEAD` requests, independent of `Accept`.
+- Don't: use the SPA shell for missing asset-like paths or non-read methods, or infer rendered failure from a client with a different request shape.
+- Evidence: 2026-07-30 live `/report`, `/example-report`, and `/es` probes with `Accept: */*` versus browser navigation headers; `api/lib/vite.ts`.
+- Trigger terms: direct link, 404, Not Found, email preview, curl, Accept, SPA fallback.
+- Verify before reuse: both browser navigation and `Accept: */*` return HTML for localized conversion routes; missing `.js` remains a no-store 404; exact pages render after the deployed bundle is live.
 
 ## 2026-07-30 — One canonical Close draft per prospect
 
