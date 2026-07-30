@@ -21,6 +21,7 @@ export function serveStaticFiles(app: App) {
   app.notFound((c) => {
     const accept = c.req.header("accept") ?? "";
     if (!accept.includes("text/html")) {
+      c.header("Cache-Control", "no-store");
       return c.json({ error: "Not Found" }, 404);
     }
     const indexPath = path.resolve(distPath, "index.html");

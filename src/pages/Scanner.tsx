@@ -273,6 +273,7 @@ export default function Scanner() {
           </label>
           <Input
             id="scanner-url"
+            inputMode="url"
             maxLength={1000}
             value={url}
             onChange={e => {

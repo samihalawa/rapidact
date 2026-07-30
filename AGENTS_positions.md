@@ -53,9 +53,9 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Status: CURRENT
 - Project/root: `rapidact`; production static delivery and client routes.
 - Mistake: a previously loaded HTML shell still referenced a removed hashed JavaScript bundle after deployment, producing a blank page while the separately loaded RapidAct badge remained visible.
-- Do: send `no-cache, no-store, must-revalidate` on every HTML response while allowing content-hashed assets to remain cacheable.
+- Do: send `no-cache, no-store, must-revalidate` on every HTML response, send `no-store` on missing assets, and allow only successful content-hashed assets to remain cacheable.
 - Don't: infer the app bundle is healthy from the badge, close on a cache-busted URL alone, or serve reusable HTML that names assets deleted by the next release.
-- Evidence: after deploy on 2026-07-30 the in-app browser rendered only the badge; the old `index-CqZKMfXi.js` returned 404, current HTML named `index-lGrSh6oa.js`, and a cache-busted navigation rendered the full scanner.
+- Evidence: after deploy on 2026-07-30 the in-app browser rendered only the badge; the old `index-CqZKMfXi.js` returned 404, current HTML named `index-lGrSh6oa.js`, and a cache-busted navigation rendered the full scanner. A later incomplete generated-asset commit briefly served HTML naming `index-jgAMy4Ff.js`; Chrome retained its cacheable 404 even after the repaired asset returned 200.
 - Trigger terms: blank page, white page, badge only, deploy, hashed asset, stale HTML, 404 bundle, cache.
 - Verify before reuse: HTML response has the no-store policy, its named JS/CSS return 200, an existing browser tab reloads after a subsequent deploy, and the exact production route renders.
 
