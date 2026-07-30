@@ -15,6 +15,7 @@ export default function Analytics() {
   const { t } = useI18n();
   const enabled = isAnalyticsHost();
   const [choice, setChoice] = useState(getConsent());
+  const isConversionFlow = /(^|\/)(report|start)\/?$/.test(location.pathname);
 
   useEffect(() => {
     initAnalytics();
@@ -52,27 +53,47 @@ export default function Analytics() {
   return (
     <aside
       aria-label="Analytics preferences"
-      className="fixed right-3 bottom-20 left-3 z-[70] mx-auto max-w-2xl border border-[#d8d8d2] bg-white p-4 shadow-[0_16px_45px_rgba(22,24,29,0.20)] sm:right-6 sm:bottom-6 sm:left-auto sm:w-[29rem]"
+      className={
+        isConversionFlow
+          ? "relative z-[70] w-full border-b border-[#d8d8d2] bg-white px-4 py-3 shadow-sm"
+          : "fixed right-3 bottom-20 left-3 z-[70] mx-auto max-w-2xl border border-[#d8d8d2] bg-white p-4 shadow-[0_16px_45px_rgba(22,24,29,0.20)] sm:right-6 sm:bottom-6 sm:left-auto sm:w-[29rem]"
+      }
     >
-      <p className="ink text-[14px] font-semibold">{t("consent.title")}</p>
-      <p className="ink-soft mt-1 text-[12px] leading-relaxed">
-        {t("consent.body")}
-      </p>
-      <div className="mt-3 flex flex-wrap gap-2">
-        <button
-          type="button"
-          className="min-h-11 rounded bg-[#16181d] px-4 text-[12px] font-semibold text-white"
-          onClick={() => setConsent("all")}
+      <div
+        className={
+          isConversionFlow
+            ? "mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+            : ""
+        }
+      >
+        <div className="min-w-0">
+          <p className="ink text-[14px] font-semibold">{t("consent.title")}</p>
+          <p className="ink-soft mt-1 text-[12px] leading-relaxed">
+            {t("consent.body")}
+          </p>
+        </div>
+        <div
+          className={
+            isConversionFlow
+              ? "grid w-full shrink-0 grid-cols-2 gap-2 sm:w-auto"
+              : "mt-3 flex flex-wrap gap-2"
+          }
         >
-          {t("consent.allow")}
-        </button>
-        <button
-          type="button"
-          className="hairline ink min-h-11 rounded border bg-white px-4 text-[12px] font-semibold"
-          onClick={() => setConsent("essential")}
-        >
-          {t("consent.essential")}
-        </button>
+          <button
+            type="button"
+            className="min-h-11 rounded bg-[#16181d] px-3 text-[12px] leading-tight font-semibold text-white"
+            onClick={() => setConsent("all")}
+          >
+            {t("consent.allow")}
+          </button>
+          <button
+            type="button"
+            className="hairline ink min-h-11 rounded border bg-white px-3 text-[12px] leading-tight font-semibold"
+            onClick={() => setConsent("essential")}
+          >
+            {t("consent.essential")}
+          </button>
+        </div>
       </div>
     </aside>
   );

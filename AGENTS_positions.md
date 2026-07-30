@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct conversion consent | a fixed analytics prompt can cover the first paid-form fields and CTA on a new mobile visit | render the same two consent choices as an in-flow banner on report/start while retaining the compact fixed prompt elsewhere | do not remove consent choices, hide the explanatory copy, or add another modal before payment | verify the fresh-storage report route at 320/375/392px with the prompt in document flow, both controls at least 44px, no horizontal overflow and the form visible below
 RapidAct localized report width | long translated compound words can preserve intrinsic grid width and push the phone page beyond its viewport | constrain both report grid children and allow heading/chapter hyphenation | do not shorten substantive localized content or trust one language at one width | verify all five report locales at 320, 375 and 392px with document width equal to viewport and a 48px enabled CTA
 RapidAct paid conversion flow | global fixed badge and WhatsApp controls can cover the primary CTA on phone screens | suppress floating controls only on report/start routes while retaining them elsewhere | do not let persistent support/compliance widgets compete with or obstruct payment progression | verify 390px report CTA is clear, five localized routes have two primary fields, and homepage still shows both widgets
 RapidAct commercial analytics | browser and Tag Assistant QA can produce plausible leads, key events and funnel activity that are not buyer demand | persist an explicit QA session classification, mark PostHog users natively as internal/test, and keep the paid assessment as the first commercial CTA without removing the free qualification path | do not diagnose price or checkout from test conversions, hardcode one device ID, or add more conversion sections | verify QA and external properties separately in GA4/PostHog, CRM lead identities, assessment click routing and zero unclassified verification events
@@ -26,6 +27,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale data-layer values, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, reset all mapped fields per event, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, let commercial fields persist between events, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-30 — Consent choices stay in flow on paid routes
+
+- Status: CURRENT
+- Project/root: `rapidact`; localized `/report` and legacy `/start` conversion routes.
+- Mistake: the fixed analytics prompt occupied the required-field and CTA region during a fresh 392px visit, creating an unrelated interaction before the buyer could inspect the form.
+- Do: preserve the full explanation and both 44px choices, but place the prompt in normal document flow above paid routes; retain the compact fixed prompt on non-conversion pages.
+- Don't: remove consent, hide its explanatory copy, add a modal, or infer abandonment causation from one replay.
+- Evidence: 2026-07-30 independent mobile critique and rendered fresh-storage report capture; `src/components/Analytics.tsx`.
+- Trigger terms: analytics consent, first visit, mobile overlay, report form, CTA obstruction.
+- Verify before reuse: fresh storage at 320/375/392px, prompt `position: relative`, document width equals viewport, both choices are at least 44px, and the report remains visible below rather than underneath it.
 
 ## 2026-07-30 — Localized report grids must release intrinsic phone width
 
