@@ -322,6 +322,7 @@ export default function Partners() {
                     {copy.name}
                     <Input
                       required
+                      maxLength={160}
                       autoComplete="name"
                       value={name}
                       onChange={event => setName(event.target.value)}
@@ -332,6 +333,7 @@ export default function Partners() {
                     {copy.company}
                     <Input
                       required
+                      maxLength={200}
                       autoComplete="organization"
                       value={company}
                       onChange={event => setCompany(event.target.value)}
@@ -343,6 +345,7 @@ export default function Partners() {
                     <Input
                       required
                       type="email"
+                      maxLength={255}
                       autoComplete="email"
                       value={email}
                       onChange={event => {
@@ -360,6 +363,7 @@ export default function Partners() {
                     {copy.website}
                     <Input
                       type="url"
+                      maxLength={1000}
                       inputMode="url"
                       autoComplete="url"
                       value={website}
@@ -373,6 +377,7 @@ export default function Partners() {
                 <label className="block text-sm font-bold text-[#16181d]">
                   {copy.notes}
                   <Textarea
+                    maxLength={2000}
                     value={notes}
                     onChange={event => setNotes(event.target.value)}
                     placeholder={copy.notesPlaceholder}

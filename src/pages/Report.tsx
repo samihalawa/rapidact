@@ -319,6 +319,7 @@ export default function Report() {
                       {copy.company} <span className="text-[#b91c1c]">*</span>
                     </label>
                     <Input
+                      maxLength={255}
                       value={company}
                       onChange={e => setCompany(e.target.value)}
                       placeholder="Acme B.V."
@@ -333,6 +334,7 @@ export default function Report() {
                     </label>
                     <Input
                       type="email"
+                      maxLength={255}
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       onBlur={() => setEmailTouched(true)}
@@ -377,6 +379,7 @@ export default function Report() {
                         {copy.website}
                       </label>
                       <Input
+                        maxLength={500}
                         value={website}
                         onChange={e => setWebsite(e.target.value)}
                         placeholder="https://company.com"
@@ -407,6 +410,7 @@ export default function Report() {
                         {copy.countries}
                       </label>
                       <Input
+                        maxLength={64}
                         value={country}
                         onChange={e => setCountry(e.target.value)}
                         placeholder={copy.countriesPlaceholder}
@@ -458,6 +462,7 @@ export default function Report() {
                         {copy.notes}
                       </label>
                       <Textarea
+                        maxLength={4000}
                         value={notes}
                         onChange={e => setNotes(e.target.value)}
                         placeholder={copy.notesPlaceholder}

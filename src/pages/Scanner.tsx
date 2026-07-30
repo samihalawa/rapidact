@@ -273,6 +273,7 @@ export default function Scanner() {
           </label>
           <Input
             id="scanner-url"
+            maxLength={1000}
             value={url}
             onChange={e => {
               setUrl(e.target.value);
@@ -345,6 +346,7 @@ export default function Scanner() {
                 <Input
                   id="scanner-email"
                   type="email"
+                  maxLength={255}
                   autoComplete="email"
                   autoFocus
                   value={email}

@@ -64,9 +64,9 @@ RapidAct product claims | claims outran shipped surfaces | promise only the scan
 - Status: CURRENT
 - Project/root: `rapidact`; scanner gate, assessment intake, partner intake and lead APIs.
 - Mistake: the scanner and report used looser browser checks than the API, so a malformed address reached a server `BAD_REQUEST` and appeared to visitors as “We could not save your email.”
-- Do: validate and normalize with the shared contract, classify validation failures as invalid input, let scanner success follow retained DB or CRM state, and keep partner success dependent on the CRM path that preserves partner metadata.
+- Do: validate and normalize with the shared contract, mirror every API length limit in the rendered inputs, classify validation failures as invalid input, let scanner success follow retained DB or CRM state, and keep partner success dependent on the CRM path that preserves partner metadata.
 - Don't: duplicate email regexes, lowercase only on one side, hide validation failures behind a storage message, or treat a generic DB lead as a complete partner enquiry.
-- Evidence: live production calls on 2026-07-30 returned `{"ok":true,"stored":true,"crm":"synced"}` for a valid address and HTTP 400 `BAD_REQUEST` for the browser-accepted malformed shape; independent review caught the partner-context regression.
+- Evidence: live production calls on 2026-07-30 returned `{"ok":true,"stored":true,"crm":"synced"}` for a valid address and HTTP 400 `BAD_REQUEST` for the browser-accepted malformed shape; independent review caught the partner-context regression and the scanner URL-length mismatch that could still masquerade as an email-storage failure.
 - Trigger terms: save email, invalid email, BAD_REQUEST, scanner modal, report form, partner form, Close, retained lead.
 - Verify before reuse: submit representative valid/invalid addresses in the rendered forms, read the API response and normalized retained record, and confirm partner fields in Close.
 
