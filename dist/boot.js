@@ -28793,6 +28793,12 @@ import fs from "fs";
 import path from "path";
 function serveStaticFiles(app2) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
+  app2.use("*", async (c, next) => {
+    await next();
+    if (c.res.headers.get("content-type")?.includes("text/html")) {
+      c.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    }
+  });
   app2.use("*", serveStatic({ root: "./dist/public" }));
   app2.notFound((c) => {
     const accept = c.req.header("accept") ?? "";

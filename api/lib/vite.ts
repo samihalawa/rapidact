@@ -9,6 +9,13 @@ type App = Hono<{ Bindings: HttpBindings }>;
 export function serveStaticFiles(app: App) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
 
+  app.use("*", async (c, next) => {
+    await next();
+    if (c.res.headers.get("content-type")?.includes("text/html")) {
+      c.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    }
+  });
+
   app.use("*", serveStatic({ root: "./dist/public" }));
 
   app.notFound((c) => {
