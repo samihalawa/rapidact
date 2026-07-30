@@ -6,7 +6,7 @@ export const ANALYTICS = {
   googleAdsId: "AW-18196170782",
   posthogKey: "phc_tKAxP5F6oRE3XHximxQYW8dMX4gtE9XYBraJ4PNwfemk",
   posthogHost: "https://posthog.megawebs.com",
-  release: "2026-07-29",
+  release: "2026-07-30",
 } as const;
 
 export const ANALYTICS_EVENTS = {
@@ -198,7 +198,7 @@ export function buildDataLayerEvent(
   properties: EventProperties
 ): EventProperties & { event: string } {
   const clearedParameters = Object.fromEntries(
-    GTM_EVENT_PARAMETERS.map((parameter) => [parameter, undefined])
+    GTM_EVENT_PARAMETERS.map(parameter => [parameter, undefined])
   );
   return { event: name, ...clearedParameters, ...properties };
 }

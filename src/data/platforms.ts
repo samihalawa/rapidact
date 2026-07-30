@@ -60,7 +60,7 @@ export const PLATFORMS: PlatformGuide[] = [
       "AI disclosure on Wix — EU AI Act Article 50 setup guide | RapidAct",
     metaDescription:
       "Add an EU AI Act Article 50 notice to your Wix site with the official RapidAct app. Tailor the message and publish without code.",
-    h1: "Add an AI disclosure notice to Wix",
+    h1: "Add EU AI Act Badge to Wix",
     intro:
       "Wix sites often use AI chat, assistants or generated content. RapidAct adds one clear visitor notice across your site through the official Wix app, with no code or page-by-page editing.",
     detectionNote:
@@ -300,7 +300,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Añade un aviso claro de interacción con IA a una web propia, Webflow, Squarespace o React mediante un único script configurable.",
     h1: {
       wordpress: "Añade un aviso de IA en WordPress",
-      wix: "Añade un aviso de IA en Wix",
+      wix: "Añade EU AI Act Badge a Wix",
       shopify: "Añade un aviso de IA en Shopify",
       tidio: "Añade un aviso claro junto a Tidio o Lyro",
       botpress: "Identifica claramente tu agente de Botpress como IA",
@@ -393,7 +393,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Fügen Sie einer eigenen Website, Webflow, Squarespace oder React mit einem konfigurierbaren Skript einen klaren KI-Interaktionshinweis hinzu.",
     h1: {
       wordpress: "KI-Hinweis in WordPress hinzufügen",
-      wix: "KI-Hinweis in Wix hinzufügen",
+      wix: "EU AI Act Badge zu Wix hinzufügen",
       shopify: "KI-Hinweis in Shopify hinzufügen",
       tidio: "Tidio oder Lyro mit einem klaren KI-Hinweis ergänzen",
       botpress: "Botpress-Agenten klar als KI kennzeichnen",
@@ -487,7 +487,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Ajoutez une mention claire d’interaction avec l’IA à un site sur mesure, Webflow, Squarespace ou React grâce à un script configurable.",
     h1: {
       wordpress: "Ajouter une mention IA sur WordPress",
-      wix: "Ajouter une mention IA sur Wix",
+      wix: "Ajouter EU AI Act Badge à Wix",
       shopify: "Ajouter une mention IA sur Shopify",
       tidio: "Ajouter une mention IA claire à Tidio ou Lyro",
       botpress: "Identifier clairement votre agent Botpress comme une IA",
@@ -581,7 +581,7 @@ const PLATFORM_LOCALES: Record<Exclude<Lang, "en">, PlatformLocale> = {
       "Aggiungi un chiaro avviso di interazione con l’IA a un sito personalizzato, Webflow, Squarespace o React con uno script configurabile.",
     h1: {
       wordpress: "Aggiungi un avviso IA a WordPress",
-      wix: "Aggiungi un avviso IA a Wix",
+      wix: "Aggiungi EU AI Act Badge a Wix",
       shopify: "Aggiungi un avviso IA a Shopify",
       tidio: "Aggiungi un avviso IA chiaro a Tidio o Lyro",
       botpress: "Identifica chiaramente il tuo agente Botpress come IA",

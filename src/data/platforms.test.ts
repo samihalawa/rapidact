@@ -163,6 +163,7 @@ describe("localized platform guides", () => {
 
       expect(wix).toBeDefined();
       expect(wix!.installUrl).toBe("https://wix.to/JKi80ih");
+      expect(wix!.h1).toContain("EU AI Act Badge");
       expectNonEmpty(PLATFORM_PAGE_COPY[lang].installOfficial(wix!));
       expect(PLATFORM_PAGE_COPY[lang].installOfficial(wix!)).toContain("Wix");
       expect(wix!.freeInstall[0]).toMatch(/Wix/);

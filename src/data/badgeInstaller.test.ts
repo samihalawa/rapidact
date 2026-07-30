@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { INSTALLER_COPY } from "./badgeInstaller";
+import { GUIDE_COPY } from "./localizedGuide";
 
 describe("badge installer copy", () => {
   it("provides a complete WordPress download path in every language", () => {
@@ -38,6 +39,13 @@ describe("badge installer copy", () => {
       expect(copy.wixSteps, language).toHaveLength(3);
       expect(copy.platformLabels.wix, language).toBe(copy.officialWixApp);
       expect(copy.locations.wix, language).not.toMatch(
+        /custom code|código personalizado|benutzerdefinierter code|code personnalisé|codice personalizzato/i
+      );
+    }
+
+    for (const [language, copy] of Object.entries(GUIDE_COPY)) {
+      expect(copy.installers.wix.body, language).toContain("EU AI Act Badge");
+      expect(copy.installers.wix.body, language).not.toMatch(
         /custom code|código personalizado|benutzerdefinierter code|code personnalisé|codice personalizzato/i
       );
     }

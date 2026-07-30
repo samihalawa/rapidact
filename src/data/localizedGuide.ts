@@ -85,7 +85,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
       },
       wix: {
         type: "Wix",
-        body: "Add the notice once through Wix Custom Code settings.",
+        body: "Add EU AI Act Badge through the official Wix app—no code required.",
         action: "Open Wix guide",
       },
     },
@@ -146,7 +146,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
       },
       wix: {
         type: "Wix",
-        body: "Añade el aviso una vez desde Código personalizado de Wix.",
+        body: "Añade EU AI Act Badge con la aplicación oficial de Wix, sin código.",
         action: "Abrir guía de Wix",
       },
     },
@@ -208,7 +208,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
       },
       wix: {
         type: "Wix",
-        body: "Fügen Sie den Hinweis einmal über Custom Code ein.",
+        body: "Fügen Sie EU AI Act Badge mit der offiziellen Wix-App hinzu – ohne Code.",
         action: "Wix-Anleitung öffnen",
       },
     },
@@ -273,7 +273,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
       },
       wix: {
         type: "Wix",
-        body: "Ajoutez l’avis une fois depuis Code personnalisé.",
+        body: "Ajoutez EU AI Act Badge avec l’application Wix officielle, sans code.",
         action: "Ouvrir le guide Wix",
       },
     },
@@ -333,7 +333,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
       },
       wix: {
         type: "Wix",
-        body: "Aggiungi l’avviso una volta da Codice personalizzato.",
+        body: "Aggiungi EU AI Act Badge con l’app Wix ufficiale, senza codice.",
         action: "Apri la guida Wix",
       },
     },
