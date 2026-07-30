@@ -62,7 +62,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installLabel: "Free AI notice",
     installTitle: "Publish a clear AI notice for every visitor",
     installBody:
-      "Choose your platform, copy the working code and tailor the message. Publish it and check the result as a visitor.",
+      "Choose your platform and follow the guided setup. Tailor the message, publish and check the result as a visitor.",
     preview: "Preview",
     installCode: "Install code",
     copy: "Copy code",
@@ -123,7 +123,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installLabel: "Aviso de IA gratuito",
     installTitle: "Publica un aviso de IA claro para cada visitante",
     installBody:
-      "Elige tu plataforma, copia el código y adapta el mensaje. Publícalo y comprueba el resultado como visitante.",
+      "Elige tu plataforma y sigue la instalación guiada. Adapta el mensaje, publícalo y comprueba el resultado como visitante.",
     preview: "Vista previa",
     installCode: "Código de instalación",
     copy: "Copiar código",
@@ -185,7 +185,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installTitle:
       "Veröffentlichen Sie einen klaren KI-Hinweis für alle Besucher",
     installBody:
-      "Wählen Sie Ihre Plattform, kopieren Sie den fertigen Code und passen Sie den Text an. Veröffentlichen und prüfen Sie ihn als Besucher.",
+      "Wählen Sie Ihre Plattform und folgen Sie der Anleitung. Passen Sie den Text an, veröffentlichen Sie ihn und prüfen Sie die Besucheransicht.",
     preview: "Vorschau",
     installCode: "Installationscode",
     copy: "Code kopieren",
@@ -250,7 +250,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installLabel: "Avis IA gratuit",
     installTitle: "Publiez un avis IA clair pour chaque visiteur",
     installBody:
-      "Choisissez votre plateforme, copiez le code et adaptez le message. Publiez-le et vérifiez le résultat comme un visiteur.",
+      "Choisissez votre plateforme et suivez l’installation guidée. Adaptez le message, publiez-le et vérifiez le résultat comme un visiteur.",
     preview: "Aperçu",
     installCode: "Code d’installation",
     copy: "Copier le code",
@@ -310,7 +310,7 @@ export const GUIDE_COPY: Record<Lang, GuideCopy> = {
     installLabel: "Avviso IA gratuito",
     installTitle: "Pubblica un avviso IA chiaro per ogni visitatore",
     installBody:
-      "Scegli la piattaforma, copia il codice e adatta il messaggio. Pubblicalo e verifica il risultato come visitatore.",
+      "Scegli la piattaforma e segui l’installazione guidata. Adatta il messaggio, pubblicalo e verifica il risultato come visitatore.",
     preview: "Anteprima",
     installCode: "Codice di installazione",
     copy: "Copia codice",

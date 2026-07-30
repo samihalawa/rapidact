@@ -48,6 +48,9 @@ describe("badge installer copy", () => {
       expect(copy.installers.wix.body, language).not.toMatch(
         /custom code|código personalizado|benutzerdefinierter code|code personnalisé|codice personalizzato/i
       );
+      expect(copy.installBody, language).not.toMatch(
+        /copy the working code|copia el código|kopieren sie den fertigen code|copiez le code|copia il codice/i
+      );
     }
   });
 });
