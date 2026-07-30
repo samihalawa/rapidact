@@ -44,6 +44,7 @@ export type PartnersCopy = {
   name: string;
   company: string;
   email: string;
+  invalidEmail: string;
   website: string;
   notes: string;
   notesPlaceholder: string;
@@ -131,6 +132,7 @@ export const PARTNERS_COPY: Record<Lang, PartnersCopy> = {
     name: "Your name",
     company: "Firm or company",
     email: "Work email",
+    invalidEmail: "Enter a valid email address.",
     website: "Website",
     notes: "Your services or first client",
     notesPlaceholder:
@@ -220,6 +222,7 @@ export const PARTNERS_COPY: Record<Lang, PartnersCopy> = {
     name: "Tu nombre",
     company: "Firma o empresa",
     email: "Correo profesional",
+    invalidEmail: "Introduce una dirección de correo válida.",
     website: "Sitio web",
     notes: "Tus servicios o el primer cliente",
     notesPlaceholder:
@@ -308,6 +311,7 @@ export const PARTNERS_COPY: Record<Lang, PartnersCopy> = {
     name: "Ihr Name",
     company: "Kanzlei oder Unternehmen",
     email: "Geschäftliche E-Mail",
+    invalidEmail: "Geben Sie eine gültige E-Mail-Adresse ein.",
     website: "Website",
     notes: "Ihre Leistungen oder der erste Kunde",
     notesPlaceholder:
@@ -395,6 +399,7 @@ export const PARTNERS_COPY: Record<Lang, PartnersCopy> = {
     name: "Votre nom",
     company: "Cabinet ou entreprise",
     email: "E-mail professionnel",
+    invalidEmail: "Saisissez une adresse e-mail valide.",
     website: "Site web",
     notes: "Vos services ou le premier client",
     notesPlaceholder:
@@ -482,6 +487,7 @@ export const PARTNERS_COPY: Record<Lang, PartnersCopy> = {
     name: "Il tuo nome",
     company: "Studio o azienda",
     email: "Email di lavoro",
+    invalidEmail: "Inserisci un indirizzo email valido.",
     website: "Sito web",
     notes: "I tuoi servizi o il primo cliente",
     notesPlaceholder:

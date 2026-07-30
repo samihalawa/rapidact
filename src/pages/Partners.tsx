@@ -47,6 +47,7 @@ export default function Partners() {
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [emailInvalid, setEmailInvalid] = useState(false);
   const captureLead = trpc.leads.capture.useMutation();
   const selectedProfile =
     copy.profiles.find(item => item.id === profile) ?? copy.profiles[0];
@@ -59,8 +60,9 @@ export default function Partners() {
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitError(false);
+    setEmailInvalid(false);
     if (!isValidEmail(email)) {
-      setSubmitError(true);
+      setEmailInvalid(true);
       return;
     }
     try {
@@ -343,8 +345,15 @@ export default function Partners() {
                       type="email"
                       autoComplete="email"
                       value={email}
-                      onChange={event => setEmail(event.target.value)}
+                      onChange={event => {
+                        setEmail(event.target.value);
+                        if (emailInvalid) setEmailInvalid(false);
+                      }}
                       className="mt-2 h-12 rounded"
+                      aria-invalid={emailInvalid}
+                      aria-describedby={
+                        emailInvalid ? "partner-email-error" : undefined
+                      }
                     />
                   </label>
                   <label className="text-sm font-bold text-[#16181d]">
@@ -371,7 +380,17 @@ export default function Partners() {
                   />
                 </label>
 
-                {(captureLead.isError || submitError) && (
+                {emailInvalid && (
+                  <p
+                    id="partner-email-error"
+                    role="alert"
+                    className="text-sm font-semibold text-[#b42318]"
+                  >
+                    {copy.invalidEmail}
+                  </p>
+                )}
+
+                {(captureLead.isError || submitError) && !emailInvalid && (
                   <p
                     role="alert"
                     className="text-sm font-semibold text-[#b42318]"

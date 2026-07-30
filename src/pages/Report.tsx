@@ -60,6 +60,7 @@ export default function Report() {
   const [company, setCompany] = useState("");
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
+  const [emailTouched, setEmailTouched] = useState(false);
   const [country, setCountry] = useState("");
   const [size, setSize] = useState("");
   const [sector, setSector] = useState("");
@@ -104,6 +105,7 @@ export default function Report() {
   }, [ref]);
 
   const valid = company.trim().length > 1 && isValidEmail(email);
+  const emailInvalid = emailTouched && !isValidEmail(email);
 
   const toggle = (s: string) =>
     setSystems(cur =>
@@ -317,11 +319,25 @@ export default function Report() {
                       type="email"
                       value={email}
                       onChange={e => setEmail(e.target.value)}
+                      onBlur={() => setEmailTouched(true)}
                       placeholder="you@company.com"
                       className="hairline mt-1.5 h-11 rounded border"
                       autoComplete="email"
+                      aria-invalid={emailInvalid}
+                      aria-describedby={
+                        emailInvalid ? "report-email-error" : undefined
+                      }
                       required
                     />
+                    {emailInvalid && (
+                      <p
+                        id="report-email-error"
+                        role="alert"
+                        className="mt-1.5 text-[12px] font-semibold text-[#b42318]"
+                      >
+                        {copy.invalidEmail}
+                      </p>
+                    )}
                   </div>
                   <div className="sm:col-span-2">
                     <label className="ink block text-[13px] font-semibold">

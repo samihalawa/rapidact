@@ -194,17 +194,22 @@ export default function Scanner() {
       setEmailDialogOpen(false);
       await runScan(submittedUrl);
     } catch (error) {
-      const typedError = error as { data?: { code?: string } };
+      const typedError = error as {
+        data?: { code?: string };
+        message?: string;
+      };
+      const isEmailValidationError =
+        typedError.data?.code === "BAD_REQUEST" &&
+        /invalid email address/i.test(typedError.message ?? "");
       setEmailError(
-        typedError.data?.code === "BAD_REQUEST"
+        isEmailValidationError
           ? copy.emailGateInvalid
           : copy.emailGateError
       );
       track("scanner_lead_capture_failed", {
-        failure_type:
-          typedError.data?.code === "BAD_REQUEST"
-            ? "invalid_email"
-            : "request_failed",
+        failure_type: isEmailValidationError
+          ? "invalid_email"
+          : "request_failed",
       });
     }
   };

@@ -10,6 +10,7 @@ export type ReportCopy = {
   intakeBody: string;
   company: string;
   email: string;
+  invalidEmail: string;
   website: string;
   countries: string;
   countriesPlaceholder: string;
@@ -93,6 +94,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Add your company and the AI systems you know about. We will examine any gaps or uncertainties.",
     company: "Company name",
     email: "Work email",
+    invalidEmail: "Enter a valid email address.",
     website: "Website",
     countries: "Countries you operate in",
     countriesPlaceholder: "Spain, Germany, UK",
@@ -168,6 +170,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Añade tu empresa y los sistemas de IA que conozcas. Revisaremos cualquier duda o carencia.",
     company: "Nombre de la empresa",
     email: "Correo de trabajo",
+    invalidEmail: "Introduce una dirección de correo válida.",
     website: "Sitio web",
     countries: "Países en los que operas",
     countriesPlaceholder: "España, Alemania, Reino Unido",
@@ -265,6 +268,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Beginnen Sie mit Ihrem Unternehmen und der KI, die Sie bereits kennen. Unklare Punkte sind Teil unserer Bewertung.",
     company: "Unternehmensname",
     email: "Geschäftliche E-Mail",
+    invalidEmail: "Geben Sie eine gültige E-Mail-Adresse ein.",
     website: "Website",
     countries: "Länder Ihrer Tätigkeit",
     countriesPlaceholder: "Deutschland, Spanien, UK",
@@ -359,6 +363,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Commencez par votre entreprise et les IA que vous connaissez déjà. Les points incertains font partie de notre évaluation.",
     company: "Nom de l’entreprise",
     email: "E-mail professionnel",
+    invalidEmail: "Saisissez une adresse e-mail valide.",
     website: "Site web",
     countries: "Pays d’activité",
     countriesPlaceholder: "France, Espagne, Allemagne",
@@ -456,6 +461,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Inizia dall’azienda e dalle IA che conosci già. I punti poco chiari fanno parte della nostra valutazione.",
     company: "Nome dell’azienda",
     email: "E-mail di lavoro",
+    invalidEmail: "Inserisci un indirizzo email valido.",
     website: "Sito web",
     countries: "Paesi in cui operi",
     countriesPlaceholder: "Italia, Spagna, Germania",
