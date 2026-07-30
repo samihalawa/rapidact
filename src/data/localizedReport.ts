@@ -111,7 +111,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "For example: we run an AI voice agent for bookings and are unsure whether it is covered.",
     sendError:
       "Your details could not be sent. Try again, or contact us directly and we will take them by email.",
-    continue: "Review €99 payment",
+    continue: "Continue to payment · €99",
     continuing: "Saving…",
     noCharge: "No charge yet. Confirm the €99 fee and seller on the next step.",
     buying: "You are buying",
@@ -187,7 +187,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Por ejemplo: utilizamos un agente de voz para reservas y no sabemos si está cubierto.",
     sendError:
       "No se han podido enviar los datos. Inténtalo de nuevo o contáctanos y los recogeremos por correo.",
-    continue: "Revisar el pago de 99 €",
+    continue: "Continuar al pago · 99 €",
     continuing: "Guardando…",
     noCharge:
       "Todavía no se cobra nada. Confirma el precio de 99 € y el vendedor en el siguiente paso.",
@@ -285,7 +285,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Zum Beispiel: Wir nutzen einen KI-Sprachagenten für Buchungen und kennen unsere Pflicht nicht.",
     sendError:
       "Die Angaben konnten nicht gesendet werden. Versuchen Sie es erneut oder kontaktieren Sie uns per E-Mail.",
-    continue: "Zahlung über 99 € prüfen",
+    continue: "Weiter zur Zahlung · 99 €",
     continuing: "Speichern…",
     noCharge:
       "Hier wird nichts berechnet. Preis und Verkäufer sehen Sie vor der Zahlung.",
@@ -380,7 +380,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
       "Par exemple : nous utilisons un agent vocal pour les réservations et ignorons s’il est couvert.",
     sendError:
       "Impossible d’envoyer vos informations. Réessayez ou contactez-nous par e-mail.",
-    continue: "Vérifier le paiement de 99 €",
+    continue: "Continuer au paiement · 99 €",
     continuing: "Enregistrement…",
     noCharge:
       "Aucun débit ici. Le prix et le vendeur sont affichés avant le paiement.",
@@ -477,7 +477,7 @@ export const REPORT_COPY: Record<Lang, ReportCopy> = {
     notesPlaceholder:
       "Ad esempio: usiamo un agente vocale per le prenotazioni e non sappiamo se è coperto.",
     sendError: "Impossibile inviare i dati. Riprova o contattaci via e-mail.",
-    continue: "Verifica il pagamento di 99 €",
+    continue: "Continua al pagamento · 99 €",
     continuing: "Salvataggio…",
     noCharge:
       "Qui non viene addebitato nulla. Vedrai prezzo e venditore prima del pagamento.",

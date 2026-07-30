@@ -287,9 +287,9 @@ export default function Report() {
         ) : (
           /* ─── Step 1: intake ───────────────────────────────────────── */
           <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-            <div>
+            <div className="min-w-0">
               <p className="eyebrow">{copy.step1}</p>
-              <h1 className="ink mt-3 text-[32px] leading-[1.12] font-bold tracking-[-0.02em] sm:text-[38px]">
+              <h1 className="ink mt-3 break-words hyphens-auto text-[32px] leading-[1.12] font-bold tracking-[-0.02em] sm:text-[38px]">
                 {copy.intakeTitle}
               </h1>
               <p className="ink-soft mt-4 max-w-xl text-[16px] leading-relaxed">
@@ -499,7 +499,7 @@ export default function Report() {
             </div>
 
             {/* Sidebar: what is bought, and from whom */}
-            <aside className="lg:pt-12">
+            <aside className="min-w-0 lg:pt-12">
               <div className="sticky top-24 space-y-6">
                 <div className="hairline border bg-white">
                   <div className="hairline border-b px-6 py-5">
@@ -529,7 +529,9 @@ export default function Report() {
                         <span className="mono ink-soft shrink-0 text-[10px]">
                           {d.n}
                         </span>
-                        <span className="font-semibold">{d.title}</span>
+                        <span className="min-w-0 break-words hyphens-auto font-semibold">
+                          {d.title}
+                        </span>
                       </li>
                     ))}
                   </ul>

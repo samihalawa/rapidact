@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct localized report width | long translated compound words can preserve intrinsic grid width and push the phone page beyond its viewport | constrain both report grid children and allow heading/chapter hyphenation | do not shorten substantive localized content or trust one language at one width | verify all five report locales at 320, 375 and 392px with document width equal to viewport and a 48px enabled CTA
 RapidAct paid conversion flow | global fixed badge and WhatsApp controls can cover the primary CTA on phone screens | suppress floating controls only on report/start routes while retaining them elsewhere | do not let persistent support/compliance widgets compete with or obstruct payment progression | verify 390px report CTA is clear, five localized routes have two primary fields, and homepage still shows both widgets
 RapidAct commercial analytics | browser and Tag Assistant QA can produce plausible leads, key events and funnel activity that are not buyer demand | persist an explicit QA session classification, mark PostHog users natively as internal/test, and keep the paid assessment as the first commercial CTA without removing the free qualification path | do not diagnose price or checkout from test conversions, hardcode one device ID, or add more conversion sections | verify QA and external properties separately in GA4/PostHog, CRM lead identities, assessment click routing and zero unclassified verification events
 RapidAct production asset continuity | a cached HTML shell can reference a hashed bundle removed by the next deploy and leave a blank page while the independently loaded badge still appears | prevent HTML-shell caching while retaining hashed asset caching | do not diagnose the bundle from the badge alone, treat a cache-busted load as enough, or delete old assets while serving reusable HTML | verify old-URL failure, fresh HTML asset reference, HTML no-store header, referenced asset 200 and rendered route after consecutive deploys
@@ -25,6 +26,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale data-layer values, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, reset all mapped fields per event, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, let commercial fields persist between events, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-07-30 — Localized report grids must release intrinsic phone width
+
+- Status: CURRENT
+- Project/root: `rapidact`; five localized `/report` and legacy `/start` routes.
+- Mistake: the German compound `Unternehmensbewertung` preserved a 414px intrinsic grid width inside a 320px viewport; changing CTA copy exposed but did not cause the overflow.
+- Do: keep both grid children `min-w-0` and allow localized headings and narrow chapter labels to break and hyphenate naturally.
+- Don't: hide overflow, shrink all typography, or shorten substantive translations to make one screenshot fit.
+- Evidence: 2026-07-30 local rendered sweep; before fix German `docWidth=430` at `viewport=320`, after fix all 15 locale/width combinations matched the viewport.
+- Trigger terms: German, compound word, report, horizontal overflow, 320px, translation, grid min-content.
+- Verify before reuse: all five locales at 320/375/392px report `documentElement.scrollWidth === innerWidth`; the filled CTA is enabled and 48px tall; visually inspect the longest locale.
 
 ## 2026-07-30 — Paid conversion routes keep floating controls off the CTA
 
