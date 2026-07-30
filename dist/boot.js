@@ -28803,6 +28803,7 @@ function serveStaticFiles(app2) {
   app2.notFound((c) => {
     const accept = c.req.header("accept") ?? "";
     if (!accept.includes("text/html")) {
+      c.header("Cache-Control", "no-store");
       return c.json({ error: "Not Found" }, 404);
     }
     const indexPath = path.resolve(distPath, "index.html");
