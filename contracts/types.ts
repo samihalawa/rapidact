@@ -2,6 +2,33 @@
  * Shared contracts between frontend and backend.
  */
 
+/**
+ * One email rule for every public form and API endpoint.
+ *
+ * The previous scanner check only looked for an `@` and a dot, while Zod used
+ * a stricter server rule. That let the modal submit addresses the API would
+ * reject, which surfaced as a misleading storage error.
+ */
+export const EMAIL_PATTERN =
+  /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+
+export function normalizeEmail(value: string) {
+  return value.trim().toLowerCase();
+}
+
+export function isValidEmail(value: string) {
+  const normalized = normalizeEmail(value);
+  const localPart = normalized.slice(0, normalized.lastIndexOf("@"));
+  return (
+    normalized.length <= 255 &&
+    localPart.length > 0 &&
+    !localPart.startsWith(".") &&
+    !localPart.endsWith(".") &&
+    !localPart.includes("..") &&
+    EMAIL_PATTERN.test(normalized)
+  );
+}
+
 export interface ScanFinding {
   id: string;
   name: string;

@@ -40,6 +40,7 @@ import {
   isLeadRetained,
   track,
 } from "@/lib/analytics";
+import { isValidEmail } from "@contracts/types";
 import { useI18n } from "@/lib/i18n";
 import { SCANNER_COPY } from "@/data/localizedScanner";
 
@@ -164,7 +165,7 @@ export default function Scanner() {
   const submitEmailGate = async () => {
     const submittedEmail = email.trim();
     const submittedUrl = url.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(submittedEmail)) {
+    if (!isValidEmail(submittedEmail)) {
       setEmailError(copy.emailGateInvalid);
       return;
     }
@@ -192,10 +193,18 @@ export default function Scanner() {
       });
       setEmailDialogOpen(false);
       await runScan(submittedUrl);
-    } catch {
-      setEmailError(copy.emailGateError);
+    } catch (error) {
+      const typedError = error as { data?: { code?: string } };
+      setEmailError(
+        typedError.data?.code === "BAD_REQUEST"
+          ? copy.emailGateInvalid
+          : copy.emailGateError
+      );
       track("scanner_lead_capture_failed", {
-        failure_type: "request_failed",
+        failure_type:
+          typedError.data?.code === "BAD_REQUEST"
+            ? "invalid_email"
+            : "request_failed",
       });
     }
   };

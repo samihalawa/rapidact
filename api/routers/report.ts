@@ -3,7 +3,11 @@ import { sql } from "drizzle-orm";
 import { createRouter, publicQuery } from "../middleware";
 import { getDb } from "../queries/connection";
 import { leads, reportRequests } from "@db/schema";
-import type { ReportRequestResult } from "@contracts/types";
+import {
+  isValidEmail,
+  normalizeEmail,
+  type ReportRequestResult,
+} from "@contracts/types";
 import { syncScannerLeadToClose } from "../lib/close";
 
 /**
@@ -54,7 +58,12 @@ export const reportRouter = createRouter({
       z.object({
         company: z.string().min(1).max(255),
         website: z.string().max(500).optional(),
-        email: z.string().email().max(255),
+        email: z
+          .string()
+          .trim()
+          .max(255)
+          .refine(isValidEmail, "Invalid email address")
+          .transform(normalizeEmail),
         country: z.string().max(64).optional(),
         companySize: z.string().max(32).optional(),
         sector: z.string().max(64).optional(),

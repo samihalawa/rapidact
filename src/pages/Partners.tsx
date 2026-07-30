@@ -19,6 +19,7 @@ import { PARTNERS_COPY, type PartnerProfileId } from "@/data/localizedPartners";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
 import { trpc } from "@/providers/trpc";
+import { isValidEmail } from "@contracts/types";
 
 const PROFILE_ICONS = {
   legal: Scale,
@@ -58,6 +59,10 @@ export default function Partners() {
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitError(false);
+    if (!isValidEmail(email)) {
+      setSubmitError(true);
+      return;
+    }
     try {
       const result = await captureLead.mutateAsync({
         name: name.trim(),

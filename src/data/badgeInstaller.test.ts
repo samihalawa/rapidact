@@ -33,6 +33,16 @@ describe("badge installer copy", () => {
     }
   });
 
+  it("provides a complete GTM publishing path in every language", () => {
+    for (const [language, copy] of Object.entries(INSTALLER_COPY)) {
+      expect(copy.gtmStepsTitle, language).not.toBe("");
+      expect(copy.gtmSteps, language).toHaveLength(3);
+      expect(copy.gtmSteps.every(step => step.length > 20), language).toBe(
+        true
+      );
+    }
+  });
+
   it("presents Wix as one official, non-technical installation path", () => {
     for (const [language, copy] of Object.entries(INSTALLER_COPY)) {
       expect(copy.officialWixApp, language).not.toBe("");

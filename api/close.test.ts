@@ -1,5 +1,20 @@
 import { describe, expect, it, vi } from "vitest";
 import { syncScannerLeadToClose } from "./lib/close";
+import {
+  isValidEmail,
+  normalizeEmail,
+} from "../contracts/types";
+
+describe("shared email validation", () => {
+  it("keeps browser and API validation aligned", () => {
+    expect(isValidEmail(" Name+tag@Company.Technology ")).toBe(true);
+    expect(normalizeEmail(" Name+tag@Company.Technology ")).toBe(
+      "name+tag@company.technology"
+    );
+    expect(isValidEmail("a..b@example.com")).toBe(false);
+    expect(isValidEmail("a@example.c")).toBe(true);
+  });
+});
 
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {

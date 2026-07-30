@@ -21,6 +21,8 @@ export type InstallerCopy = {
   wixInstallBody: string;
   wixStepsTitle: string;
   wixSteps: [string, string, string];
+  gtmStepsTitle: string;
+  gtmSteps: [string, string, string];
   installWix: string;
   manualOption: string;
   manualFallback: string;
@@ -72,6 +74,12 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Add EU AI Act Badge to your Wix site.",
       "Choose the language and notice text.",
       "Publish and check what visitors see.",
+    ],
+    gtmStepsTitle: "Publish with Google Tag Manager",
+    gtmSteps: [
+      "Open your GTM workspace, choose Tags, then select New.",
+      "Choose Custom HTML, paste the code below and trigger it on the pages where the notice should appear.",
+      "Use Preview to check the notice, then Submit and publish the container.",
     ],
     installWix: "Add EU AI Act Badge to Wix",
     manualOption: "Or install with code",
@@ -156,6 +164,12 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Elige el idioma y el texto del aviso.",
       "Publica y comprueba lo que ven tus visitantes.",
     ],
+    gtmStepsTitle: "Publica con Google Tag Manager",
+    gtmSteps: [
+      "Abre tu espacio de GTM, entra en Etiquetas y pulsa Nueva.",
+      "Elige HTML personalizado, pega el código y actívalo en las páginas donde debe aparecer el aviso.",
+      "Usa Vista previa para comprobarlo y después envía y publica el contenedor.",
+    ],
     installWix: "Añadir EU AI Act Badge a Wix",
     manualOption: "O instalar con código",
     manualFallback: "Instalación",
@@ -238,6 +252,12 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "EU AI Act Badge zur Wix-Website hinzufügen.",
       "Sprache und Hinweistext auswählen.",
       "Veröffentlichen und die Besucheransicht prüfen.",
+    ],
+    gtmStepsTitle: "Mit Google Tag Manager veröffentlichen",
+    gtmSteps: [
+      "GTM-Arbeitsbereich öffnen, Tags auswählen und auf Neu klicken.",
+      "Benutzerdefiniertes HTML wählen, den Code einfügen und die gewünschten Seiten als Trigger festlegen.",
+      "Den Hinweis in der Vorschau prüfen, anschließend Senden und den Container veröffentlichen.",
     ],
     installWix: "EU AI Act Badge zu Wix hinzufügen",
     manualOption: "Oder mit Code installieren",
@@ -322,6 +342,12 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Choisissez la langue et le texte de la mention.",
       "Publiez et vérifiez ce que voient les visiteurs.",
     ],
+    gtmStepsTitle: "Publier avec Google Tag Manager",
+    gtmSteps: [
+      "Ouvrez votre espace GTM, choisissez Balises, puis Nouvelle.",
+      "Choisissez HTML personnalisé, collez le code et déclenchez-le sur les pages où la mention doit apparaître.",
+      "Vérifiez la mention avec Aperçu, puis envoyez et publiez le conteneur.",
+    ],
     installWix: "Ajouter EU AI Act Badge à Wix",
     manualOption: "Ou installer avec du code",
     manualFallback: "Installation",
@@ -404,6 +430,12 @@ export const INSTALLER_COPY: Record<Lang, InstallerCopy> = {
       "Aggiungi EU AI Act Badge al tuo sito Wix.",
       "Scegli la lingua e il testo dell’avviso.",
       "Pubblica e controlla ciò che vedono i visitatori.",
+    ],
+    gtmStepsTitle: "Pubblica con Google Tag Manager",
+    gtmSteps: [
+      "Apri l’area di lavoro GTM, scegli Tag e poi Nuovo.",
+      "Scegli HTML personalizzato, incolla il codice e attivalo sulle pagine in cui deve apparire l’avviso.",
+      "Controlla l’avviso con Anteprima, quindi invia e pubblica il contenitore.",
     ],
     installWix: "Aggiungi EU AI Act Badge a Wix",
     manualOption: "Oppure installa con il codice",

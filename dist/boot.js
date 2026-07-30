@@ -48714,6 +48714,17 @@ var scanRouter = createRouter({
 init_connection();
 init_schema2();
 
+// contracts/types.ts
+var EMAIL_PATTERN = /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
+function normalizeEmail(value) {
+  return value.trim().toLowerCase();
+}
+function isValidEmail(value) {
+  const normalized = normalizeEmail(value);
+  const localPart = normalized.slice(0, normalized.lastIndexOf("@"));
+  return normalized.length <= 255 && localPart.length > 0 && !localPart.startsWith(".") && !localPart.endsWith(".") && !localPart.includes("..") && EMAIL_PATTERN.test(normalized);
+}
+
 // api/lib/close.ts
 var CLOSE_API = "https://api.close.com/api/v1";
 function authorization(apiKey) {
@@ -48817,7 +48828,7 @@ async function syncScannerLeadToClose({
 var leadsRouter = createRouter({
   capture: publicQuery.input(
     external_exports.object({
-      email: external_exports.string().email().max(255),
+      email: external_exports.string().trim().max(255).refine(isValidEmail, "Invalid email address").transform(normalizeEmail),
       url: external_exports.string().max(1e3).optional(),
       source: external_exports.string().max(64).optional(),
       name: external_exports.string().max(160).optional(),
@@ -48897,7 +48908,7 @@ var reportRouter = createRouter({
     external_exports.object({
       company: external_exports.string().min(1).max(255),
       website: external_exports.string().max(500).optional(),
-      email: external_exports.string().email().max(255),
+      email: external_exports.string().trim().max(255).refine(isValidEmail, "Invalid email address").transform(normalizeEmail),
       country: external_exports.string().max(64).optional(),
       companySize: external_exports.string().max(32).optional(),
       sector: external_exports.string().max(64).optional(),

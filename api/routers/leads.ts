@@ -2,14 +2,23 @@ import { z } from "zod";
 import { createRouter, publicQuery } from "../middleware";
 import { getDb } from "../queries/connection";
 import { leads } from "@db/schema";
-import type { LeadResult } from "@contracts/types";
+import {
+  isValidEmail,
+  normalizeEmail,
+  type LeadResult,
+} from "@contracts/types";
 import { syncScannerLeadToClose } from "../lib/close";
 
 export const leadsRouter = createRouter({
   capture: publicQuery
     .input(
       z.object({
-        email: z.string().email().max(255),
+        email: z
+          .string()
+          .trim()
+          .max(255)
+          .refine(isValidEmail, "Invalid email address")
+          .transform(normalizeEmail),
         url: z.string().max(1000).optional(),
         source: z.string().max(64).optional(),
         name: z.string().max(160).optional(),

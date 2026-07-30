@@ -515,6 +515,27 @@ export default function BadgeInstallDashboard({
                         </p>
                       </div>
 
+                      {selected.id === "gtm" ? (
+                        <div className="mt-5 border border-[#cbd8ec] bg-[#f7f9fc] p-4">
+                          <p className="text-sm font-bold text-[#16181d]">
+                            {copy.gtmStepsTitle}
+                          </p>
+                          <ol className="mt-3 space-y-3">
+                            {copy.gtmSteps.map((step, index) => (
+                              <li
+                                key={step}
+                                className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 text-xs leading-relaxed text-[#4e5968]"
+                              >
+                                <span className="mono grid h-7 w-7 place-items-center bg-[#0b2a5b] text-[10px] font-bold text-white">
+                                  {index + 1}
+                                </span>
+                                <span className="pt-1">{step}</span>
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                      ) : null}
+
                       <div className="mt-5 overflow-hidden border border-[#203457] bg-[#07132d]">
                         <div className="flex min-h-12 items-center justify-between gap-3 border-b border-white/15 px-3 sm:px-4">
                           <span className="mono text-[10px] font-bold tracking-[0.1em] text-white/55 uppercase">

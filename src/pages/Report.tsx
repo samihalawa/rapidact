@@ -23,6 +23,7 @@ import {
 import { useI18n } from "@/lib/i18n";
 import { REPORT_COPY } from "@/data/localizedReport";
 import { HOME_COPY } from "@/data/localizedHome";
+import { isValidEmail } from "@contracts/types";
 
 const SIZES = ["1–10", "11–50", "51–250", "251–1000", "1000+"];
 const PAYMENT_EVENT_PREFIX = "rapidact-payment-initiated:";
@@ -102,8 +103,7 @@ export default function Report() {
     if (ref) window.scrollTo(0, 0);
   }, [ref]);
 
-  const valid =
-    company.trim().length > 1 && email.includes("@") && email.includes(".");
+  const valid = company.trim().length > 1 && isValidEmail(email);
 
   const toggle = (s: string) =>
     setSystems(cur =>
