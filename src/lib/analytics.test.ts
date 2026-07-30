@@ -5,6 +5,7 @@ import {
   claimSessionEvent,
   googleTransportUrl,
   isAnalyticsHost,
+  isQaSession,
   isLeadRetained,
   stableEventId,
 } from "./analytics";
@@ -31,6 +32,57 @@ describe("Google Tag Gateway", () => {
     expect(googleTransportUrl("https://www.rapidact.eu/")).toBe(
       "https://www.rapidact.eu/metrics"
     );
+  });
+});
+
+describe("traffic classification", () => {
+  const makeStorage = () => {
+    const values = new Map<string, string>();
+    return {
+      getItem: (key: string) => values.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        values.set(key, value);
+      },
+    };
+  };
+
+  it("marks explicit verification and proof visits as QA traffic", () => {
+    expect(
+      isQaSession(
+        "https://rapidact.eu/article-50?proof=review#install",
+        "",
+        makeStorage()
+      )
+    ).toBe(true);
+    expect(
+      isQaSession(
+        "https://rapidact.eu/scanner?verify=production",
+        "",
+        makeStorage()
+      )
+    ).toBe(true);
+  });
+
+  it("persists Tag Assistant classification across later page views", () => {
+    const storage = makeStorage();
+    expect(
+      isQaSession(
+        "https://rapidact.eu/",
+        "https://tagassistant.google.com/",
+        storage
+      )
+    ).toBe(true);
+    expect(isQaSession("https://rapidact.eu/report", "", storage)).toBe(true);
+  });
+
+  it("keeps ordinary public visits external", () => {
+    expect(
+      isQaSession(
+        "https://rapidact.eu/article-50?utm_source=google",
+        "https://www.google.com/",
+        makeStorage()
+      )
+    ).toBe(false);
   });
 });
 
@@ -92,5 +144,7 @@ describe("canonical commercial events", () => {
     expect(lead.currency).toBeUndefined();
     expect(lead.payment_provider).toBeUndefined();
     expect(lead.checkout_id).toBeUndefined();
+    expect(lead.traffic_type).toBeUndefined();
+    expect(lead.debug_mode).toBeUndefined();
   });
 });

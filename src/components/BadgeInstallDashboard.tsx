@@ -344,6 +344,8 @@ export default function BadgeInstallDashboard({
                 <DialogTitle className="text-2xl leading-tight font-bold tracking-tight text-[#16181d] sm:text-3xl">
                   {selected.id === "wix"
                     ? copy.wixInstallTitle
+                    : selected.id === "gtm"
+                      ? `${selected.name} · ${copy.styles[display].name}`
                     : `${copy.installOn} ${selected.name}`}
                 </DialogTitle>
                 <DialogDescription className="max-w-2xl text-sm leading-relaxed text-[#5c6370]">
@@ -501,22 +503,24 @@ export default function BadgeInstallDashboard({
 
                   <div className="grid min-w-0 gap-0 lg:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)]">
                     <div className="min-w-0 p-5 sm:p-7">
-                      <div>
-                        <p className="eyebrow text-[#174a9b]">
-                          {selected.id === "wordpress"
-                            ? copy.manualOption
-                            : copy.manualFallback}
-                        </p>
-                        <h3 className="mt-1 text-lg font-bold text-[#16181d]">
-                          {copy.location}: {copy.locations[selected.id]}
-                        </h3>
-                        <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
-                          {copy.manualFallbackBody}
-                        </p>
-                      </div>
+                      {selected.id !== "gtm" ? (
+                        <div>
+                          <p className="eyebrow text-[#174a9b]">
+                            {selected.id === "wordpress"
+                              ? copy.manualOption
+                              : copy.manualFallback}
+                          </p>
+                          <h3 className="mt-1 text-lg font-bold text-[#16181d]">
+                            {copy.location}: {copy.locations[selected.id]}
+                          </h3>
+                          <p className="mt-2 text-sm leading-relaxed text-[#5c6370]">
+                            {copy.manualFallbackBody}
+                          </p>
+                        </div>
+                      ) : null}
 
                       {selected.id === "gtm" ? (
-                        <div className="mt-5 border border-[#cbd8ec] bg-[#f7f9fc] p-4">
+                        <div className="border border-[#cbd8ec] bg-[#f7f9fc] p-4">
                           <p className="text-sm font-bold text-[#16181d]">
                             {copy.gtmStepsTitle}
                           </p>

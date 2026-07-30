@@ -9,8 +9,8 @@ const WORKFLOW_KEYS = ["scan", "disclose", "implement", "assess"] as const;
 
 /**
  * RapidAct is a progressive workflow, not only a report. The free operational
- * layer leads; the specialist assessment is the paid escalation for companies
- * that need a complete view.
+ * layer makes the practice useful before purchase; the specialist assessment
+ * remains the primary commercial action for companies that need a complete view.
  */
 function RapidActWorkflow() {
   const { t } = useI18n();
@@ -100,23 +100,23 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <Button
-              data-analytics-event="free_scan_click"
-              data-analytics-label="Hero free scan CTA"
-              size="lg"
-              className="h-12 rounded bg-[#16181d] px-7 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
-              onClick={() => navigate(path(CONVERT.scanner))}
-            >
-              {t("hero.scan")}
-            </Button>
-            <Button
               data-analytics-event="report_started"
               data-analytics-label="Hero assessment CTA"
               size="lg"
-              variant="outline"
-              className="hairline h-12 rounded border bg-white px-7 text-[15px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
+              className="h-12 rounded bg-[#16181d] px-7 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
               onClick={() => navigate(path(CONVERT.report))}
             >
-              {t("hero.request")}
+              {t("hero.request")} · €99
+            </Button>
+            <Button
+              data-analytics-event="free_scan_click"
+              data-analytics-label="Hero free scan CTA"
+              size="lg"
+              variant="outline"
+              className="hairline h-12 rounded border bg-white px-7 text-[15px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
+              onClick={() => navigate(path(CONVERT.scanner))}
+            >
+              {t("hero.scan")}
             </Button>
           </div>
 

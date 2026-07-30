@@ -39,6 +39,9 @@ export const GTM_EVENT_PARAMETERS = [
   "ai_system_count",
   "transaction_id",
   "partner_type",
+  "traffic_class",
+  "traffic_type",
+  "debug_mode",
 ] as const;
 
 declare global {
@@ -49,6 +52,7 @@ declare global {
 }
 
 const CONSENT_KEY = "rapidact-consent-v1";
+const QA_SESSION_KEY = "rapidact-analytics-traffic-class";
 const ANALYTICS_HOSTS = new Set(["rapidact.eu", "www.rapidact.eu"]);
 let initialized = false;
 
@@ -88,6 +92,57 @@ export function isAnalyticsHost(
   hostname = typeof location === "undefined" ? "" : location.hostname
 ) {
   return ANALYTICS_HOSTS.has(hostname.toLowerCase());
+}
+
+export function isQaSession(
+  url = typeof location === "undefined" ? "" : location.href,
+  referrer = typeof document === "undefined" ? "" : document.referrer,
+  storage?: EventStorage
+) {
+  const target =
+    storage ??
+    (typeof window === "undefined" ? undefined : window.sessionStorage);
+
+  try {
+    if (target?.getItem(QA_SESSION_KEY) === "qa") return true;
+  } catch {
+    // Continue with URL and referrer signals when storage is unavailable.
+  }
+
+  let signalled = false;
+  try {
+    const parsed = new URL(url);
+    signalled = ["qa", "proof", "verify"].some(key =>
+      parsed.searchParams.has(key)
+    );
+  } catch {
+    signalled = false;
+  }
+
+  if (
+    !signalled &&
+    /(^|\.)tagassistant\.(google\.com|googleusercontent\.com)$/i.test(
+      (() => {
+        try {
+          return new URL(referrer).hostname;
+        } catch {
+          return "";
+        }
+      })()
+    )
+  ) {
+    signalled = true;
+  }
+
+  if (signalled) {
+    try {
+      target?.setItem(QA_SESSION_KEY, "qa");
+    } catch {
+      // The current event can still be classified when storage is unavailable.
+    }
+  }
+
+  return signalled;
 }
 
 export function getConsent(): ConsentChoice | null {
@@ -158,6 +213,7 @@ export function initAnalytics() {
     if (!posthog.has_opted_in_capturing()) {
       posthog.opt_in_capturing({ captureEventName: false });
     }
+    if (isQaSession()) posthog.setInternalOrTestUser();
     posthog.startSessionRecording();
   }
 }
@@ -175,6 +231,7 @@ export function setConsent(choice: ConsentChoice) {
     if (!posthog.has_opted_in_capturing()) {
       posthog.opt_in_capturing({ captureEventName: false });
     }
+    if (isQaSession()) posthog.setInternalOrTestUser();
     posthog.startSessionRecording();
     track("consent_updated", { analytics: true, advertising: true });
   } else {
@@ -185,11 +242,15 @@ export function setConsent(choice: ConsentChoice) {
 }
 
 function baseProperties(): EventProperties {
+  const qaSession = isQaSession();
   return {
     platform: "web",
     release: ANALYTICS.release,
     page_path: `${location.pathname}${location.search}`,
     page_language: document.documentElement.lang || "en",
+    traffic_class: qaSession ? "qa" : "external",
+    traffic_type: qaSession ? "internal" : undefined,
+    debug_mode: qaSession || undefined,
   };
 }
 
