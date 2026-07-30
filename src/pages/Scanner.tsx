@@ -274,6 +274,8 @@ export default function Scanner() {
           <Input
             id="scanner-url"
             inputMode="url"
+            autoCapitalize="none"
+            spellCheck={false}
             maxLength={1000}
             value={url}
             onChange={e => {
