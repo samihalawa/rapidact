@@ -216,6 +216,91 @@ assert(
   "robots: sitemap declaration missing"
 );
 
+const crawlerUserAgents = [
+  ["Googlebot", "Googlebot/2.1 (+http://www.google.com/bot.html)"],
+  ["GoogleOther", "GoogleOther"],
+  [
+    "Bingbot",
+    "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
+  ],
+  ["DuckDuckBot", "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)"],
+  [
+    "Applebot",
+    "Mozilla/5.0 (compatible; Applebot/0.3; +http://www.apple.com/go/applebot)",
+  ],
+  [
+    "YandexBot",
+    "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)",
+  ],
+  [
+    "Baiduspider",
+    "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)",
+  ],
+  ["OAI-SearchBot", "OAI-SearchBot/1.0; +https://openai.com/searchbot"],
+  ["GPTBot", "GPTBot/1.2; +https://openai.com/gptbot"],
+  ["ChatGPT-User", "ChatGPT-User/1.0; +https://openai.com/bot"],
+  ["ClaudeBot", "ClaudeBot/1.0; +https://www.anthropic.com/bot"],
+  ["anthropic-ai", "anthropic-ai/1.0"],
+  ["PerplexityBot", "PerplexityBot/1.0; +https://perplexity.ai/perplexitybot"],
+  ["CCBot", "CCBot/2.0; +https://commoncrawl.org/faq/"],
+  ["Bytespider", "Bytespider"],
+  [
+    "PetalBot",
+    "Mozilla/5.0 (compatible; PetalBot; +https://aspiegel.com/petalbot)",
+  ],
+  [
+    "facebookexternalhit",
+    "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)",
+  ],
+  ["LinkedInBot", "LinkedInBot/1.0"],
+  ["Slackbot", "Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)"],
+  ["Twitterbot", "Twitterbot/1.0"],
+];
+const crawlerProbePath = "/es/answers/ai-act-deadline-2026";
+const expectedCrawlerCanonical = `${BASE_URL}${crawlerProbePath}`;
+await Promise.all(
+  crawlerUserAgents.map(async ([name, userAgent]) => {
+    const [pageResponse, crawlerRobotsResponse] = await Promise.all([
+      fetch(`${base}${crawlerProbePath}`, {
+        headers: { "User-Agent": userAgent },
+        redirect: "manual",
+      }),
+      fetch(`${base}/robots.txt`, {
+        headers: { "User-Agent": userAgent },
+        redirect: "manual",
+      }),
+    ]);
+    const [html, crawlerRobots] = await Promise.all([
+      pageResponse.text(),
+      crawlerRobotsResponse.text(),
+    ]);
+    assert(
+      pageResponse.status === 200,
+      `${name}: crawler page received ${pageResponse.status}`
+    );
+    assert(
+      crawlerRobotsResponse.status === 200,
+      `${name}: robots received ${crawlerRobotsResponse.status}`
+    );
+    assert(
+      canonicalLinks(html)[0] === expectedCrawlerCanonical,
+      `${name}: crawler page has the wrong canonical`
+    );
+    assert(
+      /<h1\b[^>]*>/i.test(html),
+      `${name}: crawler page is missing rendered content`
+    );
+    assert(
+      !/(cf-chl-|challenge-platform|just a moment\.\.\.)/i.test(html),
+      `${name}: crawler page contains a Cloudflare challenge`
+    );
+    assert(
+      crawlerRobots === robots,
+      `${name}: crawler received a different robots policy`
+    );
+  })
+);
+
 console.log(
-  `SEO verification passed: ${routes.length} rendered canonical routes, true 404/noindex, canonical redirects, sitemap, and permissive bot policy at ${base}`
+  `SEO verification passed: ${routes.length} rendered canonical routes, true 404/noindex, canonical redirects, sitemap, and ${crawlerUserAgents.length} unrestricted crawler identities at ${base}`
 );
