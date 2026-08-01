@@ -21,6 +21,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "sitemap": "node scripts/gen-sitemap.mjs",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "verify:seo": "node scripts/verify-seo.mjs"
   },
   "dependencies": {

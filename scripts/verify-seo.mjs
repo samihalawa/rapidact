@@ -5,6 +5,7 @@ const base = (process.env.SEO_BASE_URL || "http://127.0.0.1:4173").replace(
   ""
 );
 const routes = getSeoRoutes();
+const indexNowKey = "4cd1c6fc3884b1b9ae20575112ef166f";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -216,6 +217,14 @@ assert(
   "robots: sitemap declaration missing"
 );
 
+const indexNowKeyResponse = await fetch(`${base}/${indexNowKey}.txt`);
+const indexNowKeyBody = (await indexNowKeyResponse.text()).trim();
+assert(
+  indexNowKeyResponse.status === 200,
+  `IndexNow key: expected 200, received ${indexNowKeyResponse.status}`
+);
+assert(indexNowKeyBody === indexNowKey, "IndexNow key: content mismatch");
+
 const crawlerUserAgents = [
   ["Googlebot", "Googlebot/2.1 (+http://www.google.com/bot.html)"],
   ["GoogleOther", "GoogleOther"],
@@ -302,5 +311,5 @@ await Promise.all(
 );
 
 console.log(
-  `SEO verification passed: ${routes.length} rendered canonical routes, true 404/noindex, canonical redirects, sitemap, and ${crawlerUserAgents.length} unrestricted crawler identities at ${base}`
+  `SEO verification passed: ${routes.length} rendered canonical routes, true 404/noindex, canonical redirects, sitemap, IndexNow ownership, and ${crawlerUserAgents.length} unrestricted crawler identities at ${base}`
 );
