@@ -154,7 +154,7 @@ export default function Report() {
 
   return (
     <div className="paper min-h-screen">
-      <Seo title={copy.seoTitle} description={copy.seoDescription} />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} localized />
       <SiteNav />
 
       <main className="mx-auto max-w-6xl px-4 py-12 sm:px-6">

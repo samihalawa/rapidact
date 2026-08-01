@@ -1,18 +1,17 @@
-import { useEffect } from "react";
 import { ENTITY } from "@/data/company";
 
-/** Injects JSON-LD structured data for SEO rich results. */
+/** Renders structured data in both prerendered HTML and the hydrated app. */
 export default function JsonLd({ data }: { data: object | object[] }) {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.text = JSON.stringify(Array.isArray(data) ? data : [data]);
-    document.head.appendChild(script);
-    return () => {
-      script.remove();
-    };
-  }, [data]);
-  return null;
+  const json = JSON.stringify(Array.isArray(data) ? data : [data]).replace(
+    /</g,
+    "\\u003c"
+  );
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: json }}
+    />
+  );
 }
 
 export const ORG_LD = {
@@ -25,8 +24,6 @@ export const ORG_LD = {
   description:
     "A specialist EU AI Act transparency practice helping companies scope Article 50 duties, publish AI notices, deploy disclosure plugins and badges, and document their implementation.",
   slogan: "EU AI Act transparency, implemented and documented.",
-  // Real, verifiable identity. Search engines surface this, and it is the same
-  // information a cautious buyer looks for before paying an unfamiliar company.
   identifier: ENTITY.registrationNumber
     ? {
         "@type": "PropertyValue",
@@ -101,10 +98,10 @@ export function faqLd(faqs: { q: string; a: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map(f => ({
+    mainEntity: faqs.map(faq => ({
       "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
     })),
   };
 }

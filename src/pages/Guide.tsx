@@ -24,7 +24,7 @@ export default function Guide() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Seo title={copy.seoTitle} description={copy.seoDescription} />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} localized />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <h1 className="text-3xl font-bold tracking-tight text-[#16181d] sm:text-5xl">

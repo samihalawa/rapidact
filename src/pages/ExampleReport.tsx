@@ -10,14 +10,38 @@ import { useI18n } from "@/lib/i18n";
 
 export default function ExampleReport() {
   const navigate = useNavigate();
-  const { path, t } = useI18n();
+  const { lang, path, t } = useI18n();
+  const seo = {
+    en: {
+      title: "Multi-page specimen EU AI Act assessment PDF | RapidAct",
+      description:
+        "Preview and download the full eight-page RapidAct assessment specimen before buying.",
+    },
+    es: {
+      title: "Muestra PDF de evaluación de la Ley de IA | RapidAct",
+      description:
+        "Consulta y descarga la muestra completa de ocho páginas de la evaluación de RapidAct antes de comprar.",
+    },
+    de: {
+      title: "Muster-PDF einer EU-AI-Act-Bewertung | RapidAct",
+      description:
+        "Prüfen und laden Sie vor dem Kauf das vollständige achtseitige RapidAct-Bewertungsmuster herunter.",
+    },
+    fr: {
+      title: "Exemple PDF d’évaluation de l’AI Act | RapidAct",
+      description:
+        "Consultez et téléchargez l’exemple complet de huit pages de l’évaluation RapidAct avant l’achat.",
+    },
+    it: {
+      title: "Esempio PDF di valutazione AI Act | RapidAct",
+      description:
+        "Consulta e scarica l’esempio completo di otto pagine della valutazione RapidAct prima dell’acquisto.",
+    },
+  }[lang];
 
   return (
     <div className="min-h-screen bg-[#ecece8]">
-      <Seo
-        title="Multi-page specimen EU AI Act assessment PDF | RapidAct"
-        description="Preview and download the full eight-page RapidAct assessment specimen before buying."
-      />
+      <Seo title={seo.title} description={seo.description} localized />
       <SiteNav />
 
       <main>
@@ -66,8 +90,12 @@ export default function ExampleReport() {
                   <FileText className="h-4 w-4" />
                 </span>
                 <div>
-                  <p className="text-[13px] font-semibold text-white">rapidact-specimen-assessment.pdf</p>
-                  <p className="text-[11px] text-white/45">{t("specimen.pages")}</p>
+                  <p className="text-[13px] font-semibold text-white">
+                    rapidact-specimen-assessment.pdf
+                  </p>
+                  <p className="text-[11px] text-white/45">
+                    {t("specimen.pages")}
+                  </p>
                 </div>
               </div>
               <span className="rounded-sm border border-[#f0b4b4]/25 bg-[#9b1c1c]/20 px-2.5 py-1 text-[10px] font-bold tracking-[0.08em] text-[#ffd7d7] uppercase">
@@ -85,8 +113,13 @@ export default function ExampleReport() {
                 >
                   <div className="flex h-full flex-col items-center justify-center p-8 text-center">
                     <FileText className="h-10 w-10 text-[#1f3a5f]" />
-                    <p className="ink mt-4 text-lg font-semibold">{t("specimen.title")}</p>
-                    <a href={SAMPLE_REPORT_URL} className="accent mt-3 underline">
+                    <p className="ink mt-4 text-lg font-semibold">
+                      {t("specimen.title")}
+                    </p>
+                    <a
+                      href={SAMPLE_REPORT_URL}
+                      className="accent mt-3 underline"
+                    >
                       {t("specimen.open")}
                     </a>
                   </div>

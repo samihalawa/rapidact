@@ -101,7 +101,7 @@ export default function Partners() {
 
   return (
     <div className="paper min-h-screen">
-      <Seo title={copy.seoTitle} description={copy.seoDescription} />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} localized />
       <SiteNav />
 
       <main>

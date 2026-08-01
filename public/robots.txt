@@ -1,4 +1,8 @@
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes, use=full
 Allow: /
+Disallow: /api/
+Disallow: /metrics
+Disallow: /cdn-cgi/
 
 Sitemap: https://rapidact.eu/sitemap.xml

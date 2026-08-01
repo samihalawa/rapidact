@@ -28787,7 +28787,9 @@ var init_serve_static = __esm({
 // api/lib/vite.ts
 var vite_exports = {};
 __export(vite_exports, {
+  canonicalRedirectPath: () => canonicalRedirectPath,
   isSpaRouteRequest: () => isSpaRouteRequest,
+  prerenderedRoutePath: () => prerenderedRoutePath,
   serveStaticFiles: () => serveStaticFiles
 });
 import fs from "fs";
@@ -28795,13 +28797,49 @@ import path from "path";
 function isSpaRouteRequest(method, pathname) {
   return (method === "GET" || method === "HEAD") && path.extname(pathname) === "";
 }
+function canonicalRedirectPath(pathname) {
+  let target = pathname;
+  if (target !== "/") target = target.replace(/\/+$/, "");
+  target = target.replace(/^\/en(?=\/|$)/, "") || "/";
+  target = target.replace(
+    /^\/(es|de|fr|it)(?=\/(?:privacy|terms|requirements)(?:\/|$))/,
+    ""
+  );
+  target = target.replace(/\/start$/, "/report");
+  return target || "/";
+}
+function prerenderedRoutePath(distPath, pathname) {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.some((segment) => segment === "." || segment === ".."))
+    return null;
+  const candidate = path.resolve(distPath, ...segments, "index.html");
+  const relative = path.relative(distPath, candidate);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) return null;
+  return candidate;
+}
 function serveStaticFiles(app2) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
   app2.use("*", async (c, next) => {
     await next();
     if (c.res.headers.get("content-type")?.includes("text/html")) {
-      c.header("Cache-Control", "no-cache, no-store, must-revalidate");
+      c.header(
+        "Cache-Control",
+        c.res.status >= 400 ? "no-store" : "public, max-age=0, must-revalidate"
+      );
     }
+  });
+  app2.use("*", async (c, next) => {
+    if (!isSpaRouteRequest(c.req.method, c.req.path)) return next();
+    const url2 = new URL(c.req.url);
+    const host = (c.req.header("host") ?? url2.host).split(":")[0].toLowerCase();
+    const canonicalPath = canonicalRedirectPath(c.req.path);
+    if (host === "www.rapidact.eu" || canonicalPath !== c.req.path) {
+      url2.protocol = "https:";
+      url2.host = "rapidact.eu";
+      url2.pathname = canonicalPath;
+      return c.redirect(url2.toString(), 308);
+    }
+    return next();
   });
   app2.use("*", serveStatic({ root: "./dist/public" }));
   app2.notFound((c) => {
@@ -28809,9 +28847,17 @@ function serveStaticFiles(app2) {
       c.header("Cache-Control", "no-store");
       return c.json({ error: "Not Found" }, 404);
     }
-    const indexPath = path.resolve(distPath, "index.html");
-    const content = fs.readFileSync(indexPath, "utf-8");
-    return c.html(content);
+    const routePath = prerenderedRoutePath(distPath, c.req.path);
+    if (routePath && fs.existsSync(routePath)) {
+      return c.html(fs.readFileSync(routePath, "utf-8"));
+    }
+    const notFoundPath = path.resolve(distPath, "404.html");
+    c.header("Cache-Control", "no-store");
+    c.header("X-Robots-Tag", "noindex, nofollow");
+    if (fs.existsSync(notFoundPath)) {
+      return c.html(fs.readFileSync(notFoundPath, "utf-8"), 404);
+    }
+    return c.json({ error: "Not Found" }, 404);
   });
 }
 var init_vite = __esm({

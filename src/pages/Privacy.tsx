@@ -1,9 +1,14 @@
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
+import Seo from "@/components/Seo";
 
 export default function Privacy() {
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Privacy policy | RapidAct"
+        description="How RapidAct handles website scans, email requests, analytics choices and the configurable AI-use notice."
+      />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <h1 className="text-3xl font-extrabold tracking-tight text-[#16181d]">

@@ -146,7 +146,8 @@ export function isQaSession(
 }
 
 export function getConsent(): ConsentChoice | null {
-  const value = localStorage.getItem(CONSENT_KEY);
+  if (typeof window === "undefined") return null;
+  const value = window.localStorage.getItem(CONSENT_KEY);
   return value === "all" || value === "essential" ? value : null;
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useLocation } from "react-router";
 import {
   getConsent,
@@ -13,7 +13,12 @@ import { useI18n } from "@/lib/i18n";
 export default function Analytics() {
   const location = useLocation();
   const { t } = useI18n();
-  const enabled = isAnalyticsHost();
+  const hydrated = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false
+  );
+  const enabled = hydrated && isAnalyticsHost();
   const [choice, setChoice] = useState(getConsent());
   const isConversionFlow = /(^|\/)(report|start)\/?$/.test(location.pathname);
 

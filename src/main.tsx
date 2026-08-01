@@ -1,12 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router'
-import './index.css'
-import { TRPCProvider } from "@/providers/trpc"
-import { I18nProvider } from "@/lib/i18n"
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot, hydrateRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router";
+import "./index.css";
+import { TRPCProvider } from "@/providers/trpc";
+import { I18nProvider } from "@/lib/i18n";
+import App from "./App.tsx";
 
-createRoot(document.getElementById('root')!).render(
+const root = document.getElementById("root")!;
+const application = (
   <StrictMode>
     <BrowserRouter>
       <I18nProvider>
@@ -15,5 +16,11 @@ createRoot(document.getElementById('root')!).render(
         </TRPCProvider>
       </I18nProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);
+
+if (root.hasChildNodes()) {
+  hydrateRoot(root, application);
+} else {
+  createRoot(root).render(application);
+}

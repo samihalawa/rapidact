@@ -16,6 +16,7 @@ import { MessageCircle } from "lucide-react";
 import { CONVERT } from "./config";
 import { useI18n } from "@/lib/i18n";
 import Analytics from "@/components/Analytics";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   const { t } = useI18n();
@@ -58,7 +59,8 @@ export default function App() {
         <Route path="/:lang/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/:lang/terms" element={<Terms />} />
-        <Route path="*" element={<Home />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {!isConversionFlow && (
         <a

@@ -6,6 +6,8 @@ import CtaBand from "@/components/CtaBand";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import {
   getContent,
+  hasExactContent,
+  contentSeoDescription,
   relatedContent,
   contentPath,
   LANGS,
@@ -136,18 +138,19 @@ export default function ContentPage() {
   const siblings = relatedContent(item);
 
   // hreflang alternates for every language twin that exists in the registry
-  const alternates = LANGS.filter(l => getContent(item.type, item.slug, l)).map(
-    l => ({
-      lang: l === "en" ? "en" : l,
-      path: contentPath({ type: item.type, slug: item.slug, lang: l }),
-    })
-  );
+  const languageTwins = LANGS.filter(l =>
+    hasExactContent(item.type, item.slug, l)
+  ).map(l => ({
+    lang: l,
+    path: contentPath({ type: item.type, slug: item.slug, lang: l }),
+  }));
+  const alternates = languageTwins.length > 1 ? languageTwins : [];
 
   return (
     <div className="min-h-screen bg-white">
       <Seo
         title={item.title}
-        description={item.description}
+        description={contentSeoDescription(item)}
         alternates={alternates}
       />
       <SiteNav />

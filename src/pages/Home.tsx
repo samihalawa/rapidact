@@ -9,7 +9,7 @@ import HowItWorks from "@/sections/HowItWorks";
 import Specialist from "@/sections/Specialist";
 import Pricing from "@/sections/Pricing";
 import Features from "@/sections/Features";
-import Faq, { FAQS } from "@/sections/Faq";
+import Faq from "@/sections/Faq";
 import { useI18n } from "@/lib/i18n";
 import { HOME_COPY } from "@/data/localizedHome";
 
@@ -19,11 +19,8 @@ export default function Home() {
 
   return (
     <div className="paper min-h-screen">
-      <Seo
-        title={copy.seoTitle}
-        description={copy.seoDescription}
-      />
-      <JsonLd data={[ORG_LD, PRODUCT_LD, faqLd(FAQS)]} />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} localized />
+      <JsonLd data={[ORG_LD, PRODUCT_LD, faqLd(copy.faqs)]} />
       <SiteNav />
       <main>
         <Hero />

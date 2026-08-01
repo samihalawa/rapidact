@@ -1,6 +1,7 @@
 # INDEX
 
-RapidAct SPA direct routes | Accept-header-only fallback makes extensionless conversion links return JSON 404 to previews and plain clients | serve the SPA shell for extensionless GET/HEAD requests while preserving asset and mutation 404s | do not infer browser failure from a default curl probe or serve index HTML for every missing asset | verify browser Accept and */* on localized conversion routes, missing assets, rendered pages and the deployed bundle
+RapidAct search indexability | sitemap URLs and client-side metadata still expose one empty shell plus unlimited soft-404 canonicals | prerender every canonical route and serve only generated route documents; return a noindex 404 for unknowns | do not treat JavaScript rendering, sitemap counts or managed bot defaults as indexing proof | verify every sitemap URL's raw Googlebot HTML, canonical, H1, metadata bounds, hreflang, unknown 404 and live crawler policy
+RapidAct SPA direct routes | an unrestricted extensionless shell fallback turns fabricated paths into homepage duplicates | serve prerendered documents for known extensionless GET/HEAD routes and a true noindex 404 for unknowns | do not use one generic shell as the production fallback or infer browser failure from one Accept shape | verify browser and _/_ on canonical routes, redirects, missing assets, unknown paths and the deployed bundle
 RapidAct outbound drafts | Gmail-only checks can miss existing Close drafts and create duplicate send risk | search the lead and email activities first, then update one canonical Close draft in place | do not infer “no Gmail draft” means no draft or keep competing versions across systems | verify exact lead/contact/recipient, draft status, subject/body read-back and one eventual send activity
 RapidAct conversion consent | a fixed analytics prompt can cover the first paid-form fields and CTA on a new mobile visit | render the same two consent choices as an in-flow banner on report/start while retaining the compact fixed prompt elsewhere | do not remove consent choices, hide the explanatory copy, or add another modal before payment | verify the fresh-storage report route at 320/375/392px with the prompt in document flow, both controls at least 44px, no horizontal overflow and the form visible below
 RapidAct localized report width | long translated compound words can preserve intrinsic grid width and push the phone page beyond its viewport | constrain both report grid children and allow heading/chapter hyphenation | do not shorten substantive localized content or trust one language at one width | verify all five report locales at 320, 375 and 392px with document width equal to viewport and a 48px enabled CTA
@@ -30,9 +31,20 @@ RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale 
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
 
-## 2026-07-30 — Extensionless direct routes do not depend on Accept
+## 2026-08-02 — Canonical routes need indexable server HTML
 
 - Status: CURRENT
+- Project/root: `rapidact`; public search discovery, multilingual routes, Hono delivery and Cloudflare crawler policy.
+- Mistake: 502 sitemap entries and client `Seo` effects looked comprehensive, but every raw route returned one empty shell; fabricated paths returned the homepage with a fabricated self-canonical, and Cloudflare prepended AI-crawler blocks.
+- Do: prerender the existing React route tree, serve only generated canonical documents, redirect duplicate URL forms and return a noindex 404 for unknown paths.
+- Don't: use the homepage shell as a catch-all, publish hreflang to missing translations, or treat sitemap presence/JavaScript rendering as indexing proof.
+- Evidence: `src/entry-server.tsx`, `scripts/seo-routes.mjs`, `scripts/verify-seo.mjs`, `api/lib/vite.ts`; 554-route local Googlebot verification and Cloudflare bot-management read-back on 2026-08-02.
+- Trigger terms: Google indexing, site: search, stale title, soft 404, sitemap, canonical, hreflang, robots, crawler.
+- Verify before reuse: raw Googlebot HTML for every sitemap URL has one bounded title/description, canonical, rendered H1/body and valid alternates; unknown route is 404/noindex; live Cloudflare has no whole-site bot block.
+
+## 2026-07-30 — Extensionless direct routes do not depend on Accept
+
+- Status: SUPERSEDED by “Canonical routes need indexable server HTML”; the Accept finding remains valid, but the generic production shell fallback created indexable soft duplicates.
 - Project/root: `rapidact`; Hono static delivery for React Router routes.
 - Mistake: a default curl probe received JSON 404 and was initially read as a browser outage; browser navigation already worked because it sent `Accept: text/html`, while link previews and plain clients still failed.
 - Do: serve `index.html` for extensionless `GET` and `HEAD` requests, independent of `Accept`.

@@ -66,7 +66,7 @@ export default function SiteFooter() {
               {REQUIREMENTS.map(r => (
                 <li key={r.slug}>
                   <Link
-                    to={path(`/requirements/${r.slug}`)}
+                    to={`/requirements/${r.slug}`}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
                     {t(
@@ -108,7 +108,7 @@ export default function SiteFooter() {
               ].map(l => (
                 <li key={l.label}>
                   <Link
-                    to={path(l.href)}
+                    to={l.href}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
                     {l.label}

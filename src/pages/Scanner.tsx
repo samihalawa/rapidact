@@ -35,11 +35,7 @@ import {
   ArrowRight,
   Eye,
 } from "lucide-react";
-import {
-  ANALYTICS_EVENTS,
-  isLeadRetained,
-  track,
-} from "@/lib/analytics";
+import { ANALYTICS_EVENTS, isLeadRetained, track } from "@/lib/analytics";
 import { isValidEmail } from "@contracts/types";
 import { useI18n } from "@/lib/i18n";
 import { SCANNER_COPY } from "@/data/localizedScanner";
@@ -202,9 +198,7 @@ export default function Scanner() {
         typedError.data?.code === "BAD_REQUEST" &&
         /invalid email address/i.test(typedError.message ?? "");
       setEmailError(
-        isEmailValidationError
-          ? copy.emailGateInvalid
-          : copy.emailGateError
+        isEmailValidationError ? copy.emailGateInvalid : copy.emailGateError
       );
       track("scanner_lead_capture_failed", {
         failure_type: isEmailValidationError
@@ -251,7 +245,7 @@ export default function Scanner() {
 
   return (
     <div className="paper min-h-screen">
-      <Seo title={copy.seoTitle} description={copy.seoDescription} />
+      <Seo title={copy.seoTitle} description={copy.seoDescription} localized />
       <SiteNav />
       <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <div>

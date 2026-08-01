@@ -8,18 +8,20 @@ specimen: "true"
 updated: "2026-07-26"
 ---
 
+# Specimen assessment: Meridian Retail Group
+
 ## 01. Your AI inventory
 
 A single inventory of the AI systems the company operates, including customer-facing tools, internal systems and third-party services.
 
-| System | Where it runs | Vendor | Classification |
-| --- | --- | --- | --- |
-| Customer support chatbot | All storefront pages, bottom-right widget | Intercom Fin | Transparency, Art. 50(1) |
-| AI-written product descriptions | ~4,100 product detail pages | In-house, GPT-based pipeline | Transparency, Art. 50(2) |
-| Recommendation and ranking engine | Home, category and basket pages | In-house | Out of scope for Art. 50 |
-| CV screening and ranking | Careers portal, applicant shortlisting | Third-party ATS module | High-risk, Annex III(4)(a) |
-| AI voice agent for order status | Customer service phone line | Third-party voice platform | Transparency, Art. 50(1) |
-| Internal code assistant | Engineering team only | GitHub Copilot | Out of scope |
+| System                            | Where it runs                             | Vendor                       | Classification             |
+| --------------------------------- | ----------------------------------------- | ---------------------------- | -------------------------- |
+| Customer support chatbot          | All storefront pages, bottom-right widget | Intercom Fin                 | Transparency, Art. 50(1)   |
+| AI-written product descriptions   | ~4,100 product detail pages               | In-house, GPT-based pipeline | Transparency, Art. 50(2)   |
+| Recommendation and ranking engine | Home, category and basket pages           | In-house                     | Out of scope for Art. 50   |
+| CV screening and ranking          | Careers portal, applicant shortlisting    | Third-party ATS module       | High-risk, Annex III(4)(a) |
+| AI voice agent for order status   | Customer service phone line               | Third-party voice platform   | Transparency, Art. 50(1)   |
+| Internal code assistant           | Engineering team only                     | GitHub Copilot               | Out of scope               |
 
 ## 02. Risk classification, and why each system lands where it does
 
@@ -59,15 +61,15 @@ For the high-risk CV screening system the standard is considerably higher, exten
 
 Ordered by deadline, impact and implementation lead time.
 
-| # | Action | Owner | Deadline |
-| --- | --- | --- | --- |
-| 1 | Open the documentation and logging question with your ATS vendor in writing | Procurement / HR | Start now, long lead time |
-| 2 | Add AI disclosure to the support chatbot, in all six market languages | Web team | Before 2 August 2026 |
-| 3 | Add an opening AI disclosure to the voice agent script | Customer service | Before 2 August 2026 |
-| 4 | Begin a dated disclosure evidence log across the storefront | Web team | Immediately, it cannot be backfilled |
-| 5 | Document your editorial review position for AI-written product copy | E-commerce / Legal | Before 2 August 2026 |
-| 6 | Add machine-readable provenance marking to the description pipeline | Engineering | Before 2 August 2026 |
-| 7 | Prepare the Annex III high-risk compliance programme for CV screening | HR / Legal | Before December 2027 |
+| #   | Action                                                                      | Owner              | Deadline                             |
+| --- | --------------------------------------------------------------------------- | ------------------ | ------------------------------------ |
+| 1   | Open the documentation and logging question with your ATS vendor in writing | Procurement / HR   | Start now, long lead time            |
+| 2   | Add AI disclosure to the support chatbot, in all six market languages       | Web team           | Before 2 August 2026                 |
+| 3   | Add an opening AI disclosure to the voice agent script                      | Customer service   | Before 2 August 2026                 |
+| 4   | Begin a dated disclosure evidence log across the storefront                 | Web team           | Immediately, it cannot be backfilled |
+| 5   | Document your editorial review position for AI-written product copy         | E-commerce / Legal | Before 2 August 2026                 |
+| 6   | Add machine-readable provenance marking to the description pipeline         | Engineering        | Before 2 August 2026                 |
+| 7   | Prepare the Annex III high-risk compliance programme for CV screening       | HR / Legal         | Before December 2027                 |
 
 ## 06. Assessment
 

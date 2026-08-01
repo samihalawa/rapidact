@@ -45,7 +45,11 @@ export default function PlatformPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Seo title={guide.metaTitle} description={guide.metaDescription} />
+      <Seo
+        title={guide.metaTitle}
+        description={guide.metaDescription}
+        localized
+      />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <nav className="text-xs text-[#6b7280]">
