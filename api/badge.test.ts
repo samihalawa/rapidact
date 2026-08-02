@@ -16,7 +16,7 @@ const manifest = JSON.parse(
 
 describe("RapidAct disclosure badge", () => {
   it("ships as the script used by RapidAct itself", () => {
-    expect(html).toContain('src="/rapidact-badge.js?v=20260803"');
+    expect(html).toContain('src="/rapidact-badge.js?v=20260803.1"');
     expect(badge).toContain('host.id = "rapidact-ai-disclosure"');
     expect(badge).toContain('button.setAttribute("aria-expanded"');
     expect(badge).toContain("rapidact-exact-symbol-128.webp");
