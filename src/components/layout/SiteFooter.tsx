@@ -9,12 +9,44 @@ import {
 } from "@/data/company";
 import { useI18n } from "@/lib/i18n";
 import { PARTNERS_COPY } from "@/data/localizedPartners";
+import { CONVERT } from "@/config";
 
 export default function SiteFooter() {
   const { lang, path, t } = useI18n();
   return (
     <footer className="border-t border-[#e2e2dd] bg-white">
       <div className="mx-auto max-w-6xl px-4 pt-14 pb-36 sm:px-6 sm:py-14">
+        <div className="mb-12 grid gap-6 rounded-lg bg-[#03123d] px-6 py-7 text-white sm:px-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-xl font-bold tracking-[-0.02em]">
+              {t("footer.ctaTitle")}
+            </p>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/70">
+              {t("footer.ctaBody")}
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              to={path(CONVERT.report)}
+              data-analytics-event="report_started"
+              data-analytics-label="Footer report CTA"
+              className="inline-flex min-h-12 items-center justify-center rounded bg-white px-5 text-sm font-bold text-[#03123d] transition hover:bg-[#e8f2ff]"
+            >
+              {t("contact.report")}
+            </Link>
+            <a
+              href={CONVERT.calBooking}
+              target="_blank"
+              rel="noopener"
+              data-analytics-event="booking_click"
+              data-analytics-label="Footer book a call CTA"
+              className="inline-flex min-h-12 items-center justify-center rounded border border-white/35 px-5 text-sm font-bold text-white transition hover:bg-white/10"
+            >
+              {t("footer.bookCall")}
+            </a>
+          </div>
+        </div>
+
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.3fr_repeat(4,minmax(0,1fr))]">
           <div>
             <div className="flex items-center gap-2.5" aria-label="RapidAct">
@@ -39,10 +71,11 @@ export default function SiteFooter() {
             </h4>
             <ul className="mt-4 space-y-2.5">
               {[
-                { label: t("footer.scan"), href: "/scanner" },
-                { label: t("footer.badge"), href: "/article-50#install" },
                 { label: t("footer.assessment"), href: "/report" },
+                { label: t("footer.contactPage"), href: "/contact" },
+                { label: t("footer.badge"), href: "/article-50#install" },
                 { label: PARTNERS_COPY[lang].footerLabel, href: "/partners" },
+                { label: t("footer.scan"), href: "/scanner" },
                 { label: t("footer.article"), href: "/article-50" },
                 { label: t("footer.guides"), href: "/learn" },
               ].map(l => (
@@ -66,7 +99,7 @@ export default function SiteFooter() {
               {REQUIREMENTS.map(r => (
                 <li key={r.slug}>
                   <Link
-                    to={`/requirements/${r.slug}`}
+                    to={path(`/requirements/${r.slug}`)}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
                     {t(
@@ -108,7 +141,7 @@ export default function SiteFooter() {
               ].map(l => (
                 <li key={l.label}>
                   <Link
-                    to={l.href}
+                    to={path(l.href)}
                     className="text-sm text-[#5c6370] transition hover:text-[#16181d]"
                   >
                     {l.label}

@@ -109,14 +109,20 @@ export default function Hero() {
               {t("hero.request")} · €99
             </Button>
             <Button
-              data-analytics-event="free_scan_click"
-              data-analytics-label="Hero free scan CTA"
+              asChild
               size="lg"
               variant="outline"
               className="hairline h-12 rounded border bg-white px-7 text-[15px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
-              onClick={() => navigate(path(CONVERT.scanner))}
             >
-              {t("hero.scan")}
+              <a
+                href={CONVERT.calBooking}
+                target="_blank"
+                rel="noopener"
+                data-analytics-event="booking_click"
+                data-analytics-label="Hero book a call CTA"
+              >
+                {t("hero.bookCall")}
+              </a>
             </Button>
           </div>
 

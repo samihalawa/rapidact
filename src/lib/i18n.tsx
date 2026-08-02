@@ -25,6 +25,10 @@ const EN: Dictionary = {
   "nav.menuDescription": "RapidAct navigation and language",
   "nav.request": "Start assessment",
   "nav.requestShort": "Start",
+  "nav.report": "Get the report",
+  "nav.contact": "Contact",
+  "nav.bookCall": "Book a call",
+  "nav.bookCallShort": "Book",
   whatsapp: "Ask on WhatsApp",
   "consent.title": "Private, measurable experience",
   "consent.body":
@@ -39,6 +43,7 @@ const EN: Dictionary = {
     "Use the free diagnostic and implementation tools, or commission the €99 specialist company assessment for the complete position and action plan.",
   "hero.scan": "Scan your website free",
   "hero.request": "Assess my company",
+  "hero.bookCall": "Book a call",
   "hero.specimen": "View the sample PDF",
   "hero.badgeLead": "Need the technical notice only?",
   "hero.badgeLink": "Add a clear AI-use notice",
@@ -119,6 +124,11 @@ const EN: Dictionary = {
     "A specialist EU AI Act transparency practice for Article 50 scoping, notices, plugins, badges, evidence and company assessments.",
   "footer.assessment": "The assessment, €99",
   "footer.scan": "Free website scan",
+  "footer.bookCall": "Book a call",
+  "footer.contactPage": "Contact RapidAct",
+  "footer.ctaTitle": "Ready to clarify your EU AI Act position?",
+  "footer.ctaBody":
+    "Start the €99 written assessment or book a call with the specialist.",
   "footer.badge": "AI notice installer",
   "footer.article": "Article 50 guide",
   "footer.guides": "Guides",
@@ -134,6 +144,19 @@ const EN: Dictionary = {
   "footer.copyright": "RapidAct is a trading name.",
   "footer.regulation":
     "Regulation (EU) 2024/1689, Article 50, applies from 2 August 2026",
+  "contact.seoTitle": "Contact RapidAct | EU AI Act transparency",
+  "contact.seoDescription":
+    "Book a call with RapidAct about EU AI Act Article 50 transparency, or start the €99 written company assessment.",
+  "contact.kicker": "EU AI Act transparency specialist",
+  "contact.title": "Talk through your company’s AI transparency duties",
+  "contact.body":
+    "Book a call to review your AI systems, Article 50 exposure and the most useful next step.",
+  "contact.call": "Book a call",
+  "contact.report": "Get the €99 report",
+  "contact.details": "Contact RapidAct",
+  "contact.email": "Email",
+  "contact.phone": "Phone",
+  "contact.whatsapp": "WhatsApp",
 };
 
 const ES: Dictionary = {
@@ -156,6 +179,10 @@ const ES: Dictionary = {
   "nav.menuDescription": "Navegación e idioma de RapidAct",
   "nav.request": "Iniciar evaluación",
   "nav.requestShort": "Empezar",
+  "nav.report": "Obtener el informe",
+  "nav.contact": "Contacto",
+  "nav.bookCall": "Reservar una llamada",
+  "nav.bookCallShort": "Reservar",
   whatsapp: "Preguntar por WhatsApp",
   "consent.title": "Experiencia privada y medible",
   "consent.body":
@@ -170,6 +197,7 @@ const ES: Dictionary = {
     "Usa gratis las herramientas de diagnóstico e implementación o solicita por 99 € la evaluación especializada completa y su plan de acción.",
   "hero.scan": "Escanear mi web gratis",
   "hero.request": "Evaluar mi empresa",
+  "hero.bookCall": "Reservar una llamada",
   "hero.specimen": "Ver el PDF de muestra",
   "hero.badgeLead": "¿Solo necesitas el aviso técnico?",
   "hero.badgeLink": "Añade un aviso claro sobre el uso de IA",
@@ -250,6 +278,11 @@ const ES: Dictionary = {
     "Práctica especializada en transparencia de la Ley de IA: alcance del artículo 50, avisos, plugins, distintivos, pruebas y evaluaciones.",
   "footer.assessment": "La evaluación, 99 €",
   "footer.scan": "Escaneo web gratis",
+  "footer.bookCall": "Reservar una llamada",
+  "footer.contactPage": "Contactar con RapidAct",
+  "footer.ctaTitle": "¿Listo para aclarar tu posición ante la Ley de IA?",
+  "footer.ctaBody":
+    "Empieza la evaluación escrita de 99 € o reserva una llamada con el especialista.",
   "footer.badge": "Instalador del aviso de IA",
   "footer.article": "Guía del artículo 50",
   "footer.guides": "Guías",
@@ -265,6 +298,19 @@ const ES: Dictionary = {
   "footer.copyright": "RapidAct es una marca comercial.",
   "footer.regulation":
     "Reglamento (UE) 2024/1689, artículo 50, aplicable desde el 2 de agosto de 2026",
+  "contact.seoTitle": "Contacto RapidAct | Transparencia de la Ley de IA",
+  "contact.seoDescription":
+    "Reserva una llamada sobre transparencia y artículo 50 de la Ley de IA o solicita la evaluación empresarial escrita de 99 €.",
+  "contact.kicker": "Especialista en transparencia de la Ley de IA",
+  "contact.title": "Revisemos las obligaciones de transparencia de tu empresa",
+  "contact.body":
+    "Reserva una llamada para revisar tus sistemas de IA, el artículo 50 y el siguiente paso más útil.",
+  "contact.call": "Reservar una llamada",
+  "contact.report": "Obtener el informe de 99 €",
+  "contact.details": "Contactar con RapidAct",
+  "contact.email": "Correo",
+  "contact.phone": "Teléfono",
+  "contact.whatsapp": "WhatsApp",
 };
 
 const DE: Dictionary = {
@@ -286,6 +332,10 @@ const DE: Dictionary = {
   "nav.menuDescription": "RapidAct-Navigation und Sprache",
   "nav.request": "Bewertung starten",
   "nav.requestShort": "Start",
+  "nav.report": "Bericht erhalten",
+  "nav.contact": "Kontakt",
+  "nav.bookCall": "Gespräch buchen",
+  "nav.bookCallShort": "Termin",
   whatsapp: "Per WhatsApp fragen",
   "consent.title": "Privat und messbar",
   "consent.body":
@@ -300,6 +350,7 @@ const DE: Dictionary = {
     "Nutzen Sie die Diagnose- und Umsetzungstools kostenlos oder beauftragen Sie für 99 € die vollständige Fachbewertung mit Maßnahmenplan.",
   "hero.scan": "Website kostenlos scannen",
   "hero.request": "Unternehmen bewerten",
+  "hero.bookCall": "Gespräch buchen",
   "hero.specimen": "Muster-PDF öffnen",
   "hero.badgeLead": "Nur den technischen Hinweis benötigt?",
   "hero.badgeLink": "Klaren KI-Hinweis hinzufügen",
@@ -380,6 +431,11 @@ const DE: Dictionary = {
     "Fachpraxis für AI-Act-Transparenz: Artikel-50-Scope, Hinweise, Plugins, Badges, Nachweise und Unternehmensbewertungen.",
   "footer.assessment": "Bewertung, 99 €",
   "footer.scan": "Kostenloser Website-Scan",
+  "footer.bookCall": "Gespräch buchen",
+  "footer.contactPage": "RapidAct kontaktieren",
+  "footer.ctaTitle": "Möchten Sie Ihre AI-Act-Position klären?",
+  "footer.ctaBody":
+    "Starten Sie die schriftliche Bewertung für 99 € oder buchen Sie ein Fachgespräch.",
   "footer.badge": "KI-Hinweis installieren",
   "footer.article": "Leitfaden Artikel 50",
   "footer.guides": "Leitfäden",
@@ -395,6 +451,19 @@ const DE: Dictionary = {
   "footer.copyright": "RapidAct ist ein Handelsname.",
   "footer.regulation":
     "Verordnung (EU) 2024/1689, Artikel 50, gilt ab 2. August 2026",
+  "contact.seoTitle": "Kontakt RapidAct | EU AI Act Transparenz",
+  "contact.seoDescription":
+    "Buchen Sie ein Gespräch zu Artikel 50 und AI-Act-Transparenz oder starten Sie die schriftliche Unternehmensbewertung für 99 €.",
+  "contact.kicker": "Spezialist für EU-AI-Act-Transparenz",
+  "contact.title": "Klären Sie die Transparenzpflichten Ihres Unternehmens",
+  "contact.body":
+    "Buchen Sie ein Gespräch über Ihre KI-Systeme, Artikel 50 und den sinnvollsten nächsten Schritt.",
+  "contact.call": "Gespräch buchen",
+  "contact.report": "99-€-Bericht erhalten",
+  "contact.details": "RapidAct kontaktieren",
+  "contact.email": "E-Mail",
+  "contact.phone": "Telefon",
+  "contact.whatsapp": "WhatsApp",
 };
 
 const FR: Dictionary = {
@@ -417,6 +486,10 @@ const FR: Dictionary = {
   "nav.menuDescription": "Navigation et langue de RapidAct",
   "nav.request": "Commencer l’évaluation",
   "nav.requestShort": "Commencer",
+  "nav.report": "Obtenir le rapport",
+  "nav.contact": "Contact",
+  "nav.bookCall": "Réserver un appel",
+  "nav.bookCallShort": "Appel",
   whatsapp: "Poser une question sur WhatsApp",
   "consent.title": "Expérience privée et mesurable",
   "consent.body":
@@ -431,6 +504,7 @@ const FR: Dictionary = {
     "Utilisez gratuitement les outils de diagnostic et de mise en œuvre, ou commandez l’évaluation spécialisée complète à 99 €.",
   "hero.scan": "Scanner mon site gratuitement",
   "hero.request": "Évaluer mon entreprise",
+  "hero.bookCall": "Réserver un appel",
   "hero.specimen": "Voir le PDF exemple",
   "hero.badgeLead": "Besoin uniquement de la notice technique ?",
   "hero.badgeLink": "Ajouter un avis clair sur l’usage de l’IA",
@@ -511,6 +585,11 @@ const FR: Dictionary = {
     "Pratique spécialisée en transparence AI Act : article 50, avis, plugins, badges, preuves et évaluations d’entreprise.",
   "footer.assessment": "Évaluation, 99 €",
   "footer.scan": "Scan gratuit",
+  "footer.bookCall": "Réserver un appel",
+  "footer.contactPage": "Contacter RapidAct",
+  "footer.ctaTitle": "Prêt à clarifier votre position au regard de l’AI Act ?",
+  "footer.ctaBody":
+    "Commencez l’évaluation écrite à 99 € ou réservez un appel avec le spécialiste.",
   "footer.badge": "Installer l’avis IA",
   "footer.article": "Guide de l’article 50",
   "footer.guides": "Guides",
@@ -526,6 +605,20 @@ const FR: Dictionary = {
   "footer.copyright": "RapidAct est un nom commercial.",
   "footer.regulation":
     "Règlement (UE) 2024/1689, article 50, applicable le 2 août 2026",
+  "contact.seoTitle": "Contact RapidAct | Transparence de l’AI Act",
+  "contact.seoDescription":
+    "Réservez un appel sur la transparence et l’article 50 de l’AI Act, ou commencez l’évaluation écrite de votre entreprise à 99 €.",
+  "contact.kicker": "Spécialiste de la transparence de l’AI Act",
+  "contact.title":
+    "Clarifions les obligations de transparence de votre entreprise",
+  "contact.body":
+    "Réservez un appel pour examiner vos systèmes d’IA, l’article 50 et la prochaine étape utile.",
+  "contact.call": "Réserver un appel",
+  "contact.report": "Obtenir le rapport à 99 €",
+  "contact.details": "Contacter RapidAct",
+  "contact.email": "E-mail",
+  "contact.phone": "Téléphone",
+  "contact.whatsapp": "WhatsApp",
 };
 
 const IT: Dictionary = {
@@ -547,6 +640,10 @@ const IT: Dictionary = {
   "nav.menuDescription": "Navigazione e lingua di RapidAct",
   "nav.request": "Inizia la valutazione",
   "nav.requestShort": "Inizia",
+  "nav.report": "Ottieni il rapporto",
+  "nav.contact": "Contatti",
+  "nav.bookCall": "Prenota una chiamata",
+  "nav.bookCallShort": "Prenota",
   whatsapp: "Chiedi su WhatsApp",
   "consent.title": "Esperienza privata e misurabile",
   "consent.body":
@@ -561,6 +658,7 @@ const IT: Dictionary = {
     "Usa gratis gli strumenti di diagnosi e implementazione oppure richiedi la valutazione specialistica completa da 99 €.",
   "hero.scan": "Scansiona gratis il sito",
   "hero.request": "Valuta la mia azienda",
+  "hero.bookCall": "Prenota una chiamata",
   "hero.specimen": "Apri il PDF di esempio",
   "hero.badgeLead": "Ti serve solo l’avviso tecnico?",
   "hero.badgeLink": "Aggiungi un avviso chiaro sull’uso dell’IA",
@@ -641,6 +739,11 @@ const IT: Dictionary = {
     "Pratica specializzata nella trasparenza AI Act: articolo 50, avvisi, plugin, badge, prove e valutazioni aziendali.",
   "footer.assessment": "Valutazione, 99 €",
   "footer.scan": "Scansione gratuita",
+  "footer.bookCall": "Prenota una chiamata",
+  "footer.contactPage": "Contatta RapidAct",
+  "footer.ctaTitle": "Vuoi chiarire la tua posizione rispetto all’AI Act?",
+  "footer.ctaBody":
+    "Avvia la valutazione scritta da 99 € o prenota una chiamata con lo specialista.",
   "footer.badge": "Installa l’avviso IA",
   "footer.article": "Guida articolo 50",
   "footer.guides": "Guide",
@@ -656,6 +759,19 @@ const IT: Dictionary = {
   "footer.copyright": "RapidAct è un nome commerciale.",
   "footer.regulation":
     "Regolamento (UE) 2024/1689, articolo 50, applicabile dal 2 agosto 2026",
+  "contact.seoTitle": "Contatti RapidAct | Trasparenza AI Act UE",
+  "contact.seoDescription":
+    "Prenota una chiamata su trasparenza e articolo 50 dell’AI Act o avvia la valutazione aziendale scritta da 99 €.",
+  "contact.kicker": "Specialista nella trasparenza dell’AI Act UE",
+  "contact.title": "Chiarisci gli obblighi di trasparenza della tua azienda",
+  "contact.body":
+    "Prenota una chiamata per esaminare i tuoi sistemi IA, l’articolo 50 e il prossimo passo più utile.",
+  "contact.call": "Prenota una chiamata",
+  "contact.report": "Ottieni il rapporto da 99 €",
+  "contact.details": "Contatta RapidAct",
+  "contact.email": "E-mail",
+  "contact.phone": "Telefono",
+  "contact.whatsapp": "WhatsApp",
 };
 
 const DICTIONARIES: Record<Lang, Dictionary> = {

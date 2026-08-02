@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -15,7 +15,6 @@ import { LanguageSelector, useI18n } from "@/lib/i18n";
 import { Menu } from "lucide-react";
 
 export default function SiteNav() {
-  const navigate = useNavigate();
   const { path, t } = useI18n();
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -62,10 +61,10 @@ export default function SiteNav() {
               {t("nav.product")}
             </a>
             <Link
-              to={path(CONVERT.scanner)}
+              to={path(CONVERT.report)}
               className="whitespace-nowrap hover:text-[#16181d]"
             >
-              {t("nav.scan")}
+              {t("nav.report")}
             </Link>
             <Link
               to={path(CONVERT.badge)}
@@ -73,12 +72,12 @@ export default function SiteNav() {
             >
               {t("nav.badge")}
             </Link>
-            <a
-              href={`${path("/")}#report`}
+            <Link
+              to={path("/contact")}
               className="whitespace-nowrap hover:text-[#16181d]"
             >
-              {t("nav.assessment")}
-            </a>
+              {t("nav.contact")}
+            </Link>
             <Link
               to={path(CONVERT.example)}
               className="hidden whitespace-nowrap hover:text-[#16181d] xl:inline"
@@ -104,13 +103,20 @@ export default function SiteNav() {
               <LanguageSelector />
             </div>
             <Button
-              data-analytics-event="free_scan_click"
-              data-analytics-label="Header free scan CTA"
+              asChild
               className="h-11 rounded bg-[#16181d] px-3 text-[13px] font-semibold text-white hover:bg-[#2b2f38] sm:px-4 sm:text-[14px]"
-              onClick={() => navigate(path(CONVERT.scanner))}
             >
-              <span className="lg:hidden">{t("nav.scanShort")}</span>
-              <span className="hidden lg:inline">{t("nav.scan")}</span>
+              <a
+                href={CONVERT.calBooking}
+                target="_blank"
+                rel="noopener"
+                aria-label={t("nav.bookCall")}
+                data-analytics-event="booking_click"
+                data-analytics-label="Header book a call CTA"
+              >
+                <span className="lg:hidden">{t("nav.bookCallShort")}</span>
+                <span className="hidden lg:inline">{t("nav.bookCall")}</span>
+              </a>
             </Button>
             <Sheet>
               <SheetTrigger asChild>
@@ -137,18 +143,21 @@ export default function SiteNav() {
                 <nav className="flex flex-col px-5">
                   {[
                     {
+                      label: t("nav.bookCall"),
+                      href: CONVERT.calBooking,
+                      external: true,
+                      newTab: true,
+                    },
+                    { label: t("nav.report"), href: path(CONVERT.report) },
+                    {
                       label: t("nav.product"),
                       href: `${path("/")}#features`,
                       external: true,
                     },
-                    { label: t("nav.scan"), href: path(CONVERT.scanner) },
                     { label: t("nav.badge"), href: path(CONVERT.badge) },
-                    {
-                      label: t("nav.assessment"),
-                      href: `${path("/")}#report`,
-                      external: true,
-                    },
+                    { label: t("nav.contact"), href: path("/contact") },
                     { label: t("nav.specimen"), href: path(CONVERT.example) },
+                    { label: t("nav.scan"), href: path(CONVERT.scanner) },
                     { label: t("nav.article"), href: path("/article-50") },
                     { label: t("nav.guides"), href: path("/learn") },
                   ].map(item => (
@@ -156,6 +165,8 @@ export default function SiteNav() {
                       {item.external ? (
                         <a
                           href={item.href}
+                          target={"newTab" in item ? "_blank" : undefined}
+                          rel={"newTab" in item ? "noopener" : undefined}
                           className="flex min-h-12 items-center border-b border-[#edf0f4] text-sm font-semibold text-[#334155]"
                         >
                           {item.label}

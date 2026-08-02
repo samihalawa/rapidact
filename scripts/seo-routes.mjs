@@ -13,6 +13,7 @@ const LOCALIZED_STATIC_ROUTES = [
   ["/example-report", "0.9"],
   ["/scanner", "0.9"],
   ["/partners", "0.9"],
+  ["/contact", "0.9"],
   ["/article-50", "0.9"],
   ["/learn", "0.9"],
   ["/platforms/wordpress", "0.8"],

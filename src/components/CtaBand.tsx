@@ -37,11 +37,23 @@ export default function CtaBand() {
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-4">
             <Button
+              data-analytics-event="report_started"
+              data-analytics-label="SEO page report CTA"
               className="rounded bg-[#16181d] px-6 text-[15px] font-semibold text-white hover:bg-[#2b2f38]"
               onClick={() => navigate(path(CONVERT.report))}
             >
               {t("cta.primary")}
             </Button>
+            <a
+              href={CONVERT.calBooking}
+              target="_blank"
+              rel="noopener"
+              data-analytics-event="booking_click"
+              data-analytics-label="SEO page book a call CTA"
+              className="hairline inline-flex min-h-11 items-center rounded border bg-white px-5 text-[14px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
+            >
+              {t("hero.bookCall")}
+            </a>
             <button
               onClick={() => navigate(path(CONVERT.example))}
               className="accent min-h-11 text-[14px] font-semibold underline underline-offset-2"

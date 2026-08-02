@@ -42,26 +42,30 @@ export default function Features() {
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <button
-              data-analytics-event="free_scan_click"
-              data-analytics-label="Workflow scan CTA"
-              onClick={() => navigate(path(CONVERT.scanner))}
+              data-analytics-event="report_started"
+              data-analytics-label="Workflow report CTA"
+              onClick={() => navigate(path(CONVERT.report))}
               className="inline-flex min-h-11 items-center rounded bg-[#16181d] px-5 text-[14px] font-semibold text-white hover:bg-[#2b2f38]"
             >
-              {t("hero.scan")}
+              {t("hero.request")} · €99
             </button>
+            <a
+              href={CONVERT.calBooking}
+              target="_blank"
+              rel="noopener"
+              data-analytics-event="booking_click"
+              data-analytics-label="Workflow book a call CTA"
+              className="hairline inline-flex min-h-11 items-center rounded border bg-white px-5 text-[14px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
+            >
+              {t("hero.bookCall")}
+            </a>
             <button
               data-analytics-event="badge_installer_view"
               data-analytics-label="Workflow notice CTA"
               onClick={() => navigate(path(CONVERT.badge))}
-              className="hairline inline-flex min-h-11 items-center rounded border bg-white px-5 text-[14px] font-semibold text-[#16181d] hover:bg-[#f7f7f5]"
-            >
-              {copy.copyCode}
-            </button>
-            <button
-              onClick={() => navigate(path(CONVERT.report))}
               className="accent inline-flex min-h-11 items-center px-1 text-[14px] font-semibold underline underline-offset-2"
             >
-              {t("hero.request")} · €99
+              {copy.copyCode}
             </button>
           </div>
         </div>

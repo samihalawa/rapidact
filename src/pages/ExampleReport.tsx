@@ -154,13 +154,19 @@ export default function ExampleReport() {
                 {t("hero.request")}, €99
               </Button>
               <Button
-                data-analytics-event="scan_started"
-                data-analytics-label="Specimen free scan CTA"
+                asChild
                 variant="outline"
                 className="hairline ink min-h-11 rounded border bg-white px-6 text-[15px] font-semibold hover:bg-[#f7f7f5]"
-                onClick={() => navigate(path(CONVERT.scanner))}
               >
-                {t("nav.scan")}
+                <a
+                  href={CONVERT.calBooking}
+                  target="_blank"
+                  rel="noopener"
+                  data-analytics-event="booking_click"
+                  data-analytics-label="Specimen book a call CTA"
+                >
+                  {t("hero.bookCall")}
+                </a>
               </Button>
             </div>
           </div>

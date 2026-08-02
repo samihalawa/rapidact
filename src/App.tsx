@@ -12,6 +12,7 @@ import ContentPage from "./pages/ContentPage";
 import Report from "./pages/Report";
 import ExampleReport from "./pages/ExampleReport";
 import Partners from "./pages/Partners";
+import Contact from "./pages/Contact";
 import { MessageCircle } from "lucide-react";
 import { CONVERT } from "./config";
 import { useI18n } from "@/lib/i18n";
@@ -21,7 +22,7 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   const { t } = useI18n();
   const { pathname } = useLocation();
-  const isConversionFlow = /(^|\/)(report|start)\/?$/.test(pathname);
+  const isConversionFlow = /(^|\/)(report|start|contact)\/?$/.test(pathname);
 
   useEffect(() => {
     document.body.toggleAttribute("data-conversion-flow", isConversionFlow);
@@ -50,6 +51,8 @@ export default function App() {
         <Route path="/:lang/example-report" element={<ExampleReport />} />
         <Route path="/partners" element={<Partners />} />
         <Route path="/:lang/partners" element={<Partners />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/:lang/contact" element={<Contact />} />
         {/* Legacy intake path — kept so old links and payment redirects still land. */}
         <Route path="/start" element={<Report />} />
         <Route path="/:lang/start" element={<Report />} />
