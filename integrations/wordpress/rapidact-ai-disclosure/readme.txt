@@ -1,5 +1,5 @@
 === RapidAct AI Disclosure ===
-Contributors: rapidact
+Contributors: sami2
 Tags: ai, disclosure, transparency, notice
 Requires at least: 6.3
 Tested up to: 7.0
@@ -47,4 +47,4 @@ track visitors.
 == Changelog ==
 
 = 1.0.0 =
-* Initial WordPress.org submission with a locally bundled disclosure runtime.
+* Initial WordPress.org submission with a locally bundled disclosure runtime and aligned contributor metadata.
