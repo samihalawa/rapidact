@@ -18,7 +18,7 @@ import { CONVERT } from "@/config";
 import { PARTNERS_COPY, type PartnerProfileId } from "@/data/localizedPartners";
 import { ANALYTICS_EVENTS, track } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
-import { trpc } from "@/providers/trpc";
+import { trpc, TRPCProvider } from "@/providers/trpc";
 import { isValidEmail } from "@contracts/types";
 
 const PROFILE_ICONS = {
@@ -31,7 +31,7 @@ function isProfile(value: string | null): value is PartnerProfileId {
   return value === "legal" || value === "audit" || value === "delivery";
 }
 
-export default function Partners() {
+function Partners() {
   const { search } = useLocation();
   const { lang, path } = useI18n();
   const copy = PARTNERS_COPY[lang];
@@ -422,5 +422,13 @@ export default function Partners() {
 
       <SiteFooter />
     </div>
+  );
+}
+
+export default function PartnersPage() {
+  return (
+    <TRPCProvider>
+      <Partners />
+    </TRPCProvider>
   );
 }

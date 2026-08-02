@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { trpc } from "@/providers/trpc";
+import { trpc, TRPCProvider } from "@/providers/trpc";
 import type { ScanResult, ScanFinding } from "@contracts/types";
 import { CONVERT } from "@/config";
 import { useNavigate } from "react-router";
@@ -61,7 +61,7 @@ function planItemFor(
   };
 }
 
-export default function Scanner() {
+function Scanner() {
   const navigate = useNavigate();
   const { lang, path } = useI18n();
   const copy = SCANNER_COPY[lang];
@@ -751,5 +751,13 @@ export default function Scanner() {
       </main>
       <SiteFooter />
     </div>
+  );
+}
+
+export default function ScannerPage() {
+  return (
+    <TRPCProvider>
+      <Scanner />
+    </TRPCProvider>
   );
 }

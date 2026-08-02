@@ -16,16 +16,10 @@ export type ContentType =
   | "blog"
   /** Published assessments and specimens. Drop a .md file in content/<lang>/reports/. */
   | "reports";
-export type Lang = "en" | "es" | "de" | "fr" | "it";
+import { LANGS, LANG_LABELS, type Lang } from "@/lib/languages";
 
-export const LANGS: Lang[] = ["en", "es", "de", "fr", "it"];
-export const LANG_LABELS: Record<Lang, string> = {
-  en: "English",
-  es: "Español",
-  de: "Deutsch",
-  fr: "Français",
-  it: "Italiano",
-};
+export { LANGS, LANG_LABELS };
+export type { Lang };
 
 export interface ContentItem {
   type: ContentType;

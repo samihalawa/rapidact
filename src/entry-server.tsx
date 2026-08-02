@@ -3,7 +3,6 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import App from "./App";
 import { I18nProvider } from "@/lib/i18n";
-import { TRPCProvider } from "@/providers/trpc";
 import { SeoCollectorProvider, type SeoData } from "@/components/Seo";
 
 export interface RenderedRoute {
@@ -17,11 +16,9 @@ export function renderRoute(pathname: string): RenderedRoute {
     <StrictMode>
       <StaticRouter location={pathname}>
         <I18nProvider>
-          <TRPCProvider>
-            <SeoCollectorProvider collector={collector}>
-              <App />
-            </SeoCollectorProvider>
-          </TRPCProvider>
+          <SeoCollectorProvider collector={collector}>
+            <App />
+          </SeoCollectorProvider>
         </I18nProvider>
       </StaticRouter>
     </StrictMode>

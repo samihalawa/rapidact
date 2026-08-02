@@ -5,7 +5,7 @@ import Seo from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { trpc } from "@/providers/trpc";
+import { trpc, TRPCProvider } from "@/providers/trpc";
 import { REPORT, bunqPayUrl, CONVERT } from "@/config";
 import {
   ENTITY,
@@ -53,7 +53,7 @@ function Chip({
   );
 }
 
-export default function Report() {
+function Report() {
   const { lang, path } = useI18n();
   const copy = REPORT_COPY[lang];
   const homeCopy = HOME_COPY[lang];
@@ -586,5 +586,13 @@ export default function Report() {
       </main>
       <SiteFooter />
     </div>
+  );
+}
+
+export default function ReportPage() {
+  return (
+    <TRPCProvider>
+      <Report />
+    </TRPCProvider>
   );
 }

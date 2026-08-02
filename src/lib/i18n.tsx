@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { LANGS, LANG_LABELS, type Lang } from "@/lib/content";
+import { LANGS, LANG_LABELS, type Lang } from "@/lib/languages";
 import { track } from "@/lib/analytics";
 
 type Dictionary = Record<string, string>;

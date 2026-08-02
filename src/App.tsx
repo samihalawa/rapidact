@@ -1,23 +1,50 @@
-import { useEffect } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  type ComponentType,
+  type LazyExoticComponent,
+} from "react";
 import { Routes, Route, useLocation } from "react-router";
-import Home from "./pages/Home";
-import Scanner from "./pages/Scanner";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Guide from "./pages/Guide";
-import RequirementPage from "./pages/RequirementPage";
-import PlatformPage from "./pages/PlatformPage";
-import ContentHub from "./pages/ContentHub";
-import ContentPage from "./pages/ContentPage";
-import Report from "./pages/Report";
-import ExampleReport from "./pages/ExampleReport";
-import Partners from "./pages/Partners";
-import Contact from "./pages/Contact";
 import { MessageCircle } from "lucide-react";
 import { CONVERT } from "./config";
 import { useI18n } from "@/lib/i18n";
 import Analytics from "@/components/Analytics";
-import NotFound from "./pages/NotFound";
+
+type PageModule = { default: ComponentType };
+type RouteComponent = ComponentType | LazyExoticComponent<ComponentType>;
+
+const pageModules = import.meta.glob<PageModule>("./pages/*.tsx", {
+  // Vite replaces this value for each client/SSR build. The literal cast keeps
+  // TypeScript on the lazy overload while the SSR build still receives `true`.
+  eager: import.meta.env.SSR as false,
+}) as unknown as Record<
+  string,
+  PageModule | (() => Promise<PageModule>)
+>;
+
+function page(path: string): RouteComponent {
+  const module = pageModules[path];
+  if (!module) throw new Error(`Missing route module: ${path}`);
+  return import.meta.env.SSR
+    ? (module as PageModule).default
+    : lazy(module as () => Promise<PageModule>);
+}
+
+const Home = page("./pages/Home.tsx");
+const Scanner = page("./pages/Scanner.tsx");
+const Privacy = page("./pages/Privacy.tsx");
+const Terms = page("./pages/Terms.tsx");
+const Guide = page("./pages/Guide.tsx");
+const RequirementPage = page("./pages/RequirementPage.tsx");
+const PlatformPage = page("./pages/PlatformPage.tsx");
+const ContentHub = page("./pages/ContentHub.tsx");
+const ContentPage = page("./pages/ContentPage.tsx");
+const Report = page("./pages/Report.tsx");
+const ExampleReport = page("./pages/ExampleReport.tsx");
+const Partners = page("./pages/Partners.tsx");
+const Contact = page("./pages/Contact.tsx");
+const NotFound = page("./pages/NotFound.tsx");
 
 export default function App() {
   const { t } = useI18n();
@@ -32,39 +59,44 @@ export default function App() {
   return (
     <>
       <Analytics />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:lang" element={<Home />} />
-        <Route path="/scanner" element={<Scanner />} />
-        <Route path="/:lang/scanner" element={<Scanner />} />
-        <Route path="/article-50" element={<Guide />} />
-        <Route path="/:lang/article-50" element={<Guide />} />
-        <Route path="/requirements/:slug" element={<RequirementPage />} />
-        <Route path="/:lang/requirements/:slug" element={<RequirementPage />} />
-        <Route path="/platforms/:slug" element={<PlatformPage />} />
-        <Route path="/:lang/platforms/:slug" element={<PlatformPage />} />
-        <Route path="/learn" element={<ContentHub />} />
-        <Route path="/:lang/learn" element={<ContentHub />} />
-        <Route path="/report" element={<Report />} />
-        <Route path="/:lang/report" element={<Report />} />
-        <Route path="/example-report" element={<ExampleReport />} />
-        <Route path="/:lang/example-report" element={<ExampleReport />} />
-        <Route path="/partners" element={<Partners />} />
-        <Route path="/:lang/partners" element={<Partners />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/:lang/contact" element={<Contact />} />
-        {/* Legacy intake path — kept so old links and payment redirects still land. */}
-        <Route path="/start" element={<Report />} />
-        <Route path="/:lang/start" element={<Report />} />
-        {/* Markdown content system: /answers/x, /es/vendors/y, … */}
-        <Route path="/:lang?/:type/:slug" element={<ContentPage />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/:lang/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/:lang/terms" element={<Terms />} />
-        <Route path="/404" element={<NotFound />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:lang" element={<Home />} />
+          <Route path="/scanner" element={<Scanner />} />
+          <Route path="/:lang/scanner" element={<Scanner />} />
+          <Route path="/article-50" element={<Guide />} />
+          <Route path="/:lang/article-50" element={<Guide />} />
+          <Route path="/requirements/:slug" element={<RequirementPage />} />
+          <Route
+            path="/:lang/requirements/:slug"
+            element={<RequirementPage />}
+          />
+          <Route path="/platforms/:slug" element={<PlatformPage />} />
+          <Route path="/:lang/platforms/:slug" element={<PlatformPage />} />
+          <Route path="/learn" element={<ContentHub />} />
+          <Route path="/:lang/learn" element={<ContentHub />} />
+          <Route path="/report" element={<Report />} />
+          <Route path="/:lang/report" element={<Report />} />
+          <Route path="/example-report" element={<ExampleReport />} />
+          <Route path="/:lang/example-report" element={<ExampleReport />} />
+          <Route path="/partners" element={<Partners />} />
+          <Route path="/:lang/partners" element={<Partners />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/:lang/contact" element={<Contact />} />
+          {/* Legacy intake path — kept so old links and payment redirects still land. */}
+          <Route path="/start" element={<Report />} />
+          <Route path="/:lang/start" element={<Report />} />
+          {/* Markdown content system: /answers/x, /es/vendors/y, … */}
+          <Route path="/:lang?/:type/:slug" element={<ContentPage />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/:lang/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/:lang/terms" element={<Terms />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
       {!isConversionFlow && (
         <a
           href={CONVERT.whatsapp}
