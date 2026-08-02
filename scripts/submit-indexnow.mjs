@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { BASE_URL, getSeoRoutes } from "./seo-routes.mjs";
 
 const endpoint =
-  process.env.INDEXNOW_ENDPOINT || "https://api.indexnow.org/indexnow";
+  process.env.INDEXNOW_ENDPOINT || "https://www.bing.com/indexnow";
 const key = "4cd1c6fc3884b1b9ae20575112ef166f";
 const keyFile = new URL(`../public/${key}.txt`, import.meta.url);
 const keyContents = (await fs.readFile(keyFile, "utf8")).trim();

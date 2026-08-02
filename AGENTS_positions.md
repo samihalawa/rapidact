@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct IndexNow submission | the global endpoint can reject a newly published valid key while direct Bing accepts the same verified payload | host the root key and submit the canonical batch to Bing's official IndexNow endpoint | do not treat the global aggregator's initial SiteVerificationNotCompleted response as a site crawl failure | verify the live key as IndexNowBot and require HTTP 200/202 for the exact canonical URL count
 RapidAct search indexability | sitemap URLs and client-side metadata still expose one empty shell plus unlimited soft-404 canonicals | prerender every canonical route and serve only generated route documents; return a noindex 404 for unknowns | do not treat JavaScript rendering, sitemap counts or managed bot defaults as indexing proof | verify every sitemap URL's raw Googlebot HTML, canonical, H1, metadata bounds, hreflang, unknown 404 and live crawler policy
 RapidAct SPA direct routes | an unrestricted extensionless shell fallback turns fabricated paths into homepage duplicates | serve prerendered documents for known extensionless GET/HEAD routes and a true noindex 404 for unknowns | do not use one generic shell as the production fallback or infer browser failure from one Accept shape | verify browser and _/_ on canonical routes, redirects, missing assets, unknown paths and the deployed bundle
 RapidAct outbound drafts | Gmail-only checks can miss existing Close drafts and create duplicate send risk | search the lead and email activities first, then update one canonical Close draft in place | do not infer “no Gmail draft” means no draft or keep competing versions across systems | verify exact lead/contact/recipient, draft status, subject/body read-back and one eventual send activity
@@ -30,6 +31,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale data-layer values, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, reset all mapped fields per event, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, let commercial fields persist between events, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-08-02 — Submit IndexNow through the verified direct endpoint
+
+- Status: CURRENT
+- Project/root: `rapidact`; bulk discovery notifications for the 554 repaired canonical routes.
+- Mistake: the global IndexNow endpoint returned `403 SiteVerificationNotCompleted` even though the newly deployed root key file was already readable.
+- Do: serve the hexadecimal key at the root and submit the canonical batch through Bing's official `https://www.bing.com/indexnow` endpoint.
+- Don't: diagnose the global aggregator's initial validation lag as a robots, Cloudflare or key-file failure.
+- Evidence: live IndexNowBot key request returned HTTP 200 with the exact 33-byte body; Bing accepted all 554 URLs with HTTP 200 on 2026-08-02.
+- Trigger terms: IndexNow, Bing indexing, URL submission, SiteVerificationNotCompleted, key validation.
+- Verify before reuse: key file returns the exact key to the crawler identity; submission response is HTTP 200 or 202 for the expected current canonical count.
 
 ## 2026-08-02 — Canonical routes need indexable server HTML
 
