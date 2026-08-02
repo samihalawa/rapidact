@@ -142,8 +142,22 @@ function plainMarkdownParagraphs(body: string) {
 }
 
 export function contentSeoDescription(item: ContentItem) {
-  if (item.description.trim().length >= 50) return item.description;
-  return plainMarkdownParagraphs(item.body)[0] ?? item.description;
+  const description =
+    item.description.trim().length >= 50
+      ? item.description
+      : (plainMarkdownParagraphs(item.body)[0] ?? item.description);
+
+  // Vendor pages previously shared one generic description per locale. Keep
+  // the factual localized copy, but lead with the vendor-specific page title.
+  if (item.type === "vendors") {
+    const subject = item.title
+      .replace(/\s+\|\s+RapidAct(?:\s+blog)?$/i, "")
+      .split(" — ")[0]
+      .trim();
+    return `${subject}: ${description}`;
+  }
+
+  return description;
 }
 
 export function listContent(type: ContentType, lang: Lang): ContentItem[] {

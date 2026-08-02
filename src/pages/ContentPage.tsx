@@ -4,6 +4,7 @@ import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
 import CtaBand from "@/components/CtaBand";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import JsonLd from "@/components/JsonLd";
 import {
   getContent,
   hasExactContent,
@@ -145,6 +146,32 @@ export default function ContentPage() {
     path: contentPath({ type: item.type, slug: item.slug, lang: l }),
   }));
   const alternates = languageTwins.length > 1 ? languageTwins : [];
+  const canonicalPath = contentPath(item);
+  const title = item.title.replace(/ \| RapidAct(?: blog)?$/i, "");
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "RapidAct",
+        item: "https://rapidact.eu/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: ui.learn,
+        item: `https://rapidact.eu${path("/learn")}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: `https://rapidact.eu${canonicalPath}`,
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -153,6 +180,7 @@ export default function ContentPage() {
         description={contentSeoDescription(item)}
         alternates={alternates}
       />
+      <JsonLd data={breadcrumbLd} />
       <SiteNav />
       <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <nav className="text-xs text-[#6b7280]">

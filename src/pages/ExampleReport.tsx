@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Download, ExternalLink, FileText } from "lucide-react";
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
@@ -58,6 +58,14 @@ export default function ExampleReport() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
+                <Link
+                  to="/reports/example-eu-ai-act-assessment"
+                  data-analytics-event="view_specimen_html"
+                  className="hairline ink inline-flex min-h-11 items-center gap-2 rounded border bg-white px-4 text-[14px] font-semibold hover:bg-[#f7f7f5]"
+                >
+                  <FileText className="h-4 w-4" />
+                  {t("specimen.html")}
+                </Link>
                 <a
                   href={SAMPLE_REPORT_URL}
                   data-analytics-event="view_specimen_pdf"

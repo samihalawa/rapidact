@@ -34,6 +34,37 @@ function decodeHtml(value) {
     .replaceAll("&gt;", ">");
 }
 
+function structuredDataItems(html) {
+  const items = [];
+  for (const match of html.matchAll(
+    /<script\s+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
+  )) {
+    const parsed = JSON.parse(match[1]);
+    items.push(...(Array.isArray(parsed) ? parsed : [parsed]));
+  }
+  return items;
+}
+
+function structuredDataTypes(items) {
+  return new Set(
+    items.flatMap(item => {
+      const value = item?.["@type"];
+      return Array.isArray(value) ? value : value ? [value] : [];
+    })
+  );
+}
+
+function internalLinks(html, routePath) {
+  const links = [];
+  for (const match of html.matchAll(/<a\b[^>]*href=(["'])(.*?)\1[^>]*>/gi)) {
+    const href = decodeHtml(match[2]);
+    const url = new URL(href, `${BASE_URL}${routePath}`);
+    if (url.origin !== BASE_URL) continue;
+    links.push(url.pathname.replace(/\/+$/, "") || "/");
+  }
+  return links;
+}
+
 async function verifyRoute(route) {
   const response = await fetch(`${base}${route.path}`, {
     headers: {
@@ -78,7 +109,11 @@ async function verifyRoute(route) {
     /<div id=["']root["']>\s*(?!<\/div>)[\s\S]+<\/div>/i.test(html),
     `${route.path}: empty rendered root`
   );
-  assert(/<h1\b[^>]*>/i.test(html), `${route.path}: missing rendered H1`);
+  const headings = [...html.matchAll(/<h1\b[^>]*>/gi)];
+  assert(
+    headings.length === 1,
+    `${route.path}: expected one rendered H1, found ${headings.length}`
+  );
   const canonicals = canonicalLinks(html);
   assert(
     canonicals.length === 1,
@@ -111,27 +146,83 @@ async function verifyRoute(route) {
       `${route.path}: missing ${alternate.lang} alternate ${alternate.path}`
     );
   }
+  const structuredData = structuredDataItems(html);
+  const structuredTypes = structuredDataTypes(structuredData);
+  assert(
+    !structuredTypes.has("FAQPage"),
+    `${route.path}: obsolete FAQPage structured data found`
+  );
   if (route.path === "/") {
-    const structuredData = [
-      ...html.matchAll(
-        /<script\s+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
-      ),
-    ];
     assert(structuredData.length >= 1, "home: missing JSON-LD structured data");
-    for (const block of structuredData) JSON.parse(block[1]);
+    assert(
+      structuredTypes.has("Organization") && structuredTypes.has("Service"),
+      "home: missing Organization or Service structured data"
+    );
   }
-  return true;
+  if (route.group.startsWith("content:")) {
+    assert(
+      structuredTypes.has("BreadcrumbList"),
+      `${route.path}: missing BreadcrumbList structured data`
+    );
+  }
+  return {
+    route,
+    description,
+    links: internalLinks(html, route.path),
+  };
 }
 
 const concurrency = 16;
 let nextIndex = 0;
+const results = [];
 await Promise.all(
   Array.from({ length: concurrency }, async () => {
     while (nextIndex < routes.length) {
       const route = routes[nextIndex++];
-      await verifyRoute(route);
+      results.push(await verifyRoute(route));
     }
   })
+);
+
+const routePaths = new Set(routes.map(route => route.path));
+const incomingLinks = new Map(routes.map(route => [route.path, 0]));
+for (const result of results) {
+  for (const href of result.links) {
+    if (incomingLinks.has(href)) {
+      incomingLinks.set(href, incomingLinks.get(href) + 1);
+    }
+    assert(
+      !/^\/(?:es|de|fr|it)\/(?:privacy|terms|requirements)(?:\/|$)/.test(href),
+      `${result.route.path}: links to noncanonical localized route ${href}`
+    );
+    if (
+      result.route.lang !== "en" &&
+      !href.startsWith(`/${result.route.lang}`)
+    ) {
+      const localizedTwin = `/${result.route.lang}${href === "/" ? "" : href}`;
+      assert(
+        !routePaths.has(localizedTwin),
+        `${result.route.path}: links to ${href} instead of localized twin ${localizedTwin}`
+      );
+    }
+  }
+}
+
+const orphanRoutes = [...incomingLinks]
+  .filter(([routePath, count]) => routePath !== "/" && count === 0)
+  .map(([routePath]) => routePath);
+assert(
+  orphanRoutes.length === 0,
+  `internal links: orphan canonical routes ${orphanRoutes.join(", ")}`
+);
+
+const vendorResults = results.filter(result =>
+  result.route.group.startsWith("content:vendors:")
+);
+assert(
+  new Set(vendorResults.map(result => result.description)).size ===
+    vendorResults.length,
+  "vendor pages: duplicate meta descriptions found"
 );
 
 const missing = await fetch(`${base}/definitely-not-a-rapidact-page`, {
@@ -311,5 +402,5 @@ await Promise.all(
 );
 
 console.log(
-  `SEO verification passed: ${routes.length} rendered canonical routes, true 404/noindex, canonical redirects, sitemap, IndexNow ownership, and ${crawlerUserAgents.length} unrestricted crawler identities at ${base}`
+  `SEO verification passed: ${routes.length} rendered canonical routes, one H1 each, supported structured data, unique vendor descriptions, complete canonical internal linking, true 404/noindex, canonical redirects, sitemap, IndexNow ownership, and ${crawlerUserAgents.length} unrestricted crawler identities at ${base}`
 );

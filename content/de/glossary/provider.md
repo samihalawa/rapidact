@@ -1,8 +1,9 @@
 ---
-title: "Provider (AI Act) — glosario AI Act | RapidAct"
+title: "Provider (AI Act) — AI-Act-Glossar | RapidAct"
 description: "Das Unternehmen, das ein KI-System entwickelt oder entwickeln lässt und es unter eigenem Namen auf den Markt bringt — z."
 lang: de
 ---
+
 # Provider (AI Act)
 
 **Das Unternehmen, das ein KI-System entwickelt oder entwickeln lässt und es unter eigenem Namen auf den Markt bringt — z. B. der Chatbot-Anbieter. Provider tragen Pflichten wie die maschinenlesbare Kennzeichnung von KI-Outputs.**
@@ -11,4 +12,4 @@ lang: de
 
 ---
 
-*Mehr Leitfäden in einfachem Deutsch: [Lernzentrum](/learn) · [kostenloser Scan](/scanner)*
+_Mehr Leitfäden in einfachem Deutsch: [Lernzentrum](/learn) · [kostenloser Scan](/scanner)_

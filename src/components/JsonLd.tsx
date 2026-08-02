@@ -1,4 +1,4 @@
-import { ENTITY } from "@/data/company";
+import { COMPANIES_HOUSE_URL, ENTITY, SPECIALIST } from "@/data/company";
 
 /** Renders structured data in both prerendered HTML and the hydrated app. */
 export default function JsonLd({ data }: { data: object | object[] }) {
@@ -24,6 +24,13 @@ export const ORG_LD = {
   description:
     "A specialist EU AI Act transparency practice helping companies scope Article 50 duties, publish AI notices, deploy disclosure plugins and badges, and document their implementation.",
   slogan: "EU AI Act transparency, implemented and documented.",
+  sameAs: [COMPANIES_HOUSE_URL, SPECIALIST.linkedin],
+  founder: {
+    "@type": "Person",
+    name: SPECIALIST.name,
+    jobTitle: "EU AI Act transparency specialist",
+    url: SPECIALIST.linkedin,
+  },
   identifier: ENTITY.registrationNumber
     ? {
         "@type": "PropertyValue",
@@ -47,7 +54,7 @@ export const ORG_LD = {
         contactType: "customer service",
         email: ENTITY.contactEmail || undefined,
         areaServed: "EU",
-        availableLanguage: ["en", "es"],
+        availableLanguage: ["en", "es", "de", "fr", "it"],
       }
     : undefined,
 };
@@ -93,15 +100,3 @@ export const PRODUCT_LD = {
     },
   ],
 };
-
-export function faqLd(faqs: { q: string; a: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map(faq => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: { "@type": "Answer", text: faq.a },
-    })),
-  };
-}

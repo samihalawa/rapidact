@@ -1,8 +1,9 @@
 ---
-title: "Deployer (AI Act) — glosario AI Act | RapidAct"
+title: "Deployer (AI Act) — AI-Act-Glossar | RapidAct"
 description: "Die Person oder das Unternehmen, das ein KI-System in eigener Verantwortung nutzt — z."
 lang: de
 ---
+
 # Deployer (AI Act)
 
 **Die Person oder das Unternehmen, das ein KI-System in eigener Verantwortung nutzt — z. B. der Website-Betreiber, dessen Chatbot mit Besuchern spricht. Die Offenlegungspflichten von Artikel 50 treffen vor allem Deployer: Sie, nicht Ihren Chatbot-Anbieter.**
@@ -11,4 +12,4 @@ lang: de
 
 ---
 
-*Mehr Leitfäden in einfachem Deutsch: [Lernzentrum](/learn) · [kostenloser Scan](/scanner)*
+_Mehr Leitfäden in einfachem Deutsch: [Lernzentrum](/learn) · [kostenloser Scan](/scanner)_

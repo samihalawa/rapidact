@@ -92,6 +92,7 @@ const EN: Dictionary = {
     "Meridian Retail Group is invented. No real client information appears in this document.",
   "specimen.open": "Open full PDF",
   "specimen.download": "Download PDF",
+  "specimen.html": "Read accessible HTML",
   "specimen.pages": "8 pages · A4 PDF",
   "specimen.ctaTitle": "Get this assessment for your company",
   "specimen.ctaBody":
@@ -246,6 +247,7 @@ const ES: Dictionary = {
     "Meridian Retail Group es una empresa inventada. El documento no contiene datos de clientes reales.",
   "specimen.open": "Abrir PDF completo",
   "specimen.download": "Descargar PDF",
+  "specimen.html": "Leer versión HTML",
   "specimen.pages": "8 páginas · PDF A4",
   "specimen.ctaTitle": "Recibe esta evaluación para tu empresa",
   "specimen.ctaBody":
@@ -399,6 +401,7 @@ const DE: Dictionary = {
     "Meridian Retail Group ist erfunden. Das Dokument enthält keine echten Kundendaten.",
   "specimen.open": "PDF öffnen",
   "specimen.download": "PDF herunterladen",
+  "specimen.html": "HTML-Version lesen",
   "specimen.pages": "8 Seiten · A4-PDF",
   "specimen.ctaTitle": "Erhalten Sie diese Bewertung für Ihr Unternehmen",
   "specimen.ctaBody":
@@ -553,6 +556,7 @@ const FR: Dictionary = {
     "Meridian Retail Group est fictive. Le document ne contient aucune donnée de client réel.",
   "specimen.open": "Ouvrir le PDF",
   "specimen.download": "Télécharger le PDF",
+  "specimen.html": "Lire la version HTML",
   "specimen.pages": "8 pages · PDF A4",
   "specimen.ctaTitle": "Recevez cette évaluation pour votre entreprise",
   "specimen.ctaBody":
@@ -707,6 +711,7 @@ const IT: Dictionary = {
     "Meridian Retail Group è inventata. Il documento non contiene dati di clienti reali.",
   "specimen.open": "Apri PDF",
   "specimen.download": "Scarica PDF",
+  "specimen.html": "Leggi la versione HTML",
   "specimen.pages": "8 pagine · PDF A4",
   "specimen.ctaTitle": "Ricevi questa valutazione per la tua azienda",
   "specimen.ctaBody":
@@ -803,6 +808,30 @@ function stripLocale(pathname: string): string {
   return stripped || "/";
 }
 
+const ENGLISH_ONLY_ROUTE = /^\/(?:privacy|terms|requirements(?:\/|$))/;
+const STATIC_ASSET_ROUTE = /\/[^/?#]+\.[a-z0-9]{2,8}$/i;
+
+/**
+ * Returns the canonical route for a language without generating localized
+ * URLs for English-only legal/requirements pages or public files.
+ */
+export function localizedPath(pathname: string, lang: Lang): string {
+  const match = pathname.match(/^([^?#]*)([?#].*)?$/);
+  const rawPath = match?.[1] || "/";
+  const suffix = match?.[2] || "";
+  const base = stripLocale(rawPath);
+
+  if (
+    lang === "en" ||
+    ENGLISH_ONLY_ROUTE.test(base) ||
+    STATIC_ASSET_ROUTE.test(base)
+  ) {
+    return `${base}${suffix}`;
+  }
+
+  return `/${lang}${base === "/" ? "" : base}${suffix}`;
+}
+
 function browserLanguage(): Lang {
   const saved = localStorage.getItem("rapidact-language") as Lang | null;
   if (saved && LANGS.includes(saved)) return saved;
@@ -830,17 +859,17 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     const detected = browserLanguage();
     if (detected !== "en") {
       navigate(
-        `/${detected}${location.pathname === "/" ? "" : location.pathname}${location.search}${location.hash}`,
+        localizedPath(
+          `${location.pathname}${location.search}${location.hash}`,
+          detected
+        ),
         { replace: true }
       );
     }
   }, [explicit, location.hash, location.pathname, location.search, navigate]);
 
   const value = useMemo<I18nValue>(() => {
-    const path = (pathname: string) => {
-      const base = stripLocale(pathname);
-      return lang === "en" ? base : `/${lang}${base === "/" ? "" : base}`;
-    };
+    const path = (pathname: string) => localizedPath(pathname, lang);
     return {
       lang,
       path,
@@ -851,9 +880,11 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
           selected_language: next,
         });
         localStorage.setItem("rapidact-language", next);
-        const base = stripLocale(location.pathname);
         navigate(
-          `${next === "en" ? base : `/${next}${base === "/" ? "" : base}`}${location.search}${location.hash}`
+          localizedPath(
+            `${location.pathname}${location.search}${location.hash}`,
+            next
+          )
         );
       },
     };
