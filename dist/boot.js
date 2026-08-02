@@ -28790,6 +28790,7 @@ __export(vite_exports, {
   canonicalRedirectPath: () => canonicalRedirectPath,
   immutableAssetCacheControl: () => immutableAssetCacheControl,
   isSpaRouteRequest: () => isSpaRouteRequest,
+  mutableAssetCacheControl: () => mutableAssetCacheControl,
   prerenderedRoutePath: () => prerenderedRoutePath,
   serveStaticFiles: () => serveStaticFiles
 });
@@ -28822,6 +28823,9 @@ function immutableAssetCacheControl(method, pathname, status) {
   const immutablePath = pathname.startsWith("/assets/") || pathname === "/brand/rapidact-exact-symbol-128.webp";
   return (method === "GET" || method === "HEAD") && status >= 200 && status < 300 && immutablePath ? "public, max-age=31536000, immutable" : null;
 }
+function mutableAssetCacheControl(method, pathname, status) {
+  return (method === "GET" || method === "HEAD") && status >= 200 && status < 300 && pathname === "/rapidact-badge.js" ? "public, max-age=300, must-revalidate" : null;
+}
 function serveStaticFiles(app2) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
   app2.use("*", async (c, next) => {
@@ -28832,6 +28836,12 @@ function serveStaticFiles(app2) {
       c.res.status
     );
     if (assetCacheControl) c.header("Cache-Control", assetCacheControl);
+    const mutableCacheControl = mutableAssetCacheControl(
+      c.req.method,
+      c.req.path,
+      c.res.status
+    );
+    if (mutableCacheControl) c.header("Cache-Control", mutableCacheControl);
     if (c.res.headers.get("content-type")?.includes("text/html")) {
       c.header(
         "Cache-Control",

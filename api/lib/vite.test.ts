@@ -3,6 +3,7 @@ import {
   canonicalRedirectPath,
   immutableAssetCacheControl,
   isSpaRouteRequest,
+  mutableAssetCacheControl,
   prerenderedRoutePath,
 } from "./vite";
 
@@ -44,6 +45,25 @@ describe("immutableAssetCacheControl", () => {
     "does not cache mutable or failed responses",
     (method, pathname, status) => {
       expect(immutableAssetCacheControl(method, pathname, status)).toBeNull();
+    }
+  );
+});
+
+describe("mutableAssetCacheControl", () => {
+  it("keeps the public badge runtime fresh across deployments", () => {
+    expect(mutableAssetCacheControl("GET", "/rapidact-badge.js", 200)).toBe(
+      "public, max-age=300, must-revalidate"
+    );
+  });
+
+  it.each([
+    ["GET", "/rapidact-badge.js", 404],
+    ["POST", "/rapidact-badge.js", 200],
+    ["GET", "/assets/index-AbCd1234.js", 200],
+  ])(
+    "does not cache other mutable or failed responses",
+    (method, pathname, status) => {
+      expect(mutableAssetCacheControl(method, pathname, status)).toBeNull();
     }
   );
 });

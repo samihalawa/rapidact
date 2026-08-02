@@ -52,6 +52,19 @@ export function immutableAssetCacheControl(
     : null;
 }
 
+export function mutableAssetCacheControl(
+  method: string,
+  pathname: string,
+  status: number
+) {
+  return (method === "GET" || method === "HEAD") &&
+    status >= 200 &&
+    status < 300 &&
+    pathname === "/rapidact-badge.js"
+    ? "public, max-age=300, must-revalidate"
+    : null;
+}
+
 export function serveStaticFiles(app: App) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
 
@@ -63,6 +76,12 @@ export function serveStaticFiles(app: App) {
       c.res.status
     );
     if (assetCacheControl) c.header("Cache-Control", assetCacheControl);
+    const mutableCacheControl = mutableAssetCacheControl(
+      c.req.method,
+      c.req.path,
+      c.res.status
+    );
+    if (mutableCacheControl) c.header("Cache-Control", mutableCacheControl);
     if (c.res.headers.get("content-type")?.includes("text/html")) {
       c.header(
         "Cache-Control",
