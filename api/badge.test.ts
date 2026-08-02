@@ -19,10 +19,11 @@ describe("RapidAct disclosure badge", () => {
     expect(html).toContain('src="/rapidact-badge.js"');
     expect(badge).toContain('host.id = "rapidact-ai-disclosure"');
     expect(badge).toContain('button.setAttribute("aria-expanded"');
-    expect(badge).toContain("rapidact-exact-symbol.png");
+    expect(badge).toContain("rapidact-exact-symbol-128.webp");
     expect(
-      existsSync(resolve(root, "public/brand/rapidact-exact-symbol.png"))
+      existsSync(resolve(root, "public/brand/rapidact-exact-symbol-128.webp"))
     ).toBe(true);
+    expect(badge.match(/width="128" height="128"/g)).toHaveLength(2);
     expect(html).not.toContain("rapidact-symbol.svg");
     expect(html).toContain('href="/apple-touch-icon.png"');
   });
@@ -40,6 +41,15 @@ describe("RapidAct disclosure badge", () => {
       expect(badge).toContain(`${language}: {`);
     }
     expect(badge).toContain("supportedLanguages.indexOf(pathLanguage)");
+    for (const genericLabel of [
+      "More information",
+      "Más información",
+      "Mehr erfahren",
+      "En savoir plus",
+      "Maggiori informazioni",
+    ]) {
+      expect(badge).not.toContain(genericLabel);
+    }
   });
 
   it("supports bubble, standard, and popup presentation modes", () => {

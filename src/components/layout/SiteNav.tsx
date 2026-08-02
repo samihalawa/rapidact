@@ -42,13 +42,15 @@ export default function SiteNav() {
           >
             <span className="flex items-center gap-2">
               <img
-                src="/brand/rapidact-exact-symbol.png"
+                src="/brand/rapidact-exact-symbol-128.webp"
                 alt=""
                 aria-hidden="true"
+                width={128}
+                height={128}
                 className="h-9 w-auto sm:h-10"
               />
               <span className="brand-wordmark text-[17px] font-bold tracking-[-0.04em] text-[#03123d] sm:text-[19px]">
-                Rapid<span className="text-[#087ee8]">Act</span>
+                Rapid<span className="text-[#0068c9]">Act</span>
               </span>
             </span>
           </Link>
@@ -134,7 +136,7 @@ export default function SiteNav() {
               >
                 <SheetHeader className="border-b border-[#dbe3ee] p-5 pr-14 text-left">
                   <SheetTitle className="brand-wordmark text-xl text-[#03123d]">
-                    Rapid<span className="text-[#087ee8]">Act</span>
+                    Rapid<span className="text-[#0068c9]">Act</span>
                   </SheetTitle>
                   <SheetDescription className="sr-only">
                     {t("nav.menuDescription")}

@@ -28788,6 +28788,7 @@ var init_serve_static = __esm({
 var vite_exports = {};
 __export(vite_exports, {
   canonicalRedirectPath: () => canonicalRedirectPath,
+  immutableAssetCacheControl: () => immutableAssetCacheControl,
   isSpaRouteRequest: () => isSpaRouteRequest,
   prerenderedRoutePath: () => prerenderedRoutePath,
   serveStaticFiles: () => serveStaticFiles
@@ -28817,10 +28818,20 @@ function prerenderedRoutePath(distPath, pathname) {
   if (relative.startsWith("..") || path.isAbsolute(relative)) return null;
   return candidate;
 }
+function immutableAssetCacheControl(method, pathname, status) {
+  const immutablePath = pathname.startsWith("/assets/") || pathname === "/brand/rapidact-exact-symbol-128.webp";
+  return (method === "GET" || method === "HEAD") && status >= 200 && status < 300 && immutablePath ? "public, max-age=31536000, immutable" : null;
+}
 function serveStaticFiles(app2) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
   app2.use("*", async (c, next) => {
     await next();
+    const assetCacheControl = immutableAssetCacheControl(
+      c.req.method,
+      c.req.path,
+      c.res.status
+    );
+    if (assetCacheControl) c.header("Cache-Control", assetCacheControl);
     if (c.res.headers.get("content-type")?.includes("text/html")) {
       c.header(
         "Cache-Control",

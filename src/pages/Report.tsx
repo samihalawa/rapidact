@@ -238,7 +238,7 @@ export default function Report() {
                     <dd className="mt-0.5">
                       <a
                         href={`tel:${ENTITY.phone.replace(/\s/g, "")}`}
-                        className="ink mono text-[12px] hover:underline"
+                        className="ink mono inline-flex min-h-11 items-center text-[12px] hover:underline"
                       >
                         {ENTITY.phone}
                       </a>
@@ -558,7 +558,7 @@ export default function Report() {
                       {copy.deliveryPromise} {copy.questionsBefore}{" "}
                       <a
                         href={`tel:${ENTITY.phone.replace(/\s/g, "")}`}
-                        className="ink mono"
+                        className="ink mono inline-flex min-h-11 items-center"
                       >
                         {ENTITY.phone}
                       </a>

@@ -33,7 +33,7 @@
       close: "Close notice",
       system: "System",
       provider: "Responsible",
-      details: "More information",
+      details: "Read the Article 50 guide",
       install: "Add this notice",
     },
     es: {
@@ -45,7 +45,7 @@
       close: "Cerrar aviso",
       system: "Sistema",
       provider: "Responsable",
-      details: "Más información",
+      details: "Leer la guía del artículo 50",
       install: "Añadir este aviso",
     },
     de: {
@@ -57,7 +57,7 @@
       close: "Hinweis schließen",
       system: "System",
       provider: "Verantwortlich",
-      details: "Mehr erfahren",
+      details: "Artikel-50-Leitfaden lesen",
       install: "Diesen Hinweis hinzufügen",
     },
     fr: {
@@ -69,7 +69,7 @@
       close: "Fermer l’avis",
       system: "Système",
       provider: "Responsable",
-      details: "En savoir plus",
+      details: "Lire le guide de l’article 50",
       install: "Ajouter cet avis",
     },
     it: {
@@ -81,7 +81,7 @@
       close: "Chiudi avviso",
       system: "Sistema",
       provider: "Responsabile",
-      details: "Maggiori informazioni",
+      details: "Leggi la guida all’articolo 50",
       install: "Aggiungi questo avviso",
     },
   };
@@ -123,11 +123,14 @@
       .replace(/'/g, "&#039;");
   };
   var safeTitle = escapeHtml(title);
-  var defaultBrandUrl = "https://rapidact.eu/brand/rapidact-exact-symbol.png";
+  var defaultBrandUrl =
+    "https://rapidact.eu/brand/rapidact-exact-symbol-128.webp";
   try {
     if (script && script.src) {
-      defaultBrandUrl = new URL("brand/rapidact-exact-symbol.png", script.src)
-        .href;
+      defaultBrandUrl = new URL(
+        "brand/rapidact-exact-symbol-128.webp",
+        script.src
+      ).href;
     }
   } catch (_error) {
     // The absolute production URL above remains the reliable fallback.
@@ -222,7 +225,7 @@
     '<div class="ra-brand-lockup">' +
     '<img class="ra-brand-image" src="' +
     safeBrandUrl +
-    '" alt="" aria-hidden="true">' +
+    '" alt="" aria-hidden="true" width="128" height="128">' +
     '<span class="ra-brand-name">Rapid<span class="ra-brand-name-accent">Act</span></span>' +
     "</div>" +
     '<span class="ra-brand-actions">' +
@@ -257,7 +260,7 @@
     '<span class="ra-button-lockup" aria-hidden="true">' +
     '<img class="ra-button-image" src="' +
     safeBrandUrl +
-    '" alt="" aria-hidden="true">' +
+    '" alt="" aria-hidden="true" width="128" height="128">' +
     '<span class="ra-button-copy">' +
     '<span class="ra-button-name">Rapid<span class="ra-button-name-accent">Act</span></span>' +
     '<span class="ra-button-status">' +

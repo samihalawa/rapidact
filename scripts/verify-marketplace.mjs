@@ -158,7 +158,10 @@ if (platform === "shopify") {
   for (const required of [
     "export const action",
     "authenticate.admin(request)",
-    'sessionFetcher.submit({}, { method: "post" })',
+    "shopify.idToken()",
+    ".data?index",
+    'method: "POST"',
+    "Authorization: `Bearer ${idToken}`",
   ]) {
     expect(
       appIndex.includes(required),

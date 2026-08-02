@@ -29,12 +29,18 @@ export default function Specialist() {
               <img
                 src={SPECIALIST.photo}
                 alt={SPECIALIST.name}
+                width={80}
+                height={80}
                 className="h-20 w-20 shrink-0 rounded-full border-2 border-white/20 object-cover"
               />
             )}
             <div>
-              <p className="text-lg font-semibold text-white">{SPECIALIST.name}</p>
-              {SPECIALIST.role && <p className="text-sm text-white/60">{t("specialist.role")}</p>}
+              <p className="text-lg font-semibold text-white">
+                {SPECIALIST.name}
+              </p>
+              {SPECIALIST.role && (
+                <p className="text-sm text-white/60">{t("specialist.role")}</p>
+              )}
               {SPECIALIST.linkedin && (
                 <a
                   href={SPECIALIST.linkedin}
@@ -51,7 +57,9 @@ export default function Specialist() {
           </div>
 
           <div className="p-6 sm:p-8">
-            <p className="ink-soft text-[15px] leading-relaxed">{copy.specialistBio}</p>
+            <p className="ink-soft text-[15px] leading-relaxed">
+              {copy.specialistBio}
+            </p>
             <p className="ink-soft mt-4 text-[15px] leading-relaxed">
               {t("specialist.human")}
             </p>
@@ -89,7 +97,7 @@ export default function Specialist() {
                 {copy.specialistQuestions}{" "}
                 <a
                   href={`mailto:${SPECIALIST.email}`}
-                  className="accent font-medium underline underline-offset-2"
+                  className="accent inline-flex min-h-11 items-center font-medium underline underline-offset-2"
                 >
                   {SPECIALIST.email}
                 </a>

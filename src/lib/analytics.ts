@@ -1,5 +1,3 @@
-import posthog from "posthog-js";
-
 export const ANALYTICS = {
   googleTagManagerId: "GTM-TZFZ5ZHK",
   ga4MeasurementId: "G-PEFSF0DS02",
@@ -55,6 +53,60 @@ const CONSENT_KEY = "rapidact-consent-v1";
 const QA_SESSION_KEY = "rapidact-analytics-traffic-class";
 const ANALYTICS_HOSTS = new Set(["rapidact.eu", "www.rapidact.eu"]);
 let initialized = false;
+type PostHogClient = typeof import("posthog-js").default;
+let posthogPromise: Promise<PostHogClient> | null = null;
+let posthogInitialized = false;
+
+function loadPosthog() {
+  posthogPromise ??= import("posthog-js").then(module => module.default);
+  return posthogPromise;
+}
+
+async function enablePosthog() {
+  const posthog = await loadPosthog();
+  if (getConsent() !== "all") return null;
+
+  if (!posthogInitialized) {
+    posthog.init(ANALYTICS.posthogKey, {
+      api_host: ANALYTICS.posthogHost,
+      defaults: "2026-01-30",
+      person_profiles: "identified_only",
+      capture_pageview: false,
+      capture_pageleave: true,
+      autocapture: true,
+      capture_exceptions: true,
+      capture_performance: true,
+      enable_heatmaps: true,
+      disable_surveys: true,
+      disable_session_recording: false,
+      opt_out_capturing_by_default: false,
+      mask_all_text: false,
+      mask_all_element_attributes: false,
+    });
+    posthogInitialized = true;
+  }
+
+  if (!posthog.has_opted_in_capturing()) {
+    posthog.opt_in_capturing({ captureEventName: false });
+  }
+  if (isQaSession()) posthog.setInternalOrTestUser();
+  posthog.startSessionRecording();
+  return posthog;
+}
+
+async function disablePosthog() {
+  if (!posthogPromise) return;
+  const posthog = await posthogPromise;
+  if (!posthogInitialized) return;
+  posthog.stopSessionRecording();
+  posthog.opt_out_capturing();
+}
+
+async function capturePosthog(name: string, properties: EventProperties) {
+  if (getConsent() !== "all") return;
+  const posthog = await enablePosthog();
+  if (posthog && getConsent() === "all") posthog.capture(name, properties);
+}
 
 export function isLeadRetained(result: {
   stored: boolean;
@@ -194,29 +246,7 @@ export function initAnalytics() {
   googleScript.dataset.rapidactAnalytics = "gtm";
   document.head.appendChild(googleScript);
 
-  posthog.init(ANALYTICS.posthogKey, {
-    api_host: ANALYTICS.posthogHost,
-    defaults: "2026-01-30",
-    person_profiles: "identified_only",
-    capture_pageview: false,
-    capture_pageleave: true,
-    autocapture: true,
-    capture_exceptions: true,
-    capture_performance: true,
-    enable_heatmaps: true,
-    disable_session_recording: consent !== "all",
-    opt_out_capturing_by_default: consent !== "all",
-    mask_all_text: false,
-    mask_all_element_attributes: false,
-  });
-
-  if (consent === "all") {
-    if (!posthog.has_opted_in_capturing()) {
-      posthog.opt_in_capturing({ captureEventName: false });
-    }
-    if (isQaSession()) posthog.setInternalOrTestUser();
-    posthog.startSessionRecording();
-  }
+  if (consent === "all") void enablePosthog();
 }
 
 export function setConsent(choice: ConsentChoice) {
@@ -229,15 +259,10 @@ export function setConsent(choice: ConsentChoice) {
   }
   googleConsent(choice);
   if (choice === "all") {
-    if (!posthog.has_opted_in_capturing()) {
-      posthog.opt_in_capturing({ captureEventName: false });
-    }
-    if (isQaSession()) posthog.setInternalOrTestUser();
-    posthog.startSessionRecording();
+    void enablePosthog();
     track("consent_updated", { analytics: true, advertising: true });
   } else {
-    posthog.stopSessionRecording();
-    posthog.opt_out_capturing();
+    void disablePosthog();
   }
   window.dispatchEvent(new CustomEvent("rapidact:consent", { detail: choice }));
 }
@@ -270,7 +295,7 @@ export function track(name: string, properties: EventProperties = {}) {
   const payload = { ...baseProperties(), ...properties };
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(buildDataLayerEvent(name, payload));
-  if (getConsent() === "all") posthog.capture(name, payload);
+  if (getConsent() === "all") void capturePosthog(name, payload);
 }
 
 export function trackPageView() {
@@ -281,5 +306,5 @@ export function trackPageView() {
     page_location: location.href,
   };
   window.gtag?.("event", "page_view", payload);
-  if (getConsent() === "all") posthog.capture("$pageview", payload);
+  if (getConsent() === "all") void capturePosthog("$pageview", payload);
 }

@@ -51,13 +51,15 @@ export default function SiteFooter() {
           <div>
             <div className="flex items-center gap-2.5" aria-label="RapidAct">
               <img
-                src="/brand/rapidact-exact-symbol.png"
+                src="/brand/rapidact-exact-symbol-128.webp"
                 alt=""
                 aria-hidden="true"
+                width={128}
+                height={128}
                 className="h-11 w-auto"
               />
               <span className="brand-wordmark text-xl font-bold tracking-[-0.04em] text-[#03123d]">
-                Rapid<span className="text-[#087ee8]">Act</span>
+                Rapid<span className="text-[#0068c9]">Act</span>
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#5c6370]">
@@ -187,14 +189,14 @@ export default function SiteFooter() {
               <p className="eyebrow">{t("footer.contact")}</p>
               <a
                 href={`tel:${ENTITY.phone.replace(/\s/g, "")}`}
-                className="ink mono mt-1.5 block text-[12px] hover:underline"
+                className="ink mono mt-1.5 inline-flex min-h-11 items-center text-[12px] hover:underline"
               >
                 {ENTITY.phone}
               </a>
               {ENTITY.contactEmail && (
                 <a
                   href={`mailto:${ENTITY.contactEmail}`}
-                  className="accent block text-[12px] underline underline-offset-2"
+                  className="accent flex min-h-11 items-center text-[12px] underline underline-offset-2"
                 >
                   {ENTITY.contactEmail}
                 </a>

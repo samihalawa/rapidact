@@ -36,11 +36,33 @@ export function prerenderedRoutePath(distPath: string, pathname: string) {
   return candidate;
 }
 
+export function immutableAssetCacheControl(
+  method: string,
+  pathname: string,
+  status: number
+) {
+  const immutablePath =
+    pathname.startsWith("/assets/") ||
+    pathname === "/brand/rapidact-exact-symbol-128.webp";
+  return (method === "GET" || method === "HEAD") &&
+    status >= 200 &&
+    status < 300 &&
+    immutablePath
+    ? "public, max-age=31536000, immutable"
+    : null;
+}
+
 export function serveStaticFiles(app: App) {
   const distPath = path.resolve(import.meta.dirname, "../dist/public");
 
   app.use("*", async (c, next) => {
     await next();
+    const assetCacheControl = immutableAssetCacheControl(
+      c.req.method,
+      c.req.path,
+      c.res.status
+    );
+    if (assetCacheControl) c.header("Cache-Control", assetCacheControl);
     if (c.res.headers.get("content-type")?.includes("text/html")) {
       c.header(
         "Cache-Control",

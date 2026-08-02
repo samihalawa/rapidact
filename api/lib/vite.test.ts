@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   canonicalRedirectPath,
+  immutableAssetCacheControl,
   isSpaRouteRequest,
   prerenderedRoutePath,
 } from "./vite";
@@ -22,6 +23,29 @@ describe("isSpaRouteRequest", () => {
   ])("keeps a real 404 for %s %s", (method, pathname) => {
     expect(isSpaRouteRequest(method, pathname)).toBe(false);
   });
+});
+
+describe("immutableAssetCacheControl", () => {
+  it.each([
+    ["GET", "/assets/index-AbCd1234.js"],
+    ["HEAD", "/assets/index-AbCd1234.css"],
+    ["GET", "/brand/rapidact-exact-symbol-128.webp"],
+  ])("caches successful versioned assets for %s %s", (method, pathname) => {
+    expect(immutableAssetCacheControl(method, pathname, 200)).toBe(
+      "public, max-age=31536000, immutable"
+    );
+  });
+
+  it.each([
+    ["GET", "/assets/missing.js", 404],
+    ["GET", "/rapidact-badge.js", 200],
+    ["POST", "/assets/index-AbCd1234.js", 200],
+  ])(
+    "does not cache mutable or failed responses",
+    (method, pathname, status) => {
+      expect(immutableAssetCacheControl(method, pathname, status)).toBeNull();
+    }
+  );
 });
 
 describe("canonicalRedirectPath", () => {
