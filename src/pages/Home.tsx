@@ -1,7 +1,7 @@
 import SiteNav from "@/components/layout/SiteNav";
 import SiteFooter from "@/components/layout/SiteFooter";
 import Seo from "@/components/Seo";
-import JsonLd, { ORG_LD, PRODUCT_LD } from "@/components/JsonLd";
+import JsonLd, { ORG_LD, PRODUCT_LD, WEBSITE_LD } from "@/components/JsonLd";
 import TrustBar from "@/components/TrustBar";
 import Hero from "@/sections/Hero";
 import ReportOffer from "@/sections/ReportOffer";
@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div className="paper min-h-screen">
       <Seo title={copy.seoTitle} description={copy.seoDescription} localized />
-      <JsonLd data={[ORG_LD, PRODUCT_LD]} />
+      <JsonLd data={[WEBSITE_LD, ORG_LD, PRODUCT_LD]} />
       <SiteNav />
       <main>
         <Hero />

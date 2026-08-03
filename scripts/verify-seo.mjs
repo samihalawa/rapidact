@@ -155,8 +155,20 @@ async function verifyRoute(route) {
   if (route.path === "/") {
     assert(structuredData.length >= 1, "home: missing JSON-LD structured data");
     assert(
-      structuredTypes.has("Organization") && structuredTypes.has("Service"),
-      "home: missing Organization or Service structured data"
+      structuredTypes.has("WebSite") &&
+        structuredTypes.has("Organization") &&
+        structuredTypes.has("Service"),
+      "home: missing WebSite, Organization or Service structured data"
+    );
+    const website = structuredData.find(item => item?.["@type"] === "WebSite");
+    assert(website?.name === "RapidAct", "home: wrong WebSite name");
+    assert(
+      website?.alternateName === "rapidact.eu",
+      "home: wrong WebSite alternateName"
+    );
+    assert(
+      website?.url === `${BASE_URL}/`,
+      `home: wrong WebSite URL ${website?.url}`
     );
   }
   if (route.group.startsWith("content:")) {

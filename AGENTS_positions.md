@@ -1,5 +1,6 @@
 # INDEX
 
+RapidAct Google site name | Organization schema and og:site_name do not express Google's preferred search-result site name | put a WebSite entity with RapidAct name and root URL on the canonical homepage | do not expect Organization or Open Graph metadata to control the Google site-name label | verify homepage JSON-LD, Google URL Inspection and the later public result label separately
 RapidAct initial JavaScript | eager route imports, content-coupled language constants and pre-consent analytics load unused code on the homepage | lazy-load client routes, keep SSR eager, isolate language metadata, scope tRPC and load analytics only after full consent | do not put route data, API providers or third-party analytics above every route | verify prerendered HTML, hydration, consent states, bundle gzip, SEO verifier and a fresh production Lighthouse run
 RapidAct Search Console sitemap diagnosis | a newly submitted sitemap can retain `Couldn't fetch` after Google can already retrieve it live | run URL Inspection `Test live URL` on the exact sitemap before changing sitemap architecture or resubmitting | do not infer a current fetch defect from the delayed Sitemaps report alone | verify the live test result, XML validity, URL limits, crawler responses and the later processed Sitemaps row separately
 RapidAct WordPress ownership review | the submitting account can look unrelated to the RapidAct brand even when the plugin is official | keep the official brand, align contributor metadata to `sami2`, and prove control with the exact root-domain TXT requested by WordPress.org | do not rename the product, resubmit from another account, or treat a repository/domain claim as ownership proof | verify public TXT resolution, source/ZIP byte equality, authenticated upload, and the same review-thread reply
@@ -36,6 +37,17 @@ RapidAct mobile header | the language selector displaced navigation and the conv
 RapidAct analytics | shared, local, duplicated, pageview-only, name-only, stale data-layer values, or relative gateway transport measurement obscures conversion diagnosis | use dedicated RapidAct GA4/PostHog resources, a production-host allowlist, one GTM loader, one data-layer event per product action, reset all mapped fields per event, explicit GTM parameter mappings and an absolute first-party gateway transport URL | do not track localhost, emit repeated PostHog opt-ins, send the same event through both gtag and GTM, let commercial fields persist between events, pass `/metrics` as a relative transport host, or reuse another product property | prove exact GA4/PostHog event names and parameters, replay/errors, gateway config, proxied DNS and Ads link
 RapidAct production deploy | runtime copies committed dist only | force-add the verified dist bundle with source changes | do not restore or omit generated assets before pushing | prove Coolify deployed the artifact commit and inspect the live UI
 RapidAct product claims | claims outran shipped surfaces | promise only the scanner, hosted badge, written report and working direct installation; keep marketplace release state internal until a listing is public | do not expose review/submission/publication status or imply native packages are listed | run the customer-facing claim sweep and inspect rendered installer/platform routes
+
+## 2026-08-04 — Declare the preferred Google site name with WebSite schema
+
+- Status: CURRENT
+- Project/root: `rapidact`; canonical homepage structured data and Google search-result site-name label.
+- Mistake: Organization schema and `og:site_name` named RapidAct, but the homepage omitted Google's site-name-specific WebSite entity and Google displayed `rapidact.eu` above results.
+- Do: render one WebSite entity on the root homepage with `name=RapidAct`, the canonical root URL and `rapidact.eu` as the alternate name.
+- Don't: add the entity to subpages, duplicate the homepage, or treat Organization/Open Graph metadata as site-name control.
+- Evidence: public non-personalized Google result and current homepage JSON-LD on 2026-08-04; Google Search Central site-name documentation.
+- Trigger terms: Google site name, SERP label, rapidact.eu label, WebSite schema, brand name.
+- Verify before reuse: require the exact WebSite JSON-LD in raw and rendered homepage HTML, validate the root URL in Search Console, and treat a later public `RapidAct` label as separate asynchronous proof.
 
 ## 2026-08-03 — Keep homepage language metadata separate from route content
 

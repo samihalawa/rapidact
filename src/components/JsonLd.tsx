@@ -14,6 +14,14 @@ export default function JsonLd({ data }: { data: object | object[] }) {
   );
 }
 
+export const WEBSITE_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "RapidAct",
+  alternateName: "rapidact.eu",
+  url: "https://rapidact.eu/",
+};
+
 export const ORG_LD = {
   "@context": "https://schema.org",
   "@type": ["Organization", "ProfessionalService"],
