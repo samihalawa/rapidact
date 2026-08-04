@@ -17,7 +17,7 @@ Esta es la guía en español claro — qué activa la ley en e-commerce, qué ar
 
 ## El orden de operaciones
 
-1. **Escanea todo lo público** — tu web, flujo de reserva y cualquier portal de clientes. [Escaneo gratis →](/scanner)
+1. **Escanea una página pública representativa** — empieza por la página donde los visitantes interactúan con IA y repite el escaneo en otros flujos públicos si hace falta. [Escaneo gratis →](/scanner)
 2. **Establece los roles** — identifica proveedor, deployer y el supuesto exacto del Artículo 50 para cada sistema.
 3. **Implementa el aviso correcto** — usa la [insignia gratuita de un script](/article-50#install) cuando corresponda un aviso de interacción directa.
 4. **Trata el contenido por separado** — distingue el marcado legible por máquina del proveedor y los deberes del deployer sobre deepfakes y texto de interés público.

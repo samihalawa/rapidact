@@ -48310,10 +48310,7 @@ var anchorOutputSchema = {
     "scan_status",
     "pages_visited",
     "ai_touchpoints",
-    "broken_elements",
-    "risk_indicators",
-    "blockers",
-    "summary"
+    "blockers"
   ],
   properties: {
     scan_status: { type: "string", enum: ["COMPLETE", "PARTIAL"] },
@@ -48333,6 +48330,7 @@ var anchorOutputSchema = {
     },
     ai_touchpoints: {
       type: "array",
+      maxItems: 5,
       items: {
         type: "object",
         additionalProperties: false,
@@ -48357,34 +48355,7 @@ var anchorOutputSchema = {
         }
       }
     },
-    broken_elements: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["url", "description"],
-        properties: {
-          url: { type: "string" },
-          description: { type: "string" }
-        }
-      }
-    },
-    risk_indicators: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["area", "source_url", "evidence", "reason"],
-        properties: {
-          area: { type: "string", enum: ["article_5", "annex_3"] },
-          source_url: { type: "string" },
-          evidence: { type: "string" },
-          reason: { type: "string" }
-        }
-      }
-    },
-    blockers: { type: "array", items: { type: "string" } },
-    summary: { type: "string" }
+    blockers: { type: "array", items: { type: "string" } }
   }
 };
 var anchorResultSchema = external_exports.object({
@@ -48414,7 +48385,7 @@ var anchorResultSchema = external_exports.object({
       url: external_exports.string().min(1),
       description: external_exports.string().min(1)
     })
-  ),
+  ).optional().default([]),
   risk_indicators: external_exports.array(
     external_exports.object({
       area: external_exports.enum(["article_5", "annex_3"]),
@@ -48422,9 +48393,9 @@ var anchorResultSchema = external_exports.object({
       evidence: external_exports.string().min(1),
       reason: external_exports.string().min(1)
     })
-  ),
+  ).optional().default([]),
   blockers: external_exports.array(external_exports.string().min(1)),
-  summary: external_exports.string().min(1)
+  summary: external_exports.string().min(1).optional()
 });
 var startResponseSchema = external_exports.object({
   data: external_exports.object({
@@ -48435,18 +48406,22 @@ var startResponseSchema = external_exports.object({
 var statusResponseSchema = external_exports.object({
   status: external_exports.string().optional(),
   result: external_exports.unknown().optional(),
+  error: external_exports.string().optional(),
   data: external_exports.object({
     status: external_exports.string().optional(),
-    result: external_exports.unknown().optional()
+    result: external_exports.unknown().optional(),
+    error: external_exports.string().optional()
   }).optional()
 }).refine((payload) => Boolean(payload.status ?? payload.data?.status), {
   message: "Anchor status response is missing a status"
 });
-var ANCHOR_SCAN_PROMPT = `Perform one fast visual inspection of only the supplied rendered page, then return.
+var ANCHOR_SCAN_PROMPT = `Perform one fast visual inspection of only the supplied rendered page, then return. Read the visible page from top to bottom; you may scroll this same page only when needed to see the main content and fixed controls.
 
 Do not click, navigate, submit, open menus, inspect other pages, or perform an exhaustive audit. Report a visitor-facing AI touchpoint only when this page contains a functional control through which the visitor can directly provide input to an AI system or directly receive an AI-generated or automated-decision output.
 
 Text, links, cards, legal guidance, articles, examples, marketing copy, AI notices, compliance badges, and disclosure templates that merely discuss AI are never AI touchpoints. WhatsApp, email, telephone, analytics, cookie, and language controls are never AI touchpoints.
+
+Return no more than five distinct, highest-confidence touchpoints. Treat several controls belonging to the same widget or workflow as one touchpoint and do not repeat it.
 
 For each real touchpoint:
 1. Quote the visible functional evidence and use the supplied URL as the source URL.
@@ -48454,21 +48429,33 @@ For each real touchpoint:
 3. Record whether disclosure is visible next to or before the interaction.
 4. Use severity high when disclosure is not visible, medium when it is unclear, and low when it is visible.
 
-If no feature meets this strict functional test, return an empty ai_touchpoints array. This free preview does not inspect interface defects or classify Article 5 or Annex III risk, so return empty broken_elements and risk_indicators arrays.
+If no feature meets this strict functional test, return an empty ai_touchpoints array.
 
 Return COMPLETE after this page renders. Return PARTIAL only if the page itself cannot be inspected, and list the blocker. Never infer systems, hidden pages, legal conclusions, compliance scores, or evidence that was not directly observed.`;
 function buildAnchorScanRequest(url2) {
   return {
     url: url2,
     prompt: ANCHOR_SCAN_PROMPT,
-    agent: "browser-use",
-    provider: "gemini",
-    model: "gemini-2.5-flash-lite",
+    agent: "gemini-computer-use",
     detect_elements: false,
     max_steps: 4,
     output_schema: anchorOutputSchema,
     async: true
   };
+}
+function parseStructuredResult(value) {
+  let candidate = value;
+  if (candidate && typeof candidate === "object" && "result" in candidate && candidate.status === "success") {
+    candidate = candidate.result;
+  }
+  if (typeof candidate !== "string") return candidate;
+  const trimmed = candidate.trim();
+  const json3 = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i)?.[1] ?? trimmed;
+  try {
+    return JSON.parse(json3);
+  } catch {
+    return candidate;
+  }
 }
 async function readJson(response) {
   const text2 = await response.text();
@@ -48502,12 +48489,17 @@ async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
   const payload = statusResponseSchema.parse(await readJson(response));
   const status = (payload.status ?? payload.data?.status ?? "").toUpperCase();
   const result = payload.result ?? payload.data?.result;
+  const providerError = payload.error ?? payload.data?.error;
   if (status === "RUNNING" || status === "PENDING" || status === "QUEUED") {
     return { status: "running" };
   }
   if (status === "FAILED" || status === "CANCELLED") {
-    const message = typeof result === "string" && result.trim() ? result.trim() : `anchor-${status.toLowerCase()}`;
-    return { status: "failed", error: message };
+    console.error("anchor-task-failed", {
+      workflowId,
+      status,
+      error: providerError || (typeof result === "string" ? result : void 0)
+    });
+    return { status: "failed", error: "anchor-task-failed" };
   }
   if (status !== "COMPLETED") {
     return {
@@ -48515,16 +48507,14 @@ async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
       error: `anchor-unknown-status-${status.toLowerCase()}`
     };
   }
-  let rawResult = result;
-  if (typeof rawResult === "string") {
-    try {
-      rawResult = JSON.parse(rawResult);
-    } catch {
-      return { status: "failed", error: "anchor-invalid-result" };
-    }
-  }
+  const rawResult = parseStructuredResult(result);
   const parsed = anchorResultSchema.safeParse(rawResult);
   if (!parsed.success) {
+    console.error("anchor-invalid-result", {
+      workflowId,
+      resultKind: Array.isArray(rawResult) ? "array" : typeof rawResult,
+      issuePaths: parsed.error.issues.map((issue2) => issue2.path.join("."))
+    });
     return { status: "failed", error: "anchor-invalid-result" };
   }
   return { status: "completed", observed: parsed.data };
@@ -48563,7 +48553,12 @@ function findingId(name2, index) {
   return `${slug || "touchpoint"}-${index + 1}`;
 }
 function mapAnchorResult(url2, observed) {
-  const detected = observed.ai_touchpoints.map(
+  const distinctTouchpoints = observed.ai_touchpoints.filter(
+    (touchpoint, index, all) => all.findIndex(
+      (candidate) => candidate.name.trim().toLowerCase() === touchpoint.name.trim().toLowerCase() && candidate.source_url === touchpoint.source_url
+    ) === index
+  ).slice(0, 5);
+  const detected = distinctTouchpoints.map(
     (touchpoint, index) => ({
       id: findingId(touchpoint.name, index),
       name: touchpoint.name,
@@ -48609,7 +48604,7 @@ function mapAnchorResult(url2, observed) {
     `Pages inspected: ${summary.pagesVisited.map((page) => page.url).join(", ") || "none"}`,
     `AI touchpoints observed: ${summary.total}`,
     "",
-    observed.summary,
+    observed.summary ?? `${detected.length} distinct visitor-facing AI touchpoint${detected.length === 1 ? " was" : "s were"} directly observed on the submitted page.`,
     ""
   ];
   for (const finding of detected) {

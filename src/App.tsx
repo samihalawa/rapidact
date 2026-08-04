@@ -10,21 +10,15 @@ import { MessageCircle } from "lucide-react";
 import { CONVERT } from "./config";
 import { useI18n } from "@/lib/i18n";
 import Analytics from "@/components/Analytics";
+import { pageModules, type PageModule } from "route-pages";
 
-type PageModule = { default: ComponentType };
 type RouteComponent = ComponentType | LazyExoticComponent<ComponentType>;
 
-const pageModules = import.meta.glob<PageModule>("./pages/*.tsx", {
-  // Vite replaces this value for each client/SSR build. The literal cast keeps
-  // TypeScript on the lazy overload while the SSR build still receives `true`.
-  eager: import.meta.env.SSR as false,
-}) as unknown as Record<
-  string,
-  PageModule | (() => Promise<PageModule>)
->;
-
 function page(path: string): RouteComponent {
-  const module = pageModules[path];
+  const module = pageModules[path] as
+    | PageModule
+    | (() => Promise<PageModule>)
+    | undefined;
   if (!module) throw new Error(`Missing route module: ${path}`);
   return import.meta.env.SSR
     ? (module as PageModule).default

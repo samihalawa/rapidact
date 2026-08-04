@@ -47,13 +47,14 @@ describe("Anchor scanner contract", () => {
 
     expect(request.url).toBe("https://example.com");
     expect(request.prompt).toBe(ANCHOR_SCAN_PROMPT);
-    expect(request.agent).toBe("browser-use");
-    expect(request.provider).toBe("gemini");
-    expect(request.model).toBe("gemini-2.5-flash-lite");
+    expect(request.agent).toBe("gemini-computer-use");
+    expect(request).not.toHaveProperty("provider");
+    expect(request).not.toHaveProperty("model");
     expect(request.detect_elements).toBe(false);
     expect(request.max_steps).toBe(4);
     expect(request.async).toBe(true);
     expect(request.output_schema.properties.pages_visited.maxItems).toBe(1);
+    expect(request.output_schema.properties.ai_touchpoints.maxItems).toBe(5);
     expect(request.output_schema.properties.scan_status.enum).toEqual([
       "COMPLETE",
       "PARTIAL",
@@ -62,6 +63,8 @@ describe("Anchor scanner contract", () => {
     expect(ANCHOR_SCAN_PROMPT).toContain("only the supplied rendered page");
     expect(ANCHOR_SCAN_PROMPT).toContain("Do not click, navigate, submit");
     expect(ANCHOR_SCAN_PROMPT).toContain("are never AI touchpoints");
+    expect(ANCHOR_SCAN_PROMPT).toContain("no more than five distinct");
+    expect(ANCHOR_SCAN_PROMPT).toContain("scroll this same page only");
     expect(ANCHOR_SCAN_PROMPT).toContain("Never infer systems");
   });
 
@@ -173,6 +176,60 @@ describe("Anchor scanner contract", () => {
     expect(state.status).toBe("completed");
   });
 
+  it("unwraps the native computer-use success envelope", async () => {
+    const leanObserved = {
+      scan_status: "COMPLETE",
+      pages_visited: observed.pages_visited,
+      ai_touchpoints: observed.ai_touchpoints,
+      blockers: [],
+    };
+    const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
+      void args;
+      return new Response(
+        JSON.stringify({
+          status: "COMPLETED",
+          result: {
+            status: "success",
+            result: JSON.stringify(leanObserved),
+            steps: 2,
+          },
+        }),
+        { status: 200 }
+      );
+    });
+
+    const state = await readAnchorScan(
+      "86750",
+      "test-key",
+      fetchMock as typeof fetch
+    );
+
+    expect(state.status).toBe("completed");
+    if (state.status === "completed") {
+      expect(state.observed.broken_elements).toEqual([]);
+      expect(state.observed.risk_indicators).toEqual([]);
+      expect(state.observed.summary).toBeUndefined();
+    }
+  });
+
+  it("preserves a failed provider task as a stable scanner error", async () => {
+    const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
+      void args;
+      return new Response(
+        JSON.stringify({
+          status: "FAILED",
+          error: "Failed to execute tool",
+          data: { status: "FAILED", error: "Failed to execute tool" },
+        }),
+        { status: 200 }
+      );
+    });
+
+    await expect(
+      readAnchorScan("86745", "test-key", fetchMock as typeof fetch)
+    ).resolves.toEqual({ status: "failed", error: "anchor-task-failed" });
+  });
+
   it("rejects results whose observed host does not match the requested host", () => {
     expect(anchorResultMatchesUrl("https://www.example.com", observed)).toBe(
       true
@@ -219,5 +276,23 @@ describe("Anchor scanner contract", () => {
     expect(result.report).toContain(
       "The pricing page required authentication."
     );
+  });
+
+  it("deduplicates findings and caps the public result at five", () => {
+    const manyTouchpoints = Array.from({ length: 7 }, (_, index) => ({
+      ...observed.ai_touchpoints[0],
+      name: index < 2 ? "Support assistant" : `AI control ${index}`,
+    }));
+
+    const result = mapAnchorResult("https://example.com/", {
+      ...observed,
+      ai_touchpoints: manyTouchpoints,
+    });
+
+    expect(result.detected).toHaveLength(5);
+    expect(
+      result.detected.filter(finding => finding.name === "Support assistant")
+    ).toHaveLength(1);
+    expect(result.summary.total).toBe(5);
   });
 });

@@ -76,15 +76,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Check one page for visible AI",
     intro:
       "Enter a public URL. RapidAct checks the rendered page for visitor-facing AI controls and visible disclosure.",
-    scope: "Fast preview · one page · no form submissions",
+    scope: "Fast first check · one page · up to 5 primary touchpoints",
     urlLabel: "Website address",
     placeholder: "your-site.com",
     scan: "Scan website",
     scanning: "Scanning",
     emailGateLabel: "Receive your scan",
-    emailGateTitle: "Where should we send the result?",
+    emailGateTitle: "Unlock your scan result",
     emailGateBody:
-      "Enter your email to run the scan and receive the one-page PDF. Any valid email address works.",
+      "Enter your email to run the scan, view the result and unlock the one-page PDF. Any valid email address works.",
     emailGateField: "Work email",
     emailGateHint: "We use it for this scan and relevant follow-up.",
     emailGateContinue: "Run free scan",
@@ -92,7 +92,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateInvalid: "Enter a valid email address.",
     emailGateError: "We could not save your email. Please try again.",
     progress: "Public-page scan",
-    progressScope: "One page only · no forms or additional pages opened",
+    progressScope: "One rendered page · up to 5 distinct touchpoints · no forms",
     elapsed: seconds => `${seconds}s elapsed`,
     stages: [
       {
@@ -111,7 +111,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     ],
     fullLabel: "Free scan complete",
     fullBody:
-      "Other pages, private systems and internal AI use may still need review. Request the complete scan and a company-wide action plan.",
+      "This result covers the submitted public page. The €99 assessment maps your AI systems, roles, required notices and evidence into a reviewed company action plan.",
     fullCta: "Start assessment · €99",
     fullWhatsapp: "Request complete scan",
     bookCall: "Book a specialist call",
@@ -180,15 +180,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Comprueba una página en busca de IA visible",
     intro:
       "Introduce una URL pública. RapidAct revisa la página renderizada para detectar controles de IA y avisos visibles.",
-    scope: "Vista previa rápida · una página · sin enviar formularios",
+    scope: "Primera revisión rápida · una página · hasta 5 puntos de IA",
     urlLabel: "Dirección del sitio web",
     placeholder: "tu-web.es",
     scan: "Escanear web",
     scanning: "Escaneando",
     emailGateLabel: "Recibe tu escaneo",
-    emailGateTitle: "¿Dónde enviamos el resultado?",
+    emailGateTitle: "Desbloquea el resultado del escaneo",
     emailGateBody:
-      "Introduce tu correo para ejecutar el escaneo y recibir el PDF de una página. Se acepta cualquier correo válido.",
+      "Introduce tu correo para ejecutar el escaneo, ver el resultado y desbloquear el PDF de una página. Se acepta cualquier correo válido.",
     emailGateField: "Correo de trabajo",
     emailGateHint: "Lo usamos para este escaneo y su seguimiento.",
     emailGateContinue: "Ejecutar escaneo gratis",
@@ -196,7 +196,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateInvalid: "Introduce un correo válido.",
     emailGateError: "No hemos podido guardar el correo. Inténtalo de nuevo.",
     progress: "Escaneo de página pública",
-    progressScope: "Una sola página · sin formularios ni páginas adicionales",
+    progressScope: "Una página renderizada · hasta 5 puntos distintos · sin formularios",
     elapsed: seconds => `${seconds} s`,
     stages: [
       {
@@ -214,7 +214,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     ],
     fullLabel: "Escaneo gratuito completado",
     fullBody:
-      "Otras páginas, los sistemas privados y el uso interno de IA pueden necesitar revisión. Solicita el escaneo completo y un plan para toda la empresa.",
+      "Este resultado cubre la página pública enviada. La evaluación de 99 € organiza tus sistemas de IA, roles, avisos obligatorios y evidencias en un plan de acción revisado para la empresa.",
     fullCta: "Iniciar evaluación · 99 €",
     fullWhatsapp: "Solicitar escaneo completo",
     bookCall: "Reservar llamada con un especialista",
@@ -283,15 +283,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Eine Seite auf sichtbare KI prüfen",
     intro:
       "Geben Sie eine öffentliche URL ein. RapidAct prüft die gerenderte Seite auf KI-Funktionen für Besucher und sichtbare Hinweise.",
-    scope: "Schnelle Vorschau · eine Seite · keine Formulare",
+    scope: "Schneller Erstcheck · eine Seite · bis zu 5 KI-Kontaktpunkte",
     urlLabel: "Website-Adresse",
     placeholder: "ihre-website.de",
     scan: "Website scannen",
     scanning: "Scan läuft",
     emailGateLabel: "Scan erhalten",
-    emailGateTitle: "Wohin sollen wir das Ergebnis senden?",
+    emailGateTitle: "Scan-Ergebnis freischalten",
     emailGateBody:
-      "Geben Sie Ihre E-Mail ein, um den Scan zu starten und das einseitige PDF zu erhalten. Jede gültige E-Mail-Adresse funktioniert.",
+      "Geben Sie Ihre E-Mail ein, um den Scan zu starten, das Ergebnis anzusehen und das einseitige PDF freizuschalten. Jede gültige E-Mail-Adresse funktioniert.",
     emailGateField: "Geschäftliche E-Mail",
     emailGateHint:
       "Wir verwenden sie für diesen Scan und relevante Nachfragen.",
@@ -301,7 +301,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateError:
       "Die E-Mail konnte nicht gespeichert werden. Bitte erneut versuchen.",
     progress: "Öffentlicher Seiten-Scan",
-    progressScope: "Nur eine Seite · keine Formulare oder weiteren Seiten",
+    progressScope: "Eine gerenderte Seite · bis zu 5 klare Kontaktpunkte · keine Formulare",
     elapsed: seconds => `${seconds} s`,
     stages: [
       {
@@ -319,7 +319,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     ],
     fullLabel: "Kostenloser Scan abgeschlossen",
     fullBody:
-      "Weitere Seiten, private Systeme und interne KI-Nutzung können weiterhin geprüft werden müssen. Fordern Sie den vollständigen Scan und einen unternehmensweiten Maßnahmenplan an.",
+      "Dieses Ergebnis deckt die eingereichte öffentliche Seite ab. Die Bewertung für 99 € ordnet Ihre KI-Systeme, Rollen, erforderlichen Hinweise und Nachweise in einen geprüften Aktionsplan für das Unternehmen ein.",
     fullCta: "Bewertung starten · 99 €",
     fullWhatsapp: "Vollständigen Scan anfordern",
     bookCall: "Fachgespräch buchen",
@@ -388,15 +388,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Vérifiez une page pour l’IA visible",
     intro:
       "Saisissez une URL publique. RapidAct vérifie la page rendue pour repérer les fonctions IA destinées aux visiteurs et les mentions visibles.",
-    scope: "Aperçu rapide · une page · aucun formulaire envoyé",
+    scope: "Premier contrôle rapide · une page · jusqu’à 5 points de contact IA",
     urlLabel: "Adresse du site web",
     placeholder: "votre-site.fr",
     scan: "Scanner le site",
     scanning: "Analyse en cours",
     emailGateLabel: "Recevoir votre analyse",
-    emailGateTitle: "Où devons-nous envoyer le résultat ?",
+    emailGateTitle: "Débloquez le résultat du scan",
     emailGateBody:
-      "Saisissez votre e-mail pour lancer l’analyse et recevoir le PDF d’une page. Toute adresse e-mail valide fonctionne.",
+      "Saisissez votre e-mail pour lancer l’analyse, voir le résultat et débloquer le PDF d’une page. Toute adresse e-mail valide fonctionne.",
     emailGateField: "E-mail professionnel",
     emailGateHint:
       "Nous l’utilisons pour cette analyse et son suivi pertinent.",
@@ -405,7 +405,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateInvalid: "Saisissez une adresse e-mail valide.",
     emailGateError: "Impossible d’enregistrer l’e-mail. Veuillez réessayer.",
     progress: "Scan de page publique",
-    progressScope: "Une seule page · aucun formulaire ni page supplémentaire",
+    progressScope: "Une page rendue · jusqu’à 5 points distincts · aucun formulaire",
     elapsed: seconds => `${seconds} s`,
     stages: [
       {
@@ -424,7 +424,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     ],
     fullLabel: "Analyse gratuite terminée",
     fullBody:
-      "D’autres pages, systèmes privés et usages internes de l’IA peuvent encore nécessiter un examen. Demandez l’analyse complète et un plan d’action pour l’entreprise.",
+      "Ce résultat couvre la page publique soumise. L’évaluation à 99 € structure vos systèmes d’IA, rôles, mentions requises et preuves dans un plan d’action vérifié pour l’entreprise.",
     fullCta: "Commencer l’évaluation · 99 €",
     fullWhatsapp: "Demander l’analyse complète",
     bookCall: "Réserver un appel spécialiste",
@@ -493,15 +493,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     title: "Controlla una pagina per l’IA visibile",
     intro:
       "Inserisci un URL pubblico. RapidAct controlla la pagina renderizzata per rilevare funzioni IA rivolte ai visitatori e avvisi visibili.",
-    scope: "Anteprima rapida · una pagina · nessun modulo inviato",
+    scope: "Primo controllo rapido · una pagina · fino a 5 punti di contatto IA",
     urlLabel: "Indirizzo del sito web",
     placeholder: "il-tuo-sito.it",
     scan: "Scansiona sito",
     scanning: "Scansione",
     emailGateLabel: "Ricevi la scansione",
-    emailGateTitle: "Dove dobbiamo inviare il risultato?",
+    emailGateTitle: "Sblocca il risultato della scansione",
     emailGateBody:
-      "Inserisci l’e-mail per avviare la scansione e ricevere il PDF di una pagina. Qualsiasi indirizzo e-mail valido è accettato.",
+      "Inserisci l’e-mail per avviare la scansione, vedere il risultato e sbloccare il PDF di una pagina. Qualsiasi indirizzo e-mail valido è accettato.",
     emailGateField: "E-mail di lavoro",
     emailGateHint: "La usiamo per questa scansione e il relativo seguito.",
     emailGateContinue: "Avvia scansione gratuita",
@@ -509,7 +509,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     emailGateInvalid: "Inserisci un indirizzo e-mail valido.",
     emailGateError: "Non è stato possibile salvare l’e-mail. Riprova.",
     progress: "Scansione pagina pubblica",
-    progressScope: "Una sola pagina · nessun modulo o pagina aggiuntiva",
+    progressScope: "Una pagina renderizzata · fino a 5 punti distinti · nessun modulo",
     elapsed: seconds => `${seconds} s`,
     stages: [
       {
@@ -527,7 +527,7 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
     ],
     fullLabel: "Scansione gratuita completata",
     fullBody:
-      "Altre pagine, sistemi privati e usi interni dell’IA possono richiedere una verifica. Richiedi la scansione completa e un piano d’azione aziendale.",
+      "Questo risultato copre la pagina pubblica inviata. La valutazione da 99 € organizza sistemi IA, ruoli, avvisi richiesti e prove in un piano d’azione aziendale verificato.",
     fullCta: "Inizia valutazione · 99 €",
     fullWhatsapp: "Richiedi scansione completa",
     bookCall: "Prenota una chiamata specialistica",

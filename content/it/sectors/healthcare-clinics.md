@@ -17,7 +17,7 @@ La guida in italiano chiaro — cosa attiva la legge in cliniche e salute, cosa 
 
 ## L'ordine delle operazioni
 
-1. **Scansiona tutto ciò che è pubblico** — il tuo sito, il flusso di prenotazione e qualsiasi portale clienti. [Scansione gratuita →](/scanner)
+1. **Scansiona una pagina pubblica rappresentativa** — inizia dalla pagina in cui i visitatori interagiscono con l’IA e ripeti la scansione per gli altri flussi pubblici se necessario. [Scansione gratuita →](/scanner)
 2. **Stabilisci i ruoli** — identifica fornitore, deployer e il preciso presupposto dello Articolo 50 per ogni sistema.
 3. **Implementa la comunicazione corretta** — usa il [badge gratuito con un solo script](/article-50#install) quando è appropriato un avviso alla prima interazione.
 4. **Tratta i contenuti separatamente** — distingui la marcatura leggibile dalla macchina del fornitore dagli obblighi del deployer per deepfake e testi di interesse pubblico.

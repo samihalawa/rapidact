@@ -24,7 +24,7 @@ export default function Privacy() {
               <strong>Scanner:</strong> when you scan a URL, an Anchor Browser
               task performs a fast inspection of that single rendered public
               page. It does not open other pages or submit forms. We store the
-              submitted URL, observed evidence, resulting score and report so
+              submitted URL, observed evidence and generated report so
               you can retrieve them.
               <strong> Email capture:</strong> if you give us your email, we
               store it with the scanned URL and the form source to send you what

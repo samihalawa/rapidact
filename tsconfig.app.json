@@ -16,6 +16,9 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "route-pages": [
+        "./src/pageModules.client.ts"
+      ],
       "@/*": [
         "./src/*"
       ],

@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 import { inspectAttr } from "kimi-plugin-inspect-react";
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode, isSsrBuild }) => ({
   plugins: [
     devServer({ entry: "api/boot.ts", exclude: [/^\/(?!api\/).*$/] }),
     mode === "development" ? inspectAttr() : null,
@@ -17,6 +17,12 @@ export default defineConfig(({ mode }) => ({
   },
   resolve: {
     alias: {
+      "route-pages": path.resolve(
+        __dirname,
+        isSsrBuild
+          ? "./src/pageModules.ssr.ts"
+          : "./src/pageModules.client.ts"
+      ),
       "@": path.resolve(__dirname, "./src"),
       "@contracts": path.resolve(__dirname, "./contracts"),
       "@db": path.resolve(__dirname, "./db"),

@@ -17,7 +17,7 @@ Le guide en français clair — ce qui déclenche la loi dans les agences digita
 
 ## L'ordre des opérations
 
-1. **Scanner tout ce qui est public** — votre site, le flux de réservation et tout portail client. [Scan gratuit →](/scanner)
+1. **Scannez une page publique représentative** — commencez par la page où les visiteurs interagissent avec l’IA, puis répétez le scan pour les autres parcours publics si nécessaire. [Scan gratuit →](/scanner)
 2. **Établissez les rôles** — identifiez fournisseur, déployeur et déclencheur précis de Article 50 pour chaque système.
 3. **Mettez en œuvre la bonne divulgation** — utilisez le [badge gratuit à un script](/article-50#install) lorsqu une divulgation lors de la première interaction convient.
 4. **Traitez le contenu séparément** — distinguez le marquage lisible par machine du fournisseur et les obligations du déployeur pour les deepfakes et les textes intérêt public.

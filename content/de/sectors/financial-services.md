@@ -17,7 +17,7 @@ Der Leitfaden in einfachem Deutsch — was das Gesetz in versicherungen & finanz
 
 ## Die Reihenfolge der Schritte
 
-1. **Alles Öffentliche scannen** — Ihre Website, den Buchungsflow und jedes Kundenportal. [Kostenloser Scan →](/scanner)
+1. **Eine repräsentative öffentliche Seite scannen** — beginnen Sie dort, wo Besucher mit KI interagieren, und wiederholen Sie den Scan bei Bedarf für weitere öffentliche Abläufe. [Kostenloser Scan →](/scanner)
 2. **Rollen klären** — Anbieter, Betreiber und den konkreten Artikel-50-Auslöser für jedes System bestimmen.
 3. **Den richtigen Hinweis umsetzen** — das [kostenlose Ein-Skript-Badge](/article-50#install) nutzen, wenn ein Hinweis zur direkten Interaktion passt.
 4. **Inhalte getrennt behandeln** — maschinenlesbare Anbieterkennzeichnung von Betreiberpflichten für Deepfakes und Texte von öffentlichem Interesse unterscheiden.

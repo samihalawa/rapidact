@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes scanner-progress {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(310%);
+  }
+}
+
+.scanner-progress-indicator {
+  animation: scanner-progress 1.25s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanner-progress-indicator {
+    animation: none;
+    transform: translateX(100%);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

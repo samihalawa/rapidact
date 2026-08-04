@@ -17,7 +17,7 @@ online stores are the biggest Article 50 target. What your shop must disclose by
 
 ## The order of operations
 
-1. **Scan everything public** — your site, booking flow, and any client-facing portal. [Free scan →](/scanner)
+1. **Scan one representative public page** — start with the page where visitors interact with AI, then repeat for other public workflows if useful. [Free scan →](/scanner)
 2. **Establish the roles** — identify the provider, deployer and exact Article 50 trigger for each system.
 3. **Implement the right notice** — use the [free one-script badge](/article-50#install) for a direct-interaction disclosure where it fits.
 4. **Treat content separately** — distinguish provider machine-readable marking from deployer duties for deepfakes and public-interest text.

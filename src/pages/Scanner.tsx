@@ -241,8 +241,6 @@ function Scanner() {
         `[REQUEST COMPLETE SCAN ${result.summary.url}]`
       )}`
     : CONVERT.whatsapp;
-  const progressPercent = Math.round(((scanStage + 1) / 3) * 100);
-
   return (
     <div className="paper min-h-screen">
       <Seo title={copy.seoTitle} description={copy.seoDescription} localized />
@@ -424,16 +422,10 @@ function Scanner() {
             <div
               role="progressbar"
               aria-label={copy.stages[scanStage].label}
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={progressPercent}
               aria-valuetext={copy.stages[scanStage].detail}
               className="mt-4 h-2 overflow-hidden rounded-full bg-[#e5ebf4]"
             >
-              <div
-                className="h-full rounded-full bg-[#1f5fd2] transition-[width] duration-1000 ease-out"
-                style={{ width: `${progressPercent}%` }}
-              />
+              <div className="scanner-progress-indicator h-full w-1/3 rounded-full bg-[#1f5fd2]" />
             </div>
           </section>
         )}
