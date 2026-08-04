@@ -41,6 +41,13 @@ const observed = {
   summary: "One public page was inspected and one AI assistant was observed.",
 };
 
+const zeroObserved = {
+  scan_status: "COMPLETE" as const,
+  pages_visited: [{ url: "https://rapidact.eu/article-50", title: "Article 50" }],
+  ai_touchpoints: [],
+  blockers: [],
+};
+
 describe("Anchor scanner contract", () => {
   it("builds one bounded async browser task with structured output and no legacy task field", () => {
     const request = buildAnchorScanRequest("https://example.com");
@@ -51,7 +58,7 @@ describe("Anchor scanner contract", () => {
     expect(request).not.toHaveProperty("provider");
     expect(request).not.toHaveProperty("model");
     expect(request.detect_elements).toBe(false);
-    expect(request.max_steps).toBe(4);
+    expect(request.max_steps).toBe(6);
     expect(request.async).toBe(true);
     expect(request.output_schema.properties.pages_visited.maxItems).toBe(1);
     expect(request.output_schema.properties.ai_touchpoints.maxItems).toBe(5);
@@ -61,10 +68,14 @@ describe("Anchor scanner contract", () => {
     ]);
     expect(request).not.toHaveProperty("task");
     expect(ANCHOR_SCAN_PROMPT).toContain("only the supplied rendered page");
+    expect(ANCHOR_SCAN_PROMPT).toContain(
+      "Do not read long article copy top-to-bottom"
+    );
     expect(ANCHOR_SCAN_PROMPT).toContain("Do not click, navigate, submit");
     expect(ANCHOR_SCAN_PROMPT).toContain("are never AI touchpoints");
     expect(ANCHOR_SCAN_PROMPT).toContain("no more than five distinct");
-    expect(ANCHOR_SCAN_PROMPT).toContain("scroll this same page only");
+    expect(ANCHOR_SCAN_PROMPT).toContain("you may scroll this same page once");
+    expect(ANCHOR_SCAN_PROMPT).toContain("Reserve the final step");
     expect(ANCHOR_SCAN_PROMPT).toContain("Never infer systems");
   });
 
@@ -210,6 +221,62 @@ describe("Anchor scanner contract", () => {
       expect(state.observed.risk_indicators).toEqual([]);
       expect(state.observed.summary).toBeUndefined();
     }
+  });
+
+  it("accepts a structured zero-result scan as a valid completion", async () => {
+    const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
+      void args;
+      return new Response(
+        JSON.stringify({
+          status: "COMPLETED",
+          result: {
+            status: "success",
+            result: JSON.stringify(zeroObserved),
+            steps: 4,
+          },
+        }),
+        { status: 200 }
+      );
+    });
+
+    const state = await readAnchorScan(
+      "86817",
+      "test-key",
+      fetchMock as typeof fetch
+    );
+
+    expect(state.status).toBe("completed");
+    if (state.status === "completed") {
+      expect(state.observed.ai_touchpoints).toEqual([]);
+      expect(state.observed.blockers).toEqual([]);
+      expect(
+        anchorResultMatchesUrl(
+          "https://rapidact.eu/article-50",
+          state.observed
+        )
+      ).toBe(true);
+    }
+  });
+
+  it("preserves the exact provider step-limit sentinel as a failure", async () => {
+    const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
+      void args;
+      return new Response(
+        JSON.stringify({
+          status: "COMPLETED",
+          result: {
+            status: "success",
+            result: "Task completed (max steps reached)",
+            steps: 4,
+          },
+        }),
+        { status: 200 }
+      );
+    });
+
+    await expect(
+      readAnchorScan("86819", "test-key", fetchMock as typeof fetch)
+    ).resolves.toEqual({ status: "failed", error: "anchor-step-limit" });
   });
 
   it("preserves a failed provider task as a stable scanner error", async () => {

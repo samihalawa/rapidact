@@ -117,7 +117,6 @@ function Scanner() {
           return;
         }
         setScanStage(2);
-        await wait(350);
         completed = state.result;
         break;
       }

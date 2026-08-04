@@ -138,15 +138,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "No disclosure wording found — review your role and first-interaction notice",
     noSignaturesTitle: "No visible AI touchpoints observed",
     noSignaturesBody:
-      "Anchor did not directly observe a functional AI touchpoint on this page. This is not evidence that none exists elsewhere.",
+      "No visitor-facing AI control was observed on this page. Other pages and internal systems are outside this scan.",
     evidenceBody:
       "Record the live URL, approved wording, provider or deployer role, owner, publication date and desktop/mobile check. The notice does not create an evidence log.",
     assessmentTitle: "Assess the whole company · €99",
     assessmentBody:
       "Get the inventory, classifications, required notices and prioritised action plan within 24–48h.",
-    noticeTitle: "Install the visitor notice · Free",
+    noticeTitle: "Add the visitor notice · Free",
     noticeBody:
-      "Copy one script, tailor the message and check the published result.",
+      "If you use AI elsewhere, copy one script, tailor the message and check the published result.",
     noticeCta: "Open installer",
     copied: "Copied",
     copyReport: "Copy results",
@@ -241,15 +241,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "No se encontró un aviso — revisa tu función y la primera interacción",
     noSignaturesTitle: "No se observaron puntos de IA visibles",
     noSignaturesBody:
-      "Anchor no observó directamente una función de IA interactiva en esta página. Esto no demuestra que no exista en otras páginas.",
+      "No se observó un control de IA orientado al visitante en esta página. Otras páginas y sistemas internos quedan fuera de este escaneo.",
     evidenceBody:
       "Registra la URL, el texto aprobado, la función, el responsable, la fecha y la comprobación en móvil y ordenador. El aviso no crea un registro de pruebas.",
     assessmentTitle: "Evalúa toda la empresa · 99 €",
     assessmentBody:
       "Recibe el inventario, las clasificaciones, los avisos y el plan priorizado en 24–48 h.",
-    noticeTitle: "Instala el aviso para visitantes · Gratis",
+    noticeTitle: "Añade el aviso para visitantes · Gratis",
     noticeBody:
-      "Copia un script, adapta el mensaje y comprueba el resultado publicado.",
+      "Si usas IA en otros lugares, copia un script, adapta el mensaje y comprueba el resultado publicado.",
     noticeCta: "Abrir instalador",
     copied: "Copiado",
     copyReport: "Copiar resultados",
@@ -346,15 +346,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Kein Hinweis gefunden — Rolle und erste Interaktion prüfen",
     noSignaturesTitle: "Keine sichtbaren KI-Kontaktpunkte beobachtet",
     noSignaturesBody:
-      "Anchor hat auf dieser Seite keinen funktionalen KI-Kontaktpunkt direkt beobachtet. Dies beweist nicht, dass anderswo keiner existiert.",
+      "Auf dieser Seite wurde kein besucherorientiertes KI-Steuerelement beobachtet. Andere Seiten und interne Systeme sind nicht Teil dieses Scans.",
     evidenceBody:
       "Dokumentieren Sie URL, Freigabetext, Rolle, Verantwortlichen, Datum und Desktop-/Mobilprüfung. Der Hinweis erstellt kein Nachweisprotokoll.",
     assessmentTitle: "Gesamtes Unternehmen bewerten · 99 €",
     assessmentBody:
       "Erhalten Sie Inventar, Klassifizierungen, Hinweise und Maßnahmenplan in 24–48 Stunden.",
-    noticeTitle: "Besucherhinweis installieren · Kostenlos",
+    noticeTitle: "Besucherhinweis hinzufügen · Kostenlos",
     noticeBody:
-      "Ein Skript kopieren, Aussage anpassen und Veröffentlichung prüfen.",
+      "Wenn Sie KI an anderer Stelle einsetzen, kopieren Sie ein Skript, passen Sie den Text an und prüfen Sie die Veröffentlichung.",
     noticeCta: "Installer öffnen",
     copied: "Kopiert",
     copyReport: "Ergebnisse kopieren",
@@ -451,15 +451,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Aucune mention trouvée — vérifiez le rôle et la première interaction",
     noSignaturesTitle: "Aucun point de contact IA visible observé",
     noSignaturesBody:
-      "Anchor n’a observé directement aucun point de contact IA fonctionnel sur cette page. Cela ne prouve pas qu’il n’en existe pas ailleurs.",
+      "Aucun contrôle IA orienté visiteur n’a été observé sur cette page. Les autres pages et les systèmes internes ne sont pas couverts par ce scan.",
     evidenceBody:
       "Conservez l’URL, le texte approuvé, le rôle, le responsable, la date et la vérification ordinateur/mobile. L’avis ne crée pas de journal de preuves.",
     assessmentTitle: "Évaluer toute l’entreprise · 99 €",
     assessmentBody:
       "Recevez l’inventaire, les classifications, les mentions et le plan priorisé sous 24–48 h.",
-    noticeTitle: "Installer l’avis visiteur · Gratuit",
+    noticeTitle: "Ajouter l’avis visiteur · Gratuit",
     noticeBody:
-      "Copiez un script, adaptez le message et vérifiez le résultat publié.",
+      "Si vous utilisez l’IA ailleurs, copiez un script, adaptez le message et vérifiez le résultat publié.",
     noticeCta: "Ouvrir l’installation",
     copied: "Copié",
     copyReport: "Copier les résultats",
@@ -554,15 +554,15 @@ export const SCANNER_COPY: Record<Lang, ScannerCopy> = {
       "Nessun avviso trovato — verifica ruolo e prima interazione",
     noSignaturesTitle: "Nessun punto di contatto IA visibile osservato",
     noSignaturesBody:
-      "Anchor non ha osservato direttamente funzioni IA interattive su questa pagina. Ciò non dimostra che non esistano altrove.",
+      "In questa pagina non è stato osservato alcun controllo IA rivolto ai visitatori. Altre pagine e sistemi interni non rientrano in questa scansione.",
     evidenceBody:
       "Registra URL, testo approvato, ruolo, responsabile, data e verifica desktop/mobile. L’avviso non crea un registro di prove.",
     assessmentTitle: "Valuta tutta l’azienda · 99 €",
     assessmentBody:
       "Ricevi inventario, classificazioni, avvisi e piano prioritario entro 24–48 ore.",
-    noticeTitle: "Installa l’avviso visitatore · Gratis",
+    noticeTitle: "Aggiungi l’avviso visitatore · Gratis",
     noticeBody:
-      "Copia uno script, adatta il messaggio e verifica il risultato pubblicato.",
+      "Se usi l’IA altrove, copia uno script, adatta il messaggio e verifica il risultato pubblicato.",
     noticeCta: "Apri installazione",
     copied: "Copiato",
     copyReport: "Copia risultati",

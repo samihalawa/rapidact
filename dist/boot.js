@@ -48415,7 +48415,10 @@ var statusResponseSchema = external_exports.object({
 }).refine((payload) => Boolean(payload.status ?? payload.data?.status), {
   message: "Anchor status response is missing a status"
 });
-var ANCHOR_SCAN_PROMPT = `Perform one fast visual inspection of only the supplied rendered page, then return. Read the visible page from top to bottom; you may scroll this same page only when needed to see the main content and fixed controls.
+var ANCHOR_STEP_LIMIT_SENTINEL = "Task completed (max steps reached)";
+var ANCHOR_SCAN_PROMPT = `Perform one fast visual inspection of only the supplied rendered page, then return structured JSON.
+
+Inspect the initial viewport and any fixed or sticky controls first. Do not read long article copy top-to-bottom and do not perform an exhaustive audit. If no qualifying visitor-facing AI control is visible, you may scroll this same page once to check the main body, footer, or one floating launcher, then stop. Reserve the final step for returning the structured result.
 
 Do not click, navigate, submit, open menus, inspect other pages, or perform an exhaustive audit. Report a visitor-facing AI touchpoint only when this page contains a functional control through which the visitor can directly provide input to an AI system or directly receive an AI-generated or automated-decision output.
 
@@ -48429,7 +48432,7 @@ For each real touchpoint:
 3. Record whether disclosure is visible next to or before the interaction.
 4. Use severity high when disclosure is not visible, medium when it is unclear, and low when it is visible.
 
-If no feature meets this strict functional test, return an empty ai_touchpoints array.
+If no feature meets this strict functional test, return a successful structured result with an empty ai_touchpoints array.
 
 Return COMPLETE after this page renders. Return PARTIAL only if the page itself cannot be inspected, and list the blocker. Never infer systems, hidden pages, legal conclusions, compliance scores, or evidence that was not directly observed.`;
 function buildAnchorScanRequest(url2) {
@@ -48438,7 +48441,7 @@ function buildAnchorScanRequest(url2) {
     prompt: ANCHOR_SCAN_PROMPT,
     agent: "gemini-computer-use",
     detect_elements: false,
-    max_steps: 4,
+    max_steps: 6,
     output_schema: anchorOutputSchema,
     async: true
   };
@@ -48508,6 +48511,14 @@ async function readAnchorScan(workflowId, apiKey, fetchImpl = fetch) {
     };
   }
   const rawResult = parseStructuredResult(result);
+  if (rawResult === ANCHOR_STEP_LIMIT_SENTINEL) {
+    const providerSteps = result && typeof result === "object" && "steps" in result && typeof result.steps === "number" ? result.steps : void 0;
+    console.error("anchor-step-limit", {
+      workflowId,
+      steps: providerSteps
+    });
+    return { status: "failed", error: "anchor-step-limit" };
+  }
   const parsed = anchorResultSchema.safeParse(rawResult);
   if (!parsed.success) {
     console.error("anchor-invalid-result", {
